@@ -1,18 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".splash_screen.SplashActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llInfo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <!--TODO change icon-->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="107dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="111dp"
+            android:background="@drawable/storiqa_logo"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/wallet"
+            android:textColor="@color/brightSkyBlue"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:text="@string/splash_description"
+            android:textColor="#4747349C"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+   <RelativeLayout
+       android:layout_below="@+id/llInfo"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <ImageView
+           android:id="@+id/ivLogo"
+           android:background="@drawable/splash_logo_new"
+           android:layout_centerHorizontal="true"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:scaleType="fitXY" />
+
+
+       <LinearLayout
+           android:id="@+id/llButtons"
+           android:visibility="gone"
+           android:layout_alignParentBottom="true"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+
+           <Button
+               android:id="@+id/btnGetStarted"
+               style="@style/splash_button"
+               android:layout_alignParentBottom="true"
+               android:background="@drawable/blue_button_background"
+               android:text="@string/getStartedButtonText"
+               android:textAllCaps="false"
+               android:textColor="@android:color/white" />
+
+           <Button
+               android:id="@+id/btnSignIn"
+               style="@style/splash_button"
+               android:layout_marginBottom="31dp"
+               android:layout_marginTop="16dp"
+               android:background="@drawable/white_button_background"
+               android:text="@string/signInButtonText"
+               android:textAllCaps="false"
+               android:textColor="@color/brightSkyBlue" />
+       </LinearLayout>
+   </RelativeLayout>
+
+</RelativeLayout>
+

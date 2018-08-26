@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">StoriqaWallet</string>
+    <string name="wallet">Wallet</string>
+    <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
+    <string name="getStartedButtonText">Get started</string>
+    <string name="signInButtonText">Sign in</string>
 </resources>
