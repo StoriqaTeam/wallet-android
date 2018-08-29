@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -65,7 +66,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         tilPassword.error = null
     }
 
-    override fun showVerificationError() {
+    override fun showGeneralError() {
         Toast.makeText(this, getString(R.string.errorVerification), Toast.LENGTH_LONG).show()
     }
 
@@ -89,4 +90,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         tilPassword.error = error
     }
 
+    override fun showProgressBar() {
+        pbLoading.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        pbLoading.visibility = View.GONE
+    }
 }

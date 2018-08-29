@@ -31,36 +31,36 @@ class LoginPresenter : MvpPresenter<LoginView>() {
     }
 
     fun onSignInButtonClicked(email: String, password: String) {
+        viewState.showProgressBar()
+        viewState.disableSignInButton()
+
         model.signInWithEmailAndPassword(email, password, {
             viewState.startMainScreen()
+            viewState.hideProgressBar()
+            viewState.enableSignInButton()
         }) {
             viewState.hideEmailError()
             if (it.isEmpty()) {
-                viewState.showVerificationError()
+                viewState.showGeneralError()
             } else {
                 viewState.hidePasswordError()
                 viewState.hideEmailError()
                 for (error in it) {
                     val detailMessageJson = JSONObject(error.data.details.message)
                     if(detailMessageJson.has(JsonConstants().email)) {
-                        val errors = getErrors(detailMessageJson.getJSONArray(JsonConstants().email))
+                        val errors = model.getErrors(detailMessageJson.getJSONArray(JsonConstants().email))
                         viewState.setEmailError(errors)
                     }
 
                     if(detailMessageJson.has(JsonConstants().password)) {
-                        val errors = getErrors(detailMessageJson.getJSONArray(JsonConstants().password))
+                        val errors = model.getErrors(detailMessageJson.getJSONArray(JsonConstants().password))
                         viewState.setPasswordError(errors)
                     }
                 }
             }
+            viewState.hideProgressBar()
+            viewState.enableSignInButton()
         }
     }
 
-    private fun getErrors(array: JSONArray) : String {
-        var result = ""
-        for(i in 0 until array.length()) {
-            result += array.getJSONObject(i).getString(JsonConstants().message) + "\n"
-        }
-        return result
-    }
 }
