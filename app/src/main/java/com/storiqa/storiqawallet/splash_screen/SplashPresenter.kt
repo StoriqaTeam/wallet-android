@@ -10,6 +10,15 @@ class SplashPresenter : MvpPresenter<SplashView>() {
     fun initScreen() {
         viewState.startShowButtonsAnimation()
         viewState.startResizeLogoAnimation()
+        viewState.startMoveLogoUpAnimation()
+    }
+
+    fun onGetStartedButtonClicked() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun onSignInButtonClicked() {
+        viewState.startLoginScreen()
     }
 
 

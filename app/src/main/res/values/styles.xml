@@ -8,11 +8,48 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="splash_button">
+    <style name="buttonStyle">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">30dp</item>
         <item name="android:layout_marginRight">30dp</item>
     </style>
 
+    <style name="editText">
+        <item name="android:layout_marginLeft">26dp</item>
+        <item name="android:layout_marginRight">26dp</item>
+        <item name="android:paddingBottom">18dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#40000000</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="blueTextButton">
+        <item name="android:textColor">@color/brightSkyBlue</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="grayTextButton">
+        <item name="android:textColor">@color/grayTextButtonColor</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="pinCircleStyle">
+        <item name="android:layout_marginLeft">9dp</item>
+        <item name="android:layout_marginRight">9dp</item>
+        <item name="android:background">@drawable/blue_circle_background</item>
+        <item name="android:layout_width">14dp</item>
+        <item name="android:layout_height">14dp</item>
+    </style>
+
+    <color name="grayTextButtonColor">#8C8C8C</color>
 </resources>

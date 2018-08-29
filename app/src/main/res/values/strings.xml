@@ -4,4 +4,10 @@
     <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
     <string name="getStartedButtonText">Get started</string>
     <string name="signInButtonText">Sign in</string>
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="forgotPassword">I forgot password</string>
+    <string name="socialNetworkButtonText">Sign in via social account</string>
+    <string name="haventGotAccount">Haven’t got account?</string>
+    <string name="register">Register</string>
 </resources>

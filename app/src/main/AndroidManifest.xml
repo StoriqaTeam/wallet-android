@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".login_screen.LoginActivity" />
+        <activity android:name=".pin_code_enter_screen.EnterPinCodeActivity"></activity>
     </application>
 
 </manifest>
