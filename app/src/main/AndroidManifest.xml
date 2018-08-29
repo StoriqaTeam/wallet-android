@@ -18,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login_screen.LoginActivity" />
-        <activity android:name=".pin_code_enter_screen.EnterPinCodeActivity"/>
+        <activity android:name=".login_screen.LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".pin_code_enter_screen.EnterPinCodeActivity" android:screenOrientation="portrait" />
+        <activity android:name=".register_screen.RegisterActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
