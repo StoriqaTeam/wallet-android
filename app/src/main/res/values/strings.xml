@@ -10,4 +10,7 @@
     <string name="socialNetworkButtonText">Sign in via social account</string>
     <string name="haventGotAccount">Haven’t got account?</string>
     <string name="register">Register</string>
+    <string name="errorPassword">Password must contain at least 8 symbols, at least one capital letter and digit</string>
+    <string name="errorVerification">Error occurred. Please try again or try later</string>
+    <string name="errorEmailNotVerified">This email isn’t verified</string>
 </resources>
