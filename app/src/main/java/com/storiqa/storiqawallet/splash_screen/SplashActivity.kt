@@ -7,8 +7,8 @@ import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.`object`.ResizeAnimation
-import com.storiqa.storiqawallet.`object`.ScreenStarter
+import com.storiqa.storiqawallet.objects.ResizeAnimation
+import com.storiqa.storiqawallet.objects.ScreenStarter
 import android.animation.ObjectAnimator
 import android.view.animation.LinearInterpolator
 

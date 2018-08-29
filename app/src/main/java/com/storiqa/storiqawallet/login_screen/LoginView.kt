@@ -6,12 +6,12 @@ interface LoginView : MvpView {
     fun showPassword()
     fun hidePassword()
     fun moveInputAtTheEnd()
-    fun showEmailIsNotVerifiedError()
-    fun hideEmailIsNotVerifiedError()
-    fun showPasswordError()
+    fun hideEmailError()
     fun hidePasswordError()
-    fun verificationError()
+    fun showVerificationError()
     fun enableSignInButton()
     fun disableSignInButton()
-
+    fun startMainScreen()
+    fun setEmailError(error: String)
+    fun setPasswordError(error: String)
 }

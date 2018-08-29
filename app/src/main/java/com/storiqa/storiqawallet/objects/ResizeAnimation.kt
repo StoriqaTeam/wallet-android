@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.`object`
+package com.storiqa.storiqawallet.objects
 
 import android.view.View
 import android.view.animation.Animation

@@ -43,6 +43,10 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         }
     }
 
+    override fun startMainScreen() {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun enableSignInButton() {
         btnSignIn.isEnabled = true
         btnSignIn.setTextColor(ResourcesCompat.getColor(resources, android.R.color.white, null))
@@ -53,24 +57,15 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         btnSignIn.setTextColor(ResourcesCompat.getColor(resources, R.color.disableButton, null))
     }
 
-
-    override fun showEmailIsNotVerifiedError() {
-        tilEmail.error = getString(R.string.errorEmailNotVerified)
-    }
-
-    override fun hideEmailIsNotVerifiedError() {
+    override fun hideEmailError() {
         tilEmail.error = null
-    }
-
-    override fun showPasswordError() {
-        tilPassword.error = getString(R.string.errorPassword)
     }
 
     override fun hidePasswordError() {
         tilPassword.error = null
     }
 
-    override fun verificationError() {
+    override fun showVerificationError() {
         Toast.makeText(this, getString(R.string.errorVerification), Toast.LENGTH_LONG).show()
     }
 
@@ -79,11 +74,19 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     }
 
     override fun hidePassword() {
-        etPassword.transformationMethod = PasswordTransformationMethod.getInstance();
+        etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
     }
 
     override fun showPassword() {
-        etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance();
+        etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+    }
+
+    override fun setEmailError(error: String) {
+        tilEmail.error = error
+    }
+
+    override fun setPasswordError(error: String) {
+        tilPassword.error = error
     }
 
 }
