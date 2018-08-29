@@ -59,7 +59,13 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
     }
 
     override fun startMoveLogoUpAnimation() {
-        val animation = ObjectAnimator.ofFloat(ivLogo, "translationY", -200f)
+        moveViewUp(ivLogo)
+        moveViewUp(purpleSpot)
+        moveViewUp(blueSpot)
+    }
+
+    fun moveViewUp(view : View) {
+        val animation = ObjectAnimator.ofFloat(view, "translationY", -200f)
         animation.interpolator = LinearInterpolator()
         animation.duration = 2 * SECOND
         animation.start()
