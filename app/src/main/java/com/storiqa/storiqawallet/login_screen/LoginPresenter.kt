@@ -3,7 +3,6 @@ package com.storiqa.storiqawallet.login_screen
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.storiqa.storiqawallet.constants.JsonConstants
-import org.json.JSONArray
 import org.json.JSONObject
 
 @InjectViewState
@@ -61,6 +60,22 @@ class LoginPresenter : MvpPresenter<LoginView>() {
             viewState.hideProgressBar()
             viewState.enableSignInButton()
         }
+    }
+
+    fun onGoogleLoginClicked() {
+        viewState.startGoogleSignInProcess()
+    }
+
+    fun onFacebookButtonClciked() {
+        viewState.startFacebookSignInProcess()
+    }
+
+    fun requestTokenFromGoogleAccount() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun requestTokenFromFacebookAccount() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

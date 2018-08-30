@@ -16,4 +16,6 @@ interface LoginView : MvpView {
     fun setPasswordError(error: String)
     fun showProgressBar()
     fun hideProgressBar()
+    fun startGoogleSignInProcess()
+    fun startFacebookSignInProcess()
 }

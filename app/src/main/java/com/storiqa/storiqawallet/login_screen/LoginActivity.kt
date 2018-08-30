@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.login_screen
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -13,6 +14,13 @@ import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
+import com.firebase.ui.auth.IdpResponse
+import android.content.Intent
+import com.storiqa.storiqawallet.constants.RequestCodes
+import java.util.*
+
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
 
@@ -42,6 +50,36 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         btnSignIn.setOnClickListener {
             presenter.onSignInButtonClicked(etEmail.text.toString(), etPassword.text.toString())
         }
+
+        btnGoogleLogin.setOnClickListener {
+            presenter.onGoogleLoginClicked()
+        }
+
+        btnFacebookLogin.setOnClickListener { presenter.onFacebookButtonClciked() }
+    }
+
+    override fun startFacebookSignInProcess() {
+        val providers = Arrays.asList(AuthUI.IdpConfig.FacebookBuilder().build())
+
+        // Create and launch sign-in intent
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                RequestCodes().requestFacebookSignIn)
+    }
+
+    override fun startGoogleSignInProcess() {
+        val providers = Arrays.asList(AuthUI.IdpConfig.GoogleBuilder().build())
+
+        // Create and launch sign-in intent
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                RequestCodes().requestGoogleSignIn)
     }
 
     override fun startMainScreen() {
@@ -96,5 +134,25 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun hideProgressBar() {
         pbLoading.visibility = View.GONE
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RequestCodes().requestGoogleSignIn || requestCode == RequestCodes().requestFacebookSignIn) {
+            val response = IdpResponse.fromResultIntent(data)
+
+            if (resultCode == Activity.RESULT_OK) {
+                // Successfully signed in
+                val user = FirebaseAuth.getInstance().currentUser
+                // ...
+            } else {
+                if(requestCode == RequestCodes().requestGoogleSignIn) {
+                    presenter.requestTokenFromGoogleAccount()
+                } else if(requestCode == RequestCodes().requestFacebookSignIn) {
+                    presenter.requestTokenFromFacebookAccount()
+                }
+            }
+        }
     }
 }
