@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.login_screen
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.storiqa.storiqawallet.constants.JsonConstants
+import com.storiqa.storiqawallet.constants.SignInProviders
 import org.json.JSONObject
 
 @InjectViewState
@@ -70,12 +71,20 @@ class LoginPresenter : MvpPresenter<LoginView>() {
         viewState.startFacebookSignInProcess()
     }
 
-    fun requestTokenFromGoogleAccount() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun requestTokenFromGoogleAccount(userToken: String) {
+        model.getStoriqaToken(userToken, SignInProviders().google, {
+
+        }, {
+
+        })
     }
 
-    fun requestTokenFromFacebookAccount() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun requestTokenFromFacebookAccount(userToken: String) {
+        model.getStoriqaToken(userToken, SignInProviders().facebook, {
+
+        }, {
+
+        })
     }
 
 }

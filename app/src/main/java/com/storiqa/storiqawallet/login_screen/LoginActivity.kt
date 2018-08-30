@@ -18,6 +18,7 @@ import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.firebase.ui.auth.IdpResponse
 import android.content.Intent
+import android.util.Log
 import com.storiqa.storiqawallet.constants.RequestCodes
 import java.util.*
 
@@ -145,13 +146,15 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
                 val user = FirebaseAuth.getInstance().currentUser
-                // ...
-            } else {
+                val userToken = ""
+
                 if(requestCode == RequestCodes().requestGoogleSignIn) {
-                    presenter.requestTokenFromGoogleAccount()
+                    presenter.requestTokenFromGoogleAccount(userToken)
                 } else if(requestCode == RequestCodes().requestFacebookSignIn) {
-                    presenter.requestTokenFromFacebookAccount()
+                    presenter.requestTokenFromFacebookAccount(userToken)
                 }
+            } else {
+                Log.d("","")
             }
         }
     }

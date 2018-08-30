@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.login_screen
 
 import com.storiqa.storiqawallet.constants.JsonConstants
 import com.storiqa.storiqawallet.network.StoriqaApi
+import com.storiqa.storiqawallet.network.network_requests.GetStoriqaTokenFromFirebaseTokenRequest
 import com.storiqa.storiqawallet.network.network_requests.GetTokenByEmailRequest
 import com.storiqa.storiqawallet.network.network_responses.GetTokenError
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,5 +31,20 @@ class LoginModelImp : LoginModel {
             result += array.getJSONObject(i).getString(JsonConstants().message) + "\n"
         }
         return result
+    }
+
+    override fun getStoriqaToken(userToken: String, provider: String, success: (storiqaToken: String) -> Unit, failure: () -> Unit) {
+        StoriqaApi.Factory().getInstance().getStoriqaTokenFromFirebaseToken(GetStoriqaTokenFromFirebaseTokenRequest(userToken, provider))
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if(it.errors != null) {
+                        failure()
+                    }
+                    if(it.data != null) {
+                        success(it.data.getJWTByProvider.token)
+                    }
+                }, {
+                    failure()
+                })
     }
 }

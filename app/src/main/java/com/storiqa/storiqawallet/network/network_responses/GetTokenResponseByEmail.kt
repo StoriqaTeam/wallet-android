@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.network.network_responses
 
-data class GetTokenResponse(val data : TokenData?, val errors : List<GetTokenError>?)
+data class GetTokenResponseByEmail(val data : TokenData?, val errors : List<GetTokenError>?)
 
 //data
 data class TokenData(val getJWTByEmail : GetJWTByEmail)
