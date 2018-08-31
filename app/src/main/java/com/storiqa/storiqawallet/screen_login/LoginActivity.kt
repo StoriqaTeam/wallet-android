@@ -60,7 +60,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
         btnRegister.setOnClickListener { presenter.onRegisterButtonClicked() }
 
+        btnForgotPassword.setOnClickListener { presenter.onForgotPasswordButtonClicked() }
+
     }
+
+    override fun openRecoverPasswordScreen() = ScreenStarter().startRecoverPasswordScreen(this)
 
     override fun showSignInError() {
         GeneralErrorDialogHelper(this).show {

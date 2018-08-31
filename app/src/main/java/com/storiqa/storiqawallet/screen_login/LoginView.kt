@@ -20,4 +20,5 @@ interface LoginView : MvpView {
     fun startRegisterScreen()
     fun changePasswordVisibility()
     fun showSignInError()
+    fun openRecoverPasswordScreen()
 }

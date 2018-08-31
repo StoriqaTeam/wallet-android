@@ -80,4 +80,8 @@ class LoginPresenter : MvpPresenter<LoginView>() {
         viewState.changePasswordVisibility()
     }
 
+    fun onForgotPasswordButtonClicked() {
+        viewState.openRecoverPasswordScreen()
+    }
+
 }

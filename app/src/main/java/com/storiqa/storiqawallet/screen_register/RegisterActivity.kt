@@ -12,6 +12,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.layout_password_enter.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
 
 class RegisterActivity : MvpAppCompatActivity(), RegisterView {
