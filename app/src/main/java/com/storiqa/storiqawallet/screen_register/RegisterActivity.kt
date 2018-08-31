@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.EditText
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.jakewharton.rxbinding2.widget.RxTextView
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.*
-import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_password_enter.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
@@ -24,17 +21,16 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        btnSignIn.setOnClickListener { presenter.onSignInButtonClicked() }
-
         TextVisibilityModifierFor(etPassword).observeClickOn(ivShowPassword)
         TextVisibilityModifierFor(etRepeatPassword).observeClickOn(ivShowRepeatedPassword)
 
-        setChangeObserver(etFirstName)
-        setChangeObserver(etLastName)
-        setChangeObserver(etEmail)
-        setChangeObserver(etPassword)
-        setChangeObserver(etRepeatPassword)
-        cbLicenseAgreement.setOnCheckedChangeListener { _, _ -> onInformationChanged() }
+        ButtonStateSwitcherFor(btnSignUp)
+                .observeNotEmpty(etFirstName)
+                .observeNotEmpty(etLastName)
+                .observeNotEmpty(etEmail)
+                .observeNotEmpty(etPassword)
+                .observeNotEmpty(etRepeatPassword)
+                .observeIsChecked(cbLicenseAgreement)
 
         btnSignUp.setOnClickListener { presenter.onSignUpButtonClicked(
                 etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
@@ -43,13 +39,12 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
 
         btnGoogleLogin.setOnClickListener { presenter.onGoogleSignInButtonClicked() }
         btnFacebookLogin.setOnClickListener { presenter.onFacebookSignInButtonClicked() }
+        btnSignIn.setOnClickListener { presenter.onSignInButtonClicked() }
     }
 
-    override fun startFacebookSignInProcess() =
-            SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
+    override fun startFacebookSignInProcess() = SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
 
-    override fun startGoogleSignInProcess() =
-            SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
+    override fun startGoogleSignInProcess() = SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
 
     override fun showPasswordsHaveToMatchError() {
         tilPassword.error = getString(R.string.errorPasswordHaveToMathc)
@@ -59,21 +54,8 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
         tilPassword.error = null
     }
 
-    override fun enableSignUpButton() {
-        ButtonStateSwitcher(resources, btnSignUp).enableButton()
-    }
-
-    override fun disableSignUpButton() {
-        ButtonStateSwitcher(resources, btnSignUp).disableButton()
-    }
-
-    override fun clearErrors() {
-        tilFirstName.error = null
-        tilLastName.error = null
-        tilEmail.error = null
-        tilPassword.error = null
-        tilRepeatedPassword.error = null
-    }
+    override fun clearErrors() =
+            listOf(tilFirstName, tilLastName, tilEmail, tilPassword, tilRepeatedPassword).forEach { it.error = null }
 
     override fun startLoginScreen() {
         ScreenStarter().startLoginScreen(this)
@@ -105,16 +87,4 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
         tilEmail.error = emailError
     }
 
-    private fun setChangeObserver(view: EditText) {
-        RxTextView.afterTextChangeEvents(view).skipInitialValue()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { onInformationChanged() }
-    }
-
-    private fun onInformationChanged() {
-        presenter.onFieldInformationChanged(
-                etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
-                etPassword.text.toString(), etRepeatPassword.text.toString(), cbLicenseAgreement.isChecked
-        )
-    }
 }

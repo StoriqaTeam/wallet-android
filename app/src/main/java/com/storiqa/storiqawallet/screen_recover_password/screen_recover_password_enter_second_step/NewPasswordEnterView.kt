@@ -4,6 +4,4 @@ import com.arellomobile.mvp.MvpView
 
 interface NewPasswordEnterView : MvpView {
     fun goBack()
-    fun enableConfirmButton()
-    fun disableConfirmButton()
 }

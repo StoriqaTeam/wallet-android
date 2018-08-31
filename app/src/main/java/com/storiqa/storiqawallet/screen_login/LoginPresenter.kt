@@ -9,22 +9,12 @@ import com.storiqa.storiqawallet.objects.ErrorRetriever
 class LoginPresenter : MvpPresenter<LoginView>() {
     private val model = LoginModelImp()
 
-    fun onTextChanged(email: String, password: String) {
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            viewState.enableSignInButton()
-        } else {
-            viewState.disableSignInButton()
-        }
-    }
-
     fun onSignInButtonClicked(email: String, password: String) {
         viewState.showProgressBar()
-        viewState.disableSignInButton()
 
         model.signInWithEmailAndPassword(email, password, {
             viewState.startMainScreen()
             viewState.hideProgressBar()
-            viewState.enableSignInButton()
         }) {errors ->
             viewState.hideEmailError()
             viewState.hidePasswordError()
@@ -43,7 +33,6 @@ class LoginPresenter : MvpPresenter<LoginView>() {
                 }
             }
             viewState.hideProgressBar()
-            viewState.enableSignInButton()
         }
     }
 

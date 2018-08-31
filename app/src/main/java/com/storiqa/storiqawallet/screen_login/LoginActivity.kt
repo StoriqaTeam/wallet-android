@@ -9,8 +9,6 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Toast
-import com.jakewharton.rxbinding2.widget.RxTextView
-import io.reactivex.android.schedulers.AndroidSchedulers
 import com.google.firebase.auth.FirebaseAuth
 import android.content.Intent
 import com.storiqa.storiqawallet.constants.RequestCodes
@@ -29,31 +27,14 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         setContentView(R.layout.activity_login)
 
         TextVisibilityModifierFor(etPassword).observeClickOn(ivShowPassword)
+        ButtonStateSwitcherFor(btnSignIn).observeNotEmpty(etEmail, etPassword)
 
-        RxTextView.afterTextChangeEvents(etEmail).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe {
-            presenter.onTextChanged(etEmail.text.toString(), etPassword.text.toString())
-        }
+        btnGoogleLogin.setOnClickListener { presenter.onGoogleLoginClicked() }
+        btnFacebookLogin.setOnClickListener { presenter.onFacebookButtonClciked() }
 
-        RxTextView.afterTextChangeEvents(etPassword).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe {
-            presenter.onTextChanged(etEmail.text.toString(), etPassword.text.toString())
-        }
-
-        btnSignIn.setOnClickListener {
-            presenter.onSignInButtonClicked(etEmail.text.toString(), etPassword.text.toString())
-        }
-
-        btnGoogleLogin.setOnClickListener {
-            presenter.onGoogleLoginClicked()
-        }
-
-        btnFacebookLogin.setOnClickListener {
-            presenter.onFacebookButtonClciked()
-        }
-
+        btnSignIn.setOnClickListener { presenter.onSignInButtonClicked(etEmail.text.toString(), etPassword.text.toString()) }
         btnRegister.setOnClickListener { presenter.onRegisterButtonClicked() }
-
         btnForgotPassword.setOnClickListener { presenter.onForgotPasswordButtonClicked() }
-
     }
 
     override fun openRecoverPasswordScreen() = ScreenStarter().startRecoverPasswordScreen(this)
@@ -71,10 +52,6 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     override fun startGoogleSignInProcess() = SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
 
     override fun startMainScreen() { /* TODO open main screen */ }
-
-    override fun enableSignInButton() = ButtonStateSwitcher(resources, btnSignIn).enableButton()
-
-    override fun disableSignInButton() = ButtonStateSwitcher(resources, btnSignIn).disableButton()
 
     override fun hideEmailError() {
         tilEmail.error = null

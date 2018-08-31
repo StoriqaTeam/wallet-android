@@ -7,14 +7,6 @@ import com.arellomobile.mvp.MvpPresenter
 class RecoverPasswordPresenter : MvpPresenter<RecoverPasswordView>() {
     val model = RecoverPasswordModelImp()
 
-    fun onEmailTextChanged(email: String) {
-        if(email.isEmpty()) {
-            viewState.disableResetPasswordButton()
-        } else {
-            viewState.enableResetPasswordButton()
-        }
-    }
-
     fun onResetPasswordButtonClicked(email: String) {
         viewState.openNewPasswordEnterScreen(email)
     }

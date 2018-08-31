@@ -8,8 +8,6 @@ interface LoginView : MvpView {
     fun hideEmailError()
     fun hidePasswordError()
     fun showGeneralError()
-    fun enableSignInButton()
-    fun disableSignInButton()
     fun startMainScreen()
     fun setEmailError(error: String)
     fun setPasswordError(error: String)
