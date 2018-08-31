@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "741431725543-bugcn1f34k3i0o1u71aljlii7n8j7f9o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storiqa.storiqawallet",
+            "certificate_hash": "714a2758d74b1c62522ca3bf63da135e6106b8d1"
+          }
+        },
+        {
           "client_id": "741431725543-dlo0nhv8g0nffd7mde206q7d4ftmdphn.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741431725543-dlo0nhv8g0nffd7mde206q7d4ftmdphn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
