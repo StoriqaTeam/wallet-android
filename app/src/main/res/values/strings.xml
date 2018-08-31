@@ -33,4 +33,10 @@
     <string name="registerErrorMessage">Aliens have stolen some of our servers. Chasing them, but haven’t catch them yet. Please try again or later!</string>
     <string name="close">Close</string>
     <string name="tryAgain">Try again</string>
+    <string name="passwordRecovery">Password recover</string>
+    <string name="recoverPasshordMessage">Enter email address where new password recoverind instructions will be sent to.</string>
+    <string name="yourEmail">Your email</string>
+    <string name="resetPassword">Reset password</string>
+    <string name="newPasswordMessage">Create new password and confirm it.</string>
+    <string name="confirmNewPassword">Confirm new password</string>
 </resources>
