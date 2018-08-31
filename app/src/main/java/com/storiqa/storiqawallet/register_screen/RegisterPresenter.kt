@@ -19,12 +19,27 @@ class RegisterPresenter : MvpPresenter<RegisterView>() {
         viewState.changeRepeatedPasswordVisibility()
     }
 
-    fun onFieldInformationChanged(firstName: String, lastName: String, email: String, password: String, repeatedPassword: String) {
-        if(firstName.isNotEmpty() && lastName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && repeatedPassword.isNotEmpty()) {
+    fun onFieldInformationChanged(firstName: String, lastName: String, email: String, password: String, repeatedPassword: String, isLicenseAgreed: Boolean) {
+        if(firstName.isNotEmpty() && lastName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && repeatedPassword.isNotEmpty() && isLicenseAgreed) {
             viewState.enableSignUpButton()
         } else {
             viewState.disableSignUpButton()
         }
+    }
+
+    fun onSignUpButtonClicked(firstName: String, lastName: String, email: String, password: String, repeatedPassword: String) {
+        if(password != repeatedPassword) {
+            viewState.showPasswordsHaveToMatchError()
+            return
+        } else {
+            viewState.hidePasswordsHaveToMatchError()
+        }
+
+        model.registerUser(firstName, lastName, email, password, {
+            viewState.showRegistrationSuccessDialog()
+        }, {
+            viewState.showRegistrationError()
+        })
     }
 
 

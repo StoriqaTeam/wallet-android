@@ -26,4 +26,11 @@
     <string name="repeatPassword">Repeat password</string>
     <string name="termsAndConditions">I accept the terms of the license agreement and privacy policy</string>
     <string name="lastName">Last name</string>
+    <string name="errorPasswordHaveToMathc">Passwords have to match</string>
+    <string name="emailSentMessage">Check the mail! We sent instruction how to confirm your account to your email address</string>
+    <string name="emailSentTitle">Email sent successfully</string>
+    <string name="registerErrorTitle">Oops! Something gone wrong!</string>
+    <string name="registerErrorMessage">Aliens have stolen some of our servers. Chasing them, but haven’t catch them yet. Please try again or later!</string>
+    <string name="close">Close</string>
+    <string name="tryAgain">Try again</string>
 </resources>

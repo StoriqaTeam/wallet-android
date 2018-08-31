@@ -8,6 +8,10 @@ interface RegisterView : MvpView {
     fun changeRepeatedPasswordVisibility()
     fun enableSignUpButton()
     fun disableSignUpButton()
+    fun showPasswordsHaveToMatchError()
+    fun hidePasswordsHaveToMatchError()
+    fun showRegistrationSuccessDialog()
+    fun showRegistrationError()
 
 
 }

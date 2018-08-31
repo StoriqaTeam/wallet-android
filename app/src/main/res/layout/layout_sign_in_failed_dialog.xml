@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/general_error_icon" />
+
+    <TextView
+        android:text="@string/registerErrorTitle"
+        style="@style/registerDialogTitle" />
+
+    <TextView
+        android:text="@string/registerErrorMessage"
+        style="@style/registerDialogMessage" />
+
+    <Button
+        android:id="@+id/btnTryAgain"
+        style="@style/buttonStyle"
+        android:layout_marginTop="49dp"
+        android:background="@drawable/blue_button_background"
+        android:text="@string/tryAgain"
+        android:textColor="@android:color/white" />
+
+
+    <TextView
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/close"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        android:layout_marginBottom="28dp"
+        android:layout_marginTop="26dp"/>
+
+</LinearLayout>

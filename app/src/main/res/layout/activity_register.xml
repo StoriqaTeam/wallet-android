@@ -22,39 +22,49 @@
 
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilFirstName"
             style="@style/registerTextInputStyle">
 
             <EditText
                 android:id="@+id/etFirstName"
                 style="@style/editText"
+                android:inputType="text"
                 android:hint="@string/firstName"
+                android:maxLines="1"
                 android:nextFocusDown="@id/etLastName" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilLastName"
             style="@style/registerTextInputStyle">
 
             <EditText
                 android:id="@+id/etLastName"
+                android:inputType="text"
                 style="@style/editText"
                 android:hint="@string/lastName"
+                android:maxLines="1"
                 android:nextFocusDown="@id/etEmail" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilEmail"
             style="@style/registerTextInputStyle">
 
             <EditText
                 android:id="@+id/etEmail"
+                android:inputType="textEmailAddress"
                 style="@style/editText"
                 android:hint="@string/email"
+                android:maxLines="1"
                 android:nextFocusDown="@id/etPassword" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPassword"
             style="@style/registerTextInputStyle">
 
             <RelativeLayout
@@ -79,6 +89,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilRepeatedPassword"
             style="@style/registerTextInputStyle">
 
             <RelativeLayout
@@ -111,6 +122,7 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:id="@+id/cbLicenseAgreement"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
