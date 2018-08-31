@@ -4,14 +4,14 @@ import com.storiqa.storiqawallet.constants.JsonConstants
 import com.storiqa.storiqawallet.network.StoriqaApi
 import com.storiqa.storiqawallet.network.network_requests.GetStoriqaTokenFromFirebaseTokenRequest
 import com.storiqa.storiqawallet.network.network_requests.GetTokenByEmailRequest
-import com.storiqa.storiqawallet.network.network_responses.GetTokenError
+import com.storiqa.storiqawallet.network.network_responses.ErrorInfo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONArray
 
 class LoginModelImp : LoginModel {
 
-    override fun signInWithEmailAndPassword(email: String, password: String, success: () -> Unit, failure: (errors : List<GetTokenError>) -> Unit) {
+    override fun signInWithEmailAndPassword(email: String, password: String, success: () -> Unit, failure: (errors : List<ErrorInfo>) -> Unit) {
         StoriqaApi.Factory().getInstance().getTokenByEmailAndPassword(GetTokenByEmailRequest(email, password))
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
