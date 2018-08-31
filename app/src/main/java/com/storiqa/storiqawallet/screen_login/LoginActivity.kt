@@ -5,22 +5,18 @@ import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.storiqa.storiqawallet.R
-import kotlinx.android.synthetic.main.activity_login.*
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import com.firebase.ui.auth.IdpResponse
 import android.content.Intent
-import android.util.Log
 import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.objects.*
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
-import java.util.*
 
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
@@ -28,15 +24,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     @InjectPresenter
     lateinit var presenter: LoginPresenter
 
-    private lateinit var passwordVisibilityModifier: PasswordVisibilityModifier
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        passwordVisibilityModifier = PasswordVisibilityModifier(etPassword, ivShowPassword)
-
-        ivShowPassword.setOnClickListener { presenter.onChangePasswordVisibilityButtonClicked() }
+        TextVisibilityModifierFor(etPassword).observeClickOn(ivShowPassword)
 
         RxTextView.afterTextChangeEvents(etEmail).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe {
             presenter.onTextChanged(etEmail.text.toString(), etPassword.text.toString())
@@ -71,8 +63,6 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
             presenter.onSignInButtonClicked(etEmail.text.toString(), etPassword.text.toString())
         }
     }
-
-    override fun changePasswordVisibility() = passwordVisibilityModifier.changeVisibility()
 
     override fun startRegisterScreen() = ScreenStarter().startRegisterScreen(this)
 

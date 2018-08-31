@@ -18,7 +18,6 @@ interface LoginView : MvpView {
     fun startGoogleSignInProcess()
     fun startFacebookSignInProcess()
     fun startRegisterScreen()
-    fun changePasswordVisibility()
     fun showSignInError()
     fun openRecoverPasswordScreen()
 }

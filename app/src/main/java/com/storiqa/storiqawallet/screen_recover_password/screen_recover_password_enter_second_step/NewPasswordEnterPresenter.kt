@@ -9,10 +9,6 @@ class NewPasswordEnterPresenter : MvpPresenter<NewPasswordEnterView>() {
 
     fun onBackButtonClicked() = viewState.goBack()
 
-    fun onShowPasswordButtonClicked() = viewState.changePasswordVisibility()
-
-    fun onShowRepeatedPasswordButtonClicked() = viewState.changeRepeatedPasswordVisibility()
-
     fun onEnterChanged(password: String, repeatedPassword: String) {
         if(password.isNotEmpty() && repeatedPassword.isNotEmpty()) {
             viewState.enableConfirmButton()

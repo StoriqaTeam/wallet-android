@@ -9,7 +9,6 @@ import com.storiqa.storiqawallet.objects.ErrorRetriever
 class LoginPresenter : MvpPresenter<LoginView>() {
     private val model = LoginModelImp()
 
-
     fun onTextChanged(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             viewState.enableSignInButton()
@@ -74,10 +73,6 @@ class LoginPresenter : MvpPresenter<LoginView>() {
 
     fun onRegisterButtonClicked() {
         viewState.startRegisterScreen()
-    }
-
-    fun onChangePasswordVisibilityButtonClicked() {
-        viewState.changePasswordVisibility()
     }
 
     fun onForgotPasswordButtonClicked() {

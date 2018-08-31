@@ -20,20 +20,14 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
     @InjectPresenter
     lateinit var presenter : RegisterPresenter
 
-    private lateinit var passwordVisibilityModifier: PasswordVisibilityModifier
-    private lateinit var repeatPasswordVisibilityModifier: PasswordVisibilityModifier
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         btnSignIn.setOnClickListener { presenter.onSignInButtonClicked() }
 
-        passwordVisibilityModifier = PasswordVisibilityModifier(etPassword, ivShowPassword)
-        repeatPasswordVisibilityModifier = PasswordVisibilityModifier(etRepeatPassword, ivShowRepeatedPassword)
-
-        ivShowPassword.setOnClickListener { presenter.onShowPasswordButtonClicked() }
-        ivShowRepeatedPassword.setOnClickListener { presenter.onShowRepeatedPasswordButtonClicked() }
+        TextVisibilityModifierFor(etPassword).observeClickOn(ivShowPassword)
+        TextVisibilityModifierFor(etRepeatPassword).observeClickOn(ivShowRepeatedPassword)
 
         setChangeObserver(etFirstName)
         setChangeObserver(etLastName)
@@ -79,14 +73,6 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
         tilEmail.error = null
         tilPassword.error = null
         tilRepeatedPassword.error = null
-    }
-
-    override fun changeRepeatedPasswordVisibility() {
-        repeatPasswordVisibilityModifier.changeVisibility()
-    }
-
-    override fun changePasswordVisibility() {
-        passwordVisibilityModifier.changeVisibility()
     }
 
     override fun startLoginScreen() {

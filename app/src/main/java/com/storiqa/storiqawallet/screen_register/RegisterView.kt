@@ -4,8 +4,6 @@ import com.arellomobile.mvp.MvpView
 
 interface RegisterView : MvpView {
     fun startLoginScreen()
-    fun changePasswordVisibility()
-    fun changeRepeatedPasswordVisibility()
     fun enableSignUpButton()
     fun disableSignUpButton()
     fun showPasswordsHaveToMatchError()
@@ -17,6 +15,4 @@ interface RegisterView : MvpView {
     fun clearErrors()
     fun startGoogleSignInProcess()
     fun startFacebookSignInProcess()
-
-
 }
