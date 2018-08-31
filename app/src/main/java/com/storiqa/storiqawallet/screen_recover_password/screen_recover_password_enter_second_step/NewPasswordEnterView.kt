@@ -3,4 +3,9 @@ package com.storiqa.storiqawallet.screen_recover_password.screen_recover_passwor
 import com.arellomobile.mvp.MvpView
 
 interface NewPasswordEnterView : MvpView {
+    fun goBack()
+    fun changePasswordVisibility()
+    fun changeRepeatedPasswordVisibility()
+    fun enableConfirmButton()
+    fun disableConfirmButton()
 }

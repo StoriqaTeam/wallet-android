@@ -6,4 +6,22 @@ import com.arellomobile.mvp.MvpPresenter
 @InjectViewState
 class NewPasswordEnterPresenter : MvpPresenter<NewPasswordEnterView>() {
     val model = NewPasswordEnterModelImp()
+
+    fun onBackButtonClicked() = viewState.goBack()
+
+    fun onShowPasswordButtonClicked() = viewState.changePasswordVisibility()
+
+    fun onShowRepeatedPasswordButtonClicked() = viewState.changeRepeatedPasswordVisibility()
+
+    fun onEnterChanged(password: String, repeatedPassword: String) {
+        if(password.isNotEmpty() && repeatedPassword.isNotEmpty()) {
+            viewState.enableConfirmButton()
+        } else {
+            viewState.disableConfirmButton()
+        }
+    }
+
+    fun onConfirmButtonClicked(password: String, repeatedPassword: String) {
+//       TODO implement
+    }
 }

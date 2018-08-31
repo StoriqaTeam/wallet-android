@@ -5,15 +5,15 @@ import android.support.v4.content.res.ResourcesCompat
 import android.widget.Button
 import com.storiqa.storiqawallet.R
 
-class ButtonStateSwitcher(private val resources: Resources, val btnSignIn: Button) {
+class ButtonStateSwitcher(private val resources: Resources, val button: Button) {
 
     fun enableButton() {
-        btnSignIn.isEnabled = true
-        btnSignIn.setTextColor(ResourcesCompat.getColor(resources, android.R.color.white, null))
+        button.isEnabled = true
+        button.setTextColor(ResourcesCompat.getColor(resources, android.R.color.white, null))
     }
 
     fun disableButton() {
-        btnSignIn.isEnabled = false
-        btnSignIn.setTextColor(ResourcesCompat.getColor(resources, R.color.disableButton, null))
+        button.isEnabled = false
+        button.setTextColor(ResourcesCompat.getColor(resources, R.color.disableButton, null))
     }
 }
