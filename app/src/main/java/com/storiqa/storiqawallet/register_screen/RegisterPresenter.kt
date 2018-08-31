@@ -7,5 +7,18 @@ import com.arellomobile.mvp.MvpPresenter
 class RegisterPresenter : MvpPresenter<RegisterView>() {
     val model = RegisterModelImp()
 
+    fun onSignInButtonClicked() {
+        viewState.startLoginScreen()
+    }
+
+    fun onShowPasswordButtonClicked() {
+        viewState.changePasswordVisibility()
+    }
+
+    fun onShowRepeatedPasswordButtonClicked() {
+        viewState.changeRepeatedPasswordVisibility()
+    }
+
+
 
 }
