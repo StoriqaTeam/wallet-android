@@ -6,6 +6,8 @@ interface RegisterView : MvpView {
     fun startLoginScreen()
     fun changePasswordVisibility()
     fun changeRepeatedPasswordVisibility()
+    fun enableSignUpButton()
+    fun disableSignUpButton()
 
 
 }

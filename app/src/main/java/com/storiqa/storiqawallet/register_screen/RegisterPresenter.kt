@@ -19,6 +19,13 @@ class RegisterPresenter : MvpPresenter<RegisterView>() {
         viewState.changeRepeatedPasswordVisibility()
     }
 
+    fun onFieldInformationChanged(firstName: String, lastName: String, email: String, password: String, repeatedPassword: String) {
+        if(firstName.isNotEmpty() && lastName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && repeatedPassword.isNotEmpty()) {
+            viewState.enableSignUpButton()
+        } else {
+            viewState.disableSignUpButton()
+        }
+    }
 
 
 }

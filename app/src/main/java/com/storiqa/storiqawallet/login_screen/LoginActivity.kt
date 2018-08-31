@@ -19,6 +19,7 @@ import com.firebase.ui.auth.IdpResponse
 import android.content.Intent
 import android.util.Log
 import com.storiqa.storiqawallet.constants.RequestCodes
+import com.storiqa.storiqawallet.objects.ButtonStateSwitcher
 import com.storiqa.storiqawallet.objects.PasswordVisibilityModifier
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
@@ -93,13 +94,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     }
 
     override fun enableSignInButton() {
-        btnSignIn.isEnabled = true
-        btnSignIn.setTextColor(ResourcesCompat.getColor(resources, android.R.color.white, null))
+        ButtonStateSwitcher(resources, btnSignIn).enableButton()
     }
 
     override fun disableSignInButton() {
-        btnSignIn.isEnabled = false
-        btnSignIn.setTextColor(ResourcesCompat.getColor(resources, R.color.disableButton, null))
+        ButtonStateSwitcher(resources, btnSignIn).disableButton()
     }
 
     override fun hideEmailError() {

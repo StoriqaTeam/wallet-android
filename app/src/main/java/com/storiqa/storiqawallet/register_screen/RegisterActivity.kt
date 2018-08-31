@@ -4,7 +4,9 @@ import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.objects.ButtonStateSwitcher
 import com.storiqa.storiqawallet.objects.PasswordVisibilityModifier
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,7 +32,27 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
         ivShowPassword.setOnClickListener { presenter.onShowPasswordButtonClicked() }
         ivShowRepeatedPassword.setOnClickListener { presenter.onShowRepeatedPasswordButtonClicked() }
 
-        RxTextView.afterTextChangeEvents(etFirstName).skipInitialValue().observeOn(AndroidSchedulers.mainThread())
+
+        val consumer = { it: TextViewAfterTextChangeEvent? ->
+            presenter.onFieldInformationChanged(
+                    etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
+                    etPassword.text.toString(), etRepeatPassword.text.toString()
+            )
+        }
+
+        RxTextView.afterTextChangeEvents(etFirstName).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe(consumer)
+        RxTextView.afterTextChangeEvents(etLastName).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe(consumer)
+        RxTextView.afterTextChangeEvents(etEmail).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe(consumer)
+        RxTextView.afterTextChangeEvents(etPassword).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe(consumer)
+        RxTextView.afterTextChangeEvents(etRepeatPassword).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe(consumer)
+    }
+
+    override fun enableSignUpButton() {
+        ButtonStateSwitcher(resources, btnSignUp).enableButton()
+    }
+
+    override fun disableSignUpButton() {
+        ButtonStateSwitcher(resources, btnSignUp).disableButton()
     }
 
     override fun changeRepeatedPasswordVisibility() {
