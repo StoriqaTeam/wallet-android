@@ -29,14 +29,12 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     lateinit var presenter: LoginPresenter
 
     private lateinit var passwordVisibilityModifier: PasswordVisibilityModifier
-    private lateinit var socialNetworkTokenSignInHelper: SocialNetworkTokenSignInHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         passwordVisibilityModifier = PasswordVisibilityModifier(etPassword, ivShowPassword)
-        socialNetworkTokenSignInHelper = SocialNetworkTokenSignInHelper(this)
 
         ivShowPassword.setOnClickListener { presenter.onChangePasswordVisibilityButtonClicked() }
 
@@ -74,13 +72,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun startRegisterScreen() = ScreenStarter().startRegisterScreen(this)
 
-    override fun startFacebookSignInProcess() = socialNetworkTokenSignInHelper.startGoogleSignInProcess()
+    override fun startFacebookSignInProcess() = SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
 
-    override fun startGoogleSignInProcess() = socialNetworkTokenSignInHelper.startFacebookSignInProcess()
+    override fun startGoogleSignInProcess() = SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
 
-    override fun startMainScreen() {
-        //TODO open main screen
-    }
+    override fun startMainScreen() { /* TODO open main screen */ }
 
     override fun enableSignInButton() = ButtonStateSwitcher(resources, btnSignIn).enableButton()
 

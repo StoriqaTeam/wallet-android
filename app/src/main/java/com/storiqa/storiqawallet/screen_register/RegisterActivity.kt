@@ -9,12 +9,10 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.objects.ButtonStateSwitcher
-import com.storiqa.storiqawallet.objects.GeneralErrorDialogHelper
-import com.storiqa.storiqawallet.objects.PasswordVisibilityModifier
-import com.storiqa.storiqawallet.objects.ScreenStarter
+import com.storiqa.storiqawallet.objects.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
 
 class RegisterActivity : MvpAppCompatActivity(), RegisterView {
 
@@ -48,7 +46,15 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
                 etPassword.text.toString(), etRepeatPassword.text.toString()
         ) }
 
+        btnGoogleLogin.setOnClickListener { presenter.onGoogleSignInButtonClicked() }
+        btnFacebookLogin.setOnClickListener { presenter.onFacebookSignInButtonClicked() }
     }
+
+    override fun startFacebookSignInProcess() =
+            SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
+
+    override fun startGoogleSignInProcess() =
+            SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
 
     override fun showPasswordsHaveToMatchError() {
         tilPassword.error = getString(R.string.errorPasswordHaveToMathc)
