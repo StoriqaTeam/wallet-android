@@ -61,6 +61,7 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
                 ivLogo.width
         )
         resizeAnimation.duration = 1 * SECOND
+        resizeAnimation.delay = 1 * SECOND
         ivLogo.startAnimation(resizeAnimation)
     }
 
