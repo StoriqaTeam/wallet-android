@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "741431725543",
+    "firebase_url": "https://storiqa-wallet.firebaseio.com",
+    "project_id": "storiqa-wallet",
+    "storage_bucket": "storiqa-wallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741431725543:android:2e6da16682c7cc7c",
+        "android_client_info": {
+          "package_name": "com.storiqa.storiqawallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741431725543-bugcn1f34k3i0o1u71aljlii7n8j7f9o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storiqa.storiqawallet",
+            "certificate_hash": "714a2758d74b1c62522ca3bf63da135e6106b8d1"
+          }
+        },
+        {
+          "client_id": "741431725543-dlo0nhv8g0nffd7mde206q7d4ftmdphn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBikPAriAfoZ-g0teOZIt04vD2yV0J8qEU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741431725543-dlo0nhv8g0nffd7mde206q7d4ftmdphn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

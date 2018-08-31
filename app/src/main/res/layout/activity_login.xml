@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context=".screen_login.LoginActivity">
+    
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/wallet_logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="62dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/loginEditTextSideMargin"
+                android:layout_marginRight="@dimen/loginEditTextSideMargin">
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    style="@style/editText"
+                    android:layout_marginTop="69dp"
+                    android:hint="@string/emailHint"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:nextFocusDown="@+id/etPassword" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilPassword"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/loginEditTextSideMargin"
+                android:layout_marginRight="@dimen/loginEditTextSideMargin">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        style="@style/editText"
+                        android:hint="@string/passwordHint"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:nextFocusDown="@+id/btnSignIn" />
+
+                    <ImageView
+                        android:id="@+id/ivShowPassword"
+                        android:background="@drawable/eye_opened"
+                        style="@style/watchPasswordButton" />
+
+                </RelativeLayout>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnSignIn"
+                style="@style/signButton"
+                android:layout_marginTop="29dp"
+                android:text="@string/signInButtonText" />
+
+            <TextView
+                android:id="@+id/btnResetPassword"
+                style="@style/blueTextButton"
+                android:layout_marginTop="19dp"
+                android:text="@string/forgotPassword" />
+
+            <include
+                android:layout_marginTop="42dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/sotial_network_sign_in_footer" />
+
+            <LinearLayout
+                android:id="@+id/llRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="21dp"
+                android:layout_marginTop="34dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/grayTextButton"
+                    android:text="@string/haventGotAccount" />
+
+                <TextView
+                    android:id="@+id/btnRegister"
+                    style="@style/blueTextButton"
+                    android:layout_marginLeft="6dp"
+                    android:text="@string/register" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <ImageView
+                android:layout_marginTop="385dp"
+                style="@style/purpleSpotStyle" />
+
+            <ImageView
+                android:layout_marginTop="376dp"
+                style="@style/blueSpotStyle" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

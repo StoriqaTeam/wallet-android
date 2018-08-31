@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">StoriqaWallet</string>
+    <string name="wallet">Wallet</string>
+    <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
+    <string name="getStartedButtonText">Get started</string>
+    <string name="signInButtonText">Sign in</string>
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="forgotPassword">I forgot password</string>
+    <string name="socialNetworkButtonText">Sign in via social account</string>
+    <string name="haventGotAccount">Haven’t got account?</string>
+    <string name="register">Register</string>
+    <string name="errorPassword">Password must contain at least 8 symbols, at least one capital letter and digit</string>
+    <string name="errorVerification">Error occurred. Please try again or try later</string>
+    <string name="errorEmailNotVerified">This email isn’t verified</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">425217154570731</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb:425217154570731</string>
+    <string name="signUpButtonText">Sign up</string>
+    <string name="signIn">Sign in</string>
+    <string name="haveAnAccount">Have an account?</string>
+    <string name="firstName">First name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeatPassword">Repeat password</string>
+    <string name="termsAndConditions">I accept the terms of the license agreement and privacy policy</string>
+    <string name="lastName">Last name</string>
+    <string name="errorPasswordHaveToMathc">Passwords have to match</string>
+    <string name="emailSentMessage">Check the mail! We sent instruction how to confirm your account to your email address</string>
+    <string name="emailSentTitle">Email sent successfully</string>
+    <string name="registerErrorTitle">Oops! Something gone wrong!</string>
+    <string name="registerErrorMessage">Aliens have stolen some of our servers. Chasing them, but haven’t catch them yet. Please try again or later!</string>
+    <string name="close">Close</string>
+    <string name="tryAgain">Try again</string>
 </resources>
