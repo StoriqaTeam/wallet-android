@@ -7,4 +7,5 @@ interface SplashView : MvpView {
     fun startResizeLogoAnimation()
     fun startLoginScreen()
     fun startMoveLogoUpAnimation()
+    fun startRegisterScreen()
 }

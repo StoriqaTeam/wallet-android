@@ -32,6 +32,11 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
         }, 2 * SECOND)
     }
 
+    override fun startRegisterScreen() {
+        ScreenStarter().startRegisterScreen(this)
+        finish()
+    }
+
     override fun startLoginScreen() {
         ScreenStarter().startLoginScreen(this)
         finish()
