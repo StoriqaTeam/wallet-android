@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.register_screen
+package com.storiqa.storiqawallet.screen_register
 
 import com.storiqa.storiqawallet.network.StoriqaApi
 import com.storiqa.storiqawallet.network.network_requests.RegisterUserRequest

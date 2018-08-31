@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pin_code_enter_screen.EnterPinCodeActivity">
+    tools:context=".screen_pin_code_enter.EnterPinCodeActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         tools:background="@color/brightSkyBlue"

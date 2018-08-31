@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.splash_screen
+package com.storiqa.storiqawallet.screen_splash
 
 import android.os.Bundle
 import android.view.animation.AlphaAnimation

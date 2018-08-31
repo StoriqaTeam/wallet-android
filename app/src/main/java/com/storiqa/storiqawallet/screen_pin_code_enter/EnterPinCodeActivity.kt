@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.pin_code_enter_screen
+package com.storiqa.storiqawallet.screen_pin_code_enter
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

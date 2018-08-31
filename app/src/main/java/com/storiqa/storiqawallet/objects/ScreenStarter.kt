@@ -2,8 +2,8 @@ package com.storiqa.storiqawallet.objects
 
 import android.content.Context
 import android.content.Intent
-import com.storiqa.storiqawallet.login_screen.LoginActivity
-import com.storiqa.storiqawallet.register_screen.RegisterActivity
+import com.storiqa.storiqawallet.screen_login.LoginActivity
+import com.storiqa.storiqawallet.screen_register.RegisterActivity
 
 class ScreenStarter {
 

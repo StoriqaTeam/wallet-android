@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.login_screen
+package com.storiqa.storiqawallet.screen_login
 
 import com.storiqa.storiqawallet.network.StoriqaApi
 import com.storiqa.storiqawallet.network.network_requests.GetStoriqaTokenFromFirebaseTokenRequest

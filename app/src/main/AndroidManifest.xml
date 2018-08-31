@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".splash_screen.SplashActivity">
+        <activity android:name=".screen_splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,15 +21,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login_screen.LoginActivity"
+            android:name=".screen_login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".pin_code_enter_screen.EnterPinCodeActivity"
+            android:name=".screen_pin_code_enter.EnterPinCodeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".register_screen.RegisterActivity"
+            android:name=".screen_register.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
     </application>
