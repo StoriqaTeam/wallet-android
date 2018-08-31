@@ -2,6 +2,9 @@ package com.storiqa.storiqawallet.register_screen
 
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -18,8 +21,8 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
     @InjectPresenter
     lateinit var presenter : RegisterPresenter
 
-    lateinit var passwordVisibilityModifier: PasswordVisibilityModifier
-    lateinit var repeatPasswordVisibilityModifier: PasswordVisibilityModifier
+    private lateinit var passwordVisibilityModifier: PasswordVisibilityModifier
+    private lateinit var repeatPasswordVisibilityModifier: PasswordVisibilityModifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,25 +58,20 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
         tilPassword.error = null
     }
 
-    fun onInformationChanged() {
-        presenter.onFieldInformationChanged(
-                etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
-                etPassword.text.toString(), etRepeatPassword.text.toString(), cbLicenseAgreement.isChecked
-        )
-    }
-
-    fun setChangeObserver(view: EditText) {
-        RxTextView.afterTextChangeEvents(view).skipInitialValue()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { onInformationChanged() }
-    }
-
     override fun enableSignUpButton() {
         ButtonStateSwitcher(resources, btnSignUp).enableButton()
     }
 
     override fun disableSignUpButton() {
         ButtonStateSwitcher(resources, btnSignUp).disableButton()
+    }
+
+    override fun clearErrors() {
+        tilFirstName.error = null
+        tilLastName.error = null
+        tilEmail.error = null
+        tilPassword.error = null
+        tilRepeatedPassword.error = null
     }
 
     override fun changeRepeatedPasswordVisibility() {
@@ -90,14 +88,50 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
     }
 
     override fun showRegistrationSuccessDialog() {
+        val view = LayoutInflater.from(this).inflate(R.layout.layout_sign_in_success_dialog, null, false)
+        view.findViewById<Button>(R.id.btnSignIn).setOnClickListener { presenter.onSignInButtonClicked() }
+
         AlertDialog.Builder(this)
-                .setView(R.layout.layout_sign_in_success_dialog)
+                .setCancelable(false)
+                .setView(view)
                 .show()
     }
 
     override fun showRegistrationError() {
-        AlertDialog.Builder(this)
-                .setView(R.layout.layout_sign_in_failed_dialog)
-                .show()
+        val view = LayoutInflater.from(this).inflate(R.layout.layout_sign_in_failed_dialog, null, false)
+        val dialog = AlertDialog.Builder(this)
+                .setCancelable(false)
+                .setView(view)
+                .create()
+
+        view.findViewById<Button>(R.id.btnTryAgain).setOnClickListener {
+            presenter.onSignUpButtonClicked(etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
+                    etPassword.text.toString(), etRepeatPassword.text.toString())
+        }
+
+        view.findViewById<View>(R.id.btnClose).setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
+    }
+
+    override fun setPasswordError(passwordError: String) {
+        tilPassword.error = passwordError
+    }
+
+    override fun setEmailError(emailError: String) {
+        tilEmail.error = emailError
+    }
+
+    private fun setChangeObserver(view: EditText) {
+        RxTextView.afterTextChangeEvents(view).skipInitialValue()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { onInformationChanged() }
+    }
+
+    private fun onInformationChanged() {
+        presenter.onFieldInformationChanged(
+                etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
+                etPassword.text.toString(), etRepeatPassword.text.toString(), cbLicenseAgreement.isChecked
+        )
     }
 }

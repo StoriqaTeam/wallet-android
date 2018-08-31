@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.register_screen
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.storiqa.storiqawallet.objects.ErrorRetriever
 
 @InjectViewState
 class RegisterPresenter : MvpPresenter<RegisterView>() {
@@ -35,10 +36,24 @@ class RegisterPresenter : MvpPresenter<RegisterView>() {
             viewState.hidePasswordsHaveToMatchError()
         }
 
+        viewState.clearErrors()
         model.registerUser(firstName, lastName, email, password, {
             viewState.showRegistrationSuccessDialog()
-        }, {
-            viewState.showRegistrationError()
+        }, { errors ->
+            if(errors == null) {
+                viewState.showRegistrationError()
+            } else {
+                val errorRetriever = ErrorRetriever(errors)
+
+                if(errorRetriever.isEmailErrorExist()) {
+                    viewState.setEmailError(errorRetriever.emailErrors)
+                }
+
+                if(errorRetriever.isPasswordErrorExist()) {
+                    viewState.setPasswordError(errorRetriever.passwordErrors)
+                }
+            }
+
         })
     }
 

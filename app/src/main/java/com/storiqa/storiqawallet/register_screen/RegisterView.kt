@@ -12,6 +12,9 @@ interface RegisterView : MvpView {
     fun hidePasswordsHaveToMatchError()
     fun showRegistrationSuccessDialog()
     fun showRegistrationError()
+    fun setEmailError(emailError: String)
+    fun setPasswordError(passwordError: String)
+    fun clearErrors()
 
 
 }
