@@ -9,7 +9,6 @@ import com.storiqa.storiqawallet.R
 import kotlinx.android.synthetic.main.activity_login.*
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -20,25 +19,26 @@ import com.firebase.ui.auth.IdpResponse
 import android.content.Intent
 import android.util.Log
 import com.storiqa.storiqawallet.constants.RequestCodes
+import com.storiqa.storiqawallet.objects.PasswordVisibilityModifier
+import com.storiqa.storiqawallet.objects.ScreenStarter
+import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
 import java.util.*
 
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     @InjectPresenter
-    lateinit var presenter : LoginPresenter
+    lateinit var presenter: LoginPresenter
+
+    lateinit var passwordVisibilityModifier: PasswordVisibilityModifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        ivShowPassword.setOnTouchListener { _, motionEvent ->
-            when (motionEvent.action) {
-                MotionEvent.ACTION_DOWN -> presenter.onShowPasswordPressed()
-                MotionEvent.ACTION_UP -> presenter.onShowPasswordButtonReleased()
-                else -> false
-            }
-        }
+        passwordVisibilityModifier = PasswordVisibilityModifier(etPassword, ivShowPassword)
+
+        ivShowPassword.setOnClickListener { presenter.onChangePasswordVisibilityButtonClicked() }
 
         RxTextView.afterTextChangeEvents(etEmail).skipInitialValue().observeOn(AndroidSchedulers.mainThread()).subscribe {
             presenter.onTextChanged(etEmail.text.toString(), etPassword.text.toString())
@@ -56,31 +56,36 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
             presenter.onGoogleLoginClicked()
         }
 
-        btnFacebookLogin.setOnClickListener { presenter.onFacebookButtonClciked() }
+        btnFacebookLogin.setOnClickListener {
+            presenter.onFacebookButtonClciked()
+        }
+
+        btnRegister.setOnClickListener { presenter.onRegisterButtonClicked() }
+
+    }
+
+    override fun showSignInError() {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun changePasswordVisibility() {
+        passwordVisibilityModifier.changeVisibility()
+    }
+
+    override fun startRegisterScreen() {
+        ScreenStarter().startRegisterScreen(this)
     }
 
     override fun startFacebookSignInProcess() {
-        val providers = Arrays.asList(AuthUI.IdpConfig.FacebookBuilder().build())
-
         // Create and launch sign-in intent
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                RequestCodes().requestFacebookSignIn)
+        startSignInIntent(
+                Arrays.asList(AuthUI.IdpConfig.FacebookBuilder().build()),
+                RequestCodes().requestGoogleSignIn)
+
     }
 
     override fun startGoogleSignInProcess() {
-        val providers = Arrays.asList(AuthUI.IdpConfig.GoogleBuilder().build())
-
-        // Create and launch sign-in intent
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                RequestCodes().requestGoogleSignIn)
+        startSignInIntent(Arrays.asList(AuthUI.IdpConfig.GoogleBuilder().build()), RequestCodes().requestGoogleSignIn)
     }
 
     override fun startMainScreen() {
@@ -107,10 +112,6 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun showGeneralError() {
         Toast.makeText(this, getString(R.string.errorVerification), Toast.LENGTH_LONG).show()
-    }
-
-    override fun moveInputAtTheEnd() {
-        etPassword.setSelection(etPassword.text.length)
     }
 
     override fun hidePassword() {
@@ -143,19 +144,25 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         if (requestCode == RequestCodes().requestGoogleSignIn || requestCode == RequestCodes().requestFacebookSignIn) {
             val response = IdpResponse.fromResultIntent(data)
 
-            if (resultCode == Activity.RESULT_OK) {
-                // Successfully signed in
-                val user = FirebaseAuth.getInstance().currentUser
-                val userToken = ""
-
-                if(requestCode == RequestCodes().requestGoogleSignIn) {
-                    presenter.requestTokenFromGoogleAccount(userToken)
-                } else if(requestCode == RequestCodes().requestFacebookSignIn) {
-                    presenter.requestTokenFromFacebookAccount(userToken)
+            if (resultCode == Activity.RESULT_OK && response != null) {
+                FirebaseAuth.getInstance().getAccessToken(true).addOnCompleteListener {
+                    val userToken = it.result.token!!
+                    if (requestCode == RequestCodes().requestGoogleSignIn) {
+                        presenter.requestTokenFromGoogleAccount(userToken)
+                    } else if (requestCode == RequestCodes().requestFacebookSignIn) {
+                        presenter.requestTokenFromFacebookAccount(userToken)
+                    }
                 }
             } else {
-                Log.d("","")
+                Log.d("", "")
             }
         }
+    }
+
+    private fun startSignInIntent(providers: MutableList<AuthUI.IdpConfig>, requestCode: Int) {
+        startActivityForResult(AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build(), requestCode)
     }
 }
