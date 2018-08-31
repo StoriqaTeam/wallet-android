@@ -2,9 +2,8 @@ package com.storiqa.storiqawallet.login_screen
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.storiqa.storiqawallet.constants.JsonConstants
 import com.storiqa.storiqawallet.constants.SignInProviders
-import org.json.JSONObject
+import com.storiqa.storiqawallet.objects.ErrorRetriever
 
 @InjectViewState
 class LoginPresenter : MvpPresenter<LoginView>() {
@@ -27,24 +26,22 @@ class LoginPresenter : MvpPresenter<LoginView>() {
             viewState.startMainScreen()
             viewState.hideProgressBar()
             viewState.enableSignInButton()
-        }) {
+        }) {errors ->
             viewState.hideEmailError()
-            if (it.isEmpty()) {
+            if (errors.isEmpty()) {
                 viewState.showGeneralError()
             } else {
                 viewState.hidePasswordError()
                 viewState.hideEmailError()
-                for (error in it) {
-                    val detailMessageJson = JSONObject(error.data.details.message)
-                    if(detailMessageJson.has(JsonConstants().email)) {
-                        val errors = model.getErrors(detailMessageJson.getJSONArray(JsonConstants().email))
-                        viewState.setEmailError(errors)
-                    }
 
-                    if(detailMessageJson.has(JsonConstants().password)) {
-                        val errors = model.getErrors(detailMessageJson.getJSONArray(JsonConstants().password))
-                        viewState.setPasswordError(errors)
-                    }
+                val errorRetriever = ErrorRetriever(errors)
+
+                if(errorRetriever.isEmailErrorExist()) {
+                    viewState.setEmailError(errorRetriever.emailErrors)
+                }
+
+                if(errorRetriever.isPasswordErrorExist()) {
+                    viewState.setPasswordError(errorRetriever.passwordErrors)
                 }
             }
             viewState.hideProgressBar()

@@ -1,13 +1,11 @@
 package com.storiqa.storiqawallet.login_screen
 
-import com.storiqa.storiqawallet.constants.JsonConstants
 import com.storiqa.storiqawallet.network.StoriqaApi
 import com.storiqa.storiqawallet.network.network_requests.GetStoriqaTokenFromFirebaseTokenRequest
 import com.storiqa.storiqawallet.network.network_requests.GetTokenByEmailRequest
 import com.storiqa.storiqawallet.network.network_responses.ErrorInfo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.json.JSONArray
 
 class LoginModelImp : LoginModel {
 
@@ -23,14 +21,6 @@ class LoginModelImp : LoginModel {
                 }, {
                     failure(arrayListOf())
                 })
-    }
-
-    override fun getErrors(jsonArray: JSONArray) : String {
-        var result = ""
-        for(i in 0 until jsonArray.length()) {
-            result += jsonArray.getJSONObject(i).getString(JsonConstants().message) + "\n"
-        }
-        return result
     }
 
     override fun getStoriqaToken(userToken: String, provider: String, success: (storiqaToken: String) -> Unit, failure: () -> Unit) {
