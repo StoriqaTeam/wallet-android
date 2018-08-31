@@ -3,7 +3,6 @@ package com.storiqa.storiqawallet.register_screen
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -11,6 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.ButtonStateSwitcher
+import com.storiqa.storiqawallet.objects.GeneralErrorDialogHelper
 import com.storiqa.storiqawallet.objects.PasswordVisibilityModifier
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -98,20 +98,10 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
     }
 
     override fun showRegistrationError() {
-        val view = LayoutInflater.from(this).inflate(R.layout.layout_sign_in_failed_dialog, null, false)
-        val dialog = AlertDialog.Builder(this)
-                .setCancelable(false)
-                .setView(view)
-                .create()
-
-        view.findViewById<Button>(R.id.btnTryAgain).setOnClickListener {
+        GeneralErrorDialogHelper(this).show {
             presenter.onSignUpButtonClicked(etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
                     etPassword.text.toString(), etRepeatPassword.text.toString())
         }
-
-        view.findViewById<View>(R.id.btnClose).setOnClickListener { dialog.dismiss() }
-
-        dialog.show()
     }
 
     override fun setPasswordError(passwordError: String) {

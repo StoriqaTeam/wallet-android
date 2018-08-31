@@ -28,12 +28,11 @@ class LoginPresenter : MvpPresenter<LoginView>() {
             viewState.enableSignInButton()
         }) {errors ->
             viewState.hideEmailError()
-            if (errors.isEmpty()) {
-                viewState.showGeneralError()
-            } else {
-                viewState.hidePasswordError()
-                viewState.hideEmailError()
+            viewState.hidePasswordError()
 
+            if (errors.isEmpty()) {
+                viewState.showSignInError()
+            } else {
                 val errorRetriever = ErrorRetriever(errors)
 
                 if(errorRetriever.isEmailErrorExist()) {

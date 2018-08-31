@@ -20,6 +20,7 @@ import android.content.Intent
 import android.util.Log
 import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.objects.ButtonStateSwitcher
+import com.storiqa.storiqawallet.objects.GeneralErrorDialogHelper
 import com.storiqa.storiqawallet.objects.PasswordVisibilityModifier
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
@@ -66,7 +67,9 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     }
 
     override fun showSignInError() {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        GeneralErrorDialogHelper(this).show {
+            presenter.onSignInButtonClicked(etEmail.text.toString(), etPassword.text.toString())
+        }
     }
 
     override fun changePasswordVisibility() {
