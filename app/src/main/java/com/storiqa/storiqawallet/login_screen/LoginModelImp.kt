@@ -25,10 +25,10 @@ class LoginModelImp : LoginModel {
                 })
     }
 
-    override fun getErrors(array: JSONArray) : String {
+    override fun getErrors(jsonArray: JSONArray) : String {
         var result = ""
-        for(i in 0 until array.length()) {
-            result += array.getJSONObject(i).getString(JsonConstants().message) + "\n"
+        for(i in 0 until jsonArray.length()) {
+            result += jsonArray.getJSONObject(i).getString(JsonConstants().message) + "\n"
         }
         return result
     }

@@ -17,4 +17,13 @@
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_application_id" translatable="false">425217154570731</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb:425217154570731</string>
+    <string name="signUpButtonText">Sign up</string>
+    <string name="signIn">Sign in</string>
+    <string name="haveAnAccount">Have an account?</string>
+    <string name="firstName">First name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeatPassword">Repeat password</string>
+    <string name="termsAndConditions">I accept the terms of the license agreement and privacy policy</string>
+    <string name="lastName">Last name</string>
 </resources>

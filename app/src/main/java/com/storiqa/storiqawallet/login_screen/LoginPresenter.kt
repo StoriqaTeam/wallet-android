@@ -10,17 +10,6 @@ import org.json.JSONObject
 class LoginPresenter : MvpPresenter<LoginView>() {
     private val model = LoginModelImp()
 
-    fun onShowPasswordPressed(): Boolean {
-        viewState.showPassword()
-        viewState.moveInputAtTheEnd()
-        return true
-    }
-
-    fun onShowPasswordButtonReleased(): Boolean {
-        viewState.hidePassword()
-        viewState.moveInputAtTheEnd()
-        return true
-    }
 
     fun onTextChanged(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -73,18 +62,26 @@ class LoginPresenter : MvpPresenter<LoginView>() {
 
     fun requestTokenFromGoogleAccount(userToken: String) {
         model.getStoriqaToken(userToken, SignInProviders().google, {
-
+            viewState.startMainScreen()
         }, {
-
+            viewState.showSignInError()
         })
     }
 
     fun requestTokenFromFacebookAccount(userToken: String) {
         model.getStoriqaToken(userToken, SignInProviders().facebook, {
-
+            viewState.startMainScreen()
         }, {
-
+            viewState.showSignInError()
         })
+    }
+
+    fun onRegisterButtonClicked() {
+        viewState.startRegisterScreen()
+    }
+
+    fun onChangePasswordVisibilityButtonClicked() {
+        viewState.changePasswordVisibility()
     }
 
 }

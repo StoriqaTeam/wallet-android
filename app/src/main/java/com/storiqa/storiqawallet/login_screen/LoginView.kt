@@ -5,7 +5,6 @@ import com.arellomobile.mvp.MvpView
 interface LoginView : MvpView {
     fun showPassword()
     fun hidePassword()
-    fun moveInputAtTheEnd()
     fun hideEmailError()
     fun hidePasswordError()
     fun showGeneralError()
@@ -18,4 +17,7 @@ interface LoginView : MvpView {
     fun hideProgressBar()
     fun startGoogleSignInProcess()
     fun startFacebookSignInProcess()
+    fun startRegisterScreen()
+    fun changePasswordVisibility()
+    fun showSignInError()
 }
