@@ -93,5 +93,19 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="purpleSpotStyle">
+        <item name="android:background">@drawable/purple_blur_spot</item>
+        <item name="android:layout_width">94dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_height">220dp</item>
+    </style>
+
+    <style name="blueSpotStyle">
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">136dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@drawable/blue_blur_spot</item>
+    </style>
+
     <color name="grayTextButtonColor">#8C8C8C</color>
 </resources>

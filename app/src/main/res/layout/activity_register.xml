@@ -7,166 +7,180 @@
     android:orientation="vertical"
     tools:context=".screen_register.RegisterActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".screen_register.RegisterActivity">
+        android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/wallet_logo"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp" />
+            android:orientation="vertical"
+            tools:context=".screen_register.RegisterActivity">
 
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilFirstName"
-            style="@style/registerTextInputStyle">
-
-            <EditText
-                android:id="@+id/etFirstName"
-                style="@style/editText"
-                android:inputType="text"
-                android:hint="@string/firstName"
-                android:maxLines="1"
-                android:nextFocusDown="@id/etLastName" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilLastName"
-            style="@style/registerTextInputStyle">
-
-            <EditText
-                android:id="@+id/etLastName"
-                android:inputType="text"
-                style="@style/editText"
-                android:hint="@string/lastName"
-                android:maxLines="1"
-                android:nextFocusDown="@id/etEmail" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilEmail"
-            style="@style/registerTextInputStyle">
-
-            <EditText
-                android:id="@+id/etEmail"
-                android:inputType="textEmailAddress"
-                style="@style/editText"
-                android:hint="@string/email"
-                android:maxLines="1"
-                android:nextFocusDown="@id/etPassword" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilPassword"
-            style="@style/registerTextInputStyle">
-
-            <RelativeLayout
+            <include
+                layout="@layout/wallet_logo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/etPassword"
-                    style="@style/editText"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:nextFocusDown="@id/etRepeatPassword" />
-
-                <ImageView
-                    android:id="@+id/ivShowPassword"
-                    style="@style/watchPasswordButton"
-                    android:background="@drawable/eye_opened" />
-
-            </RelativeLayout>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilRepeatedPassword"
-            style="@style/registerTextInputStyle">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/etRepeatPassword"
-                    style="@style/editText"
-                    android:hint="@string/repeatPassword"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:nextFocusDown="@id/btnSignUp" />
-
-                <ImageView
-                    android:id="@+id/ivShowRepeatedPassword"
-                    style="@style/watchPasswordButton"
-                    android:background="@drawable/eye_opened" />
-
-            </RelativeLayout>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/registerEditTextSideMargin"
-            android:layout_marginRight="@dimen/registerEditTextSideMargin"
-            android:layout_marginTop="36dp"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/cbLicenseAgreement"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:text="@string/termsAndConditions" />
+                android:layout_marginTop="24dp" />
 
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilFirstName"
+                style="@style/registerTextInputStyle">
+
+                <EditText
+                    android:id="@+id/etFirstName"
+                    style="@style/editText"
+                    android:inputType="text"
+                    android:hint="@string/firstName"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/etLastName" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilLastName"
+                style="@style/registerTextInputStyle">
+
+                <EditText
+                    android:id="@+id/etLastName"
+                    android:inputType="text"
+                    style="@style/editText"
+                    android:hint="@string/lastName"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/etEmail" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilEmail"
+                style="@style/registerTextInputStyle">
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:inputType="textEmailAddress"
+                    style="@style/editText"
+                    android:hint="@string/email"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/etPassword" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/registerTextInputStyle">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        style="@style/editText"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:nextFocusDown="@id/etRepeatPassword" />
+
+                    <ImageView
+                        android:id="@+id/ivShowPassword"
+                        style="@style/watchPasswordButton"
+                        android:background="@drawable/eye_opened" />
+
+                </RelativeLayout>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilRepeatedPassword"
+                style="@style/registerTextInputStyle">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/etRepeatPassword"
+                        style="@style/editText"
+                        android:hint="@string/repeatPassword"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:nextFocusDown="@id/btnSignUp" />
+
+                    <ImageView
+                        android:id="@+id/ivShowRepeatedPassword"
+                        style="@style/watchPasswordButton"
+                        android:background="@drawable/eye_opened" />
+
+                </RelativeLayout>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/registerEditTextSideMargin"
+                android:layout_marginRight="@dimen/registerEditTextSideMargin"
+                android:layout_marginTop="36dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cbLicenseAgreement"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:text="@string/termsAndConditions" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSignUp"
+                style="@style/signButton"
+                android:layout_marginTop="29dp"
+                android:text="@string/signUpButtonText" />
+
+            <include
+                layout="@layout/sotial_network_sign_in_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp" />
+
+            <LinearLayout
+                android:id="@+id/llRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="21dp"
+                android:layout_marginTop="34dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/grayTextButton"
+                    android:text="@string/haveAnAccount" />
+
+                <TextView
+                    android:id="@+id/btnSignIn"
+                    style="@style/blueTextButton"
+                    android:layout_marginLeft="6dp"
+                    android:text="@string/signIn" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnSignUp"
-            style="@style/signButton"
-            android:layout_marginTop="29dp"
-            android:text="@string/signUpButtonText" />
+        <ImageView
+            android:layout_marginTop="385dp"
+            style="@style/purpleSpotStyle" />
 
-        <include
-            layout="@layout/sotial_network_sign_in_footer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="42dp" />
+        <ImageView
+            android:layout_marginTop="376dp"
+            style="@style/blueSpotStyle" />
 
-        <LinearLayout
-            android:id="@+id/llRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="21dp"
-            android:layout_marginTop="34dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/grayTextButton"
-                android:text="@string/haveAnAccount" />
-
-            <TextView
-                android:id="@+id/btnSignIn"
-                style="@style/blueTextButton"
-                android:layout_marginLeft="6dp"
-                android:text="@string/signIn" />
-
-        </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </ScrollView>

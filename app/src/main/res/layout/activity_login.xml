@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".screen_login.LoginActivity">
-
+    
     <ProgressBar
         android:id="@+id/pbLoading"
         android:visibility="gone"
@@ -14,11 +14,15 @@
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
+    
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,5 +122,16 @@
             </LinearLayout>
 
         </LinearLayout>
+
+            <ImageView
+                android:layout_marginTop="385dp"
+                style="@style/purpleSpotStyle" />
+
+            <ImageView
+                android:layout_marginTop="376dp"
+                style="@style/blueSpotStyle" />
+
+        </RelativeLayout>
     </ScrollView>
+
 </RelativeLayout>

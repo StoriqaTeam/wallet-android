@@ -10,7 +10,8 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.ResizeAnimation
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import android.animation.ObjectAnimator
-import android.view.animation.LinearInterpolator
+import android.util.TypedValue
+import android.view.animation.AccelerateInterpolator
 
 
 class SplashActivity : MvpAppCompatActivity(), SplashView {
@@ -54,12 +55,12 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
     override fun startResizeLogoAnimation() {
         val resizeAnimation = ResizeAnimation(
                 ivLogo,
-                Math.round(ivLogo.height * 0.7f), //make this view's height 70% from previous (decrease by 30%)
+                Math.round(ivLogo.height * 0.9f), //make this view's height 90% from previous (decrease by 10%)
                 ivLogo.height,
-                Math.round(ivLogo.width * 0.7f),
+                Math.round(ivLogo.width * 0.9f),
                 ivLogo.width
         )
-        resizeAnimation.duration = 2 * SECOND
+        resizeAnimation.duration = 1 * SECOND
         ivLogo.startAnimation(resizeAnimation)
     }
 
@@ -70,9 +71,11 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
     }
 
     fun moveViewUp(view : View) {
-        val animation = ObjectAnimator.ofFloat(view, "translationY", -200f)
-        animation.interpolator = LinearInterpolator()
-        animation.duration = 2 * SECOND
+        val seventyDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70f, resources.displayMetrics)
+
+        val animation = ObjectAnimator.ofFloat(view, "translationY", -seventyDp)
+        animation.interpolator = AccelerateInterpolator()
+        animation.duration = 1 * SECOND
         animation.start()
     }
 }
