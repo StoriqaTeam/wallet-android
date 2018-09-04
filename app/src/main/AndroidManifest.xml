@@ -38,7 +38,8 @@
             android:name=".screen_recover_password.screen_recover_email_enter_first_step.RecoverPasswordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity"></activity>
+        <activity android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity" />
+        <activity android:name=".screen_pincode_setup.PinCodeSetupActivity"></activity>
     </application>
 
 </manifest>

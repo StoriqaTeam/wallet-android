@@ -39,4 +39,7 @@
     <string name="resetPassword">Reset password</string>
     <string name="newPasswordMessage">Create new password\nand confirm it.</string>
     <string name="confirmNewPassword">Confirm new password</string>
+    <string name="setUpPinCodeQuestion">Set up PIN code?</string>
+    <string name="doNotUse">Do not use</string>
+    <string name="setUpPinCode">Set up PIN code</string>
 </resources>
