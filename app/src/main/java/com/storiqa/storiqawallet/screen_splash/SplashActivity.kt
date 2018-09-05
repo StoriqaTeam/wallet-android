@@ -31,6 +31,8 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
         ivLogo.postDelayed({
             presenter.initScreen()
         }, 2 * SECOND)
+
+        presenter.redirectIfUserSawSplash()
     }
 
     override fun startRegisterScreen() {

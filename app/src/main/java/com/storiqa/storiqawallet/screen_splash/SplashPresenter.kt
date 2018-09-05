@@ -14,12 +14,19 @@ class SplashPresenter : MvpPresenter<SplashView>() {
     }
 
     fun onGetStartedButtonClicked() {
+        model.setUserWentSplash()
         viewState.startRegisterScreen()
     }
 
     fun onSignInButtonClicked() {
+        model.setUserWentSplash()
         viewState.startLoginScreen()
     }
 
+    fun redirectIfUserSawSplash() {
+        if(model.isUserWentFromSplash()) {
+            viewState.startLoginScreen()
+        }
+    }
 
 }
