@@ -118,7 +118,7 @@
 
                 <TextView
                     android:id="@+id/btnSignIn"
-                    style="@style/blueTextButton"
+                    style="@style/textButtonStyle"
                     android:layout_marginLeft="6dp"
                     android:text="@string/signIn" />
 
