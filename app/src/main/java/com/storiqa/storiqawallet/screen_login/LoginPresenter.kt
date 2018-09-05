@@ -13,8 +13,8 @@ class LoginPresenter : MvpPresenter<LoginView>() {
         viewState.showProgressBar()
 
         model.signInWithEmailAndPassword(email, password, {
-            viewState.startMainScreen()
             viewState.hideProgressBar()
+            startNextScreen()
         }) {errors ->
             viewState.hideEmailError()
             viewState.hidePasswordError()
@@ -46,7 +46,7 @@ class LoginPresenter : MvpPresenter<LoginView>() {
 
     fun requestTokenFromGoogleAccount(userToken: String) {
         model.getStoriqaToken(userToken, SignInProviders().google, {
-            viewState.startMainScreen()
+            startNextScreen()
         }, {
             viewState.showSignInError()
         })
@@ -54,10 +54,18 @@ class LoginPresenter : MvpPresenter<LoginView>() {
 
     fun requestTokenFromFacebookAccount(userToken: String) {
         model.getStoriqaToken(userToken, SignInProviders().facebook, {
-            viewState.startMainScreen()
+            startNextScreen()
         }, {
             viewState.showSignInError()
         })
+    }
+
+    fun startNextScreen() {
+        if (model.isUserFinishedQuickLaunch()) {
+            viewState.startMainScreen()
+        } else {
+            viewState.startQuickLaunchScreen()
+        }
     }
 
     fun onRegisterButtonClicked() {

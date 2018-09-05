@@ -1,5 +1,7 @@
 package com.storiqa.storiqawallet.screen_login
 
+import com.storiqa.storiqawallet.StoriqaApp
+import com.storiqa.storiqawallet.db.PreferencesHelper
 import com.storiqa.storiqawallet.network.StoriqaApi
 import com.storiqa.storiqawallet.network.network_requests.GetStoriqaTokenFromFirebaseTokenRequest
 import com.storiqa.storiqawallet.network.network_requests.GetTokenByEmailRequest
@@ -22,6 +24,8 @@ class LoginModelImp : LoginModel {
                     failure(arrayListOf())
                 })
     }
+
+    override fun isUserFinishedQuickLaunch(): Boolean = PreferencesHelper(StoriqaApp.context).isQuickLaunchFinished()
 
     override fun getStoriqaToken(userToken: String, provider: String, success: (storiqaToken: String) -> Unit, failure: () -> Unit) {
         StoriqaApi.Factory().getInstance().getStoriqaTokenFromFirebaseToken(GetStoriqaTokenFromFirebaseTokenRequest(userToken, provider))

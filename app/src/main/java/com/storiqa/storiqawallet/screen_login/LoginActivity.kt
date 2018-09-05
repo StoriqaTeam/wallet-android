@@ -37,6 +37,8 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         btnForgotPassword.setOnClickListener { presenter.onForgotPasswordButtonClicked() }
     }
 
+    override fun startSetupLoginScreen() = ScreenStarter().startQuickStartScreen(this)
+
     override fun openRecoverPasswordScreen() = ScreenStarter().startRecoverPasswordScreen(this)
 
     override fun showSignInError() {
@@ -47,11 +49,13 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun startRegisterScreen() = ScreenStarter().startRegisterScreen(this)
 
+    override fun startQuickLaunchScreen() =  ScreenStarter().startQuickStartScreen(this)
+
     override fun startFacebookSignInProcess() = SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
 
     override fun startGoogleSignInProcess() = SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
 
-    override fun startMainScreen() { /* TODO open main screen */ }
+    override fun startMainScreen() = ScreenStarter().startMainScreen(this)
 
     override fun hideEmailError() {
         tilEmail.error = null
