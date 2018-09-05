@@ -48,4 +48,8 @@
     <string name="chooseWay">Choose the way to confirm\nyour identity</string>
     <string name="setupFingerprint">Set up fingerprint\nlaunch?</string>
     <string name="useFingerprintScanner">Use Fingerprint scanner</string>
+    <string name="pinCodeSet">Enter PIN code</string>
+    <string name="pinCodeRepeat">Repeat PIN code</string>
+    <string name="pinNotValid">Entered pin is not valid</string>
+    <string name="pinsNotMatch">Your pin codes doesn\'t match. Try again</string>
 </resources>
