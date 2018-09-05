@@ -9,4 +9,5 @@
     <color name="greyishBrown">#505050</color>
     <color name="grayTextButtonColor">#8C8C8C</color>
     <color name="splashMessage">#a59ccd</color>
+    <color name="grayButtonLight">#f7f7f7</color>
 </resources>
