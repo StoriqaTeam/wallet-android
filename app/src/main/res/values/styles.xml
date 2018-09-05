@@ -26,13 +26,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="blueTextButton">
-        <item name="android:textColor">@color/brightSkyBlue</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
+
 
     <style name="grayTextButton">
         <item name="android:textColor">@color/grayTextButtonColor</item>
@@ -131,6 +125,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:gravity">center</item>
         <item name="android:textStyle">normal</item>
         <item name="android:lineSpacingExtra">2dp</item>
         <item name="android:textColor">@android:color/black</item>
@@ -142,11 +137,13 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textColor">@color/recoveryGray</item>
+        <item name="android:textColor">@color/grayTextButtonColor</item>
         <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="textButtonStyle" parent="blueTextButton">
+    <style name="textButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">17sp</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
@@ -155,5 +152,4 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <color name="grayTextButtonColor">#8C8C8C</color>
 </resources>

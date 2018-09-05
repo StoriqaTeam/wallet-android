@@ -8,13 +8,9 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/recoveryHeader"
         android:layout_marginTop="53dp"
-        android:gravity="center"
         android:text="@string/quickLaunch"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,8 +20,8 @@
         android:layout_width="0dp"
         android:layout_height="438dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="26dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSetUpPinCode"
+        android:layout_marginTop="57dp"
+        android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,12 +44,8 @@
 
     <TextView
         android:id="@+id/btnDoNotUse"
-        style="@style/blueTextButton"
+        style="@style/textButtonStyle"
         android:layout_marginBottom="19dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/doNotUse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,8 +58,24 @@
         android:layout_marginBottom="27dp"
         android:gravity="center"
         android:text="@string/chooseWay"
+        android:textColor="@color/greyishBrown"
         app:layout_constraintBottom_toTopOf="@+id/btnSetQuickStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="283dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/purple_blur_spot" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="218dp"
+        android:layout_marginBottom="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/blue_blur_spot" />
 
 </android.support.constraint.ConstraintLayout>
