@@ -39,7 +39,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity" />
-        <activity android:name=".screen_pincode_setup.PinCodeSetupActivity"></activity>
+        <activity android:name=".screen_pincode_setup.PinCodeSetupActivity" />
+        <activity android:name=".screen_quick_start.QuickStartActivity" />
+        <activity android:name=".screen_setup_fingerprint.FingerprintSetupActivity"></activity>
     </application>
 
 </manifest>

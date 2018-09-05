@@ -1,18 +1,18 @@
-package com.storiqa.storiqawallet.screen_pincode_setup
+package com.storiqa.storiqawallet.screen_setup_fingerprint
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.ScreenStarter
-import kotlinx.android.synthetic.main.activity_pin_code_setup.*
+import kotlinx.android.synthetic.main.activity_fingerprint_setup.*
 
-class PinCodeSetupActivity : AppCompatActivity() {
+class FingerprintSetupActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pin_code_setup)
+        setContentView(R.layout.activity_fingerprint_setup)
 
-        btnSetUpPinCode.setOnClickListener { ScreenStarter().startEnterPinCodeScreen(this) }
+        btnSetUpFingerprint.setOnClickListener { ScreenStarter().startEnterPinCodeScreen(this) }
         btnDoNotUse.setOnClickListener { ScreenStarter().startFingerprintSetupScreen(this) }
     }
 }

@@ -10,12 +10,9 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="34dp"
-        android:text="@string/setUpPinCodeQuestion"
+        android:layout_marginTop="53dp"
+        android:gravity="center"
+        android:text="@string/quickLaunch"
         android:textSize="24sp"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,17 +22,17 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="438dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="26dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSetUpPinCode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/set_pin_image" />
+        app:srcCompat="@drawable/quick_launch_image" />
 
     <Button
-        android:id="@+id/btnSetUpPinCode"
+        android:id="@+id/btnSetQuickStart"
         style="@style/buttonStyle"
         android:layout_marginBottom="19dp"
         android:layout_marginEnd="28dp"
@@ -43,7 +40,7 @@
         android:layout_marginRight="28dp"
         android:layout_marginStart="28dp"
         android:background="@drawable/blue_button_background"
-        android:text="@string/setUpPinCode"
+        android:text="@string/setUpQuickLaunch"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnDoNotUse"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +56,17 @@
         android:layout_marginStart="8dp"
         android:text="@string/doNotUse"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        android:gravity="center"
+        android:text="@string/chooseWay"
+        app:layout_constraintBottom_toTopOf="@+id/btnSetQuickStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
