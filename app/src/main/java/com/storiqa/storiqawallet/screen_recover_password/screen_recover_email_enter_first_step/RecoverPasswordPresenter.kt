@@ -8,6 +8,7 @@ class RecoverPasswordPresenter : MvpPresenter<RecoverPasswordView>() {
     val model = RecoverPasswordModelImp()
 
     fun onResetPasswordButtonClicked(email: String) {
+        model.resetPassword(email)
         viewState.openNewPasswordEnterScreen(email)
     }
 
