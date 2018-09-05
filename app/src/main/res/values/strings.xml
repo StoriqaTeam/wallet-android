@@ -42,4 +42,10 @@
     <string name="setUpPinCodeQuestion">Set up PIN code?</string>
     <string name="doNotUse">Do not use</string>
     <string name="setUpPinCode">Set up PIN code</string>
+    <string name="continueButton">Continue</string>
+    <string name="quickLaunch">Wanna use quick\nlaunch?</string>
+    <string name="setUpQuickLaunch">Set up quick launch</string>
+    <string name="chooseWay">Choose the way to confirm\nyour identity</string>
+    <string name="setupFingerprint">Set up fingerprint\nlaunch?</string>
+    <string name="useFingerprintScanner">Use Fingerprint scanner</string>
 </resources>
