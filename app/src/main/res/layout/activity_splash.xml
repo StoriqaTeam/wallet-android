@@ -1,93 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_below="@+id/llInfo"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/llInfo"
+        android:id="@+id/llStoriquaLogo"
+        android:paddingTop="59dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <include
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="111dp"
             layout="@layout/wallet_logo" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:gravity="center"
-            android:text="@string/splash_description"
-            android:textColor="#4747349C"
-            android:textSize="12sp" />
-
     </LinearLayout>
 
-   <RelativeLayout
-       android:layout_below="@+id/llInfo"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:lineSpacingExtra="5sp"
+        android:text="@string/splash_description"
+        android:textColor="@color/splashMessage"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llStoriquaLogo" />
 
-       <ImageView
-           android:id="@+id/ivLogo"
-           android:background="@drawable/logo_start_screen"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="110dp"
-           android:layout_width="240dp"
-           android:layout_height="240dp"/>
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="222dp"
+        android:layout_height="222dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/logo_start_screen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        app:layout_constraintVertical_bias="0.0" />
 
-       <ImageView
-           android:id="@+id/purpleSpot"
-           android:background="@drawable/purple_blur_spot"
-           android:layout_marginTop="240dp"
-           android:layout_width="140dp"
-           android:layout_alignParentLeft="true"
-           android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/purpleSpot"
+        android:layout_width="137dp"
+        android:layout_height="283dp"
+        android:background="@drawable/purple_blur_spot"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-       <ImageView
-           android:id="@+id/blueSpot"
-           android:layout_width="139dp"
-           android:layout_height="wrap_content"
-           android:layout_alignParentRight="true"
-           android:layout_marginTop="170dp"
-           android:background="@drawable/blue_blur_spot" />
+    <ImageView
+        android:id="@+id/blueSpot"
+        android:layout_width="100dp"
+        android:layout_height="283dp"
+        android:background="@drawable/blue_blur_spot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-       <LinearLayout
-           android:id="@+id/llButtons"
-           android:visibility="gone"
-           android:layout_alignParentBottom="true"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/llButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="52dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="322dp">
 
-           <Button
-               android:id="@+id/btnGetStarted"
-               style="@style/buttonStyle"
-               android:background="@drawable/blue_button_background"
-               android:text="@string/getStartedButtonText"
-               android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/btnGetStarted"
+            style="@style/buttonStyle"
+            android:background="@drawable/blue_button_background"
+            android:text="@string/getStartedButtonText"
+            android:textColor="@android:color/white" />
 
-           <Button
-               android:id="@+id/btnSignIn"
-               style="@style/buttonStyle"
-               android:layout_marginBottom="31dp"
-               android:layout_marginTop="16dp"
-               android:background="@drawable/white_button_background"
-               android:text="@string/signInButtonText"
-               android:textColor="@color/brightSkyBlue" />
-       </LinearLayout>
-   </RelativeLayout>
+        <TextView
+            android:id="@+id/btnSignIn"
+            style="@style/textButtonStyle"
+            android:layout_marginTop="21dp"
+            android:text="@string/signInButtonText" />
+    </LinearLayout>
 
-</RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
+
 

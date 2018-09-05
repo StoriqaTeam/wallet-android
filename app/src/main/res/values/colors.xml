@@ -8,4 +8,5 @@
     <color name="disableButton">#AAAAAA</color>
     <color name="greyishBrown">#505050</color>
     <color name="grayTextButtonColor">#8C8C8C</color>
+    <color name="splashMessage">#a59ccd</color>
 </resources>

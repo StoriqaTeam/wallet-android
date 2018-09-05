@@ -9,7 +9,6 @@ class SplashPresenter : MvpPresenter<SplashView>() {
 
     fun initScreen() {
         viewState.startShowButtonsAnimation()
-        viewState.startResizeLogoAnimation()
         viewState.startMoveLogoUpAnimation()
     }
 

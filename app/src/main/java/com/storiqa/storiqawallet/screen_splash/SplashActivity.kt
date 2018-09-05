@@ -7,11 +7,10 @@ import android.view.View
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.objects.ResizeAnimation
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import android.animation.ObjectAnimator
 import android.util.TypedValue
-import android.view.animation.AccelerateInterpolator
+import android.view.animation.LinearInterpolator
 
 
 class SplashActivity : MvpAppCompatActivity(), SplashView {
@@ -54,31 +53,18 @@ class SplashActivity : MvpAppCompatActivity(), SplashView {
         llButtons.animation.start()
     }
 
-    override fun startResizeLogoAnimation() {
-        val resizeAnimation = ResizeAnimation(
-                ivLogo,
-                Math.round(ivLogo.height * 0.9f), //make this view's height 90% from previous (decrease by 10%)
-                ivLogo.height,
-                Math.round(ivLogo.width * 0.9f),
-                ivLogo.width
-        )
-        resizeAnimation.duration = 1 * SECOND
-        resizeAnimation.delay = 1 * SECOND
-        ivLogo.startAnimation(resizeAnimation)
-    }
-
     override fun startMoveLogoUpAnimation() {
         moveViewUp(ivLogo)
         moveViewUp(purpleSpot)
         moveViewUp(blueSpot)
     }
 
-    fun moveViewUp(view : View) {
-        val seventyDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70f, resources.displayMetrics)
-
-        val animation = ObjectAnimator.ofFloat(view, "translationY", -seventyDp)
-        animation.interpolator = AccelerateInterpolator()
+    private fun moveViewUp(view : View) {
+        val animation = ObjectAnimator.ofFloat(view, "translationY", -dpToPx(45f))
+        animation.interpolator = LinearInterpolator()
         animation.duration = 1 * SECOND
         animation.start()
     }
+
+    private fun dpToPx(value : Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, resources.displayMetrics)
 }
