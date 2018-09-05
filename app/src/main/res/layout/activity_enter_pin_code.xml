@@ -22,7 +22,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="83dp"
+            android:layout_marginTop="95dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,20 +30,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:background="@{viewModel.pinCode.get().length > 0? @drawable/blue_circle_background : @drawable/white_circle_blue_corners_background}"
-                style="@style/pinCircleStyle" />
+                style="@style/pinCircleStyle"
+                android:background="@{viewModel.pinCode.get().length > 0? @drawable/blue_circle_background : @drawable/white_circle_blue_corners_background}" />
 
             <ImageView
-                android:background="@{viewModel.pinCode.get().length > 1? @drawable/blue_circle_background : @drawable/white_circle_blue_corners_background}"
-                style="@style/pinCircleStyle" />
+                style="@style/pinCircleStyle"
+                android:background="@{viewModel.pinCode.get().length > 1? @drawable/blue_circle_background : @drawable/white_circle_blue_corners_background}" />
 
             <ImageView
-                android:background="@{viewModel.pinCode.get().length > 2? @drawable/blue_circle_background : @drawable/white_circle_blue_corners_background}"
-                style="@style/pinCircleStyle" />
+                style="@style/pinCircleStyle"
+                android:background="@{viewModel.pinCode.get().length > 2? @drawable/blue_circle_background : @drawable/white_circle_blue_corners_background}" />
 
             <ImageView
-                android:background="@{viewModel.pinCode.get().length > 3? @drawable/blue_circle_background : @drawable/white_circle_blue_corners_background}"
-                style="@style/pinCircleStyle" />
+                style="@style/pinCircleStyle"
+                android:background="@{viewModel.pinCode.get().length > 3? @drawable/blue_circle_background : @drawable/white_circle_blue_corners_background}" />
 
         </LinearLayout>
 
@@ -59,26 +59,26 @@
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:onClick='@{() -> viewModel.enterDigit("1")}'
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("1")}'
                 android:text="1"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:onClick='@{() -> viewModel.enterDigit("2")}'
-                android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
+                android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("2")}'
                 android:text="2"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:onClick='@{() -> viewModel.enterDigit("3")}'
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("3")}'
                 android:text="3"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,26 +94,26 @@
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:onClick='@{() -> viewModel.enterDigit("4")}'
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("4")}'
                 android:text="4"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
             <TextView
                 style="@style/pinCodeNumber"
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
-                android:onClick='@{() -> viewModel.enterDigit("5")}'
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("5")}'
                 android:text="5"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:onClick='@{() -> viewModel.enterDigit("6")}'
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("6")}'
                 android:text="6"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <LinearLayout
@@ -129,24 +129,24 @@
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:onClick='@{() -> viewModel.enterDigit("7")}'
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("7")}'
                 android:text="7"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
             <TextView
                 style="@style/pinCodeNumber"
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
-                android:onClick='@{() -> viewModel.enterDigit("8")}'
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("8")}'
                 android:text="8"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:onClick='@{() -> viewModel.enterDigit("9")}'
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+                android:onClick='@{() -> viewModel.enterDigit("9")}'
                 android:text="9"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
@@ -159,6 +159,7 @@
             android:layout_marginRight="35dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/fingerprint_blue"
+            android:visibility='@{viewModel.isEnterForLogin ? View.VISIBLE : View.GONE}'
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="@+id/textView4" />
@@ -171,9 +172,9 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="18dp"
-            android:text="0"
-            android:onClick='@{() -> viewModel.enterDigit("0")}'
             android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
+            android:onClick='@{() -> viewModel.enterDigit("0")}'
+            android:text="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
@@ -187,8 +188,9 @@
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginStart="28dp"
-            android:enabled="@{viewModel.pinCode.get().length == 4? true : false}"
             android:background="@drawable/switch_state_button"
+            android:enabled="@{viewModel.pinCode.get().length == 4? true : false}"
+            android:onClick="@{()-> viewModel.isEnterForLogin? viewModel.performLogin() : viewModel.nextSetPasswordState()}"
             android:text="@string/continueButton"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -208,6 +210,34 @@
             app:layout_constraintTop_toTopOf="@+id/textView4"
             app:srcCompat="@drawable/erase_pin" />
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:visibility="@{viewModel.isEnterForLogin ? View.GONE : View.VISIBLE}"
+            android:text="@{viewModel.isEnterForPasswordSet ? @string/pinCodeSet : @string/pinCodeRepeat }"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="50dp"
+            android:textStyle=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="pin code message" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            tools:text="error"
+            android:gravity="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="@{viewModel.isPinNotValidError || viewModel.isPinsNotMatchError ? View.VISIBLE : View.GONE}"
+            android:text="@{viewModel.isPinNotValidError() ? @string/pinNotValid : @string/pinsNotMatch}"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     </android.support.constraint.ConstraintLayout>
 

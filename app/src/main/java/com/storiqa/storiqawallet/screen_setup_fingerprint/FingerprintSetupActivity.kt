@@ -12,7 +12,9 @@ class FingerprintSetupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fingerprint_setup)
 
-        btnSetUpFingerprint.setOnClickListener { ScreenStarter().startEnterPinCodeScreen(this) }
-        btnDoNotUse.setOnClickListener { ScreenStarter().startFingerprintSetupScreen(this) }
+        btnSetUpFingerprint.setOnClickListener {
+            //TODO add fingerprint
+        }
+        btnDoNotUse.setOnClickListener { ScreenStarter().startMainScreen(this) }
     }
 }
