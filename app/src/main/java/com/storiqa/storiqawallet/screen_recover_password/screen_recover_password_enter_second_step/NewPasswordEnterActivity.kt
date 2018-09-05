@@ -7,7 +7,6 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.ButtonStateSwitcherFor
 import com.storiqa.storiqawallet.objects.TextVisibilityModifierFor
 import kotlinx.android.synthetic.main.activity_new_password_enter.*
-import kotlinx.android.synthetic.main.header.*
 import kotlinx.android.synthetic.main.layout_password_enter.*
 
 class NewPasswordEnterActivity : MvpAppCompatActivity(), NewPasswordEnterView {
