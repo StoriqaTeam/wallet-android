@@ -15,12 +15,13 @@
         <item name="android:layout_height">45dp</item>
         <item name="android:layout_marginLeft">29dp</item>
         <item name="android:layout_marginRight">29dp</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="editText">
         <item name="android:paddingBottom">18dp</item>
         <item name="android:textSize">17sp</item>
-        <item name="android:textColor">#A7A7A7</item>
+        <item name="android:textColor">#60000000</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -124,6 +125,23 @@
         <item name="android:textColor">@color/brightSkyBlue</item>
         <item name="android:textSize">36sp</item>
 
+    </style>
+
+    <style name="recoveryHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="recoveryMessage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/recoveryGray</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <color name="grayTextButtonColor">#8C8C8C</color>

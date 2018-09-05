@@ -8,7 +8,6 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.ButtonStateSwitcherFor
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import kotlinx.android.synthetic.main.activity_recover_password.*
-import kotlinx.android.synthetic.main.header.*
 
 class RecoverPasswordActivity : MvpAppCompatActivity(), RecoverPasswordView {
 
