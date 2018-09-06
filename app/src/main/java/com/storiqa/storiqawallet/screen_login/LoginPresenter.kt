@@ -11,11 +11,14 @@ class LoginPresenter : MvpPresenter<LoginView>() {
 
     fun onSignInButtonClicked(email: String, password: String) {
         viewState.showProgressBar()
+        viewState.disableSignInButton()
+        viewState.hideKeyboard()
 
         model.signInWithEmailAndPassword(email, password, {
             viewState.hideProgressBar()
             startNextScreen()
         }) {errors ->
+            viewState.enableSignInButton()
             viewState.hideEmailError()
             viewState.hidePasswordError()
 

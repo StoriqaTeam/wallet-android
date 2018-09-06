@@ -20,4 +20,7 @@ interface LoginView : MvpView {
     fun openRecoverPasswordScreen()
     fun startSetupLoginScreen()
     fun startQuickLaunchScreen()
+    fun disableSignInButton()
+    fun enableSignInButton()
+    fun hideKeyboard()
 }

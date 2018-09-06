@@ -61,12 +61,12 @@ class ButtonStateSwitcherFor(val button: Button) {
         return true
     }
 
-    private fun enableButton() {
+    fun enableButton() {
         button.isEnabled = true
         button.setTextColor(ResourcesCompat.getColor(button.context.resources, android.R.color.white, null))
     }
 
-    private fun disableButton() {
+    fun disableButton() {
         button.isEnabled = false
         button.setTextColor(ResourcesCompat.getColor(button.context.resources, R.color.disableButton, null))
     }

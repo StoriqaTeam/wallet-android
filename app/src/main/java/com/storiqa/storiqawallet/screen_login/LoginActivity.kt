@@ -15,6 +15,7 @@ import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
+import android.view.inputmethod.InputMethodManager
 
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
@@ -22,12 +23,14 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     @InjectPresenter
     lateinit var presenter: LoginPresenter
 
+    lateinit var buttonStateSwitcher: ButtonStateSwitcherFor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         TextVisibilityModifierFor(etPassword).observeClickOn(ivShowPassword)
-        ButtonStateSwitcherFor(btnSignIn).observeNotEmpty(etEmail, etPassword)
+        buttonStateSwitcher = ButtonStateSwitcherFor(btnSignIn).observeNotEmpty(etEmail, etPassword)
 
         btnGoogleLogin.setOnClickListener { presenter.onGoogleLoginClicked() }
         btnFacebookLogin.setOnClickListener { presenter.onFacebookButtonClciked() }
@@ -84,6 +87,17 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         tilPassword.error = error
     }
 
+    override fun hideKeyboard() {
+        val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view = currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(this)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
     override fun showProgressBar() {
         pbLoading.visibility = View.VISIBLE
     }
@@ -108,5 +122,9 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
             }
         }
     }
+
+    override fun disableSignInButton() = buttonStateSwitcher.disableButton()
+
+    override fun enableSignInButton() = buttonStateSwitcher.enableButton()
 
 }
