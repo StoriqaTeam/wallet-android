@@ -8,8 +8,8 @@ import io.reactivex.schedulers.Schedulers
 class RecoverPasswordModelImp : RecoverPasswordModel {
 
     override fun resetPassword(email: String) {
-        StoriqaApi.Factory().getInstance().resetPassword(ResetPasswordRequest(email))
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+//        StoriqaApi.Factory().getInstance().resetPassword(ResetPasswordRequest(email))
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
     }
 }

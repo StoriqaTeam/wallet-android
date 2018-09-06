@@ -16,6 +16,13 @@ import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
 import android.view.inputmethod.InputMethodManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import android.accounts.AccountManager
+import android.accounts.AccountManagerFuture
+import android.accounts.Account
+
+
 
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
@@ -54,9 +61,9 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun startQuickLaunchScreen() =  ScreenStarter().startQuickStartScreen(this)
 
-    override fun startFacebookSignInProcess() = SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
+    override fun startFacebookSignInProcess() = SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
 
-    override fun startGoogleSignInProcess() = SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
+    override fun startGoogleSignInProcess() = SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
 
     override fun startMainScreen() = ScreenStarter().startMainScreen(this)
 
@@ -113,7 +120,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
             FirebaseAuth.getInstance().getAccessToken(true).addOnCompleteListener {
                 val userToken = it.result.token ?: ""
                 if(requestCode == RequestCodes().requestGoogleSignIn) {
-                    presenter.requestTokenFromGoogleAccount(userToken)
+                    presenter.requestTokenFromGoogleAccount(getGoogleToken())
                 }
 
                 if(requestCode == RequestCodes().requestFacebookSignIn) {
@@ -127,4 +134,18 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun enableSignInButton() = buttonStateSwitcher.enableButton()
 
+    private fun getGoogleToken(): String {
+        var authToken = "null"
+        try {
+            val am = AccountManager.get(applicationContext)
+            val accounts = am.getAccountsByType("com.google")
+            val accountManagerFuture = am.getAuthToken(accounts[0], "oauth2:https://www.googleapis.com/auth/userinfo.profile", null, this, null, null)
+            val authTokenBundle = accountManagerFuture.result
+            authToken = authTokenBundle.getString(AccountManager.KEY_AUTHTOKEN)!!.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return authToken
+    }
 }

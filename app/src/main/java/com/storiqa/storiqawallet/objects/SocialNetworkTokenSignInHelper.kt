@@ -5,6 +5,7 @@ import com.firebase.ui.auth.AuthUI
 import com.storiqa.storiqawallet.constants.RequestCodes
 import java.util.*
 
+
 class SocialNetworkTokenSignInHelper(private val activity: AppCompatActivity) {
 
     private fun startSignInIntent(providers: MutableList<AuthUI.IdpConfig>, requestCode: Int) {
