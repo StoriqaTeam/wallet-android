@@ -68,7 +68,7 @@
         android:layout_height="283dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/purple_blur_spot" />
+        android:src="@drawable/purple_blur_spot" />
 
     <ImageView
         android:layout_width="0dp"
@@ -76,6 +76,6 @@
         android:layout_marginBottom="53dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/blue_blur_spot" />
+        android:src="@drawable/blue_blur_spot" />
 
 </android.support.constraint.ConstraintLayout>

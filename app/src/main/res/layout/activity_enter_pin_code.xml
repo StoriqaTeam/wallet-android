@@ -227,17 +227,14 @@
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
             tools:text="error"
-            android:gravity="center"
-            android:textColor="@android:color/holo_red_dark"
             android:visibility="@{viewModel.isPinNotValidError || viewModel.isPinsNotMatchError ? View.VISIBLE : View.GONE}"
             android:text="@{viewModel.isPinNotValidError() ? @string/pinNotValid : @string/pinsNotMatch}"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            style="@style/errorTextStyle" />
 
         <ImageView
             android:id="@+id/btnBack"
