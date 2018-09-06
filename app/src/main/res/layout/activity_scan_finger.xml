@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.screen_scan_finger.ScanFingerViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="@string/scanYourFinger"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivFingerprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="152dp"
+            android:src="@{viewModel.isAuthSucced? @drawable/fingerprint_blue : @drawable/fingerprint_gray}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/fingerprint_gray" />
+
+        <TextView
+            android:id="@+id/textView16"
+            style="@style/recoveryMessage"
+            android:layout_marginTop="72dp"
+            android:text="@string/scanFingerMessage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivFingerprint" />
+
+        <Button
+            android:id="@+id/btnConfirm"
+            style="@style/buttonStyle"
+            android:layout_marginBottom="19dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="28dp"
+            android:layout_marginStart="28dp"
+            android:background="@drawable/switch_state_button"
+            android:enabled="@{viewModel.isAuthSucced? true : false}"
+            android:text="@string/confirmWithTouchId"
+            android:textColor="@drawable/switch_state_button_color"
+            app:layout_constraintBottom_toTopOf="@+id/btnGoBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:enabled="false" />
+
+        <!--
+                    android:visibility="@{viewModel.isAuthFailed ? View.GONE : View.VISIBLE}"
+        -->
+
+        <TextView
+            android:id="@+id/btnGoBack"
+            style="@style/textButtonStyle"
+            android:layout_marginBottom="19dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/goBack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!--android:onClick="@{()-> viewModel.isAuthFailed ? viewModel.tryAgain() : viewModel.redirectBack()}"-->
+        <!--android:text="@{viewModel.isAuthFailed? @string/tryAgain : @string/goBack}"-->
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="283dp"
+            android:src="@drawable/purple_blur_spot"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="218dp"
+            android:layout_marginBottom="53dp"
+            android:src="@drawable/blue_blur_spot"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/errorTextStyle"
+            android:layout_marginTop="24dp"
+            android:text="@string/cannotPerformAuth"
+            android:visibility="@{viewModel.isAuthFailed? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

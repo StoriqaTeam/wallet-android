@@ -15,13 +15,13 @@ class SocialNetworkTokenSignInHelper(private val activity: AppCompatActivity) {
     }
 
     fun startGoogleSignInProcess() {
-        startSignInIntent(Arrays.asList(AuthUI.IdpConfig.FacebookBuilder().build()),
+        startSignInIntent(Arrays.asList(AuthUI.IdpConfig.GoogleBuilder().build()),
                 RequestCodes().requestGoogleSignIn)
     }
 
     fun startFacebookSignInProcess() {
-        startSignInIntent(Arrays.asList(AuthUI.IdpConfig.GoogleBuilder().build()),
-                RequestCodes().requestGoogleSignIn)
+        startSignInIntent(Arrays.asList(AuthUI.IdpConfig.FacebookBuilder().build()),
+                RequestCodes().requestFacebookSignIn)
     }
 
 

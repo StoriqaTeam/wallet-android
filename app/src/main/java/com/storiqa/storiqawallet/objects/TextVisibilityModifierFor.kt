@@ -6,12 +6,16 @@ import android.view.View
 import android.widget.EditText
 import com.storiqa.storiqawallet.R
 
-class PasswordVisibilityModifier(val etPassword : EditText, val showOrHideButton : View) {
+class TextVisibilityModifierFor(val etPassword: EditText) {
 
     var isPasswordVisible = false
 
-    fun changeVisibility() {
-        if(isPasswordVisible) {
+    fun observeClickOn(showOrHideButton: View) {
+        showOrHideButton.setOnClickListener { changeVisibility(showOrHideButton) }
+    }
+
+    private fun changeVisibility(showOrHideButton: View) {
+        if (isPasswordVisible) {
             etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
             showOrHideButton.setBackgroundResource(R.drawable.eye_opened)
         } else {

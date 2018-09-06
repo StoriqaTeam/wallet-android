@@ -7,4 +7,8 @@
     <color name="gray">#0D000000</color>
     <color name="disableButton">#AAAAAA</color>
     <color name="greyishBrown">#505050</color>
+    <color name="grayTextButtonColor">#8C8C8C</color>
+    <color name="splashMessage">#a59ccd</color>
+    <color name="grayButtonLight">#f7f7f7</color>
+    <color name="oppacedSkyBlue">#1a00b2ff</color>
 </resources>

@@ -9,24 +9,16 @@ import com.storiqa.storiqawallet.objects.ErrorRetriever
 class LoginPresenter : MvpPresenter<LoginView>() {
     private val model = LoginModelImp()
 
-
-    fun onTextChanged(email: String, password: String) {
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            viewState.enableSignInButton()
-        } else {
-            viewState.disableSignInButton()
-        }
-    }
-
     fun onSignInButtonClicked(email: String, password: String) {
         viewState.showProgressBar()
         viewState.disableSignInButton()
+        viewState.hideKeyboard()
 
         model.signInWithEmailAndPassword(email, password, {
-            viewState.startMainScreen()
             viewState.hideProgressBar()
-            viewState.enableSignInButton()
+            startNextScreen()
         }) {errors ->
+            viewState.enableSignInButton()
             viewState.hideEmailError()
             viewState.hidePasswordError()
 
@@ -44,7 +36,6 @@ class LoginPresenter : MvpPresenter<LoginView>() {
                 }
             }
             viewState.hideProgressBar()
-            viewState.enableSignInButton()
         }
     }
 
@@ -58,7 +49,7 @@ class LoginPresenter : MvpPresenter<LoginView>() {
 
     fun requestTokenFromGoogleAccount(userToken: String) {
         model.getStoriqaToken(userToken, SignInProviders().google, {
-            viewState.startMainScreen()
+            startNextScreen()
         }, {
             viewState.showSignInError()
         })
@@ -66,18 +57,26 @@ class LoginPresenter : MvpPresenter<LoginView>() {
 
     fun requestTokenFromFacebookAccount(userToken: String) {
         model.getStoriqaToken(userToken, SignInProviders().facebook, {
-            viewState.startMainScreen()
+            startNextScreen()
         }, {
             viewState.showSignInError()
         })
+    }
+
+    fun startNextScreen() {
+        if (model.isUserFinishedQuickLaunch()) {
+            viewState.startMainScreen()
+        } else {
+            viewState.startQuickLaunchScreen()
+        }
     }
 
     fun onRegisterButtonClicked() {
         viewState.startRegisterScreen()
     }
 
-    fun onChangePasswordVisibilityButtonClicked() {
-        viewState.changePasswordVisibility()
+    fun onForgotPasswordButtonClicked() {
+        viewState.openRecoverPasswordScreen()
     }
 
 }

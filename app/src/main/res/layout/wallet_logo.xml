@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:showIn="@layout/activity_splash">
+    android:layout_height="wrap_content">
 
     <!--TODO change icon-->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="107dp"
-        android:layout_height="24dp"
-        android:background="@drawable/storiqa_logo"
-        android:scaleType="fitCenter" />
+        android:layout_height="22dp"
+        android:background="@drawable/storiqa_logo" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
         android:fontFamily="sans-serif-light"
         android:text="@string/wallet"
+        android:lineSpacingExtra="0sp"
+        android:gravity="center_horizontal"
         android:textColor="@color/brightSkyBlue"
         android:textSize="36sp" />
 </LinearLayout>

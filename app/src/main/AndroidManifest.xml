@@ -2,17 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.storiqa.storiqawallet">
 
+    <uses-feature android:name="android.hardware.fingerprint"
+        android:required="false"/>
+
+    <uses-permission
+        android:name="android.permission.USE_FINGERPRINT" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
+        android:name=".StoriqaApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screen_splash.SplashActivity"
+        <activity
+            android:name=".screen_splash.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +40,16 @@
             android:name=".screen_register.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".screen_recover_password.screen_recover_email_enter_first_step.RecoverPasswordActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity" />
+        <activity android:name=".screen_pincode_setup.PinCodeSetupActivity" />
+        <activity android:name=".screen_quick_start.QuickStartActivity" />
+        <activity android:name=".screen_setup_fingerprint.FingerprintSetupActivity" />
+        <activity android:name=".screen_main.MainActivity" />
+        <activity android:name=".screen_scan_finger.ScanFingerActivity"></activity>
     </application>
 
 </manifest>
