@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.storiqa.storiqawallet">
 
+    <uses-feature android:name="android.hardware.fingerprint"
+        android:required="false"/>
+
+    <uses-permission
+        android:name="android.permission.USE_FINGERPRINT" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
@@ -42,7 +48,8 @@
         <activity android:name=".screen_pincode_setup.PinCodeSetupActivity" />
         <activity android:name=".screen_quick_start.QuickStartActivity" />
         <activity android:name=".screen_setup_fingerprint.FingerprintSetupActivity" />
-        <activity android:name=".screen_main.MainActivity"></activity>
+        <activity android:name=".screen_main.MainActivity" />
+        <activity android:name=".screen_scan_finger.ScanFingerActivity"></activity>
     </application>
 
 </manifest>

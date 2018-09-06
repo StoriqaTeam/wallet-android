@@ -52,4 +52,8 @@
     <string name="pinCodeRepeat">Repeat PIN code</string>
     <string name="pinNotValid">Entered pin is not valid</string>
     <string name="pinsNotMatch">Your pin codes doesn\'t match. Try again</string>
+    <string name="scanYourFinger">Scan your finger to enable\nTouch ID launch</string>
+    <string name="scanFingerMessage">Scan your finger to enable\nTouch ID quick launch</string>
+    <string name="confirmWithTouchId">Confirm using Touch ID</string>
+    <string name="goBack">Go back</string>
 </resources>

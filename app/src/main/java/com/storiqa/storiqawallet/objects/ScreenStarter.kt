@@ -12,6 +12,7 @@ import com.storiqa.storiqawallet.screen_quick_start.QuickStartActivity
 import com.storiqa.storiqawallet.screen_recover_password.screen_recover_email_enter_first_step.RecoverPasswordActivity
 import com.storiqa.storiqawallet.screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity
 import com.storiqa.storiqawallet.screen_register.RegisterActivity
+import com.storiqa.storiqawallet.screen_scan_finger.ScanFingerActivity
 import com.storiqa.storiqawallet.screen_setup_fingerprint.FingerprintSetupActivity
 
 class ScreenStarter {
@@ -33,4 +34,6 @@ class ScreenStarter {
     fun startFingerprintSetupScreen(context: Context) = context.startActivity(Intent(context, FingerprintSetupActivity::class.java))
 
     fun startMainScreen(context: Context)  = context.startActivity(Intent(context, MainActivity::class.java))
+
+    fun startFingerScanScreen(context: Context)  = context.startActivity(Intent(context, ScanFingerActivity::class.java))
 }
