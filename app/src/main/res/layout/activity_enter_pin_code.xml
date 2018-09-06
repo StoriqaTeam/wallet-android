@@ -240,15 +240,24 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="21dp"
+            android:id="@+id/btnBack"
+            style="@style/arrowBackStyle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:color/background_dark" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            style="@style/purpleSpotStyle"
+            android:layout_width="136dp"
+            android:layout_height="283dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            style="@style/blueSpotStyle"
+            android:layout_width="100dp"
+            android:layout_height="218dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

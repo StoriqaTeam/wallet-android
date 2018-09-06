@@ -10,6 +10,7 @@ import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.ActivityEnterPinCodeBinding
 import com.storiqa.storiqawallet.enums.PinCodeEnterType
 import com.storiqa.storiqawallet.objects.ScreenStarter
+import kotlinx.android.synthetic.main.activity_enter_pin_code.*
 
 class EnterPinCodeActivity : AppCompatActivity() {
 
@@ -24,6 +25,7 @@ class EnterPinCodeActivity : AppCompatActivity() {
 
         observeRedirectOnMainScreen(viewModel)
         observeRedirectOnFingerprintSetup(viewModel)
+        btnBack.setOnClickListener { onBackPressed() }
     }
 
     private fun observeRedirectOnFingerprintSetup(viewModel: EnterPinViewModel) {

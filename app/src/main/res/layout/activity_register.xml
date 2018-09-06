@@ -22,10 +22,11 @@
                 layout="@layout/wallet_logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp" />
+                android:layout_marginTop="32dp" />
 
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="21dp"
                 android:id="@+id/tilFirstName"
                 style="@style/registerTextInputStyle">
 
@@ -74,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/registerEditTextSideMargin"
                 android:layout_marginRight="@dimen/registerEditTextSideMargin"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="14dp"
                 android:orientation="horizontal">
 
                 <CheckBox
@@ -86,6 +87,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/grayTextButtonColor"
                     android:layout_marginLeft="18dp"
                     android:text="@string/termsAndConditions" />
 
@@ -93,7 +95,10 @@
 
             <Button
                 android:id="@+id/btnSignUp"
-                style="@style/signButton"
+                style="@style/buttonStyle"
+                android:background="@drawable/switch_state_button"
+                android:enabled="false"
+                android:textColor="@color/grayTextButtonColor"
                 android:layout_marginTop="29dp"
                 android:text="@string/signUpButtonText" />
 
@@ -101,14 +106,14 @@
                 layout="@layout/sotial_network_sign_in_footer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="42dp" />
+                android:layout_marginTop="33dp" />
 
             <LinearLayout
                 android:id="@+id/llRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="21dp"
-                android:layout_marginTop="34dp"
+                android:layout_marginBottom="23dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -119,6 +124,7 @@
                 <TextView
                     android:id="@+id/btnSignIn"
                     style="@style/textButtonStyle"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="6dp"
                     android:text="@string/signIn" />
 
