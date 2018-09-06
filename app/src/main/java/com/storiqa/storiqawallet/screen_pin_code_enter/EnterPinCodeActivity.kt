@@ -9,6 +9,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.ActivityEnterPinCodeBinding
 import com.storiqa.storiqawallet.enums.PinCodeEnterType
+import com.storiqa.storiqawallet.objects.FingerprintHepler
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import kotlinx.android.synthetic.main.activity_enter_pin_code.*
 
@@ -29,9 +30,13 @@ class EnterPinCodeActivity : AppCompatActivity() {
     }
 
     private fun observeRedirectOnFingerprintSetup(viewModel: EnterPinViewModel) {
-        viewModel.shouldRedirectToFingerPrintSetup.observe(this, Observer<Boolean> { shouldRedirectToMainScreen ->
-            if (shouldRedirectToMainScreen!!) {
-                ScreenStarter().startFingerprintSetupScreen(this@EnterPinCodeActivity)
+        viewModel.shouldRedirectToFingerPrintSetup.observe(this, Observer<Boolean> { shouldRedirectToFingerPrintSetup ->
+            if (shouldRedirectToFingerPrintSetup!!) {
+                if(FingerprintHepler(this@EnterPinCodeActivity).isFingerprintSetupNotAvailable()) {
+                    ScreenStarter().startMainScreen(this@EnterPinCodeActivity)
+                } else {
+                    ScreenStarter().startFingerprintSetupScreen(this@EnterPinCodeActivity)
+                }
             }
         })
     }

@@ -31,9 +31,9 @@ class ScreenStarter {
 
     fun startQuickStartScreen(context: Context) = context.startActivity(Intent(context, QuickStartActivity::class.java))
 
-    fun startFingerprintSetupScreen(context: Context) = context.startActivity(Intent(context, FingerprintSetupActivity::class.java))
-
     fun startMainScreen(context: Context)  = context.startActivity(Intent(context, MainActivity::class.java))
+
+    fun startFingerprintSetupScreen(context: Context) = context.startActivity(Intent(context, FingerprintSetupActivity::class.java))
 
     fun startFingerScanScreen(context: Context)  = context.startActivity(Intent(context, ScanFingerActivity::class.java))
 }
