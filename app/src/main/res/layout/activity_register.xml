@@ -119,12 +119,13 @@
 
                 <TextView
                     style="@style/grayTextButton"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/haveAnAccount" />
 
                 <TextView
                     android:id="@+id/btnSignIn"
                     style="@style/textButtonStyle"
-                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="6dp"
                     android:text="@string/signIn" />
 

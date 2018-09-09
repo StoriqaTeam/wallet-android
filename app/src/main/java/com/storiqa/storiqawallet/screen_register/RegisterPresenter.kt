@@ -41,13 +41,5 @@ class RegisterPresenter : MvpPresenter<RegisterView>() {
         })
     }
 
-    fun onGoogleSignInButtonClicked() {
-        viewState.startGoogleSignInProcess()
-    }
-
-    fun onFacebookSignInButtonClicked() {
-        viewState.startFacebookSignInProcess()
-    }
-
 
 }

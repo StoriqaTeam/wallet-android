@@ -37,14 +37,8 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
                 etPassword.text.toString(), etRepeatPassword.text.toString()
         ) }
 
-        btnGoogleLogin.setOnClickListener { presenter.onGoogleSignInButtonClicked() }
-        btnFacebookLogin.setOnClickListener { presenter.onFacebookSignInButtonClicked() }
         btnSignIn.setOnClickListener { presenter.onSignInButtonClicked() }
     }
-
-    override fun startFacebookSignInProcess() = SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
-
-    override fun startGoogleSignInProcess() = SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
 
     override fun showPasswordsHaveToMatchError() {
         tilPassword.error = getString(R.string.errorPasswordHaveToMathc)
