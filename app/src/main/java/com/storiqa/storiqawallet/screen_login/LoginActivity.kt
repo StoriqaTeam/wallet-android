@@ -5,11 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
@@ -23,6 +28,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
+import java.util.*
 
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
@@ -32,6 +38,8 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     lateinit var buttonStateSwitcher: ButtonStateSwitcherFor
 
+    val callbackManager = CallbackManager.Factory.create()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -39,11 +47,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         TextVisibilityModifierFor(etPassword).observeClickOn(ivShowPassword)
         buttonStateSwitcher = ButtonStateSwitcherFor(btnSignIn).observeNotEmpty(etEmail, etPassword)
 
-        btnGoogleLogin.setOnClickListener {
 
-        }
-
-        btnFacebookLogin.setOnClickListener { presenter.onFacebookButtonClciked() }
 
         btnSignIn.setOnClickListener { presenter.onSignInButtonClicked(etEmail.text.toString(), etPassword.text.toString()) }
         btnRegister.setOnClickListener { presenter.onRegisterButtonClicked() }
@@ -51,6 +55,28 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
         presenter.redirectIfAlternativeLoginSetted()
 
+        setupFacebookLogin()
+
+    }
+
+    fun setupFacebookLogin() {
+        fb_login_button.setReadPermissions(Arrays.asList("email", "user_gender"))
+        // Callback registration
+        fb_login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+                if (result != null && result.accessToken != null) {
+                    presenter.requestTokenFromFacebookAccount(result.accessToken.token)
+                }
+            }
+
+            override fun onCancel() {
+                Log.d("", "")
+            }
+
+            override fun onError(error: FacebookException?) {
+                Log.d("", "")
+            }
+        })
     }
 
     override fun openPinCodeEnterSceenForLogin() {
@@ -126,6 +152,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 0) {
 		val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
