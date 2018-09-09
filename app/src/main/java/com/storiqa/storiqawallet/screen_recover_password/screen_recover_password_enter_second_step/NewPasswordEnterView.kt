@@ -4,4 +4,9 @@ import com.arellomobile.mvp.MvpView
 
 interface NewPasswordEnterView : MvpView {
     fun goBack()
+    fun showPasswordsNotMatchError()
+    fun startLoginScreen()
+    fun showGeneralError()
+    fun showProgress()
+    fun hideProgress()
 }
