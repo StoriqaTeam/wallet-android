@@ -152,6 +152,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/btnLoginWithFingerprint"
             android:layout_width="32dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -215,7 +216,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="26sp"
-            android:visibility="@{viewModel.isEnterForLogin ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.isEnterForLogin ? View.INVISIBLE : View.VISIBLE}"
             android:text="@{viewModel.isEnterForPasswordSet ? @string/pinCodeSet : @string/pinCodeRepeat }"
             android:textColor="@android:color/black"
             android:layout_marginTop="50dp"
@@ -244,7 +245,7 @@
 
         <ImageView
             style="@style/purpleSpotStyle"
-            android:layout_width="136dp"
+            android:layout_width="135dp"
             android:layout_height="283dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

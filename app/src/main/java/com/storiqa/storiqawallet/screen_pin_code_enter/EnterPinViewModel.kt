@@ -4,9 +4,11 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import com.storiqa.storiqawallet.enums.PinCodeEnterType
+import com.storiqa.storiqawallet.objects.FingerprintHepler
+import com.storiqa.storiqawallet.screen_scan_finger.ScanFingerModel
 
 class EnterPinViewModel(enterType : PinCodeEnterType) : ViewModel() {
-
+    val model = PinCodeModel()
     var pinCode = ObservableField<String>("")
     var enteredPinCode = ObservableField<String>("")
 
@@ -27,8 +29,7 @@ class EnterPinViewModel(enterType : PinCodeEnterType) : ViewModel() {
     }
 
     fun performLogin() {
-        //TODO check pin
-        var isPinValid = true
+        val isPinValid = model.pinCodeIsValid(pinCode.get()!!)
         if(isPinValid) {
             shouldRedirectToMainScreen.value = true
         } else {
@@ -47,6 +48,8 @@ class EnterPinViewModel(enterType : PinCodeEnterType) : ViewModel() {
             isEnterForPasswordSet.set(false)
         } else if(isEnterForPasswordRepeat.get()!!) {
             if(pinCode.get()!! == enteredPinCode.get()) {
+                model.savePincode(pinCode.get().toString())
+                model.onPinCodeSetted()
                 shouldRedirectToFingerPrintSetup.value = true
             } else {
                 isEnterForPasswordSet.set(true)
@@ -57,4 +60,9 @@ class EnterPinViewModel(enterType : PinCodeEnterType) : ViewModel() {
             }
         }
     }
+
+    fun startListenForFingerprint(success: () -> Unit, failure: () -> Unit) {
+        ScanFingerModel().startListenForFingerprint(success, failure)
+    }
+
 }

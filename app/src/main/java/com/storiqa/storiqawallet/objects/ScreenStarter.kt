@@ -23,17 +23,19 @@ class ScreenStarter {
 
     fun startRecoverPasswordScreen(context: Context) = context.startActivity(Intent(context, RecoverPasswordActivity::class.java))
 
-    fun startNewPasswordEnterScreen(context: Context, email: String) = context.startActivity(Intent(context, NewPasswordEnterActivity::class.java).putExtra(Extras().email, email))
-
     fun startPinCodeSetupScreen(context: Context) = context.startActivity(Intent(context, PinCodeSetupActivity::class.java))
 
     fun startEnterPinCodeScreen(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.ENTER_PASSWORD_FIRST_TIME))
 
     fun startQuickStartScreen(context: Context) = context.startActivity(Intent(context, QuickStartActivity::class.java))
 
-    fun startMainScreen(context: Context)  = context.startActivity(Intent(context, MainActivity::class.java))
+    fun startMainScreen(context: Context) = context.startActivity(Intent(context, MainActivity::class.java))
 
     fun startFingerprintSetupScreen(context: Context) = context.startActivity(Intent(context, FingerprintSetupActivity::class.java))
 
-    fun startFingerScanScreen(context: Context)  = context.startActivity(Intent(context, ScanFingerActivity::class.java))
+    fun startFingerScanScreen(context: Context) = context.startActivity(Intent(context, ScanFingerActivity::class.java))
+
+    fun startEnterPinCodeScreenForLogin(context: Context) {
+        context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.LOGIN))
+    }
 }

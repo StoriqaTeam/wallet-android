@@ -23,4 +23,5 @@ interface LoginView : MvpView {
     fun disableSignInButton()
     fun enableSignInButton()
     fun hideKeyboard()
+    fun openPinCodeEnterSceenForLogin()
 }

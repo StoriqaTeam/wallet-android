@@ -58,4 +58,9 @@
     <string name="goBack">Go back</string>
     <string name="cannotPerformAuth">Can not perform\nauthentication</string>
     <string name="server_client_id">245895770851-38n6to49r49reccloeepeutocvk2hne3.apps.googleusercontent.com</string>
+    <string name="noEmailProgram">Can\'t find any email program</string>
+    <string name="openEmail">Open email</string>
+    <string name="cancel">Cancel</string>
+    <string name="resetDialogMessage">Instructions to reset an email was sent to your email.</string>
+    <string name="putYourFingerOnTouchId">Put your finger\non touch id</string>
 </resources>

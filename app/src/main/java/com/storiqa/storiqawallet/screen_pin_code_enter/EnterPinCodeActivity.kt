@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.ActivityEnterPinCodeBinding
@@ -27,6 +28,16 @@ class EnterPinCodeActivity : AppCompatActivity() {
         observeRedirectOnMainScreen(viewModel)
         observeRedirectOnFingerprintSetup(viewModel)
         btnBack.setOnClickListener { onBackPressed() }
+
+        btnLoginWithFingerprint.setOnClickListener {
+            AlertDialog.Builder(this).setView(R.layout.layout_scan_finger_for_login).show()
+
+            viewModel.startListenForFingerprint({
+                ScreenStarter().startMainScreen(this)
+            }, {})
+
+        }
+
     }
 
     private fun observeRedirectOnFingerprintSetup(viewModel: EnterPinViewModel) {

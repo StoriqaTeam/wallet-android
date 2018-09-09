@@ -79,4 +79,10 @@ class LoginPresenter : MvpPresenter<LoginView>() {
         viewState.openRecoverPasswordScreen()
     }
 
+    fun redirectIfAlternativeLoginSetted() {
+        if(model.isPinCodeEntered()) {
+            viewState.openPinCodeEnterSceenForLogin()
+        }
+    }
+
 }
