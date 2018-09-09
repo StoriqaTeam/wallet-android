@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.screen_login
 
+import android.os.Message
 import com.arellomobile.mvp.MvpView
 
 interface LoginView : MvpView {

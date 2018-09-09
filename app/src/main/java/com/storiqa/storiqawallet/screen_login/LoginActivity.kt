@@ -1,8 +1,13 @@
 package com.storiqa.storiqawallet.screen_login
 
+import android.accounts.Account
+import android.accounts.AccountManager
+import android.accounts.AccountManagerCallback
+import android.accounts.AccountManagerFuture
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Message
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
@@ -15,16 +20,8 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.Scope
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.db.AuthPreferences
 import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
@@ -32,6 +29,14 @@ import java.util.*
 
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
+
+    lateinit var authPreferences: AuthPreferences
+    lateinit var accountManager: AccountManager
+
+    private val AUTHORIZATION_CODE = 1993
+    private val ACCOUNT_CODE = 1601
+
+    private val SCOPE = "https://www.googleapis.com/auth/googletalk"
 
     @InjectPresenter
     lateinit var presenter: LoginPresenter
@@ -47,8 +52,6 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         TextVisibilityModifierFor(etPassword).observeClickOn(ivShowPassword)
         buttonStateSwitcher = ButtonStateSwitcherFor(btnSignIn).observeNotEmpty(etEmail, etPassword)
 
-
-
         btnSignIn.setOnClickListener { presenter.onSignInButtonClicked(etEmail.text.toString(), etPassword.text.toString()) }
         btnRegister.setOnClickListener { presenter.onRegisterButtonClicked() }
         btnForgotPassword.setOnClickListener { presenter.onForgotPasswordButtonClicked() }
@@ -56,7 +59,15 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         presenter.redirectIfAlternativeLoginSetted()
 
         setupFacebookLogin()
-
+        btnGoogleLogin.setOnClickListener {
+            accountManager = AccountManager.get(this);
+            authPreferences =  AuthPreferences(this);
+            if (authPreferences.user != null && authPreferences.token != null) {
+                presenter.requestTokenFromGoogleAccount(authPreferences.token!!)
+            } else {
+                chooseAccount()
+            }
+        }
     }
 
     fun setupFacebookLogin() {
@@ -150,68 +161,78 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         pbLoading.visibility = View.GONE
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 0) {
-		val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-		if (result.isSuccess()) {
-			val acct = result.getSignInAccount();
-			val authCode = acct?.getServerAuthCode();
-//			getAccessToken(authCode);
-		}
-	}
-
-//        if (resultCode == Activity.RESULT_OK) {
-//            FirebaseAuth.getInstance().getAccessToken(true).addOnCompleteListener {
-//                val userToken = it.result.token ?: ""
-//                if (requestCode == RequestCodes().requestGoogleSignIn) {
-////                    presenter.requestTokenFromGoogleAccount(getGoogleToken())
-//                }
-//
-//                if (requestCode == RequestCodes().requestFacebookSignIn) {
-//                    presenter.requestTokenFromFacebookAccount(userToken)
-//                }
-//            }
-//        }
-    }
-
     override fun disableSignInButton() = buttonStateSwitcher.disableButton()
 
     override fun enableSignInButton() = buttonStateSwitcher.enableButton()
 
-//    private fun getGoogleToken(result: (token: String) -> Unit) {
-//        Dexter.withActivity(this).withPermissions(android.Manifest.permission.GET_ACCOUNTS, android.Manifest.permission.ACCOUNT_MANAGER)
-//                .withListener(object : MultiplePermissionsListener {
-//                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-////                            val am = AccountManager.get(applicationContext)
-////
-////                            val accounts = am.getAccountsByType(AccountType.GOOGLE)
-////
-////
-////                            val accountManagerFuture = am.getAuthToken(accounts[0], "oauth2:https://www.googleapis.com/auth/userinfo.profile", null, this@LoginActivity, null, null)
-////                            val authTokenBundle = accountManagerFuture.result
-////                            result(authTokenBundle.getString(AccountManager.KEY_AUTHTOKEN)!!.toString())
-//
-//                        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                                .requestServerAuthCode(getString(R.string.server_client_id))
-//                                .requestEmail()
-//                                .requestScopes(Scope("https://www.googleapis.com/auth/youtube.readonly"))
-//                                .build();
-//
-//                        val mApiClient = GoogleApiClient.Builder(this@LoginActivity)
-//                                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-//                                .build();
-//
-//                        val signInIntent = Auth.GoogleSignInApi.getSignInIntent(mApiClient)
-//                        startActivityForResult(signInIntent, 0)
-//                    }
-//
-//                    override fun onPermissionRationaleShouldBeShown(permissions: MutableList<PermissionRequest>?, token: PermissionToken?) {
-//                        token?.continuePermissionRequest()
-//                    }
-//
-//                }).check()
-//    }
+    private fun chooseAccount() {
+        // use https://github.com/frakbot/Android-AccountChooser for
+        // compatibility with older devices
+        val intent = AccountManager.newChooseAccountIntent(null, null,
+                arrayOf("com.google"), false, null, null, null, null)
+        startActivityForResult(intent, ACCOUNT_CODE)
+    }
+
+    private fun requestToken() {
+		var userAccount : Account
+		val user = authPreferences?.user
+		for ( account in accountManager!!.getAccountsByType("com.google")) {
+			if (account.name.equals(user)) {
+				userAccount = account;
+                accountManager.getAuthToken(userAccount, "oauth2:" + SCOPE, null, this,
+                        OnTokenAcquired(), null);
+				break;
+			}
+		}
+
+
+	}
+
+    private fun invalidateToken() {
+        val accountManager = AccountManager.get(this)
+        accountManager.invalidateAuthToken("com.google",
+                authPreferences.token)
+
+        authPreferences.token = null
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == AUTHORIZATION_CODE) {
+                requestToken()
+            } else if (requestCode == ACCOUNT_CODE) {
+                val accountName = data!!
+                        .getStringExtra(AccountManager.KEY_ACCOUNT_NAME)
+                authPreferences.user = accountName
+
+                // invalidate old tokens which might be cached. we want a fresh
+                // one, which is guaranteed to work
+                invalidateToken()
+
+                requestToken()
+            }
+        }
+    }
+
+    private inner class OnTokenAcquired : AccountManagerCallback<Bundle> {
+
+        override fun run(result: AccountManagerFuture<Bundle>) {
+            try {
+                val bundle = result.result
+
+                if (bundle.get(AccountManager.KEY_INTENT) != null) {
+                    startActivityForResult(bundle.get(AccountManager.KEY_INTENT) as Intent, AUTHORIZATION_CODE)
+                } else {
+                    val token = bundle.getString(AccountManager.KEY_AUTHTOKEN)
+                    authPreferences.token = token
+                    presenter.requestTokenFromGoogleAccount(token)
+                }
+            } catch (e: Exception) {
+                throw RuntimeException(e)
+            }
+
+        }
+    }
 }
