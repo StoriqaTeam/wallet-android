@@ -1,7 +1,9 @@
 package com.storiqa.storiqawallet
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.os.Bundle
 import android.support.multidex.MultiDex
 
 class StoriqaApp : Application() {
@@ -19,4 +21,5 @@ class StoriqaApp : Application() {
         super.attachBaseContext(base)
         MultiDex.install(this)
     }
+
 }

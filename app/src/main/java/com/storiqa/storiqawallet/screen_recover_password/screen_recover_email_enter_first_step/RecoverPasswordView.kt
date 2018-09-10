@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.screen_recover_password.screen_recover_email_e
 import com.arellomobile.mvp.MvpView
 
 interface RecoverPasswordView : MvpView {
-    fun openNewPasswordEnterScreen(email: String)
+    fun onNewPasswordEmailSent(email: String)
     fun goBack()
+    fun showGeneralError()
 }

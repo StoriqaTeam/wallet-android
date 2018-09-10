@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.screen_register
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.widget.Button
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_password_enter.*
@@ -16,6 +18,8 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
 
     @InjectPresenter
     lateinit var presenter : RegisterPresenter
+    lateinit var googleAuthFlow: GoogleAuthFlow
+    lateinit var facebookAuthFlow : FacebookAuthFlow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +41,39 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
                 etPassword.text.toString(), etRepeatPassword.text.toString()
         ) }
 
-        btnGoogleLogin.setOnClickListener { presenter.onGoogleSignInButtonClicked() }
-        btnFacebookLogin.setOnClickListener { presenter.onFacebookSignInButtonClicked() }
         btnSignIn.setOnClickListener { presenter.onSignInButtonClicked() }
+
+        btnGoogleLogin.setOnClickListener {
+            googleAuthFlow = GoogleAuthFlow(this@RegisterActivity, {
+                presenter.requestTokenFromGoogleAccount(it)
+            }, {
+                GeneralErrorDialogHelper(this).show {
+                    btnGoogleLogin.performClick()
+                }
+            })
+            googleAuthFlow.performLogin()
+        }
+
+        facebookAuthFlow = FacebookAuthFlow(fb_login_button, {
+            presenter.requestTokenFromFacebookAccount(it)
+        }, {
+            GeneralErrorDialogHelper(this).show {
+                fb_login_button.performClick()
+            }
+        })
     }
 
-    override fun startFacebookSignInProcess() = SocialNetworkTokenSignInHelper(this).startFacebookSignInProcess()
+    override fun showGoogleSignInError() {
+        GeneralErrorDialogHelper(this).show {
+            btnGoogleLogin.performClick()
+        }
+    }
 
-    override fun startGoogleSignInProcess() = SocialNetworkTokenSignInHelper(this).startGoogleSignInProcess()
+    override fun showFacebookSignInError() {
+        GeneralErrorDialogHelper(this).show {
+            fb_login_button.performClick()
+        }
+    }
 
     override fun showPasswordsHaveToMatchError() {
         tilPassword.error = getString(R.string.errorPasswordHaveToMathc)
@@ -87,4 +116,12 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
         tilEmail.error = emailError
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == RequestCodes().authorizationGoogle || requestCode == RequestCodes().accountGoogle) {
+            googleAuthFlow.handleOnActivityResult(requestCode, resultCode, data)
+        } else {
+            facebookAuthFlow.handleOnActivityResult(requestCode, resultCode, data)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 }

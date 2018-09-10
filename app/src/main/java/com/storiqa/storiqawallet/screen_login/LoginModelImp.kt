@@ -16,13 +16,17 @@ class LoginModelImp : LoginModel {
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if(it.errors != null) {
-                        failure(it.errors!!)
+                        failure(it.errors)
                     } else {
                         success()
                     }
                 }, {
                     failure(arrayListOf())
                 })
+    }
+
+    override fun isPinCodeEntered(): Boolean {
+        return PreferencesHelper(StoriqaApp.context).isPinCodeEnabled()
     }
 
     override fun isUserFinishedQuickLaunch(): Boolean = PreferencesHelper(StoriqaApp.context).isQuickLaunchFinished()

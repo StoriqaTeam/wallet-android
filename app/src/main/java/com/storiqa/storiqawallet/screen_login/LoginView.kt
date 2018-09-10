@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.screen_login
 
+import android.os.Message
 import com.arellomobile.mvp.MvpView
 
 interface LoginView : MvpView {
@@ -13,14 +14,12 @@ interface LoginView : MvpView {
     fun setPasswordError(error: String)
     fun showProgressBar()
     fun hideProgressBar()
-    fun startGoogleSignInProcess()
-    fun startFacebookSignInProcess()
     fun startRegisterScreen()
     fun showSignInError()
     fun openRecoverPasswordScreen()
-    fun startSetupLoginScreen()
     fun startQuickLaunchScreen()
     fun disableSignInButton()
     fun enableSignInButton()
     fun hideKeyboard()
+    fun openPinCodeEnterSceenForLogin()
 }

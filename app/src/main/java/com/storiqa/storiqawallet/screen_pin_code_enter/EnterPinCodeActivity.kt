@@ -5,6 +5,10 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.ImageView
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.ActivityEnterPinCodeBinding
@@ -27,6 +31,30 @@ class EnterPinCodeActivity : AppCompatActivity() {
         observeRedirectOnMainScreen(viewModel)
         observeRedirectOnFingerprintSetup(viewModel)
         btnBack.setOnClickListener { onBackPressed() }
+
+        btnLoginWithFingerprint.setOnClickListener {
+            startFingerprintDialog(viewModel)
+        }
+
+        if(getPinCodeEnterType() == PinCodeEnterType.LOGIN) {
+            if (FingerprintHepler(this, null).isFingerprintSetupNotAvailable()) {
+                btnLoginWithFingerprint.visibility = View.GONE
+            } else {
+                startFingerprintDialog(viewModel)
+            }
+        }
+    }
+
+    fun startFingerprintDialog(viewModel: EnterPinViewModel) {
+        val view = LayoutInflater.from(this).inflate(R.layout.layout_scan_finger_for_login, null, false)
+        val ivFingerprint = view.findViewById<ImageView>(R.id.ivFingerprint)
+        AlertDialog.Builder(this).setView(view).show()
+
+        viewModel.startListenForFingerprint({
+            ivFingerprint.setImageResource(R.drawable.fingerprint_blue)
+            ScreenStarter().startMainScreen(this)
+            finish()
+        }, {})
     }
 
     private fun observeRedirectOnFingerprintSetup(viewModel: EnterPinViewModel) {
@@ -34,8 +62,10 @@ class EnterPinCodeActivity : AppCompatActivity() {
             if (shouldRedirectToFingerPrintSetup!!) {
                 if(FingerprintHepler(this@EnterPinCodeActivity).isFingerprintSetupNotAvailable()) {
                     ScreenStarter().startMainScreen(this@EnterPinCodeActivity)
+                    finish()
                 } else {
                     ScreenStarter().startFingerprintSetupScreen(this@EnterPinCodeActivity)
+                    finish()
                 }
             }
         })
@@ -45,6 +75,7 @@ class EnterPinCodeActivity : AppCompatActivity() {
         viewModel.shouldRedirectToMainScreen.observe(this, Observer<Boolean> { shouldRedirectToMainScreen ->
             if (shouldRedirectToMainScreen!!) {
                 ScreenStarter().startMainScreen(this@EnterPinCodeActivity)
+                finish()
             }
         })
     }

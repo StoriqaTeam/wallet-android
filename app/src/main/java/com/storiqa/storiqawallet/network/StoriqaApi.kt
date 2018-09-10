@@ -1,11 +1,10 @@
 package com.storiqa.storiqawallet.network
 
-import com.storiqa.storiqawallet.network.network_requests.GetStoriqaTokenFromFirebaseTokenRequest
-import com.storiqa.storiqawallet.network.network_requests.GetTokenByEmailRequest
-import com.storiqa.storiqawallet.network.network_requests.RegisterUserRequest
+import com.storiqa.storiqawallet.network.network_requests.*
 import com.storiqa.storiqawallet.network.network_responses.RegisterUserResponse
 import com.storiqa.storiqawallet.network.network_responses.GetTokenResponseByEmail
 import com.storiqa.storiqawallet.network.network_responses.GetTokenResponseByProvider
+import com.storiqa.storiqawallet.network.network_responses.ResetPasswordResponse
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,8 +25,13 @@ interface StoriqaApi {
     @POST("/graphql")
     fun getStoriqaTokenFromFirebaseToken(@Body getStoriqaTokenFromFirebaseTokenRequest: GetStoriqaTokenFromFirebaseTokenRequest) : Observable<GetTokenResponseByProvider>
 
+    @POST("/graphql")
+    fun resetPassword(@Body resetPasswordRequest: ResetPasswordRequest) : Observable<ResetPasswordResponse>
+
+    @POST("/graphql")
+    fun applyNewPassword(@Body applyNewPasswordRequest: ApplyNewPasswordRequest) : Observable<ResetPasswordResponse>
+
     class Factory {
-//        private val baseUrl = "https://nightly.stq.cloud:60443" //dev
         private val baseUrl = "https://stage.stq.cloud:60443" //stage
 
         fun getInstance(): StoriqaApi {

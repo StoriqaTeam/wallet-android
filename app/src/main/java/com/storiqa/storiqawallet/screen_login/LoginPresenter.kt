@@ -39,14 +39,6 @@ class LoginPresenter : MvpPresenter<LoginView>() {
         }
     }
 
-    fun onGoogleLoginClicked() {
-        viewState.startGoogleSignInProcess()
-    }
-
-    fun onFacebookButtonClciked() {
-        viewState.startFacebookSignInProcess()
-    }
-
     fun requestTokenFromGoogleAccount(userToken: String) {
         model.getStoriqaToken(userToken, SignInProviders().google, {
             startNextScreen()
@@ -77,6 +69,12 @@ class LoginPresenter : MvpPresenter<LoginView>() {
 
     fun onForgotPasswordButtonClicked() {
         viewState.openRecoverPasswordScreen()
+    }
+
+    fun redirectIfAlternativeLoginSetted() {
+        if(model.isPinCodeEntered()) {
+            viewState.openPinCodeEnterSceenForLogin()
+        }
     }
 
 }

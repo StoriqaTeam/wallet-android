@@ -11,6 +11,6 @@ interface RegisterView : MvpView {
     fun setEmailError(emailError: String)
     fun setPasswordError(passwordError: String)
     fun clearErrors()
-    fun startGoogleSignInProcess()
-    fun startFacebookSignInProcess()
+    fun showGoogleSignInError()
+    fun showFacebookSignInError()
 }
