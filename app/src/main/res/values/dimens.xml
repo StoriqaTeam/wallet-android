@@ -3,4 +3,5 @@
     <dimen name="loginEditTextSideMargin">26dp</dimen>
     <dimen name="registerEditTextSideMargin">29dp</dimen>
     <dimen name="textInputLayoutRegisterTopMargin">8dp</dimen>
+    <dimen name="splash_logo_top_margin">72dp</dimen>
 </resources>

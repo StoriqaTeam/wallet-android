@@ -17,7 +17,6 @@ interface LoginView : MvpView {
     fun startRegisterScreen()
     fun showSignInError()
     fun openRecoverPasswordScreen()
-    fun startSetupLoginScreen()
     fun startQuickLaunchScreen()
     fun disableSignInButton()
     fun enableSignInButton()

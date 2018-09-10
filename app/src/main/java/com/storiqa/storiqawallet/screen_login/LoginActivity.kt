@@ -63,13 +63,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     }
 
-
     override fun openPinCodeEnterSceenForLogin() {
         ScreenStarter().startEnterPinCodeScreenForLogin(this)
         finish()
     }
 
-    override fun startSetupLoginScreen() = ScreenStarter().startQuickStartScreen(this)
 
     override fun openRecoverPasswordScreen() = ScreenStarter().startRecoverPasswordScreen(this)
 
@@ -81,9 +79,15 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     override fun startRegisterScreen() = ScreenStarter().startRegisterScreen(this)
 
-    override fun startQuickLaunchScreen() = ScreenStarter().startQuickStartScreen(this)
+    override fun startQuickLaunchScreen()  {
+        ScreenStarter().startQuickStartScreen(this)
+        finish()
+    }
 
-    override fun startMainScreen() = ScreenStarter().startMainScreen(this)
+    override fun startMainScreen() {
+        ScreenStarter().startMainScreen(this)
+        finish()
+    }
 
     override fun hideEmailError() {
         tilEmail.error = null
@@ -143,6 +147,4 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
-
-
 }

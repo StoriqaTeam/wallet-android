@@ -19,12 +19,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/ivFingerprint"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
-        app:srcCompat="@drawable/fingerprint_gray" />
+        android:src="@drawable/fingerprint_gray" />
 </android.support.constraint.ConstraintLayout>
