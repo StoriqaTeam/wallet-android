@@ -5,22 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
-import java.util.*
 
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
@@ -32,7 +26,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
     lateinit var googleAuthFlow: GoogleAuthFlow
 
-    val callbackManager = CallbackManager.Factory.create()
+    lateinit var facebookAuthFlow : FacebookAuthFlow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,36 +41,28 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
 
         presenter.redirectIfAlternativeLoginSetted()
 
-        setupFacebookLogin()
+
         btnGoogleLogin.setOnClickListener {
             googleAuthFlow = GoogleAuthFlow(this@LoginActivity, {
                 presenter.requestTokenFromGoogleAccount(it)
             }, {
-                //TODO add error
+                GeneralErrorDialogHelper(this).show {
+                    btnGoogleLogin.performClick()
+                }
             })
             googleAuthFlow.performLogin()
         }
-    }
 
-    fun setupFacebookLogin() {
-        fb_login_button.setReadPermissions(Arrays.asList("email", "user_gender"))
-        // Callback registration
-        fb_login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult?) {
-                if (result != null && result.accessToken != null) {
-                    presenter.requestTokenFromFacebookAccount(result.accessToken.token)
-                }
-            }
-
-            override fun onCancel() {
-                Log.d("", "")
-            }
-
-            override fun onError(error: FacebookException?) {
-                Log.d("", "")
+        facebookAuthFlow = FacebookAuthFlow(fb_login_button, {
+            presenter.requestTokenFromFacebookAccount(it)
+        }, {
+            GeneralErrorDialogHelper(this).show {
+                fb_login_button.performClick()
             }
         })
+
     }
+
 
     override fun openPinCodeEnterSceenForLogin() {
         ScreenStarter().startEnterPinCodeScreenForLogin(this)
@@ -150,13 +136,12 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     override fun enableSignInButton() = buttonStateSwitcher.enableButton()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
         if(requestCode == RequestCodes().authorizationGoogle || requestCode == RequestCodes().accountGoogle) {
             googleAuthFlow.handleOnActivityResult(requestCode, resultCode, data)
         } else {
-            callbackManager.onActivityResult(requestCode, resultCode, data)
+            facebookAuthFlow.handleOnActivityResult(requestCode, resultCode, data)
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 

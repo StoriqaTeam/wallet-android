@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.view.View
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.ActivityEnterPinCodeBinding
@@ -38,6 +39,9 @@ class EnterPinCodeActivity : AppCompatActivity() {
 
         }
 
+        if(FingerprintHepler(this, null).isFingerprintSetupNotAvailable()) {
+            btnLoginWithFingerprint.visibility = View.GONE
+        }
     }
 
     private fun observeRedirectOnFingerprintSetup(viewModel: EnterPinViewModel) {
