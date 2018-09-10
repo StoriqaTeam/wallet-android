@@ -20,11 +20,7 @@ class GoogleAuthFlow(val activity: Activity, val success: (token: String) -> Uni
     fun performLogin() {
         accountManager = AccountManager.get(activity)
         authPreferences = AuthPreferences(activity)
-        if (authPreferences.user != null && authPreferences.token != null) {
-            success(authPreferences.token!!)
-        } else {
-            chooseAccount()
-        }
+        chooseAccount()
     }
 
 
@@ -41,10 +37,10 @@ class GoogleAuthFlow(val activity: Activity, val success: (token: String) -> Uni
         val user = authPreferences?.user
         for (account in accountManager!!.getAccountsByType("com.google")) {
             if (account.name.equals(user)) {
-                userAccount = account;
+                userAccount = account
                 accountManager.getAuthToken(userAccount, "oauth2:" + SCOPE, null, activity,
                         OnTokenAcquired(), null);
-                break;
+                break
             }
         }
     }
@@ -71,6 +67,7 @@ class GoogleAuthFlow(val activity: Activity, val success: (token: String) -> Uni
                     success(token)
                 }
             } catch (e: Exception) {
+                failure()
                 throw RuntimeException(e)
             }
 
