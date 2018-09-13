@@ -16,7 +16,7 @@ import com.storiqa.storiqawallet.screen_setup_fingerprint.FingerprintSetupActivi
 
 class ScreenStarter {
 
-    fun startLoginScreen(context: Context) = context.startActivity(Intent(context, LoginActivity::class.java))
+    fun startLoginScreen(context: Context) = context.startActivity(Intent(context, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
     fun startRegisterScreen(context: Context) = context.startActivity(Intent(context, RegisterActivity::class.java))
 
@@ -24,11 +24,11 @@ class ScreenStarter {
 
     fun startPinCodeSetupScreen(context: Context) = context.startActivity(Intent(context, PinCodeSetupActivity::class.java))
 
-    fun startEnterPinCodeScreen(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.ENTER_PASSWORD_FIRST_TIME))
+    fun startEnterPinCodeScreen(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.SET_PASSWORD))
 
     fun startQuickStartScreen(context: Context) = context.startActivity(Intent(context, QuickStartActivity::class.java))
 
-    fun startMainScreen(context: Context) = context.startActivity(Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+    fun startMainScreen(context: Context) = context.startActivity(Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
 
     fun startFingerprintSetupScreen(context: Context) = context.startActivity(Intent(context, FingerprintSetupActivity::class.java))
 
