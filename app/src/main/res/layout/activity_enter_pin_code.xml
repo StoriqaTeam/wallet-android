@@ -239,6 +239,7 @@
 
         <ImageView
             android:id="@+id/btnBack"
+            android:visibility="@{viewModel.isEnterForLogin ? View.GONE : View.VISIBLE}"
             style="@style/arrowBackStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
