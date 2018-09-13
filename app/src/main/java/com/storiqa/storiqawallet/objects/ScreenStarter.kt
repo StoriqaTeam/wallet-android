@@ -24,7 +24,7 @@ class ScreenStarter {
 
     fun startPinCodeSetupScreen(context: Context) = context.startActivity(Intent(context, PinCodeSetupActivity::class.java))
 
-    fun startEnterPinCodeScreen(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.ENTER_PASSWORD_FIRST_TIME))
+    fun startEnterPinCodeScreen(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.SET_PASSWORD))
 
     fun startQuickStartScreen(context: Context) = context.startActivity(Intent(context, QuickStartActivity::class.java))
 

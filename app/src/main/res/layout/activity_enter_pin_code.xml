@@ -189,7 +189,7 @@
             android:layout_marginLeft="28dp"
             android:layout_marginRight="28dp"
             android:layout_marginStart="28dp"
-            android:visibility="gone"
+            android:visibility="@{viewModel.pinCode.get().length == 4 &amp;&amp; viewModel.isContinueButtonVisible &amp;&amp; !viewModel.isEnterForPasswordRepeat()? View.VISIBLE : View.GONE}"
             android:background="@drawable/switch_state_button"
             android:onClick="@{()-> viewModel.isEnterForLogin? viewModel.performLogin() : viewModel.nextSetPasswordState()}"
             android:text="@string/continueButton"

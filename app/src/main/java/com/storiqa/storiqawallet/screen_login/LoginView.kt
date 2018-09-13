@@ -20,4 +20,5 @@ interface LoginView  {
     fun openPinCodeEnterSceenForLogin()
     fun getEmail(): String
     fun getPassword(): String
+    fun movePasswordCursorToEnd()
 }

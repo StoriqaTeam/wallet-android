@@ -94,5 +94,6 @@ class LoginViewModel(val view : LoginView) : ViewModel() {
 
     fun changePasswordVisibility() {
         isPasswordVisible.set(!isPasswordVisible.get()!!)
+        view.movePasswordCursorToEnd()
     }
 }

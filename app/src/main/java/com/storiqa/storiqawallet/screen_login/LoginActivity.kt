@@ -64,6 +64,8 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     }
 
+    override fun movePasswordCursorToEnd() = etPassword.setSelection(etPassword.text.length)
+
     override fun openPinCodeEnterSceenForLogin() {
         ScreenStarter().startEnterPinCodeScreenForLogin(this)
         finish()
@@ -73,9 +75,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
     override fun openRecoverPasswordScreen() = ScreenStarter().startRecoverPasswordScreen(this)
 
     override fun showSignInError() {
-        GeneralErrorDialogHelper(this).show {
-            viewModel.onSignInButtonClicked()
-        }
+        GeneralErrorDialogHelper(this).show(viewModel::onSignInButtonClicked)
     }
 
     override fun startRegisterScreen() = ScreenStarter().startRegisterScreen(this)
