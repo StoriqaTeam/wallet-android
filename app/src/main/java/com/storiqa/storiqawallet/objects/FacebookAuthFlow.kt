@@ -1,36 +1,36 @@
 package com.storiqa.storiqawallet.objects
 
+import android.app.Activity
 import android.content.Intent
-import android.util.Log
+import android.widget.ImageView
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
 import java.util.*
 
-class FacebookAuthFlow(val facebookButton: LoginButton, val success: (token: String) -> Unit, val failure: () -> Unit) {
+class FacebookAuthFlow(private val activity : Activity, facebookButton: ImageView, val success: (token: String) -> Unit, val failure: () -> Unit) {
 
     val callbackManager = CallbackManager.Factory.create()
 
     init {
-        facebookButton.setReadPermissions(Arrays.asList("email", "user_gender"))
-        // Callback registration
-        facebookButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult?) {
-                if (result != null && result.accessToken != null) {
+        val fbLoginManager = com.facebook.login.LoginManager.getInstance()
+        fbLoginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                // here write code When Login successfully
+                if (result.accessToken != null) {
                     success(result.accessToken.token!!)
                 }
             }
 
-            override fun onCancel() {
-                Log.d("", "")
-            }
+            override fun onCancel() {}
 
-            override fun onError(error: FacebookException?) {
-                Log.d("", "")
-            }
+            override fun onError(e: FacebookException) {failure()}
         })
+
+        facebookButton.setOnClickListener {
+            fbLoginManager.logInWithReadPermissions(activity, Arrays.asList("email", "public_profile", "user_gender"))
+        }
     }
 
     fun handleOnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

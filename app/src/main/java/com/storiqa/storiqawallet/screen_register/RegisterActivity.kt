@@ -54,7 +54,7 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
             googleAuthFlow.performLogin()
         }
 
-        facebookAuthFlow = FacebookAuthFlow(fb_login_button, {
+        facebookAuthFlow = FacebookAuthFlow(this, fb_login_button, {
             presenter.requestTokenFromFacebookAccount(it)
         }, {
             GeneralErrorDialogHelper(this).show {

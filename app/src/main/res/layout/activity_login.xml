@@ -8,6 +8,8 @@
     <data>
 
         <import type="android.view.View" />
+        <import type="android.widget.EditText" />
+        <import type="android.text.InputType"/>
 
         <import type="java.lang.String" />
 
@@ -99,7 +101,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/passwordHint"
-                            android:inputType="textPassword"
+                            android:inputType='@{viewModel.isPasswordVisible? InputType.TYPE_CLASS_TEXT : (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)  }'
                             android:maxLines="1"
                             android:nextFocusDown="@+id/btnSignIn" />
 
@@ -107,9 +109,8 @@
                         <ImageView
                             android:id="@+id/ivShowPassword"
                             style="@style/watchPasswordButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/eye_opened" />
+                            android:background="@{viewModel.isPasswordVisible ? @drawable/closed_eye : @drawable/eye_opened}"
+                            android:onClick="@{()->viewModel.changePasswordVisibility()}"/>
 
                     </RelativeLayout>
 

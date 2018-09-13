@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
             googleAuthFlow.performLogin()
         }
 
-        facebookAuthFlow = FacebookAuthFlow(fb_login_button, {
+        facebookAuthFlow = FacebookAuthFlow(this, fb_login_button, {
             viewModel.requestTokenFromFacebookAccount(it)
         }, {
             GeneralErrorDialogHelper(this).show {
