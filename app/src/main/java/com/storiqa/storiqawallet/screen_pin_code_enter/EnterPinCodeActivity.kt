@@ -53,7 +53,6 @@ class EnterPinCodeActivity : AppCompatActivity() {
         viewModel.startListenForFingerprint({
             ivFingerprint.setImageResource(R.drawable.fingerprint_blue)
             ScreenStarter().startMainScreen(this)
-            finish()
         }, {})
     }
 
@@ -62,7 +61,6 @@ class EnterPinCodeActivity : AppCompatActivity() {
             if (shouldRedirectToFingerPrintSetup!!) {
                 if(FingerprintHepler(this@EnterPinCodeActivity).isFingerprintSetupNotAvailable()) {
                     ScreenStarter().startMainScreen(this@EnterPinCodeActivity)
-                    finish()
                 } else {
                     ScreenStarter().startFingerprintSetupScreen(this@EnterPinCodeActivity)
                     finish()
@@ -75,7 +73,6 @@ class EnterPinCodeActivity : AppCompatActivity() {
         viewModel.shouldRedirectToMainScreen.observe(this, Observer<Boolean> { shouldRedirectToMainScreen ->
             if (shouldRedirectToMainScreen!!) {
                 ScreenStarter().startMainScreen(this@EnterPinCodeActivity)
-                finish()
             }
         })
     }

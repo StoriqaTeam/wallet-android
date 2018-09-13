@@ -16,7 +16,7 @@ import com.storiqa.storiqawallet.screen_setup_fingerprint.FingerprintSetupActivi
 
 class ScreenStarter {
 
-    fun startLoginScreen(context: Context) = context.startActivity(Intent(context, LoginActivity::class.java))
+    fun startLoginScreen(context: Context) = context.startActivity(Intent(context, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
     fun startRegisterScreen(context: Context) = context.startActivity(Intent(context, RegisterActivity::class.java))
 
@@ -28,7 +28,7 @@ class ScreenStarter {
 
     fun startQuickStartScreen(context: Context) = context.startActivity(Intent(context, QuickStartActivity::class.java))
 
-    fun startMainScreen(context: Context) = context.startActivity(Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+    fun startMainScreen(context: Context) = context.startActivity(Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
 
     fun startFingerprintSetupScreen(context: Context) = context.startActivity(Intent(context, FingerprintSetupActivity::class.java))
 

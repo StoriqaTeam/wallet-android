@@ -87,7 +87,6 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     override fun startMainScreen() {
         ScreenStarter().startMainScreen(this)
-        finish()
     }
 
     override fun showGeneralError() =
