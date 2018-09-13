@@ -10,6 +10,7 @@ class LoginViewModel(val view : LoginView) : ViewModel() {
 
     val isProgressBarVisible = ObservableField<Boolean>(false)
     val isSignInButtonEnabled = ObservableField<Boolean>(false)
+    val isPasswordVisible = ObservableField<Boolean>(false)
     val emailError = ObservableField<String>("")
     val passwordError = ObservableField<String>("")
     val email = ObservableField<String>("")
@@ -89,6 +90,9 @@ class LoginViewModel(val view : LoginView) : ViewModel() {
     fun updateFields() {
         email.set(view.getEmail())
         password.set(view.getPassword())
+    }
 
+    fun changePasswordVisibility() {
+        isPasswordVisible.set(!isPasswordVisible.get()!!)
     }
 }

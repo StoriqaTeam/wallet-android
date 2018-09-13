@@ -7,22 +7,31 @@ import com.storiqa.storiqawallet.enums.PinCodeEnterType
 import com.storiqa.storiqawallet.objects.FingerprintHepler
 import com.storiqa.storiqawallet.screen_scan_finger.ScanFingerModel
 
-class EnterPinViewModel(enterType : PinCodeEnterType) : ViewModel() {
+class EnterPinViewModel(private val view: EnterPinCodeView) : ViewModel() {
     val model = PinCodeModel()
     var pinCode = ObservableField<String>("")
     var enteredPinCode = ObservableField<String>("")
 
-    val isEnterForLogin = ObservableField<Boolean>(enterType == PinCodeEnterType.LOGIN)
-    val isEnterForPasswordSet = ObservableField<Boolean>(enterType == PinCodeEnterType.ENTER_PASSWORD_FIRST_TIME)
-    val isEnterForPasswordRepeat = ObservableField<Boolean>(enterType == PinCodeEnterType.REPEAT_PASSWORD_FIRST_TIME)
-
-    val shouldRedirectToMainScreen = MutableLiveData<Boolean>()
-    val shouldRedirectToFingerPrintSetup = MutableLiveData<Boolean>()
+    val isEnterForLogin = ObservableField<Boolean>(view.enterType() == PinCodeEnterType.LOGIN)
+    val isEnterForPasswordSet = ObservableField<Boolean>(view.enterType() == PinCodeEnterType.ENTER_PASSWORD_FIRST_TIME)
+    val isEnterForPasswordRepeat = ObservableField<Boolean>(view.enterType() == PinCodeEnterType.REPEAT_PASSWORD_FIRST_TIME)
 
     val isPinNotValidError = ObservableField<Boolean>(false)
     val isPinsNotMatchError = ObservableField<Boolean>(false)
 
-    fun enterDigit(digit: String) = pinCode.set(pinCode.get() + digit)
+    fun enterDigit(digit: String) {
+        pinCode.set(pinCode.get() + digit)
+        isPinNotValidError.set(false)
+        isPinsNotMatchError.set(false)
+
+        if(pinCode.get()!!.length == 4) {
+            if(view.enterType() != PinCodeEnterType.LOGIN) {
+                nextSetPasswordState()
+            } else {
+                performLogin()
+            }
+        }
+    }
 
     fun eraseLastDigit() {
         pinCode.set(pinCode.get()!!.substring(0, pinCode.get()!!.lastIndex))
@@ -31,9 +40,10 @@ class EnterPinViewModel(enterType : PinCodeEnterType) : ViewModel() {
     fun performLogin() {
         val isPinValid = model.pinCodeIsValid(pinCode.get()!!)
         if(isPinValid) {
-            shouldRedirectToMainScreen.value = true
+            view.redirectOnMainScreen()
         } else {
             isPinNotValidError.set(true)
+            view.vibrate()
         }
     }
 
@@ -50,13 +60,14 @@ class EnterPinViewModel(enterType : PinCodeEnterType) : ViewModel() {
             if(pinCode.get()!! == enteredPinCode.get()) {
                 model.savePincode(pinCode.get().toString())
                 model.onPinCodeSetted()
-                shouldRedirectToFingerPrintSetup.value = true
+                view.redirectToFingerPrintSetup()
             } else {
                 isEnterForPasswordSet.set(true)
                 isEnterForPasswordRepeat.set(false)
                 pinCode.set("")
                 enteredPinCode.set("")
                 isPinsNotMatchError.set(true)
+                view.vibrate()
             }
         }
     }
