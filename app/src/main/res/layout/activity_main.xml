@@ -5,11 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
             name="viewModel"
-            type="com.storiqa.storiqawallet.screen_main.MainViewModel" />
+            type="com.storiqa.storiqawallet.screen_main.MainActivityViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -17,32 +18,84 @@
         android:layout_height="match_parent"
         tools:context=".screen_main.MainActivity">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvBills"
+        <FrameLayout
+            android:id="@+id/flWallet"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            tools:listitem = "@layout/item_card"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="34dp"
-            android:text="@string/myWallet"
-            android:textColor="@android:color/black"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        </FrameLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/grayButtonLight"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:onClick="@{()-> viewModel.openMyWalletScreen()}"
+                android:src="@drawable/wallet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:onClick="@{()-> viewModel.openDepositScreen()}"
+                android:src="@drawable/deposit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:onClick="@{()-> viewModel.openExchangeScreen()}"
+                android:src="@drawable/exchange"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView9"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:onClick="@{()-> viewModel.openSendScreen()}"
+                android:src="@drawable/send"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                app:layout_constraintStart_toEndOf="@+id/imageView8"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.515" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:onClick="@{()-> viewModel.openMenuScreen()}"
+                android:src="@drawable/menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 
 </layout>
