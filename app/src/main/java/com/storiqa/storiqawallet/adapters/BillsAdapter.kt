@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.storiqa.storiqawallet.databinding.ItemCardBinding
 import com.storiqa.storiqawallet.objects.Bill
 
-class BillsAdapter(private val bills : List<Bill>, val onClick : (position : Int) -> Unit) : RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
+class BillsAdapter(private val bills : Array<Bill>, val onClick : (position : Int) -> Unit) : RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
 
     private var layoutInflater : LayoutInflater? = null
 
