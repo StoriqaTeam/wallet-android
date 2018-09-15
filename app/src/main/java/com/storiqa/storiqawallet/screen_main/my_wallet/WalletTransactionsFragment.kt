@@ -18,21 +18,22 @@ import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.FragmentWalletTransactionsBinding
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.Transaction
+import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_wallet_transactions.*
 import org.jetbrains.anko.support.v4.dip
 
 
 class WalletTransactionsFragment : Fragment() {
 
-    lateinit var viewModel : WalletTransactionsViewModel
+    lateinit var viewModel : MainActivityViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewModel = ViewModelProviders.of(this).get(WalletTransactionsViewModel::class.java)
-
-        val binding : FragmentWalletTransactionsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_wallet_transactions, container, false)
-        binding.viewModel = viewModel
-        binding.executePendingBindings()
-        return binding.root
+        return inflater.inflate(R.layout.fragment_wallet_transactions, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

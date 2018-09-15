@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.storiqa.storiqawallet.screen_main.my_wallet.MyWalletViewModel" />
+            type="com.storiqa.storiqawallet.screen_main.MainActivityViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

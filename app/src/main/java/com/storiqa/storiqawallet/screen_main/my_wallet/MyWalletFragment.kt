@@ -15,17 +15,16 @@ import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.FragmentMywalletBinding
 import com.storiqa.storiqawallet.db.PreferencesHelper
 import com.storiqa.storiqawallet.objects.Bill
-import com.storiqa.storiqawallet.objects.BillClicked
+import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_mywallet.*
-import org.greenrobot.eventbus.EventBus
 
 
 class MyWalletFragment : Fragment() {
 
-    lateinit var viewModel: MyWalletViewModel
+    lateinit var viewModel: MainActivityViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewModel = ViewModelProviders.of(this).get(MyWalletViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
 
         val binding : FragmentMywalletBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mywallet, container, false)
         binding.viewModel = viewModel
@@ -41,10 +40,9 @@ class MyWalletFragment : Fragment() {
     }
 
     private fun refreshBillInfo() {
-        val bills = arguments?.getSerializable(Extras().bill) as Array<Bill>
         rvBills?.apply {
-            adapter = BillsAdapter(bills) { positionOfClickedBill ->
-                EventBus.getDefault().post(BillClicked(bills[positionOfClickedBill].id))
+            adapter = BillsAdapter(viewModel.bills.value!!) { positionOfClickedBill ->
+                viewModel.selectedBillId.value = viewModel.bills.value!![positionOfClickedBill].id
             }
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)

@@ -5,18 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.widget.Toast
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityMainBinding
 import com.storiqa.storiqawallet.enums.Screen
-import com.storiqa.storiqawallet.objects.BillClicked
 import com.storiqa.storiqawallet.screen_main.my_wallet.MyWalletFragment
 import com.storiqa.storiqawallet.screen_main.my_wallet.WalletTransactionsFragment
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.ThreadMode
-import org.greenrobot.eventbus.Subscribe
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,18 +27,30 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.openMyWalletScreen()
 
-        setScreenChangeObservable()
+        observeScreenChange()
+        observeBillSelection()
     }
 
-    fun setScreenChangeObservable() {
-        viewModel.selectedScreen.observe(this, object : Observer<Screen> {
-            override fun onChanged(t: Screen?) {
-                when (t) {
-                    Screen.MY_WALLET -> loadMyWalletFragment()
+    fun observeBillSelection() {
+        viewModel.selectedBillId.observe(this, object : Observer<String> {
+            override fun onChanged(idOfBill: String?) {
+                val walletTransactionsFragment = WalletTransactionsFragment.getInstance(idOfBill!!, viewModel.bills.value!!)
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.flWallet, walletTransactionsFragment)
+                transaction.commit()
+            }
+        })
+    }
 
-                    else -> {
-                        Toast.makeText(this@MainActivity, t.toString(), Toast.LENGTH_LONG).show()
-                    }
+    fun observeScreenChange() {
+        viewModel.selectedScreen.observe(this, object : Observer<Screen> {
+            override fun onChanged(newScreen: Screen?) {
+                when (newScreen) {
+                    Screen.MY_WALLET -> loadMyWalletFragment()
+                    Screen.DEPOSIT -> {}
+                    Screen.EXCHANGE -> {}
+                    Screen.SEND -> {}
+                    Screen.MENU -> {}
                 }
             }
         })
@@ -58,22 +63,6 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    public override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
 
-    public override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: BillClicked) {
-        val walletTransactionsFragment = WalletTransactionsFragment.getInstance(event.idOfBill, viewModel.bills.value!!)
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.flWallet, walletTransactionsFragment)
-        transaction.commit()
-    };
 
 }
