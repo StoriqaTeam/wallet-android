@@ -29,6 +29,12 @@ class MainActivity : AppCompatActivity() {
 
         observeScreenChange()
         observeBillSelection()
+
+        viewModel.goBack = {
+            if(supportFragmentManager.backStackEntryCount > 1) {
+                supportFragmentManager.popBackStack()
+            }
+        }
     }
 
     fun observeBillSelection() {
@@ -37,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 val walletTransactionsFragment = WalletTransactionsFragment.getInstance(idOfBill!!, viewModel.bills.value!!)
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.flWallet, walletTransactionsFragment)
+                transaction.addToBackStack("")
                 transaction.commit()
             }
         })
@@ -60,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         val walletFragment = MyWalletFragment.getInstance(viewModel.bills.value!!)
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.flWallet, walletFragment)
+        transaction.addToBackStack("")
         transaction.commit()
     }
 

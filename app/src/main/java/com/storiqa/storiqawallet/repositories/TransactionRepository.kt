@@ -3,13 +3,15 @@ package com.storiqa.storiqawallet.repositories
 import com.storiqa.storiqawallet.enums.TransactionType
 import com.storiqa.storiqawallet.objects.Transaction
 import io.reactivex.Observable
+import io.reactivex.Observer
+import java.util.*
 
 class TransactionRepository {
 
-    fun getTransactions(idOfSelectedBill : String, limit : Long) : Observable<Array<Transaction>> {
+    fun getTransactions(idOfSelectedBill : String, limit : Int) : Observable<Array<Transaction>> {
         return Observable.create<Array<Transaction>> {
             emitter ->
-            //TODO implement
+//            TODO implement
             val transactions = arrayListOf<Transaction>()
             transactions.add(Transaction("","STQ", TransactionType.SEND, true, "0.00001", "250", "", "Aleksey V."))
             transactions.add(Transaction("","BTC", TransactionType.SEND, false, "0.0000001", "2", "", "Aleksey V."))
@@ -39,12 +41,13 @@ class TransactionRepository {
             transactions.add(Transaction("","ETH6", TransactionType.SEND, false, "0.00001", "250", "", "Aleksey V."))
             transactions.add(Transaction("","ETH7", TransactionType.SEND, false, "0.00001", "250", "", "Aleksey V."))
             transactions.add(Transaction("","ETH8", TransactionType.SEND, false, "0.00001", "250", "", "Aleksey V."))
-            transactions.shuffle()
 
-            Observable.fromArray(transactions).take(limit).subscribe {
-                emitter.onNext(transactions.toTypedArray())
+            transactions.shuffle()
+            Observable.fromArray(transactions).take(limit.toLong()).subscribe {
+                emitter.onNext(transactions.slice(0 until limit).toTypedArray())
                 emitter.onComplete()
             }
-        }
+
+        }.onErrorReturnItem(arrayOf())
     }
 }

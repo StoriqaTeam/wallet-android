@@ -15,11 +15,12 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.BillsPagerAdapter
 import com.storiqa.storiqawallet.adapters.TransactionAdapter
 import com.storiqa.storiqawallet.constants.Extras
-import com.storiqa.storiqawallet.databinding.FragmentWalletTransactionsBinding
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.Transaction
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_wallet_transactions.*
+import kotlinx.android.synthetic.main.header.view.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.dip
 
 
@@ -33,7 +34,9 @@ class WalletTransactionsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_wallet_transactions, container, false)
+        val view =  inflater.inflate(R.layout.fragment_wallet_transactions, container, false)
+        view.btnBack.onClick { viewModel.goBack() }
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -52,8 +55,8 @@ class WalletTransactionsFragment : Fragment() {
             override fun onPageSelected(pageNumber: Int) {
                 viewModel.updateTransactionList(bills[pageNumber].id)
             }
-
         })
+
         viewModel.transactions.observe(this, Observer<Array<Transaction>> { newTransactions ->
             rvTransactions.apply {
                 setHasFixedSize(true)
