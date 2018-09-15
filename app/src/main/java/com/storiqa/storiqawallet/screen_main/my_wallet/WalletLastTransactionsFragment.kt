@@ -42,7 +42,7 @@ class WalletLastTransactionsFragment : Fragment() {
         view.vpBills.adapter?.notifyDataSetChanged()
         view.vpBills.clipToPadding = false
         view.vpBills.setPadding(dip(20),0, dip(20),0)
-
+        view.pageIndicator.setupWithViewPager(view.vpBills, true)
         view.vpBills.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {}
 
