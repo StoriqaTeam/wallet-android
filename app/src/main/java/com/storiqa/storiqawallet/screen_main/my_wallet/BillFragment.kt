@@ -10,6 +10,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.ItemCardBinding
 import com.storiqa.storiqawallet.objects.Bill
+import org.jetbrains.anko.support.v4.dip
 
 class BillFragment : Fragment() {
 
@@ -17,6 +18,7 @@ class BillFragment : Fragment() {
         val binding : ItemCardBinding = DataBindingUtil.inflate(inflater, R.layout.item_card, container, false)
         binding.bill = arguments?.getSerializable(Extras().bill) as Bill
         binding.executePendingBindings()
+        binding.root.setPadding(dip(5),0, dip(5) ,0)
         return binding.root
     }
 

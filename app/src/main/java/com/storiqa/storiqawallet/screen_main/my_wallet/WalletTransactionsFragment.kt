@@ -17,7 +17,7 @@ import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.Transaction
 import kotlinx.android.synthetic.main.fragment_wallet_transactions.*
 import android.util.TypedValue
-
+import org.jetbrains.anko.support.v4.dip
 
 
 class WalletTransactionsFragment : Fragment() {
@@ -37,7 +37,8 @@ class WalletTransactionsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         vpBills.adapter = BillsPagerAdapter(fragmentManager!!, arguments?.getSerializable(Extras().bill) as Array<Bill>)
-        vpBills.pageMargin = convertDip2Pixels(context!!, 10)
+        vpBills.clipToPadding = false
+        vpBills.setPadding(dip(20),0, dip(20),0)
 
 
         viewModel.transactions.observe(this, Observer<Array<Transaction>> { newTransactions ->
@@ -56,8 +57,4 @@ class WalletTransactionsFragment : Fragment() {
         }
     }
 
-    //TODO replace with ANKO
-    private fun convertDip2Pixels(context: Context, dip: Int): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip.toFloat(), context.resources.displayMetrics).toInt()
-    }
 }
