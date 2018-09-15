@@ -12,4 +12,5 @@
     <color name="grayButtonLight">#f7f7f7</color>
     <color name="oppacedSkyBlue">#1a00b2ff</color>
     <color name="grayLine">#1e000000</color>
+    <color name="captionGrey">#505050</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.screen_main
+package com.storiqa.storiqawallet.screen_main.my_wallet
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -14,7 +14,9 @@ import com.storiqa.storiqawallet.adapters.BillsAdapter
 import com.storiqa.storiqawallet.databinding.FragmentMywalletBinding
 import com.storiqa.storiqawallet.db.PreferencesHelper
 import com.storiqa.storiqawallet.objects.Bill
+import com.storiqa.storiqawallet.objects.BillClicked
 import kotlinx.android.synthetic.main.fragment_mywallet.*
+import org.greenrobot.eventbus.EventBus
 
 
 class MyWalletFragment : Fragment() {
@@ -39,9 +41,11 @@ class MyWalletFragment : Fragment() {
     }
 
     fun setBillObservable() {
-        viewModel.bills.observe(this, Observer<List<Bill>> { newBills ->
-            rvBills.apply {
-                adapter = BillsAdapter(newBills!!, { })
+        viewModel.bills.observe(this, Observer<Array<Bill>> { newBills ->
+            rvBills?.apply {
+                adapter = BillsAdapter(newBills!!) { positionOfClickedBill ->
+                    EventBus.getDefault().post(BillClicked(positionOfClickedBill))
+                }
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
             }
