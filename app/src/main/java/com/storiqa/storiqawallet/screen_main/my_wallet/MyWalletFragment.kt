@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.BillsAdapter
+import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.FragmentMywalletBinding
 import com.storiqa.storiqawallet.db.PreferencesHelper
 import com.storiqa.storiqawallet.objects.Bill
@@ -35,20 +36,27 @@ class MyWalletFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.refreshBillInfo()
+        refreshBillInfo()
         PreferencesHelper(context!!).setQuickLaunchFinished()
-        setBillObservable()
     }
 
-    fun setBillObservable() {
-        viewModel.bills.observe(this, Observer<Array<Bill>> { newBills ->
-            rvBills?.apply {
-                adapter = BillsAdapter(newBills!!) { positionOfClickedBill ->
-                    EventBus.getDefault().post(BillClicked(positionOfClickedBill))
-                }
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
+    private fun refreshBillInfo() {
+        rvBills?.apply {
+            adapter = BillsAdapter(arguments?.getSerializable(Extras().bill) as Array<Bill>) { positionOfClickedBill ->
+                EventBus.getDefault().post(BillClicked(positionOfClickedBill))
             }
-        })
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+        }
+    }
+
+    companion object {
+        fun getInstance(bills : Array<Bill>) : MyWalletFragment {
+            val myWalletFragment = MyWalletFragment()
+            val bundle = Bundle()
+            bundle.putSerializable(Extras().bill, bills)
+            myWalletFragment.arguments = bundle
+            return myWalletFragment
+        }
     }
 }

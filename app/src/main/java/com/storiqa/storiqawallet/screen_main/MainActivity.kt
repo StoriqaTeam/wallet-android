@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadMyWalletFragment() {
-        val walletFragment = MyWalletFragment()
+        val walletFragment = MyWalletFragment.getInstance(viewModel.bills.value!!)
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.flWallet, walletFragment)
         transaction.commit()
