@@ -9,7 +9,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityMainBinding
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.screen_main.my_wallet.MyWalletFragment
-import com.storiqa.storiqawallet.screen_main.my_wallet.WalletTransactionsFragment
+import com.storiqa.storiqawallet.screen_main.my_wallet.WalletLastTransactionsFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     fun observeBillSelection() {
         viewModel.selectedBillId.observe(this, object : Observer<String> {
             override fun onChanged(idOfBill: String?) {
-                val walletTransactionsFragment = WalletTransactionsFragment.getInstance(idOfBill!!, viewModel.bills.value!!)
+                val walletTransactionsFragment = WalletLastTransactionsFragment.getInstance(idOfBill!!, viewModel.bills.value!!)
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.flWallet, walletTransactionsFragment)
                 transaction.addToBackStack("")
@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-
-
+    override fun onBackPressed() {
+        viewModel.goBack()
+    }
 }

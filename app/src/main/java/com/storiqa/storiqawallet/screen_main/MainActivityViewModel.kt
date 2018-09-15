@@ -23,8 +23,8 @@ class MainActivityViewModel : ViewModel() {
         }
     }
 
-    fun updateTransactionList(idOfSelectedBill : String) {
-        TransactionRepository().getTransactions(idOfSelectedBill, 10).subscribe { newTransactions ->
+    fun updateTransactionList(idOfSelectedBill : String, limit : Int? = null) {
+        TransactionRepository().getTransactions(idOfSelectedBill, limit).subscribe { newTransactions ->
             transactions.value = newTransactions
         }
     }

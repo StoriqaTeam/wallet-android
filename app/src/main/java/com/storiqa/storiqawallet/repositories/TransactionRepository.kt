@@ -8,7 +8,7 @@ import java.util.*
 
 class TransactionRepository {
 
-    fun getTransactions(idOfSelectedBill : String, limit : Int) : Observable<Array<Transaction>> {
+    fun getTransactions(idOfSelectedBill : String, limit : Int?) : Observable<Array<Transaction>> {
         return Observable.create<Array<Transaction>> {
             emitter ->
 //            TODO implement
@@ -43,10 +43,13 @@ class TransactionRepository {
             transactions.add(Transaction("","ETH8", TransactionType.SEND, false, "0.00001", "250", "", "Aleksey V."))
 
             transactions.shuffle()
-            Observable.fromArray(transactions).take(limit.toLong()).subscribe {
+
+            if(limit != null) {
                 emitter.onNext(transactions.slice(0 until limit).toTypedArray())
-                emitter.onComplete()
+            } else {
+                emitter.onNext(transactions.toTypedArray())
             }
+            emitter.onComplete()
 
         }.onErrorReturnItem(arrayOf())
     }
