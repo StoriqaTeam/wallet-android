@@ -41,9 +41,10 @@ class MyWalletFragment : Fragment() {
     }
 
     private fun refreshBillInfo() {
+        val bills = arguments?.getSerializable(Extras().bill) as Array<Bill>
         rvBills?.apply {
-            adapter = BillsAdapter(arguments?.getSerializable(Extras().bill) as Array<Bill>) { positionOfClickedBill ->
-                EventBus.getDefault().post(BillClicked(positionOfClickedBill))
+            adapter = BillsAdapter(bills) { positionOfClickedBill ->
+                EventBus.getDefault().post(BillClicked(bills[positionOfClickedBill].id))
             }
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)

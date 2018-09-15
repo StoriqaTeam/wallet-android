@@ -9,8 +9,8 @@ class WalletTransactionsViewModel : ViewModel() {
 
     val transactions = MutableLiveData<Array<Transaction>>()
 
-    fun updateTransactionList() {
-        TransactionRepository().getTransactions(10).subscribe({newTransactions ->
+    fun updateTransactionList(idOfSelectedBill : String) {
+        TransactionRepository().getTransactions(idOfSelectedBill, 10).subscribe({newTransactions ->
             transactions.value = newTransactions
         }, {
             transactions.value = arrayOf()

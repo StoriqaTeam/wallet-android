@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: BillClicked) {
-        val walletTransactionsFragment = WalletTransactionsFragment.getInstance(viewModel.bills.value!!)
+        val walletTransactionsFragment = WalletTransactionsFragment.getInstance(event.idOfBill, viewModel.bills.value!!)
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.flWallet, walletTransactionsFragment)
         transaction.commit()

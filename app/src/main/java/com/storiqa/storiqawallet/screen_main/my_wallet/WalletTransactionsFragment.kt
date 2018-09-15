@@ -6,6 +6,7 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -37,27 +38,37 @@ class WalletTransactionsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        vpBills.adapter = BillsPagerAdapter(fragmentManager!!, arguments?.getSerializable(Extras().bill) as Array<Bill>)
+        val bills = arguments?.getSerializable(Extras().bill) as Array<Bill>
+        vpBills.adapter = BillsPagerAdapter(fragmentManager!!, bills)
         vpBills.clipToPadding = false
         vpBills.setPadding(dip(20),0, dip(20),0)
 
+        vpBills.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(p0: Int) {}
+
+            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
+
+            override fun onPageSelected(pageNumber: Int) {
+                viewModel.updateTransactionList(bills[pageNumber].id)
+            }
+
+        })
         viewModel.transactions.observe(this, Observer<Array<Transaction>> { newTransactions ->
             rvTransactions.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
-                adapter = TransactionAdapter(newTransactions!!, {
-                    //TODO implement
-                })
+                adapter = TransactionAdapter(newTransactions!!, {})
             }
         })
-        viewModel.updateTransactionList()
+        viewModel.updateTransactionList(bills[0].id)
     }
 
     companion object {
-        fun getInstance(bills : Array<Bill>) : WalletTransactionsFragment {
+        fun getInstance(idOfSelectedBill : String, bills : Array<Bill>) : WalletTransactionsFragment {
             val walletTransactionsFragment = WalletTransactionsFragment()
             val bundle = Bundle()
             bundle.putSerializable(Extras().bill, bills)
+            bundle.putString(Extras().idOfSelectedBill, idOfSelectedBill)
             walletTransactionsFragment.arguments = bundle
             return walletTransactionsFragment
         }
