@@ -65,4 +65,8 @@
     <string name="putYourFingerOnTouchId">Put your finger\non touch id</string>
     <string name="myWallet">My wallet</string>
     <string name="black">Black</string>
+    <string name="send">Sent</string>
+    <string name="recieve">Recieve</string>
+    <string name="to">to</string>
+    <string name="from">from</string>
 </resources>

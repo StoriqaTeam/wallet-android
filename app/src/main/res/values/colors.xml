@@ -13,4 +13,6 @@
     <color name="oppacedSkyBlue">#1a00b2ff</color>
     <color name="grayLine">#1e000000</color>
     <color name="captionGrey">#505050</color>
+    <color name="sentRed">#FF0000</color>
+    <color name="recievedGreen">@android:color/holo_green_dark</color>
 </resources>

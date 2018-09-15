@@ -8,4 +8,11 @@ data class Transaction(val tokenType : String,
                        val amountInToken : String,
                        val amountInDollars : String,
                        val transactionSenderWallet : String,
-                       val transactionReceiverName : String)
+                       val transactionReceiverName : String) {
+
+    lateinit var formattedDate : String
+    init {
+        formattedDate = "15:54 Sep 15"
+    }
+
+}
