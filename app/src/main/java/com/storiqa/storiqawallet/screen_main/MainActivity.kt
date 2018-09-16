@@ -10,6 +10,7 @@ import com.storiqa.storiqawallet.databinding.ActivityMainBinding
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.screen_main.my_wallet.MyWalletFragment
 import com.storiqa.storiqawallet.screen_main.my_wallet.WalletLastTransactionsFragment
+import com.storiqa.storiqawallet.screen_main.send.SendFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,15 +39,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun observeBillSelection() {
-        viewModel.selectedBillId.observe(this, object : Observer<String> {
-            override fun onChanged(idOfBill: String?) {
-                val walletTransactionsFragment = WalletLastTransactionsFragment.getInstance(idOfBill!!, viewModel.bills.value!!)
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.flWallet, walletTransactionsFragment)
-                transaction.addToBackStack("")
-                transaction.commit()
-            }
-        })
+        viewModel.loadBillInfo = { billId ->
+            val walletTransactionsFragment = WalletLastTransactionsFragment.getInstance(billId, viewModel.bills.value!!)
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.flWallet, walletTransactionsFragment)
+            transaction.addToBackStack("")
+            transaction.commit()
+        }
     }
 
     fun observeScreenChange() {
@@ -56,19 +55,20 @@ class MainActivity : AppCompatActivity() {
                     Screen.MY_WALLET -> loadMyWalletFragment()
                     Screen.DEPOSIT -> {}
                     Screen.EXCHANGE -> {}
-                    Screen.SEND -> {}
+                    Screen.SEND -> loadSendFragment()
                     Screen.MENU -> {}
                 }
             }
         })
     }
 
+    private fun loadSendFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.flWallet, SendFragment()).addToBackStack("").commit()
+    }
+
     private fun loadMyWalletFragment() {
-        val walletFragment = MyWalletFragment.getInstance(viewModel.bills.value!!)
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.flWallet, walletFragment)
-        transaction.addToBackStack("")
-        transaction.commit()
+        supportFragmentManager.beginTransaction().replace(R.id.flWallet, MyWalletFragment.getInstance(viewModel.bills.value!!))
+                .addToBackStack("").commit()
     }
 
     override fun onBackPressed() {

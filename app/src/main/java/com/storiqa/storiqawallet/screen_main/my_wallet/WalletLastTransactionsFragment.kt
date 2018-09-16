@@ -14,6 +14,7 @@ import com.storiqa.storiqawallet.adapters.BillsPagerAdapter
 import com.storiqa.storiqawallet.adapters.TransactionAdapter
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.objects.Bill
+import com.storiqa.storiqawallet.objects.BillPagerHelper
 import com.storiqa.storiqawallet.objects.Transaction
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_wallet_transactions.*
@@ -32,26 +33,15 @@ class WalletLastTransactionsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
         bills = arguments?.getSerializable(Extras().bill) as Array<Bill>
-        retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_wallet_transactions, container, false)
 
-        view.vpBills.adapter = BillsPagerAdapter(childFragmentManager!!, bills)
-        view.vpBills.adapter?.notifyDataSetChanged()
-        view.vpBills.clipToPadding = false
-        view.vpBills.setPadding(dip(20),0, dip(20),0)
-        view.pageIndicator.setupWithViewPager(view.vpBills, true)
-        view.vpBills.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(p0: Int) {}
-
-            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
-
-            override fun onPageSelected(pageNumber: Int) {
-                viewModel.updateTransactionList(bills[pageNumber].id, maxAmountOfTransactions)
-            }
-        })
+        BillPagerHelper(childFragmentManager) { pageNumber ->
+            viewModel.updateTransactionList(bills[pageNumber].id, maxAmountOfTransactions)
+            viewModel.selectedBillId = bills[pageNumber].id
+        }.setPager(view.vpBills, view.pageIndicator, bills, arguments?.getString(Extras().idOfSelectedBill)!!)
 
         return view
     }
@@ -66,9 +56,6 @@ class WalletLastTransactionsFragment : Fragment() {
                         .addToBackStack("")
                         .commit() }
         }
-
-        val selectedBill = bills.first { it.id == arguments?.getString(Extras().idOfSelectedBill) }
-        vpBills.currentItem = bills.indexOf(selectedBill)
     }
 
     override fun onResume() {

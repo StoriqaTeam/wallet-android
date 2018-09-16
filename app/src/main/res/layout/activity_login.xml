@@ -121,6 +121,7 @@
                     android:id="@+id/btnSignIn"
                     style="@style/buttonStyle"
                     android:layout_marginTop="28dp"
+                    tools:textColor="@android:color/white"
                     android:background="@drawable/switch_state_button"
                     android:enabled='@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? true : false}'
                     android:text="@string/signInButtonText"

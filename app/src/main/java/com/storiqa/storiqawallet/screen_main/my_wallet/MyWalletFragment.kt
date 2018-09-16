@@ -42,7 +42,7 @@ class MyWalletFragment : Fragment() {
     private fun refreshBillInfo() {
         rvBills?.apply {
             adapter = BillsAdapter(viewModel.bills.value!!) { positionOfClickedBill ->
-                viewModel.selectedBillId.value = viewModel.bills.value!![positionOfClickedBill].id
+                viewModel.loadBillInfo(viewModel.bills.value!![positionOfClickedBill].id)
             }
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
