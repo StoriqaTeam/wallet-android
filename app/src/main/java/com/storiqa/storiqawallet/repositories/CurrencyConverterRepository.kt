@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.repositories
 
 import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 
 class CurrencyConverterRepository {
 
@@ -13,7 +14,6 @@ class CurrencyConverterRepository {
 
             emitter.onNext(map)
             emitter.onComplete()
-        }
-
+        }.timeout(500, TimeUnit.MILLISECONDS)
     }
 }

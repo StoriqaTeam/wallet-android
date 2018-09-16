@@ -5,6 +5,7 @@ import com.storiqa.storiqawallet.objects.Transaction
 import io.reactivex.Observable
 import io.reactivex.Observer
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class TransactionRepository {
 
@@ -51,6 +52,6 @@ class TransactionRepository {
             }
             emitter.onComplete()
 
-        }.onErrorReturnItem(arrayOf())
+        }.onErrorReturnItem(arrayOf()).timeout(500, TimeUnit.MILLISECONDS)
     }
 }

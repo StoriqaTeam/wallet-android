@@ -94,7 +94,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tlPaymentVariants" />
 
-
         <android.support.constraint.ConstraintLayout
             android:id="@+id/editLayout"
             android:layout_width="0dp"
@@ -113,12 +112,14 @@
             <EditText
                 android:id="@+id/etAmount"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="60dp"
                 android:layout_marginRight="60dp"
                 android:background="@android:color/transparent"
                 android:inputType="numberDecimal"
-                android:text="0"
-                android:minWidth="50dp"
+                android:hint="0"
+                android:textSize="17sp"
+                android:textColorHint="@android:color/black"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvAmountInSTQ"
@@ -162,9 +163,8 @@
 
         </android.support.constraint.ConstraintLayout>
 
-
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnNext"
             style="@style/buttonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -175,13 +175,11 @@
             android:layout_marginStart="20dp"
             android:background="@drawable/switch_state_button"
             android:text="@string/next"
+            android:minWidth="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:textColor="@android:color/white" />
 
-
-
     </android.support.constraint.ConstraintLayout>
-
 </layout>
