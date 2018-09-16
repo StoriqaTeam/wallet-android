@@ -14,6 +14,7 @@ import java.math.BigDecimal
 
 class MainActivityViewModel : ViewModel() {
 
+    var tokenType = ObservableField<String>("STQ")
     val transactions = MutableLiveData<Array<Transaction>>()
     val selectedScreen = MutableLiveData<Screen>()
     val bills = MutableLiveData<Array<Bill>>()
@@ -48,4 +49,6 @@ class MainActivityViewModel : ViewModel() {
             amountInSTQ.value = (amountInCurrency * BigDecimal(it[tokenType]!!)).toString()
         }
     }
+
+
 }

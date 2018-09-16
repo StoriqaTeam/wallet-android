@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit
 class SendFragment : Fragment() {
 
     lateinit var viewModel: MainActivityViewModel
-    private var tokenType = "STQ"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +32,7 @@ class SendFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binder = FragmentSendBinding.inflate(inflater, container, false)
+        binder.viewModel = viewModel
         binder.executePendingBindings()
         return binder.root
     }
@@ -77,7 +77,6 @@ class SendFragment : Fragment() {
         RxTextView.afterTextChangeEvents(etAmount).skipInitialValue().debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     refreshAmountInStq()
-                    btnNext.isEnabled = !etAmount.text.isEmpty()
                 }
 
         RxTextView.afterTextChangeEvents(etAmount).skipInitialValue().debounce(1500, TimeUnit.MILLISECONDS)
@@ -92,26 +91,27 @@ class SendFragment : Fragment() {
             override fun onTabUnselected(p0: TabLayout.Tab?) {}
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                tokenType = when (tlPaymentVariants.selectedTabPosition) {
+                viewModel.tokenType.set(when (tlPaymentVariants.selectedTabPosition) {
                     0 -> "STQ"
                     1 -> "BTC"
                     2 -> "ETH"
                     else -> ""
-                }
-                tvTokenType.text = tokenType
+                })
+
+                tvTokenType.text = viewModel.tokenType.get()
 
                 refreshAmountInStq()
             }
         })
 
-        tvTokenType.text = tokenType
+        tvTokenType.text = viewModel.tokenType.get()
     }
 
     fun refreshAmountInStq() {
         if (etAmount.text.isEmpty()) {
             viewModel.amountInSTQ.value = "0"
         } else {
-            viewModel.refreshAmountInStq(tokenType, BigDecimal(etAmount.text.toString()))
+            viewModel.refreshAmountInStq(viewModel.tokenType.get()!!, BigDecimal(etAmount.text.toString()))
         }
     }
 }
