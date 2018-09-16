@@ -19,10 +19,16 @@ class MainActivityViewModel : ViewModel() {
     val selectedScreen = MutableLiveData<Screen>()
     val bills = MutableLiveData<Array<Bill>>()
     val amount = ObservableField<BigDecimal>(BigDecimal(0))
-    var goBack : () -> Unit = {}
     var selectedBillId : String = ""
-    var loadBillInfo : (billId : String)-> Unit = {}
     var amountInSTQ = MutableLiveData<String>()
+    var amountInCurrency = BigDecimal(0)
+
+    var goBack : () -> Unit = {}
+    var loadBillInfo : (billId : String)-> Unit = {}
+    var openRecieverScreen : ()-> Unit = {}
+
+    val wallet = ObservableField<String>("")
+    val reciever = ObservableField<String>("")
 
     fun openMyWalletScreen() {
         BillsRepository().getBills().subscribe { loadedBills ->
@@ -47,6 +53,7 @@ class MainActivityViewModel : ViewModel() {
     fun refreshAmountInStq(tokenType : String, amountInCurrency: BigDecimal) {
         CurrencyConverterRepository().getLastConverCources().observeOn(AndroidSchedulers.mainThread()).subscribe {
             amountInSTQ.value = (amountInCurrency * BigDecimal(it[tokenType]!!)).toString()
+            this.amountInCurrency = amountInCurrency
         }
     }
 

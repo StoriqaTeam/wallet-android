@@ -10,6 +10,7 @@ import com.storiqa.storiqawallet.databinding.ActivityMainBinding
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.screen_main.my_wallet.MyWalletFragment
 import com.storiqa.storiqawallet.screen_main.my_wallet.WalletLastTransactionsFragment
+import com.storiqa.storiqawallet.screen_main.send.ChooseRecieverFragment
 import com.storiqa.storiqawallet.screen_main.send.SendFragment
 
 
@@ -30,6 +31,14 @@ class MainActivity : AppCompatActivity() {
 
         observeScreenChange()
         observeBillSelection()
+
+        viewModel.openRecieverScreen = {
+            val recieverFragment = ChooseRecieverFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.flWallet, recieverFragment)
+            transaction.addToBackStack("")
+            transaction.commit()
+        }
 
         viewModel.goBack = {
             if(supportFragmentManager.backStackEntryCount > 1) {

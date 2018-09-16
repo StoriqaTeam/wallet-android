@@ -119,7 +119,6 @@
                 android:inputType="numberDecimal"
                 android:hint="0"
                 android:textSize="17sp"
-                android:textColorHint="@android:color/black"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvAmountInSTQ"

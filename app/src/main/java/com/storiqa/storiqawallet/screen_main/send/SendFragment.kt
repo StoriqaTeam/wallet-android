@@ -54,6 +54,8 @@ class SendFragment : Fragment() {
             etAmount.requestFocus()
             etAmount.setSelection(etAmount.text.length)
         }
+
+        btnNext.onClick { viewModel.openRecieverScreen() }
     }
 
     private fun observeCurrencyChangeRecalculated() {
