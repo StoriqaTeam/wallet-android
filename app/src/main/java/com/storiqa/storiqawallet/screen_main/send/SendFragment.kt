@@ -16,10 +16,11 @@ import com.storiqa.storiqawallet.objects.BillPagerHelper
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_send.*
-import kotlinx.android.synthetic.main.fragment_wallet_transactions.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
+import android.view.inputmethod.InputMethodManager
+
 
 class SendFragment : Fragment() {
 
@@ -34,25 +35,28 @@ class SendFragment : Fragment() {
         val binder = FragmentSendBinding.inflate(inflater, container, false)
         binder.viewModel = viewModel
         binder.executePendingBindings()
+
+        BillPagerHelper(childFragmentManager) { pageNumber ->
+            viewModel.selectedBillId = viewModel.bills.value!![pageNumber].id
+        }.setPager(binder.vpBills, binder.pageIndicator, viewModel.bills.value!!, viewModel.selectedBillId)
+
         return binder.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        BillPagerHelper(childFragmentManager) { pageNumber ->
-            viewModel.selectedBillId = viewModel.bills.value!![pageNumber].id
-        }.setPager(view.vpBills, view.pageIndicator, viewModel.bills.value!!, viewModel.selectedBillId)
-
         setTokenTypeInfo()
         observeAmountChanging()
         observeCurrencyChangeRecalculated()
-        observeAmountFocused()
         refreshAmountInStq()
 
         editLayout.onClick {
             etAmount.requestFocus()
             etAmount.setSelection(etAmount.text.length)
+
+            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm!!.showSoftInput(etAmount, InputMethodManager.SHOW_IMPLICIT)
         }
 
         btnNext.onClick { viewModel.openRecieverScreen() }
@@ -62,28 +66,10 @@ class SendFragment : Fragment() {
         viewModel.amountInSTQ.observe(this, Observer<String> { tvAmountInSTQ.text = "~$it STQ" })
     }
 
-    private fun observeAmountFocused() {
-        etAmount.setOnFocusChangeListener { view, isFocused ->
-            if (isFocused) {
-                vpBills.visibility = View.GONE
-                pageIndicator.visibility = View.GONE
-            } else {
-                hideKeyboard(etAmount)
-                vpBills.visibility = View.VISIBLE
-                pageIndicator.visibility = View.VISIBLE
-            }
-        }
-    }
-
     private fun observeAmountChanging() {
         RxTextView.afterTextChangeEvents(etAmount).skipInitialValue().debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     refreshAmountInStq()
-                }
-
-        RxTextView.afterTextChangeEvents(etAmount).skipInitialValue().debounce(1500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                    etAmount.clearFocus()
                 }
     }
 

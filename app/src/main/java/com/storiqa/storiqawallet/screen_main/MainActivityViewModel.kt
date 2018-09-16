@@ -5,8 +5,10 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.Bill
+import com.storiqa.storiqawallet.objects.Contact
 import com.storiqa.storiqawallet.objects.Transaction
 import com.storiqa.storiqawallet.repositories.BillsRepository
+import com.storiqa.storiqawallet.repositories.ContactsRepository
 import com.storiqa.storiqawallet.repositories.CurrencyConverterRepository
 import com.storiqa.storiqawallet.repositories.TransactionRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,6 +31,7 @@ class MainActivityViewModel : ViewModel() {
 
     val wallet = ObservableField<String>("")
     val reciever = ObservableField<String>("")
+    val contacts = MutableLiveData<Array<Contact>>()
 
     fun openMyWalletScreen() {
         BillsRepository().getBills().subscribe { loadedBills ->
@@ -55,6 +58,10 @@ class MainActivityViewModel : ViewModel() {
             amountInSTQ.value = (amountInCurrency * BigDecimal(it[tokenType]!!)).toString()
             this.amountInCurrency = amountInCurrency
         }
+    }
+
+    fun requestContacts() {
+        contacts.value = ContactsRepository().getContactList()
     }
 
 

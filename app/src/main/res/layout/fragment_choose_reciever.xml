@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="@android:color/white"
+                android:text='@{viewModel.amountInCurrency + " " + viewModel.tokenType}'
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView24"
                 tools:text="0.00340000 BTC" />
@@ -49,9 +50,13 @@
                 android:id="@+id/tvAmountInSTQ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="19dp"
+                android:text='@{viewModel.amountInSTQ + " STQ"}'
                 android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvAmountInCurrency"
                 app:layout_constraintTop_toBottomOf="@+id/tvAmountInCurrency"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="=10322.22 STQ" />
 
             <ImageView
@@ -80,6 +85,7 @@
             <TextView
                 android:id="@+id/textView29"
                 style="@style/sendHeader"
+                android:visibility='@{viewModel.wallet == ""? View.GONE : View.VISIBLE }'
                 android:layout_marginTop="20dp"
                 android:text="Address"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,11 +95,15 @@
                 android:id="@+id/textView30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="19dp"
                 android:layout_marginTop="9dp"
-                android:text="TextView"
+                android:text='@{viewModel.wallet}'
                 android:textColor="@android:color/white"
+                android:visibility='@{viewModel.wallet == ""? View.GONE : View.VISIBLE }'
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView29"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="1F1tAaz5x***4xqX" />
 
             <TextView
@@ -101,6 +111,7 @@
                 style="@style/sendHeader"
                 android:layout_marginTop="26dp"
                 android:text="Receiver"
+                android:visibility='@{viewModel.reciever == ""? View.GONE : View.VISIBLE }'
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -111,6 +122,8 @@
                 android:layout_marginBottom="19dp"
                 android:layout_marginTop="6dp"
                 android:textColor="@android:color/white"
+                android:visibility='@{viewModel.reciever == ""? View.GONE : View.VISIBLE }'
+                android:text='@{viewModel.reciever}'
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView31"
@@ -168,6 +181,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvContacts"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="18dp"
