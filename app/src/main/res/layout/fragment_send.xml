@@ -84,7 +84,7 @@
         </android.support.design.widget.TabLayout>
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/labelAmount"
             style="@style/sentLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,19 +108,17 @@
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23">
+            app:layout_constraintTop_toBottomOf="@+id/labelAmount">
 
             <EditText
                 android:id="@+id/etAmount"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
-                android:layout_marginRight="60dp"
                 android:background="@android:color/transparent"
-                android:inputType="numberDecimal"
                 android:hint="0"
-                android:textSize="17sp"
+                android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
+                android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvAmountInSTQ"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -141,19 +139,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="~10000 STQ" />
-
-            <TextView
-                android:id="@+id/tvTokenType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:textColor="@android:color/black"
-                android:textSize="17sp"
-                app:layout_constraintBottom_toBottomOf="@+id/etAmount"
-                app:layout_constraintStart_toEndOf="@+id/etAmount"
-                app:layout_constraintTop_toTopOf="@+id/etAmount"
-                tools:text="BTC" />
 
             <View
                 android:layout_width="match_parent"

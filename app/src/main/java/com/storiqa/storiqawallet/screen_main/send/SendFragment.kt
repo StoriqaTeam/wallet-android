@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.storiqa.storiqawallet.databinding.FragmentSendBinding
-import com.storiqa.storiqawallet.hideKeyboard
 import com.storiqa.storiqawallet.objects.BillPagerHelper
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_send.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
-import android.view.inputmethod.InputMethodManager
 
 
 class SendFragment : Fragment() {
@@ -51,14 +49,6 @@ class SendFragment : Fragment() {
         observeCurrencyChangeRecalculated()
         refreshAmountInStq()
 
-        editLayout.onClick {
-            etAmount.requestFocus()
-            etAmount.setSelection(etAmount.text.length)
-
-            val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm!!.showSoftInput(etAmount, InputMethodManager.SHOW_IMPLICIT)
-        }
-
         btnNext.onClick { viewModel.openRecieverScreen() }
     }
 
@@ -80,19 +70,15 @@ class SendFragment : Fragment() {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 viewModel.tokenType.set(when (tlPaymentVariants.selectedTabPosition) {
-                    0 -> "STQ"
+                    0 -> "STQ" //TODO replace to currency enum
                     1 -> "BTC"
                     2 -> "ETH"
                     else -> ""
                 })
 
-                tvTokenType.text = viewModel.tokenType.get()
-
                 refreshAmountInStq()
             }
         })
-
-        tvTokenType.text = viewModel.tokenType.get()
     }
 
     fun refreshAmountInStq() {

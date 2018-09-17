@@ -8,20 +8,20 @@ import com.storiqa.storiqawallet.objects.Contact
 class ContactsRepository {
 
     fun getContactList(): Array<Contact> {
-        val cr = StoriqaApp.context.getContentResolver()
-        val cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
+        val contentResolver = StoriqaApp.context.contentResolver
+        val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
 
         val contactList = ArrayList<Contact>()
 
-        if ((if (cur != null) cur.getCount() else 0) > 0) {
-            while (cur != null && cur.moveToNext()) {
-                val id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID))
-                val name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+        if ((if (cursor != null) cursor.getCount() else 0) > 0) {
+            while (cursor != null && cursor.moveToNext()) {
+                val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+                val name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
                 var phoneNo = ""
-                var photo = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.PHOTO_THUMBNAIL_URI)) ?: ""
+                val photo = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
 
-                if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-                    val pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                if (cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    val pCur = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", arrayOf<String>(id), null)
 
                     while (pCur.moveToNext()) {
@@ -30,11 +30,11 @@ class ContactsRepository {
                     pCur.close()
                 }
 
-                contactList.add(Contact(name, phoneNo, photo))
+                contactList.add(Contact(name?:"", phoneNo?:"", photo?:""))
             }
         }
-        if (cur != null) {
-            cur.close()
+        if (cursor != null) {
+            cursor.close()
         }
 
         return contactList.toTypedArray()
