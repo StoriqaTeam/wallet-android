@@ -3,11 +3,12 @@ package com.storiqa.storiqawallet.repositories
 import android.provider.ContactsContract
 import com.storiqa.storiqawallet.StoriqaApp
 import com.storiqa.storiqawallet.objects.Contact
-
+import io.reactivex.Observable
 
 class ContactsRepository {
 
-    fun getContactList(): Array<Contact> {
+    private fun fetchContactsFromPhone(): Array<Contact> {
+
         val contentResolver = StoriqaApp.context.contentResolver
         val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
 
@@ -17,9 +18,9 @@ class ContactsRepository {
             while (cursor != null && cursor.moveToNext()) {
                 val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
                 val name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-                var phoneNo = ""
                 val photo = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
 
+                var phoneNo = ""
                 if (cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
                     val pCur = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", arrayOf<String>(id), null)
@@ -30,7 +31,7 @@ class ContactsRepository {
                     pCur.close()
                 }
 
-                contactList.add(Contact(name?:"", phoneNo?:"", photo?:""))
+                contactList.add(Contact(id,name ?: "", phoneNo ?: "", photo ?: ""))
             }
         }
         if (cursor != null) {
@@ -38,8 +39,15 @@ class ContactsRepository {
         }
 
         return contactList.toTypedArray()
-
     }
 
-
+    fun getContacts(): Observable<Array<Contact>> {
+        val contacts = fetchContactsFromPhone()
+        return WalletsRepository().getWallets(contacts.map { it.phone }.toTypedArray()).map { phoneToWallet ->
+            for (contact in contacts) {
+                contact.wallet = phoneToWallet[contact.phone] ?: ""
+            }
+            contacts
+        }
+    }
 }

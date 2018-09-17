@@ -61,8 +61,9 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun requestContacts() {
-        contacts.value = ContactsRepository().getContactList()
+        ContactsRepository().getContacts().subscribe {newContacts ->
+            contacts.value = newContacts
+        }
     }
-
 
 }

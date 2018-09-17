@@ -24,14 +24,14 @@
             android:layout_marginTop="25dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            tools:listitem = "@layout/item_card"
+            tools:listitem = "@layout/item_bill"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTokenType" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/tvTokenType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

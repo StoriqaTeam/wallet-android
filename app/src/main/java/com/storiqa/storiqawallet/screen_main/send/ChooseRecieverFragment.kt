@@ -36,32 +36,31 @@ class ChooseRecieverFragment : Fragment() {
         return binder.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
         Dexter.withActivity(activity).withPermission(Manifest.permission.READ_CONTACTS).withListener(object : PermissionListener {
             override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                 viewModel.requestContacts()
+                viewModel.contacts.observe(this@ChooseRecieverFragment, Observer{ newContacts ->
+                    rvContacts.apply {
+                        setHasFixedSize(true)
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = ContactsAdapter(newContacts!!) {
+                            etReciever.setText(viewModel.contacts.value!![it].wallet)
+                        }
+                    }
+                })
             }
 
             override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                token?.continuePermissionRequest()
             }
 
             override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
         }).check()
-
-        viewModel.contacts.observe(this, Observer{
-            rvContacts.apply {
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context)
-                adapter = ContactsAdapter(it!!, {
-                    //TODO set wallet
-                })
-            }
-        })
     }
 }

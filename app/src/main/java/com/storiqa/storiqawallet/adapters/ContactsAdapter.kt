@@ -1,14 +1,15 @@
 package com.storiqa.storiqawallet.adapters
 
 import android.content.Context
-import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ItemContactBinding
 import com.storiqa.storiqawallet.objects.Contact
 import kotlinx.android.synthetic.main.item_contact.view.*
-import org.jetbrains.anko.dip
+import android.net.Uri
 
 class ContactsAdapter(private val contacts : Array<Contact>, val onClick : (position : Int) -> Unit) : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
@@ -29,11 +30,19 @@ class ContactsAdapter(private val contacts : Array<Contact>, val onClick : (posi
 
     class ViewHolder(private val binding : ItemContactBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact, onClick : (position : Int) -> Unit) {
-            binding.contact = contact
-            binding.executePendingBindings()
-            binding.root.ivContact.setImageURI(Uri.parse(contact.imageIri))
-            binding.root.setOnClickListener { _ -> onClick(layoutPosition) }
+            binding.apply {
+                this.contact = contact
+                executePendingBindings()
+                root.tvNameShorten.text = contact.getShortenName()
+                root.setOnClickListener { _ -> onClick(layoutPosition) }
+                if (contact.imageIri.isNotEmpty()) {
+                    root.tvNameShorten.visibility = View.GONE
+                    root.ivContact.setImageURI(Uri.parse(contact.imageIri))
+                } else {
+                    root.tvNameShorten.visibility = View.VISIBLE
+                    root.ivContact.setImageResource(R.color.contactGray)
+                }
+            }
         }
-
     }
 }
