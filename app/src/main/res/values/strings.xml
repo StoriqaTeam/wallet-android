@@ -72,4 +72,6 @@
     <string name="next">Next</string>
     <string name="amount">Amount</string>
     <string name="recieverCurrency">Receiver currency</string>
+    <string name="emptyText" />
+    <string name="gold">Gold</string>
 </resources>

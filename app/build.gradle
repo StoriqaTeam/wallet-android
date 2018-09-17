@@ -68,6 +68,8 @@ dependencies {
     implementation 'org.jetbrains.anko:anko:0.10.6'
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
     implementation 'com.facebook.android:facebook-login:4.36.0'
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
