@@ -2,6 +2,8 @@ package com.storiqa.storiqawallet.repositories
 
 import com.storiqa.storiqawallet.objects.Bill
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class BillsRepository {
@@ -17,6 +19,6 @@ class BillsRepository {
             bills.add(Bill("info from id3","ETH", "3000000000", "4000000", "Peter Staranchuk"))
             emitter.onNext(bills.toTypedArray())
             emitter.onComplete()
-        }.timeout(500, TimeUnit.MILLISECONDS)
+        }.timeout(500, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
     }
 }

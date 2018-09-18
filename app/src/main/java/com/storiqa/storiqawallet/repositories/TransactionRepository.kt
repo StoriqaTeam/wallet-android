@@ -3,8 +3,8 @@ package com.storiqa.storiqawallet.repositories
 import com.storiqa.storiqawallet.enums.TransactionType
 import com.storiqa.storiqawallet.objects.Transaction
 import io.reactivex.Observable
-import io.reactivex.Observer
-import java.util.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class TransactionRepository {
@@ -53,5 +53,6 @@ class TransactionRepository {
             emitter.onComplete()
 
         }.onErrorReturnItem(arrayOf()).timeout(500, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
     }
 }

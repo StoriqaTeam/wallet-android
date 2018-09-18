@@ -4,6 +4,7 @@ import android.provider.ContactsContract
 import com.storiqa.storiqawallet.StoriqaApp
 import com.storiqa.storiqawallet.objects.Contact
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
 class ContactsRepository {
 
@@ -14,7 +15,7 @@ class ContactsRepository {
 
         val contactList = ArrayList<Contact>()
 
-        if ((if (cursor != null) cursor.getCount() else 0) > 0) {
+        if ((if (cursor != null) cursor.count else 0) > 0) {
             while (cursor != null && cursor.moveToNext()) {
                 val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
                 val name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
@@ -31,7 +32,9 @@ class ContactsRepository {
                     pCur.close()
                 }
 
-                contactList.add(Contact(id,name ?: "", phoneNo ?: "", photo ?: ""))
+                if(phoneNo.isNotEmpty()) {
+                    contactList.add(Contact(id, name ?: "", phoneNo ?: "", photo ?: ""))
+                }
             }
         }
         if (cursor != null) {
@@ -42,12 +45,16 @@ class ContactsRepository {
     }
 
     fun getContacts(): Observable<Array<Contact>> {
-        val contacts = fetchContactsFromPhone()
-        return WalletsRepository().getWallets(contacts.map { it.phone }.toTypedArray()).map { phoneToWallet ->
-            for (contact in contacts) {
-                contact.wallet = phoneToWallet[contact.phone] ?: ""
+        return Observable.create<Array<Contact>> {emitter ->
+            emitter.onNext(fetchContactsFromPhone())
+            emitter.onComplete()
+        }.subscribeOn(Schedulers.newThread()).flatMap {contacts ->
+            WalletsRepository().getWallets(contacts.map { it.phone }.toTypedArray()).map { phoneToWallet ->
+                for (contact in contacts) {
+                    contact.wallet = phoneToWallet[contact.phone] ?: ""
+                }
+                contacts
             }
-            contacts
         }
     }
 }

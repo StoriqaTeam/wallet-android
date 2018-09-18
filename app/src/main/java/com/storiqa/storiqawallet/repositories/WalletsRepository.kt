@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.repositories
 
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class WalletsRepository {
@@ -17,6 +19,6 @@ class WalletsRepository {
 
             emitter.onNext(result)
             emitter.onComplete()
-        }.timeout(1, TimeUnit.SECONDS)
+        }.timeout(1, TimeUnit.SECONDS).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
     }
 }
