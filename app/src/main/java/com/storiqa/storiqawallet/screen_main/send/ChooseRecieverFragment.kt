@@ -22,6 +22,9 @@ import com.storiqa.storiqawallet.objects.Contact
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_choose_reciever.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import android.content.Intent
+import com.blikoon.qrcodescanner.QrCodeActivity
+import com.storiqa.storiqawallet.constants.RequestCodes
 
 class ChooseRecieverFragment : Fragment() {
 
@@ -49,12 +52,36 @@ class ChooseRecieverFragment : Fragment() {
 
         RxTextView.afterTextChangeEvents(etReciever).subscribe {
             if(etReciever.text.isEmpty()) {
-                setContacts(viewModel.contacts.value)
+                setContacts(viewModel.getContacts())
                 viewModel.clearSenderInfo()
             } else {
                 val searchQuery = etReciever.text.toString()
                 setContacts(viewModel.getContacts().filter { it.name.contains(searchQuery) || it.phone.startsWith(searchQuery) }.toTypedArray())
             }
+        }
+
+        ivStartScanner.onClick {
+            Dexter.withActivity(activity).withPermission(Manifest.permission.CAMERA).withListener(object  : PermissionListener {
+                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                    startActivityForResult(Intent(context, QrCodeActivity::class.java), RequestCodes().scanQR)
+                }
+
+                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
+                    token?.continuePermissionRequest()
+                }
+
+                override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
+            }).check()
+        }
+
+        viewModel.scannedQR.observe(this, Observer {
+            it?.let {
+                binder.etReciever.setText(it)
+            }
+        })
+
+        btnNext.onClick {
+            viewModel.openSendFinalScreen()
         }
     }
 
@@ -65,7 +92,8 @@ class ChooseRecieverFragment : Fragment() {
             override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                 viewModel.requestContacts()
                 viewModel.contacts.observe(this@ChooseRecieverFragment, Observer{ newContacts ->
-                    setContacts(newContacts)
+                    newContacts?.let { setContacts(newContacts)  }
+
                 })
             }
 
@@ -78,16 +106,19 @@ class ChooseRecieverFragment : Fragment() {
         }).check()
     }
 
-    fun setContacts(newContacts: Array<Contact>?) {
-        rvContacts.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            adapter = ContactsAdapter(newContacts!!) {
-                binder.etReciever.setText(newContacts[it].phone)
-                setContacts(arrayOf(newContacts[it]))
+    fun setContacts(newContacts: Array<Contact>) {
 
-                viewModel.saveRecieverInfo(newContacts[it])
+            rvContacts.apply {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context)
+                adapter = ContactsAdapter(newContacts!!) {
+                    binder.etReciever.setText(newContacts[it].phone)
+                    setContacts(arrayOf(newContacts[it]))
+
+                    viewModel.saveRecieverInfo(newContacts[it])
+                }
+                viewModel.isFoundErrorVisible.set(newContacts.isEmpty())
             }
-        }
+
     }
 }

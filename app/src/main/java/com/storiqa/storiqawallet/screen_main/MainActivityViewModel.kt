@@ -28,11 +28,14 @@ class MainActivityViewModel : ViewModel() {
     var goBack : () -> Unit = {}
     var loadBillInfo : (billId : String)-> Unit = {}
     var openRecieverScreen : ()-> Unit = {}
+    var openSendFinalScreen : ()-> Unit = {}
 
     val wallet = ObservableField<String>("")
     val phone = ObservableField<String>("")
     val reciever = ObservableField<String>("")
     val contacts = MutableLiveData<Array<Contact>>()
+    val scannedQR = MutableLiveData<String>()
+    val isFoundErrorVisible = ObservableField<Boolean>(false)
 
     init {
         contacts.value = arrayOf()

@@ -103,11 +103,11 @@
             android:layout_marginEnd="9dp"
             android:layout_marginRight="9dp"
             android:text="Scan QR code"
-            app:layout_constraintEnd_toStartOf="@+id/imageView14"
+            app:layout_constraintEnd_toStartOf="@+id/ivStartScanner"
             app:layout_constraintTop_toTopOf="@+id/textView26" />
 
         <ImageView
-            android:id="@+id/imageView14"
+            android:id="@+id/ivStartScanner"
             android:layout_width="17dp"
             android:layout_height="17dp"
             android:layout_marginEnd="20dp"
@@ -166,6 +166,8 @@
             android:layout_marginRight="18dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="21dp"
+            tools:visibility="gone"
+            android:visibility="@{viewModel.isFoundErrorVisible? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -184,6 +186,32 @@
             android:layout_marginBottom="21dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="81dp"
+            android:layout_height="87dp"
+            android:layout_marginTop="41dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlReciever"
+            app:srcCompat="@android:color/background_dark" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="70dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="There is no such number in system. Use another way to send funds."
+            android:textColor="@color/bluegrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
     </android.support.constraint.ConstraintLayout>
 

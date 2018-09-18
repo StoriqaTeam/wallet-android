@@ -17,4 +17,5 @@
     <color name="recievedGreen">@android:color/holo_green_dark</color>
     <color name="contactGray">#f7f7f7</color>
     <color name="contactImageText">#c3cedc</color>
+    <color name="bluegrey">#889eba</color>
 </resources>
