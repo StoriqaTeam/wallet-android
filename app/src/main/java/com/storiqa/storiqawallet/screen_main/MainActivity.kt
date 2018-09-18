@@ -18,6 +18,7 @@ import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import com.storiqa.storiqawallet.constants.RequestCodes
+import com.storiqa.storiqawallet.screen_main.send.SendFinalScreen
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,11 +40,7 @@ class MainActivity : AppCompatActivity() {
         observeBillSelection()
 
         viewModel.openRecieverScreen = {
-            val recieverFragment = ChooseRecieverFragment()
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.flWallet, recieverFragment)
-            transaction.addToBackStack("")
-            transaction.commit()
+            supportFragmentManager.beginTransaction().replace(R.id.flWallet, ChooseRecieverFragment()).addToBackStack("").commit()
         }
 
         viewModel.goBack = {
@@ -53,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.openSendFinalScreen = {
-            //TODO implement
+            supportFragmentManager.beginTransaction().replace(R.id.flWallet, SendFinalScreen()).addToBackStack("").commit()
         }
     }
 

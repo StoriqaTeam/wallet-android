@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.screen_main.MainActivityViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/send_header_container">
+
+            <TextView
+                android:id="@+id/textView24"
+                style="@style/sendHeader"
+                android:text="Sending"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAmountInCurrency"
+                android:layout_marginTop="8dp"
+                android:text='@{viewModel.amountInCurrency + " " + viewModel.tokenType}'
+                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/textView24"
+                tools:text="0.00340000 BTC"
+                style="@style/sendAmountStyle" />
+
+            <TextView
+                android:id="@+id/tvAmountInSTQ"
+                style="@style/sendAmountStyle"
+                android:layout_marginBottom="19dp"
+                android:text='@{viewModel.amountInSTQ + " STQ"}'
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvAmountInCurrency"
+                app:layout_constraintTop_toBottomOf="@+id/tvAmountInCurrency"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="=10322.22 STQ" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                app:layout_constraintBottom_toTopOf="@+id/tvAmountInSTQ"
+                app:layout_constraintStart_toEndOf="@+id/tvAmountInCurrency"
+                app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency"
+                style="@style/buttonEdit" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                style="@style/currencySign"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAmountInSTQ"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView24" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView17"
+            style="@style/sendHeader"
+            android:text='@{viewModel.wallet != ""? @string/wallet : @string/phone}'
+            android:layout_marginTop="17dp"
+            android:textColor="@color/bluegrey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <TextView
+            android:id="@+id/textView29"
+            style="@style/sendInfoStyle"
+            android:text='@{viewModel.wallet != ""? viewModel.wallet.get() : viewModel.phone.get()}'
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17"
+            tools:text="1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX" />
+
+
+        <TextView
+            android:id="@+id/textView31"
+            style="@style/sendHeader"
+            android:layout_marginTop="25dp"
+            android:text="Receiver"
+            android:textColor="@color/bluegrey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+        <TextView
+            android:id="@+id/textView30"
+            style="@style/sendAmountStyle"
+            android:layout_height="29dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="8dp"
+            android:text='@{viewModel.reciever}'
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView31"
+            tools:text="Arnold Arkroyd" />
+
+        <TextView
+            android:id="@+id/textView32"
+            style="@style/sendHeader"
+            android:textColor="@color/bluegrey"
+            android:layout_marginTop="29dp"
+            android:text="Payment fee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+        <TextView
+            android:id="@+id/tvCommission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            tools:layout_editor_absoluteX="337dp"
+            tools:layout_editor_absoluteY="279dp"
+            tools:text="30 STQ" />
+
+        <SeekBar
+            android:id="@+id/seekBar2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="26dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_marginTop="22dp"
+            android:text="Low"
+            app:layout_constraintStart_toStartOf="@+id/seekBar2"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar2"
+            style="@style/sliderItem" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:text="Hight"
+            style="@style/sliderItem"
+            app:layout_constraintEnd_toEndOf="@+id/seekBar2"
+            app:layout_constraintTop_toTopOf="@+id/textView36" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:text="Medium"
+            style="@style/sliderItem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView36" />
+
+        <TextView
+            android:id="@+id/textView39"
+            style="@style/sendHeader"
+            android:layout_marginTop="22dp"
+            android:text="Median wait:"
+            android:textColor="@color/bluegrey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView39"
+            app:layout_constraintStart_toEndOf="@+id/textView39"
+            app:layout_constraintTop_toTopOf="@+id/textView39"
+            tools:text="48 S" />
+
+        <TextView
+            android:id="@+id/textView41"
+            style="@style/sendHeader"
+            android:textColor="@color/bluegrey"
+            android:layout_marginTop="34dp"
+            android:text="Subtotal to send"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView41"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView41"
+            tools:text="10372.22 STQ" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginStart="21dp"
+            android:text="Send"
+            style="@style/buttonStyle"
+            android:background="@drawable/blue_button_background"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

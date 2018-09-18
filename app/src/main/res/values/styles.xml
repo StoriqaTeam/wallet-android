@@ -187,9 +187,55 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginStart">20dp</item>
-        <item name="android:layout_marginTop">10dp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="send_header_container">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@color/captionGrey</item>
+    </style>
+
+    <style name="sendAmountStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="buttonEdit">
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:background">@android:color/background_dark</item>
+    </style>
+
+    <style name="currencySign">
+        <item name="android:layout_width">31dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginEnd">33dp</item>
+        <item name="android:layout_marginRight">33dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@android:color/background_dark</item>
+    </style>
+
+    <style name="sendInfoStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">17dp</item>
+        <item name="android:layout_marginStart">17dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="sliderItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/bluegrey</item>
     </style>
 
 </resources>

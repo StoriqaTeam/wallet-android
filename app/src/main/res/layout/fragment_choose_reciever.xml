@@ -18,41 +18,33 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/captionGrey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/send_header_container">
 
             <TextView
                 android:id="@+id/textView24"
                 style="@style/sendHeader"
                 android:text="Sending"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvAmountInCurrency"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="@android:color/white"
                 android:text='@{viewModel.amountInCurrency + " " + viewModel.tokenType}'
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView24"
-                tools:text="0.00340000 BTC" />
+                tools:text="0.00340000 BTC"
+                style="@style/sendAmountStyle" />
 
             <TextView
                 android:id="@+id/tvAmountInSTQ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/sendAmountStyle"
                 android:layout_marginBottom="19dp"
                 android:text='@{viewModel.amountInSTQ + " STQ"}'
-                android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvAmountInCurrency"
                 app:layout_constraintTop_toBottomOf="@+id/tvAmountInCurrency"
@@ -61,26 +53,17 @@
 
             <ImageView
                 android:id="@+id/imageView12"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
+                style="@style/buttonEdit"
                 app:layout_constraintBottom_toTopOf="@+id/tvAmountInSTQ"
                 app:layout_constraintStart_toEndOf="@+id/tvAmountInCurrency"
-                app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency"
-                app:srcCompat="@android:color/background_dark" />
+                app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency" />
 
             <ImageView
                 android:id="@+id/imageView13"
-                android:layout_width="31dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="33dp"
-                android:layout_marginRight="33dp"
-                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tvAmountInSTQ"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView24"
-                app:srcCompat="@android:color/background_dark" />
+                style="@style/currencySign" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -192,6 +175,7 @@
             android:layout_width="81dp"
             android:layout_height="87dp"
             android:layout_marginTop="41dp"
+            android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rlReciever"
@@ -207,6 +191,7 @@
             android:layout_marginStart="70dp"
             android:layout_marginTop="20dp"
             android:gravity="center"
+            android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
             android:text="There is no such number in system. Use another way to send funds."
             android:textColor="@color/bluegrey"
             app:layout_constraintEnd_toEndOf="parent"
