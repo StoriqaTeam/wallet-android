@@ -30,8 +30,14 @@ class MainActivityViewModel : ViewModel() {
     var openRecieverScreen : ()-> Unit = {}
 
     val wallet = ObservableField<String>("")
+    val phone = ObservableField<String>("")
     val reciever = ObservableField<String>("")
     val contacts = MutableLiveData<Array<Contact>>()
+
+    init {
+        contacts.value = arrayOf()
+        transactions.value = arrayOf()
+    }
 
     fun openMyWalletScreen() {
         BillsRepository().getBills().subscribe { loadedBills ->
@@ -64,6 +70,22 @@ class MainActivityViewModel : ViewModel() {
         ContactsRepository().getContacts().subscribe {newContacts ->
             contacts.value = newContacts
         }
+    }
+
+    fun clearSenderInfo() {
+        wallet.set("")
+        phone.set("")
+        reciever.set("")
+    }
+
+    fun saveRecieverInfo(contact: Contact) {
+        wallet.set(contact.wallet)
+        phone.set(contact.phone)
+        reciever.set(contact.name)
+    }
+
+    fun getContacts(): Array<Contact> {
+        return contacts.value!!
     }
 
 }

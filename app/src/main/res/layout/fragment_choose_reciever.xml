@@ -82,53 +82,6 @@
                 app:layout_constraintTop_toTopOf="@+id/textView24"
                 app:srcCompat="@android:color/background_dark" />
 
-            <TextView
-                android:id="@+id/textView29"
-                style="@style/sendHeader"
-                android:visibility='@{viewModel.wallet == ""? View.GONE : View.VISIBLE }'
-                android:layout_marginTop="20dp"
-                android:text="Address"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvAmountInSTQ" />
-
-            <TextView
-                android:id="@+id/textView30"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="19dp"
-                android:layout_marginTop="9dp"
-                android:text='@{viewModel.wallet}'
-                android:textColor="@android:color/white"
-                android:visibility='@{viewModel.wallet == ""? View.GONE : View.VISIBLE }'
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView24"
-                app:layout_constraintTop_toBottomOf="@+id/textView29"
-                app:layout_constraintVertical_bias="0.0"
-                tools:text="1F1tAaz5x***4xqX" />
-
-            <TextView
-                android:id="@+id/textView31"
-                style="@style/sendHeader"
-                android:layout_marginTop="26dp"
-                android:text="Receiver"
-                android:visibility='@{viewModel.reciever == ""? View.GONE : View.VISIBLE }'
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView30" />
-
-            <TextView
-                android:id="@+id/textView32"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="19dp"
-                android:layout_marginTop="6dp"
-                android:textColor="@android:color/white"
-                android:visibility='@{viewModel.reciever == ""? View.GONE : View.VISIBLE }'
-                android:text='@{viewModel.reciever}'
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView24"
-                app:layout_constraintTop_toBottomOf="@+id/textView31"
-                app:layout_constraintVertical_bias="0.0"
-                tools:text="Arnold Arkroyd" />
         </android.support.constraint.ConstraintLayout>
 
         <TextView
@@ -164,21 +117,45 @@
             app:layout_constraintTop_toTopOf="@+id/textView27"
             app:srcCompat="@android:color/holo_blue_bright" />
 
-        <EditText
-            android:id="@+id/etReciever"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rlReciever"
             android:layout_marginEnd="18dp"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="11dp"
-            android:ems="10"
-            android:hint="Wallet address or phone number"
-            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView26" />
+            app:layout_constraintTop_toBottomOf="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etReciever"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="Wallet address or phone number"
+                android:inputType="number" />
+
+            <View
+                android:layout_marginTop="9dp"
+                android:layout_below="@id/etReciever"
+                android:background="@color/grayLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <ImageView
+                android:id="@+id/vClear"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/brightSkyBlue"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+        </RelativeLayout>
+
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvContacts"
@@ -189,11 +166,24 @@
             android:layout_marginRight="18dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="21dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etReciever"
+            app:layout_constraintTop_toBottomOf="@+id/rlReciever"
             tools:listitem="@layout/item_contact" />
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/buttonStyle"
+            android:text="@string/next"
+            tools:visibility="gone"
+            android:visibility='@{viewModel.wallet != "" || viewModel.phone != "" ? View.VISIBLE : View.GONE}'
+            android:background="@drawable/blue_button_background"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="21dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </android.support.constraint.ConstraintLayout>
 
