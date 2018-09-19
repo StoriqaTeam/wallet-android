@@ -19,9 +19,9 @@ class BillInfo(val bill : Bill) {
 
     fun getBillImage() : Int {
         return when(bill.tokenType) {
-            "STQ" -> return R.drawable.eth //TODO add images
-            "ETH" -> return R.drawable.eth
-            "BTC" -> return R.drawable.eth
+            "STQ" -> return R.drawable.cart_black //TODO add images
+            "ETH" -> return R.drawable.cart_ether
+            "BTC" -> return R.drawable.bitcoin_cart
             else -> 0
         }
     }

@@ -95,19 +95,8 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="purpleSpotStyle">
-        <item name="android:background">@drawable/purple_blur_spot</item>
-        <item name="android:layout_width">94dp</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_height">220dp</item>
-    </style>
 
-    <style name="blueSpotStyle">
-        <item name="android:layout_width">55dp</item>
-        <item name="android:layout_height">136dp</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:background">@drawable/blue_blur_spot</item>
-    </style>
+
 
     <style name="toolbarTextStyle">
         <item name="android:textColor">@color/greyishBrown</item>
@@ -193,11 +182,10 @@
 
     <style name="send_header_container">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">100dp</item>
         <item name="android:layout_marginEnd">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
-        <item name="android:layout_marginTop">20dp</item>
-        <item name="android:background">@color/captionGrey</item>
+        <item name="android:background">@drawable/send_header</item>
     </style>
 
     <style name="sendAmountStyle">
@@ -207,20 +195,19 @@
     </style>
 
     <style name="buttonEdit">
-        <item name="android:layout_width">12dp</item>
-        <item name="android:layout_height">12dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:layout_marginStart">8dp</item>
-        <item name="android:background">@android:color/background_dark</item>
+        <item name="android:src">@drawable/pencil_redact</item>
     </style>
 
     <style name="currencySign">
-        <item name="android:layout_width">31dp</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginEnd">33dp</item>
         <item name="android:layout_marginRight">33dp</item>
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:background">@android:color/background_dark</item>
     </style>
 
     <style name="sendInfoStyle">
@@ -236,6 +223,18 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/bluegrey</item>
+    </style>
+
+    <style name="purpleSpotStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/purple_blur_spot</item>
+    </style>
+
+    <style name="blueSpotStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/blue_blur_spot</item>
     </style>
 
 </resources>

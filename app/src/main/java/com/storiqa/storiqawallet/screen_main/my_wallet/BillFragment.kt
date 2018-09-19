@@ -35,6 +35,7 @@ class BillFragment : Fragment() {
             root.tvTokenType.setTextColor(textColor)
             root.tvHolderName.setTextColor(textColor)
             root.tvAmount.setTextColor(textColor)
+            root.ivBillLogo.setImageResource(billInfo.getBillImage())
             //TODO refactor (duplicate logic in adapter)
         }
         return binding.root

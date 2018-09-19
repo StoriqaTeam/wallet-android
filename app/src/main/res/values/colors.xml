@@ -18,4 +18,5 @@
     <color name="contactGray">#f7f7f7</color>
     <color name="contactImageText">#c3cedc</color>
     <color name="bluegrey">#889eba</color>
+    <color name="warm_grey">#8c8c8c</color>
 </resources>

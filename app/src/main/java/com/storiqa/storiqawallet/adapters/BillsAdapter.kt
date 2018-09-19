@@ -35,7 +35,7 @@ class BillsAdapter(private val bills : Array<Bill>, val onClick : (position : In
                 this.bill = bill
                 executePendingBindings()
                 root.setOnClickListener { _ -> onClick(layoutPosition) }
-                root.setPadding(0,0,0, root.context.dip(17))
+                root.setPadding(root.context.dip(20),0,root.context.dip(20), root.context.dip(17))
 
                 val billInfo = BillInfo(bill)
                 root.tvBillStatus.text = root.context.getString(billInfo.getBillStatus())
@@ -46,6 +46,7 @@ class BillsAdapter(private val bills : Array<Bill>, val onClick : (position : In
                 root.tvTokenType.setTextColor(textColor)
                 root.tvHolderName.setTextColor(textColor)
                 root.tvAmount.setTextColor(textColor)
+                root.ivBillLogo.setImageResource(billInfo.getBillImage())
             }
         }
     }
