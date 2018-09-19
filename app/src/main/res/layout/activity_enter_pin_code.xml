@@ -246,15 +246,11 @@
 
         <ImageView
             style="@style/purpleSpotStyle"
-            android:layout_width="132dp"
-            android:layout_height="283dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             style="@style/blueSpotStyle"
-            android:layout_width="100dp"
-            android:layout_height="218dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -133,11 +133,9 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_marginTop="385dp"
             style="@style/purpleSpotStyle" />
 
         <ImageView
-            android:layout_marginTop="376dp"
             style="@style/blueSpotStyle" />
 
     </RelativeLayout>

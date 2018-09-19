@@ -26,14 +26,14 @@
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/ivContact"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                app:riv_oval="true"
-                android:scaleType="fitCenter"
-                app:riv_corner_radius="30dip"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerInParent="true"
+                android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="30dip"
+                app:riv_oval="true"
                 tools:src="@color/contactGray" />
 
             <TextView
@@ -46,25 +46,19 @@
 
         </RelativeLayout>
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/grayLine"
-            app:layout_constraintTop_toBottomOf="@+id/ivContactContainer" />
-
         <TextView
             android:id="@+id/textView28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="24dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="8dp"
             android:text="@{contact.name}"
-            android:textColor="@android:color/black"
+            android:textColor="#de000000"
+            android:textSize="15sp"
             android:textStyle="bold"
+            android:typeface="normal"
             app:layout_constraintEnd_toStartOf="@+id/textView34"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ivContactContainer"
@@ -75,9 +69,8 @@
             android:id="@+id/textView33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:text="@{contact.phone}"
             app:layout_constraintStart_toEndOf="@+id/ivContactContainer"
             app:layout_constraintTop_toBottomOf="@+id/textView28"
@@ -90,9 +83,10 @@
             android:layout_marginEnd="29dp"
             android:layout_marginRight="29dp"
             android:text="Wallet"
-            android:visibility='@{contact.wallet != ""? View.VISIBLE : View.GONE}'
             android:textColor="@color/brightSkyBlue"
-            app:layout_constraintBottom_toTopOf="@+id/view"
+            android:textSize="15sp"
+            android:visibility='@{contact.wallet != ""? View.VISIBLE : View.GONE}'
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>

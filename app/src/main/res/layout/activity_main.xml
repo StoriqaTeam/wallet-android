@@ -42,10 +42,10 @@
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.MY_WALLET)}'
-                android:src="@drawable/wallet"
+                android:src="@drawable/my_wallet_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView6"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +53,10 @@
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.DEPOSIT)}'
-                android:src="@drawable/deposit"
+                android:src="@drawable/deposit_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView8"
                 app:layout_constraintStart_toEndOf="@+id/imageView7"
@@ -64,10 +64,10 @@
 
             <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.EXCHANGE)}'
-                android:src="@drawable/exchange"
+                android:src="@drawable/change_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView9"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
@@ -75,10 +75,10 @@
 
             <ImageView
                 android:id="@+id/imageView9"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.SEND)}'
-                android:src="@drawable/send"
+                android:src="@drawable/send_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView10"
                 app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -87,10 +87,10 @@
 
             <ImageView
                 android:id="@+id/imageView10"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.MENU)}'
-                android:src="@drawable/menu"
+                android:src="@drawable/menu_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"

@@ -41,7 +41,7 @@
         android:layout_width="222dp"
         android:layout_height="222dp"
         android:layout_marginTop="@dimen/splash_logo_top_margin"
-        android:background="@drawable/logo_start_screen"
+        android:src="@drawable/logo_start_screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,16 +50,12 @@
 
     <ImageView
         android:id="@+id/purpleSpot"
-        android:layout_width="137dp"
-        android:layout_height="283dp"
-        android:background="@drawable/purple_blur_spot"
+        style="@style/purpleSpotStyle"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/blueSpot"
-        android:layout_width="100dp"
-        android:layout_height="283dp"
-        android:background="@drawable/blue_blur_spot"
+        style="@style/blueSpotStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -16,34 +16,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/btnBack"
+            style="@style/arrowBackStyle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
+            style="@style/send_header_container"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/send_header_container">
+            app:layout_constraintTop_toBottomOf="@id/btnBack">
 
             <TextView
                 android:id="@+id/textView24"
                 style="@style/sendHeader"
-                android:text="Sending"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="21dp"
+                android:text="@string/sending"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvAmountInCurrency"
-                android:layout_marginTop="8dp"
+                style="@style/sendAmountStyle"
+                android:layout_marginTop="7dp"
                 android:text='@{viewModel.amountInCurrency + " " + viewModel.tokenType}'
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView24"
-                tools:text="0.00340000 BTC"
-                style="@style/sendAmountStyle" />
+                tools:text="0.00340000 BTC" />
 
             <TextView
                 android:id="@+id/tvAmountInSTQ"
                 style="@style/sendAmountStyle"
                 android:layout_marginBottom="19dp"
+                android:layout_marginTop="4dp"
                 android:text='@{viewModel.amountInSTQ + " STQ"}'
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvAmountInCurrency"
@@ -56,14 +64,18 @@
                 style="@style/buttonEdit"
                 app:layout_constraintBottom_toTopOf="@+id/tvAmountInSTQ"
                 app:layout_constraintStart_toEndOf="@+id/tvAmountInCurrency"
-                app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency" />
+                app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency"
+                  />
 
             <ImageView
-                android:id="@+id/imageView13"
-                app:layout_constraintBottom_toBottomOf="@+id/tvAmountInSTQ"
+                android:id="@+id/currencyLogo"
+                style="@style/currencySign"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView24"
-                style="@style/currencySign" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@android:color/black"
+                tools:layout_height="48dp"
+                tools:layout_width="48dp" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -74,7 +86,8 @@
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="18dp"
-            android:text="Send to"
+            android:text="@string/sendTo"
+            android:textColor="@color/bluegrey"
             android:textAllCaps="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
@@ -83,35 +96,36 @@
             android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/brightSkyBlue"
             android:layout_marginEnd="9dp"
             android:layout_marginRight="9dp"
-            android:text="Scan QR code"
+            android:text="@string/scanQR"
             app:layout_constraintEnd_toStartOf="@+id/ivStartScanner"
             app:layout_constraintTop_toTopOf="@+id/textView26" />
 
         <ImageView
             android:id="@+id/ivStartScanner"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView27"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView27"
-            app:srcCompat="@android:color/holo_blue_bright" />
+            android:background="@drawable/scan_qr_icon" />
 
         <RelativeLayout
             android:id="@+id/rlReciever"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView26"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            app:layout_constraintTop_toBottomOf="@+id/textView26">
 
             <EditText
                 android:id="@+id/etReciever"
@@ -123,22 +137,20 @@
                 android:inputType="number" />
 
             <View
-                android:layout_marginTop="9dp"
-                android:layout_below="@id/etReciever"
-                android:background="@color/grayLine"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:layout_below="@id/etReciever"
+                android:layout_marginTop="9dp"
+                android:background="@color/grayLine" />
 
             <ImageView
                 android:id="@+id/vClear"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@color/brightSkyBlue"
-                android:layout_width="15dp"
-                android:layout_height="15dp" />
+                android:background="@color/brightSkyBlue" />
         </RelativeLayout>
-
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvContacts"
@@ -192,12 +204,34 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
-            android:text="There is no such number in system. Use another way to send funds."
+            android:text="@string/noNumberError"
             android:textColor="@color/bluegrey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
+        <ImageView
+            style="@style/purpleSpotStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            style="@style/blueSpotStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Send"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            tools:layout_editor_absoluteX="176dp" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>
