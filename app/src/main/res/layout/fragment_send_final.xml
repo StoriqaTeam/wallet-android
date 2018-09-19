@@ -16,19 +16,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/btnBack"
+            style="@style/arrowBackStyle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:text="@string/send"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            style="@style/header" />
+
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnBack"
             style="@style/send_header_container">
 
             <TextView
                 android:id="@+id/textView24"
                 style="@style/sendHeader"
-                android:text="Sending"
-                android:layout_marginTop="10dp"
+                android:text="@string/sending"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,17 +77,18 @@
             <ImageView
                 android:id="@+id/currencyLogo"
                 style="@style/currencySign"
-                app:layout_constraintBottom_toBottomOf="@+id/tvAmountInSTQ"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView24" />
-
+                app:layout_constraintTop_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView17"
-            style="@style/sendHeader"
+            style="@style/sendTitleStyle"
             android:text='@{viewModel.wallet != ""? @string/wallet : @string/phone}'
+            tools:text="Address"
+            android:layout_marginLeft="18dp"
             android:layout_marginTop="17dp"
             android:textColor="@color/bluegrey"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,9 +105,10 @@
 
         <TextView
             android:id="@+id/textView31"
-            style="@style/sendHeader"
+            style="@style/sendTitleStyle"
             android:layout_marginTop="25dp"
-            android:text="Receiver"
+            android:text="@string/reciever"
+            android:layout_marginLeft="18dp"
             android:textColor="@color/bluegrey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView29" />
@@ -111,10 +128,10 @@
 
         <TextView
             android:id="@+id/textView32"
-            style="@style/sendHeader"
-            android:textColor="@color/bluegrey"
+            style="@style/sendTitleStyle"
             android:layout_marginTop="29dp"
-            android:text="Payment fee"
+            android:layout_marginLeft="18dp"
+            android:text="@string/labelPaymentFee"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -124,7 +141,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
             android:layout_marginRight="18dp"
-            android:text="TextView"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView32"
@@ -168,9 +184,10 @@
 
         <TextView
             android:id="@+id/textView39"
-            style="@style/sendHeader"
+            style="@style/sendTitleStyle"
+            android:layout_marginLeft="18dp"
             android:layout_marginTop="22dp"
-            android:text="Median wait:"
+            android:text="@string/medianWait"
             android:textColor="@color/bluegrey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView36" />
@@ -189,10 +206,9 @@
 
         <TextView
             android:id="@+id/textView41"
-            style="@style/sendHeader"
-            android:textColor="@color/bluegrey"
+            style="@style/sendTitleStyle"
             android:layout_marginTop="34dp"
-            android:text="Subtotal to send"
+            android:text="@string/subtotal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView39" />
 

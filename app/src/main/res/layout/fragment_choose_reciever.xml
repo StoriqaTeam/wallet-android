@@ -42,7 +42,6 @@
             <TextView
                 android:id="@+id/textView24"
                 style="@style/sendHeader"
-                android:layout_marginTop="21dp"
                 android:text="@string/sending"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

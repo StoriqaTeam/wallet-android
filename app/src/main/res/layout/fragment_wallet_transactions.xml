@@ -23,11 +23,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvTitle"
+            android:text="Account"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            style="@style/header" />
+
         <android.support.v4.view.ViewPager
             android:id="@+id/vpBills"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnBack" />
@@ -47,13 +56,11 @@
 
         <TextView
             android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
-            android:text="Last transactions"
-            android:textColor="@color/captionGrey"
+            android:text="@string/lastTransactions"
+            style="@style/sendTitleStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vpBills" />
 
@@ -63,7 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="View all"
+            android:text="@string/viewAll"
+            android:textSize="13sp"
             android:textColor="@color/brightSkyBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView22" />
@@ -83,6 +91,15 @@
             app:layout_constraintTop_toBottomOf="@+id/textView22"
             tools:listitem="@layout/item_transaction" />
 
+        <ImageView
+            style="@style/purpleSpotStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            style="@style/blueSpotStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

@@ -24,7 +24,11 @@ import kotlinx.android.synthetic.main.fragment_choose_reciever.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.content.Intent
 import com.blikoon.qrcodescanner.QrCodeActivity
+import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.RequestCodes
+import com.storiqa.storiqawallet.enums.Currency
+import kotlinx.android.synthetic.main.item_bill.*
+import java.util.*
 
 class ChooseRecieverFragment : Fragment() {
 
@@ -50,7 +54,7 @@ class ChooseRecieverFragment : Fragment() {
             etReciever.text.clear()
         }
 
-        RxTextView.afterTextChangeEvents(etReciever).subscribe {
+        RxTextView.afterTextChangeEvents(etReciever).skipInitialValue().subscribe {
             if(etReciever.text.isEmpty()) {
                 setContacts(viewModel.getContacts())
                 viewModel.clearSenderInfo()
@@ -74,14 +78,23 @@ class ChooseRecieverFragment : Fragment() {
             }).check()
         }
 
+        btnBack.onClick { viewModel.goBack() }
+
         viewModel.scannedQR.observe(this, Observer {
-            it?.let {
-                binder.etReciever.setText(it)
-            }
+            it?.let { binder.etReciever.setText(it) }
         })
 
         btnNext.onClick {
             viewModel.openSendFinalScreen()
+        }
+
+        when(viewModel.tokenType.get()) {
+            Currency.STQ.name-> {
+                currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
+                tvAmountInSTQ.visibility = View.GONE
+            }
+            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
+            Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
         }
     }
 

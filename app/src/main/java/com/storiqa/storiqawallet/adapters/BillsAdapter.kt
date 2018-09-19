@@ -39,20 +39,7 @@ class BillsAdapter(private val bills : Array<Bill>, val onClick : (position : In
                 root.setPadding(root.context.dip(20),0,root.context.dip(20), root.context.dip(17))
 
                 val billInfo = BillInfo(bill)
-                root.tvBillStatus.text = root.context.getString(billInfo.getBillStatus())
-                root.ivBillImage.setBackgroundResource(billInfo.getBillImage())
-                root.clBill.setBackgroundResource(billInfo.getBillColor())
-
-                val textColor = ResourcesCompat.getColor(root.context.resources, billInfo.getBillTextColor(), null)
-                root.tvTokenType.setTextColor(textColor)
-                root.tvHolderName.setTextColor(textColor)
-                root.tvAmount.setTextColor(textColor)
-                root.ivBillLogo.setImageResource(billInfo.getBillImage())
-
-                val additionalInforColor = ResourcesCompat.getColor(root.context.resources, billInfo.getBillInfoColors(), null)
-                root.tvBillStatus.setTextColor(additionalInforColor)
-                root.tvAmountInDollars.setTextColor(additionalInforColor)
-                root.tvHolderNameLabel.setTextColor(additionalInforColor)
+                billInfo.initBillView(root)
             }
         }
     }

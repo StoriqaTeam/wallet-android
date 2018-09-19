@@ -27,16 +27,7 @@ class BillFragment : Fragment() {
             root.setPadding(dip(5), 0, dip(5), 0)
 
             val billInfo = BillInfo(bill)
-            root.tvBillStatus.text = root.context.getString(billInfo.getBillStatus())
-            root.ivBillImage.setBackgroundResource(billInfo.getBillImage())
-            root.clBill.setBackgroundResource(billInfo.getBillColor())
-
-            val textColor = ResourcesCompat.getColor(root.context.resources, billInfo.getBillTextColor(), null)
-            root.tvTokenType.setTextColor(textColor)
-            root.tvHolderName.setTextColor(textColor)
-            root.tvAmount.setTextColor(textColor)
-            root.ivBillLogo.setImageResource(billInfo.getBillImage())
-            //TODO refactor (duplicate logic in adapter)
+            billInfo.initBillView(root)
         }
         return binding.root
     }

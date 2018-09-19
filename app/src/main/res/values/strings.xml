@@ -81,4 +81,10 @@
     <string name="sending">Sending</string>
     <string name="send">Send</string>
     <string name="holderName">HOLDER NAME</string>
+    <string name="lastTransactions">Last transactions</string>
+    <string name="viewAll">View all</string>
+    <string name="labelPaymentFee">Payment fee</string>
+    <string name="medianWait">Median wait:</string>
+    <string name="subtotal">Subtotal to send</string>
+    <string name="reciever">Receiver</string>
 </resources>

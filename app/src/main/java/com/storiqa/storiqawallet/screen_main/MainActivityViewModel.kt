@@ -35,6 +35,7 @@ class MainActivityViewModel : ViewModel() {
     val reciever = ObservableField<String>("")
     val contacts = MutableLiveData<Array<Contact>>()
     val scannedQR = MutableLiveData<String>()
+
     val isFoundErrorVisible = ObservableField<Boolean>(false)
 
     init {

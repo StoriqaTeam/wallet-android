@@ -1,11 +1,14 @@
 package com.storiqa.storiqawallet.objects
 
+import android.support.v4.content.res.ResourcesCompat
+import android.view.View
 import com.storiqa.storiqawallet.R
+import kotlinx.android.synthetic.main.item_bill.view.*
 import java.math.BigDecimal
 
 class BillInfo(val bill : Bill) {
 
-    fun getBillColor() : Int{
+    private fun getBillColor() : Int{
         return if(!bill.tokenType.equals("STQ")) {
             R.drawable.bill_gray
         } else {
@@ -17,22 +20,22 @@ class BillInfo(val bill : Bill) {
         }
     }
 
-    fun getBillImage() : Int {
+    private fun getBillImage() : Int {
         return when(bill.tokenType) {
             "STQ" -> {
-                if(isGold()) {
-                    return R.drawable.cart_black //TODO change to gold card
+                return if(isGold()) {
+                    R.drawable.stq_gold
                 } else {
-                    return R.drawable.cart_black
+                    R.drawable.stq_black
                 }
-            } //TODO add images
+            }
             "ETH" -> return R.drawable.cart_ether
             "BTC" -> return R.drawable.bitcoin_cart
             else -> 0
         }
     }
 
-    fun getBillStatus() : Int {
+    private fun getBillStatus() : Int {
         return when {
             isRegular() -> R.string.emptyText
             isGold() -> R.string.gold
@@ -41,14 +44,14 @@ class BillInfo(val bill : Bill) {
         }
     }
 
-    fun getBillTextColor() : Int {
+    private fun getBillTextColor() : Int {
         return when{
             isGold() || isBlack() -> android.R.color.white
             else -> android.R.color.black
         }
     }
 
-    fun getBillInfoColors() : Int {
+    private fun getBillInfoColors() : Int {
         return when{
             isGold() || isBlack() -> R.color.white50oppacity
             else -> R.color.black50oppacity
@@ -72,5 +75,21 @@ class BillInfo(val bill : Bill) {
 
     private fun isStq() : Boolean {
         return bill.tokenType == "STQ"
+    }
+
+    fun initBillView(root: View) {
+        root.tvBillStatus.text = root.context.getString(getBillStatus())
+        root.clBill.setBackgroundResource(getBillColor())
+
+        val textColor = ResourcesCompat.getColor(root.context.resources, getBillTextColor(), null)
+        root.tvTokenType.setTextColor(textColor)
+        root.tvHolderName.setTextColor(textColor)
+        root.tvAmount.setTextColor(textColor)
+        root.ivBillLogo.setImageResource(getBillImage())
+
+        val additionalInforColor = ResourcesCompat.getColor(root.context.resources, getBillInfoColors(), null)
+        root.tvBillStatus.setTextColor(additionalInforColor)
+        root.tvAmountInDollars.setTextColor(additionalInforColor)
+        root.tvHolderNameLabel.setTextColor(additionalInforColor)
     }
 }
