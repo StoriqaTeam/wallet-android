@@ -15,7 +15,7 @@ class BillsRepository {
             bills.add(Bill("info from id5","STQ", "1000000", "6000000", "Peter Staranchuk"))
             bills.add(Bill("info from id6","STQ", "10000000", "7000000", "Peter Staranchuk"))
             bills.add(Bill("info from id1","STQ", "1000000000", "2000000", "Peter Staranchuk"))
-            bills.add(Bill("info from id2","BTС", "2000", "3000", "Peter Staranchuk"))
+            bills.add(Bill("info from id2","BTC", "2000", "3000", "Peter Staranchuk"))
             bills.add(Bill("info from id3","ETH", "3000000000", "4000000", "Peter Staranchuk"))
             emitter.onNext(bills.toTypedArray())
             emitter.onComplete()

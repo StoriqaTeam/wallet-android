@@ -42,7 +42,7 @@ class TransactionAdapter(val transactions : Array<Transaction>, val onClick : ()
                 when(transaction.transactionType) {
                     TransactionType.SEND -> {
                         sign ="-"
-                        transactionTypeLocalicedText = root.context.getString(R.string.send)
+                        transactionTypeLocalicedText = root.context.getString(R.string.sent)
                         transactionDescriptionLocaliced = "${root.context.getString(R.string.to)} ${transaction.transactionReceiverName}"
                     }
 

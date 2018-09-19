@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.storiqa.storiqawallet.databinding.ItemBillBinding
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.BillInfo
+import kotlinx.android.synthetic.main.fragment_send.view.*
 import kotlinx.android.synthetic.main.item_bill.view.*
 import org.jetbrains.anko.dip
 
@@ -47,6 +48,11 @@ class BillsAdapter(private val bills : Array<Bill>, val onClick : (position : In
                 root.tvHolderName.setTextColor(textColor)
                 root.tvAmount.setTextColor(textColor)
                 root.ivBillLogo.setImageResource(billInfo.getBillImage())
+
+                val additionalInforColor = ResourcesCompat.getColor(root.context.resources, billInfo.getBillInfoColors(), null)
+                root.tvBillStatus.setTextColor(additionalInforColor)
+                root.tvAmountInDollars.setTextColor(additionalInforColor)
+                root.tvHolderNameLabel.setTextColor(additionalInforColor)
             }
         }
     }

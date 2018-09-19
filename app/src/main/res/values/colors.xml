@@ -19,4 +19,6 @@
     <color name="contactImageText">#c3cedc</color>
     <color name="bluegrey">#889eba</color>
     <color name="warm_grey">#8c8c8c</color>
+    <color name="black50oppacity">#80000000</color>
+    <color name="white50oppacity">#80FFFFFF</color>
 </resources>

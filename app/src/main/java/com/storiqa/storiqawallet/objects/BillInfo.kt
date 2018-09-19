@@ -19,7 +19,13 @@ class BillInfo(val bill : Bill) {
 
     fun getBillImage() : Int {
         return when(bill.tokenType) {
-            "STQ" -> return R.drawable.cart_black //TODO add images
+            "STQ" -> {
+                if(isGold()) {
+                    return R.drawable.cart_black //TODO change to gold card
+                } else {
+                    return R.drawable.cart_black
+                }
+            } //TODO add images
             "ETH" -> return R.drawable.cart_ether
             "BTC" -> return R.drawable.bitcoin_cart
             else -> 0
@@ -39,6 +45,13 @@ class BillInfo(val bill : Bill) {
         return when{
             isGold() || isBlack() -> android.R.color.white
             else -> android.R.color.black
+        }
+    }
+
+    fun getBillInfoColors() : Int {
+        return when{
+            isGold() || isBlack() -> R.color.white50oppacity
+            else -> R.color.black50oppacity
         }
     }
 

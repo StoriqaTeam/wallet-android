@@ -22,6 +22,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textView19"
+            android:text="@string/send"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            style="@style/header" />
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
             style="@style/send_header_container"
@@ -220,18 +229,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Send"
-            android:textColor="@android:color/black"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
-            app:layout_constraintTop_toTopOf="@+id/btnBack"
-            tools:layout_editor_absoluteX="176dp" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

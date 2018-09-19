@@ -19,16 +19,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/btnBack"
+            style="@style/arrowBackStyle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textView19"
+            android:text="@string/send"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack"
+            style="@style/header" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpBills"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="13dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/btnBack" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/pageIndicator"
@@ -45,10 +58,12 @@
 
         <TextView
             android:id="@+id/textView15"
-            style="@style/sentLabel"
             android:text="@string/recieverCurrency"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pageIndicator" />
+            app:layout_constraintTop_toBottomOf="@+id/pageIndicator"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            style="@style/sendTitleStyle" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tlPaymentVariants"
@@ -66,13 +81,15 @@
             <android.support.design.widget.TabItem
                 android:id="@+id/tabStq"
                 android:tag="STQ"
+                android:icon="@drawable/stq_small_logo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/stq_small_logo" />
+                android:layout_height="wrap_content"/>
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabBtc"
                 android:tag="BTC"
+                android:scaleX="4"
+                android:scaleY="4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/btc_small_logo" />
@@ -87,12 +104,10 @@
 
         <TextView
             android:id="@+id/labelAmount"
-            style="@style/sentLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/sendTitleStyle"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="30dp"
             android:text="@string/amount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tlPaymentVariants" />
@@ -120,7 +135,8 @@
                 android:hint="0"
                 android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
-                android:textSize="17sp"
+                android:textSize="16sp"
+                android:typeface="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvAmountInSTQ"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -137,6 +153,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/bluegrey"
+                android:typeface="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -155,19 +173,29 @@
             style="@style/buttonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="33dp"
             android:layout_marginEnd="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginStart="20dp"
-            android:text="@string/next"
-            android:minWidth="20dp"
             android:background="@drawable/switch_state_button"
+            android:minWidth="20dp"
+            android:text="@string/next"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:textColor="@android:color/white" />
 
+
+        <ImageView
+            style="@style/purpleSpotStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            style="@style/blueSpotStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>
