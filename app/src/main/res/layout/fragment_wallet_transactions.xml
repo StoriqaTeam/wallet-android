@@ -25,12 +25,12 @@
 
         <TextView
             android:id="@+id/tvTitle"
-            android:text="Account"
+            style="@style/header"
+            android:text="@string/account"
             app:layout_constraintBottom_toBottomOf="@+id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnBack"
-            style="@style/header" />
+            app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpBills"
@@ -72,6 +72,7 @@
             android:layout_marginRight="20dp"
             android:text="@string/viewAll"
             android:textSize="13sp"
+            android:fontFamily="@font/roboto"
             android:textColor="@color/brightSkyBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView22" />

@@ -87,4 +87,5 @@
     <string name="medianWait">Median wait:</string>
     <string name="subtotal">Subtotal to send</string>
     <string name="reciever">Receiver</string>
+    <string name="account">Account</string>
 </resources>

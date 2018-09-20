@@ -59,6 +59,7 @@
             <TextView
                 android:id="@+id/tvAmountInSTQ"
                 style="@style/sendAmountStyle"
+                android:fontFamily="@font/roboto_light"
                 android:layout_marginBottom="19dp"
                 android:text='@{viewModel.amountInSTQ + " STQ"}'
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -207,6 +208,8 @@
         <TextView
             android:id="@+id/textView41"
             style="@style/sendTitleStyle"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="34dp"
             android:text="@string/subtotal"
             app:layout_constraintStart_toStartOf="parent"

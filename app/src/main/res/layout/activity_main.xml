@@ -41,59 +41,62 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/ivWallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.MY_WALLET)}'
-                android:src="@drawable/my_wallet_tab_off"
+                android:src="@{viewModel.selectedScreen == Screen.MY_WALLET? @drawable/my_wallet_tab_on : @drawable/my_wallet_tab_off}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                app:layout_constraintEnd_toStartOf="@+id/ivDeposit"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/ivDeposit"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@{viewModel.selectedScreen == Screen.DEPOSIT? @drawable/deposit_tab_on : @drawable/deposit_tab_off}"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.DEPOSIT)}'
-                android:src="@drawable/deposit_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView8"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintEnd_toStartOf="@+id/ivExchange"
+                app:layout_constraintStart_toEndOf="@+id/ivWallet"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/ivExchange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@{viewModel.selectedScreen == Screen.EXCHANGE? @drawable/change_tab_on : @drawable/change_tab_off}"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.EXCHANGE)}'
-                android:src="@drawable/change_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView9"
-                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintEnd_toStartOf="@+id/ivSend"
+                app:layout_constraintStart_toEndOf="@+id/ivDeposit"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/ivSend"
+                android:src="@{viewModel.selectedScreen == Screen.SEND? @drawable/send_tab_on : @drawable/send_tab_off}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.SEND)}'
-                android:src="@drawable/send_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView10"
-                app:layout_constraintStart_toEndOf="@+id/imageView8"
+                app:layout_constraintEnd_toStartOf="@+id/ivMenu"
+                app:layout_constraintStart_toEndOf="@+id/ivExchange"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.515" />
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/ivMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@{viewModel.selectedScreen == Screen.MENU? @drawable/menu_tab_on : @drawable/menu_tab_off}"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.MENU)}'
-                android:src="@drawable/menu_tab_off"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintStart_toEndOf="@+id/ivSend"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

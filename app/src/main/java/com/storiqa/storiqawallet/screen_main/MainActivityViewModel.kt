@@ -18,7 +18,7 @@ class MainActivityViewModel : ViewModel() {
 
     var tokenType = ObservableField<String>("STQ")
     val transactions = MutableLiveData<Array<Transaction>>()
-    val selectedScreen = MutableLiveData<Screen>()
+    val selectedScreen = ObservableField<Screen>(Screen.MY_WALLET)
     val bills = MutableLiveData<Array<Bill>>()
     val amount = ObservableField<BigDecimal>(BigDecimal(0))
     var selectedBillId : String = ""
@@ -29,6 +29,7 @@ class MainActivityViewModel : ViewModel() {
     var loadBillInfo : (billId : String)-> Unit = {}
     var openRecieverScreen : ()-> Unit = {}
     var openSendFinalScreen : ()-> Unit = {}
+    var onScreenChanged : (newScreen : Screen) -> Unit = {}
 
     val wallet = ObservableField<String>("")
     val phone = ObservableField<String>("")
@@ -49,7 +50,7 @@ class MainActivityViewModel : ViewModel() {
             if(selectedBillId.isEmpty()) {
                 selectedBillId = bills.value!![0].id
             }
-            selectedScreen.value = Screen.MY_WALLET
+            selectScreen(Screen.MY_WALLET)
         }
     }
 
@@ -60,7 +61,8 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun selectScreen(screen : Screen) {
-        selectedScreen.value = screen
+        selectedScreen.set(screen)
+        onScreenChanged(screen)
     }
 
     fun refreshAmountInStq(tokenType : String, amountInCurrency: BigDecimal) {

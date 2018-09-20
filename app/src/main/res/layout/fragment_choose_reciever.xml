@@ -60,6 +60,7 @@
                 style="@style/sendAmountStyle"
                 android:layout_marginBottom="19dp"
                 android:layout_marginTop="4dp"
+                android:fontFamily="@font/roboto_light"
                 android:text='@{viewModel.amountInSTQ + " STQ"}'
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvAmountInCurrency"
@@ -190,33 +191,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/imageView14"
-            android:layout_width="81dp"
-            android:layout_height="87dp"
-            android:layout_marginTop="41dp"
-            android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
+
+        <LinearLayout
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rlReciever"
-            app:srcCompat="@android:color/background_dark" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="70dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
-            android:text="@string/noNumberError"
-            android:textColor="@color/bluegrey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="81dp"
+                android:layout_height="87dp"
+                android:layout_marginTop="41dp"
+                android:src="@drawable/phone_not_found" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:gravity="center"
+                tools:text="Error"
+                android:text="@string/noNumberError"
+                android:textColor="@color/bluegrey"/>
+
+        </LinearLayout>
+
 
         <ImageView
             style="@style/purpleSpotStyle"

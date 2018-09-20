@@ -103,11 +103,11 @@ class ChooseRecieverFragment : Fragment() {
 
         Dexter.withActivity(activity).withPermission(Manifest.permission.READ_CONTACTS).withListener(object : PermissionListener {
             override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                viewModel.requestContacts()
                 viewModel.contacts.observe(this@ChooseRecieverFragment, Observer{ newContacts ->
                     newContacts?.let { setContacts(newContacts)  }
 
                 })
+                viewModel.requestContacts()
             }
 
             override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
@@ -130,7 +130,8 @@ class ChooseRecieverFragment : Fragment() {
 
                     viewModel.saveRecieverInfo(newContacts[it])
                 }
-                viewModel.isFoundErrorVisible.set(newContacts.isEmpty())
+
+                viewModel.isFoundErrorVisible.set(newContacts.isEmpty() && binder.etReciever.text.isNotEmpty())
             }
 
     }

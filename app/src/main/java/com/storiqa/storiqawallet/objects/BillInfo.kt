@@ -59,17 +59,17 @@ class BillInfo(val bill : Bill) {
     }
 
     private fun isRegular() : Boolean {
-        val bdAmount = BigDecimal(bill.amount)
+        val bdAmount = BigDecimal(bill.amount.replace(",", ""))
         return bdAmount < BigDecimal(1000000)
     }
 
     private fun isGold() : Boolean {
-        val bdAmount = BigDecimal(bill.amount)
+        val bdAmount = BigDecimal(bill.amount.replace(",", ""))
         return isStq() && bdAmount >= BigDecimal(1000000) && bdAmount < BigDecimal(5000000)
     }
 
     private fun isBlack() : Boolean {
-        val bdAmount = BigDecimal(bill.amount)
+        val bdAmount = BigDecimal(bill.amount.replace(",", ""))
         return isStq() && bdAmount > BigDecimal(5000000)
     }
 

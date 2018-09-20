@@ -17,6 +17,8 @@ import android.content.DialogInterface.BUTTON_NEUTRAL
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.screen_main.send.SendFinalScreen
 
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.openMyWalletScreen()
 
-        observeScreenChange()
+
         observeBillSelection()
 
         viewModel.openRecieverScreen = {
@@ -52,6 +54,16 @@ class MainActivity : AppCompatActivity() {
         viewModel.openSendFinalScreen = {
             supportFragmentManager.beginTransaction().replace(R.id.flWallet, SendFinalScreen()).addToBackStack("").commit()
         }
+
+        viewModel.onScreenChanged = { newScreen ->
+            when (newScreen) {
+                Screen.MY_WALLET -> { loadMyWalletFragment() }
+                Screen.DEPOSIT -> { }
+                Screen.EXCHANGE -> { }
+                Screen.SEND -> { loadSendFragment() }
+                Screen.MENU -> { }
+            }
+        }
     }
 
     fun observeBillSelection() {
@@ -64,19 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun observeScreenChange() {
-        viewModel.selectedScreen.observe(this, object : Observer<Screen> {
-            override fun onChanged(newScreen: Screen?) {
-                when (newScreen) {
-                    Screen.MY_WALLET -> loadMyWalletFragment()
-                    Screen.DEPOSIT -> { }
-                    Screen.EXCHANGE -> { }
-                    Screen.SEND -> loadSendFragment()
-                    Screen.MENU -> { }
-                }
-            }
-        })
-    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = data?.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult")
