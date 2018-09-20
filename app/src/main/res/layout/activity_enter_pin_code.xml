@@ -32,7 +32,7 @@
                 android:layout_width="47dp"
                 android:layout_height="47dp"
                 android:layout_centerInParent="true"
-                android:src="@color/gray"
+                android:src="#e4e4e4"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +45,7 @@
                 android:layout_centerInParent="true"
                 android:textSize="17sp"
                 android:text="U"
-                android:textColor="@color/contactImageText"
+                android:textColor="@color/warm_grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

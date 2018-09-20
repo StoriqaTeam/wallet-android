@@ -38,6 +38,7 @@ class MainActivityViewModel : ViewModel() {
     val scannedQR = MutableLiveData<String>()
 
     val isFoundErrorVisible = ObservableField<Boolean>(false)
+    val isAmountInStqUpdating = ObservableField<Boolean>(false)
 
     init {
         contacts.value = arrayOf()
@@ -66,9 +67,11 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun refreshAmountInStq(tokenType : String, amountInCurrency: BigDecimal) {
+        isAmountInStqUpdating.set(true)
         CurrencyConverterRepository().getLastConverCources().observeOn(AndroidSchedulers.mainThread()).subscribe {
             amountInSTQ.value = (amountInCurrency * BigDecimal(it[tokenType]!!)).toString()
             this.amountInCurrency = amountInCurrency
+            isAmountInStqUpdating.set(false)
         }
     }
 

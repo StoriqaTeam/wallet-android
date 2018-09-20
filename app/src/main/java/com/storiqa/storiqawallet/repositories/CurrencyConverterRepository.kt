@@ -17,6 +17,6 @@ class CurrencyConverterRepository {
             emitter.onNext(map)
             emitter.onComplete()
         }.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .timeout(500, TimeUnit.MILLISECONDS)
+                .timeout(2000, TimeUnit.MILLISECONDS)
     }
 }
