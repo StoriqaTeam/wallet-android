@@ -16,7 +16,7 @@ class PreferencesHelper(val context: Context) {
 
     private fun getPrefs(): SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
-    fun setQuickLaunchFinished() = getPrefs().edit().putBoolean(isUserFinishedQuickLaunchSetupOrSkippedIt, true).apply()
+    fun setQuickLaunchFinished(isFinished : Boolean) = getPrefs().edit().putBoolean(isUserFinishedQuickLaunchSetupOrSkippedIt, isFinished).apply()
 
     fun isQuickLaunchFinished(): Boolean = getPrefs().getBoolean(isUserFinishedQuickLaunchSetupOrSkippedIt, false)
 
@@ -36,7 +36,4 @@ class PreferencesHelper(val context: Context) {
 
     fun getPinCode() = getPrefs().getString(pinCode, "")
 
-    fun saveFingerPrintToken(fingerprint: String) = getPrefs().edit().putString(fingerPrint, fingerprint).apply()
-
-    fun getFingerPrintToken() = getPrefs().getString(fingerPrint, "")
 }

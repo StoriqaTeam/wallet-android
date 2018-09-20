@@ -36,7 +36,7 @@ class MyWalletFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         refreshBillInfo()
-        PreferencesHelper(context!!).setQuickLaunchFinished()
+        PreferencesHelper(context!!).setQuickLaunchFinished(true)
     }
 
     private fun refreshBillInfo() {

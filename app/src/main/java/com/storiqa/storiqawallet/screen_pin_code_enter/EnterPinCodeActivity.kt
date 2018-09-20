@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_enter_pin_code.*
 import android.os.VibrationEffect
 import android.os.Build
 import android.os.Vibrator
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
 
@@ -30,6 +31,7 @@ class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
 
         val binding: ActivityEnterPinCodeBinding = DataBindingUtil.setContentView(this, R.layout.activity_enter_pin_code)
         binding.viewModel = viewModel
+
         binding.executePendingBindings()
 
         btnBack.setOnClickListener { onBackPressed() }
@@ -42,6 +44,11 @@ class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
             } else {
                 startFingerprintDialog(viewModel)
             }
+        }
+
+        tvForgotPin.onClick {
+            ScreenStarter().startLoginScreen(this@EnterPinCodeActivity)
+            viewModel.eraseUserQuickLaunch()
         }
     }
 

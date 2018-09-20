@@ -89,4 +89,5 @@
     <string name="reciever">Receiver</string>
     <string name="account">Account</string>
     <string name="hintAddReceiver">Wallet address or phone number</string>
+    <string name="forgotPin">I forgot my PIN</string>
 </resources>
