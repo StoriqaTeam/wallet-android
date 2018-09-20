@@ -42,7 +42,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@{bill.tokenType}"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -71,22 +71,24 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="56dp"
+                    android:fontFamily="@font/roboto"
+                    android:text='@{bill.amount}'
                     android:textSize="17sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvTokenType"
-                    android:text='@{bill.amount}'
                     tools:text="145,678,445.00" />
 
                 <TextView
                     android:id="@+id/tvAmountInDollars"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_light"
+                    android:text='@{bill.amountInDollars + " $"}'
                     android:textColor="@color/black50oppacity"
                     android:textSize="13sp"
-                    app:lineHeight="26sp"
                     app:layout_constraintStart_toStartOf="@+id/tvAmount"
                     app:layout_constraintTop_toBottomOf="@+id/tvAmount"
-                    android:text='@{bill.amountInDollars + " $"}'
+                    app:lineHeight="26sp"
                     tools:text="257,204.00 $" />
 
                 <TextView
@@ -94,24 +96,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
+                    android:fontFamily="@font/roboto"
                     android:text="@string/holderName"
                     android:textColor="@color/black50oppacity"
                     android:textSize="13sp"
-                    app:lineHeight="26sp"
                     app:layout_constraintStart_toStartOf="@+id/tvAmount"
-                    app:layout_constraintTop_toBottomOf="@+id/tvAmountInDollars" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvAmountInDollars"
+                    app:lineHeight="26sp" />
 
                 <TextView
                     android:id="@+id/tvHolderName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/roboto_light"
                     android:text="@{bill.holderName}"
                     android:textSize="17sp"
-                    app:lineHeight="26sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tvAmount"
                     app:layout_constraintTop_toBottomOf="@+id/tvHolderNameLabel"
+                    app:lineHeight="26sp"
                     tools:text="Mushchinskii Dmitrii" />
 
                 <ImageView

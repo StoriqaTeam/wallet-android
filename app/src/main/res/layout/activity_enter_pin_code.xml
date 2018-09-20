@@ -18,6 +18,55 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:id="@+id/ivContactContainer"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="47dp"
+                android:layout_height="47dp"
+                android:layout_centerInParent="true"
+                android:src="@color/gray"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="30dip"
+                app:riv_oval="true"
+                tools:src="@color/contactGray" />
+
+            <TextView
+                android:id="@+id/tvNameShorten"
+                android:layout_centerInParent="true"
+                android:textSize="17sp"
+                android:textColor="@color/contactImageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvMessageToUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/roboto_light"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="8sp"
+            android:text="User, good day"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivContactContainer" />
+
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
@@ -27,7 +76,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5">
+            app:layout_constraintTop_toBottomOf="@+id/tvMessageToUser">
 
             <ImageView
                 style="@style/pinCircleStyle"
@@ -51,7 +100,7 @@
             android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="21dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,8 +115,8 @@
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
+                android:layout_marginLeft="44dp"
+                android:layout_marginRight="44dp"
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
                 android:onClick='@{() -> viewModel.enterDigit("2")}'
                 android:text="2"
@@ -85,7 +134,7 @@
             android:id="@+id/linearLayout4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
@@ -101,8 +150,8 @@
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
+                android:layout_marginLeft="44dp"
+                android:layout_marginRight="44dp"
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
                 android:onClick='@{() -> viewModel.enterDigit("5")}'
                 android:text="5"
@@ -120,7 +169,7 @@
             android:id="@+id/linearLayout5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
@@ -136,8 +185,8 @@
 
             <TextView
                 style="@style/pinCodeNumber"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
+                android:layout_marginLeft="44dp"
+                android:layout_marginRight="44dp"
                 android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
                 android:onClick='@{() -> viewModel.enterDigit("8")}'
                 android:text="8"
@@ -156,8 +205,8 @@
             android:layout_width="32dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginRight="35dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginRight="65dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/fingerprint_blue"
             android:visibility='@{viewModel.isEnterForLogin ? View.VISIBLE : View.GONE}'
@@ -172,7 +221,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="25dp"
             android:enabled="@{viewModel.pinCode.get().length == 4 ? false : true}"
             android:onClick='@{() -> viewModel.enterDigit("0")}'
             android:text="0"
@@ -198,12 +247,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/textView6"
+            tools:text="error"
+            android:visibility="@{viewModel.isPinNotValidError || viewModel.isPinsNotMatchError ? View.VISIBLE : View.GONE}"
+            android:text="@{viewModel.isPinNotValidError() ? @string/pinNotValid : @string/pinsNotMatch}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            style="@style/errorTextStyle" />
+
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="32dp"
-            android:layout_height="22dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginStart="33dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="65dp"
+            android:layout_marginStart="65dp"
             android:onClick="@{()-> viewModel.eraseLastDigit()}"
             android:visibility="@{viewModel.pinCode.get().length > 0 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
@@ -211,31 +271,8 @@
             app:layout_constraintTop_toTopOf="@+id/textView4"
             app:srcCompat="@drawable/erase_pin" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="26sp"
-            android:visibility="@{viewModel.isEnterForLogin ? View.INVISIBLE : View.VISIBLE}"
-            android:text="@{viewModel.isEnterForPasswordSet ? @string/pinCodeSet : @string/pinCodeRepeat }"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="50dp"
-            android:textStyle=""
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="pin code message" />
 
-        <TextView
-            android:id="@+id/textView6"
-            tools:text="error"
-            android:visibility="@{viewModel.isPinNotValidError || viewModel.isPinsNotMatchError ? View.VISIBLE : View.GONE}"
-            android:text="@{viewModel.isPinNotValidError() ? @string/pinNotValid : @string/pinsNotMatch}"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            style="@style/errorTextStyle" />
+
 
         <ImageView
             android:id="@+id/btnBack"
@@ -253,6 +290,8 @@
             style="@style/blueSpotStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+
 
     </android.support.constraint.ConstraintLayout>
 
