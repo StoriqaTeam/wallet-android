@@ -25,5 +25,5 @@
     <color name="pinkish_grey15opacity">#32c8c8c8</color>
     <color name="pinCircleGrey">#e4e4e4</color>
     <color name="charcoal">#1e201d</color>
-    <color name="black5oppacity">#000</color>
+    <color name="black5oppacity">#0D000000</color>
 </resources>

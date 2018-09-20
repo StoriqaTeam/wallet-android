@@ -34,8 +34,8 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/grayButtonLight"
+            android:layout_height="56dp"
+            android:background="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -53,7 +53,6 @@
 
             <ImageView
                 android:id="@+id/ivDeposit"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@{viewModel.selectedScreen == Screen.DEPOSIT? @drawable/deposit_tab_on : @drawable/deposit_tab_off}"
@@ -67,7 +66,6 @@
                 android:id="@+id/ivExchange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:src="@{viewModel.selectedScreen == Screen.EXCHANGE? @drawable/change_tab_on : @drawable/change_tab_off}"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.EXCHANGE)}'
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +89,6 @@
                 android:id="@+id/ivMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:src="@{viewModel.selectedScreen == Screen.MENU? @drawable/menu_tab_on : @drawable/menu_tab_off}"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.MENU)}'
                 app:layout_constraintBottom_toBottomOf="parent"
