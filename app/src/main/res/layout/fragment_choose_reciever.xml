@@ -201,7 +201,7 @@
                 android:layout_width="81dp"
                 android:layout_height="87dp"
                 android:layout_marginTop="41dp"
-                android:src="@drawable/phone_not_found" />
+                android:src="@drawable/placeholder_no_address" />
 
             <TextView
                 android:id="@+id/textView18"

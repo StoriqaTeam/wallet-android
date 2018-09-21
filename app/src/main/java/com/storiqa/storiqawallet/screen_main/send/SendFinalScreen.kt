@@ -3,7 +3,6 @@ package com.storiqa.storiqawallet.screen_main.send
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,11 +49,11 @@ class SendFinalScreen : Fragment() {
 
         when(viewModel.tokenType.get()) {
             Currency.STQ.name-> {
-                currencyLogo.setImageResource(R.drawable.stq_small_logo)
+                currencyLogo.setImageResource(R.drawable.stq_medium_logo)
                 tvAmountInSTQ.visibility = View.GONE
             }
-            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.eth_small_logo_off_2x)
-            Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.btc_small_logo_off_2x)
+            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.eth_medium_logo)
+            Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
         }
 
         btnBack.onClick {

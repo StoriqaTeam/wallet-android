@@ -89,11 +89,11 @@ class ChooseRecieverFragment : Fragment() {
 
         when(viewModel.tokenType.get()) {
             Currency.STQ.name-> {
-                currencyLogo.setImageResource(R.drawable.stq_small_logo)
+                currencyLogo.setImageResource(R.drawable.stq_medium_logo)
                 tvAmountInSTQ.visibility = View.GONE
             }
-            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.eth_small_logo_off_2x)
-            Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.btc_small_logo_off_2x)
+            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.eth_medium_logo)
+            Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
         }
 
         if(viewModel.wallet.get()!!.isNotEmpty()) {
@@ -127,7 +127,6 @@ class ChooseRecieverFragment : Fragment() {
     }
 
     fun setContacts(newContacts: Array<Contact>) {
-        //remove error
         tvError.visibility = View.INVISIBLE
         if(newContacts.size == 1) {
             viewModel.isContinueButtonVisible.set(true)
@@ -141,6 +140,8 @@ class ChooseRecieverFragment : Fragment() {
         } else {
             viewModel.isContinueButtonVisible.set(false)
         }
+
+        viewModel.isFoundErrorVisible.set(newContacts.isEmpty() && etReciever.text.isNotEmpty())
 
         rvContacts.apply {
             setHasFixedSize(true)
