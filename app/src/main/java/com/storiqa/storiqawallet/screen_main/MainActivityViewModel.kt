@@ -39,8 +39,9 @@ class MainActivityViewModel : ViewModel() {
 
     val isFoundErrorVisible = ObservableField<Boolean>(false)
     val isAmountInStqUpdating = ObservableField<Boolean>(false)
-    val isContactSelected = ObservableField<Boolean>(false)
+    val isContinueButtonEnabled = ObservableField<Boolean>(false)
     val isContinueButtonVisible = ObservableField<Boolean>(false)
+    val isContactsLoading = ObservableField<Boolean>(false)
 
     init {
         contacts.value = arrayOf()
@@ -78,8 +79,10 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun requestContacts() {
+        isContactsLoading.set(true)
         ContactsRepository().getContacts().subscribe {newContacts ->
             contacts.value = newContacts
+            isContactsLoading.set(false)
         }
     }
 

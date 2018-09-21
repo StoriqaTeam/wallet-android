@@ -50,8 +50,9 @@ class SendFragment : Fragment() {
         observeCurrencyChangeRecalculated()
         refreshAmountInStq()
 
-        btnNext.onClick { viewModel.openRecieverScreen() }
-
+        btnNext.onClick {
+            viewModel.openRecieverScreen()
+        }
 
         addTab(R.drawable.stq_small_logo_off_2x, R.drawable.stq_small_logo_2x)
         addTab(R.drawable.btc_small_logo_off_2x, R.drawable.btc_small_logo_on)
@@ -104,10 +105,12 @@ class SendFragment : Fragment() {
     }
 
     fun refreshAmountInStq() {
-        if (etAmount.text.isEmpty()) {
-            viewModel.amountInSTQ.value = "0"
-        } else {
-            viewModel.refreshAmountInStq(viewModel.tokenType.get()!!, BigDecimal(etAmount.text.toString()))
+        if(etAmount != null) {
+            if (etAmount.text.isEmpty()) {
+                viewModel.amountInSTQ.value = "0"
+            } else {
+                viewModel.refreshAmountInStq(viewModel.tokenType.get()!!, BigDecimal(etAmount.text.toString()))
+            }
         }
     }
 }

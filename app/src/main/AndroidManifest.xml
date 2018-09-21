@@ -52,12 +52,18 @@
             android:name=".screen_recover_password.screen_recover_email_enter_first_step.RecoverPasswordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".screen_pincode_setup.PinCodeSetupActivity" />
-        <activity android:name=".screen_quick_start.QuickStartActivity" />
-        <activity android:name=".screen_setup_fingerprint.FingerprintSetupActivity" />
-        <activity android:name=".screen_main.MainActivity" />
-        <activity android:name=".screen_scan_finger.ScanFingerActivity" />
-        <activity android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity">
+        <activity android:name=".screen_pincode_setup.PinCodeSetupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen_quick_start.QuickStartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen_setup_fingerprint.FingerprintSetupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen_main.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen_scan_finger.ScanFingerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

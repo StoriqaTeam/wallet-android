@@ -127,22 +127,28 @@ class ChooseRecieverFragment : Fragment() {
     }
 
     fun setContacts(newContacts: Array<Contact>) {
+        //remove error
+        tvError.visibility = View.INVISIBLE
+        if(newContacts.size == 1) {
+            viewModel.isContinueButtonVisible.set(true)
+            if(newContacts[0].wallet.isNotEmpty()) {
+                viewModel.isContinueButtonEnabled.set(true)
+                viewModel.saveRecieverInfo(newContacts[0])
+            } else {
+                viewModel.isContinueButtonEnabled.set(false)
+                tvError.visibility = View.VISIBLE
+            }
+        } else {
+            viewModel.isContinueButtonVisible.set(false)
+        }
+
         rvContacts.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = ContactsAdapter(newContacts!!) {
                 binder.etReciever.setText(newContacts[it].phone)
                 setContacts(arrayOf(newContacts[it]))
-
-                viewModel.saveRecieverInfo(newContacts[it])
-                viewModel.isContinueButtonVisible.set(viewModel.wallet.get()?.isNotEmpty())
-                viewModel.isContactSelected.set(newContacts.size == 1 && newContacts[0].wallet.isNotEmpty())
             }
-
-            viewModel.isFoundErrorVisible.set(newContacts.isEmpty() && binder.etReciever.text.isNotEmpty())
-            viewModel.isContinueButtonVisible.set(viewModel.wallet.get()?.isNotEmpty())
-            viewModel.isContactSelected.set(newContacts.size == 1 && newContacts[0].wallet.isNotEmpty())
         }
-
     }
 }

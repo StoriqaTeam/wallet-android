@@ -88,17 +88,12 @@
         <!--android:text="@{viewModel.isAuthFailed? @string/tryAgain : @string/goBack}"-->
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="283dp"
-            android:src="@drawable/purple_blur_spot"
+            style="@style/purpleSpotStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="218dp"
-            android:layout_marginBottom="53dp"
-            android:src="@drawable/blue_blur_spot"
+            style="@style/blueSpotStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

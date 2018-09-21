@@ -141,11 +141,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:ems="10"
                 android:hint="@string/hintAddReceiver"
-                android:inputType="number" />
+                android:inputType="text" />
 
             <View
+                android:id="@+id/delimeter"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@id/etReciever"
@@ -157,8 +157,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:src="@drawable/delete" />
+
+            <TextView
+                android:id="@+id/tvError"
+                android:layout_marginTop="16dp"
+                android:text="@string/noWalletError"
+                android:textColor="@color/sentRed"
+                android:layout_below="@+id/delimeter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -169,37 +177,24 @@
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="21dp"
             tools:visibility="gone"
-            android:visibility="@{viewModel.isFoundErrorVisible? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.isFoundErrorVisible || viewModel.isContactsLoading? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rlReciever"
             tools:listitem="@layout/item_contact" />
 
-        <Button
-            android:id="@+id/btnNext"
-            style="@style/buttonStyle"
-            android:text="@string/next"
-            android:enabled='@{viewModel.isContactSelected}'
-            android:visibility='@{viewModel.isContinueButtonVisible? View.VISIBLE : View.GONE}'
-            android:background="@drawable/switch_state_button"
-            android:textColor="@drawable/button_color_switcher"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="21dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <LinearLayout
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rlReciever"
+            android:id="@+id/linearLayout6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlReciever">
 
             <ImageView
                 android:id="@+id/imageView14"
@@ -212,26 +207,52 @@
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="70dp"
                 android:layout_marginRight="70dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                tools:text="Error"
                 android:text="@string/noNumberError"
-                android:textColor="@color/bluegrey"/>
+                android:textColor="@color/bluegrey"
+                tools:text="Error" />
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/buttonStyle"
+            android:text="@string/next"
+            android:enabled='@{viewModel.isContinueButtonEnabled}'
+            android:visibility='@{viewModel.isContinueButtonVisible? View.VISIBLE : View.GONE}'
+            android:background="@drawable/switch_state_button"
+            android:textColor="@drawable/button_color_switcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="21dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ImageView
             style="@style/purpleSpotStyle"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             style="@style/blueSpotStyle"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="@{viewModel.isContactsLoading? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout6" />
 
     </android.support.constraint.ConstraintLayout>
 

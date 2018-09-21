@@ -148,7 +148,7 @@
             tools:text="30 STQ" />
 
         <SeekBar
-            android:id="@+id/seekBar2"
+            android:id="@+id/sbFee"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -164,15 +164,15 @@
             android:id="@+id/textView36"
             android:layout_marginTop="22dp"
             android:text="Low"
-            app:layout_constraintStart_toStartOf="@+id/seekBar2"
-            app:layout_constraintTop_toBottomOf="@+id/seekBar2"
+            app:layout_constraintStart_toStartOf="@+id/sbFee"
+            app:layout_constraintTop_toBottomOf="@+id/sbFee"
             style="@style/sliderItem" />
 
         <TextView
             android:id="@+id/textView37"
             android:text="Hight"
             style="@style/sliderItem"
-            app:layout_constraintEnd_toEndOf="@+id/seekBar2"
+            app:layout_constraintEnd_toEndOf="@+id/sbFee"
             app:layout_constraintTop_toTopOf="@+id/textView36" />
 
         <TextView
@@ -194,7 +194,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
         <TextView
-            android:id="@+id/textView40"
+            android:id="@+id/tvWaitTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -210,39 +210,56 @@
             style="@style/sendTitleStyle"
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="22dp"
             android:text="@string/subtotal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
         <TextView
-            android:id="@+id/textView42"
+            android:id="@+id/tvSubtotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="17dp"
             android:layout_marginRight="17dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView41"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView41"
             tools:text="10372.22 STQ" />
 
-        <Button
-            android:id="@+id/button2"
+        <TextView
+            android:id="@+id/tvError"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="22dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/btnSend"
+            android:layout_marginLeft="71dp"
+            android:layout_marginRight="71dp"
+            android:textColor="#ff2d55"
+            android:text="You haven’t got enough funds to send. Try to set another count." />
+
+
+        <Button
+            android:id="@+id/btnSend"
+            style="@style/buttonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginEnd="21dp"
             android:layout_marginLeft="21dp"
             android:layout_marginRight="21dp"
             android:layout_marginStart="21dp"
-            android:text="Send"
-            style="@style/buttonStyle"
-            android:background="@drawable/blue_button_background"
-            android:textColor="@android:color/white"
+            android:background="@drawable/switch_state_button"
+            android:text="@string/send"
+            android:textColor="@drawable/button_color_switcher"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtotal"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </android.support.constraint.ConstraintLayout>
