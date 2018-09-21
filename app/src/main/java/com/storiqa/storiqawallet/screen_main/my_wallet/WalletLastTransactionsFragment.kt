@@ -13,6 +13,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.BillsPagerAdapter
 import com.storiqa.storiqawallet.adapters.TransactionAdapter
 import com.storiqa.storiqawallet.constants.Extras
+import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.BillPagerHelper
 import com.storiqa.storiqawallet.objects.Transaction
@@ -27,7 +28,7 @@ class WalletLastTransactionsFragment : Fragment() {
 
     lateinit var viewModel : MainActivityViewModel
     lateinit var bills : Array<Bill>
-    val maxAmountOfTransactions = 10
+    private val maxAmountOfTransactions = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,10 @@ class WalletLastTransactionsFragment : Fragment() {
                         .addToBackStack("")
                         .commit() }
         }
+
+        btnSend.onClick { viewModel.selectScreen(Screen.SEND) }
+        btnChange.onClick { viewModel.selectScreen(Screen.EXCHANGE) }
+        btnDeposit.onClick { viewModel.selectScreen(Screen.DEPOSIT) }
     }
 
     override fun onResume() {

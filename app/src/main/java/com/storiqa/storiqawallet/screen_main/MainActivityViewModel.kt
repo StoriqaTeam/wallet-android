@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.screen_main
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
+import com.storiqa.storiqawallet.R.string.phone
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.Contact
@@ -32,13 +33,14 @@ class MainActivityViewModel : ViewModel() {
     var onScreenChanged : (newScreen : Screen) -> Unit = {}
 
     val wallet = ObservableField<String>("")
-    val phone = ObservableField<String>("")
     val reciever = ObservableField<String>("")
     val contacts = MutableLiveData<Array<Contact>>()
     val scannedQR = MutableLiveData<String>()
 
     val isFoundErrorVisible = ObservableField<Boolean>(false)
     val isAmountInStqUpdating = ObservableField<Boolean>(false)
+    val isContactSelected = ObservableField<Boolean>(false)
+    val isContinueButtonVisible = ObservableField<Boolean>(false)
 
     init {
         contacts.value = arrayOf()
@@ -83,13 +85,11 @@ class MainActivityViewModel : ViewModel() {
 
     fun clearSenderInfo() {
         wallet.set("")
-        phone.set("")
         reciever.set("")
     }
 
     fun saveRecieverInfo(contact: Contact) {
         wallet.set(contact.wallet)
-        phone.set(contact.phone)
         reciever.set(contact.name)
     }
 

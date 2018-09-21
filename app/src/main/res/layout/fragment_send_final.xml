@@ -69,7 +69,7 @@
                 tools:text="=10322.22 STQ" />
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/ivEdit"
                 app:layout_constraintBottom_toTopOf="@+id/tvAmountInSTQ"
                 app:layout_constraintStart_toEndOf="@+id/tvAmountInCurrency"
                 app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency"
@@ -87,7 +87,7 @@
         <TextView
             android:id="@+id/textView17"
             style="@style/sendTitleStyle"
-            android:text='@{viewModel.wallet != ""? @string/wallet : @string/phone}'
+            android:text="@string/wallet"
             tools:text="Address"
             android:layout_marginLeft="18dp"
             android:layout_marginTop="17dp"
@@ -98,7 +98,7 @@
         <TextView
             android:id="@+id/textView29"
             style="@style/sendInfoStyle"
-            android:text='@{viewModel.wallet != ""? viewModel.wallet.get() : viewModel.phone.get()}'
+            android:text='@{viewModel.wallet}'
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView17"
             tools:text="1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX" />

@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentSendFinalBinding
 import com.storiqa.storiqawallet.enums.Currency
+import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_choose_reciever.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class SendFinalScreen : Fragment() {
 
@@ -38,6 +40,19 @@ class SendFinalScreen : Fragment() {
             }
             Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
             Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
+        }
+
+        ivEdit.onClick {
+            viewModel.onScreenChanged(Screen.SEND)
+        }
+
+        when(viewModel.tokenType.get()) {
+            Currency.STQ.name-> {
+                currencyLogo.setImageResource(R.drawable.stq_small_logo)
+                tvAmountInSTQ.visibility = View.GONE
+            }
+            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.eth_small_logo_off_2x)
+            Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.btc_small_logo_off_2x)
         }
     }
 }

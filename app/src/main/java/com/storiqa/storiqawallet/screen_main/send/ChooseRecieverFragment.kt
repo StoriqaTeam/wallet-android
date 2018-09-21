@@ -27,8 +27,7 @@ import com.blikoon.qrcodescanner.QrCodeActivity
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.enums.Currency
-import kotlinx.android.synthetic.main.item_bill.*
-import java.util.*
+import com.storiqa.storiqawallet.enums.Screen
 
 class ChooseRecieverFragment : Fragment() {
 
@@ -90,11 +89,19 @@ class ChooseRecieverFragment : Fragment() {
 
         when(viewModel.tokenType.get()) {
             Currency.STQ.name-> {
-                currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
+                currencyLogo.setImageResource(R.drawable.stq_small_logo)
                 tvAmountInSTQ.visibility = View.GONE
             }
-            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
-            Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
+            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.eth_small_logo_off_2x)
+            Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.btc_small_logo_off_2x)
+        }
+
+        if(viewModel.wallet.get()!!.isNotEmpty()) {
+            binder.etReciever.setText(viewModel.wallet.get()!!)
+        }
+
+        ivEdit.onClick {
+            viewModel.onScreenChanged(Screen.SEND)
         }
     }
 
@@ -120,19 +127,22 @@ class ChooseRecieverFragment : Fragment() {
     }
 
     fun setContacts(newContacts: Array<Contact>) {
+        rvContacts.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = ContactsAdapter(newContacts!!) {
+                binder.etReciever.setText(newContacts[it].phone)
+                setContacts(arrayOf(newContacts[it]))
 
-            rvContacts.apply {
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context)
-                adapter = ContactsAdapter(newContacts!!) {
-                    binder.etReciever.setText(newContacts[it].phone)
-                    setContacts(arrayOf(newContacts[it]))
-
-                    viewModel.saveRecieverInfo(newContacts[it])
-                }
-
-                viewModel.isFoundErrorVisible.set(newContacts.isEmpty() && binder.etReciever.text.isNotEmpty())
+                viewModel.saveRecieverInfo(newContacts[it])
+                viewModel.isContinueButtonVisible.set(viewModel.wallet.get()?.isNotEmpty())
+                viewModel.isContactSelected.set(newContacts.size == 1 && newContacts[0].wallet.isNotEmpty())
             }
+
+            viewModel.isFoundErrorVisible.set(newContacts.isEmpty() && binder.etReciever.text.isNotEmpty())
+            viewModel.isContinueButtonVisible.set(viewModel.wallet.get()?.isNotEmpty())
+            viewModel.isContactSelected.set(newContacts.size == 1 && newContacts[0].wallet.isNotEmpty())
+        }
 
     }
 }

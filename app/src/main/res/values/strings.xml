@@ -90,4 +90,6 @@
     <string name="account">Account</string>
     <string name="hintAddReceiver">Wallet address or phone number</string>
     <string name="forgotPin">I forgot my PIN</string>
+    <string name="change">Change</string>
+    <string name="deposit">Deposit</string>
 </resources>

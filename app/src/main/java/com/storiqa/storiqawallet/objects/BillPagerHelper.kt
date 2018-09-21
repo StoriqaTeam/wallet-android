@@ -14,7 +14,7 @@ class BillPagerHelper(private val fragmentManager: FragmentManager, val onPageCh
         vpBills.adapter = BillsPagerAdapter(fragmentManager, bills)
         vpBills.adapter?.notifyDataSetChanged()
         vpBills.clipToPadding = false
-        vpBills.setPadding(vpBills.context.dip(20),0, vpBills.context.dip(20),0)
+        vpBills.setPadding(vpBills.context.dip(10),0, vpBills.context.dip(10),0)
         pageIndicator.setupWithViewPager(vpBills, true)
         vpBills.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {}
