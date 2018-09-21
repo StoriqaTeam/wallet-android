@@ -57,6 +57,8 @@
 
         <LinearLayout
             android:id="@+id/btnSend"
+            android:layout_marginLeft="19dp"
+            android:layout_marginRight="6dp"
             style="@style/myWalletButtonContainerStyle"
             android:layout_marginTop="14dp"
             app:layout_constraintEnd_toStartOf="@+id/btnChange"
@@ -77,6 +79,8 @@
         <LinearLayout
             android:id="@+id/btnChange"
             style="@style/myWalletButtonContainerStyle"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
             app:layout_constraintEnd_toStartOf="@+id/btnDeposit"
             app:layout_constraintStart_toEndOf="@+id/btnSend"
             app:layout_constraintTop_toTopOf="@+id/btnSend">
@@ -96,6 +100,8 @@
             android:id="@+id/btnDeposit"
             style="@style/myWalletButtonContainerStyle"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="19dp"
             app:layout_constraintStart_toEndOf="@+id/btnChange"
             app:layout_constraintTop_toTopOf="@+id/btnSend">
 

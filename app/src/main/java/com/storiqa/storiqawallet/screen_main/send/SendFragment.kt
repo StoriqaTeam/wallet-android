@@ -19,6 +19,8 @@ import kotlinx.android.synthetic.main.tab_icon.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import org.jetbrains.anko.support.v4.dip
 
 
 class SendFragment : Fragment() {
