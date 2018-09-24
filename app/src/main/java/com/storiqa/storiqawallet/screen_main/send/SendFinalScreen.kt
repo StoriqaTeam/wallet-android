@@ -107,7 +107,7 @@ class SendFinalScreen : Fragment() {
 
             view.tvMessage.text = "You are going to send ${viewModel.amountInSTQ.value} STQ to ${viewModel.wallet.get()} "
             view.tvConfirm.onClick {
-                viewModel.selectScreen(Screen.MY_WALLET)
+                viewModel.loadBillInfo(viewModel.selectedBillId)
                 if(dialog.isShowing) {
                     dialog.dismiss()
                 }
