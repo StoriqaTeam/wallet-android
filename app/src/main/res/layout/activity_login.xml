@@ -47,6 +47,7 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/tilEmail"
+                    android:layout_marginTop="80dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -79,7 +80,7 @@
                     android:layout_marginLeft="26dp"
                     android:layout_marginRight="26dp"
                     android:layout_marginStart="26dp"
-                    android:layout_marginTop="23dp"
+                    android:layout_marginTop="30dp"
                     app:errorText="@{viewModel.passwordError}"
                     app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -143,11 +144,15 @@
                 <TextView
                     android:id="@+id/btnForgotPassword"
                     style="@style/textButtonStyle"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginStart="27dp"
                     android:layout_marginTop="22dp"
-                    android:text="@string/forgotPassword"
+                    android:textColor="@color/warm_grey"
                     android:onClick="@{()-> viewModel.onForgotPasswordButtonClicked()}"
+                    android:text="@string/forgotPassword"
                     app:layout_constraintBottom_toTopOf="@+id/include3"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
 
@@ -156,50 +161,40 @@
                     layout="@layout/sotial_network_sign_in_footer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="65dp"
+                    android:layout_marginTop="147dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btnForgotPassword" />
 
-                <LinearLayout
+
+                <TextView
+                    android:id="@+id/btnRegister"
+                    style="@style/textButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginTop="32dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/include3"
-                    app:layout_goneMarginBottom="32dp">
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="27dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="27dp"
+                    android:onClick="@{()-> viewModel.onRegisterButtonClicked()}"
+                    android:text="@string/register"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnForgotPassword"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btnForgotPassword" />
 
-                    <TextView
-                        android:id="@+id/textView11"
-                        style="@style/grayTextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/haventGotAccount" />
-
-                    <TextView
-                        android:id="@+id/btnRegister"
-                        style="@style/textButtonStyle"
-                        android:onClick="@{()-> viewModel.onRegisterButtonClicked()}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="4dp"
-                        android:text="@string/register" />
-
-                </LinearLayout>
 
 
                 <ImageView
                     style="@style/purpleSpotStyle"
+                    tools:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
                     style="@style/blueSpotStyle"
+                    tools:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
