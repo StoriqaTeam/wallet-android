@@ -3,16 +3,20 @@ package com.storiqa.storiqawallet.screen_main.send
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.R.string.subtotal
 import com.storiqa.storiqawallet.databinding.FragmentSendFinalBinding
 import com.storiqa.storiqawallet.enums.Currency
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_send_final.*
+import kotlinx.android.synthetic.main.layout_sent.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class SendFinalScreen : Fragment() {
@@ -85,16 +89,7 @@ class SendFinalScreen : Fragment() {
                 val subtotal = viewModel.amountInSTQ.value!!.toDouble() + fee
                 tvSubtotal.text = subtotal.toString() + " STQ"
 
-                val billId = viewModel.selectedBillId
-                val bill = viewModel.bills.value!!.filter { it.id == billId }[0]
-                if(bill.amount.replace(",","").toDouble() < subtotal) {
-                    btnSend.isEnabled = false
-                    tvError.visibility = View.VISIBLE
-                } else {
-                    btnSend.isEnabled = true
-                    tvError.visibility = View.GONE
-                }
-
+                refreshErrorState(subtotal)
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {}
@@ -102,8 +97,43 @@ class SendFinalScreen : Fragment() {
             override fun onStopTrackingTouch(p0: SeekBar?) {}
         })
 
-//        btnSend.onClick {
-//            AlertDialog.Builder(this).setView().show()
-//        }
+        val subtotal = viewModel.amountInSTQ.value!!.toDouble() + minFee
+        tvSubtotal.text = subtotal.toString() + " STQ"
+        refreshErrorState(subtotal)
+
+        btnSend.onClick {
+            val view = LayoutInflater.from(context).inflate(R.layout.layout_sent, null, false)
+            val dialog = AlertDialog.Builder(context!!).setView(view).create()
+
+            view.tvMessage.text = "You are going to send ${viewModel.amountInSTQ.value} STQ to ${viewModel.wallet.get()} "
+            view.tvConfirm.onClick {
+                viewModel.selectScreen(Screen.MY_WALLET)
+                if(dialog.isShowing) {
+                    dialog.dismiss()
+                }
+                Toast.makeText(context, "Successfully sent", Toast.LENGTH_LONG).show()
+            }
+
+            view.tvCancel.onClick {
+                if(dialog.isShowing) {
+                    dialog.dismiss()
+                }
+            }
+
+            dialog.show()
+
+        }
+    }
+
+    fun refreshErrorState(subtotal: Double) {
+        val billId = viewModel.selectedBillId
+        val bill = viewModel.bills.value!!.filter { it.id == billId }[0]
+        if (bill.amount.replace(",", "").toDouble() < subtotal) {
+            btnSend.isEnabled = false
+            tvError.visibility = View.VISIBLE
+        } else {
+            btnSend.isEnabled = true
+            tvError.visibility = View.GONE
+        }
     }
 }

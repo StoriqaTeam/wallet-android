@@ -25,8 +25,10 @@ class BillInfo(val bill : Bill) {
             "STQ" -> {
                 return if(isGold()) {
                     R.drawable.stq_gold
-                } else {
+                } else if(isBlack()) {
                     R.drawable.stq_black
+                } else {
+                    R.drawable.cart_silver_stq
                 }
             }
             "ETH" -> return R.drawable.cart_ether

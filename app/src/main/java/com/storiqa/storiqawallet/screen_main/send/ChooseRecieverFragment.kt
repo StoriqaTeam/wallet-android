@@ -96,9 +96,6 @@ class ChooseRecieverFragment : Fragment() {
             Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
         }
 
-        if(viewModel.wallet.get()!!.isNotEmpty()) {
-            binder.etReciever.setText(viewModel.wallet.get()!!)
-        }
 
         ivEdit.onClick {
             viewModel.onScreenChanged(Screen.SEND)
@@ -124,6 +121,12 @@ class ChooseRecieverFragment : Fragment() {
             override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
 
         }).check()
+
+
+        if(viewModel.wallet.get()!!.isNotEmpty()) {
+            binder.etReciever.setText(viewModel.reciever.get()!!)
+        }
+
     }
 
     fun setContacts(newContacts: Array<Contact>) {

@@ -201,7 +201,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginEnd">33dp</item>
         <item name="android:layout_marginRight">33dp</item>
-        <item name="android:layout_marginTop">8dp</item>
     </style>
 
     <style name="sendInfoStyle">
@@ -266,10 +265,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/my_wallet_button</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:paddingRight">24dp</item>
-        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingLeft">12dp</item>
     </style>
 
 </resources>
