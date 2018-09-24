@@ -5,6 +5,6 @@
     <solid
         android:color="@color/grayButtonLight"/>
 
-    <corners android:radius="21dp"/>
+    <corners android:radius="26dp"/>
 
 </shape>

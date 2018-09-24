@@ -18,12 +18,9 @@
             android:orientation="vertical"
             tools:context=".screen_register.RegisterActivity">
 
-            <include
-                layout="@layout/wallet_logo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp" />
-
+            <TextView
+                style="@style/headerRegisterLoginText"
+                android:text="@string/signUp" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_marginTop="21dp"
@@ -133,9 +130,12 @@
         </LinearLayout>
 
         <ImageView
+            android:layout_alignParentBottom="true"
             style="@style/purpleSpotStyle" />
 
         <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             style="@style/blueSpotStyle" />
 
     </RelativeLayout>
