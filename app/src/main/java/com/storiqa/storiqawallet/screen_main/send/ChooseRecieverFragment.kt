@@ -33,8 +33,8 @@ import kotlinx.android.synthetic.main.layout_ask_contacts.view.*
 
 class ChooseRecieverFragment : Fragment() {
 
-    lateinit var viewModel : MainActivityViewModel
-    lateinit var binder : FragmentChooseRecieverBinding
+    lateinit var viewModel: MainActivityViewModel
+    lateinit var binder: FragmentChooseRecieverBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,7 @@ class ChooseRecieverFragment : Fragment() {
         }
 
         RxTextView.afterTextChangeEvents(etReciever).skipInitialValue().subscribe {
-            if(etReciever.text.isEmpty()) {
+            if (etReciever.text.isEmpty()) {
                 setContacts(viewModel.getContacts())
                 viewModel.clearSenderInfo()
             } else {
@@ -66,7 +66,7 @@ class ChooseRecieverFragment : Fragment() {
         }
 
         ivStartScanner.onClick {
-            Dexter.withActivity(activity).withPermission(Manifest.permission.CAMERA).withListener(object  : PermissionListener {
+            Dexter.withActivity(activity).withPermission(Manifest.permission.CAMERA).withListener(object : PermissionListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                     startActivityForResult(Intent(context, QrCodeActivity::class.java), RequestCodes().scanQR)
                 }
@@ -89,12 +89,12 @@ class ChooseRecieverFragment : Fragment() {
             viewModel.openSendFinalScreen()
         }
 
-        when(viewModel.tokenType.get()) {
-            Currency.STQ.name-> {
+        when (viewModel.tokenType.get()) {
+            Currency.STQ.name -> {
                 currencyLogo.setImageResource(R.drawable.stq_medium_logo)
                 tvAmountInSTQ.visibility = View.GONE
             }
-            Currency.ETH.name-> currencyLogo.setImageResource(R.drawable.eth_medium_logo)
+            Currency.ETH.name -> currencyLogo.setImageResource(R.drawable.eth_medium_logo)
             Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
         }
 
@@ -111,32 +111,37 @@ class ChooseRecieverFragment : Fragment() {
 
         val dialog = AlertDialog.Builder(context!!).setView(view).create()
 
-        view.btnAllow.setOnClickListener { Dexter.withActivity(activity).withPermission(Manifest.permission.READ_CONTACTS).withListener(object : PermissionListener {
-            override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                viewModel.contacts.observe(this@ChooseRecieverFragment, Observer{ newContacts ->
-                    newContacts?.let { setContacts(newContacts)  }
+        view.btnAllow.setOnClickListener {
+            Dexter.withActivity(activity).withPermission(Manifest.permission.READ_CONTACTS).withListener(object : PermissionListener {
+                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                    viewModel.contacts.observe(this@ChooseRecieverFragment, Observer { newContacts ->
+                        newContacts?.let { setContacts(newContacts) }
 
-                })
-                viewModel.requestContacts()
+                    })
+                    viewModel.requestContacts()
+                }
+
+                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
+                    token?.continuePermissionRequest()
+                }
+
+                override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
+
+            }).check()
+            if (dialog.isShowing) {
+                dialog.dismiss()
             }
-
-            override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
-                token?.continuePermissionRequest()
-            }
-
-            override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
-
-        }).check() }
+        }
 
         view.tvDeny.setOnClickListener {
-            if(dialog.isShowing) {
+            if (dialog.isShowing) {
                 dialog.dismiss()
             }
         }
 
         dialog.show()
 
-        if(viewModel.wallet.get()!!.isNotEmpty()) {
+        if (viewModel.wallet.get()!!.isNotEmpty()) {
             binder.etReciever.setText(viewModel.reciever.get()!!)
         }
 
@@ -144,9 +149,9 @@ class ChooseRecieverFragment : Fragment() {
 
     fun setContacts(newContacts: Array<Contact>) {
         tvError.visibility = View.INVISIBLE
-        if(newContacts.size == 1) {
+        if (newContacts.size == 1) {
             viewModel.isContinueButtonVisible.set(true)
-            if(newContacts[0].wallet.isNotEmpty()) {
+            if (newContacts[0].wallet.isNotEmpty()) {
                 viewModel.isContinueButtonEnabled.set(true)
                 viewModel.saveRecieverInfo(newContacts[0])
             } else {

@@ -97,15 +97,14 @@ class SendFragment : Fragment() {
                     0 -> "STQ"
                     1 -> "BTC"
                     2 -> "ETH"
-                    3 -> {
-                        ""
-                    }
+
                     else -> ""
                 })
 
                 if(viewModel.tokenType.get()!!.isEmpty()) {
                     editLayout.visibility = View.GONE
                     commingSoon.visibility = View.VISIBLE
+                    etAmount.setText("")
                 } else {
                     editLayout.visibility = View.VISIBLE
                     commingSoon.visibility = View.GONE
