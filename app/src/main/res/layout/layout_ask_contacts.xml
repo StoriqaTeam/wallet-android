@@ -20,7 +20,7 @@
     <Button
         android:id="@+id/btnAllow"
         style="@style/buttonStyle"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="89dp"
         android:background="@drawable/blue_button_background"
         android:text="@string/allow"
         android:textColor="@android:color/white" />
