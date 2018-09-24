@@ -28,8 +28,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:name=".screen_main.MainActivity"
+            android:name=".screen_splash.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +37,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".screen_splash.SplashActivity" android:screenOrientation="portrait"/>
+        <activity
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:name=".screen_main.MainActivity"
+
+             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".screen_login.LoginActivity"

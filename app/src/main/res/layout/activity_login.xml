@@ -91,7 +91,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-
                         <EditText
                             android:id="@+id/etPassword"
                             style="@style/editText"
@@ -106,7 +105,8 @@
                         <ImageView
                             android:id="@+id/ivShowPassword"
                             style="@style/watchPasswordButton"
-                            android:background="@{viewModel.isPasswordVisible ? @drawable/closed_eye : @drawable/eye_opened}"
+                            tools:background="@drawable/closed_eye"
+                            android:background="@{viewModel.isPasswordVisible ? @drawable/eye_opened : @drawable/closed_eye}"
                             android:onClick="@{()->viewModel.changePasswordVisibility()}"/>
 
                     </RelativeLayout>
