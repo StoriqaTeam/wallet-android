@@ -61,7 +61,7 @@
     <string name="openEmail">Open email</string>
     <string name="cancel">Cancel</string>
     <string name="resetDialogMessage">Instructions to reset an email was sent to your email.</string>
-    <string name="putYourFingerOnTouchId">Put your finger\non touch id</string>
+    <string name="putYourFingerOnTouchId">Put your finger on\ntouch ID</string>
     <string name="myWallet">My wallet</string>
     <string name="black">Black</string>
     <string name="sent">Sent</string>
@@ -101,4 +101,5 @@
     <string name="deny">Deny</string>
     <string name="allow">Allow</string>
     <string name="willBeAwailableSoon">Will be available soon</string>
+    <string name="errorNoMatch">Error - no match!</string>
 </resources>
