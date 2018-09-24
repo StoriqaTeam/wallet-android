@@ -35,10 +35,18 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/ivWallet"
@@ -55,8 +63,8 @@
                 android:id="@+id/ivDeposit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@{viewModel.selectedScreen == Screen.DEPOSIT? @drawable/deposit_tab_on : @drawable/deposit_tab_off}"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.DEPOSIT)}'
+                android:src="@{viewModel.selectedScreen == Screen.DEPOSIT? @drawable/send_tab_on : @drawable/send_tab_off}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivExchange"
                 app:layout_constraintStart_toEndOf="@+id/ivWallet"
@@ -75,7 +83,7 @@
 
             <ImageView
                 android:id="@+id/ivSend"
-                android:src="@{viewModel.selectedScreen == Screen.SEND? @drawable/send_tab_on : @drawable/send_tab_off}"
+                android:src="@{viewModel.selectedScreen == Screen.SEND? @drawable/deposit_tab_on : @drawable/deposit_tab_off}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick='@{()-> viewModel.selectScreen(Screen.SEND)}'
@@ -95,6 +103,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivSend"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
 
         </android.support.constraint.ConstraintLayout>

@@ -59,6 +59,7 @@ class SendFragment : Fragment() {
         addTab(R.drawable.stq_small_logo_off_2x, R.drawable.stq_small_logo_2x)
         addTab(R.drawable.btc_small_logo_off_2x, R.drawable.btc_small_logo_on)
         addTab(R.drawable.eth_small_logo_off_2x, R.drawable.eth_small_logo_on_2x)
+        addTab(R.drawable.bankcard_small_logo_off_2x, R.drawable.bankcard_small_logo_on_2x)
     }
 
     private fun addTab(logoOff: Int, logoOn: Int) {
@@ -96,8 +97,19 @@ class SendFragment : Fragment() {
                     0 -> "STQ"
                     1 -> "BTC"
                     2 -> "ETH"
+                    3 -> {
+                        ""
+                    }
                     else -> ""
                 })
+
+                if(viewModel.tokenType.get()!!.isEmpty()) {
+                    editLayout.visibility = View.GONE
+                    commingSoon.visibility = View.VISIBLE
+                } else {
+                    editLayout.visibility = View.VISIBLE
+                    commingSoon.visibility = View.GONE
+                }
 
                 tab?.customView?.iconOn?.visibility = View.VISIBLE
                 tab?.customView?.iconOff?.visibility = View.GONE

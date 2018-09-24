@@ -12,7 +12,7 @@ class QuickStartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quick_start)
 
-        btnSetQuickStart.setOnClickListener { ScreenStarter().startPinCodeSetupScreen(this) }
+        btnSetQuickStart.setOnClickListener { ScreenStarter().startEnterPinCodeScreen(this) }
         btnDoNotUse.setOnClickListener { ScreenStarter().startMainScreen(this) }
     }
 }

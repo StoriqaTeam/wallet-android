@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".screen_register.RegisterActivity">
 
@@ -75,8 +76,9 @@
                 android:layout_marginTop="14dp"
                 android:orientation="horizontal">
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/cbLicenseAgreement"
+                    app:buttonTint="@color/brightSkyBlue"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -130,10 +132,12 @@
         </LinearLayout>
 
         <ImageView
+            tools:visibility="gone"
             android:layout_alignParentBottom="true"
             style="@style/purpleSpotStyle" />
 
         <ImageView
+            tools:visibility="gone"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             style="@style/blueSpotStyle" />

@@ -65,7 +65,7 @@
     <string name="myWallet">My wallet</string>
     <string name="black">Black</string>
     <string name="sent">Sent</string>
-    <string name="recieve">Recieve</string>
+    <string name="recieve">Receive</string>
     <string name="to">to</string>
     <string name="from">from</string>
     <string name="next">Next</string>
@@ -95,4 +95,10 @@
     <string name="notEnoghtFounds">You haven’t got enough funds to send. Try to set another count.</string>
     <string name="signUp">Sign up</string>
     <string name="signIn">Sign in</string>
+    <string name="mailSent">Mail successfully sent</string>
+    <string name="checkMailbox">Check your mailbox and follow the link to recover your password</string>
+    <string name="wantToAccessContacts">Allow StoriqaWallet to access your contacts?</string>
+    <string name="deny">Deny</string>
+    <string name="allow">Allow</string>
+    <string name="willBeAwailableSoon">Will be available soon</string>
 </resources>

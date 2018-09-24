@@ -13,6 +13,7 @@ class CurrencyConverterRepository {
             map["STQ"] = 1.0
             map["BTC"] = 0.5
             map["ETH"] = 2.0
+            map[""] = 0.0
 
             emitter.onNext(map)
             emitter.onComplete()

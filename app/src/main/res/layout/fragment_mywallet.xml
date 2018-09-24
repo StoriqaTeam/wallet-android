@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/myWallet"
             android:textColor="@color/charcoal"
@@ -35,23 +35,12 @@
             android:id="@+id/rvBills"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="12dp"
             tools:listitem = "@layout/item_bill"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/myWallet" />
-
-
-        <ImageView
-            style="@style/purpleSpotStyle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            style="@style/blueSpotStyle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

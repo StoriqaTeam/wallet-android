@@ -10,7 +10,10 @@ import com.storiqa.storiqawallet.objects.ButtonStateSwitcherFor
 import com.storiqa.storiqawallet.objects.GeneralErrorDialogHelper
 import kotlinx.android.synthetic.main.activity_recover_password.*
 import android.content.Intent
+import android.view.LayoutInflater
 import android.widget.Toast
+import com.storiqa.storiqawallet.objects.ScreenStarter
+import kotlinx.android.synthetic.main.layout_mail_sent.view.*
 
 
 class RecoverPasswordActivity : MvpAppCompatActivity(), RecoverPasswordView {
@@ -20,7 +23,6 @@ class RecoverPasswordActivity : MvpAppCompatActivity(), RecoverPasswordView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recover_password)
-
         ButtonStateSwitcherFor(btnResetPassword).observeNotEmpty(etEmail)
         btnResetPassword.setOnClickListener { presenter.onResetPasswordButtonClicked(etEmail.text.toString()) }
         btnBack.setOnClickListener { presenter.onBackButtonPressed() }
@@ -29,7 +31,13 @@ class RecoverPasswordActivity : MvpAppCompatActivity(), RecoverPasswordView {
     override fun goBack() = onBackPressed()
 
     override fun onNewPasswordEmailSent(email: String) {
-        android.support.v7.app.AlertDialog.Builder(this).setMessage(getString(R.string.resetDialogMessage))
+        val view = LayoutInflater.from(this).inflate(R.layout.layout_mail_sent, null, false)
+        view.btnSignIn.setOnClickListener {
+            ScreenStarter().startLoginScreen(this)
+        }
+
+        android.support.v7.app.AlertDialog.Builder(this)
+                .setView(view)
                 .setPositiveButton(getString(R.string.openEmail)) { _: DialogInterface, i: Int ->
                     val intent = Intent(Intent.ACTION_SEND)
                     val mailer = Intent.createChooser(intent, null)

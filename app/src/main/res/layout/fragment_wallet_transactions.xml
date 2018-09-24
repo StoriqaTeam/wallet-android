@@ -29,6 +29,7 @@
             android:text="@string/account"
             app:layout_constraintBottom_toBottomOf="@+id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.21"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
@@ -57,11 +58,12 @@
 
         <LinearLayout
             android:id="@+id/btnSend"
+            style="@style/myWalletButtonContainerStyle"
             android:layout_marginLeft="19dp"
             android:layout_marginRight="6dp"
-            style="@style/myWalletButtonContainerStyle"
             android:layout_marginTop="14dp"
             app:layout_constraintEnd_toStartOf="@+id/btnChange"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pageIndicator">
 
@@ -155,17 +157,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView22"
             tools:listitem="@layout/item_transaction" />
 
-        <ImageView
-            style="@style/purpleSpotStyle"
-            tools:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            style="@style/blueSpotStyle"
-            tools:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

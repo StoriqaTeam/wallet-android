@@ -37,6 +37,7 @@
                 app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
             <ScrollView
+                android:id="@+id/svContainer"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnBack"
@@ -93,124 +94,139 @@
                 android:layout_marginTop="27dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15">
-
-
-            </android.support.design.widget.TabLayout>
-
-            <TextView
-                android:id="@+id/labelAmount"
-                style="@style/sendTitleStyle"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/amount"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tlPaymentVariants" />
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/editLayout"
-                android:layout_width="0dp"
-                android:layout_height="39dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="11dp"
-                android:inputType="numberDecimal"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/labelAmount">
-
-                <EditText
-                    android:id="@+id/etAmount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="0"
-                    android:inputType="numberDecimal"
-                    android:paddingBottom="10dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:typeface="normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tvAmountInSTQ"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvAmountInSTQ"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
-                    android:paddingBottom="10dp"
-                    android:textColor="@color/bluegrey"
-                    android:typeface="normal"
-                    android:visibility="@{viewModel.isAmountInStqUpdating? View.GONE : View.VISIBLE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="~10000 STQ" />
+                app:layout_constraintTop_toBottomOf="@+id/textView15"/>
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:id="@+id/vBottomLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:background="@color/grayLine"
-                    app:layout_constraintBottom_toBottomOf="@+id/etAmount" />
+                    app:layout_constraintTop_toBottomOf="@+id/tlPaymentVariants"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"/>
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginRight="42dp"
-                    android:visibility="@{viewModel.isAmountInStqUpdating? View.VISIBLE : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/commingSoon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="26dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tlPaymentVariants">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="@string/willBeAwailableSoon"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/editLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="11dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tlPaymentVariants">
+
+                    <TextView
+                        android:id="@+id/labelAmount"
+                        style="@style/sendTitleStyle"
+                        android:text="@string/amount"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/etAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@android:color/transparent"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:paddingBottom="10dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:typeface="normal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tvAmountInSTQ"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/labelAmount" />
+
+                    <TextView
+                        android:id="@+id/tvAmountInSTQ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:textColor="@color/bluegrey"
+                        android:typeface="normal"
+                        android:visibility="@{viewModel.isAmountInStqUpdating? View.GONE : View.VISIBLE}"
+                        app:layout_constraintBottom_toTopOf="@+id/view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/etAmount"
+                        tools:text="~10000 STQ" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grayLine"
+                        app:layout_constraintBottom_toBottomOf="@+id/etAmount" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="42dp"
+                        android:visibility="@{viewModel.isAmountInStqUpdating? View.VISIBLE : View.GONE}"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvAmountInSTQ"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvAmountInSTQ" />
+
+                </android.support.constraint.ConstraintLayout>
 
             </android.support.constraint.ConstraintLayout>
+
+            </ScrollView>
 
             <Button
                 android:id="@+id/btnNext"
                 style="@style/buttonStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="33dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
                 android:background="@drawable/switch_state_button"
                 android:text="@string/next"
                 android:textColor="@drawable/button_color_switcher"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editLayout"
                 tools:textColor="@android:color/white" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            </ScrollView>
-            <ImageView
-                style="@style/purpleSpotStyle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                style="@style/blueSpotStyle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
 
         </android.support.constraint.ConstraintLayout>
 </layout>
