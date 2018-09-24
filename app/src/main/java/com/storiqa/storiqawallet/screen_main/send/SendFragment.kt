@@ -37,7 +37,7 @@ class SendFragment : Fragment() {
         binder.viewModel = viewModel
         binder.executePendingBindings()
 
-        BillPagerHelper(childFragmentManager) { pageNumber ->
+        BillPagerHelper(R.layout.item_bill, childFragmentManager) { pageNumber ->
             viewModel.selectedBillId = viewModel.bills.value!![pageNumber].id
         }.setPager(binder.vpBills, binder.pageIndicator, viewModel.bills.value!!, viewModel.selectedBillId)
 

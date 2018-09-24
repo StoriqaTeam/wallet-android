@@ -39,7 +39,7 @@ class WalletLastTransactionsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_wallet_transactions, container, false)
 
-        BillPagerHelper(childFragmentManager) { pageNumber ->
+        BillPagerHelper(R.layout.item_bill_small, childFragmentManager) { pageNumber ->
             viewModel.updateTransactionList(bills[pageNumber].id, maxAmountOfTransactions)
             viewModel.selectedBillId = bills[pageNumber].id
         }.setPager(view.vpBills, view.pageIndicator, bills, arguments?.getString(Extras().idOfSelectedBill)!!)

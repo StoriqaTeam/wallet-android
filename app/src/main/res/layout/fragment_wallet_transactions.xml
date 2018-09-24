@@ -27,16 +27,17 @@
             android:id="@+id/tvTitle"
             style="@style/header"
             android:text="@string/account"
+            android:layout_marginLeft="72dp"
             app:layout_constraintBottom_toBottomOf="@+id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.21"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpBills"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="102dp"
             android:layout_marginTop="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

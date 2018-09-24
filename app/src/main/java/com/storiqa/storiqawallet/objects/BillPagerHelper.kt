@@ -8,10 +8,10 @@ import com.storiqa.storiqawallet.constants.Extras
 import kotlinx.android.synthetic.main.fragment_wallet_transactions.*
 import org.jetbrains.anko.dip
 
-class BillPagerHelper(private val fragmentManager: FragmentManager, val onPageChanged : (pageNumber : Int)-> Unit) {
+class BillPagerHelper(private val resId : Int, private val fragmentManager: FragmentManager, val onPageChanged : (pageNumber : Int)-> Unit) {
 
     fun setPager(vpBills : ViewPager, pageIndicator : TabLayout , bills : Array<Bill>, selectedBillId : String) {
-        vpBills.adapter = BillsPagerAdapter(fragmentManager, bills)
+        vpBills.adapter = BillsPagerAdapter(resId, fragmentManager, bills)
         vpBills.adapter?.notifyDataSetChanged()
         vpBills.clipToPadding = false
         vpBills.setPadding(vpBills.context.dip(10),0, vpBills.context.dip(10),0)
