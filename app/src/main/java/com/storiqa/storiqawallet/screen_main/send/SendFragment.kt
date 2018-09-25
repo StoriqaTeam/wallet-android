@@ -63,14 +63,18 @@ class SendFragment : Fragment() {
         addTab(R.drawable.eth_small_logo_off_2x, R.drawable.eth_small_logo_on_2x)
         addTab(R.drawable.bankcard_small_logo_off_2x, R.drawable.bankcard_small_logo_on_2x)
 
-        etAmount.onFocusChangeListener = object : View.OnFocusChangeListener {
-            override fun onFocusChange(p0: View?, isFocussed: Boolean) {
-                if(isFocussed) {
-                    view.view.setBackgroundColor(ResourcesCompat.getColor(resources, R.color.brightSkyBlue, null))
-                } else {
-                    view.view.setBackgroundColor(ResourcesCompat.getColor(resources, R.color.grayLine, null))
-                }
+        etAmount.onFocusChangeListener = View.OnFocusChangeListener { p0, isFocussed ->
+            if(isFocussed) {
+                view.view.visibility = View.GONE
+                view.viewBlue.visibility = View.VISIBLE
+            } else {
+                view.view.visibility = View.VISIBLE
+                view.viewBlue.visibility = View.GONE
             }
+        }
+
+        btnBack.onClick {
+            viewModel.goBack()
         }
     }
 
