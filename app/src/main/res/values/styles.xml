@@ -20,7 +20,7 @@
         <item name="android:layout_height">45dp</item>
         <item name="android:layout_marginLeft">27dp</item>
         <item name="android:layout_marginRight">27dp</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="editText">
@@ -239,8 +239,8 @@
     </style>
 
     <style name="sendTitleStyle">
-        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:lineSpacingExtra">9sp</item>
         <item name="android:textColor">@color/bluegrey</item>
         <item name="android:layout_height">wrap_content</item>

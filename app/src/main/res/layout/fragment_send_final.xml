@@ -57,25 +57,33 @@
                     <TextView
                         android:id="@+id/textView24"
                         style="@style/sendHeader"
+                        android:fontFamily="@font/roboto"
                         android:text="@string/sending"
+                        android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tvAmountInCurrency"
+                        style="@style/sendAmountStyle"
+                        android:layout_marginBottom="19dp"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/roboto"
                         android:text='@{viewModel.amountInCurrency + " " + viewModel.tokenType}'
+                        android:textSize="17sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView24"
                         app:layout_constraintTop_toBottomOf="@+id/textView24"
-                        tools:text="0.00340000 BTC"
-                        style="@style/sendAmountStyle" />
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:text="0.00340000 BTC" />
 
                     <TextView
                         android:id="@+id/tvAmountInSTQ"
                         style="@style/sendAmountStyle"
-                        android:fontFamily="@font/roboto_light"
                         android:layout_marginBottom="19dp"
+                        android:fontFamily="@font/roboto_light"
                         android:text='@{"~" + viewModel.amountInSTQ + " STQ"}'
+                        android:textSize="13sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/tvAmountInCurrency"
                         app:layout_constraintTop_toBottomOf="@+id/tvAmountInCurrency"
@@ -84,10 +92,12 @@
 
                     <ImageView
                         android:id="@+id/ivEdit"
+                        style="@style/buttonEdit"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
                         app:layout_constraintBottom_toTopOf="@+id/tvAmountInSTQ"
                         app:layout_constraintStart_toEndOf="@+id/tvAmountInCurrency"
-                        app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency"
-                        style="@style/buttonEdit" />
+                        app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency" />
 
                     <ImageView
                         android:id="@+id/currencyLogo"
@@ -119,7 +129,9 @@
                     <TextView
                         android:id="@+id/textView29"
                         style="@style/sendInfoStyle"
+                        android:fontFamily="@font/roboto"
                         android:text='@{viewModel.wallet}'
+                        android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView17"
                         tools:text="1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX" />
@@ -142,8 +154,10 @@
                         android:layout_marginLeft="18dp"
                         android:layout_marginStart="18dp"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/roboto"
                         android:text='@{viewModel.reciever}'
                         android:textColor="@android:color/black"
+                        android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView31"
                         tools:text="Arnold Arkroyd" />
@@ -163,7 +177,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="18dp"
                         android:layout_marginRight="18dp"
+                        android:fontFamily="@font/roboto"
                         android:textColor="@android:color/black"
+                        android:textSize="17sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView32"
                         tools:text="30 STQ" />
@@ -184,23 +200,26 @@
 
                     <TextView
                         android:id="@+id/textView36"
+                        style="@style/sliderItem"
                         android:layout_marginTop="22dp"
                         android:text="Low"
+                        android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="@+id/sbFee"
-                        app:layout_constraintTop_toBottomOf="@+id/sbFee"
-                        style="@style/sliderItem" />
+                        app:layout_constraintTop_toBottomOf="@+id/sbFee" />
 
                     <TextView
                         android:id="@+id/textView37"
-                        android:text="Hight"
                         style="@style/sliderItem"
+                        android:text="Hight"
+                        android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="@+id/sbFee"
                         app:layout_constraintTop_toTopOf="@+id/textView36" />
 
                     <TextView
                         android:id="@+id/textView38"
-                        android:text="Medium"
                         style="@style/sliderItem"
+                        android:text="Medium"
+                        android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView36" />
@@ -221,7 +240,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginStart="8dp"
+                        android:fontFamily="@font/roboto"
                         android:textColor="@android:color/black"
+                        android:textSize="13sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView39"
                         app:layout_constraintStart_toEndOf="@+id/textView39"
                         app:layout_constraintTop_toTopOf="@+id/textView39"
@@ -243,7 +264,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="18dp"
                         android:layout_marginRight="18dp"
+                        android:fontFamily="@font/roboto"
                         android:textColor="#000000"
+                        android:textSize="17sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView41"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView41"
@@ -253,17 +276,18 @@
                         android:id="@+id/tvError"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="21dp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
                         android:layout_marginBottom="16dp"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toTopOf="@+id/btnSend"
                         android:layout_marginLeft="71dp"
                         android:layout_marginRight="71dp"
+                        android:layout_marginTop="21dp"
+                        android:gravity="center"
+                        android:text="@string/notEnoghtFounds"
                         android:textColor="#ff2d55"
+                        app:layout_constraintBottom_toTopOf="@+id/btnSend"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvSubtotal"
-                        android:text="@string/notEnoghtFounds" />
+                        app:layout_constraintVertical_bias="1.0" />
 
 
                     <Button

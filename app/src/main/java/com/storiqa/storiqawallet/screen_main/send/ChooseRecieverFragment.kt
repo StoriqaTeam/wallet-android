@@ -23,6 +23,8 @@ import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_choose_reciever.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import com.blikoon.qrcodescanner.QrCodeActivity
 import com.storiqa.storiqawallet.R
@@ -107,6 +109,23 @@ class ChooseRecieverFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestAccessToContacts()
+        } else {
+            viewModel.requestContacts()
+        }
+
+        if (viewModel.wallet.get()!!.isNotEmpty()) {
+            binder.etReciever.setText(viewModel.reciever.get()!!)
+        }
+
+        viewModel.contacts.observe(this@ChooseRecieverFragment, Observer { newContacts ->
+            newContacts?.let { setContacts(newContacts) }
+
+        })
+    }
+
+    fun requestAccessToContacts() {
         val view = layoutInflater.inflate(R.layout.layout_ask_contacts, null, false)
 
         val dialog = AlertDialog.Builder(context!!).setView(view).create()
@@ -114,10 +133,6 @@ class ChooseRecieverFragment : Fragment() {
         view.btnAllow.setOnClickListener {
             Dexter.withActivity(activity).withPermission(Manifest.permission.READ_CONTACTS).withListener(object : PermissionListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    viewModel.contacts.observe(this@ChooseRecieverFragment, Observer { newContacts ->
-                        newContacts?.let { setContacts(newContacts) }
-
-                    })
                     viewModel.requestContacts()
                 }
 
@@ -140,11 +155,6 @@ class ChooseRecieverFragment : Fragment() {
         }
 
         dialog.show()
-
-        if (viewModel.wallet.get()!!.isNotEmpty()) {
-            binder.etReciever.setText(viewModel.reciever.get()!!)
-        }
-
     }
 
     fun setContacts(newContacts: Array<Contact>) {

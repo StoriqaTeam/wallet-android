@@ -24,12 +24,16 @@
 
         <TextView
             android:id="@+id/textView19"
+            style="@style/header"
+            android:layout_marginLeft="72dp"
+            android:layout_marginStart="72dp"
             android:text="@string/send"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnBack"
-            style="@style/header" />
+            app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -42,17 +46,24 @@
             <TextView
                 android:id="@+id/textView24"
                 style="@style/sendHeader"
+                android:fontFamily="@font/roboto"
                 android:text="@string/sending"
+                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvAmountInCurrency"
                 style="@style/sendAmountStyle"
+                android:layout_marginBottom="19dp"
                 android:layout_marginTop="7dp"
+                android:fontFamily="@font/roboto"
                 android:text='@{viewModel.amountInCurrency + " " + viewModel.tokenType}'
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView24"
+                app:layout_constraintVertical_bias="0.0"
                 tools:text="0.00340000 BTC" />
 
             <TextView
@@ -62,6 +73,7 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/roboto_light"
                 android:text='@{"~" + viewModel.amountInSTQ + " STQ"}'
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvAmountInCurrency"
                 app:layout_constraintTop_toBottomOf="@+id/tvAmountInCurrency"
@@ -71,10 +83,11 @@
             <ImageView
                 android:id="@+id/ivEdit"
                 style="@style/buttonEdit"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/tvAmountInSTQ"
                 app:layout_constraintStart_toEndOf="@+id/tvAmountInCurrency"
-                app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency"
-                  />
+                app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency" />
 
             <ImageView
                 android:id="@+id/currencyLogo"
@@ -95,9 +108,11 @@
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
             android:layout_marginTop="18dp"
+            android:fontFamily="@font/roboto"
             android:text="@string/sendTo"
-            android:textColor="@color/bluegrey"
             android:textAllCaps="true"
+            android:textColor="@color/bluegrey"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
@@ -105,10 +120,11 @@
             android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/brightSkyBlue"
             android:layout_marginEnd="9dp"
             android:layout_marginRight="9dp"
+            android:fontFamily="@font/roboto"
             android:text="@string/scanQR"
+            android:textColor="@color/brightSkyBlue"
             app:layout_constraintEnd_toStartOf="@+id/ivStartScanner"
             app:layout_constraintTop_toTopOf="@+id/textView26" />
 
@@ -140,6 +156,7 @@
                 android:id="@+id/etReciever"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
                 android:background="@android:color/transparent"
                 android:hint="@string/hintAddReceiver"
                 android:inputType="text" />
@@ -161,12 +178,15 @@
 
             <TextView
                 android:id="@+id/tvError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/delimeter"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:visibility="gone"
                 android:text="@string/noWalletError"
                 android:textColor="@color/sentRed"
-                android:layout_below="@+id/delimeter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="13sp" />
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -210,10 +230,12 @@
                 android:layout_marginLeft="70dp"
                 android:layout_marginRight="70dp"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto"
                 android:gravity="center"
                 android:text="@string/noNumberError"
                 android:textColor="@color/bluegrey"
-                tools:text="Error" />
+                android:textSize="13sp"
+                tools:text="There is no such number in system. Use another way to send funds." />
 
         </LinearLayout>
 

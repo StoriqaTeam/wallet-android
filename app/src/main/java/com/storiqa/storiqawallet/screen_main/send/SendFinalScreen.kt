@@ -71,7 +71,7 @@ class SendFinalScreen : Fragment() {
 
         tvWaitTime.text = minWait.toString() + " s"
 
-        tvCommission.text = minFee.toString()
+        tvCommission.text = minFee.toString()  + " STQ"
         sbFee.max = maxFee.toInt()
         sbFee.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, progress: Int, p2: Boolean) {

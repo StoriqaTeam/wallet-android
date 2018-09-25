@@ -13,7 +13,7 @@
     <color name="oppacedSkyBlue">#1a00b2ff</color>
     <color name="grayLine">#1e000000</color>
     <color name="captionGrey">#879db9</color>
-    <color name="sentRed">#c76666</color>
+    <color name="sentRed">#ff2d55</color>
     <color name="recievedGreen">#52a88a</color>
     <color name="contactGray">#f7f7f7</color>
     <color name="contactImageText">#c3cedc</color>

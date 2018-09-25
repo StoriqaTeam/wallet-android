@@ -194,9 +194,6 @@
                     app:layout_constraintTop_toTopOf="@+id/etAmount"
                     tools:text="~10000 STQ" />
 
-                <!--                    android:visibility="@{viewModel.isAmountInStqUpdating? View.GONE : View.VISIBLE}"
--->
-
                 <View
                     android:id="@+id/view"
                     android:layout_width="match_parent"
