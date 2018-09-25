@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.content.res.ResourcesCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import kotlinx.android.synthetic.main.fragment_send.view.*
 import org.jetbrains.anko.support.v4.dip
 
 
@@ -60,6 +62,16 @@ class SendFragment : Fragment() {
         addTab(R.drawable.btc_small_logo_off_2x, R.drawable.btc_small_logo_on)
         addTab(R.drawable.eth_small_logo_off_2x, R.drawable.eth_small_logo_on_2x)
         addTab(R.drawable.bankcard_small_logo_off_2x, R.drawable.bankcard_small_logo_on_2x)
+
+        etAmount.onFocusChangeListener = object : View.OnFocusChangeListener {
+            override fun onFocusChange(p0: View?, isFocussed: Boolean) {
+                if(isFocussed) {
+                    view.view.setBackgroundColor(ResourcesCompat.getColor(resources, R.color.brightSkyBlue, null))
+                } else {
+                    view.view.setBackgroundColor(ResourcesCompat.getColor(resources, R.color.grayLine, null))
+                }
+            }
+        }
     }
 
     private fun addTab(logoOff: Int, logoOn: Int) {

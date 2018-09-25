@@ -31,7 +31,7 @@ class BillFragment : Fragment() {
             } //TODO refactore. Break of Open/close principle
 
             executePendingBindings()
-            root.setPadding(dip(5), 0, dip(5), 0)
+            root.setPadding(dip(7), 0, dip(7), 0)
 
             val billInfo = BillInfo(bill)
             billInfo.initBillView(root)

@@ -49,15 +49,16 @@
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="21dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent">
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/vpBills"
+                        android:layout_marginTop="17dp"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="201dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -97,6 +98,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
+
                     <View
                         android:id="@+id/vBottomLine"
                         android:layout_width="0dp"
@@ -133,9 +135,21 @@
                     </android.support.constraint.ConstraintLayout>
 
 
+
                 </android.support.constraint.ConstraintLayout>
 
             </ScrollView>
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:scaleY="-1"
+                android:layout_marginTop="@dimen/actionBarMarginTop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/shad_nav_bar" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/editLayout"
@@ -198,7 +212,7 @@
                     android:id="@+id/view"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/brightSkyBlue"
+                    android:background="@color/grayLine"
                     app:layout_constraintBottom_toBottomOf="@+id/etAmount" />
 
                 <ProgressBar

@@ -36,10 +36,10 @@ class BillsAdapter(private val bills : Array<Bill>, val onClick : (position : In
                 this.bill = bill
                 executePendingBindings()
                 root.setOnClickListener { _ -> onClick(layoutPosition) }
-                root.setPadding(root.context.dip(20),0,root.context.dip(20), root.context.dip(17))
+                root.setPadding(root.context.dip(17),0,root.context.dip(17), root.context.dip(17))
 
                 if(layoutPosition == 0) {
-                    root.setPadding(root.context.dip(20),root.context.dip(17), root.context.dip(20), root.context.dip(17))
+                    root.setPadding(root.context.dip(17),root.context.dip(17), root.context.dip(17), root.context.dip(17))
                 }
 
                 val billInfo = BillInfo(bill)
