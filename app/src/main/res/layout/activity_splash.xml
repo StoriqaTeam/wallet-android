@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +83,7 @@
         <TextView
             android:id="@+id/btnSignIn"
             style="@style/textButtonStyle"
-            android:layout_marginTop="21dp"
+            android:padding="21dp"
             android:text="@string/signInButtonText" />
     </LinearLayout>
 

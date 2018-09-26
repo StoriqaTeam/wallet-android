@@ -68,7 +68,6 @@ class GoogleAuthFlow(val activity: Activity, val success: (token: String) -> Uni
                 }
             } catch (e: Exception) {
                 failure()
-                throw RuntimeException(e)
             }
 
         }

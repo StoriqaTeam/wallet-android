@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityScanFingerBinding
 import com.storiqa.storiqawallet.objects.ScreenStarter
@@ -27,6 +28,8 @@ class ScanFingerActivity : AppCompatActivity() {
         btnConfirm.setOnClickListener { ScreenStarter().startMainScreen(this) }
 
         btnGoBack.setOnClickListener { onBackPressed() }
+
+        tvFingerprintError.visibility = View.GONE
     }
 
     override fun onResume() {

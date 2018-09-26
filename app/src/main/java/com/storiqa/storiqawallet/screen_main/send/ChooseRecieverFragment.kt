@@ -114,7 +114,6 @@ class ChooseRecieverFragment : Fragment() {
             viewModel.wallet.set(it)
             viewModel.reciever.set("Wallet owner")
 
-//            setContacts(arrayOf())
             setAdapter(arrayOf())
             viewModel.isFoundErrorVisible.set(false)
             viewModel.isSentNextButtonEnabled.set(true)
@@ -138,7 +137,7 @@ class ChooseRecieverFragment : Fragment() {
 
     private fun filterContacts() {
         val searchQuery = etReciever.text.toString()
-        setContacts(viewModel.getContacts().filter { it.name.contains(searchQuery) || it.phone.startsWith(searchQuery) }.toTypedArray())
+        setContacts(viewModel.getContacts().filter { it.name.contains(searchQuery) || it.phone.contains(searchQuery) }.toTypedArray())
     }
 
     private fun requestAccessToContacts() {

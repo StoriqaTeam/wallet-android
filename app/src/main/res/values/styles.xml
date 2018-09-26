@@ -8,8 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="colorControlNormal">@color/grayLine</item>
-        <item name="colorControlActivated">@color/grayLine</item>
-        <item name="colorControlHighlight">@color/grayLine</item>
+        <item name="colorControlActivated">@color/brightSkyBlue</item>
+        <item name="colorControlHighlight">@color/brightSkyBlue</item>
     </style>
 
     <style name="buttonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
@@ -51,8 +51,8 @@
     </style>
 
     <style name="registerTextInputStyle">
-        <item name="android:layout_marginLeft">@dimen/registerEditTextSideMargin</item>
-        <item name="android:layout_marginRight">@dimen/registerEditTextSideMargin</item>
+        <item name="android:layout_marginLeft">17dp</item>
+        <item name="android:layout_marginRight">17dp</item>
         <item name="android:layout_marginTop">14dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
