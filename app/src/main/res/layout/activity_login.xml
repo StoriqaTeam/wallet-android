@@ -83,6 +83,7 @@
                     android:layout_marginStart="17dp"
                     android:layout_marginTop="23dp"
                     app:errorText="@{viewModel.passwordError}"
+                    app:layout_constraintVertical_bias="0"
                     app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -118,17 +119,16 @@
                 <Button
                     android:id="@+id/btnSignIn"
                     style="@style/buttonStyle"
-                    android:layout_marginTop="28dp"
-                    tools:textColor="@android:color/white"
+                    android:layout_marginTop="46dp"
                     android:background="@drawable/switch_state_button"
                     android:enabled='@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? true : false}'
+                    android:onClick="@{()-> viewModel.onSignInButtonClicked()}"
                     android:text="@string/signInButtonText"
                     android:textColor="@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? @android:color/white : @color/disableButton}"
-                    android:onClick="@{()-> viewModel.onSignInButtonClicked()}"
-                    app:layout_constraintBottom_toTopOf="@+id/btnForgotPassword"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+                    app:layout_constraintTop_toBottomOf="@+id/btnForgotPassword"
+                    tools:textColor="@android:color/white" />
 
                 <ProgressBar
                     android:id="@+id/pbLoading"
@@ -143,19 +143,18 @@
                     tools:visibility="visible" />
 
                 <TextView
+                    app:layout_constraintTop_toBottomOf="@+id/tilPassword"
                     android:id="@+id/btnForgotPassword"
                     style="@style/textButtonStyle"
-                    android:layout_marginLeft="27dp"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginTop="22dp"
-                    android:textColor="@color/warm_grey"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginStart="19dp"
                     android:onClick="@{()-> viewModel.onForgotPasswordButtonClicked()}"
                     android:text="@string/forgotPassword"
-                    app:layout_constraintBottom_toTopOf="@+id/include3"
+                    android:textColor="@color/warm_grey"
+                    android:layout_marginTop="19dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <include
                     android:id="@+id/include3"
@@ -174,9 +173,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="27dp"
+                    android:layout_marginEnd="19dp"
                     android:layout_marginLeft="4dp"
-                    android:layout_marginRight="27dp"
+                    android:layout_marginRight="19dp"
                     android:onClick="@{()-> viewModel.onRegisterButtonClicked()}"
                     android:text="@string/register"
                     app:layout_constraintBottom_toBottomOf="@+id/btnForgotPassword"

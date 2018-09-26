@@ -13,6 +13,7 @@ import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_password_enter.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class RegisterActivity : MvpAppCompatActivity(), RegisterView {
 
@@ -61,6 +62,10 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
                 fb_login_button.performClick()
             }
         })
+
+        tvPrivacy.onClick {
+            cbLicenseAgreement.isChecked = !cbLicenseAgreement.isChecked
+        }
     }
 
     override fun showGoogleSignInError() {
