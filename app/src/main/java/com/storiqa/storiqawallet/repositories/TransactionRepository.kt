@@ -52,7 +52,7 @@ class TransactionRepository {
             }
             emitter.onComplete()
 
-        }.onErrorReturnItem(arrayOf()).timeout(500, TimeUnit.MILLISECONDS)
+        }.onErrorReturnItem(arrayOf())
                 .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
     }
 }

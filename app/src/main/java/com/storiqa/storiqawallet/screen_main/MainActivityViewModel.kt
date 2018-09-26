@@ -13,6 +13,7 @@ import com.storiqa.storiqawallet.repositories.ContactsRepository
 import com.storiqa.storiqawallet.repositories.CurrencyConverterRepository
 import com.storiqa.storiqawallet.repositories.TransactionRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.math.BigDecimal
 
 class MainActivityViewModel : ViewModel() {
@@ -22,15 +23,15 @@ class MainActivityViewModel : ViewModel() {
     val selectedScreen = ObservableField<Screen>(Screen.MY_WALLET)
     val bills = MutableLiveData<Array<Bill>>()
     val amount = ObservableField<BigDecimal>(BigDecimal(0))
-    var selectedBillId : String = ""
+    var selectedBillId: String = ""
     var amountInSTQ = MutableLiveData<String>()
     var amountInCurrency = BigDecimal(0)
 
-    var goBack : () -> Unit = {}
-    var loadBillInfo : (billId : String)-> Unit = {}
-    var openRecieverScreen : ()-> Unit = {}
-    var openSendFinalScreen : ()-> Unit = {}
-    var onScreenChanged : (newScreen : Screen) -> Unit = {}
+    var goBack: () -> Unit = {}
+    var loadBillInfo: (billId: String) -> Unit = {}
+    var openRecieverScreen: () -> Unit = {}
+    var openSendFinalScreen: () -> Unit = {}
+    var onScreenChanged: (newScreen: Screen) -> Unit = {}
 
     val wallet = ObservableField<String>("")
     val reciever = ObservableField<String>("")
@@ -44,6 +45,7 @@ class MainActivityViewModel : ViewModel() {
     val isContinueButtonVisible = ObservableField<Boolean>(false)
     val isContactsLoading = ObservableField<Boolean>(false)
     val isSentNextButtonEnabled = ObservableField<Boolean>(false)
+    val contactRepository = ContactsRepository()
 
     init {
         contacts.value = arrayOf()
@@ -53,24 +55,24 @@ class MainActivityViewModel : ViewModel() {
     fun openMyWalletScreen() {
         BillsRepository().getBills().subscribe { loadedBills ->
             bills.value = loadedBills
-            if(selectedBillId.isEmpty()) {
+            if (selectedBillId.isEmpty()) {
                 selectedBillId = bills.value!![0].id
             }
             selectScreen(Screen.MY_WALLET)
         }
     }
 
-    fun updateTransactionList(idOfSelectedBill : String, limit : Int? = null) {
+    fun updateTransactionList(idOfSelectedBill: String, limit: Int? = null) {
         TransactionRepository().getTransactions(idOfSelectedBill, limit).subscribe { newTransactions ->
             transactions.value = newTransactions
         }
     }
 
-    fun selectScreen(screen : Screen) {
+    fun selectScreen(screen: Screen) {
         onScreenChanged(screen)
     }
 
-    fun refreshAmountInStq(tokenType : String, amountInCurrency: BigDecimal) {
+    fun refreshAmountInStq(tokenType: String, amountInCurrency: BigDecimal) {
         isAmountInStqUpdating.set(true)
         isSentNextButtonEnabled.set(false)
         CurrencyConverterRepository().getLastConverCources().observeOn(AndroidSchedulers.mainThread()).subscribe {
@@ -83,10 +85,13 @@ class MainActivityViewModel : ViewModel() {
 
     fun requestContacts() {
         isContactsLoading.set(true)
-        ContactsRepository().getContacts().subscribe {newContacts ->
-            contacts.value = newContacts
-            isContactsLoading.set(false)
-        }
+
+        contactRepository.getContacts()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { newContacts ->
+                    contacts.value = newContacts
+                    isContactsLoading.set(false)
+                }
     }
 
     fun clearSenderInfo() {

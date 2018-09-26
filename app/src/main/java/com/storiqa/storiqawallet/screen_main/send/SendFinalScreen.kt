@@ -133,7 +133,7 @@ class SendFinalScreen : Fragment() {
             tvError.visibility = View.VISIBLE
         } else {
             btnSend.isEnabled = true
-            tvError.visibility = View.GONE
+            tvError.visibility = View.INVISIBLE
         }
     }
 }

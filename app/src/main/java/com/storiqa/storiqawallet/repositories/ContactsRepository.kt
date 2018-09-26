@@ -8,8 +8,9 @@ import io.reactivex.schedulers.Schedulers
 
 class ContactsRepository {
 
-    private fun fetchContactsFromPhone(): Array<Contact> {
+    private  var storedContactsObservable : Observable<Array<Contact>>? = null
 
+    private fun fetchContactsFromPhone(): Array<Contact> {
         val contentResolver = StoriqaApp.context.contentResolver
         val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
 
@@ -45,16 +46,21 @@ class ContactsRepository {
     }
 
     fun getContacts(): Observable<Array<Contact>> {
-        return Observable.create<Array<Contact>> {emitter ->
-            emitter.onNext(fetchContactsFromPhone())
-            emitter.onComplete()
-        }.subscribeOn(Schedulers.newThread()).flatMap {contacts ->
-            WalletsRepository().getWallets(contacts.map { it.phone }.toTypedArray()).map { phoneToWallet ->
-                for (contact in contacts) {
-                    contact.wallet = phoneToWallet[contact.phone] ?: ""
+        if(storedContactsObservable != null) {
+             return storedContactsObservable!!
+        } else {
+            storedContactsObservable = Observable.create<Array<Contact>> {emitter ->
+                emitter.onNext(fetchContactsFromPhone())
+                emitter.onComplete()
+            }.flatMap {contacts ->
+                WalletsRepository().getWallets(contacts.map { it.phone }.toTypedArray()).map { phoneToWallet ->
+                    for (contact in contacts) {
+                        contact.wallet = phoneToWallet[contact.phone] ?: ""
+                    }
+                    contacts
                 }
-                contacts
             }
+            return storedContactsObservable!!
         }
     }
 }

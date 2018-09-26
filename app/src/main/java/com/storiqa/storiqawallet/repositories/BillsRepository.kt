@@ -19,6 +19,6 @@ class BillsRepository {
             bills.add(Bill("info from id3","ETH", "3,000,000,000.00", "4,000,000.00", "Peter Staranchuk"))
             emitter.onNext(bills.toTypedArray())
             emitter.onComplete()
-        }.timeout(500, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+        }.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
     }
 }
