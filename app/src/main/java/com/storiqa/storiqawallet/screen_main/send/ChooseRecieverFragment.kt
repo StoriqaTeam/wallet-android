@@ -67,20 +67,13 @@ class ChooseRecieverFragment : Fragment() {
         }
 
         ivStartScanner.onClick { startScan() }
-
         tvStartScanText.onClick { startScan() }
 
         btnBack.onClick { viewModel.goBack() }
 
-        viewModel.scannedQR.observe(this, Observer {
-            it?.let {
-                binder.etReciever.setText(it)
-            }
-        })
+        viewModel.scannedQR.observe(this, Observer { it?.let { binder.etReciever.setText(it) } })
 
-        btnNext.onClick {
-            viewModel.openSendFinalScreen()
-        }
+        btnNext.onClick { viewModel.openSendFinalScreen() }
 
         when (viewModel.tokenType.get()) {
             Currency.STQ.name -> {
@@ -95,9 +88,31 @@ class ChooseRecieverFragment : Fragment() {
         ivEdit.onClick {
             viewModel.onScreenChanged(Screen.SEND)
         }
+
+        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestAccessToContacts()
+        } else {
+            viewModel.requestContacts()
+        }
     }
 
-    fun startScan() {
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.contacts.observe(this@ChooseRecieverFragment, Observer { newContacts ->
+            newContacts?.let { setContacts(newContacts) }
+            if(etReciever.text.isNotEmpty()) {
+                filterContacts()
+            }
+        })
+
+        if(viewModel.phone.get()!!.isNotEmpty()) {
+            etReciever.setText(viewModel.phone.get()!!)
+            filterContacts()
+        }
+    }
+
+    private fun startScan() {
         Dexter.withActivity(activity).withPermission(Manifest.permission.CAMERA).withListener(object : PermissionListener {
             override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                 startActivityForResult(Intent(context, QrCodeActivity::class.java), RequestCodes().scanQR)
@@ -111,23 +126,9 @@ class ChooseRecieverFragment : Fragment() {
         }).check()
     }
 
-    fun filterContacts() {
+    private fun filterContacts() {
         val searchQuery = etReciever.text.toString()
         setContacts(viewModel.getContacts().filter { it.name.contains(searchQuery) || it.phone.startsWith(searchQuery) }.toTypedArray())
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            requestAccessToContacts()
-        } else {
-            viewModel.requestContacts()
-        }
-
-        viewModel.contacts.observe(this@ChooseRecieverFragment, Observer { newContacts ->
-            newContacts?.let { setContacts(newContacts) }
-        })
     }
 
     private fun requestAccessToContacts() {

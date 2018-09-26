@@ -102,4 +102,5 @@
     <string name="allow">Allow</string>
     <string name="willBeAwailableSoon">Will be available soon</string>
     <string name="errorNoMatch">Error - no match!</string>
+    <string name="confirmTransaction">Confirm transaction</string>
 </resources>

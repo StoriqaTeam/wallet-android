@@ -80,6 +80,13 @@ class SendFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(viewModel.amountInSTQ.value!!.isNotEmpty()) {
+            etAmount.setText(viewModel.amountInSTQ.value!!)
+        }
+    }
+
     private fun addTab(logoOff: Int, logoOn: Int) {
         val view = LayoutInflater.from(context).inflate(R.layout.tab_icon, null, false)
         view.iconOff.setBackgroundResource(logoOff)
@@ -96,7 +103,7 @@ class SendFragment : Fragment() {
 
     private fun observeAmountChanging() {
         RxTextView.afterTextChangeEvents(etAmount)
-                .observeOn(AndroidSchedulers.mainThread()).subscribe { btnNext.isEnabled = etAmount.text.isNotEmpty() }
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { btnNext.isEnabled = false }
 
         RxTextView.afterTextChangeEvents(etAmount).skipInitialValue().debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe { refreshAmountInStq() }

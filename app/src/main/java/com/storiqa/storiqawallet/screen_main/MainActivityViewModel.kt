@@ -34,6 +34,7 @@ class MainActivityViewModel : ViewModel() {
 
     val wallet = ObservableField<String>("")
     val reciever = ObservableField<String>("")
+    val phone = ObservableField<String>("")
     val contacts = MutableLiveData<Array<Contact>>()
     val scannedQR = MutableLiveData<String>()
 
@@ -42,6 +43,7 @@ class MainActivityViewModel : ViewModel() {
     val isContinueButtonEnabled = ObservableField<Boolean>(false)
     val isContinueButtonVisible = ObservableField<Boolean>(false)
     val isContactsLoading = ObservableField<Boolean>(false)
+    val isSentNextButtonEnabled = ObservableField<Boolean>(false)
 
     init {
         contacts.value = arrayOf()
@@ -71,10 +73,12 @@ class MainActivityViewModel : ViewModel() {
 
     fun refreshAmountInStq(tokenType : String, amountInCurrency: BigDecimal) {
         isAmountInStqUpdating.set(true)
+        isSentNextButtonEnabled.set(false)
         CurrencyConverterRepository().getLastConverCources().observeOn(AndroidSchedulers.mainThread()).subscribe {
             amountInSTQ.value = (amountInCurrency * BigDecimal(it[tokenType]!!)).toString()
             this.amountInCurrency = amountInCurrency
             isAmountInStqUpdating.set(false)
+            isSentNextButtonEnabled.set(true)
         }
     }
 
@@ -89,11 +93,13 @@ class MainActivityViewModel : ViewModel() {
     fun clearSenderInfo() {
         wallet.set("")
         reciever.set("")
+        phone.set("")
     }
 
     fun saveRecieverInfo(contact: Contact) {
         wallet.set(contact.wallet)
         reciever.set(contact.name)
+        phone.set(contact.phone)
     }
 
     fun getContacts(): Array<Contact> {

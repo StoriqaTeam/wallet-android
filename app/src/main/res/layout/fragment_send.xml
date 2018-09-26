@@ -241,6 +241,7 @@
             android:layout_marginTop="17dp"
             android:background="@drawable/switch_state_button"
             android:text="@string/next"
+            android:enabled="@{viewModel.isSentNextButtonEnabled? true : false}"
             android:textColor="@drawable/button_color_switcher"
             app:layout_constraintTop_toBottomOf="@+id/svContainer"
             app:layout_constraintBottom_toBottomOf="parent"
