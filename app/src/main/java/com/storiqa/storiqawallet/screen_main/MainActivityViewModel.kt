@@ -67,7 +67,6 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun selectScreen(screen : Screen) {
-        selectedScreen.set(screen)
         onScreenChanged(screen)
     }
 

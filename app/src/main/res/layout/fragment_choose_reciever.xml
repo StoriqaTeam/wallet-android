@@ -243,7 +243,7 @@
             android:id="@+id/btnNext"
             style="@style/buttonStyle"
             android:text="@string/next"
-            android:enabled='@{viewModel.isContinueButtonEnabled &amp;&amp; !viewModel.isAmountInStqUpdating}'
+            android:enabled='@{viewModel.isContinueButtonEnabled}'
             android:visibility='@{viewModel.isContinueButtonVisible? View.VISIBLE : View.GONE}'
             android:background="@drawable/switch_state_button"
             android:textColor="@drawable/button_color_switcher"

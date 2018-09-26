@@ -71,8 +71,6 @@ class ChooseRecieverFragment : Fragment() {
 
         btnBack.onClick { viewModel.goBack() }
 
-        viewModel.scannedQR.observe(this, Observer { it?.let { binder.etReciever.setText(it) } })
-
         btnNext.onClick { viewModel.openSendFinalScreen() }
 
         when (viewModel.tokenType.get()) {
@@ -94,10 +92,6 @@ class ChooseRecieverFragment : Fragment() {
         } else {
             viewModel.requestContacts()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         viewModel.contacts.observe(this@ChooseRecieverFragment, Observer { newContacts ->
             newContacts?.let { setContacts(newContacts) }
@@ -105,11 +99,27 @@ class ChooseRecieverFragment : Fragment() {
                 filterContacts()
             }
         })
+    }
 
-        if(viewModel.phone.get()!!.isNotEmpty()) {
+    override fun onResume() {
+        super.onResume()
+
+        if(viewModel.phone.get()!!.isNotEmpty() && etReciever.text.isEmpty()) {
             etReciever.setText(viewModel.phone.get()!!)
             filterContacts()
         }
+
+        viewModel.scannedQR.observe(this, Observer {
+            it?.let { binder.etReciever.setText(it) }
+            viewModel.wallet.set(it)
+            viewModel.reciever.set("Wallet owner")
+
+//            setContacts(arrayOf())
+            setAdapter(arrayOf())
+            viewModel.isFoundErrorVisible.set(false)
+            viewModel.isSentNextButtonEnabled.set(true)
+            viewModel.isContinueButtonVisible.set(true)
+        })
     }
 
     private fun startScan() {
@@ -180,6 +190,10 @@ class ChooseRecieverFragment : Fragment() {
 
         viewModel.isFoundErrorVisible.set(newContacts.isEmpty() && etReciever.text.isNotEmpty())
 
+        setAdapter(newContacts)
+    }
+
+    fun setAdapter(newContacts: Array<Contact>) {
         rvContacts.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)

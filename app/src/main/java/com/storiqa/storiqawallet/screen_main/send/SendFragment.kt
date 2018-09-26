@@ -82,8 +82,8 @@ class SendFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if(viewModel.amountInSTQ.value!!.isNotEmpty()) {
-            etAmount.setText(viewModel.amountInSTQ.value!!)
+        if(viewModel.amountInCurrency != BigDecimal.ZERO) {
+            etAmount.setText(viewModel.amountInCurrency .toString())
         }
     }
 
