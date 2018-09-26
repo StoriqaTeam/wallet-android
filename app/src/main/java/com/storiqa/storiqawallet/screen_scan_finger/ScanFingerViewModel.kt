@@ -9,6 +9,7 @@ class ScanFingerViewModel : ViewModel() {
     val isAuthFailed = ObservableField<Boolean>(false)
 
     fun startListenForFingerprint() {
+        isAuthFailed.set(false)
         ScanFingerModel().startListenForFingerprint({
             isAuthSucced.set(true)
             isAuthFailed.set(false)

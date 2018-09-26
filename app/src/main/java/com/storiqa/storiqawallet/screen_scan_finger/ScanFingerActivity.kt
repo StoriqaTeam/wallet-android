@@ -13,20 +13,25 @@ import kotlinx.android.synthetic.main.activity_scan_finger.*
 
 class ScanFingerActivity : AppCompatActivity() {
 
+    lateinit var viewModel: ScanFingerViewModel
+
     @TargetApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel = ViewModelProviders.of(this).get(ScanFingerViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ScanFingerViewModel::class.java)
         val binding: ActivityScanFingerBinding = DataBindingUtil.setContentView(this, R.layout.activity_scan_finger)
         binding.viewModel = viewModel
         binding.executePendingBindings()
-        viewModel.startListenForFingerprint()
 
         btnConfirm.setOnClickListener { ScreenStarter().startMainScreen(this) }
 
         btnGoBack.setOnClickListener { onBackPressed() }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.startListenForFingerprint()
+    }
 }
 

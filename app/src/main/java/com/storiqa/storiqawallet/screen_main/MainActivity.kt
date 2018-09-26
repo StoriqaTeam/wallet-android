@@ -20,6 +20,9 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.storiqa.storiqawallet.constants.RequestCodes
+import com.storiqa.storiqawallet.screen_main.deposit.DepositFragment
+import com.storiqa.storiqawallet.screen_main.exchange.ExchangeFragment
+import com.storiqa.storiqawallet.screen_main.menu.MenuFragment
 import com.storiqa.storiqawallet.screen_main.send.SendFinalScreen
 
 
@@ -48,6 +51,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.goBack = {
             if (supportFragmentManager.backStackEntryCount > 1) {
                 supportFragmentManager.popBackStack()
+            } else {
+                finish()
             }
         }
 
@@ -58,12 +63,24 @@ class MainActivity : AppCompatActivity() {
         viewModel.onScreenChanged = { newScreen ->
             when (newScreen) {
                 Screen.MY_WALLET -> { loadMyWalletFragment() }
-                Screen.DEPOSIT -> { }
-                Screen.EXCHANGE -> { }
+                Screen.DEPOSIT -> { loadDepositFragment()}
+                Screen.EXCHANGE -> {loadExchangeFragment() }
                 Screen.SEND -> { loadSendFragment() }
-                Screen.MENU -> { }
+                Screen.MENU -> { loadMenuFragment() }
             }
         }
+    }
+
+    private fun loadMenuFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.flWallet, MenuFragment()).addToBackStack("").commit()
+    }
+
+    private fun loadExchangeFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.flWallet, ExchangeFragment()).addToBackStack("").commit()
+    }
+
+    private fun loadDepositFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.flWallet, DepositFragment()).addToBackStack("").commit()
     }
 
     fun observeBillSelection() {
@@ -75,8 +92,6 @@ class MainActivity : AppCompatActivity() {
             transaction.commit()
         }
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = data?.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult")

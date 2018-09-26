@@ -103,4 +103,7 @@
     <string name="willBeAwailableSoon">Will be available soon</string>
     <string name="errorNoMatch">Error - no match!</string>
     <string name="confirmTransaction">Confirm transaction</string>
+    <string name="exchange">Exchange</string>
+    <string name="menu">Menu</string>
+    <string name="willBeAvailableSoon">Will be available soon</string>
 </resources>
