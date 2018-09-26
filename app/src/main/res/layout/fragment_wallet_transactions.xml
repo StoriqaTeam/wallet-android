@@ -39,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="102dp"
             android:layout_marginTop="14dp"
+            tools:foreground="@color/recievedGreen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnBack" />
@@ -62,7 +63,7 @@
             style="@style/myWalletButtonContainerStyle"
             android:layout_marginLeft="19dp"
             android:layout_marginRight="6dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="7dp"
             app:layout_constraintEnd_toStartOf="@+id/btnChange"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -158,6 +159,16 @@
             app:layout_constraintTop_toBottomOf="@+id/textView22"
             tools:listitem="@layout/item_transaction" />
 
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:scaleY="-1"
+            android:layout_marginTop="@dimen/actionBarMarginTop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/shad_nav_bar" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

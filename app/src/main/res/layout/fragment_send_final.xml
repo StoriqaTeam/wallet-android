@@ -24,12 +24,15 @@
 
         <TextView
             android:id="@+id/textView19"
+            style="@style/header"
+            android:layout_marginLeft="72dp"
+            android:layout_marginStart="72dp"
             android:text="@string/send"
             app:layout_constraintBottom_toBottomOf="@+id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnBack"
-            style="@style/header" />
+            app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
 
         <ScrollView
@@ -107,6 +110,8 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </android.support.constraint.ConstraintLayout>
+
+
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_marginTop="17dp"
@@ -311,6 +316,16 @@
                         app:layout_constraintVertical_bias="1.0" />
 
                 </android.support.constraint.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:scaleY="-1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/shad_nav_bar" />
 
             </android.support.constraint.ConstraintLayout>
 

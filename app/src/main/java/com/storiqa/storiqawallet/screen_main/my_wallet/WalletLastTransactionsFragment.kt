@@ -38,6 +38,7 @@ class WalletLastTransactionsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_wallet_transactions, container, false)
+        viewModel.selectedScreen.set(Screen.MY_WALLET)
 
         BillPagerHelper(R.layout.item_bill_small, childFragmentManager) { pageNumber ->
             viewModel.updateTransactionList(bills[pageNumber].id, maxAmountOfTransactions)

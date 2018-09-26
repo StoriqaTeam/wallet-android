@@ -62,29 +62,20 @@ class ChooseRecieverFragment : Fragment() {
                 setContacts(viewModel.getContacts())
                 viewModel.clearSenderInfo()
             } else {
-                val searchQuery = etReciever.text.toString()
-                setContacts(viewModel.getContacts().filter { it.name.contains(searchQuery) || it.phone.startsWith(searchQuery) }.toTypedArray())
+                filterContacts()
             }
         }
 
-        ivStartScanner.onClick {
-            Dexter.withActivity(activity).withPermission(Manifest.permission.CAMERA).withListener(object : PermissionListener {
-                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    startActivityForResult(Intent(context, QrCodeActivity::class.java), RequestCodes().scanQR)
-                }
+        ivStartScanner.onClick { startScan() }
 
-                override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
-                    token?.continuePermissionRequest()
-                }
-
-                override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
-            }).check()
-        }
+        tvStartScanText.onClick { startScan() }
 
         btnBack.onClick { viewModel.goBack() }
 
         viewModel.scannedQR.observe(this, Observer {
-            it?.let { binder.etReciever.setText(it) }
+            it?.let {
+                binder.etReciever.setText(it)
+            }
         })
 
         btnNext.onClick {
@@ -106,6 +97,25 @@ class ChooseRecieverFragment : Fragment() {
         }
     }
 
+    fun startScan() {
+        Dexter.withActivity(activity).withPermission(Manifest.permission.CAMERA).withListener(object : PermissionListener {
+            override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                startActivityForResult(Intent(context, QrCodeActivity::class.java), RequestCodes().scanQR)
+            }
+
+            override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
+                token?.continuePermissionRequest()
+            }
+
+            override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
+        }).check()
+    }
+
+    fun filterContacts() {
+        val searchQuery = etReciever.text.toString()
+        setContacts(viewModel.getContacts().filter { it.name.contains(searchQuery) || it.phone.startsWith(searchQuery) }.toTypedArray())
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -115,17 +125,12 @@ class ChooseRecieverFragment : Fragment() {
             viewModel.requestContacts()
         }
 
-        if (viewModel.wallet.get()!!.isNotEmpty()) {
-            binder.etReciever.setText(viewModel.reciever.get()!!)
-        }
-
         viewModel.contacts.observe(this@ChooseRecieverFragment, Observer { newContacts ->
             newContacts?.let { setContacts(newContacts) }
-
         })
     }
 
-    fun requestAccessToContacts() {
+    private fun requestAccessToContacts() {
         val view = layoutInflater.inflate(R.layout.layout_ask_contacts, null, false)
 
         val dialog = AlertDialog.Builder(context!!).setView(view).create()

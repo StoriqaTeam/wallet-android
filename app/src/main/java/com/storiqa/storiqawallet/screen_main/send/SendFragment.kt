@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v4.content.res.ResourcesCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +20,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import com.storiqa.storiqawallet.enums.Screen
 import kotlinx.android.synthetic.main.fragment_send.view.*
 import org.jetbrains.anko.support.v4.dip
 
@@ -36,6 +36,8 @@ class SendFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binder = FragmentSendBinding.inflate(inflater, container, false)
+        viewModel.selectedScreen.set(Screen.SEND)
+
         binder.viewModel = viewModel
         binder.executePendingBindings()
 
