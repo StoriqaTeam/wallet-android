@@ -48,7 +48,8 @@ class SendFinalScreen : Fragment() {
         }
 
         ivEdit.onClick {
-            viewModel.onScreenChanged(Screen.SEND)
+            viewModel.goBack()
+            viewModel.goBack()
         }
 
         when(viewModel.tokenType.get()) {
@@ -107,6 +108,8 @@ class SendFinalScreen : Fragment() {
 
             view.tvMessage.text = "You are going to send ${viewModel.amountInSTQ.value} STQ to ${viewModel.wallet.get()} "
             view.tvConfirm.onClick {
+                viewModel.clearSendAmountInfo()
+                viewModel.clearSenderInfo()
                 viewModel.loadBillInfo(viewModel.selectedBillId)
                 if(dialog.isShowing) {
                     dialog.dismiss()

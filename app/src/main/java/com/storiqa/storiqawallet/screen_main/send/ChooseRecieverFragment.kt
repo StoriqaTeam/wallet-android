@@ -84,7 +84,7 @@ class ChooseRecieverFragment : Fragment() {
 
 
         ivEdit.onClick {
-            viewModel.onScreenChanged(Screen.SEND)
+            viewModel.goBack()
         }
 
         if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
