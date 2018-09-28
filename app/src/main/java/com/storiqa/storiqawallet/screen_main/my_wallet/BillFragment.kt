@@ -24,9 +24,12 @@ class BillFragment : Fragment() {
         val bill = arguments?.getSerializable(Extras().bill) as Bill
 
         binding.apply {
+            var isSmall = false
             if(binding is ItemBillBinding) {
+                isSmall = false
                 (binding as ItemBillBinding).bill = bill
             } else {
+                isSmall = true
                 (binding as ItemBillSmallBinding).bill = bill
             } //TODO refactore. Break of Open/close principle
 
@@ -34,7 +37,7 @@ class BillFragment : Fragment() {
             root.setPadding(dip(7), 0, dip(7), 0)
 
             val billInfo = BillInfo(bill)
-            billInfo.initBillView(root)
+            billInfo.initBillView(root, isSmall)
         }
         return binding.root
     }

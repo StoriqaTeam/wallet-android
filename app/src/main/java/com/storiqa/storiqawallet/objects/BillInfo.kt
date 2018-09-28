@@ -37,6 +37,22 @@ class BillInfo(val bill : Bill) {
         }
     }
 
+    private fun getBillSmallImage() : Int {
+        return when(bill.tokenType) {
+            "STQ" -> {
+                return when {
+                    isGold() -> R.drawable.stq_gold_small
+                    isBlack() -> R.drawable.stq_black_small
+                    else -> R.drawable.stq_small_card
+                }
+            }
+            "ETH" -> return R.drawable.cart_ether_small_card
+            "BTC" -> return R.drawable.bitcoin_cart_small_card
+            else -> 0
+        }
+    }
+
+
     private fun getBillStatus() : Int {
         return when {
             isRegular() -> R.string.emptyText
@@ -79,7 +95,7 @@ class BillInfo(val bill : Bill) {
         return bill.tokenType == "STQ"
     }
 
-    fun initBillView(root: View) {
+    fun initBillView(root: View, isSmall : Boolean = false) {
         root.tvBillStatus.text = root.context.getString(getBillStatus())
         root.clBill.setBackgroundResource(getBillColor())
 
@@ -87,7 +103,7 @@ class BillInfo(val bill : Bill) {
         root.tvTokenType.setTextColor(textColor)
         root.tvHolderName.setTextColor(textColor)
         root.tvAmount.setTextColor(textColor)
-        root.ivBillLogo.setImageResource(getBillImage())
+        root.ivBillLogo.setImageResource(if(isSmall) getBillSmallImage() else getBillImage())
 
         val additionalInforColor = ResourcesCompat.getColor(root.context.resources, getBillInfoColors(), null)
         root.tvBillStatus.setTextColor(additionalInforColor)
