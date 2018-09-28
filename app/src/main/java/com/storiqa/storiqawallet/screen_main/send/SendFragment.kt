@@ -127,12 +127,12 @@ class SendFragment : Fragment() {
                 })
 
                 if(viewModel.tokenType.get()!!.isEmpty()) {
-                    editLayout.visibility = View.GONE
+                    editLayout.visibility = View.INVISIBLE
                     commingSoon.visibility = View.VISIBLE
                     etAmount.setText("")
                 } else {
                     editLayout.visibility = View.VISIBLE
-                    commingSoon.visibility = View.GONE
+                    commingSoon.visibility = View.GONE //TODO move to binding
                 }
 
                 tab?.customView?.iconOn?.visibility = View.VISIBLE
