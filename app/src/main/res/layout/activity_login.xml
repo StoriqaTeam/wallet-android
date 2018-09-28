@@ -21,12 +21,11 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".screen_login.LoginActivity">
+        android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -35,7 +34,7 @@
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/tvSignIn"
@@ -107,8 +106,9 @@
                         <ImageView
                             android:id="@+id/ivShowPassword"
                             style="@style/watchPasswordButton"
-                            tools:background="@drawable/closed_eye"
-                            android:background="@{viewModel.isPasswordVisible ? @drawable/eye_opened : @drawable/closed_eye}"
+                            tools:src="@drawable/closed_eye"
+                            android:padding="10dp"
+                            android:src="@{viewModel.isPasswordVisible ? @drawable/eye_opened : @drawable/closed_eye}"
                             android:onClick="@{()->viewModel.changePasswordVisibility()}"/>
 
                     </RelativeLayout>
@@ -186,21 +186,22 @@
 
 
 
-                <ImageView
-                    style="@style/purpleSpotStyle"
-                    tools:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <ImageView
-                    style="@style/blueSpotStyle"
-                    tools:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 
         </ScrollView>
+
+        <ImageView
+            style="@style/purpleSpotStyle"
+            tools:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            style="@style/blueSpotStyle"
+            tools:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

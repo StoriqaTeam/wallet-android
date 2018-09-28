@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_recover_password.*
 import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
+import com.storiqa.storiqawallet.R.id.etEmail
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import kotlinx.android.synthetic.main.layout_mail_sent.view.*
 
@@ -38,18 +39,7 @@ class RecoverPasswordActivity : MvpAppCompatActivity(), RecoverPasswordView {
 
         android.support.v7.app.AlertDialog.Builder(this)
                 .setView(view)
-                .setPositiveButton(getString(R.string.openEmail)) { _: DialogInterface, i: Int ->
-                    val intent = Intent(Intent.ACTION_SEND)
-                    val mailer = Intent.createChooser(intent, null)
-
-                    if(intent.resolveActivity(packageManager) != null) {
-                        startActivity(mailer)
-                    } else {
-                        Toast.makeText(this@RecoverPasswordActivity, getString(R.string.noEmailProgram), Toast.LENGTH_LONG).show()
-                    }
-                }.setNegativeButton(getString(R.string.cancel)) { _: DialogInterface, i: Int ->
-                    finish()
-                }.show()
+                .show()
     }
 
     override fun showGeneralError() {
