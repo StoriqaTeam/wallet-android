@@ -43,7 +43,8 @@
             android:id="@+id/svContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnNext"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnBack">
@@ -223,33 +224,33 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/tvAmountInSTQ" />
 
+
                 </android.support.constraint.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/btnNext"
+                    style="@style/buttonStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/switch_state_button"
+                    android:enabled="@{viewModel.isSentNextButtonEnabled? true : false}"
+                    android:text="@string/next"
+                    android:textColor="@drawable/button_color_switcher"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/editLayout"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:textColor="@android:color/white" />
 
             </android.support.constraint.ConstraintLayout>
 
         </ScrollView>
-
-        <Button
-            android:id="@+id/btnNext"
-            style="@style/buttonStyle"
-            android:layout_width="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="17dp"
-            android:background="@drawable/switch_state_button"
-            android:text="@string/next"
-            android:enabled="@{viewModel.isSentNextButtonEnabled? true : false}"
-            android:textColor="@drawable/button_color_switcher"
-            app:layout_constraintTop_toBottomOf="@+id/svContainer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            tools:textColor="@android:color/white" />
 
         <ImageView
             android:id="@+id/imageView8"

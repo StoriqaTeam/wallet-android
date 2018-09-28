@@ -31,5 +31,5 @@ class ScreenStarter {
 
     fun startFingerScanScreen(context: Context) = context.startActivity(Intent(context, ScanFingerActivity::class.java))
 
-    fun startEnterPinCodeScreenForLogin(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.LOGIN))
+    fun startEnterPinCodeScreenForLogin(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.LOGIN).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
 }
