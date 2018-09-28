@@ -18,7 +18,19 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView22"
+            android:layout_marginBottom="23dp"
+            app:srcCompat="@drawable/wallet_back_gradient"/>
+
+        <ImageView
             android:id="@+id/btnBack"
+            android:src="@drawable/back_white"
             style="@style/arrowBackStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,6 +40,7 @@
             style="@style/header"
             android:text="@string/account"
             android:layout_marginLeft="72dp"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@+id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -76,6 +89,7 @@
 
             <TextView
                 style="@style/blackMediumText"
+                android:textColor="@color/pale_salmon"
                 android:layout_marginLeft="5dp"
                 android:text="@string/send" />
         </LinearLayout>
@@ -96,6 +110,7 @@
 
             <TextView
                 style="@style/blackMediumText"
+                android:textColor="@android:color/white"
                 android:layout_marginLeft="5dp"
                 android:text="@string/change" />
         </LinearLayout>
@@ -116,6 +131,7 @@
 
             <TextView
                 style="@style/blackMediumText"
+                android:textColor="@color/greenish_turquoise"
                 android:layout_marginLeft="5dp"
                 android:text="@string/deposit" />
         </LinearLayout>
@@ -127,7 +143,7 @@
             style="@style/sendTitleStyle"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="43dp"
             android:text="@string/lastTransactions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnSend" />
@@ -159,16 +175,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView22"
             tools:listitem="@layout/item_transaction" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="0dp"
-            android:layout_height="8dp"
-            android:scaleY="-1"
-            android:layout_marginTop="@dimen/actionBarMarginTop"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/shad_nav_bar" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

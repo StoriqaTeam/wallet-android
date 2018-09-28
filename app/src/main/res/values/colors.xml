@@ -13,8 +13,8 @@
     <color name="oppacedSkyBlue">#1a00b2ff</color>
     <color name="grayLine">#1e000000</color>
     <color name="captionGrey">#879db9</color>
-    <color name="sentRed">#ff2d55</color>
-    <color name="recievedGreen">#52a88a</color>
+    <color name="sentRed">#ee7171</color>
+    <color name="recievedGreen">#0be7a0</color>
     <color name="contactGray">#f7f7f7</color>
     <color name="contactImageText">#c3cedc</color>
     <color name="bluegrey">#889eba</color>
@@ -26,4 +26,6 @@
     <color name="pinCircleGrey">#e4e4e4</color>
     <color name="charcoal">#1e201d</color>
     <color name="black5oppacity">#0D000000</color>
+    <color name="pale_salmon">#ffa5a5</color>
+    <color name="greenish_turquoise">#00ffac</color>
 </resources>

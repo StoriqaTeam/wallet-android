@@ -13,6 +13,7 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:background="@drawable/wallet_back_gradient"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".screen_main.MainActivity">
@@ -26,8 +27,8 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/myWallet"
-            android:textColor="@color/charcoal"
-            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="8dp"
             android:scaleY="-1"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/actionBarMarginTop"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

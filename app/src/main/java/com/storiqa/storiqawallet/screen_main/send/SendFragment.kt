@@ -85,6 +85,8 @@ class SendFragment : Fragment() {
         if(viewModel.amountInCurrency != BigDecimal.ZERO) {
             etAmount.setText(viewModel.amountInCurrency.toString())
         }
+
+        if(viewModel.tokenType)
     }
 
     private fun addTab(logoOff: Int, logoOn: Int) {
