@@ -189,6 +189,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="8dp"
                         android:layout_marginEnd="8dp"
+                        android:visibility="@{viewModel.isAmountInStqUpdating? View.INVISIBLE : View.VISIBLE}"
                         android:layout_marginRight="8dp"
                         android:textColor="@color/bluegrey"
                         android:typeface="normal"
@@ -218,10 +219,14 @@
                         style="?android:attr/progressBarStyle"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginRight="42dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="8dp"
                         android:visibility="@{viewModel.isAmountInStqUpdating? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="@+id/tvAmountInSTQ"
-                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tvAmountInSTQ"
+                        app:layout_constraintStart_toStartOf="@+id/tvAmountInSTQ"
                         app:layout_constraintTop_toTopOf="@+id/tvAmountInSTQ" />
 
 

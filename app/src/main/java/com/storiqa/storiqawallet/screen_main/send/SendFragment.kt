@@ -83,7 +83,7 @@ class SendFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if(viewModel.amountInCurrency != BigDecimal.ZERO) {
-            etAmount.setText(viewModel.amountInCurrency .toString())
+            etAmount.setText(viewModel.amountInCurrency.toString())
         }
     }
 
@@ -102,8 +102,10 @@ class SendFragment : Fragment() {
     }
 
     private fun observeAmountChanging() {
-        RxTextView.afterTextChangeEvents(etAmount)
-                .observeOn(AndroidSchedulers.mainThread()).subscribe { btnNext.isEnabled = false }
+        RxTextView.afterTextChangeEvents(etAmount).skipInitialValue()
+                .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    viewModel.isAmountInStqUpdating.set(true)
+                    btnNext.isEnabled = false }
 
         RxTextView.afterTextChangeEvents(etAmount).skipInitialValue().debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe { refreshAmountInStq() }
@@ -146,6 +148,7 @@ class SendFragment : Fragment() {
         if(etAmount != null) {
             if (etAmount.text.isEmpty()) {
                 viewModel.amountInSTQ.value = "0"
+                viewModel.isAmountInStqUpdating.set(false)
             } else {
                 viewModel.refreshAmountInStq(viewModel.tokenType.get()!!, BigDecimal(etAmount.text.toString()))
             }
