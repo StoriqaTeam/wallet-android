@@ -113,4 +113,11 @@ class MainActivityViewModel : ViewModel() {
         return contacts.value!!
     }
 
+    fun clearSendAmountInfo() {
+        amount.set(BigDecimal.ZERO)
+        amountInSTQ.value = ""
+        amountInCurrency = BigDecimal.ZERO
+        scannedQR.value = ""
+    }
+
 }
