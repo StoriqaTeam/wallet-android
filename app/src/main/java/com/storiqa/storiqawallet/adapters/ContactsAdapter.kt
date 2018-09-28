@@ -10,6 +10,7 @@ import com.storiqa.storiqawallet.databinding.ItemContactBinding
 import com.storiqa.storiqawallet.objects.Contact
 import kotlinx.android.synthetic.main.item_contact.view.*
 import android.net.Uri
+import org.jetbrains.anko.dip
 
 class ContactsAdapter(private val contacts : Array<Contact>, val onClick : (position : Int) -> Unit) : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
@@ -42,6 +43,7 @@ class ContactsAdapter(private val contacts : Array<Contact>, val onClick : (posi
                     root.tvNameShorten.visibility = View.VISIBLE
                     root.ivContact.setImageResource(R.color.contactGray)
                 }
+                root.setPadding(root.context.dip(17),0,root.context.dip(17), 0)
             }
         }
     }
