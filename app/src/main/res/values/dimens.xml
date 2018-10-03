@@ -4,4 +4,7 @@
     <dimen name="registerEditTextSideMargin">29dp</dimen>
     <dimen name="textInputLayoutRegisterTopMargin">8dp</dimen>
     <dimen name="splash_logo_top_margin">72dp</dimen>
+    <dimen name="send_header_radius">12dp</dimen>
+    <dimen name="actionBarMarginTop">57dp</dimen>
+    <dimen name="navBarHeight">56dp</dimen>
 </resources>

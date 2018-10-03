@@ -20,13 +20,13 @@
 
         <ImageView
             android:id="@+id/imageView11"
-            android:layout_width="29dp"
-            android:layout_height="29dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="reci"
-            android:src= "@{transaction.transactionType == TransactionType.SEND? @drawable/sent : @drawable/recieved}" />
+            tools:src="@drawable/deposit_icon_round"
+            android:src= "@{transaction.transactionType == TransactionType.SEND? @drawable/send_icon_round : @drawable/deposit_icon_round}" />
 
         <TextView
             android:id="@+id/tvTransactionHeader"
@@ -34,8 +34,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
+            android:fontFamily="@font/roboto"
             android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:textSize="13sp"
             app:layout_constraintStart_toEndOf="@+id/imageView11"
             app:layout_constraintTop_toTopOf="@+id/imageView11"
             tools:text="Receive ETH" />
@@ -45,7 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:textColor="@android:color/black"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/warm_grey"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="@+id/tvTransactionHeader"
             app:layout_constraintTop_toBottomOf="@+id/tvTransactionHeader"
             tools:text="from 0xe3f…78345hj" />
@@ -55,17 +58,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto"
+            android:text="@{transaction.formattedDate}"
+            android:textColor="@color/pinkish_grey"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/tvTransactionDescription"
             app:layout_constraintTop_toBottomOf="@+id/tvTransactionDescription"
-            android:text="@{transaction.formattedDate}"
             tools:text="17:22 Aug 11" />
 
         <TextView
             android:id="@+id/tvAmountInToken"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor = "@{transaction.transactionType == TransactionType.SEND? @color/sentRed : @color/recievedGreen}"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@{transaction.transactionType == TransactionType.SEND? @color/sentRed : @color/recievedGreen}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvTransactionHeader"
             tools:text="+0.00010000127 ETH" />
@@ -75,16 +81,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:fontFamily="@font/roboto"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/warm_grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAmountInToken"
             tools:text="+$0.029" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/grayLine"
-            app:layout_constraintTop_toBottomOf="@id/textView25" />
+
     </android.support.constraint.ConstraintLayout>
 
 </layout>

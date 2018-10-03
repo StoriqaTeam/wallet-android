@@ -16,4 +16,10 @@ class PinCodeModel {
         return PreferencesHelper(StoriqaApp.context).getPinCode().equals(pincode)
     }
 
+    fun eraseUserQuickLaunch() {
+        PreferencesHelper(StoriqaApp.context).setFingerprintEnabled(false)
+        PreferencesHelper(StoriqaApp.context).setPinCodeEnabled(false)
+        PreferencesHelper(StoriqaApp.context).setQuickLaunchFinished(false)
+    }
+
 }

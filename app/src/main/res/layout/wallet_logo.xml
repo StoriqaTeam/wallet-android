@@ -5,21 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--TODO change icon-->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="107dp"
-        android:layout_height="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/storiqa_logo" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/wallet"
-        android:lineSpacingExtra="0sp"
+        android:fontFamily="@font/roboto_thin"
         android:gravity="center_horizontal"
+        android:lineSpacingExtra="0sp"
+        android:text="@string/wallet"
         android:textColor="@color/brightSkyBlue"
         android:textSize="36sp" />
 </LinearLayout>

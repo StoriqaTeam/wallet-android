@@ -7,7 +7,6 @@ import com.storiqa.storiqawallet.enums.PinCodeEnterType
 import com.storiqa.storiqawallet.screen_login.LoginActivity
 import com.storiqa.storiqawallet.screen_main.MainActivity
 import com.storiqa.storiqawallet.screen_pin_code_enter.EnterPinCodeActivity
-import com.storiqa.storiqawallet.screen_pincode_setup.PinCodeSetupActivity
 import com.storiqa.storiqawallet.screen_quick_start.QuickStartActivity
 import com.storiqa.storiqawallet.screen_recover_password.screen_recover_email_enter_first_step.RecoverPasswordActivity
 import com.storiqa.storiqawallet.screen_register.RegisterActivity
@@ -22,8 +21,6 @@ class ScreenStarter {
 
     fun startRecoverPasswordScreen(context: Context) = context.startActivity(Intent(context, RecoverPasswordActivity::class.java))
 
-    fun startPinCodeSetupScreen(context: Context) = context.startActivity(Intent(context, PinCodeSetupActivity::class.java))
-
     fun startEnterPinCodeScreen(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.SET_PASSWORD))
 
     fun startQuickStartScreen(context: Context) = context.startActivity(Intent(context, QuickStartActivity::class.java))
@@ -34,5 +31,5 @@ class ScreenStarter {
 
     fun startFingerScanScreen(context: Context) = context.startActivity(Intent(context, ScanFingerActivity::class.java))
 
-    fun startEnterPinCodeScreenForLogin(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.LOGIN))
+    fun startEnterPinCodeScreenForLogin(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.LOGIN).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
 }

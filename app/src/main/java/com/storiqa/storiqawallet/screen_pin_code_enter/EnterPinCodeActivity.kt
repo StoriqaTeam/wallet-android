@@ -20,16 +20,21 @@ import kotlinx.android.synthetic.main.activity_enter_pin_code.*
 import android.os.VibrationEffect
 import android.os.Build
 import android.os.Vibrator
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
+
+    lateinit var ivFingerprint : ImageView
+    lateinit var viewModel : EnterPinViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel = ViewModelProviders.of(this, EnterPinViewModelFactory(this)).get(EnterPinViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, EnterPinViewModelFactory(this)).get(EnterPinViewModel::class.java)
 
         val binding: ActivityEnterPinCodeBinding = DataBindingUtil.setContentView(this, R.layout.activity_enter_pin_code)
         binding.viewModel = viewModel
+
         binding.executePendingBindings()
 
         btnBack.setOnClickListener { onBackPressed() }
@@ -43,15 +48,23 @@ class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
                 startFingerprintDialog(viewModel)
             }
         }
+
+        tvForgotPin.onClick {
+            ScreenStarter().startLoginScreen(this@EnterPinCodeActivity)
+            viewModel.eraseUserQuickLaunch()
+        }
     }
 
     fun startFingerprintDialog(viewModel: EnterPinViewModel) {
         val view = LayoutInflater.from(this).inflate(R.layout.layout_scan_finger_for_login, null, false)
-        val ivFingerprint = view.findViewById<ImageView>(R.id.ivFingerprint)
+        ivFingerprint = view.findViewById<ImageView>(R.id.ivFingerprint)
         AlertDialog.Builder(this).setView(view).show()
+    }
 
+    override fun onResume() {
+        super.onResume()
         viewModel.startListenForFingerprint({
-            ivFingerprint.setImageResource(R.drawable.fingerprint_blue)
+            ivFingerprint.setImageResource(R.drawable.touchid_icon)
             ScreenStarter().startMainScreen(this)
         }, {})
     }

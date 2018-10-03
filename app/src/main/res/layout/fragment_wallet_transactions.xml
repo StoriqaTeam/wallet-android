@@ -18,31 +18,135 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView22"
+            android:layout_marginBottom="23dp"
+            app:srcCompat="@drawable/wallet_back_gradient"/>
+
+        <ImageView
             android:id="@+id/btnBack"
+            android:src="@drawable/back_white"
             style="@style/arrowBackStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/header"
+            android:text="@string/account"
+            android:layout_marginLeft="72dp"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
         <android.support.v4.view.ViewPager
             android:id="@+id/vpBills"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="14dp"
+            tools:foreground="@color/recievedGreen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/pageIndicator"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:text="Last transactions"
-            android:textColor="@color/captionGrey"
+            android:layout_width="match_parent"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabPaddingStart="7dp"
+            app:tabPaddingEnd="7dp"
+            tools:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vpBills" />
+
+        <LinearLayout
+            android:id="@+id/btnSend"
+            style="@style/myWalletButtonContainerStyle"
+            android:layout_marginLeft="19dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="7dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnChange"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pageIndicator">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/send_icon" />
+
+            <TextView
+                style="@style/blackMediumText"
+                android:textColor="@color/pale_salmon"
+                android:layout_marginLeft="5dp"
+                android:text="@string/send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnChange"
+            style="@style/myWalletButtonContainerStyle"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnDeposit"
+            app:layout_constraintStart_toEndOf="@+id/btnSend"
+            app:layout_constraintTop_toTopOf="@+id/btnSend">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/change_icon" />
+
+            <TextView
+                style="@style/blackMediumText"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="5dp"
+                android:text="@string/change" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnDeposit"
+            style="@style/myWalletButtonContainerStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="19dp"
+            app:layout_constraintStart_toEndOf="@+id/btnChange"
+            app:layout_constraintTop_toTopOf="@+id/btnSend">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/deposit_icon" />
+
+            <TextView
+                style="@style/blackMediumText"
+                android:textColor="@color/greenish_turquoise"
+                android:layout_marginLeft="5dp"
+                android:text="@string/deposit" />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/textView22"
+            style="@style/sendTitleStyle"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="43dp"
+            android:text="@string/lastTransactions"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSend" />
 
         <TextView
             android:id="@+id/tvViewAll"
@@ -50,19 +154,20 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="View all"
+            android:text="@string/viewAll"
+            android:textSize="13sp"
+            android:fontFamily="@font/roboto"
             android:textColor="@color/brightSkyBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView22" />
 
         <android.support.v7.widget.RecyclerView
+            tools:layout_marginLeft="20dp"
+            tools:layout_marginRight="20dp"
             android:id="@+id/rvTransactions"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

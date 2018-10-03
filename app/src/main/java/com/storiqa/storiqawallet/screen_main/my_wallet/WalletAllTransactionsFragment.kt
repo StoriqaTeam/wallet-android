@@ -39,6 +39,6 @@ class WalletAllTransactionsFragment : Fragment() {
                 adapter = TransactionAdapter(newTransactions!!, {})
             }
         })
-        viewModel.updateTransactionList(viewModel.selectedBillId.value!!)
+        viewModel.updateTransactionList(viewModel.selectedBillId)
     }
 }

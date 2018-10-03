@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.screen_main.MainActivityViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            style="@style/arrowBackStyle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView19"
+            style="@style/header"
+            android:layout_marginLeft="72dp"
+            android:layout_marginStart="72dp"
+            android:text="@string/send"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            style="@style/send_header_container"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnBack">
+
+            <TextView
+                android:id="@+id/textView24"
+                style="@style/sendHeader"
+                android:fontFamily="@font/roboto"
+                android:text="@string/sending"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAmountInCurrency"
+                style="@style/sendAmountStyle"
+                android:layout_marginBottom="19dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:text='@{viewModel.amountInCurrency + " " + viewModel.tokenType}'
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/textView24"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="0.00340000 BTC" />
+
+            <TextView
+                android:id="@+id/tvAmountInSTQ"
+                style="@style/sendAmountStyle"
+                android:layout_marginBottom="19dp"
+                android:fontFamily="@font/roboto_light"
+                android:text='@{"~" + viewModel.amountInSTQ + " STQ"}'
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvAmountInCurrency"
+                app:layout_constraintTop_toBottomOf="@+id/tvAmountInCurrency"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="=10322.22 STQ" />
+
+            <ImageView
+                android:id="@+id/ivEdit"
+                style="@style/buttonEdit"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/tvAmountInSTQ"
+                app:layout_constraintStart_toEndOf="@+id/tvAmountInCurrency"
+                app:layout_constraintTop_toTopOf="@+id/tvAmountInCurrency" />
+
+            <ImageView
+                android:id="@+id/currencyLogo"
+                style="@style/currencySign"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@android:color/black"
+                tools:layout_height="48dp"
+                tools:layout_width="48dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/sendTo"
+            android:textAllCaps="true"
+            android:textColor="@color/bluegrey"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <TextView
+            android:id="@+id/tvStartScanText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="9dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/scanQR"
+            android:textColor="@color/brightSkyBlue"
+            app:layout_constraintEnd_toStartOf="@+id/ivStartScanner"
+            app:layout_constraintTop_toTopOf="@+id/textView26" />
+
+        <ImageView
+            android:id="@+id/ivStartScanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStartScanText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvStartScanText"
+            android:paddingLeft="20dp"
+            android:background="@drawable/scan_qr_icon" />
+
+        <RelativeLayout
+            android:id="@+id/rlReciever"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView26">
+
+            <EditText
+                android:id="@+id/etReciever"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:background="@android:color/transparent"
+                android:hint="@string/hintAddReceiver"
+                android:inputType="text" />
+
+            <View
+                android:id="@+id/delimeter"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/etReciever"
+                android:layout_marginTop="9dp"
+                android:background="@color/grayLine" />
+
+            <ImageView
+                android:id="@+id/vClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/delete" />
+
+            <TextView
+                android:id="@+id/tvError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/delimeter"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:visibility="gone"
+                android:text="@string/noWalletError"
+                android:textColor="@color/sentRed"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvContacts"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:visibility="gone"
+            android:overScrollMode="never"
+            android:background="@android:color/white"
+            android:scrollbars="vertical"
+            android:visibility="@{viewModel.isFoundErrorVisible || viewModel.isContactsLoading? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/btnNext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlReciever"
+            tools:listitem="@layout/item_contact" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.isFoundErrorVisible? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlReciever">
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="81dp"
+                android:layout_height="87dp"
+                android:layout_marginTop="41dp"
+                android:src="@drawable/placeholder_no_address" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:text="@string/noNumberError"
+                android:textColor="@color/bluegrey"
+                android:textSize="13sp"
+                tools:text="There is no such number in system. Use another way to send funds." />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            style="@style/buttonStyle"
+            android:text="@string/next"
+            android:enabled='@{viewModel.isContinueButtonEnabled}'
+            android:visibility='@{viewModel.isContinueButtonVisible? View.VISIBLE : View.GONE}'
+            android:background="@drawable/switch_state_button"
+            android:textColor="@drawable/button_color_switcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="21dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            style="@style/purpleSpotStyle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            style="@style/blueSpotStyle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="@{viewModel.isContactsLoading? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout6" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:scaleY="-1"
+            android:layout_marginTop="@dimen/actionBarMarginTop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/shad_nav_bar" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

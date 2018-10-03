@@ -8,8 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="colorControlNormal">@color/grayLine</item>
-        <item name="colorControlActivated">@color/grayLine</item>
-        <item name="colorControlHighlight">@color/grayLine</item>
+        <item name="colorControlActivated">@color/brightSkyBlue</item>
+        <item name="colorControlHighlight">@color/brightSkyBlue</item>
     </style>
 
     <style name="buttonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
@@ -18,18 +18,18 @@
         <item name="android:shadowColor">@android:color/transparent</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">45dp</item>
-        <item name="android:layout_marginLeft">29dp</item>
-        <item name="android:layout_marginRight">29dp</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_marginLeft">27dp</item>
+        <item name="android:layout_marginRight">27dp</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="editText">
         <item name="android:paddingBottom">18dp</item>
         <item name="android:textSize">17sp</item>
-        <item name="android:textColor">#60000000</item>
+        <item name="android:textColor">#000</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
 
@@ -43,16 +43,16 @@
     </style>
 
     <style name="pinCircleStyle">
-        <item name="android:layout_marginLeft">6dp</item>
-        <item name="android:layout_marginRight">6dp</item>
+        <item name="android:layout_marginLeft">13dp</item>
+        <item name="android:layout_marginRight">13dp</item>
         <item name="android:background">@drawable/white_circle_blue_corners_background</item>
         <item name="android:layout_width">11dp</item>
         <item name="android:layout_height">11dp</item>
     </style>
 
     <style name="registerTextInputStyle">
-        <item name="android:layout_marginLeft">@dimen/registerEditTextSideMargin</item>
-        <item name="android:layout_marginRight">@dimen/registerEditTextSideMargin</item>
+        <item name="android:layout_marginLeft">17dp</item>
+        <item name="android:layout_marginRight">17dp</item>
         <item name="android:layout_marginTop">14dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -81,7 +81,6 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textColor">@color/greyishBrown</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="registerDialogMessage">
@@ -89,25 +88,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">40dp</item>
         <item name="android:layout_marginRight">40dp</item>
-        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:layout_marginTop">24dp</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">@color/greyishBrown</item>
+        <item name="android:textColor">@color/warm_grey</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="purpleSpotStyle">
-        <item name="android:background">@drawable/purple_blur_spot</item>
-        <item name="android:layout_width">94dp</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_height">220dp</item>
-    </style>
 
-    <style name="blueSpotStyle">
-        <item name="android:layout_width">55dp</item>
-        <item name="android:layout_height">136dp</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:background">@drawable/blue_blur_spot</item>
-    </style>
+
 
     <style name="toolbarTextStyle">
         <item name="android:textColor">@color/greyishBrown</item>
@@ -123,7 +111,8 @@
         <item name="android:layout_height">63dp</item>
         <item name="android:background">@drawable/pin_enter_button</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@drawable/pin_enter_text_color</item>
+        <item name="android:fontFamily">@font/roboto_thin</item>
+        <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">36sp</item>
     </style>
 
@@ -151,7 +140,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">#00b2ff</item>
@@ -160,10 +149,9 @@
     </style>
 
     <style name="arrowBackStyle">
-        <item name="android:layout_width">16dp</item>
-        <item name="android:layout_height">16dp</item>
-        <item name="android:layout_marginLeft">20dp</item>
-        <item name="android:layout_marginTop">21dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">20dp</item>
         <item name="android:src">@drawable/back</item>
     </style>
 
@@ -172,6 +160,125 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
+
+    <style name="sendHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginTop">21dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="send_header_container">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:background">@drawable/send_header</item>
+    </style>
+
+    <style name="sendAmountStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="buttonEdit">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:src">@drawable/pencil_redact</item>
+    </style>
+
+    <style name="currencySign">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">33dp</item>
+        <item name="android:layout_marginRight">33dp</item>
+    </style>
+
+    <style name="sendInfoStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">17dp</item>
+        <item name="android:layout_marginStart">17dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="sliderItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/bluegrey</item>
+    </style>
+
+    <style name="purpleSpotStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/purple_blur_spot</item>
+    </style>
+
+    <style name="blueSpotStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/blue_blur_spot</item>
+    </style>
+
+    <style name="header">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="sendTitleStyle">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineSpacingExtra">9sp</item>
+        <item name="android:textColor">@color/bluegrey</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="blackMediumText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="myWalletButtonContainerStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/transaction_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingLeft">12dp</item>
+    </style>
+
+    <style name="headerRegisterLoginText">
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
 </resources>

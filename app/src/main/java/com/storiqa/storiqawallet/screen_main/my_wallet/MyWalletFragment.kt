@@ -14,6 +14,7 @@ import com.storiqa.storiqawallet.adapters.BillsAdapter
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.FragmentMywalletBinding
 import com.storiqa.storiqawallet.db.PreferencesHelper
+import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_mywallet.*
@@ -25,6 +26,7 @@ class MyWalletFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
+        viewModel.selectedScreen.set(Screen.MY_WALLET)
 
         val binding : FragmentMywalletBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mywallet, container, false)
         binding.viewModel = viewModel
@@ -36,13 +38,13 @@ class MyWalletFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         refreshBillInfo()
-        PreferencesHelper(context!!).setQuickLaunchFinished()
+        PreferencesHelper(context!!).setQuickLaunchFinished(true)
     }
 
     private fun refreshBillInfo() {
         rvBills?.apply {
             adapter = BillsAdapter(viewModel.bills.value!!) { positionOfClickedBill ->
-                viewModel.selectedBillId.value = viewModel.bills.value!![positionOfClickedBill].id
+                viewModel.loadBillInfo(viewModel.bills.value!![positionOfClickedBill].id)
             }
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)

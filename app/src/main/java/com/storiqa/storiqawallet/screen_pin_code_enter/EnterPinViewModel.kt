@@ -10,6 +10,8 @@ class EnterPinViewModel(private val view: EnterPinCodeView) : ViewModel() {
     var pinCode = ObservableField<String>("")
     var enteredPinCode = ObservableField<String>("")
 
+    val enterType = ObservableField<PinCodeEnterType>(PinCodeEnterType.LOGIN)
+
     val isEnterForLogin = ObservableField<Boolean>(view.enterType() == PinCodeEnterType.LOGIN)
     val isEnterForPasswordSet = ObservableField<Boolean>(view.enterType() == PinCodeEnterType.SET_PASSWORD)
     val isEnterForPasswordRepeat = ObservableField<Boolean>(view.enterType() == PinCodeEnterType.REPEAT_PASSWORD)
@@ -73,6 +75,10 @@ class EnterPinViewModel(private val view: EnterPinCodeView) : ViewModel() {
 
     fun startListenForFingerprint(success: () -> Unit, failure: () -> Unit) {
         ScanFingerModel().startListenForFingerprint(success, failure)
+    }
+
+    fun eraseUserQuickLaunch() {
+        model.eraseUserQuickLaunch()
     }
 
 }

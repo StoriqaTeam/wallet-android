@@ -3,6 +3,6 @@
 
     <item android:drawable="@drawable/pin_enter_button_pressed" android:state_pressed="true" />
 
-    <item android:color="@color/brightSkyBlue" android:drawable="@drawable/pin_enter_button_normal" />
+    <item android:color="@color/black5oppacity" android:drawable="@drawable/pin_enter_button_normal" />
 
 </selector>

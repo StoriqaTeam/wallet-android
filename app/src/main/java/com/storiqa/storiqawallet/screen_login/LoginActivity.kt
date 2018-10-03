@@ -59,8 +59,14 @@ class LoginActivity : AppCompatActivity(), LoginView {
             }
         })
 
-        RxTextView.textChangeEvents(etEmail).subscribe { viewModel.updateFields() }
-        RxTextView.textChangeEvents(etPassword).subscribe { viewModel.updateFields() }
+        RxTextView.textChangeEvents(etEmail).subscribe {
+            viewModel.emailError.set("")
+            viewModel.updateFields()
+        }
+        RxTextView.textChangeEvents(etPassword).subscribe {
+            viewModel.passwordError.set("")
+            viewModel.updateFields()
+        }
 
     }
 

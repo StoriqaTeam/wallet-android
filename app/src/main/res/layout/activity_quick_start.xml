@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screen_pincode_setup.PinCodeSetupActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView2"
@@ -64,18 +63,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="283dp"
+        style="@style/purpleSpotStyle"
+        android:id="@+id/imageView4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/purple_blur_spot" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="218dp"
-        android:layout_marginBottom="53dp"
+        android:id="@+id/imageView5"
+        style="@style/blueSpotStyle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/blue_blur_spot" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

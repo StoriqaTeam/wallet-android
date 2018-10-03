@@ -12,7 +12,9 @@ import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_password_enter.*
+import kotlinx.android.synthetic.main.layout_sign_in_success_dialog.view.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class RegisterActivity : MvpAppCompatActivity(), RegisterView {
 
@@ -61,6 +63,10 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
                 fb_login_button.performClick()
             }
         })
+
+        tvPrivacy.onClick {
+            cbLicenseAgreement.isChecked = !cbLicenseAgreement.isChecked
+        }
     }
 
     override fun showGoogleSignInError() {
@@ -94,6 +100,7 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
     override fun showRegistrationSuccessDialog() {
         val view = LayoutInflater.from(this).inflate(R.layout.layout_sign_in_success_dialog, null, false)
         view.findViewById<Button>(R.id.btnSignIn).setOnClickListener { presenter.onSignInButtonClicked() }
+        view.btnEmailSentMessage.append(" " + etEmail.text.toString())
 
         AlertDialog.Builder(this)
                 .setCancelable(false)

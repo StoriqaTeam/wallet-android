@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature
         android:name="android.hardware.fingerprint"
@@ -27,6 +29,7 @@
 
         <activity
             android:name=".screen_splash.SplashActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,10 +37,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".screen_main.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".screen_login.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".screen_pin_code_enter.EnterPinCodeActivity"
             android:screenOrientation="portrait"
@@ -49,13 +58,15 @@
         <activity
             android:name=".screen_recover_password.screen_recover_email_enter_first_step.RecoverPasswordActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".screen_pincode_setup.PinCodeSetupActivity" />
-        <activity android:name=".screen_quick_start.QuickStartActivity" />
-        <activity android:name=".screen_setup_fingerprint.FingerprintSetupActivity" />
-        <activity android:name=".screen_main.MainActivity" />
-        <activity android:name=".screen_scan_finger.ScanFingerActivity" />
-        <activity android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity">
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".screen_quick_start.QuickStartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen_setup_fingerprint.FingerprintSetupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen_scan_finger.ScanFingerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -72,6 +83,9 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/fb_app_id"
             tools:replace="android:value" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name="com.facebook.FacebookActivity"

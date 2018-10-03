@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".screen_register.RegisterActivity">
 
@@ -18,12 +19,9 @@
             android:orientation="vertical"
             tools:context=".screen_register.RegisterActivity">
 
-            <include
-                layout="@layout/wallet_logo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp" />
-
+            <TextView
+                style="@style/headerRegisterLoginText"
+                android:text="@string/signUp" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_marginTop="21dp"
@@ -73,18 +71,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/registerEditTextSideMargin"
-                android:layout_marginRight="@dimen/registerEditTextSideMargin"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
                 android:layout_marginTop="14dp"
                 android:orientation="horizontal">
 
-                <CheckBox
+                <android.support.v7.widget.AppCompatCheckBox
                     android:id="@+id/cbLicenseAgreement"
+                    app:buttonTint="@color/brightSkyBlue"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/tvPrivacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grayTextButtonColor"
@@ -133,11 +133,14 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_marginTop="385dp"
+            tools:visibility="gone"
+            android:layout_alignParentBottom="true"
             style="@style/purpleSpotStyle" />
 
         <ImageView
-            android:layout_marginTop="376dp"
+            tools:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             style="@style/blueSpotStyle" />
 
     </RelativeLayout>

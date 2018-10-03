@@ -68,7 +68,6 @@ class GoogleAuthFlow(val activity: Activity, val success: (token: String) -> Uni
                 }
             } catch (e: Exception) {
                 failure()
-                throw RuntimeException(e)
             }
 
         }
@@ -76,7 +75,7 @@ class GoogleAuthFlow(val activity: Activity, val success: (token: String) -> Uni
 
     fun handleOnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == RequestCodes().authorizationGoogle) {
+            if (requestCode == RequestCodes().authorizationGoogle || requestCode == RequestCodes().accountGoogle) {
                 requestToken()
             } else if (requestCode == RequestCodes().accountGoogle) {
                 val accountName = data!!
