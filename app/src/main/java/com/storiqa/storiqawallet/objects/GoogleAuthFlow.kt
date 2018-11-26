@@ -10,7 +10,7 @@ import android.os.Bundle
 import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.db.AuthPreferences
 
-class GoogleAuthFlow(val activity: Activity, val success: (token: String) -> Unit, val failure : () -> Unit) {
+class GoogleAuthFlow(val activity: Activity, val success: (token: String) -> Unit, val failure: () -> Unit) {
 
     lateinit var authPreferences: AuthPreferences
     lateinit var accountManager: AccountManager

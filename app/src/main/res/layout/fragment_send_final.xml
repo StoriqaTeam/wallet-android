@@ -112,7 +112,6 @@
                 </android.support.constraint.ConstraintLayout>
 
 
-
                 <android.support.constraint.ConstraintLayout
                     android:layout_marginTop="17dp"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
@@ -128,8 +127,7 @@
                         tools:text="Address"
                         android:layout_marginLeft="18dp"
                         android:textColor="@color/bluegrey"
-                        app:layout_constraintStart_toStartOf="parent"
-                        />
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
                         android:id="@+id/textView29"

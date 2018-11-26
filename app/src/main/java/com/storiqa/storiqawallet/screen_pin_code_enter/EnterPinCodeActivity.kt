@@ -1,12 +1,14 @@
 package com.storiqa.storiqawallet.screen_pin_code_enter
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -17,15 +19,12 @@ import com.storiqa.storiqawallet.enums.PinCodeEnterType
 import com.storiqa.storiqawallet.objects.FingerprintHepler
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import kotlinx.android.synthetic.main.activity_enter_pin_code.*
-import android.os.VibrationEffect
-import android.os.Build
-import android.os.Vibrator
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
 
-    lateinit var ivFingerprint : ImageView
-    lateinit var viewModel : EnterPinViewModel
+    lateinit var ivFingerprint: ImageView
+    lateinit var viewModel: EnterPinViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +40,7 @@ class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
 
         btnLoginWithFingerprint.setOnClickListener { startFingerprintDialog(viewModel) }
 
-        if(getPinCodeEnterType() == PinCodeEnterType.LOGIN) {
+        if (getPinCodeEnterType() == PinCodeEnterType.LOGIN) {
             if (FingerprintHepler(this, null).isFingerprintSetupNotAvailable()) {
                 btnLoginWithFingerprint.visibility = View.GONE
             } else {
@@ -70,7 +69,7 @@ class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
     }
 
     override fun redirectToFingerPrintSetup() {
-        if(FingerprintHepler(this@EnterPinCodeActivity).isFingerprintSetupNotAvailable()) {
+        if (FingerprintHepler(this@EnterPinCodeActivity).isFingerprintSetupNotAvailable()) {
             ScreenStarter().startMainScreen(this@EnterPinCodeActivity)
         } else {
             ScreenStarter().startFingerprintSetupScreen(this@EnterPinCodeActivity)

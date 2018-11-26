@@ -15,7 +15,7 @@ class StoriqaApp : Application(), LifecycleObserver {
     private var isQuited = false
 
     companion object {
-       lateinit var context : Context
+        lateinit var context: Context
     }
 
     override fun onCreate() {
@@ -36,8 +36,8 @@ class StoriqaApp : Application(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onAppForegrounded() {
-        if(isQuited) {
-            if(PreferencesHelper(applicationContext).isPinCodeEnabled()) {
+        if (isQuited) {
+            if (PreferencesHelper(applicationContext).isPinCodeEnabled()) {
                 ScreenStarter().startEnterPinCodeScreenForLogin(applicationContext)
             } else {
                 ScreenStarter().startLoginScreen(applicationContext)

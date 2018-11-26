@@ -16,7 +16,7 @@ class PreferencesHelper(val context: Context) {
 
     private fun getPrefs(): SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
-    fun setQuickLaunchFinished(isFinished : Boolean) = getPrefs().edit().putBoolean(isUserFinishedQuickLaunchSetupOrSkippedIt, isFinished).apply()
+    fun setQuickLaunchFinished(isFinished: Boolean) = getPrefs().edit().putBoolean(isUserFinishedQuickLaunchSetupOrSkippedIt, isFinished).apply()
 
     fun isQuickLaunchFinished(): Boolean = getPrefs().getBoolean(isUserFinishedQuickLaunchSetupOrSkippedIt, false)
 

@@ -14,7 +14,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class DepositFragment : Fragment() {
 
-    lateinit var viewModel : MainActivityViewModel
+    lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

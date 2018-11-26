@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.transaction_list_fragment.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class WalletAllTransactionsFragment : Fragment() {
-    lateinit var viewModel : MainActivityViewModel
+    lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

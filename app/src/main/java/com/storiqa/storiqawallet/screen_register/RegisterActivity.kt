@@ -19,9 +19,9 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 class RegisterActivity : MvpAppCompatActivity(), RegisterView {
 
     @InjectPresenter
-    lateinit var presenter : RegisterPresenter
+    lateinit var presenter: RegisterPresenter
     lateinit var googleAuthFlow: GoogleAuthFlow
-    lateinit var facebookAuthFlow : FacebookAuthFlow
+    lateinit var facebookAuthFlow: FacebookAuthFlow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +38,12 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
                 .observeNotEmpty(etRepeatPassword)
                 .observeIsChecked(cbLicenseAgreement)
 
-        btnSignUp.setOnClickListener { presenter.onSignUpButtonClicked(
-                etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
-                etPassword.text.toString(), etRepeatPassword.text.toString()
-        ) }
+        btnSignUp.setOnClickListener {
+            presenter.onSignUpButtonClicked(
+                    etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(),
+                    etPassword.text.toString(), etRepeatPassword.text.toString()
+            )
+        }
 
         btnSignIn.setOnClickListener { presenter.onSignInButtonClicked() }
 
@@ -124,7 +126,7 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == RequestCodes().authorizationGoogle || requestCode == RequestCodes().accountGoogle) {
+        if (requestCode == RequestCodes().authorizationGoogle || requestCode == RequestCodes().accountGoogle) {
             googleAuthFlow.handleOnActivityResult(requestCode, resultCode, data)
         } else {
             facebookAuthFlow.handleOnActivityResult(requestCode, resultCode, data)

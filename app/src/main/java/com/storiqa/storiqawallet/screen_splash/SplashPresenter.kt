@@ -22,7 +22,7 @@ class SplashPresenter : MvpPresenter<SplashView>() {
     }
 
     fun redirectIfUserSawSplash() {
-        if(model.isUserWentFromSplash()) {
+        if (model.isUserWentFromSplash()) {
             viewState.startLoginScreen()
         }
     }

@@ -6,8 +6,8 @@ import android.support.design.widget.TextInputLayout;
 public class CutomBindings {
 
     @BindingAdapter("app:errorText")
-    public static void errorText(TextInputLayout inputLayout , String text) {
-        inputLayout.setError(text.isEmpty()? null : text);
+    public static void errorText(TextInputLayout inputLayout, String text) {
+        inputLayout.setError(text.isEmpty() ? null : text);
     }
 
 }

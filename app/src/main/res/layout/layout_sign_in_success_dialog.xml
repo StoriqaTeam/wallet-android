@@ -13,12 +13,12 @@
 
     <TextView
         style="@style/registerDialogTitle"
-        android:text="@string/emailSentTitle"/>
+        android:text="@string/emailSentTitle" />
 
     <TextView
         android:id="@+id/btnEmailSentMessage"
         style="@style/registerDialogMessage"
-        android:text="@string/emailSentMessage"/>
+        android:text="@string/emailSentMessage" />
 
     <Button
         android:id="@+id/btnSignIn"

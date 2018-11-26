@@ -9,7 +9,7 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import java.util.*
 
-class FacebookAuthFlow(private val activity : Activity, facebookButton: ImageView, val success: (token: String) -> Unit, val failure: () -> Unit) {
+class FacebookAuthFlow(private val activity: Activity, facebookButton: ImageView, val success: (token: String) -> Unit, val failure: () -> Unit) {
 
     val callbackManager = CallbackManager.Factory.create()
 
@@ -25,7 +25,9 @@ class FacebookAuthFlow(private val activity : Activity, facebookButton: ImageVie
 
             override fun onCancel() {}
 
-            override fun onError(e: FacebookException) {failure()}
+            override fun onError(e: FacebookException) {
+                failure()
+            }
         })
 
         facebookButton.setOnClickListener {

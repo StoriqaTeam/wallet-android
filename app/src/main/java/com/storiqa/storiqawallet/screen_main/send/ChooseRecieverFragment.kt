@@ -3,12 +3,17 @@ package com.storiqa.storiqawallet.screen_main.send
 import android.Manifest
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.blikoon.qrcodescanner.QrCodeActivity
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -16,22 +21,16 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.ContactsAdapter
+import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.databinding.FragmentChooseRecieverBinding
+import com.storiqa.storiqawallet.enums.Currency
 import com.storiqa.storiqawallet.objects.Contact
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_choose_reciever.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
-import com.blikoon.qrcodescanner.QrCodeActivity
-import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.constants.RequestCodes
-import com.storiqa.storiqawallet.enums.Currency
-import com.storiqa.storiqawallet.enums.Screen
 import kotlinx.android.synthetic.main.layout_ask_contacts.view.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class ChooseRecieverFragment : Fragment() {
 
@@ -95,7 +94,7 @@ class ChooseRecieverFragment : Fragment() {
 
         viewModel.contacts.observe(this@ChooseRecieverFragment, Observer { newContacts ->
             newContacts?.let { setContacts(newContacts) }
-            if(etReciever.text.isNotEmpty()) {
+            if (etReciever.text.isNotEmpty()) {
                 filterContacts()
             }
         })
@@ -104,7 +103,7 @@ class ChooseRecieverFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        if(viewModel.phone.get()!!.isNotEmpty() && etReciever.text.isEmpty()) {
+        if (viewModel.phone.get()!!.isNotEmpty() && etReciever.text.isEmpty()) {
             etReciever.setText(viewModel.phone.get()!!)
             filterContacts()
         }
