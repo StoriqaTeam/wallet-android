@@ -48,7 +48,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="23dp"
-            app:srcCompat="@drawable/wallet_back_gradient"/>
+            app:srcCompat="@drawable/wallet_back_gradient" />
 
         <ScrollView
             android:id="@+id/svContainer"
@@ -66,7 +66,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
-
 
 
                 <android.support.v4.view.ViewPager
@@ -269,7 +268,6 @@
             </android.support.constraint.ConstraintLayout>
 
         </ScrollView>
-
 
 
     </android.support.constraint.ConstraintLayout>

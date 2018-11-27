@@ -11,18 +11,16 @@ import android.view.ViewGroup
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentSendBinding
+import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.BillPagerHelper
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_send.*
+import kotlinx.android.synthetic.main.fragment_send.view.*
 import kotlinx.android.synthetic.main.tab_icon.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import com.storiqa.storiqawallet.enums.Screen
-import kotlinx.android.synthetic.main.fragment_send.view.*
-import org.jetbrains.anko.support.v4.dip
 
 
 class SendFragment : Fragment() {
@@ -66,7 +64,7 @@ class SendFragment : Fragment() {
         addTab(R.drawable.bankcard_small_logo_off_2x, R.drawable.bankcard_small_logo_on_2x)
 
         etAmount.onFocusChangeListener = View.OnFocusChangeListener { p0, isFocussed ->
-            if(isFocussed) {
+            if (isFocussed) {
                 view.view.visibility = View.GONE
                 view.viewBlue.visibility = View.VISIBLE
             } else {
@@ -82,7 +80,7 @@ class SendFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if(viewModel.amountInCurrency != BigDecimal.ZERO) {
+        if (viewModel.amountInCurrency != BigDecimal.ZERO) {
             etAmount.setText(viewModel.amountInCurrency.toString())
         }
 
@@ -107,7 +105,8 @@ class SendFragment : Fragment() {
         RxTextView.afterTextChangeEvents(etAmount).skipInitialValue()
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     viewModel.isAmountInStqUpdating.set(true)
-                    btnNext.isEnabled = false }
+                    btnNext.isEnabled = false
+                }
 
         RxTextView.afterTextChangeEvents(etAmount).skipInitialValue().debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe { refreshAmountInStq() }
@@ -130,7 +129,7 @@ class SendFragment : Fragment() {
                     else -> ""
                 })
 
-                if(viewModel.tokenType.get()!!.isEmpty()) {
+                if (viewModel.tokenType.get()!!.isEmpty()) {
                     editLayout.visibility = View.INVISIBLE
                     commingSoon.visibility = View.VISIBLE
                     etAmount.setText("")
@@ -147,7 +146,7 @@ class SendFragment : Fragment() {
     }
 
     fun refreshAmountInStq() {
-        if(etAmount != null) {
+        if (etAmount != null) {
             if (etAmount.text.isEmpty()) {
                 viewModel.amountInSTQ.value = "0"
                 viewModel.isAmountInStqUpdating.set(false)

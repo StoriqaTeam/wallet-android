@@ -1,9 +1,9 @@
 package com.storiqa.storiqawallet.network
 
 import com.storiqa.storiqawallet.network.network_requests.*
-import com.storiqa.storiqawallet.network.network_responses.RegisterUserResponse
 import com.storiqa.storiqawallet.network.network_responses.GetTokenResponseByEmail
 import com.storiqa.storiqawallet.network.network_responses.GetTokenResponseByProvider
+import com.storiqa.storiqawallet.network.network_responses.RegisterUserResponse
 import com.storiqa.storiqawallet.network.network_responses.ResetPasswordResponse
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -17,19 +17,19 @@ import retrofit2.http.POST
 interface StoriqaApi {
 
     @POST("/graphql")
-    fun getTokenByEmailAndPassword(@Body getTokenByEmailRequest : GetTokenByEmailRequest) : Observable<GetTokenResponseByEmail>
+    fun getTokenByEmailAndPassword(@Body getTokenByEmailRequest: GetTokenByEmailRequest): Observable<GetTokenResponseByEmail>
 
     @POST("/graphql")
-    fun registerUser(@Body registerUserRequest : RegisterUserRequest) : Observable<RegisterUserResponse>
+    fun registerUser(@Body registerUserRequest: RegisterUserRequest): Observable<RegisterUserResponse>
 
     @POST("/graphql")
-    fun getStoriqaTokenFromFirebaseToken(@Body getStoriqaTokenFromFirebaseTokenRequest: GetStoriqaTokenFromFirebaseTokenRequest) : Observable<GetTokenResponseByProvider>
+    fun getStoriqaTokenFromFirebaseToken(@Body getStoriqaTokenFromFirebaseTokenRequest: GetStoriqaTokenFromFirebaseTokenRequest): Observable<GetTokenResponseByProvider>
 
     @POST("/graphql")
-    fun resetPassword(@Body resetPasswordRequest: ResetPasswordRequest) : Observable<ResetPasswordResponse>
+    fun resetPassword(@Body resetPasswordRequest: ResetPasswordRequest): Observable<ResetPasswordResponse>
 
     @POST("/graphql")
-    fun applyNewPassword(@Body applyNewPasswordRequest: ApplyNewPasswordRequest) : Observable<ResetPasswordResponse>
+    fun applyNewPassword(@Body applyNewPasswordRequest: ApplyNewPasswordRequest): Observable<ResetPasswordResponse>
 
     class Factory {
         private val baseUrl = "https://stage.stq.cloud:60443" //stage

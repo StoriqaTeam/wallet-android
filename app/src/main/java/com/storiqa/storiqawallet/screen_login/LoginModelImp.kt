@@ -11,11 +11,11 @@ import io.reactivex.schedulers.Schedulers
 
 class LoginModelImp : LoginModel {
 
-    override fun signInWithEmailAndPassword(email: String, password: String, success: () -> Unit, failure: (errors : List<ErrorInfo>) -> Unit) {
+    override fun signInWithEmailAndPassword(email: String, password: String, success: () -> Unit, failure: (errors: List<ErrorInfo>) -> Unit) {
         StoriqaApi.Factory().getInstance().getTokenByEmailAndPassword(GetTokenByEmailRequest(email, password))
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if(it.errors != null) {
+                    if (it.errors != null) {
                         failure(it.errors)
                     } else {
                         success()
@@ -35,10 +35,10 @@ class LoginModelImp : LoginModel {
         StoriqaApi.Factory().getInstance().getStoriqaTokenFromFirebaseToken(GetStoriqaTokenFromFirebaseTokenRequest(userToken, provider))
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if(it.errors != null) {
+                    if (it.errors != null) {
                         failure()
                     }
-                    if(it.data != null) {
+                    if (it.data != null) {
                         success(it.data.getJWTByProvider.token)
                     }
                 }, {

@@ -25,7 +25,7 @@ class EnterPinViewModel(private val view: EnterPinCodeView) : ViewModel() {
         isPinNotValidError.set(false)
         isPinsNotMatchError.set(false)
 
-        if(pinCode.get()!!.length == 4) {
+        if (pinCode.get()!!.length == 4) {
             when {
                 isEnterForLogin.get()!! -> performLogin()
                 isEnterForPasswordSet.get()!! -> isContinueButtonVisible.set(true)
@@ -40,7 +40,7 @@ class EnterPinViewModel(private val view: EnterPinCodeView) : ViewModel() {
 
     fun performLogin() {
         val isPinValid = model.pinCodeIsValid(pinCode.get()!!)
-        if(isPinValid) {
+        if (isPinValid) {
             view.redirectOnMainScreen()
         } else {
             isPinNotValidError.set(true)
@@ -52,13 +52,13 @@ class EnterPinViewModel(private val view: EnterPinCodeView) : ViewModel() {
         isPinNotValidError.set(false)
         isPinsNotMatchError.set(false)
 
-        if(isEnterForPasswordSet.get()!!) {
+        if (isEnterForPasswordSet.get()!!) {
             enteredPinCode.set(pinCode.get())
             pinCode.set("")
             isEnterForPasswordRepeat.set(true)
             isEnterForPasswordSet.set(false)
-        } else if(isEnterForPasswordRepeat.get()!!) {
-            if(pinCode.get()!! == enteredPinCode.get()) {
+        } else if (isEnterForPasswordRepeat.get()!!) {
+            if (pinCode.get()!! == enteredPinCode.get()) {
                 model.savePincode(pinCode.get().toString())
                 model.onPinCodeSetted()
                 view.redirectToFingerPrintSetup()

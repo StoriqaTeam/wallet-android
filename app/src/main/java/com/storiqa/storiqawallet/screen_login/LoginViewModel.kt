@@ -5,7 +5,7 @@ import android.databinding.ObservableField
 import com.storiqa.storiqawallet.constants.SignInProviders
 import com.storiqa.storiqawallet.objects.ErrorRetriever
 
-class LoginViewModel(val view : LoginView) : ViewModel() {
+class LoginViewModel(val view: LoginView) : ViewModel() {
     private val model = LoginModelImp()
 
     val isProgressBarVisible = ObservableField<Boolean>(false)
@@ -27,7 +27,7 @@ class LoginViewModel(val view : LoginView) : ViewModel() {
         model.signInWithEmailAndPassword(email, password, {
             isProgressBarVisible.set(false)
             startNextScreen()
-        }) {errors ->
+        }) { errors ->
             isSignInButtonEnabled.set(true)
             emailError.set("")
             passwordError.set("")
@@ -37,11 +37,11 @@ class LoginViewModel(val view : LoginView) : ViewModel() {
             } else {
                 val errorRetriever = ErrorRetriever(errors)
 
-                if(errorRetriever.isEmailErrorExist()) {
+                if (errorRetriever.isEmailErrorExist()) {
                     emailError.set(errorRetriever.emailErrors)
                 }
 
-                if(errorRetriever.isPasswordErrorExist()) {
+                if (errorRetriever.isPasswordErrorExist()) {
                     passwordError.set(errorRetriever.passwordErrors)
                 }
             }
@@ -66,7 +66,7 @@ class LoginViewModel(val view : LoginView) : ViewModel() {
     }
 
     fun redirectIfAlternativeLoginSetted() {
-        if(model.isPinCodeEntered()) {
+        if (model.isPinCodeEntered()) {
             view.openPinCodeEnterSceenForLogin()
         }
     }

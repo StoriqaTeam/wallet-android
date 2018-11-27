@@ -10,13 +10,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class ButtonStateSwitcherFor(val button: Button) {
 
-    var editTextViews : List<EditText> = arrayListOf()
-    var checkBoxes : List<CheckBox> = arrayListOf()
+    var editTextViews: List<EditText> = arrayListOf()
+    var checkBoxes: List<CheckBox> = arrayListOf()
 
-    fun observeNotEmpty(vararg editTextViews : EditText) : ButtonStateSwitcherFor {
+    fun observeNotEmpty(vararg editTextViews: EditText): ButtonStateSwitcherFor {
         this.editTextViews = editTextViews.asList()
 
-        for(editText in editTextViews) {
+        for (editText in editTextViews) {
             RxTextView.afterTextChangeEvents(editText)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { refreshButtonState() }
@@ -33,8 +33,8 @@ class ButtonStateSwitcherFor(val button: Button) {
     }
 
     private fun allCheckboxesChecked(): Boolean {
-        for(checkbox in checkBoxes) {
-            if(!checkbox.isChecked) {
+        for (checkbox in checkBoxes) {
+            if (!checkbox.isChecked) {
                 return false
             }
         }
@@ -42,10 +42,10 @@ class ButtonStateSwitcherFor(val button: Button) {
         return true
     }
 
-    fun observeIsChecked(vararg checkBoxes : CheckBox) : ButtonStateSwitcherFor {
+    fun observeIsChecked(vararg checkBoxes: CheckBox): ButtonStateSwitcherFor {
         this.checkBoxes = checkBoxes.asList()
 
-        for(checkBox in checkBoxes) {
+        for (checkBox in checkBoxes) {
             checkBox.setOnCheckedChangeListener { compoundButton, state -> refreshButtonState() }
         }
 

@@ -12,12 +12,12 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.databinding.ActivityLoginBinding
 import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
-import com.storiqa.storiqawallet.R
 
 class LoginActivity : AppCompatActivity(), LoginView {
 
@@ -125,9 +125,9 @@ class LoginActivity : AppCompatActivity(), LoginView {
         pbLoading.visibility = View.GONE
     }
 
-    override fun getEmail(): String =  etEmail.text.toString()
+    override fun getEmail(): String = etEmail.text.toString()
 
-    override fun getPassword(): String =  etPassword.text.toString()
+    override fun getPassword(): String = etPassword.text.toString()
 
     override fun disableSignInButton() = buttonStateSwitcher.disableButton()
 

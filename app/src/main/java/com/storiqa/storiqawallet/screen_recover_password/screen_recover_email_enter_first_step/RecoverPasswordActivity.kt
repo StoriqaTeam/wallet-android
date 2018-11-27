@@ -1,19 +1,15 @@
 package com.storiqa.storiqawallet.screen_recover_password.screen_recover_email_enter_first_step
 
-import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.ButtonStateSwitcherFor
 import com.storiqa.storiqawallet.objects.GeneralErrorDialogHelper
-import kotlinx.android.synthetic.main.activity_recover_password.*
-import android.content.Intent
-import android.view.LayoutInflater
-import android.widget.Toast
-import com.storiqa.storiqawallet.R.id.etEmail
 import com.storiqa.storiqawallet.objects.ScreenStarter
+import kotlinx.android.synthetic.main.activity_recover_password.*
 import kotlinx.android.synthetic.main.layout_mail_sent.view.*
 
 

@@ -5,5 +5,5 @@ class Extras {
     val pinCodeEnterType = "com.storiqa.storiqawallet.PIN_CODE_ENTER_TYPE"
     val bill = "com.storiqa.storiqawallet.bill"
     val idOfSelectedBill = "com.storiqa.storiqawallet.idOfSelectedBill"
-    val billRes =  "com.storiqa.storiqawallet.billRes"
+    val billRes = "com.storiqa.storiqawallet.billRes"
 }

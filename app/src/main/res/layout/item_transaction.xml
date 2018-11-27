@@ -5,9 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
-        <import type="com.storiqa.storiqawallet.enums.TransactionType"/>
+        <import type="com.storiqa.storiqawallet.enums.TransactionType" />
 
         <variable
             name="transaction"
@@ -26,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/deposit_icon_round"
-            android:src= "@{transaction.transactionType == TransactionType.SEND? @drawable/send_icon_round : @drawable/deposit_icon_round}" />
+            android:src="@{transaction.transactionType == TransactionType.SEND? @drawable/send_icon_round : @drawable/deposit_icon_round}" />
 
         <TextView
             android:id="@+id/tvTransactionHeader"

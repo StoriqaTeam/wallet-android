@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.layout_password_enter.*
 class NewPasswordEnterActivity : MvpAppCompatActivity(), NewPasswordEnterView {
 
     @InjectPresenter
-    lateinit var presenter : NewPasswordEnterPresenter
+    lateinit var presenter: NewPasswordEnterPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,7 @@ class NewPasswordEnterActivity : MvpAppCompatActivity(), NewPasswordEnterView {
         }
     }
 
-    private fun getResetToken() = intent.data.path.substring(intent.data.path.lastIndexOf("/")+1)
+    private fun getResetToken() = intent.data.path.substring(intent.data.path.lastIndexOf("/") + 1)
 
     override fun goBack() = onBackPressed()
 }

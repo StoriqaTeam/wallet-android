@@ -1,29 +1,21 @@
 package com.storiqa.storiqawallet.screen_main
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityMainBinding
 import com.storiqa.storiqawallet.enums.Screen
-import com.storiqa.storiqawallet.screen_main.my_wallet.MyWalletFragment
-import com.storiqa.storiqawallet.screen_main.my_wallet.WalletLastTransactionsFragment
-import com.storiqa.storiqawallet.screen_main.send.ChooseRecieverFragment
-import com.storiqa.storiqawallet.screen_main.send.SendFragment
-import android.content.DialogInterface
-import android.content.DialogInterface.BUTTON_NEUTRAL
-import android.app.Activity
-import android.content.Intent
-import android.util.Log
-import android.view.View
-import android.widget.ImageView
-import com.storiqa.storiqawallet.constants.RequestCodes
 import com.storiqa.storiqawallet.screen_main.deposit.DepositFragment
 import com.storiqa.storiqawallet.screen_main.exchange.ExchangeFragment
 import com.storiqa.storiqawallet.screen_main.menu.MenuFragment
+import com.storiqa.storiqawallet.screen_main.my_wallet.MyWalletFragment
+import com.storiqa.storiqawallet.screen_main.my_wallet.WalletLastTransactionsFragment
+import com.storiqa.storiqawallet.screen_main.send.ChooseRecieverFragment
 import com.storiqa.storiqawallet.screen_main.send.SendFinalScreen
+import com.storiqa.storiqawallet.screen_main.send.SendFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -62,11 +54,21 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.onScreenChanged = { newScreen ->
             when (newScreen) {
-                Screen.MY_WALLET -> { loadMyWalletFragment() }
-                Screen.DEPOSIT -> { loadDepositFragment()}
-                Screen.EXCHANGE -> {loadExchangeFragment() }
-                Screen.SEND -> { loadSendFragment() }
-                Screen.MENU -> { loadMenuFragment() }
+                Screen.MY_WALLET -> {
+                    loadMyWalletFragment()
+                }
+                Screen.DEPOSIT -> {
+                    loadDepositFragment()
+                }
+                Screen.EXCHANGE -> {
+                    loadExchangeFragment()
+                }
+                Screen.SEND -> {
+                    loadSendFragment()
+                }
+                Screen.MENU -> {
+                    loadMenuFragment()
+                }
             }
         }
     }

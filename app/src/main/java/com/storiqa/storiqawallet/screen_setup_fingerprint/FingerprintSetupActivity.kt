@@ -1,8 +1,7 @@
 package com.storiqa.storiqawallet.screen_setup_fingerprint
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.support.v7.app.AppCompatActivity
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import kotlinx.android.synthetic.main.activity_fingerprint_setup.*

@@ -3,7 +3,6 @@ package com.storiqa.storiqawallet.screen_main
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
-import com.storiqa.storiqawallet.R.string.phone
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.Contact
@@ -69,8 +68,8 @@ class MainActivityViewModel : ViewModel() {
     }
 
     fun selectScreen(screen: Screen) {
-        val currentScreen= this.selectedScreen.get()
-        if(currentScreen == Screen.NOT_LOADED || currentScreen != screen) {
+        val currentScreen = this.selectedScreen.get()
+        if (currentScreen == Screen.NOT_LOADED || currentScreen != screen) {
             onScreenChanged(screen)
         }
     }

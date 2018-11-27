@@ -1,6 +1,5 @@
 package com.storiqa.storiqawallet.screen_main.my_wallet
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -28,7 +27,7 @@ class MyWalletFragment : Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
         viewModel.selectedScreen.set(Screen.MY_WALLET)
 
-        val binding : FragmentMywalletBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mywallet, container, false)
+        val binding: FragmentMywalletBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mywallet, container, false)
         binding.viewModel = viewModel
         binding.executePendingBindings()
         return binding.root
@@ -52,7 +51,7 @@ class MyWalletFragment : Fragment() {
     }
 
     companion object {
-        fun getInstance(bills : Array<Bill>) : MyWalletFragment {
+        fun getInstance(bills: Array<Bill>): MyWalletFragment {
             val myWalletFragment = MyWalletFragment()
             val bundle = Bundle()
             bundle.putSerializable(Extras().bill, bills)

@@ -8,8 +8,10 @@
     <data>
 
         <import type="android.view.View" />
+
         <import type="android.widget.EditText" />
-        <import type="android.text.InputType"/>
+
+        <import type="android.text.InputType" />
 
         <import type="java.lang.String" />
 
@@ -109,7 +111,7 @@
                             tools:src="@drawable/closed_eye"
                             android:padding="10dp"
                             android:src="@{viewModel.isPasswordVisible ? @drawable/eye_opened : @drawable/closed_eye}"
-                            android:onClick="@{()->viewModel.changePasswordVisibility()}"/>
+                            android:onClick="@{()->viewModel.changePasswordVisibility()}" />
 
                     </RelativeLayout>
 
@@ -183,8 +185,6 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/btnForgotPassword" />
-
-
 
 
             </android.support.constraint.ConstraintLayout>

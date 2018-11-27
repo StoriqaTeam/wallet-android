@@ -8,7 +8,7 @@
 
         <import type="android.view.View" />
 
-        <import type="com.storiqa.storiqawallet.enums.Screen"/>
+        <import type="com.storiqa.storiqawallet.enums.Screen" />
 
         <variable
             name="viewModel"
@@ -39,7 +39,7 @@
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-           android:background="@drawable/shad_nav_bar" />
+            android:background="@drawable/shad_nav_bar" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout"

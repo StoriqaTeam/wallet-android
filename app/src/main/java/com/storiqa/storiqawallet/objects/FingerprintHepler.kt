@@ -27,7 +27,7 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.SecretKey
 
 @TargetApi(Build.VERSION_CODES.M)
-class FingerprintHepler(private val context: Context, private val authCallback : FingerprintManager.AuthenticationCallback? = null ) {
+class FingerprintHepler(private val context: Context, private val authCallback: FingerprintManager.AuthenticationCallback? = null) {
 
     private lateinit var fingerprintManager: FingerprintManager
     private lateinit var keyguardManager: KeyguardManager
@@ -45,7 +45,9 @@ class FingerprintHepler(private val context: Context, private val authCallback :
         fun onNoFingersRegisteredInPhone()
     }
 
-    init { initFingerprintScaner() }
+    init {
+        initFingerprintScaner()
+    }
 
     private fun initFingerprintScaner() {
         keyguardManager = context.getSystemService(AppCompatActivity.KEYGUARD_SERVICE) as KeyguardManager
@@ -80,7 +82,7 @@ class FingerprintHepler(private val context: Context, private val authCallback :
 
     private fun isPermissionNotGranted() = ActivityCompat.checkSelfPermission(context, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED
 
-    fun isFingerprintSetupNotAvailable() : Boolean = android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M || isNoFingersRegistered() || isNotSecuredByKeyguard() || isPermissionNotGranted()
+    fun isFingerprintSetupNotAvailable(): Boolean = android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M || isNoFingersRegistered() || isNotSecuredByKeyguard() || isPermissionNotGranted()
 
     @RequiresApi(Build.VERSION_CODES.M)
     protected fun generateKey() {
@@ -146,10 +148,10 @@ class FingerprintHepler(private val context: Context, private val authCallback :
 
         try {
             keyStore.load(null);
-            val key = keyStore.getKey (FacebookRequestErrorClassification.KEY_NAME,null) as SecretKey
+            val key = keyStore.getKey(FacebookRequestErrorClassification.KEY_NAME, null) as SecretKey
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return true;
-        } catch (e : KeyPermanentlyInvalidatedException) {
+        } catch (e: KeyPermanentlyInvalidatedException) {
             return false;
         } catch (e: NoSuchAlgorithmException) {
             throw RuntimeException(e)

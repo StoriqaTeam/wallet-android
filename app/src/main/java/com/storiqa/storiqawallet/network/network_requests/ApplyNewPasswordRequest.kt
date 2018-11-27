@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.network.network_requests
 
-class ApplyNewPasswordRequest(token : String, password : String) {
+class ApplyNewPasswordRequest(token: String, password: String) {
     val operationName = "applyPasswordReset"
     val query = "mutation applyPasswordReset(\$input: ResetApply!) { applyPasswordReset(input: \$input) { token } }"
     val variables = HashMap<String, HashMap<String, String>>()

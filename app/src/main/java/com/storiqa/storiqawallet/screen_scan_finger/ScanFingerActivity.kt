@@ -4,8 +4,8 @@ import android.annotation.TargetApi
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityScanFingerBinding
