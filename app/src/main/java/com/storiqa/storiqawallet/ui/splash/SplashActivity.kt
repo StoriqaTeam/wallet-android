@@ -21,15 +21,13 @@ class SplashActivity : AppCompatActivity(), SplashNavigator {
         viewModel = obtainViewModel()
         viewModel.setNavigator(this)
         viewModel.checkLoggedIn()
-        val binding: ActivitySplashBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+        val binding: ActivitySplashBinding =
+                DataBindingUtil.setContentView(this, R.layout.activity_splash)
         binding.viewModel = viewModel
     }
 
     fun obtainViewModel(): SplashViewModel =
             ViewModelProviders.of(this).get(SplashViewModel::class.java)
-
-    /*fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
-            ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)*/
 
     override fun openLoginActivity() {
         openActivity(LoginActivity::class.java)
