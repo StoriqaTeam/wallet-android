@@ -17,6 +17,10 @@ public class PrivateKey {
         hex = TypeConverter.byteArrayToHexString(raw);
     }
 
+    public static PrivateKey fromHex(String keyHex) {
+        return new PrivateKey(TypeConverter.hexStringToByteArray(keyHex));
+    }
+
     ECKey getKey() {
         return key;
     }
