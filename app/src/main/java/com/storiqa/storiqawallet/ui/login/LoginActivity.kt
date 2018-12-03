@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.ui.login
 
-import android.app.ProgressDialog
+import android.app.Dialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity(), LoginNavigator {
 
     private lateinit var facebookAuthFlow: FacebookAuthFlow
 
-    private var loadingDialog: ProgressDialog? = null
+    private var loadingDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,11 +117,10 @@ class LoginActivity : AppCompatActivity(), LoginNavigator {
     }
 
     private fun showLoadingDialog(context: Context) {
-        loadingDialog = ProgressDialog(context)
+        loadingDialog = Dialog(context)
         loadingDialog!!.show()
-        loadingDialog!!.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loadingDialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         loadingDialog!!.setContentView(R.layout.progress_dialog)
-        loadingDialog!!.isIndeterminate = true
         loadingDialog!!.setCancelable(false)
         loadingDialog!!.setCanceledOnTouchOutside(false)
     }
