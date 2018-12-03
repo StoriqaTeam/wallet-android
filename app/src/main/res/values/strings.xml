@@ -15,7 +15,7 @@
     <string name="errorEmailNotVerified">This email isn’t verified</string>
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
-    <string name="fb_app_id">425217154570731</string>
+    <string name="fb_app_id">730145060671124</string>
     <string name="fb_login_protocol_scheme">fb425217154570731</string>
     <string name="signUpButtonText">Sign up</string>
     <string name="haveAnAccount">Have an account?</string>
@@ -106,4 +106,13 @@
     <string name="exchange">Exchange</string>
     <string name="menu">Menu</string>
     <string name="willBeAvailableSoon">Will be available soon</string>
+
+    <string name="haven_t_got_account">Haven\'t got account?</string>
+    <string name="error_email_not_valid">Email not valid</string>
+    <string name="error_email_not_exist">Email not found</string>
+    <string name="error_password_length"></string>
+    <string name="error_password_upper_case"></string>
+    <string name="error_password_numbers"></string>
+    <string name="error_password_wrong_pass">Wrong password</string>
+    <string name="error_device_not_attached">Device not attached</string>
 </resources>

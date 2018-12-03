@@ -1,9 +1,7 @@
 package com.storiqa.storiqawallet.screen_login
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.method.HideReturnsTransformationMethod
@@ -11,13 +9,10 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.jakewharton.rxbinding2.widget.RxTextView
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.constants.RequestCodes
-import com.storiqa.storiqawallet.databinding.ActivityLoginBinding
 import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
 
 class LoginActivity : AppCompatActivity(), LoginView {
 
@@ -32,7 +27,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, LoginViewModelFactory(this)).get(LoginViewModel::class.java)
+        /*viewModel = ViewModelProviders.of(this, LoginViewModelFactory(this)).get(LoginViewModel::class.java)
 
         val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.viewModel = viewModel
@@ -67,10 +62,10 @@ class LoginActivity : AppCompatActivity(), LoginView {
             viewModel.passwordError.set("")
             viewModel.updateFields()
         }
-
+*/
     }
 
-    override fun movePasswordCursorToEnd() = etPassword.setSelection(etPassword.text.length)
+    override fun movePasswordCursorToEnd() = etPassword.setSelection(0)
 
     override fun openPinCodeEnterSceenForLogin() {
         ScreenStarter().startEnterPinCodeScreenForLogin(this)

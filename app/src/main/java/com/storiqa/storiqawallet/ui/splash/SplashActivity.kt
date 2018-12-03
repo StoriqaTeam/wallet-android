@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivitySplashBinding
-import com.storiqa.storiqawallet.screen_login.LoginActivity
 import com.storiqa.storiqawallet.screen_pin_code_enter.EnterPinCodeActivity
 import com.storiqa.storiqawallet.screen_register.RegisterActivity
+import com.storiqa.storiqawallet.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity(), SplashNavigator {
 
@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity(), SplashNavigator {
         binding.viewModel = viewModel
     }
 
-    fun obtainViewModel(): SplashViewModel =
+    private fun obtainViewModel(): SplashViewModel =
             ViewModelProviders.of(this).get(SplashViewModel::class.java)
 
     override fun openLoginActivity() {

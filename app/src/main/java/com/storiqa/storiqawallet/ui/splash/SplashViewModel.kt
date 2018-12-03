@@ -5,7 +5,11 @@ import java.lang.ref.WeakReference
 
 class SplashViewModel : ViewModel() {
 
-    var refNavigator: WeakReference<SplashNavigator>? = null
+    private var refNavigator: WeakReference<SplashNavigator>? = null
+
+    fun setNavigator(splashNavigator: SplashNavigator) {
+        refNavigator = WeakReference(splashNavigator)
+    }
 
     fun checkLoggedIn() {
 
@@ -17,9 +21,5 @@ class SplashViewModel : ViewModel() {
 
     fun startRegistration() {
         refNavigator?.get()?.openRegistrationActivity()
-    }
-
-    fun setNavigator(splashNavigator: SplashNavigator) {
-        refNavigator = WeakReference(splashNavigator)
     }
 }

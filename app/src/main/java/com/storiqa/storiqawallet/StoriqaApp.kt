@@ -1,14 +1,10 @@
 package com.storiqa.storiqawallet
 
 import android.app.Application
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.OnLifecycleEvent
 import android.arch.lifecycle.ProcessLifecycleOwner
 import android.content.Context
 import android.support.multidex.MultiDex
-import com.storiqa.storiqawallet.db.PreferencesHelper
-import com.storiqa.storiqawallet.objects.ScreenStarter
 
 class StoriqaApp : Application(), LifecycleObserver {
 
@@ -16,6 +12,10 @@ class StoriqaApp : Application(), LifecycleObserver {
 
     companion object {
         lateinit var context: Context
+
+        fun getStringFromRecources(id: Int): String {
+            return context.getString(id)
+        }
     }
 
     override fun onCreate() {
@@ -29,6 +29,7 @@ class StoriqaApp : Application(), LifecycleObserver {
         MultiDex.install(this)
     }
 
+/*
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onAppBackgrounded1() {
         isQuited = true
@@ -44,5 +45,5 @@ class StoriqaApp : Application(), LifecycleObserver {
             }
             isQuited = false
         }
-    }
+    }*/
 }

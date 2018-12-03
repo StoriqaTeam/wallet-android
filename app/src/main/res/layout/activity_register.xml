@@ -103,7 +103,7 @@
                 android:text="@string/signUpButtonText" />
 
             <include
-                layout="@layout/sotial_network_sign_in_footer"
+                layout="@layout/social_network_sign_in"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="33dp" />
