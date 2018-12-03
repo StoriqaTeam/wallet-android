@@ -33,7 +33,7 @@
     <string name="close">Close</string>
     <string name="tryAgain">Try again</string>
     <string name="passwordRecovery">Password recover</string>
-    <string name="recoverPasshordMessage">Enter email address where new\npassword recovering instructions \n will be sent to.</string>
+    <string name="recoverPasswordMessage">Enter email address where new\npassword recovering instructions \n will be sent to.</string>
     <string name="yourEmail">Your email</string>
     <string name="resetPassword">Reset password</string>
     <string name="newPasswordMessage">Create new password\nand confirm it.</string>

@@ -11,8 +11,6 @@
 
         <import type="android.widget.EditText" />
 
-        <import type="android.text.InputType" />
-
         <import type="java.lang.String" />
 
         <variable
@@ -23,7 +21,9 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:id="@+id/tvSignIn"
@@ -82,6 +82,8 @@
                 android:hint="@string/passwordHint"
                 android:inputType="textPassword"
                 android:nextFocusDown="@+id/btnSignIn"
+                android:imeOptions="actionDone"
+                app:onEditorEnterAction="@{()->viewModel.onSignInButtonClicked()}"
                 android:text="@={viewModel.password}" />
 
         </android.support.design.widget.TextInputLayout>
@@ -93,7 +95,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/switch_state_button"
             android:enabled='@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? true : false}'
-            android:onClick="@{()-> viewModel.onSignInButtonClicked()}"
+            android:onClick="@{()->viewModel.onSignInButtonClicked()}"
             android:text="@string/signInButtonText"
             android:textColor="@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? @android:color/white : @color/disableButton}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +124,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:onClick="@{()-> viewModel.onPasswordRecoveryButtonClicked()}"
+            android:onClick="@{()->viewModel.onPasswordRecoveryButtonClicked()}"
             android:text="@string/forgotPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="12dp"
-            android:onClick="@{()-> viewModel.onRegistrationButtonClicked()}"
+            android:onClick="@{()->viewModel.onRegistrationButtonClicked()}"
             android:text="@string/register"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -15,19 +15,15 @@ import com.storiqa.storiqawallet.network.StoriqaApi
 import com.storiqa.storiqawallet.network.requests.LoginRequest
 import com.storiqa.storiqawallet.network.responses.LoginErrorResponse
 import com.storiqa.storiqawallet.network.responses.TokenResponse
-import com.storiqa.storiqawallet.utils.getDeviceId
-import com.storiqa.storiqawallet.utils.getDeviceOs
-import com.storiqa.storiqawallet.utils.getSign
-import com.storiqa.storiqawallet.utils.getTimestamp
+import com.storiqa.storiqawallet.utils.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 import java.lang.ref.WeakReference
-import java.util.regex.Pattern
 
 class LoginViewModel : ViewModel() {
 
-    val storiqaApi = StoriqaApi.Factory().getInstance()
+    private val storiqaApi = StoriqaApi.Factory().getInstance()
 
     val isLoading = ObservableField<Boolean>(false)
     val emailError = ObservableField<String>("")
@@ -65,17 +61,6 @@ class LoginViewModel : ViewModel() {
 
     fun onPasswordRecoveryButtonClicked() {
         refNavigator?.get()?.openPasswordRecoveryActivity()
-    }
-
-    private fun isEmailValid(email: String): Boolean {
-        return Pattern.compile(
-                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
-                        + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                        + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
-                        + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$")
-                .matcher(email).matches()
     }
 
     @SuppressLint("CheckResult")

@@ -20,8 +20,8 @@ import com.storiqa.storiqawallet.objects.GeneralErrorDialogHelper
 import com.storiqa.storiqawallet.objects.GoogleAuthFlow
 import com.storiqa.storiqawallet.screen_main.MainActivity
 import com.storiqa.storiqawallet.screen_pin_code_enter.EnterPinCodeActivity
-import com.storiqa.storiqawallet.screen_recover_password.screen_recover_email_enter_first_step.RecoverPasswordActivity
 import com.storiqa.storiqawallet.screen_register.RegisterActivity
+import com.storiqa.storiqawallet.ui.password.PasswordRecoveryActivity
 import kotlinx.android.synthetic.main.social_network_sign_in.*
 
 
@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity(), LoginNavigator {
     }
 
     override fun openPasswordRecoveryActivity() {
-        openActivity(RecoverPasswordActivity::class.java)
+        openActivity(PasswordRecoveryActivity::class.java)
     }
 
     override fun openMainActivity() {
