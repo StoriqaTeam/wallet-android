@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".screen_splash.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -107,6 +107,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
