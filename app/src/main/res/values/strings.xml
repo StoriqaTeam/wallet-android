@@ -16,7 +16,7 @@
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="fb_app_id">730145060671124</string>
-    <string name="fb_login_protocol_scheme">fb425217154570731</string>
+    <string name="fb_login_protocol_scheme">fb730145060671124</string>
     <string name="signUpButtonText">Sign up</string>
     <string name="haveAnAccount">Have an account?</string>
     <string name="firstName">First name</string>

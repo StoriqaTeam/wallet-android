@@ -1,114 +1,89 @@
 package com.storiqa.storiqawallet.ui.login
 
-import android.annotation.SuppressLint
-import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
-import com.google.gson.Gson
+import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.StoriqaApp
-import com.storiqa.storiqawallet.common.SingleLiveEvent
+import com.storiqa.storiqawallet.common.IError
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
-import com.storiqa.storiqawallet.constants.EMAIL_NOT_EXIST
-import com.storiqa.storiqawallet.constants.EMAIL_NOT_VALID
-import com.storiqa.storiqawallet.constants.PASS_WRONG
-import com.storiqa.storiqawallet.network.StoriqaApi
+import com.storiqa.storiqawallet.network.common.RequestHeaders
+import com.storiqa.storiqawallet.network.providers.ILoginNetworkProvider
+import com.storiqa.storiqawallet.network.providers.LoginError
 import com.storiqa.storiqawallet.network.requests.LoginRequest
-import com.storiqa.storiqawallet.network.responses.LoginErrorResponse
 import com.storiqa.storiqawallet.network.responses.TokenResponse
-import com.storiqa.storiqawallet.utils.*
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import retrofit2.Response
-import java.lang.ref.WeakReference
+import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.utils.getDeviceId
+import com.storiqa.storiqawallet.utils.getSign
+import com.storiqa.storiqawallet.utils.getTimestamp
+import com.storiqa.storiqawallet.utils.isEmailValid
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+        navigator: LoginNavigator,
+        private val loginNetworkProvider: ILoginNetworkProvider) : BaseViewModel<LoginNavigator>() {
 
-    private val storiqaApi = StoriqaApi.Factory().getInstance()
-
-    val isLoading = ObservableField<Boolean>(false)
     val emailError = ObservableField<String>("")
     val passwordError = ObservableField<String>("")
     val email = ObservableField<String>("")
     val password = ObservableField<String>("")
 
-    val hideKeyboard = SingleLiveEvent<Void>()
-
     init {
+        setNavigator(navigator)
         email.addOnPropertyChanged { emailError.set("") }
         password.addOnPropertyChanged { passwordError.set("") }
     }
 
-    private var refNavigator: WeakReference<LoginNavigator>? = null
-
-    fun setNavigator(loginNavigator: LoginNavigator) {
-        refNavigator = WeakReference(loginNavigator)
-    }
-
     fun onSignInButtonClicked() {
-        hideKeyboard.call()
+        hideKeyboard()
         passwordError.set("")
         emailError.set("")
         if (isEmailValid(email.get()!!)) {
             requestLogIn()
-            isLoading.set(true)
+            showLoadingDialog()
         } else
-            emailError.set(StoriqaApp.getStringFromRecources(R.string.error_email_not_valid))
+            emailError.set(App.getStringFromResources(R.string.error_email_not_valid))
     }
 
     fun onRegistrationButtonClicked() {
-        refNavigator?.get()?.openRegistrationActivity()
+        getNavigator()?.openRegistrationActivity()
     }
 
     fun onPasswordRecoveryButtonClicked() {
-        refNavigator?.get()?.openPasswordRecoveryActivity()
+        getNavigator()?.openPasswordRecoveryActivity()
     }
 
-    @SuppressLint("CheckResult")
     private fun requestLogIn() {
         val timestamp = getTimestamp()
-        val deviceId = getDeviceId()
-        storiqaApi
-                .login(timestamp, deviceId, getSign(timestamp, deviceId)!!,
-                        LoginRequest(email.get()!!, password.get()!!, getDeviceOs(), getDeviceId()))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    handleResponse(it)
 
-                }, {
-                    it.printStackTrace()
-                    isLoading.set(false)
-                    print("not nice")
-                })
+        val deviceId = getDeviceId()
+        val deviceOs = "25"
+        val sign = getSign(timestamp, deviceId)!!
+
+        val requestHeaders = RequestHeaders(timestamp, deviceId, sign)
+        val loginRequest = LoginRequest(email.get()!!, password.get()!!, deviceOs, deviceId)
+
+        loginNetworkProvider.requestLogIn(requestHeaders, loginRequest,
+                { onSuccess(it) }, { onFailure(it) })
     }
 
-    private fun handleResponse(response: Response<TokenResponse>) {
-        when (response.code()) {
-            200 -> refNavigator?.get()?.openMainActivity()
-            422 -> {
-                val gson = Gson()
-                val loginErrorResponse = gson.fromJson(response.errorBody()?.string(),
-                        LoginErrorResponse::class.java)
+    private fun onSuccess(token: TokenResponse?) {
 
-                val emailErrorCode = loginErrorResponse.email?.get(0)?.message
-                when {
-                    emailErrorCode.equals(EMAIL_NOT_VALID) ->
-                        emailError.set(StoriqaApp.getStringFromRecources(R.string.error_email_not_valid))
+        getNavigator()?.openMainActivity()//change
+        hideLoadingDialog()
+    }
 
-                    emailErrorCode.equals(EMAIL_NOT_EXIST) ->
-                        emailError.set(StoriqaApp.getStringFromRecources(R.string.error_email_not_exist))
-                }
-
-                val passwordErrorCode = loginErrorResponse.password?.get(0)?.code
-                if (passwordErrorCode.equals(PASS_WRONG))
-                    passwordError.set(StoriqaApp.getStringFromRecources(R.string.error_password_wrong_pass))
-
-                //if (loginErrorResponse.device?.get(0)?.equals(DEVICE_NOT_EXIST))
-                ;//TODO request to attach device
+    private fun onFailure(error: IError) {
+        when (error) {
+            LoginError.EMAIL_NOT_VALID ->
+                emailError.set(App.getStringFromResources(R.string.error_email_not_valid))
+            LoginError.EMAIL_NOT_EXIST ->
+                emailError.set(App.getStringFromResources(R.string.error_email_not_exist))
+            LoginError.PASS_WRONG ->
+                passwordError.set(App.getStringFromResources(R.string.error_password_wrong_pass))
+            LoginError.SERVER_ERROR -> {//TODO show dialog
             }
-            500 -> {//TODO show dialog
+            LoginError.DEVICE_NOT_EXIST -> {//TODO request for attach
             }
         }
-        isLoading.set(false)
+        hideLoadingDialog()
     }
+
 }

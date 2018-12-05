@@ -1,25 +1,25 @@
 package com.storiqa.storiqawallet.screen_pin_code_enter
 
-import com.storiqa.storiqawallet.StoriqaApp
+import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.db.PreferencesHelper
 
 class PinCodeModel {
     fun savePincode(pincode: String) {
-        PreferencesHelper(StoriqaApp.context).savePinCode(pincode)
+        PreferencesHelper(App.context).savePinCode(pincode)
     }
 
     fun onPinCodeSetted() {
-        PreferencesHelper(StoriqaApp.context).setPinCodeEnabled(true)
+        PreferencesHelper(App.context).setPinCodeEnabled(true)
     }
 
     fun pinCodeIsValid(pincode: String): Boolean {
-        return PreferencesHelper(StoriqaApp.context).getPinCode().equals(pincode)
+        return PreferencesHelper(App.context).getPinCode().equals(pincode)
     }
 
     fun eraseUserQuickLaunch() {
-        PreferencesHelper(StoriqaApp.context).setFingerprintEnabled(false)
-        PreferencesHelper(StoriqaApp.context).setPinCodeEnabled(false)
-        PreferencesHelper(StoriqaApp.context).setQuickLaunchFinished(false)
+        PreferencesHelper(App.context).setFingerprintEnabled(false)
+        PreferencesHelper(App.context).setPinCodeEnabled(false)
+        PreferencesHelper(App.context).setQuickLaunchFinished(false)
     }
 
 }

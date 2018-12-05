@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.repositories
 
 import android.provider.ContactsContract
-import com.storiqa.storiqawallet.StoriqaApp
+import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.objects.Contact
 import io.reactivex.Observable
 
@@ -10,7 +10,7 @@ class ContactsRepository {
     private var storedContactsObservable: Observable<Array<Contact>>? = null
 
     private fun fetchContactsFromPhone(): Array<Contact> {
-        val contentResolver = StoriqaApp.context.contentResolver
+        val contentResolver = App.context.contentResolver
         val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
 
         val contactList = ArrayList<Contact>()
