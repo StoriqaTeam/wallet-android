@@ -1,14 +1,13 @@
 package com.storiqa.storiqawallet.ui.base
 
 import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableBoolean
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import java.lang.ref.WeakReference
 
 abstract class BaseViewModel<N> : ViewModel() {
 
     val hideKeyboard = SingleLiveEvent<Void>()
-    val isLoading = ObservableBoolean(false)
+    val showLoadingDialog = SingleLiveEvent<Boolean>()
 
     private var refNavigator: WeakReference<N>? = null
 
@@ -17,11 +16,11 @@ abstract class BaseViewModel<N> : ViewModel() {
     }
 
     protected fun showLoadingDialog() {
-        isLoading.set(true)
+        showLoadingDialog.value = true
     }
 
     protected fun hideLoadingDialog() {
-        isLoading.set(false)
+        showLoadingDialog.value = false
     }
 
     fun setNavigator(navigator: N) {

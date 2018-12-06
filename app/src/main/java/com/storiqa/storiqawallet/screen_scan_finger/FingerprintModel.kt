@@ -6,7 +6,7 @@ import com.storiqa.storiqawallet.db.PreferencesHelper
 class FingerprintModel {
 
     fun onFingerprintEnabled() {
-        PreferencesHelper(App.context).setFingerprintEnabled(true)
+        PreferencesHelper(App.instance).setFingerprintEnabled(true)
     }
 
 }

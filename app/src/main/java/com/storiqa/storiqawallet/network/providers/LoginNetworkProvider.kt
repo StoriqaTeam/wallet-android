@@ -3,14 +3,16 @@ package com.storiqa.storiqawallet.network.providers
 import android.annotation.SuppressLint
 import com.google.gson.Gson
 import com.storiqa.storiqawallet.common.IError
-import com.storiqa.storiqawallet.network.common.RequestHeaders
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.common.RequestHeaders
 import com.storiqa.storiqawallet.network.requests.LoginRequest
 import com.storiqa.storiqawallet.network.responses.LoginErrorResponse
 import com.storiqa.storiqawallet.network.responses.TokenResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
+import java.io.IOException
+import javax.inject.Inject
 
 const val CODE_EMAIL_NOT_EXIST = "Email not found"
 const val CODE_EMAIL_NOT_VALID = "Invalid email format"
@@ -27,7 +29,9 @@ interface ILoginNetworkProvider {
 
 }
 
-class LoginNetworkProvider(private val walletApi: WalletApi) : ILoginNetworkProvider {
+class LoginNetworkProvider
+@Inject
+constructor(private val walletApi: WalletApi) : ILoginNetworkProvider {
 
     private lateinit var onSuccessCallback: (it: TokenResponse?) -> Unit
     private lateinit var onFailureCallback: (it: IError) -> Unit
@@ -46,15 +50,13 @@ class LoginNetworkProvider(private val walletApi: WalletApi) : ILoginNetworkProv
                 .login(headers.timestamp, headers.deviceId, headers.sign, request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { handleSuccessResponse(it) }
-                .doOnError { handleFailureResponse(it) }
-                .subscribe()
+                .subscribe({ handleSuccessResponse(it) }, { handleFailureResponse(it) })
+        //.doOnNext { handleSuccessResponse(it) }
+        //.doOnError { handleFailureResponse(it) }
+        //.subscribe()
     }
 
     private fun handleSuccessResponse(response: Response<TokenResponse>) {
-        if (!response.isSuccessful)
-            handleFailureResponse(Throwable())
-
         when (response.code()) {
             200 -> onSuccessCallback(response.body())
             422 -> {
@@ -86,13 +88,17 @@ class LoginNetworkProvider(private val walletApi: WalletApi) : ILoginNetworkProv
 
     private fun handleFailureResponse(throwable: Throwable) {
         throwable.printStackTrace()
-
+        if (throwable is IOException)
+            onFailureCallback(LoginError.NO_INTERNET)
+        else //converter errors
+            onFailureCallback(LoginError.UNKNOWN_ERROR)
     }
 
 }
 
 enum class LoginError : IError {
-    EMAIL_NOT_VALID, EMAIL_NOT_EXIST, PASS_WRONG, DEVICE_NOT_EXIST, SERVER_ERROR
+    EMAIL_NOT_VALID, EMAIL_NOT_EXIST, PASS_WRONG, DEVICE_NOT_EXIST,
+    SERVER_ERROR, NO_INTERNET, UNKNOWN_ERROR
 }
 
 

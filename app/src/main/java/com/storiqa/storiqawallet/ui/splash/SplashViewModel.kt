@@ -1,25 +1,25 @@
 package com.storiqa.storiqawallet.ui.splash
 
-import android.arch.lifecycle.ViewModel
-import java.lang.ref.WeakReference
+import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class SplashViewModel : ViewModel() {
+class SplashViewModel
+@Inject
+constructor(navigator: ISplashNavigator) : BaseViewModel<ISplashNavigator>() {
 
-    private var refNavigator: WeakReference<SplashNavigator>? = null
-
-    fun setNavigator(splashNavigator: SplashNavigator) {
-        refNavigator = WeakReference(splashNavigator)
+    init {
+        setNavigator(navigator)
     }
 
     fun checkLoggedIn() {
-
+        //TODO open pin code screen
     }
 
     fun startLogin() {
-        refNavigator?.get()?.openLoginActivity()
+        getNavigator()?.openLoginActivity()
     }
 
     fun startRegistration() {
-        refNavigator?.get()?.openRegistrationActivity()
+        getNavigator()?.openRegistrationActivity()
     }
 }

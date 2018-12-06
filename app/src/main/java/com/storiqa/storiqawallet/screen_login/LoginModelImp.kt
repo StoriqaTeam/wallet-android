@@ -21,10 +21,10 @@ class LoginModelImp : LoginModel {
     }
 
     override fun isPinCodeEntered(): Boolean {
-        return PreferencesHelper(App.context).isPinCodeEnabled()
+        return PreferencesHelper(App.instance).isPinCodeEnabled()
     }
 
-    override fun isUserFinishedQuickLaunch(): Boolean = PreferencesHelper(App.context).isQuickLaunchFinished()
+    override fun isUserFinishedQuickLaunch(): Boolean = PreferencesHelper(App.instance).isQuickLaunchFinished()
 
     override fun getStoriqaToken(userToken: String, provider: String, success: (storiqaToken: String) -> Unit, failure: () -> Unit) {
         /*WalletApi.Factory().getInstance().getStoriqaTokenFromFirebaseToken(GetStoriqaTokenFromFirebaseTokenRequest(userToken, provider))

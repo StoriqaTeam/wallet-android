@@ -2,35 +2,37 @@ package com.storiqa.storiqawallet
 
 import android.app.Application
 import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.ProcessLifecycleOwner
 import android.content.Context
+import android.content.res.Resources
 import android.support.multidex.MultiDex
-import com.storiqa.storiqawallet.di.apiModule
-import com.storiqa.storiqawallet.di.viewModelModule
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.androidModule
+import com.storiqa.storiqawallet.di.components.AppComponent
+import com.storiqa.storiqawallet.di.components.DaggerAppComponent
+import com.storiqa.storiqawallet.di.modules.AppModule
 
-class App : Application(), LifecycleObserver, KodeinAware {
-
-    override val kodein = Kodein.lazy {
-        import(apiModule)
-        import(viewModelModule)
-        import(androidModule(this@App))
-    }
+class App : Application(), LifecycleObserver {
 
     companion object {
-        lateinit var context: Context
+        lateinit var instance: App
+            private set
+
+        lateinit var appComponent: AppComponent
+            private set
+
+        val res: Resources
+            get() = this.instance.resources
 
         fun getStringFromResources(id: Int): String {
-            return context.getString(id)
+            return this.instance.getString(id)
         }
     }
 
     override fun onCreate() {
         super.onCreate()
-        context = applicationContext
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+
+        instance = this
+        appComponent = DaggerAppComponent.builder()
+                .appModule(AppModule(this))
+                .build()
     }
 
     override fun attachBaseContext(base: Context) {

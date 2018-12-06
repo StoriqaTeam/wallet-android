@@ -15,10 +15,12 @@ import com.storiqa.storiqawallet.utils.getDeviceId
 import com.storiqa.storiqawallet.utils.getSign
 import com.storiqa.storiqawallet.utils.getTimestamp
 import com.storiqa.storiqawallet.utils.isEmailValid
+import javax.inject.Inject
 
-class LoginViewModel(
-        navigator: LoginNavigator,
-        private val loginNetworkProvider: ILoginNetworkProvider) : BaseViewModel<LoginNavigator>() {
+class LoginViewModel
+@Inject
+constructor(navigator: ILoginNavigator,
+            private val loginNetworkProvider: ILoginNetworkProvider) : BaseViewModel<ILoginNavigator>() {
 
     val emailError = ObservableField<String>("")
     val passwordError = ObservableField<String>("")
@@ -81,6 +83,10 @@ class LoginViewModel(
             LoginError.SERVER_ERROR -> {//TODO show dialog
             }
             LoginError.DEVICE_NOT_EXIST -> {//TODO request for attach
+            }
+            LoginError.NO_INTERNET -> {//TODO show dialog
+            }
+            LoginError.UNKNOWN_ERROR -> {//TODO show dialog
             }
         }
         hideLoadingDialog()

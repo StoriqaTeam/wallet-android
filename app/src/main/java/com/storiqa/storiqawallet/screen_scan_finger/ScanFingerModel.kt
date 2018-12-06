@@ -8,7 +8,7 @@ import com.storiqa.storiqawallet.objects.FingerprintHepler
 
 class ScanFingerModel {
     fun startListenForFingerprint(success: () -> Unit, failed: () -> Unit): Unit {
-        FingerprintHepler(App.context, @RequiresApi(Build.VERSION_CODES.M)
+        FingerprintHepler(App.instance, @RequiresApi(Build.VERSION_CODES.M)
         object : FingerprintManager.AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                 super.onAuthenticationError(errorCode, errString)

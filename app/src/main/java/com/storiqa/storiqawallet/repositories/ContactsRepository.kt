@@ -10,7 +10,7 @@ class ContactsRepository {
     private var storedContactsObservable: Observable<Array<Contact>>? = null
 
     private fun fetchContactsFromPhone(): Array<Contact> {
-        val contentResolver = App.context.contentResolver
+        val contentResolver = App.instance.contentResolver
         val cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
 
         val contactList = ArrayList<Contact>()
