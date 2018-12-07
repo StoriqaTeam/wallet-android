@@ -18,7 +18,7 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body loginRequest: LoginRequest): Observable<Response<TokenResponse>>
+            @Body loginRequest: LoginRequest): Observable<TokenResponse>
 
     @POST("v1/sessions/oauth")
     fun loginByOauth(

@@ -7,6 +7,7 @@ import com.storiqa.storiqawallet.di.modules.NavigatorModule
 import com.storiqa.storiqawallet.di.modules.ViewModelModule
 import com.storiqa.storiqawallet.di.qualifiers.ActivityContext
 import com.storiqa.storiqawallet.di.scopes.PerActivity
+import com.storiqa.storiqawallet.network.errors.ErrorHandler
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.login.ILoginNavigator
 import com.storiqa.storiqawallet.ui.login.LoginActivity
@@ -28,8 +29,8 @@ interface ActivityComponentProvides : AppComponentProvides {
 
     @ActivityContext
     fun activityContext(): Context
-
     fun defaultFragmentManager(): FragmentManager
+    fun errorHandler(): ErrorHandler
 
     fun navigator(): INavigator
     fun splashNavigator(): ISplashNavigator

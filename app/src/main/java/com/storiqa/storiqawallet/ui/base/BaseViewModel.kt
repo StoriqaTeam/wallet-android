@@ -12,7 +12,7 @@ abstract class BaseViewModel<N> : ViewModel() {
     private var refNavigator: WeakReference<N>? = null
 
     protected fun hideKeyboard() {
-        hideKeyboard.call()
+        hideKeyboard.trigger()
     }
 
     protected fun showLoadingDialog() {

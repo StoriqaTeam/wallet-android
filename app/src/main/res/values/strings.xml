@@ -115,4 +115,7 @@
     <string name="error_password_numbers"></string>
     <string name="error_password_wrong_pass">Wrong password</string>
     <string name="error_device_not_attached">Device not attached</string>
+    <string name="error_server_error">Server error</string>
+    <string name="error_no_internet">No internet</string>
+    <string name="error_unknown_error">Unknown error</string>
 </resources>

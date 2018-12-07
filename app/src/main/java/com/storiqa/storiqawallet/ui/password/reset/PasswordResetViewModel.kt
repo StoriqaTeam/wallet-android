@@ -27,7 +27,7 @@ class PasswordResetViewModel : ViewModel() {
     }
 
     fun onPasswordResetButtonClicked() {
-        hideKeyboard.call()
+        hideKeyboard.trigger()
         if (isEmailValid(email.get()!!))
             requestResetPassword()
         else

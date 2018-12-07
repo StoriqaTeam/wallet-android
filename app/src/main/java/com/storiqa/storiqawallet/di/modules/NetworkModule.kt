@@ -3,8 +3,7 @@ package com.storiqa.storiqawallet.di.modules
 import com.storiqa.storiqawallet.BuildConfig
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.providers.ILoginNetworkProvider
-import com.storiqa.storiqawallet.network.providers.LoginNetworkProvider
+import com.storiqa.storiqawallet.network.errors.ErrorInterceptor
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -13,6 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 @Module
@@ -28,6 +28,8 @@ class NetworkModule {
     @PerApplication
     internal fun provideWalletApi(okHttpClient: OkHttpClient): WalletApi {
         val httpClientBuilder = okHttpClient.newBuilder()
+                .addInterceptor(ErrorInterceptor())
+                .connectTimeout(20, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor()
@@ -42,12 +44,6 @@ class NetworkModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
                 .create(WalletApi::class.java)
-    }
-
-    @Provides
-    @PerApplication
-    internal fun provideLoginNetworkProvider(walletApi: WalletApi): ILoginNetworkProvider {
-        return LoginNetworkProvider(walletApi)
     }
 
 }
