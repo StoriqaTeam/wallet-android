@@ -22,7 +22,7 @@ class RecoverPasswordActivity : MvpAppCompatActivity(), RecoverPasswordView {
         setContentView(R.layout.activity_recover_password)
         ButtonStateSwitcherFor(btnResetPassword).observeNotEmpty(etEmail)
         btnResetPassword.setOnClickListener { presenter.onResetPasswordButtonClicked(etEmail.text.toString()) }
-        btnBack.setOnClickListener { presenter.onBackButtonPressed() }
+        //btnBack.setOnClickListener { presenter.onBackButtonPressed() }
     }
 
     override fun goBack() = onBackPressed()

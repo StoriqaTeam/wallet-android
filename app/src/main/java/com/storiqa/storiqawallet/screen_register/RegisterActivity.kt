@@ -13,7 +13,7 @@ import com.storiqa.storiqawallet.objects.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_password_enter.*
 import kotlinx.android.synthetic.main.layout_sign_in_success_dialog.view.*
-import kotlinx.android.synthetic.main.sotial_network_sign_in_footer.*
+import kotlinx.android.synthetic.main.social_network_sign_in.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class RegisterActivity : MvpAppCompatActivity(), RegisterView {
@@ -47,22 +47,22 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
 
         btnSignIn.setOnClickListener { presenter.onSignInButtonClicked() }
 
-        btnGoogleLogin.setOnClickListener {
+        loginViaGoogle.setOnClickListener {
             googleAuthFlow = GoogleAuthFlow(this@RegisterActivity, {
                 presenter.requestTokenFromGoogleAccount(it)
             }, {
                 GeneralErrorDialogHelper(this).show {
-                    btnGoogleLogin.performClick()
+                    loginViaGoogle.performClick()
                 }
             })
             googleAuthFlow.performLogin()
         }
 
-        facebookAuthFlow = FacebookAuthFlow(this, fb_login_button, {
+        facebookAuthFlow = FacebookAuthFlow(this, loginViaFB, {
             presenter.requestTokenFromFacebookAccount(it)
         }, {
             GeneralErrorDialogHelper(this).show {
-                fb_login_button.performClick()
+                loginViaFB.performClick()
             }
         })
 
@@ -73,13 +73,13 @@ class RegisterActivity : MvpAppCompatActivity(), RegisterView {
 
     override fun showGoogleSignInError() {
         GeneralErrorDialogHelper(this).show {
-            btnGoogleLogin.performClick()
+            loginViaGoogle.performClick()
         }
     }
 
     override fun showFacebookSignInError() {
         GeneralErrorDialogHelper(this).show {
-            fb_login_button.performClick()
+            loginViaFB.performClick()
         }
     }
 

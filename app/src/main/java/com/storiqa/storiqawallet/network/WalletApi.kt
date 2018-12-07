@@ -1,11 +1,5 @@
 package com.storiqa.storiqawallet.network
 
-import com.storiqa.storiqawallet.network.network_requests.ApplyNewPasswordRequest
-import com.storiqa.storiqawallet.network.network_requests.GetStoriqaTokenFromFirebaseTokenRequest
-import com.storiqa.storiqawallet.network.network_requests.GetTokenByEmailRequest
-import com.storiqa.storiqawallet.network.network_responses.GetTokenResponseByEmail
-import com.storiqa.storiqawallet.network.network_responses.GetTokenResponseByProvider
-import com.storiqa.storiqawallet.network.network_responses.ResetPasswordResponse
 import com.storiqa.storiqawallet.network.requests.*
 import com.storiqa.storiqawallet.network.responses.TokenResponse
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
@@ -17,16 +11,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
-interface StoriqaApi {
-
-    @POST("/graphql")
-    fun getTokenByEmailAndPassword(@Body getTokenByEmailRequest: GetTokenByEmailRequest): Observable<GetTokenResponseByEmail>
-
-    @POST("/graphql")
-    fun getStoriqaTokenFromFirebaseToken(@Body getStoriqaTokenFromFirebaseTokenRequest: GetStoriqaTokenFromFirebaseTokenRequest): Observable<GetTokenResponseByProvider>
-
-    @POST("/graphql")
-    fun applyNewPassword(@Body applyNewPasswordRequest: ApplyNewPasswordRequest): Observable<ResetPasswordResponse>
+interface WalletApi {
 
     @POST("v1/sessions")
     fun login(
@@ -178,7 +163,7 @@ interface StoriqaApi {
     class Factory {
         private val baseUrl = "https://pay-nightly.stq.cloud/" //stage
 
-        fun getInstance(): StoriqaApi {
+        fun getInstance(): WalletApi {
 
             val client = OkHttpClient.Builder().build()
 
@@ -188,7 +173,7 @@ interface StoriqaApi {
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl(baseUrl)
                     .build()
-            return retrofit.create(StoriqaApi::class.java)
+            return retrofit.create(WalletApi::class.java)
         }
     }
 }

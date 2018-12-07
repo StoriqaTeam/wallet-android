@@ -5,7 +5,7 @@ import com.storiqa.storiqawallet.network.network_responses.ResetPasswordResponse
 class RecoverPasswordModelImp : RecoverPasswordModel {
 
     override fun resetPassword(email: String, sucess: (resetPasswordResponse: ResetPasswordResponse) -> Unit, failure: () -> Unit) {
-        /*StoriqaApi.Factory().getInstance().resetPassword(ResetPasswordRequest(email))
+        /*WalletApi.Factory().getInstance().resetPassword(ResetPasswordRequest(email))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe({
                     sucess(it)

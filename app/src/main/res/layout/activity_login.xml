@@ -11,197 +11,163 @@
 
         <import type="android.widget.EditText" />
 
-        <import type="android.text.InputType" />
-
         <import type="java.lang.String" />
 
         <variable
             name="viewModel"
-            type="com.storiqa.storiqawallet.screen_login.LoginViewModel" />
+            type="com.storiqa.storiqawallet.ui.login.LoginViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            android:id="@+id/tvSignIn"
+            style="@style/headerRegisterLoginText"
+            android:layout_marginTop="50dp"
+            android:text="@string/signIn"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/linearLayout2"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="17dp"
+            app:errorText="@{viewModel.emailError}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSignIn">
+
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/editText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:hint="@string/emailHint"
+                android:inputType="textEmailAddress"
+                android:nextFocusDown="@+id/etPassword"
+                android:text="@={viewModel.email}"
+                android:textColorHighlight="@drawable/edit_text_color" />
 
-                <TextView
-                    android:id="@+id/tvSignIn"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="@string/signIn"
-                    style="@style/headerRegisterLoginText" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilEmail"
-                    android:layout_marginTop="80dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    app:errorText="@{viewModel.emailError}"
-                    android:layout_marginEnd="17dp"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="17dp"
-                    android:layout_marginStart="17dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSignIn">
-
-                    <EditText
-                        android:id="@+id/etEmail"
-                        style="@style/editText"
-                        android:textColorHighlight="@drawable/edit_text_color"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/emailHint"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:nextFocusDown="@+id/etPassword" />
-
-                </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>
 
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="17dp"
-                    android:layout_marginLeft="17dp"
-                    android:layout_marginRight="17dp"
-                    android:layout_marginStart="17dp"
-                    android:layout_marginTop="23dp"
-                    app:errorText="@{viewModel.passwordError}"
-                    app:layout_constraintVertical_bias="0"
-                    app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tilEmail">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="17dp"
+            app:errorText="@{viewModel.passwordError}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilEmail"
+            app:passwordToggleDrawable="@drawable/eye_background"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorAccent">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/passwordHint"
+                android:inputType="textPassword"
+                android:nextFocusDown="@+id/btnSignIn"
+                android:imeOptions="actionDone"
+                app:onEditorEnterAction="@{()->viewModel.onSignInButtonClicked()}"
+                android:text="@={viewModel.password}" />
 
-                        <EditText
-                            android:id="@+id/etPassword"
-                            style="@style/editText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/passwordHint"
-                            android:inputType='@{viewModel.isPasswordVisible? InputType.TYPE_CLASS_TEXT : (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)  }'
-                            android:maxLines="1"
-                            android:nextFocusDown="@+id/btnSignIn" />
+        </android.support.design.widget.TextInputLayout>
 
 
-                        <ImageView
-                            android:id="@+id/ivShowPassword"
-                            style="@style/watchPasswordButton"
-                            tools:src="@drawable/closed_eye"
-                            android:padding="10dp"
-                            android:src="@{viewModel.isPasswordVisible ? @drawable/eye_opened : @drawable/closed_eye}"
-                            android:onClick="@{()->viewModel.changePasswordVisibility()}" />
+        <Button
+            android:id="@+id/btnSignIn"
+            style="@style/buttonStyle"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/switch_state_button"
+            android:enabled='@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? true : false}'
+            android:onClick="@{()->viewModel.onSignInButtonClicked()}"
+            android:text="@string/signInButtonText"
+            android:textColor="@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? @android:color/white : @color/disableButton}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.703"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilPassword"
+            tools:textColor="@android:color/white" />
 
-                    </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSignIn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnSignIn"
+            tools:visibility="visible" />
 
-
-                </android.support.design.widget.TextInputLayout>
-
-                <Button
-                    android:id="@+id/btnSignIn"
-                    style="@style/buttonStyle"
-                    android:layout_marginTop="46dp"
-                    android:background="@drawable/switch_state_button"
-                    android:enabled='@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? true : false}'
-                    android:onClick="@{()-> viewModel.onSignInButtonClicked()}"
-                    android:text="@string/signInButtonText"
-                    android:textColor="@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? @android:color/white : @color/disableButton}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btnForgotPassword"
-                    tools:textColor="@android:color/white" />
-
-                <ProgressBar
-                    android:id="@+id/pbLoading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnSignIn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btnSignIn"
-                    tools:visibility="visible" />
-
-                <TextView
-                    app:layout_constraintTop_toBottomOf="@+id/tilPassword"
-                    android:id="@+id/btnForgotPassword"
-                    style="@style/textButtonStyle"
-                    android:layout_marginLeft="19dp"
-                    android:layout_marginStart="19dp"
-                    android:onClick="@{()-> viewModel.onForgotPasswordButtonClicked()}"
-                    android:text="@string/forgotPassword"
-                    android:textColor="@color/warm_grey"
-                    android:layout_marginTop="19dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <include
-                    android:id="@+id/include3"
-                    layout="@layout/sotial_network_sign_in_footer"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="147dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btnForgotPassword" />
+        <TextView
+            android:id="@+id/btnForgotPassword"
+            style="@style/textButtonStyle"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:onClick="@{()->viewModel.onPasswordRecoveryButtonClicked()}"
+            android:text="@string/forgotPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
 
 
-                <TextView
-                    android:id="@+id/btnRegister"
-                    style="@style/textButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="19dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="19dp"
-                    android:onClick="@{()-> viewModel.onRegisterButtonClicked()}"
-                    android:text="@string/register"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnForgotPassword"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btnForgotPassword" />
-
-
-            </android.support.constraint.ConstraintLayout>
-
-        </ScrollView>
-
-        <ImageView
-            style="@style/purpleSpotStyle"
-            tools:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <include
+            android:id="@+id/include3"
+            layout="@layout/social_network_sign_in"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            style="@style/blueSpotStyle"
-            tools:visibility="gone"
+        <TextView
+            android:id="@+id/tvQuestion"
+            style="@style/grayTextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="5dp"
+            android:text="@string/haven_t_got_account"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
+            app:layout_constraintEnd_toStartOf="@+id/btnRegister"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/btnRegister"
+            style="@style/textButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="12dp"
+            android:onClick="@{()->viewModel.onRegistrationButtonClicked()}"
+            android:text="@string/register"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvQuestion" />
 
     </android.support.constraint.ConstraintLayout>
 
