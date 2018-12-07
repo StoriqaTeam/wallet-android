@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.di.components
 import android.content.Context
 import android.support.v4.app.FragmentManager
 import com.storiqa.storiqawallet.di.modules.ActivityModule
+import com.storiqa.storiqawallet.di.modules.NavigatorModule
 import com.storiqa.storiqawallet.di.modules.ViewModelModule
 import com.storiqa.storiqawallet.di.qualifiers.ActivityContext
 import com.storiqa.storiqawallet.di.scopes.PerActivity
@@ -14,7 +15,8 @@ import com.storiqa.storiqawallet.ui.splash.SplashActivity
 import dagger.Component
 
 @PerActivity
-@Component(dependencies = arrayOf(AppComponent::class), modules = arrayOf(ActivityModule::class, ViewModelModule::class))
+@Component(dependencies = arrayOf(AppComponent::class),
+        modules = arrayOf(ActivityModule::class, NavigatorModule::class, ViewModelModule::class))
 interface ActivityComponent : ActivityComponentProvides {
 
     fun inject(activity: SplashActivity)

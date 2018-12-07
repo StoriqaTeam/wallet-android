@@ -37,7 +37,7 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
         startActivityInternal(activityClass, null, adaptIntentFun)
     }
 
-    fun startActivity(clsActivity: Class<out Activity>, isFinish: Boolean) {
+    override fun startActivity(clsActivity: Class<out Activity>, isFinish: Boolean) {
         val intent = Intent(activity, clsActivity)
         startActivity(intent)
 

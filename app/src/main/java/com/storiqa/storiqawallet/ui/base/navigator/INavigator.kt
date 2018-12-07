@@ -20,6 +20,7 @@ interface INavigator {
     fun startActivity(intent: Intent)
     fun startActivity(action: String, uri: Uri? = null)
     fun startActivity(activityClass: Class<out Activity>, adaptIntentFun: (Intent.() -> Unit)? = null)
+    fun startActivity(clsActivity: Class<out Activity>, isFinish: Boolean)
 
     fun startActivityForResult(activityClass: Class<out Activity>, requestCode: Int, adaptIntentFun: (Intent.() -> Unit)? = null)
 

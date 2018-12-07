@@ -17,6 +17,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.di.components.ActivityComponent
 import com.storiqa.storiqawallet.di.components.DaggerActivityComponent
 import com.storiqa.storiqawallet.di.modules.ActivityModule
+import com.storiqa.storiqawallet.di.modules.NavigatorModule
 import javax.inject.Inject
 
 abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCompatActivity() {
@@ -36,6 +37,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
     internal val activityComponent: ActivityComponent by lazy {
         DaggerActivityComponent.builder()
                 .activityModule(ActivityModule(this))
+                .navigatorModule(NavigatorModule(this))
                 .appComponent(App.appComponent)
                 .build()
     }

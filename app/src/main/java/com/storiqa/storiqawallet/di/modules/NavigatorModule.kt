@@ -1,0 +1,29 @@
+package com.storiqa.storiqawallet.di.modules
+
+import android.support.v7.app.AppCompatActivity
+import com.storiqa.storiqawallet.di.scopes.PerActivity
+import com.storiqa.storiqawallet.ui.base.navigator.INavigator
+import com.storiqa.storiqawallet.ui.base.navigator.Navigator
+import com.storiqa.storiqawallet.ui.login.ILoginNavigator
+import com.storiqa.storiqawallet.ui.login.LoginNavigator
+import com.storiqa.storiqawallet.ui.splash.ISplashNavigator
+import com.storiqa.storiqawallet.ui.splash.SplashNavigator
+import dagger.Module
+import dagger.Provides
+
+@Module
+class NavigatorModule(private val activity: AppCompatActivity) {
+
+    @Provides
+    @PerActivity
+    internal fun provideNavigator(): INavigator = Navigator(activity)
+
+    @Provides
+    @PerActivity
+    internal fun provideSplashNavigator(navigator: INavigator): ISplashNavigator = SplashNavigator(navigator)
+
+    @Provides
+    @PerActivity
+    internal fun provideLoginNavigator(navigator: INavigator): ILoginNavigator = LoginNavigator(navigator)
+
+}
