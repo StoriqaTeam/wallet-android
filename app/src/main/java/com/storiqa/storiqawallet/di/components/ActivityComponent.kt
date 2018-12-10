@@ -29,6 +29,7 @@ interface ActivityComponentProvides : AppComponentProvides {
 
     @ActivityContext
     fun activityContext(): Context
+
     fun defaultFragmentManager(): FragmentManager
     fun errorHandler(): ErrorHandler
 

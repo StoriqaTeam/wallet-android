@@ -6,7 +6,6 @@ import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.common.RequestHeaders
 import com.storiqa.storiqawallet.network.errors.ErrorCode
 import com.storiqa.storiqawallet.network.errors.ErrorHandler
 import com.storiqa.storiqawallet.network.requests.LoginRequest
@@ -60,20 +59,14 @@ constructor(navigator: ILoginNavigator,
     @SuppressLint("CheckResult")
     private fun requestLogIn() {
         val timestamp = getTimestamp()
-
         val deviceId = getDeviceId()
         val deviceOs = "25"
         val sign = getSign(timestamp, deviceId)!!
-
-        val requestHeaders = RequestHeaders(timestamp, deviceId, sign)
         val loginRequest = LoginRequest(email.get()!!, password.get()!!, deviceOs, deviceId)
 
-        /*loginNetworkProvider.requestLogIn(requestHeaders, loginRequest,
-                { onSuccess(it) }, { handleUnprocessableEntity(it) })*/
         val observableField: Observable<TokenResponse> =
                 walletApi
                         .login(timestamp, deviceId, sign, loginRequest)
-
 
         observableField
                 .subscribeOn(Schedulers.io())
@@ -100,13 +93,7 @@ constructor(navigator: ILoginNavigator,
                 emailError.set(App.getStringFromResources(error.title))
             ErrorCode.WRONG_PASSWORD ->
                 passwordError.set(App.getStringFromResources(error.title))
-            ErrorCode.SERVER_ERROR -> {//TODO show dialog
-            }
             ErrorCode.DEVICE_NOT_ATTACHED -> {//TODO request for attach
-            }
-            ErrorCode.NO_INTERNET -> {//TODO show dialog
-            }
-            ErrorCode.UNKNOWN_ERROR -> {//TODO show dialog
             }
         }
         hideLoadingDialog()

@@ -53,6 +53,7 @@ enum class ErrorCode(
     EMAIL_NOT_EXIST(R.string.error_email_not_exist),
     WRONG_PASSWORD(R.string.error_password_wrong_pass),
     DEVICE_NOT_ATTACHED(R.string.error_device_not_attached),
+    BAD_REQUEST(R.string.error_bad_request),
     SERVER_ERROR(R.string.error_server_error),
     NO_INTERNET(R.string.error_no_internet),
     UNKNOWN_ERROR(R.string.error_unknown_error)

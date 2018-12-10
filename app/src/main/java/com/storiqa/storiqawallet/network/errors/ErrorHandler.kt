@@ -10,19 +10,18 @@ constructor(private val context: Context) {
 
     fun handleError(exception: Exception, handleUnprocessableEntity: (ErrorCode) -> Unit) {
         when (exception) {
-            is BadRequest -> {
-            }
-            is InternalServerError -> {
-            }
-            is UnknownError -> {
-            }
-            is UnprocessableEntity -> {
+            is BadRequest -> TODO() //show dialog
+
+            is InternalServerError -> TODO() //show dialog
+
+            is UnknownError -> TODO() //show dialog
+
+            is UnprocessableEntity ->
                 exception.errors.forEach { handleUnprocessableEntity(it) }
-            }
-            is IOException -> {
-            }
-            else -> {
-            }
+
+            is IOException -> TODO() //show dialog
+
+            else -> TODO() //show dialog
         }
     }
 
