@@ -1,7 +1,5 @@
 package com.storiqa.cryptokeys;
 
-import com.storiqa.cryptokeys.Util.ECKey;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Random;
@@ -13,7 +11,7 @@ import javax.crypto.spec.PBEKeySpec;
 public class KeyGenerator implements IKeyGenerator {
 
     private static final int ITERATIONS = 1024;
-    private static final int KEY_LENGHT = 256;
+    private static final int KEY_LENGTH = 256;
 
     private static String password = "storiqa";
     private static String salt = "android" + new Random().nextDouble(); //+float (0..1000)
@@ -32,10 +30,26 @@ public class KeyGenerator implements IKeyGenerator {
 
         try {
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGHT);
+            PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
             SecretKey key = skf.generateSecret(spec);
 
             return key.getEncoded();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public SecretKey generateSecretKey() {
+
+        try {
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt.getBytes(), ITERATIONS, KEY_LENGTH);
+            SecretKey key = skf.generateSecret(spec);
+
+            return key;
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
         }
