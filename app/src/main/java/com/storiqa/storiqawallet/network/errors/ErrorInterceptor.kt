@@ -14,9 +14,13 @@ class ErrorInterceptor : Interceptor {
             200 -> return response
             400 -> throw BadRequest
             422 -> {
+                if (response.body() == null)
+                    throw UnknownError
+
                 val gson = Gson()
-                val type = object : TypeToken<HashMap<String, Array<ValidationError>?>>() {}.type
-                val loginErrorResponse: HashMap<String, Array<ValidationError>?> = gson.fromJson(response.body()?.string(), type)
+                val type = object : TypeToken<HashMap<String, Array<ValidationError>>>() {}.type
+                val loginErrorResponse: HashMap<String, Array<ValidationError>> =
+                        gson.fromJson(response.body()?.string(), type)
                 throw UnprocessableEntity(loginErrorResponse)
             }
             in 500..599 -> throw InternalServerError

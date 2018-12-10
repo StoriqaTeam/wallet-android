@@ -23,7 +23,6 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject
 constructor(navigator: ILoginNavigator,
-            private val errorHandler: ErrorHandler,
             private val walletApi: WalletApi) : BaseViewModel<ILoginNavigator>() {
 
     val emailError = ObservableField<String>("")
@@ -74,7 +73,9 @@ constructor(navigator: ILoginNavigator,
                 .subscribe({
                     onSuccess(it)
                 }, {
-                    errorHandler.handleError(it as Exception, { handleUnprocessableEntity(it) })
+                    ErrorHandler().handleError(it as Exception,
+                            { showErrorDialog(it) },
+                            { code: ErrorCode, message: Int -> showErrorField(code, message) })
                 })
 
     }
@@ -85,14 +86,14 @@ constructor(navigator: ILoginNavigator,
         hideLoadingDialog()
     }
 
-    private fun handleUnprocessableEntity(error: ErrorCode) {
+    private fun showErrorField(error: ErrorCode, message: Int) {
         when (error) {
             ErrorCode.EMAIL_NOT_VALID ->
-                emailError.set(App.getStringFromResources(error.title))
-            ErrorCode.EMAIL_NOT_EXIST ->
-                emailError.set(App.getStringFromResources(error.title))
+                emailError.set(App.getStringFromResources(message))
+            ErrorCode.EMAIL_NOT_FOUND ->
+                emailError.set(App.getStringFromResources(message))
             ErrorCode.WRONG_PASSWORD ->
-                passwordError.set(App.getStringFromResources(error.title))
+                passwordError.set(App.getStringFromResources(message))
             ErrorCode.DEVICE_NOT_ATTACHED -> {//TODO request for attach
             }
         }

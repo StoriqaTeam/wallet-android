@@ -1,9 +1,6 @@
 package com.storiqa.storiqawallet.network.errors
 
 data class ValidationError(
-        val code: String,
+        val code: ErrorCode,
         val message: String,
-        val params: HashMap<String, String>)
-
-data class ErrorParams(
-        val value: String)
+        val params: HashMap<String, String>?)
