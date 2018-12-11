@@ -6,8 +6,9 @@ import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.errors.ErrorCode
 import com.storiqa.storiqawallet.network.errors.ErrorHandler
+import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
+import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.network.requests.LoginRequest
 import com.storiqa.storiqawallet.network.responses.TokenResponse
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
@@ -73,9 +74,11 @@ constructor(navigator: ILoginNavigator,
                 .subscribe({
                     onSuccess(it)
                 }, {
-                    ErrorHandler().handleError(it as Exception,
-                            { showErrorDialog(it) },
-                            { code: ErrorCode, message: Int -> showErrorField(code, message) })
+                    val errorPresenter = ErrorHandler().handleError(it as Exception)
+                    when (errorPresenter) {
+                        is ErrorPresenterDialog -> showErrorDialog(errorPresenter)
+                        is ErrorPresenterFields -> showErrorFields(errorPresenter)
+                    }
                 })
 
     }
@@ -86,17 +89,17 @@ constructor(navigator: ILoginNavigator,
         hideLoadingDialog()
     }
 
-    private fun showErrorField(error: ErrorCode, message: Int) {
-        when (error) {
-            ErrorCode.EMAIL_NOT_VALID ->
-                emailError.set(App.getStringFromResources(message))
-            ErrorCode.EMAIL_NOT_FOUND ->
-                emailError.set(App.getStringFromResources(message))
-            ErrorCode.WRONG_PASSWORD ->
-                passwordError.set(App.getStringFromResources(message))
-            ErrorCode.DEVICE_NOT_ATTACHED -> {//TODO request for attach
+    private fun showErrorFields(errorPresenter: ErrorPresenterFields) {
+        errorPresenter.fieldErrors.forEach { (key, value) ->
+            when (key) {
+                "email" ->
+                    emailError.set(App.getStringFromResources(value))
+                "password" ->
+                    passwordError.set(App.getStringFromResources(value))
             }
         }
+
+
         hideLoadingDialog()
     }
 
