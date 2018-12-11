@@ -2,6 +2,8 @@ package com.storiqa.storiqawallet.ui.base
 
 import android.app.Dialog
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
@@ -20,11 +22,14 @@ import com.storiqa.storiqawallet.di.modules.ActivityModule
 import com.storiqa.storiqawallet.di.modules.NavigatorModule
 import javax.inject.Inject
 
+
 abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCompatActivity() {
+
+    @Inject
+    protected lateinit var viewModelFactory: ViewModelProvider.Factory
 
     protected lateinit var binding: B
 
-    @Inject
     protected lateinit var viewModel: VM
 
     private var loadingDialog: Dialog? = null
@@ -33,6 +38,8 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
     abstract fun getLayoutId(): Int
 
     abstract fun getBindingVariable(): Int
+
+    abstract fun getViewModelClass(): Class<VM>
 
     internal val activityComponent: ActivityComponent by lazy {
         DaggerActivityComponent.builder()
@@ -47,9 +54,12 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
         super.onCreate(savedInstanceState)
 
         try {
-            ActivityComponent::class.java.getDeclaredMethod("inject", this::class.java).invoke(activityComponent, this)
+            ActivityComponent::class.java.getDeclaredMethod("inject", this::class.java)
+                    .invoke(activityComponent, this)
+            viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass())
         } catch (e: NoSuchMethodException) {
-            throw NoSuchMethodException("You forgot to add \"fun inject(activity: ${this::class.java.simpleName})\" in ActivityComponent")
+            throw NoSuchMethodException("You forgot to add \"fun inject(activity: " +
+                    "${this::class.java.simpleName})\" in ActivityComponent")
         }
 
         performDataBinding()

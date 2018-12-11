@@ -44,13 +44,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         })*/
     }
 
-    override fun getBindingVariable(): Int {
-        return BR.viewModel
-    }
+    override fun getBindingVariable() = BR.viewModel
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_login
-    }
+    override fun getLayoutId() = R.layout.activity_login
+    override fun getViewModelClass(): Class<LoginViewModel> = LoginViewModel::class.java
 
     /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == RequestCodes().authorizationGoogle ||
