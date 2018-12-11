@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName
 enum class ErrorCode {
 
     @SerializedName("email")
-    EMAIL_NOT_VALID,
+    INVALID_EMAIL,
 
-    @SerializedName("email")
-    EMAIL_NOT_FOUND,
+    @SerializedName("not_found")
+    NOT_FOUND,
 
     @SerializedName("password")
-    WRONG_PASSWORD,
+    INVALID_PASSWORD,
 
     @SerializedName("exists")
-    DEVICE_NOT_ATTACHED
+    ALREADY_EXISTS
 
 }

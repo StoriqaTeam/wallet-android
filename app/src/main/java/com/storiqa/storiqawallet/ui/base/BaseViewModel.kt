@@ -2,14 +2,14 @@ package com.storiqa.storiqawallet.ui.base
 
 import android.arch.lifecycle.ViewModel
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.network.errors.ErrorData
+import com.storiqa.storiqawallet.network.errors.ErrorPresenter
 import java.lang.ref.WeakReference
 
 abstract class BaseViewModel<N> : ViewModel() {
 
     val hideKeyboard = SingleLiveEvent<Void>()
     val showLoadingDialog = SingleLiveEvent<Boolean>()
-    val showErrorDialog = SingleLiveEvent<ErrorData>()
+    val showErrorDialog = SingleLiveEvent<ErrorPresenter>()
 
     private var refNavigator: WeakReference<N>? = null
 
@@ -33,8 +33,8 @@ abstract class BaseViewModel<N> : ViewModel() {
         return refNavigator?.get()
     }
 
-    fun showErrorDialog(errorData: ErrorData) {
-        showErrorDialog.value = errorData
+    fun showErrorDialog(errorPresenter: ErrorPresenter) {
+        showErrorDialog.value = errorPresenter
     }
 
 }

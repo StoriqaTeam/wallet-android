@@ -88,13 +88,13 @@ constructor(navigator: ILoginNavigator,
 
     private fun showErrorField(error: ErrorCode, message: Int) {
         when (error) {
-            ErrorCode.EMAIL_NOT_VALID ->
+            ErrorCode.INVALID_EMAIL ->
                 emailError.set(App.getStringFromResources(message))
-            ErrorCode.EMAIL_NOT_FOUND ->
+            ErrorCode.NOT_FOUND ->
                 emailError.set(App.getStringFromResources(message))
-            ErrorCode.WRONG_PASSWORD ->
+            ErrorCode.INVALID_PASSWORD ->
                 passwordError.set(App.getStringFromResources(message))
-            ErrorCode.DEVICE_NOT_ATTACHED -> {//TODO request for attach
+            ErrorCode.ALREADY_EXISTS -> {//TODO request for attach
             }
         }
         hideLoadingDialog()
