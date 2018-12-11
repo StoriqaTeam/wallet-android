@@ -20,6 +20,11 @@ import com.storiqa.storiqawallet.di.components.ActivityComponent
 import com.storiqa.storiqawallet.di.components.DaggerActivityComponent
 import com.storiqa.storiqawallet.di.modules.ActivityModule
 import com.storiqa.storiqawallet.di.modules.NavigatorModule
+import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
+import com.storiqa.storiqawallet.ui.dialogs.ARGUMENT_ICON
+import com.storiqa.storiqawallet.ui.dialogs.ARGUMENT_MESSAGE
+import com.storiqa.storiqawallet.ui.dialogs.ARGUMENT_TITLE
+import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
 import javax.inject.Inject
 
 
@@ -71,6 +76,18 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
                 Observer { if (it!!) showLoadingDialog() else hideLoadingDialog() })
 
         viewModel.hideKeyboard.observe(this, Observer { hideKeyboard() })
+
+        viewModel.showErrorDialog.observe(this, Observer { showErrorDialog(it!!) })
+    }
+
+    private fun showErrorDialog(error: ErrorPresenterDialog) {
+        val messageDialog = MessageDialog()
+        val bundle = Bundle()
+        bundle.putInt(ARGUMENT_TITLE, error.title)
+        bundle.putInt(ARGUMENT_MESSAGE, error.description)
+        bundle.putInt(ARGUMENT_ICON, error.icon)
+        messageDialog.arguments = bundle
+        messageDialog.show(supportFragmentManager, "error dialog")
     }
 
     private fun showLoadingDialog() {

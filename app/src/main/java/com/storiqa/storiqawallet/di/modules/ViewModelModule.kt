@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.di.modules
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.storiqa.storiqawallet.di.mapkeys.ViewModelKey
+import com.storiqa.storiqawallet.ui.dialogs.MessageViewModel
 import com.storiqa.storiqawallet.ui.login.LoginViewModel
 import com.storiqa.storiqawallet.ui.splash.SplashViewModel
 import dagger.Binds
@@ -28,12 +29,17 @@ abstract class ViewModelModule {
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(MessageViewModel::class)
+    abstract fun bindMessageViewModel(messageViewModel: MessageViewModel): ViewModel
+
 }
 
 class ViewModelFactory
 @Inject
-constructor(private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) :
-        ViewModelProvider.Factory {
+constructor(private val creators: Map<Class<out ViewModel>,
+        @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val creator = creators[modelClass] ?: creators.entries.firstOrNull {
