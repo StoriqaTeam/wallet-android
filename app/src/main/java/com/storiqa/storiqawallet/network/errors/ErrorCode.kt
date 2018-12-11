@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 enum class ErrorCode {
 
     @SerializedName("email")
-    EMAIL_NOT_VALID,
+    INVALID_EMAIL,
 
     @SerializedName("email")
     EMAIL_NOT_FOUND,
