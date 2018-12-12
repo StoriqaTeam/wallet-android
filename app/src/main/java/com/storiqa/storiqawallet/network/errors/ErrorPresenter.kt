@@ -6,9 +6,15 @@ import android.support.annotation.StringRes
 sealed class ErrorPresenter
 
 data class ErrorPresenterDialog(
-        @StringRes val title: Int = 0,
+        @StringRes val title: Int = 0, //TODO delete default params
         @StringRes val description: Int = 0,
-        @DrawableRes val icon: Int = 0) : ErrorPresenter()
+        @DrawableRes val icon: Int = 0,
+        val positiveButton: DialogButton = DialogButton(-1, {}),
+        val negativeButton: DialogButton? = null) : ErrorPresenter()
 
 data class ErrorPresenterFields(
         val fieldErrors: HashMap<String, Int>) : ErrorPresenter()
+
+data class DialogButton(
+        @StringRes val name: Int,
+        var onClick: () -> Unit)

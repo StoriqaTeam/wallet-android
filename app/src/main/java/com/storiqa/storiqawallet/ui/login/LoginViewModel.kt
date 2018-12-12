@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.ui.login
 
 import android.annotation.SuppressLint
 import android.databinding.ObservableField
+import android.util.Log
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
@@ -76,8 +77,12 @@ constructor(navigator: ILoginNavigator,
                 }, {
                     val errorPresenter = ErrorHandler().handleError(it as Exception)
                     when (errorPresenter) {
-                        is ErrorPresenterDialog -> showErrorDialog(errorPresenter)
                         is ErrorPresenterFields -> showErrorFields(errorPresenter)
+                        is ErrorPresenterDialog -> {
+                            errorPresenter.positiveButton.onClick = { Log.d("TAGGG", "positive button clicked") }
+                            errorPresenter.negativeButton?.onClick = { Log.d("TAGGG", "negative button clicked") }
+                            showErrorDialog(errorPresenter)
+                        }
                     }
                 })
 

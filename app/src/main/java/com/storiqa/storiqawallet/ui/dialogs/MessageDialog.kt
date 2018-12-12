@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.ui.dialogs
 
 import android.app.Dialog
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -19,6 +20,8 @@ import javax.inject.Inject
 const val ARGUMENT_TITLE = "argument_title"
 const val ARGUMENT_MESSAGE = "argument_message"
 const val ARGUMENT_ICON = "argument_icon"
+const val ARGUMENT_POSITIVE_BUTTON = "positive_button"
+const val ARGUMENT_NEGATIVE_BUTTON = "negative_button"
 
 class MessageDialog : DialogFragment() {
 
@@ -26,6 +29,9 @@ class MessageDialog : DialogFragment() {
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: MessageViewModel
+
+    private lateinit var onPositiveClick: () -> Unit
+    private var onNegativeClick: (() -> Unit)? = null
 
     internal val fragmentComponent: FragmentComponent by lazy {
         DaggerFragmentComponent.builder()
@@ -44,21 +50,54 @@ class MessageDialog : DialogFragment() {
             throw NoSuchMethodException("You forgot to add \"fun inject(activity: " +
                     "${this::class.java.simpleName})\" in ActivityComponent")
         }
+
+        subscribeEvents()
+    }
+
+    private fun subscribeEvents() {
+        viewModel.positiveButtonClicked.observe(this, Observer {
+            dismiss()
+            onPositiveClick()
+        })
+
+        viewModel.negativeButtonClicked.observe(this, Observer {
+            dismiss()
+            onNegativeClick?.invoke()
+        })
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(context!!)
 
-        viewModel.initData(
-                App.res.getString(arguments?.getInt(ARGUMENT_TITLE)!!),
-                App.res.getString(arguments?.getInt(ARGUMENT_MESSAGE)!!),
-                App.res.getDrawable(arguments?.getInt(ARGUMENT_ICON)!!))
+        val args = arguments
+        if (args != null) {
+            val btnNegativeText = if (onNegativeClick == null) null else
+                App.res.getString(args.getInt(ARGUMENT_NEGATIVE_BUTTON))
+
+            viewModel.initData(
+                    App.res.getString(args.getInt(ARGUMENT_TITLE)),
+                    App.res.getString(args.getInt(ARGUMENT_MESSAGE)),
+                    App.res.getDrawable(args.getInt(ARGUMENT_ICON)),
+                    App.res.getString(args.getInt(ARGUMENT_POSITIVE_BUTTON)),
+                    btnNegativeText)
+        }
 
         val binding = DialogMessageBinding.inflate(activity!!.layoutInflater)
-        binding.setVariable(BR.viewModel, viewModel)
         builder.setView(binding.root)
+        binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()
 
         return builder.create()
+    }
+
+    fun setPositiveButton(name: Int, onClick: () -> Unit) {
+        arguments?.putInt(ARGUMENT_POSITIVE_BUTTON, name)
+        onPositiveClick = onClick
+    }
+
+    fun setNegativeButton(name: Int, onClick: () -> Unit) {
+        arguments?.putInt(ARGUMENT_NEGATIVE_BUTTON, name)
+        onNegativeClick = onClick
+
     }
 }

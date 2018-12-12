@@ -81,25 +81,32 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
     }
 
     private fun showErrorDialog(error: ErrorPresenterDialog) {
-        val messageDialog = MessageDialog()
         val bundle = Bundle()
         bundle.putInt(ARGUMENT_TITLE, error.title)
         bundle.putInt(ARGUMENT_MESSAGE, error.description)
         bundle.putInt(ARGUMENT_ICON, error.icon)
-        messageDialog.arguments = bundle
-        messageDialog.show(supportFragmentManager, "error dialog")
+        val messageDialog = MessageDialog().apply {
+            arguments = bundle
+            setPositiveButton(error.positiveButton.name, error.positiveButton.onClick)
+            val negativeButton = error.negativeButton
+            if (negativeButton != null)
+                setNegativeButton(negativeButton.name, negativeButton.onClick)
+
+            show(supportFragmentManager, "error dialog")
+        }
     }
 
     private fun showLoadingDialog() {
         if (loadingDialog != null && loadingDialog?.isShowing!!)
             return
 
-        loadingDialog = Dialog(this)
-        loadingDialog!!.show()
-        loadingDialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        loadingDialog!!.setContentView(R.layout.progress_dialog)
-        loadingDialog!!.setCancelable(false)
-        loadingDialog!!.setCanceledOnTouchOutside(false)
+        loadingDialog = Dialog(this).apply {
+            show()
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setContentView(R.layout.progress_dialog)
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
+        }
     }
 
     private fun hideLoadingDialog() {

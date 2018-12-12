@@ -4,6 +4,10 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <import type="java.lang.String" />
+
         <variable
             name="viewModel"
             type="com.storiqa.storiqawallet.ui.dialogs.MessageViewModel" />
@@ -13,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@drawable/background_dialog"
         android:padding="28dp">
 
         <ImageView
@@ -35,21 +40,25 @@
             android:id="@+id/tvMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:gravity="center_horizontal"
             android:text="@{viewModel.message}"
-            android:textSize="13sp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnPositive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:onClick="@{() -> viewModel.onPositiveButtonClicked()}"
+            android:text="@{viewModel.btnPositiveText}" />
 
         <Button
             android:id="@+id/btnNegative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:onClick="@{() -> viewModel.onNegativeButtonClicked()}"
+            android:text="@{viewModel.btnNegativeText}"
+            android:visibility="@{viewModel.btnNegativeText.get().length > 0 ? View.VISIBLE : View.GONE}" />
     </LinearLayout>
 
 </layout>

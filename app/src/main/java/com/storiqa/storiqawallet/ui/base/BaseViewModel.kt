@@ -35,6 +35,7 @@ abstract class BaseViewModel<N> : ViewModel() {
 
     fun showErrorDialog(errorPresenter: ErrorPresenterDialog) {
         showErrorDialog.value = errorPresenter
+        hideLoadingDialog()
     }
 
 }

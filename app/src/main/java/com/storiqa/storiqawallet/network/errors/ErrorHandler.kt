@@ -59,7 +59,11 @@ open class ErrorHandler {
                     ErrorCode.WRONG_PASSWORD ->
                         errorFields[field] = R.string.error_password_wrong_pass
                     ErrorCode.DEVICE_NOT_ATTACHED ->
-                        return ErrorPresenterDialog()
+                        return ErrorPresenterDialog(R.string.error_device_not_attached_title,
+                                R.string.error_device_not_attached_description,
+                                R.drawable.general_error_icon,
+                                DialogButton(R.string.button_ok, {}),
+                                DialogButton(R.string.cancel, {}))
                 }
             }
         }
