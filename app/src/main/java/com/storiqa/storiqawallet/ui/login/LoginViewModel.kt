@@ -6,8 +6,6 @@ import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.errors.ErrorHandler
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.network.requests.LoginRequest
 import com.storiqa.storiqawallet.network.responses.TokenResponse
@@ -74,13 +72,8 @@ constructor(navigator: ILoginNavigator,
                 .subscribe({
                     onSuccess(it)
                 }, {
-                    val errorPresenter = ErrorHandler().handleError(it as Exception)
-                    when (errorPresenter) {
-                        is ErrorPresenterDialog -> showErrorDialog(errorPresenter)
-                        is ErrorPresenterFields -> showErrorFields(errorPresenter)
-                    }
+                    handleError(it as Exception)
                 })
-
     }
 
     private fun onSuccess(token: TokenResponse?) {
@@ -89,7 +82,7 @@ constructor(navigator: ILoginNavigator,
         hideLoadingDialog()
     }
 
-    private fun showErrorFields(errorPresenter: ErrorPresenterFields) {
+    override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
         errorPresenter.fieldErrors.forEach { (key, value) ->
             when (key) {
                 "email" ->
@@ -98,9 +91,10 @@ constructor(navigator: ILoginNavigator,
                     passwordError.set(App.getStringFromResources(value))
             }
         }
+    }
 
+    override fun onDialogPositiveButtonClicked() {
 
-        hideLoadingDialog()
     }
 
 }

@@ -7,13 +7,16 @@ enum class ErrorCode {
     @SerializedName("email")
     INVALID_EMAIL,
 
-    @SerializedName("email")
-    EMAIL_NOT_FOUND,
+    @SerializedName("not_found")
+    NOT_FOUND,
 
     @SerializedName("password")
-    WRONG_PASSWORD,
+    INVALID_PASSWORD,
+
+    @SerializedName("not_attached")
+    DEVICE_NOT_ATTACHED,
 
     @SerializedName("exists")
-    DEVICE_NOT_ATTACHED
+    ALREADY_EXISTS
 
 }

@@ -107,16 +107,20 @@
     <string name="menu">Menu</string>
     <string name="willBeAvailableSoon">Will be available soon</string>
 
-    <string name="haven_t_got_account">Haven\'t got account?</string>
+    <string name="haven_t_got_account">Haven’t got account?</string>
     <string name="error_email_not_valid">Email not valid</string>
     <string name="error_email_not_exist">Email not found</string>
     <string name="error_password_length"></string>
     <string name="error_password_upper_case"></string>
     <string name="error_password_numbers"></string>
     <string name="error_password_wrong_pass">Wrong password</string>
-    <string name="error_device_not_attached">Device not attached</string>
+    <string name="error_device_not_attached_title">Your device is not registered yet</string>
+    <string name="error_device_not_attached_description">Do you want to register this device to your account?</string>
     <string name="error_bad_request">Bad request</string>
     <string name="error_server_error">Server error</string>
-    <string name="error_no_internet">No internet</string>
+    <string name="error_no_internet_title">No internet</string>
     <string name="error_unknown_error">Unknown error</string>
+
+    <string name="button_ok">Ok</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

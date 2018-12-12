@@ -49,17 +49,23 @@ open class ErrorHandler {
         for ((field, errors) in validationErrors) {
             for (error in errors) {
                 when (error.code) {
-                    ErrorCode.INVALID_EMAIL,
-                    ErrorCode.EMAIL_NOT_FOUND -> {
-                        if (error.message == "Invalid email format")
-                            errorFields[field] = R.string.error_email_not_valid
-                        else //if (error.message == "Email not found")
-                            errorFields[field] = R.string.error_email_not_exist
-                    }
-                    ErrorCode.WRONG_PASSWORD ->
+                    ErrorCode.INVALID_EMAIL ->
+                        errorFields[field] = R.string.error_email_not_valid
+
+                    ErrorCode.NOT_FOUND ->
+                        errorFields[field] = R.string.error_email_not_exist
+
+                    ErrorCode.INVALID_PASSWORD ->
                         errorFields[field] = R.string.error_password_wrong_pass
+
+                    ErrorCode.ALREADY_EXISTS -> TODO()
+
                     ErrorCode.DEVICE_NOT_ATTACHED ->
-                        return ErrorPresenterDialog()
+                        return ErrorPresenterDialog(R.string.error_device_not_attached_title,
+                                R.string.error_device_not_attached_description,
+                                R.drawable.general_error_icon,
+                                DialogButton(R.string.button_ok, {}),
+                                DialogButton(R.string.cancel, {}))
                 }
             }
         }
