@@ -7,7 +7,6 @@ import com.storiqa.storiqawallet.di.modules.NetworkModule
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.providers.ILoginNetworkProvider
 import dagger.Component
 
 @PerApplication
@@ -23,6 +22,5 @@ interface AppComponentProvides {
 
     fun resources(): Resources
     fun walletApi(): WalletApi
-    fun loginNetworkProvider(): ILoginNetworkProvider
 
 }

@@ -26,7 +26,7 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
     }
 
     @MainThread
-    fun call() {
+    fun trigger() {
         value = null
     }
 }
