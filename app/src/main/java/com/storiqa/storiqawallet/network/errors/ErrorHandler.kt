@@ -58,10 +58,19 @@ open class ErrorHandler {
                     ErrorCode.INVALID_PASSWORD ->
                         errorFields[field] = R.string.error_password_wrong_pass
 
-                    ErrorCode.ALREADY_EXISTS -> TODO()
+                    ErrorCode.ALREADY_EXISTS ->
+                        return ErrorPresenterDialog(
+                                DialogType.DEVICE_NOT_ATTACHED,
+                                R.string.error_device_not_attached_title,
+                                R.string.error_device_not_attached_description,
+                                R.drawable.general_error_icon,
+                                DialogButton(R.string.button_ok, {}),
+                                DialogButton(R.string.cancel, {}))
 
                     ErrorCode.DEVICE_NOT_ATTACHED ->
-                        return ErrorPresenterDialog(R.string.error_device_not_attached_title,
+                        return ErrorPresenterDialog(
+                                DialogType.DEVICE_NOT_ATTACHED,
+                                R.string.error_device_not_attached_title,
                                 R.string.error_device_not_attached_description,
                                 R.drawable.general_error_icon,
                                 DialogButton(R.string.button_ok, {}),

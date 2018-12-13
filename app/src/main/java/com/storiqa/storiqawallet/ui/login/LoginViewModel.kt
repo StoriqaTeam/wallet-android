@@ -2,10 +2,12 @@ package com.storiqa.storiqawallet.ui.login
 
 import android.annotation.SuppressLint
 import android.databinding.ObservableField
+import android.util.Log
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.network.requests.LoginRequest
 import com.storiqa.storiqawallet.network.responses.TokenResponse
@@ -93,8 +95,14 @@ constructor(navigator: ILoginNavigator,
         }
     }
 
-    override fun onDialogPositiveButtonClicked() {
-
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType): () -> Unit {
+        when (dialogType) {
+            DialogType.DEVICE_NOT_ATTACHED -> return { attachDevice() }
+            else -> return { }
+        }
     }
 
+    private fun attachDevice() {
+        Log.d("TAGGG", "attach device")
+    }
 }

@@ -1,12 +1,8 @@
 package com.storiqa.storiqawallet.ui.base
 
 import android.arch.lifecycle.ViewModel
-import android.util.Log
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.network.errors.ErrorHandler
-import com.storiqa.storiqawallet.network.errors.ErrorPresenter
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
+import com.storiqa.storiqawallet.network.errors.*
 import java.lang.ref.WeakReference
 
 abstract class BaseViewModel<N> : ViewModel() {
@@ -54,19 +50,21 @@ abstract class BaseViewModel<N> : ViewModel() {
         when (errorPresenter) {
             is ErrorPresenterFields -> showErrorFields(errorPresenter)
             is ErrorPresenterDialog -> {
-                errorPresenter.positiveButton?.onClick = { onDialogPositiveButtonClicked() }
-                errorPresenter.negativeButton?.onClick = { onDialogNegativeButtonClicked() }
+                errorPresenter.positiveButton?.onClick =
+                        getDialogPositiveButtonClicked(errorPresenter.dialogType)
+                errorPresenter.negativeButton?.onClick =
+                        getDialogNegativeButtonClicked(errorPresenter.dialogType)
                 showErrorDialog(errorPresenter)
             }
         }
     }
 
-    open fun onDialogPositiveButtonClicked() {
-        Log.d("TAGGG", "positive button clicked")
+    open fun getDialogPositiveButtonClicked(dialogType: DialogType): () -> Unit {
+        return {}
     }
 
-    open fun onDialogNegativeButtonClicked() {
-        Log.d("TAGGG", "negative button clicked")
+    open fun getDialogNegativeButtonClicked(dialogType: DialogType): () -> Unit {
+        return {}
     }
 
 }
