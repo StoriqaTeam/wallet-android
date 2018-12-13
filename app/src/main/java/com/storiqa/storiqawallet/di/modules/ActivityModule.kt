@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.storiqa.storiqawallet.di.qualifiers.ActivityContext
 import com.storiqa.storiqawallet.di.scopes.PerActivity
-import com.storiqa.storiqawallet.network.errors.ErrorHandler
 import dagger.Module
 import dagger.Provides
 
@@ -20,9 +19,5 @@ class ActivityModule(private val activity: AppCompatActivity) {
     @Provides
     @PerActivity
     internal fun provideFragmentManager(): FragmentManager = activity.supportFragmentManager
-
-    @Provides
-    @PerActivity
-    internal fun provideErrorHandler(@ActivityContext context: Context): ErrorHandler = ErrorHandler(context)
 
 }

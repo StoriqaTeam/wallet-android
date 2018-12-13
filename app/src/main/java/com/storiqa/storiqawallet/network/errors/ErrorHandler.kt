@@ -1,28 +1,85 @@
 package com.storiqa.storiqawallet.network.errors
 
-import android.content.Context
+import com.storiqa.storiqawallet.R
 import java.io.IOException
-import javax.inject.Inject
 
-class ErrorHandler
-@Inject
-constructor(private val context: Context) {
+open class ErrorHandler {
 
-    fun handleError(exception: Exception, handleUnprocessableEntity: (ErrorCode) -> Unit) {
+    fun handleError(exception: Exception): ErrorPresenter {
         when (exception) {
-            is BadRequest -> TODO() //show dialog
+            is BadRequest ->
+                return handleBadRequest()
 
-            is InternalServerError -> TODO() //show dialog
+            is InternalServerError ->
+                return handleInternalServerError()
 
-            is UnknownError -> TODO() //show dialog
+            is UnknownError ->
+                return handleUnknownError()
 
             is UnprocessableEntity ->
-                exception.errors.forEach { handleUnprocessableEntity(it) }
+                return handleUnprocessableEntity(exception.validationErrors)
 
-            is IOException -> TODO() //show dialog
+            is IOException ->
+                return handleNoInternetError()
 
-            else -> TODO() //show dialog
+            else ->
+                return handleUnknownError()
         }
+    }
+
+    fun handleBadRequest(): ErrorPresenterDialog {
+        return ErrorPresenterDialog()
+    }
+
+    fun handleInternalServerError(): ErrorPresenterDialog {
+        return ErrorPresenterDialog()
+    }
+
+    fun handleUnknownError(): ErrorPresenterDialog {
+        return ErrorPresenterDialog()
+    }
+
+    fun handleNoInternetError(): ErrorPresenterDialog {
+        return ErrorPresenterDialog()
+    }
+
+    fun handleUnprocessableEntity(validationErrors: HashMap<String, Array<ValidationError>>): ErrorPresenter {
+        val errorFields = HashMap<String, Int>()
+
+        for ((field, errors) in validationErrors) {
+            for (error in errors) {
+                when (error.code) {
+                    ErrorCode.INVALID_EMAIL ->
+                        errorFields[field] = R.string.error_email_not_valid
+
+                    ErrorCode.NOT_FOUND ->
+                        errorFields[field] = R.string.error_email_not_exist
+
+                    ErrorCode.INVALID_PASSWORD ->
+                        errorFields[field] = R.string.error_password_wrong_pass
+
+                    ErrorCode.ALREADY_EXISTS ->
+                        return ErrorPresenterDialog(
+                                DialogType.DEVICE_NOT_ATTACHED,
+                                R.string.error_device_not_attached_title,
+                                R.string.error_device_not_attached_description,
+                                R.drawable.general_error_icon,
+                                DialogButton(R.string.button_ok, {}),
+                                DialogButton(R.string.cancel, {}))
+
+                    ErrorCode.DEVICE_NOT_ATTACHED ->
+                        return ErrorPresenterDialog(
+                                DialogType.DEVICE_NOT_ATTACHED,
+                                R.string.error_device_not_attached_title,
+                                R.string.error_device_not_attached_description,
+                                R.drawable.general_error_icon,
+                                DialogButton(R.string.button_ok, {}),
+                                DialogButton(R.string.cancel, {}))
+                }
+            }
+        }
+
+        return ErrorPresenterFields(errorFields)
     }
 
 }
