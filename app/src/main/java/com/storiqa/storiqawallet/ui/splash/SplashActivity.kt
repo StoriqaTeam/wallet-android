@@ -7,8 +7,9 @@ import com.storiqa.storiqawallet.ui.base.BaseActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
-    override fun getBindingVariable(): Int = BR.viewModel
+    override fun getBindingVariable() = BR.viewModel
 
-    override fun getLayoutId(): Int = R.layout.activity_splash
+    override fun getLayoutId() = R.layout.activity_splash
 
+    override fun getViewModelClass(): Class<SplashViewModel> = SplashViewModel::class.java
 }

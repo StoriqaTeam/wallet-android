@@ -10,6 +10,7 @@
         <item name="colorControlNormal">@color/grayLine</item>
         <item name="colorControlActivated">@color/brightSkyBlue</item>
         <item name="colorControlHighlight">@color/brightSkyBlue</item>
+        <item name="alertDialogTheme">@style/TransparentDialogTheme</item>
     </style>
 
     <style name="buttonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
@@ -278,6 +279,10 @@
     </style>
 
     <!--//////////////////////////////////////////////////////////////////////////////////////-->
+
+    <style name="TransparentDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 
     <style name="SolidButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:layout_width">match_parent</item>

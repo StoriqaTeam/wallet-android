@@ -1,10 +1,11 @@
 package com.storiqa.storiqawallet.ui.login
 
+import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityLoginBinding
-import com.storiqa.storiqawallet.objects.FacebookAuthFlow
 import com.storiqa.storiqawallet.objects.GoogleAuthFlow
 import com.storiqa.storiqawallet.ui.base.BaseActivity
 
@@ -12,8 +13,6 @@ import com.storiqa.storiqawallet.ui.base.BaseActivity
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     private lateinit var googleAuthFlow: GoogleAuthFlow
-
-    private lateinit var facebookAuthFlow: FacebookAuthFlow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,23 +41,28 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
                 loginViaFB.performClick()
             }
         })*/
+        //FacebookSdk.sdkInitialize(this.applicationContext)
     }
 
-    override fun getBindingVariable(): Int {
-        return BR.viewModel
+    override fun subscribeEvents() {
+        super.subscribeEvents()
+
+        viewModel.requestLoginViaFacebook.observe(this, Observer { requestLoginViaFacebook() })
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_login
-    }
-
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == RequestCodes().authorizationGoogle ||
-                requestCode == RequestCodes().accountGoogle) {
-            googleAuthFlow.handleOnActivityResult(requestCode, resultCode, data)
-        } else {
-            facebookAuthFlow.handleOnActivityResult(requestCode, resultCode, data)
-        }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-    }*/
+
+        viewModel.facebookAuthHelper.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun getBindingVariable() = BR.viewModel
+
+    override fun getLayoutId() = R.layout.activity_login
+
+    override fun getViewModelClass(): Class<LoginViewModel> = LoginViewModel::class.java
+
+    private fun requestLoginViaFacebook() {
+        viewModel.facebookAuthHelper.requestLogIn(this)
+    }
 }

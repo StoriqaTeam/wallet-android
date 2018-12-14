@@ -119,6 +119,7 @@
     <string name="error_bad_request">Bad request</string>
     <string name="error_server_error">Server error</string>
     <string name="error_no_internet_title">No internet</string>
+    <string name="error_no_internet_description">No internet</string>
     <string name="error_unknown_error">Unknown error</string>
 
     <string name="button_ok">Ok</string>

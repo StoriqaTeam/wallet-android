@@ -1,40 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<layout>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:showIn="@layout/activity_login">
+    <data>
 
-    <TextView
-        style="@style/grayTextButton"
-        android:text="@string/socialNetworkButtonText" />
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel" />
 
-    <LinearLayout
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        tools:showIn="@layout/activity_login">
 
-        <ImageView
-            android:id="@+id/loginViaFB"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/fb_login_icon" />
+        <TextView
+            style="@style/grayTextButton"
+            android:text="@string/socialNetworkButtonText" />
 
-        <ImageView
-            android:id="@+id/loginViaGoogle"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:src="@drawable/google_login_icon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/loginViaFB"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:onClick="@{() -> viewModel.onFacebookLoginButtonClicked()}"
+                android:src="@drawable/fb_login_icon" />
+
+            <ImageView
+                android:id="@+id/loginViaGoogle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/google_login_icon" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</layout>

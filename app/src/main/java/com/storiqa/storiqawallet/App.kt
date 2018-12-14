@@ -21,9 +21,6 @@ class App : Application(), LifecycleObserver {
         val res: Resources
             get() = this.instance.resources
 
-        fun getStringFromResources(id: Int): String {
-            return this.instance.getString(id)
-        }
     }
 
     override fun onCreate() {
