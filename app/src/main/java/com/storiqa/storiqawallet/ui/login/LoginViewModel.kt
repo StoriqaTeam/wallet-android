@@ -115,7 +115,7 @@ constructor(navigator: ILoginNavigator,
 
     override fun onFacebookLoginButtonClicked() {
         facebookAuthHelper.registerCallback(
-                onSuccess = {},
+                onSuccess = { Log.d("TAGGG", "token: ${it.accessToken.token}") },
                 onError = { handleError(it) })
 
         requestLoginViaFacebook.trigger()
