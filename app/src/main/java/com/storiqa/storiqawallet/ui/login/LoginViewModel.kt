@@ -5,12 +5,15 @@ import android.databinding.ObservableField
 import android.util.Log
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.network.requests.LoginRequest
 import com.storiqa.storiqawallet.network.responses.TokenResponse
+import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
+import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.utils.getDeviceId
 import com.storiqa.storiqawallet.utils.getSign
@@ -24,12 +27,16 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject
 constructor(navigator: ILoginNavigator,
-            private val walletApi: WalletApi) : BaseViewModel<ILoginNavigator>() {
+            private val walletApi: WalletApi,
+            val facebookAuthHelper: FacebookAuthHelper) :
+        BaseViewModel<ILoginNavigator>(), SocialNetworksViewModel {
 
     val emailError = ObservableField<String>("")
     val passwordError = ObservableField<String>("")
     val email = ObservableField<String>("")
     val password = ObservableField<String>("")
+
+    val requestLoginViaFacebook = SingleLiveEvent<Boolean>()
 
     init {
         setNavigator(navigator)
@@ -45,7 +52,7 @@ constructor(navigator: ILoginNavigator,
             requestLogIn()
             showLoadingDialog()
         } else
-            emailError.set(App.getStringFromResources(R.string.error_email_not_valid))
+            emailError.set(App.res.getString(R.string.error_email_not_valid))
     }
 
     fun onRegistrationButtonClicked() {
@@ -88,9 +95,9 @@ constructor(navigator: ILoginNavigator,
         errorPresenter.fieldErrors.forEach { (key, value) ->
             when (key) {
                 "email" ->
-                    emailError.set(App.getStringFromResources(value))
+                    emailError.set(App.res.getString(value))
                 "password" ->
-                    passwordError.set(App.getStringFromResources(value))
+                    passwordError.set(App.res.getString(value))
             }
         }
     }
@@ -104,5 +111,17 @@ constructor(navigator: ILoginNavigator,
 
     private fun attachDevice() {
         Log.d("TAGGG", "attach device")
+    }
+
+    override fun onFacebookLoginButtonClicked() {
+        facebookAuthHelper.registerCallback(
+                onSuccess = { Log.d("TAGGG", "token: ${it.accessToken.token}") },
+                onError = { handleError(it) })
+
+        requestLoginViaFacebook.trigger()
+    }
+
+    override fun onGoogleLoginButtonClicked() {
+        Log.d("TAGGG", "onGoogleLoginButtonClicked")
     }
 }

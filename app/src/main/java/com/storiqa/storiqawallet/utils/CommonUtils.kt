@@ -1,10 +1,7 @@
 package com.storiqa.storiqawallet.utils
 
-import android.os.Build
 import com.storiqa.cryptokeys.PrivateKey
 import com.storiqa.cryptokeys.Signer
-
-fun getDeviceOs() = Build.VERSION.SDK_INT.toString()
 
 fun getTimestamp() = System.currentTimeMillis().toString()
 

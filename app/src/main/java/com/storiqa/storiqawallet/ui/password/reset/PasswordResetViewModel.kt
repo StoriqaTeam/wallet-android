@@ -31,7 +31,7 @@ class PasswordResetViewModel : ViewModel() {
         if (isEmailValid(email.get()!!))
             requestResetPassword()
         else
-            emailError.set(App.getStringFromResources(R.string.error_email_not_valid))
+            emailError.set(App.res.getString(R.string.error_email_not_valid))
     }
 
     @SuppressLint("CheckResult")

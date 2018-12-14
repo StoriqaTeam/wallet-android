@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.Resources
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
+import com.storiqa.storiqawallet.utils.CryptoSignUtils
 import dagger.Module
 import dagger.Provides
 
@@ -20,4 +21,7 @@ class AppModule(private val app: Application) {
     @PerApplication
     internal fun provideResources(): Resources = app.resources
 
+    @Provides
+    @PerApplication
+    internal fun provideCryptoSignUtils(): CryptoSignUtils = CryptoSignUtils(app)
 }

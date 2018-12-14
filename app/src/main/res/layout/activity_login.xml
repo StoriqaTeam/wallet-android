@@ -3,6 +3,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -80,11 +81,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/passwordHint"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:nextFocusDown="@+id/btnSignIn"
-                android:imeOptions="actionDone"
-                app:onEditorEnterAction="@{()->viewModel.onSignInButtonClicked()}"
-                android:text="@={viewModel.password}" />
+                android:text="@={viewModel.password}"
+                bind:onEditorEnterAction="@{()->viewModel.onSignInButtonClicked()}" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -132,14 +133,15 @@
 
 
         <include
-            android:id="@+id/include3"
+            android:id="@+id/social_networks"
             layout="@layout/social_network_sign_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             app:layout_constraintBottom_toTopOf="@+id/btnRegister"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            bind:viewModel="@{viewModel}" />
 
         <TextView
             android:id="@+id/tvQuestion"

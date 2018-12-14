@@ -63,7 +63,13 @@ dependencies {
 
     // Required only if Facebook login support is required
     // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94
-    implementation 'com.google.firebase:firebase-core:16.0.4'
+    //implementation 'com.google.firebase:firebase-core:16.0.4'
+
+    //login via google
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    //login via facebook
+    implementation 'com.facebook.android:facebook-login:4.36.0'
 
     //TODO delete
     implementation 'com.android.support:multidex:1.0.3'
@@ -72,14 +78,11 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
     kapt "android.arch.lifecycle:compiler:1.1.1"
 
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'org.jetbrains.anko:anko:0.10.6'
-    implementation 'com.facebook.android:facebook-login:4.36.0'
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
 }
 
 apply plugin: 'com.google.gms.google-services'
-

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.lang.String" />
+
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.ui.dialogs.MessageViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_dialog"
+        android:orientation="vertical"
+        android:padding="28dp">
+
+        <ImageView
+            android:id="@+id/imgIcon"
+            imageDrawable="@{viewModel.icon}"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            tools:srcCompat="@drawable/general_error_icon" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_horizontal"
+            android:text="@{viewModel.title}"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_horizontal"
+            android:text="@{viewModel.description}"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnPositive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onPositiveButtonClicked()}"
+            android:text="@{viewModel.btnPositiveText}" />
+
+        <Button
+            android:id="@+id/btnNegative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onNegativeButtonClicked()}"
+            android:text="@{viewModel.btnNegativeText}"
+            android:visibility="@{viewModel.btnNegativeText.get().length > 0 ? View.VISIBLE : View.GONE}" />
+    </LinearLayout>
+
+</layout>

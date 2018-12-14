@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.network.errors
 
+import com.facebook.FacebookException
 import com.storiqa.storiqawallet.R
 import java.io.IOException
 
@@ -7,6 +8,9 @@ open class ErrorHandler {
 
     fun handleError(exception: Exception): ErrorPresenter {
         when (exception) {
+            is FacebookException ->
+                return handleFacebookAuthError()
+
             is BadRequest ->
                 return handleBadRequest()
 
@@ -27,23 +31,32 @@ open class ErrorHandler {
         }
     }
 
-    fun handleBadRequest(): ErrorPresenterDialog {
+    private fun handleFacebookAuthError(): ErrorPresenter {
         return ErrorPresenterDialog()
     }
 
-    fun handleInternalServerError(): ErrorPresenterDialog {
+    private fun handleBadRequest(): ErrorPresenterDialog {
         return ErrorPresenterDialog()
     }
 
-    fun handleUnknownError(): ErrorPresenterDialog {
+    private fun handleInternalServerError(): ErrorPresenterDialog {
         return ErrorPresenterDialog()
     }
 
-    fun handleNoInternetError(): ErrorPresenterDialog {
+    private fun handleUnknownError(): ErrorPresenterDialog {
         return ErrorPresenterDialog()
     }
 
-    fun handleUnprocessableEntity(validationErrors: HashMap<String, Array<ValidationError>>): ErrorPresenter {
+    private fun handleNoInternetError(): ErrorPresenterDialog {
+        return ErrorPresenterDialog(
+                DialogType.DEVICE_NOT_ATTACHED,
+                R.string.error_no_internet_title,
+                R.string.error_no_internet_description,
+                R.drawable.general_error_icon)
+    }
+
+    private fun handleUnprocessableEntity(validationErrors: HashMap<String,
+            Array<ValidationError>>): ErrorPresenter {
         val errorFields = HashMap<String, Int>()
 
         for ((field, errors) in validationErrors) {

@@ -2,14 +2,17 @@ package com.storiqa.storiqawallet.ui.base
 
 import android.arch.lifecycle.ViewModel
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.network.errors.*
+import com.storiqa.storiqawallet.network.errors.DialogType
+import com.storiqa.storiqawallet.network.errors.ErrorHandler
+import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
+import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
 import java.lang.ref.WeakReference
 
 abstract class BaseViewModel<N> : ViewModel() {
 
     val hideKeyboard = SingleLiveEvent<Void>()
     val showLoadingDialog = SingleLiveEvent<Boolean>()
-    val showErrorDialog = SingleLiveEvent<ErrorPresenter>()
+    val showErrorDialog = SingleLiveEvent<ErrorPresenterDialog>()
 
     private val errorHandler = ErrorHandler()
 
