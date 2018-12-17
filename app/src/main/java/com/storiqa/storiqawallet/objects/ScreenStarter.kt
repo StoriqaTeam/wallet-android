@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.enums.PinCodeEnterType
-import com.storiqa.storiqawallet.screen_login.LoginActivity
 import com.storiqa.storiqawallet.screen_main.MainActivity
 import com.storiqa.storiqawallet.screen_pin_code_enter.EnterPinCodeActivity
 import com.storiqa.storiqawallet.screen_quick_start.QuickStartActivity
@@ -12,6 +11,7 @@ import com.storiqa.storiqawallet.screen_recover_password.screen_recover_email_en
 import com.storiqa.storiqawallet.screen_register.RegisterActivity
 import com.storiqa.storiqawallet.screen_scan_finger.ScanFingerActivity
 import com.storiqa.storiqawallet.screen_setup_fingerprint.FingerprintSetupActivity
+import com.storiqa.storiqawallet.ui.login.LoginActivity
 
 class ScreenStarter {
 

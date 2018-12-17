@@ -17,6 +17,15 @@ enum class ErrorCode {
     DEVICE_NOT_ATTACHED,
 
     @SerializedName("exists")
-    ALREADY_EXISTS
+    ALREADY_EXISTS,
+
+    @SerializedName("upper case")
+    NO_UPPER_CASE_CHARACTER,
+
+    @SerializedName("len")
+    INVALID_LENGTH,
+
+    @SerializedName("numbers")
+    NO_NUMBER
 
 }

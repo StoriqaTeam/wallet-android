@@ -92,12 +92,14 @@ constructor(navigator: ILoginNavigator,
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
-        errorPresenter.fieldErrors.forEach { (key, value) ->
-            when (key) {
-                "email" ->
-                    emailError.set(App.res.getString(value))
-                "password" ->
-                    passwordError.set(App.res.getString(value))
+        errorPresenter.fieldErrors.forEach {
+            it.forEach { (key, value) ->
+                when (key) {
+                    "email" ->
+                        emailError.set(App.res.getString(value))
+                    "password" ->
+                        passwordError.set(App.res.getString(value))
+                }
             }
         }
     }

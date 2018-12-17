@@ -1,12 +1,13 @@
 package com.storiqa.storiqawallet.ui.password
 
+import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.hideKeyboard
+import com.storiqa.storiqawallet.ui.base.BaseFragmentActivity
 import com.storiqa.storiqawallet.ui.password.reset.PasswordResetFragment
+import com.storiqa.storiqawallet.ui.password.setup.PasswordSetupFragment
 
-class PasswordRecoveryActivity : AppCompatActivity() {
+class PasswordRecoveryActivity : BaseFragmentActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,15 +15,19 @@ class PasswordRecoveryActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_password)
 
-        supportFragmentManager
-                .beginTransaction()
-                .add(R.id.container, PasswordResetFragment(), "PasswordResetFragment")
-                .commit()
-    }
+        val data: Uri? = intent?.data
+        val token = data?.path?.split("/")?.last()
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        hideKeyboard()
-        return super.onSupportNavigateUp()
+        if (token == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.container, PasswordResetFragment(), "PasswordResetFragment")
+                    .commit()
+        } else {
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.container, PasswordSetupFragment.newInstance(token), "PasswordSetupFragment")
+                    .commit()
+        }
     }
 }

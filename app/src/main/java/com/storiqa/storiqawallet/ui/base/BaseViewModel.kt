@@ -12,7 +12,7 @@ abstract class BaseViewModel<N> : ViewModel() {
 
     val hideKeyboard = SingleLiveEvent<Void>()
     val showLoadingDialog = SingleLiveEvent<Boolean>()
-    val showErrorDialog = SingleLiveEvent<ErrorPresenterDialog>()
+    val showMessageDialog = SingleLiveEvent<ErrorPresenterDialog>()
 
     private val errorHandler = ErrorHandler()
 
@@ -38,8 +38,8 @@ abstract class BaseViewModel<N> : ViewModel() {
         return refNavigator?.get()
     }
 
-    private fun showErrorDialog(errorPresenter: ErrorPresenterDialog) {
-        showErrorDialog.value = errorPresenter
+    fun showMessageDialog(errorPresenter: ErrorPresenterDialog) {
+        showMessageDialog.value = errorPresenter
     }
 
     open fun showErrorFields(errorPresenter: ErrorPresenterFields) {
@@ -57,7 +57,7 @@ abstract class BaseViewModel<N> : ViewModel() {
                         getDialogPositiveButtonClicked(errorPresenter.dialogType)
                 errorPresenter.negativeButton?.onClick =
                         getDialogNegativeButtonClicked(errorPresenter.dialogType)
-                showErrorDialog(errorPresenter)
+                showMessageDialog(errorPresenter)
             }
         }
     }

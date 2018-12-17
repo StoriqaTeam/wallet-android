@@ -3,7 +3,6 @@ package com.storiqa.storiqawallet.screen_register
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.storiqa.storiqawallet.objects.ErrorRetriever
-import com.storiqa.storiqawallet.screen_login.LoginModelImp
 
 @InjectViewState
 class RegisterPresenter : MvpPresenter<RegisterView>() {
@@ -43,19 +42,19 @@ class RegisterPresenter : MvpPresenter<RegisterView>() {
     }
 
     fun requestTokenFromGoogleAccount(googleToken: String) {
-        LoginModelImp().getStoriqaToken(googleToken, "GOOGLE", {
+        /*LoginModelImp().getStoriqaToken(googleToken, "GOOGLE", {
             viewState.startLoginScreen()
         }, {
             viewState.showGoogleSignInError()
-        })
+        })*/
     }
 
     fun requestTokenFromFacebookAccount(facebookToken: String) {
-        LoginModelImp().getStoriqaToken(facebookToken, "FACEBOOK", {
+        /*LoginModelImp().getStoriqaToken(facebookToken, "FACEBOOK", {
             viewState.startLoginScreen()
         }, {
             viewState.showFacebookSignInError()
-        })
+        })*/
     }
 
 

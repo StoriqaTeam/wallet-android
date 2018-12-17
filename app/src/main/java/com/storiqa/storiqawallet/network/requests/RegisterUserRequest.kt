@@ -7,8 +7,8 @@ data class RegisterUserRequest(
         val firstName: String = "Dmitry",
         val lastName: String = "Kruglov",
         val deviceOs: String = "25",
-        val deviceId: String = "09bbda10-2908-4c5a-bd63-9098fc6b6ffb",
-        val publicKey: String = "04965c38dc327722ab231198e63c1b9c6d5a3b5b462e2e609dfa808d7022cb35f4358fedc1ea8b529026ecb2937ba97ff1d5639501b5fc1c1da8d1f4737505b595") {
+        val deviceId: String = "09bbda10-2908-4c5a-bd63-9098fc6bffff",
+        val publicKey: String = "04b569b0d199212a2d111af0d5e35b0ca52b2206799766bcaf2c9ef230ad330da18bd480dc707640880e73a3abbe06d903deae95cb2a1ed7651aa36e0b0d640319") {
 
     val deviceType = "android"
 

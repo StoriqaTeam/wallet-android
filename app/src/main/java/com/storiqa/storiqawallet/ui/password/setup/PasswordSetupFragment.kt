@@ -1,43 +1,49 @@
 package com.storiqa.storiqawallet.ui.password.setup
 
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentPasswordSetupBinding
+import com.storiqa.storiqawallet.ui.base.BaseFragment
 
-class PasswordSetupFragment : Fragment() {
+class PasswordSetupFragment : BaseFragment<FragmentPasswordSetupBinding, PasswordSetupViewModel>() {
 
-    private lateinit var binding: FragmentPasswordSetupBinding
-    private lateinit var viewModel: PasswordSetupViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = obtainViewModel()
+    companion object {
+        private const val ARGUMENT_TOKEN = "argument_token"
+
+        @JvmStatic
+        fun newInstance(token: String): PasswordSetupFragment {
+            val bundle = Bundle().apply {
+                putString(ARGUMENT_TOKEN, token)
+            }
+            val passwordSetupFragment = PasswordSetupFragment()
+            passwordSetupFragment.arguments = bundle
+            return passwordSetupFragment
+        }
     }
+
+    override fun getLayoutId(): Int = R.layout.fragment_password_setup
+
+    override fun getBindingVariable(): Int = BR.viewModel
+
+    override fun getViewModelClass(): Class<PasswordSetupViewModel> = PasswordSetupViewModel::class.java
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil
-                .inflate(inflater, R.layout.fragment_password_setup, container, false)
+        val view = super.onCreateView(inflater, container, savedInstanceState)
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        return binding.root
+        viewModel.token = arguments?.getString(ARGUMENT_TOKEN, "") ?: ""
+
+        return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
-    }
-
-    private fun obtainViewModel(): PasswordSetupViewModel =
-            ViewModelProviders.of(this).get(PasswordSetupViewModel::class.java)
 }

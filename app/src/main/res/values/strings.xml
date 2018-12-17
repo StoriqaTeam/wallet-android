@@ -110,10 +110,11 @@
     <string name="haven_t_got_account">Haven’t got account?</string>
     <string name="error_email_not_valid">Email not valid</string>
     <string name="error_email_not_exist">Email not found</string>
-    <string name="error_password_length"></string>
-    <string name="error_password_upper_case"></string>
-    <string name="error_password_numbers"></string>
+    <string name="error_password_no_number">At least one number is required</string>
     <string name="error_password_wrong_pass">Wrong password</string>
+    <string name="error_password_not_match">Passwords do not match</string>
+    <string name="error_password_no_upper">At least one upper case character is required</string>
+    <string name="error_password_invalid_length">Password should be between 8 and 30 symbols</string>
     <string name="error_device_not_attached_title">Your device is not registered yet</string>
     <string name="error_device_not_attached_description">Do you want to register this device to your account?</string>
     <string name="error_bad_request">Bad request</string>
@@ -122,6 +123,12 @@
     <string name="error_no_internet_description">No internet</string>
     <string name="error_unknown_error">Unknown error</string>
 
+    <string name="dialog_pass_mail_sent_title">Mail successfully sent</string>
+    <string name="dialog_pass_mail_sent_description">Check your mailbox and follow the link to recover your password</string>
+    <string name="dialog_pass_set_up_title">Password was successfully set up</string>
+    <string name="dialog_pass_set_up_description">You have successfully set up new password.</string>
+
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
+    <string name="button_sign_in">Sign in</string>
 </resources>

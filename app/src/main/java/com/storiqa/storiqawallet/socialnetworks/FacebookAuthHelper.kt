@@ -19,9 +19,9 @@ constructor() {
 
     private val permissions = Arrays.asList("public_profile", "user_gender", "email")
 
-    fun registerCallback(callback: FacebookCallback<LoginResult>) {
+    /*fun registerCallback(callback: FacebookCallback<LoginResult>) {
         LoginManager.getInstance().registerCallback(callbackManager, callback)
-    }
+    }*/
 
     fun registerCallback(onSuccess: (LoginResult) -> Unit, onError: (FacebookException) -> Unit) {
         LoginManager.getInstance()

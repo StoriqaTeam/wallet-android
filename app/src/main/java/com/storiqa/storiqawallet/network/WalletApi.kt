@@ -4,11 +4,7 @@ import com.storiqa.storiqawallet.network.requests.*
 import com.storiqa.storiqawallet.network.responses.TokenResponse
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import io.reactivex.Observable
-import okhttp3.OkHttpClient
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface WalletApi {
@@ -75,7 +71,7 @@ interface WalletApi {
 
     @POST("v1/users/confirm_reset_password")
     fun confirmResetPassword(
-            @Body confirmResetPasswordRequest: ConfirmResetPasswordRequest): Observable<Response<Any>>
+            @Body confirmResetPasswordRequest: ConfirmResetPasswordRequest): Observable<TokenResponse>
 
     @GET("v1/users/me")
     fun getUserInfo(
@@ -160,20 +156,4 @@ interface WalletApi {
             @Header("Authorization") bearer: String,
             @Body calculateFeeResponse: CalculateFeeResponse): Observable<Response<Any>>
 
-    class Factory {
-        private val baseUrl = "https://pay-nightly.stq.cloud/" //stage
-
-        fun getInstance(): WalletApi {
-
-            val client = OkHttpClient.Builder().build()
-
-            val retrofit = Retrofit.Builder()
-                    .client(client)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(baseUrl)
-                    .build()
-            return retrofit.create(WalletApi::class.java)
-        }
-    }
 }

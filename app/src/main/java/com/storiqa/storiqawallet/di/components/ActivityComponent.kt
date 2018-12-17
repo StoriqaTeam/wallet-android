@@ -10,6 +10,8 @@ import com.storiqa.storiqawallet.di.scopes.PerActivity
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.login.ILoginNavigator
 import com.storiqa.storiqawallet.ui.login.LoginActivity
+import com.storiqa.storiqawallet.ui.password.IPasswordRecoveryNavigator
+import com.storiqa.storiqawallet.ui.password.PasswordRecoveryActivity
 import com.storiqa.storiqawallet.ui.splash.ISplashNavigator
 import com.storiqa.storiqawallet.ui.splash.SplashActivity
 import dagger.Component
@@ -21,6 +23,7 @@ interface ActivityComponent : ActivityComponentProvides {
 
     fun inject(activity: SplashActivity)
     fun inject(activity: LoginActivity)
+    fun inject(activity: PasswordRecoveryActivity)
 
 }
 
@@ -34,5 +37,6 @@ interface ActivityComponentProvides : AppComponentProvides {
     fun navigator(): INavigator
     fun splashNavigator(): ISplashNavigator
     fun loginNavigator(): ILoginNavigator
+    fun providePasswordRecoveryNavigator(): IPasswordRecoveryNavigator
 
 }

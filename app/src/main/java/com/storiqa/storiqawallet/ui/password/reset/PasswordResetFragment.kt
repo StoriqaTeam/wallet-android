@@ -1,51 +1,32 @@
 package com.storiqa.storiqawallet.ui.password.reset
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentPasswordResetBinding
-import com.storiqa.storiqawallet.hideKeyboard
+import com.storiqa.storiqawallet.ui.base.BaseFragment
 
-class PasswordResetFragment : Fragment() {
+class PasswordResetFragment : BaseFragment<FragmentPasswordResetBinding, PasswordResetViewModel>() {
 
-    private lateinit var binding: FragmentPasswordResetBinding
-    private lateinit var viewModel: PasswordResetViewModel
+    override fun getLayoutId(): Int = R.layout.fragment_password_reset
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = obtainViewModel()
-    }
+    override fun getBindingVariable(): Int = BR.viewModel
+
+    override fun getViewModelClass(): Class<PasswordResetViewModel> = PasswordResetViewModel::class.java
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil
-                .inflate(inflater, R.layout.fragment_password_reset, container, false)
+        val view = super.onCreateView(inflater, container, savedInstanceState)
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        initObservers()
-
-        return binding.root
+        return view
     }
 
-    private fun initObservers() {
-        viewModel.hideKeyboard.observe(this, Observer { hideKeyboard() })
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
-    }
-
-    private fun obtainViewModel(): PasswordResetViewModel =
-            ViewModelProviders.of(this).get(PasswordResetViewModel::class.java)
 }
