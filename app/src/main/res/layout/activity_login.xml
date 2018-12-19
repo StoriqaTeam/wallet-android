@@ -85,7 +85,7 @@
                 android:inputType="textPassword"
                 android:nextFocusDown="@+id/btnSignIn"
                 android:text="@={viewModel.password}"
-                bind:onEditorEnterAction="@{()->viewModel.onSignInButtonClicked()}" />
+                bind:onEditorEnterAction="@{()->viewModel.onSubmitButtonClicked()}" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -104,18 +104,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilPassword"
             tools:textColor="@android:color/white" />
-
-        <ProgressBar
-            android:id="@+id/pbLoading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/btnSignIn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnSignIn"
-            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/btnForgotPassword"

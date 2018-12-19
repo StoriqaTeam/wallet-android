@@ -7,6 +7,7 @@ import com.storiqa.storiqawallet.ui.dialogs.MessageViewModel
 import com.storiqa.storiqawallet.ui.login.LoginViewModel
 import com.storiqa.storiqawallet.ui.password.reset.PasswordResetViewModel
 import com.storiqa.storiqawallet.ui.password.setup.PasswordSetupViewModel
+import com.storiqa.storiqawallet.ui.registration.RegistrationViewModel
 import com.storiqa.storiqawallet.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
@@ -30,6 +31,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegistrationViewModel::class)
+    abstract fun bindRegistrationViewModel(registrationViewModel: RegistrationViewModel): ViewModel
 
     @Binds
     @IntoMap

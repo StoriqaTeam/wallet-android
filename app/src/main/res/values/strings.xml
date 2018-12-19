@@ -6,6 +6,7 @@
     <string name="signInButtonText">Sign in</string>
     <string name="emailHint">Email</string>
     <string name="passwordHint">Password</string>
+    <string name="repeatPasswordHint">Repeat password</string>
     <string name="forgotPassword">I forgot password</string>
     <string name="socialNetworkButtonText">Sign in via social account</string>
     <string name="haventGotAccount">Haven’t got account?</string>
@@ -112,7 +113,7 @@
     <string name="error_email_not_exist">Email not found</string>
     <string name="error_password_no_number">At least one number is required</string>
     <string name="error_password_wrong_pass">Wrong password</string>
-    <string name="error_password_not_match">Passwords do not match</string>
+    <string name="error_passwords_not_match">Passwords do not match</string>
     <string name="error_password_no_upper">At least one upper case character is required</string>
     <string name="error_password_invalid_length">Password should be between 8 and 30 symbols</string>
     <string name="error_device_not_attached_title">Your device is not registered yet</string>

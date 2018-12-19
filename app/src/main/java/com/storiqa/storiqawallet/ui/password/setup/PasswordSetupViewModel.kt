@@ -41,7 +41,7 @@ constructor(navigator: IPasswordRecoveryNavigator,
             showLoadingDialog()
             confirmResetPassword()
         } else
-            passwordRepeatError.set(App.res.getString(R.string.error_password_not_match))
+            passwordRepeatError.set(App.res.getString(R.string.error_passwords_not_match))
     }
 
     @SuppressLint("CheckResult")

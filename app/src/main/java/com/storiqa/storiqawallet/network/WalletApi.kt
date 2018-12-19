@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.network
 
 import com.storiqa.storiqawallet.network.requests.*
+import com.storiqa.storiqawallet.network.responses.RegisterUserResponse
 import com.storiqa.storiqawallet.network.responses.TokenResponse
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import io.reactivex.Observable
@@ -28,7 +29,7 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body registerUserRequest: RegisterUserRequest): Observable<Response<Any>>
+            @Body registerUserRequest: RegisterUserRequest): Observable<RegisterUserResponse>
 
     @PUT("v1/users")
     fun updateUser(

@@ -55,6 +55,13 @@ constructor(navigator: ILoginNavigator,
             emailError.set(App.res.getString(R.string.error_email_not_valid))
     }
 
+    fun onSubmitButtonClicked() {
+        if (email.get()?.isNotEmpty()!! && password.get()?.isNotEmpty()!!)
+            onSignInButtonClicked()
+        else
+            hideKeyboard()
+    }
+
     fun onRegistrationButtonClicked() {
         getNavigator()?.openRegistrationActivity()
     }

@@ -49,6 +49,11 @@
             android:windowSoftInputMode="stateHidden|adjustPan" />
 
         <activity
+            android:name=".ui.registration.RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+
+        <activity
             android:name=".ui.password.PasswordRecoveryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">

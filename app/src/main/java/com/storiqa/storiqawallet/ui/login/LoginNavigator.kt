@@ -1,14 +1,14 @@
 package com.storiqa.storiqawallet.ui.login
 
 import com.storiqa.storiqawallet.screen_main.MainActivity
-import com.storiqa.storiqawallet.screen_register.RegisterActivity
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.password.PasswordRecoveryActivity
+import com.storiqa.storiqawallet.ui.registration.RegistrationActivity
 
 class LoginNavigator(private val navigator: INavigator) : ILoginNavigator {
 
     override fun openRegistrationActivity() {
-        navigator.startActivity(RegisterActivity::class.java, false)
+        navigator.startActivity(RegistrationActivity::class.java, false)
     }
 
     override fun openPasswordRecoveryActivity() {
