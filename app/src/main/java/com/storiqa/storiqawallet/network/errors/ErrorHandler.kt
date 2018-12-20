@@ -57,19 +57,29 @@ open class ErrorHandler {
 
     private fun handleUnprocessableEntity(validationErrors: HashMap<String,
             Array<ValidationError>>): ErrorPresenter {
-        val errorFields = HashMap<String, Int>()
+        val errorFields = ArrayList<HashMap<String, Int>>()
 
         for ((field, errors) in validationErrors) {
             for (error in errors) {
+                val errorField = HashMap<String, Int>()
                 when (error.code) {
                     ErrorCode.INVALID_EMAIL ->
-                        errorFields[field] = R.string.error_email_not_valid
+                        errorField[field] = R.string.error_email_not_valid
 
                     ErrorCode.NOT_FOUND ->
-                        errorFields[field] = R.string.error_email_not_exist
+                        errorField[field] = R.string.error_email_not_exist
 
                     ErrorCode.INVALID_PASSWORD ->
-                        errorFields[field] = R.string.error_password_wrong_pass
+                        errorField[field] = R.string.error_password_wrong_pass
+
+                    ErrorCode.NO_UPPER_CASE_CHARACTER ->
+                        errorField[field] = R.string.error_password_no_upper
+
+                    ErrorCode.INVALID_LENGTH ->
+                        errorField[field] = R.string.error_password_invalid_length
+
+                    ErrorCode.NO_NUMBER ->
+                        errorField[field] = R.string.error_password_no_number
 
                     ErrorCode.ALREADY_EXISTS ->
                         return ErrorPresenterDialog(
@@ -89,6 +99,8 @@ open class ErrorHandler {
                                 DialogButton(R.string.button_ok, {}),
                                 DialogButton(R.string.cancel, {}))
                 }
+
+                errorFields.add(errorField)
             }
         }
 

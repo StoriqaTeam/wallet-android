@@ -55,6 +55,13 @@ constructor(navigator: ILoginNavigator,
             emailError.set(App.res.getString(R.string.error_email_not_valid))
     }
 
+    fun onSubmitButtonClicked() {
+        if (email.get()?.isNotEmpty()!! && password.get()?.isNotEmpty()!!)
+            onSignInButtonClicked()
+        else
+            hideKeyboard()
+    }
+
     fun onRegistrationButtonClicked() {
         getNavigator()?.openRegistrationActivity()
     }
@@ -92,12 +99,14 @@ constructor(navigator: ILoginNavigator,
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
-        errorPresenter.fieldErrors.forEach { (key, value) ->
-            when (key) {
-                "email" ->
-                    emailError.set(App.res.getString(value))
-                "password" ->
-                    passwordError.set(App.res.getString(value))
+        errorPresenter.fieldErrors.forEach {
+            it.forEach { (key, value) ->
+                when (key) {
+                    "email" ->
+                        emailError.set(App.res.getString(value))
+                    "password" ->
+                        passwordError.set(App.res.getString(value))
+                }
             }
         }
     }

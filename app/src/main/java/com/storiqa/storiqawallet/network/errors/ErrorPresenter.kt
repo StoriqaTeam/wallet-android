@@ -2,10 +2,11 @@ package com.storiqa.storiqawallet.network.errors
 
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
+import com.storiqa.storiqawallet.R
 
 sealed class ErrorPresenter
 
-data class ErrorPresenterDialog(
+open class ErrorPresenterDialog(
         val dialogType: DialogType = DialogType.NO_INTERNET,
         @StringRes val title: Int = 0, //TODO delete default params
         @StringRes val description: Int = 0,
@@ -14,12 +15,26 @@ data class ErrorPresenterDialog(
         val negativeButton: DialogButton? = null) : ErrorPresenter()
 
 data class ErrorPresenterFields(
-        val fieldErrors: HashMap<String, Int>) : ErrorPresenter()
+        val fieldErrors: ArrayList<HashMap<String, Int>>) : ErrorPresenter()
 
 enum class DialogType {
-    NO_INTERNET, DEVICE_NOT_ATTACHED
+    NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP
 }
 
 data class DialogButton(
         @StringRes val name: Int,
         var onClick: () -> Unit)
+
+class PassMailSentDialogPresenter : ErrorPresenterDialog(
+        DialogType.RECOVERY_PASS_MAIL_SENT,
+        R.string.dialog_pass_mail_sent_title,
+        R.string.dialog_pass_mail_sent_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_ok, {}))
+
+class PassSetUpDialogPresenter : ErrorPresenterDialog(
+        DialogType.RECOVERY_PASS_SET_UP,
+        R.string.dialog_pass_set_up_title,
+        R.string.dialog_pass_set_up_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_sign_in, {}))

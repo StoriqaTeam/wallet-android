@@ -5,6 +5,9 @@ import android.arch.lifecycle.ViewModelProvider
 import com.storiqa.storiqawallet.di.mapkeys.ViewModelKey
 import com.storiqa.storiqawallet.ui.dialogs.MessageViewModel
 import com.storiqa.storiqawallet.ui.login.LoginViewModel
+import com.storiqa.storiqawallet.ui.password.reset.PasswordResetViewModel
+import com.storiqa.storiqawallet.ui.password.setup.PasswordSetupViewModel
+import com.storiqa.storiqawallet.ui.registration.RegistrationViewModel
 import com.storiqa.storiqawallet.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
@@ -31,8 +34,23 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(RegistrationViewModel::class)
+    abstract fun bindRegistrationViewModel(registrationViewModel: RegistrationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(MessageViewModel::class)
     abstract fun bindMessageViewModel(messageViewModel: MessageViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PasswordResetViewModel::class)
+    abstract fun bindPasswordResetViewModel(passwordResetViewModel: PasswordResetViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PasswordSetupViewModel::class)
+    abstract fun bindPasswordSetupViewModel(passwordSetupViewModel: PasswordSetupViewModel): ViewModel
 
 }
 

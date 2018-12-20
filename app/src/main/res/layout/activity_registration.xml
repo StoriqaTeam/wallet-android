@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.ui.registration.RegistrationViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/headerRegisterLoginText"
+                android:text="@string/signUp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginRight="17dp"
+                app:errorEnabled="true"
+                android:gravity="bottom">
+
+                <EditText
+                    android:id="@+id/etFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/firstName"
+                    android:inputType="textCapWords|textPersonName"
+                    android:maxLines="1"
+                    bind:addTextFilter="@{true}"
+                    android:nextFocusDown="@id/etLastName"
+                    android:text="@={viewModel.firstName}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                app:errorEnabled="true"
+                android:gravity="bottom">
+
+                <EditText
+                    android:id="@+id/etLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lastName"
+                    bind:addTextFilter="@{true}"
+                    android:inputType="textCapWords|textPersonName"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/etEmail"
+                    android:text="@={viewModel.lastName}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="17dp"
+                app:errorEnabled="true"
+                android:gravity="bottom"
+                app:errorText="@{viewModel.emailError}">
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    bind:addTextFilter="@{true}"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/etPassword"
+                    android:text="@={viewModel.email}"
+                    bind:onFocusLost="@{()->viewModel.validateEmail()}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="17dp"
+                app:errorEnabled="true"
+                app:errorText="@{viewModel.passwordError}"
+                app:passwordToggleDrawable="@drawable/eye_background"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorAccent">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/passwordHint"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@+id/etRepeatPassword"
+                    android:paddingTop="0dp"
+                    android:text="@={viewModel.password}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilPasswordRepeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="17dp"
+                app:errorEnabled="true"
+                app:errorText="@{viewModel.passwordRepeatError}"
+                app:passwordToggleDrawable="@drawable/eye_background"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorAccent">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etPasswordRepeat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/repeatPasswordHint"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    onEditorEnterAction="@{()->viewModel.onSubmitButtonClicked()}"
+                    android:text="@={viewModel.passwordRepeat}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/policyAgreement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="17dp"
+                android:checked="@={viewModel.policyAgreement}"
+                android:text="@string/termsAndConditions"
+                android:textColor="@color/grayTextButtonColor"
+                app:buttonTint="@color/brightSkyBlue" />
+
+            <Button
+                android:id="@+id/btnSignUp"
+                style="@style/buttonStyle"
+                android:layout_marginTop="29dp"
+                android:background="@drawable/switch_state_button"
+                android:enabled='@{viewModel.signUpButtonEnabled}'
+                android:onClick="@{()->viewModel.onSignUpButtonClicked()}"
+                android:text="@string/signUpButtonText"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColor="@color/grayTextButtonColor" />
+
+            <include
+                layout="@layout/social_network_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                bind:viewModel="@{viewModel}" />
+
+            <LinearLayout
+                android:id="@+id/llRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="23dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/grayTextButton"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/haveAnAccount" />
+
+                <TextView
+                    android:id="@+id/btnSignIn"
+                    style="@style/textButtonStyle"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:onClick="@{()->viewModel.onSignInButtonClicked()}"
+                    android:text="@string/signIn" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

@@ -35,7 +35,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<*>> : Fragme
     internal val fragmentComponent: FragmentComponent by lazy {
         DaggerFragmentComponent.builder()
                 .fragmentModule(FragmentModule(this))
-                .activityComponent((activity as BaseActivity<*, *>).activityComponent)
+                .activityComponent((activity as IBaseActivity).activityComponent)
                 .build()
     }
 
@@ -47,8 +47,8 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<*>> : Fragme
                     .invoke(fragmentComponent, this)
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass())
         } catch (e: NoSuchMethodException) {
-            throw NoSuchMethodException("You forgot to add \"fun inject(activity: " +
-                    "${this::class.java.simpleName})\" in ActivityComponent")
+            throw NoSuchMethodException("You forgot to add \"fun inject(fragment: " +
+                    "${this::class.java.simpleName})\" in FragmentComponent")
         }
 
         subscribeEvents()
@@ -69,7 +69,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<*>> : Fragme
 
         viewModel.hideKeyboard.observe(this, Observer { getBaseActivity()?.hideKeyboard() })
 
-        viewModel.showErrorDialog.observe(this,
+        viewModel.showMessageDialog.observe(this,
                 Observer { getBaseActivity()?.showErrorDialog(it!!) })
     }
 
@@ -79,7 +79,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<*>> : Fragme
         binding.executePendingBindings()
     }
 
-    private fun getBaseActivity(): BaseActivity<*, *>? {
-        return activity as BaseActivity<*, *>
+    private fun getBaseActivity(): IBaseActivity? {
+        return activity as IBaseActivity
     }
 }
