@@ -2,12 +2,15 @@ package com.storiqa.storiqawallet.ui.login
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityLoginBinding
 import com.storiqa.storiqawallet.objects.GoogleAuthFlow
 import com.storiqa.storiqawallet.ui.base.BaseActivity
+import com.storiqa.storiqawallet.ui.common.onSubmitButtonClicked
+import com.storiqa.storiqawallet.ui.password.reset.PasswordResetFragment
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
@@ -17,31 +20,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*val binding: ActivityLoginBinding =
-                DataBindingUtil.setContentView(this, R.layout.activity_login)*/
-        //binding.viewModel = loginViewModel
+        initView()
 
-        /*loginViaGoogle.setOnClickListener {
-            googleAuthFlow = GoogleAuthFlow(this@LoginActivity, {
-                println(it)
-                println()
-            }, {
-                GeneralErrorDialogHelper(this).show {
-                    loginViaGoogle.performClick()
-                }
-            })
-            googleAuthFlow.performLogin()
+        val data: Uri? = intent?.data
+        val token = data?.path?.split("/")?.last()
+
+        if (token != null) {
+            viewModel.confirmEmail(token)
+        }
+    }
+
+    private fun initView() {
+        binding.etEmail.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus)
+                viewModel.validateEmail()
         }
 
-        facebookAuthFlow = FacebookAuthFlow(this, loginViaFB, {
-            println(it)
-            println()
-        }, {
-            GeneralErrorDialogHelper(this).show {
-                loginViaFB.performClick()
-            }
-        })*/
-        //FacebookSdk.sdkInitialize(this.applicationContext)
+        binding.etPassword.setOnEditorActionListener { textView, actionId, event ->
+            onSubmitButtonClicked(textView, actionId, event) { viewModel.onSubmitButtonClicked() }
+        }
     }
 
     override fun subscribeEvents() {

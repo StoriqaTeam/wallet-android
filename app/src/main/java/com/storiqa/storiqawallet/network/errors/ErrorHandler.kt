@@ -98,6 +98,9 @@ open class ErrorHandler {
                                 R.drawable.general_error_icon,
                                 DialogButton(R.string.button_ok, {}),
                                 DialogButton(R.string.cancel, {}))
+
+                    ErrorCode.NOT_VERIFIED ->
+                        return EmailNotVerifiedDialogPresenter()
                 }
 
                 errorFields.add(errorField)

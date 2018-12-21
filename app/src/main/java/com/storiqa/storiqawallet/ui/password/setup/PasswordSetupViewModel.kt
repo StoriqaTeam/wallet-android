@@ -1,9 +1,9 @@
 package com.storiqa.storiqawallet.ui.password.setup
 
 import android.annotation.SuppressLint
-import android.databinding.ObservableField
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
@@ -20,16 +20,15 @@ class PasswordSetupViewModel
 constructor(navigator: IPasswordRecoveryNavigator,
             private val walletApi: WalletApi) : BaseViewModel<IPasswordRecoveryNavigator>() {
 
-    val password = ObservableField<String>("")
-    val passwordRepeat = ObservableField<String>("")
-    val passwordError = ObservableField<String>("")
-    val passwordRepeatError = ObservableField<String>("")
+    val password = NonNullObservableField("")
+    val passwordRepeat = NonNullObservableField("")
+    val passwordError = NonNullObservableField("")
+    val passwordRepeatError = NonNullObservableField("")
 
     lateinit var token: String
 
     init {
         setNavigator(navigator)
-        //password.addOnPropertyChanged { passwordError.set("") }
         passwordRepeat.addOnPropertyChanged { passwordRepeatError.set("") }
     }
 
@@ -46,7 +45,7 @@ constructor(navigator: IPasswordRecoveryNavigator,
 
     @SuppressLint("CheckResult")
     private fun confirmResetPassword() {
-        walletApi.confirmResetPassword(ConfirmResetPasswordRequest(token, password.get()!!))
+        walletApi.confirmResetPassword(ConfirmResetPasswordRequest(token, password.get()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -58,7 +57,10 @@ constructor(navigator: IPasswordRecoveryNavigator,
 
     private fun onSuccess() {
         val dialogPresenter = PassSetUpDialogPresenter()
-        dialogPresenter.positiveButton?.onClick = { getNavigator()?.openLoginActivity() }
+        dialogPresenter.positiveButton?.onClick = {
+            getNavigator()?.openLoginActivity()
+            getNavigator()?.closeActivity()
+        }
         showMessageDialog(dialogPresenter)
     }
 
@@ -67,7 +69,7 @@ constructor(navigator: IPasswordRecoveryNavigator,
             it.forEach { (key, value) ->
                 when (key) {
                     "password" -> {
-                        if (passwordError.get()!!.isEmpty())
+                        if (passwordError.get().isEmpty())
                             passwordError.set(App.res.getString(value))
                         else
                             passwordError.set(passwordError.get() + "\n" + App.res.getString(value))

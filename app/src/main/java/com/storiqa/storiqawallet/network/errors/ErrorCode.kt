@@ -26,6 +26,9 @@ enum class ErrorCode {
     INVALID_LENGTH,
 
     @SerializedName("numbers")
-    NO_NUMBER
+    NO_NUMBER,
+
+    @SerializedName("not_verified")
+    NOT_VERIFIED
 
 }

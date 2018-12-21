@@ -18,7 +18,8 @@ data class ErrorPresenterFields(
         val fieldErrors: ArrayList<HashMap<String, Int>>) : ErrorPresenter()
 
 enum class DialogType {
-    NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP
+    NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP,
+    REGISTRATION_MAIL_SENT, EMAIL_NOT_VERIFIED
 }
 
 data class DialogButton(
@@ -38,3 +39,18 @@ class PassSetUpDialogPresenter : ErrorPresenterDialog(
         R.string.dialog_pass_set_up_description,
         R.drawable.general_error_icon,
         DialogButton(R.string.button_sign_in, {}))
+
+class RegistrationMailSentDialogPresenter : ErrorPresenterDialog(
+        DialogType.REGISTRATION_MAIL_SENT,
+        R.string.dialog_registration_mail_sent_title,
+        R.string.dialog_registration_mail_sent_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_sign_in, {}))
+
+class EmailNotVerifiedDialogPresenter : ErrorPresenterDialog(
+        DialogType.EMAIL_NOT_VERIFIED,
+        R.string.dialog_not_verified_title,
+        R.string.dialog_not_verified_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_resend, {}),
+        DialogButton(R.string.button_cancel, {}))

@@ -63,6 +63,7 @@ class MessageDialog : DialogFragment() {
             throw NoSuchMethodException("You forgot to add \"fun inject(activity: " +
                     "${this::class.java.simpleName})\" in ActivityComponent")
         }
+        isCancelable = false
 
         subscribeEvents()
     }

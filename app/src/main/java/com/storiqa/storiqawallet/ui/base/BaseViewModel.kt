@@ -39,7 +39,12 @@ abstract class BaseViewModel<N> : ViewModel() {
     }
 
     fun showMessageDialog(errorPresenter: ErrorPresenterDialog) {
-        showMessageDialog.value = errorPresenter
+        showMessageDialog.value = errorPresenter.apply {
+            positiveButton?.onClick =
+                    getDialogPositiveButtonClicked(errorPresenter.dialogType)
+            negativeButton?.onClick =
+                    getDialogNegativeButtonClicked(errorPresenter.dialogType)
+        }
     }
 
     open fun showErrorFields(errorPresenter: ErrorPresenterFields) {
@@ -53,10 +58,6 @@ abstract class BaseViewModel<N> : ViewModel() {
         when (errorPresenter) {
             is ErrorPresenterFields -> showErrorFields(errorPresenter)
             is ErrorPresenterDialog -> {
-                errorPresenter.positiveButton?.onClick =
-                        getDialogPositiveButtonClicked(errorPresenter.dialogType)
-                errorPresenter.negativeButton?.onClick =
-                        getDialogNegativeButtonClicked(errorPresenter.dialogType)
                 showMessageDialog(errorPresenter)
             }
         }

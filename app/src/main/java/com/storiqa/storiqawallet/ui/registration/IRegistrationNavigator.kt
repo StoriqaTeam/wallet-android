@@ -4,4 +4,6 @@ interface IRegistrationNavigator {
 
     fun openLoginActivity()
 
+    fun closeActivity()
+
 }

@@ -1,9 +1,9 @@
 package com.storiqa.storiqawallet.ui.password.reset
 
 import android.annotation.SuppressLint
-import android.databinding.ObservableField
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
@@ -21,8 +21,8 @@ class PasswordResetViewModel
 constructor(navigator: IPasswordRecoveryNavigator,
             private val walletApi: WalletApi) : BaseViewModel<IPasswordRecoveryNavigator>() {
 
-    val email = ObservableField<String>("")
-    val emailError = ObservableField<String>("")
+    val email = NonNullObservableField("")
+    val emailError = NonNullObservableField("")
 
     init {
         setNavigator(navigator)
@@ -32,7 +32,10 @@ constructor(navigator: IPasswordRecoveryNavigator,
 
     fun onPasswordResetButtonClicked() {
         hideKeyboard.trigger()
-        if (isEmailValid(email.get()!!)) {
+        if (email.get().isEmpty())
+            return
+
+        if (isEmailValid(email.get())) {
             showLoadingDialog()
             requestResetPassword()
         } else
@@ -41,7 +44,7 @@ constructor(navigator: IPasswordRecoveryNavigator,
 
     @SuppressLint("CheckResult")
     private fun requestResetPassword() {
-        walletApi.resetPassword(ResetPasswordRequest(email.get()!!))
+        walletApi.resetPassword(ResetPasswordRequest(email.get()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -59,7 +62,7 @@ constructor(navigator: IPasswordRecoveryNavigator,
     }
 
     private fun closeActivity() {
-        getNavigator()?.closePasswordRecoveryActivity()
+        getNavigator()?.closeActivity()
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {

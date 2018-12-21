@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
+import android.support.v4.media.MediaBrowserCompat
 
 open class Navigator(protected val activity: FragmentActivity) : INavigator {
 
@@ -37,12 +38,10 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
         startActivityInternal(activityClass, null, adaptIntentFun)
     }
 
-    override fun startActivity(clsActivity: Class<out Activity>, isFinish: Boolean) {
+    override fun startActivity(clsActivity: Class<out Activity>, vararg flags: Int) {
         val intent = Intent(activity, clsActivity)
+        flags.forEach { intent.addFlags(it) }
         startActivity(intent)
-
-        if (isFinish)
-            activity.finish()
     }
 
     override fun startActivityForResult(activityClass: Class<out Activity>, requestCode: Int, adaptIntentFun: (Intent.() -> Unit)?) {

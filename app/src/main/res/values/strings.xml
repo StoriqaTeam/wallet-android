@@ -2,15 +2,8 @@
     <string name="app_name">StoriqaWallet</string>
     <string name="wallet">Wallet</string>
     <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
-    <string name="getStartedButtonText">Get started</string>
     <string name="signInButtonText">Sign in</string>
-    <string name="emailHint">Email</string>
-    <string name="passwordHint">Password</string>
-    <string name="repeatPasswordHint">Repeat password</string>
-    <string name="forgotPassword">I forgot password</string>
-    <string name="socialNetworkButtonText">Sign in via social account</string>
     <string name="haventGotAccount">Haven’t got account?</string>
-    <string name="register">Register</string>
     <string name="errorPassword">Password must contain at least 8 symbols, at least one capital letter and digit</string>
     <string name="errorVerification">Error occurred. Please try again or try later</string>
     <string name="errorEmailNotVerified">This email isn’t verified</string>
@@ -18,14 +11,9 @@
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="fb_app_id">730145060671124</string>
     <string name="fb_login_protocol_scheme">fb730145060671124</string>
-    <string name="signUpButtonText">Sign up</string>
-    <string name="haveAnAccount">Have an account?</string>
-    <string name="firstName">First name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="repeatPassword">Repeat password</string>
-    <string name="termsAndConditions">I accept the terms of the license agreement and privacy policy</string>
-    <string name="lastName">Last name</string>
     <string name="errorPasswordHaveToMathc">Passwords have to match</string>
     <string name="emailSentMessage">Check the mail! We sent instruction how to confirm your account to your email address</string>
     <string name="emailSentTitle">Email sent successfully</string>
@@ -33,12 +21,7 @@
     <string name="registerErrorMessage">Aliens have stolen some of our servers. Chasing them, but haven’t catch them yet. Please try again or later!</string>
     <string name="close">Close</string>
     <string name="tryAgain">Try again</string>
-    <string name="passwordRecovery">Password recover</string>
-    <string name="recoverPasswordMessage">Enter email address where new\npassword recovering instructions \n will be sent to.</string>
     <string name="yourEmail">Your email</string>
-    <string name="resetPassword">Reset password</string>
-    <string name="newPasswordMessage">Create new password\nand confirm it.</string>
-    <string name="confirmNewPassword">Confirm new password</string>
     <string name="setUpPinCodeQuestion">Set up PIN code?</string>
     <string name="doNotUse">Do not use</string>
     <string name="setUpPinCode">Set up PIN code</string>
@@ -94,8 +77,6 @@
     <string name="deposit">Deposit</string>
     <string name="noWalletError">This user doesn\'t have a wallet</string>
     <string name="notEnoghtFounds">You haven’t got enough funds to send. Try to set another count.</string>
-    <string name="signUp">Sign up</string>
-    <string name="signIn">Sign in</string>
     <string name="mailSent">Mail successfully sent</string>
     <string name="checkMailbox">Check your mailbox and follow the link to recover your password</string>
     <string name="wantToAccessContacts">Allow StoriqaWallet to access your contacts?</string>
@@ -107,8 +88,10 @@
     <string name="exchange">Exchange</string>
     <string name="menu">Menu</string>
     <string name="willBeAvailableSoon">Will be available soon</string>
+<!--*********************************************************************************************-->
+    <string name="text_haven_t_got_account">Haven’t got account?</string>
 
-    <string name="haven_t_got_account">Haven’t got account?</string>
+    <string name="error_name_not_valid">Wrong name</string> <!--TODO set text-->
     <string name="error_email_not_valid">Email not valid</string>
     <string name="error_email_not_exist">Email not found</string>
     <string name="error_password_no_number">At least one number is required</string>
@@ -128,8 +111,35 @@
     <string name="dialog_pass_mail_sent_description">Check your mailbox and follow the link to recover your password</string>
     <string name="dialog_pass_set_up_title">Password was successfully set up</string>
     <string name="dialog_pass_set_up_description">You have successfully set up new password.</string>
+    <string name="dialog_registration_mail_sent_title">Email sent successfully</string>
+    <string name="dialog_registration_mail_sent_description">Check the mail! We sent instruction how to confirm your account to your email address</string>
+    <string name="dialog_not_verified_title">Your email is not verified</string>
+    <string name="dialog_not_verified_description">The link we’ve sent you has been expired. Tap ‘Resend’ to get a new link to verify your account.</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_sign_in">Sign in</string>
+    <string name="button_sign_up">Sign up</string>
+    <string name="button_resend">Resend</string>
+    <string name="button_get_started">Get started</string>
+    <string name="button_forgot_password">I forgot password</string>
+    <string name="button_register">Register</string>
+    <string name="button_reset_password">Reset password</string>
+    <string name="button_confirm_password">Confirm new password</string>
+
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_repeat_password">Repeat password</string>
+    <string name="hint_first_name">First name</string>
+    <string name="hint_last_name">Last name</string>
+
+    <string name="text_social_accounts">Sign in via social account</string>
+    <string name="text_have_an_account">Have an account?</string>
+    <string name="text_policy_agreement">I accept the terms of the license agreement and privacy policy</string>
+    <string name="text_recover_password">Enter email address where new\npassword recovering instructions \n will be sent to.</string>
+    <string name="text_create_password">Create new password\nand confirm it.</string>
+    <string name="text_sign_up">Sign up</string>
+    <string name="text_sign_in">Sign in</string>
+
+    <string name="toolbar_password_recovery">Password recover</string>
 </resources>

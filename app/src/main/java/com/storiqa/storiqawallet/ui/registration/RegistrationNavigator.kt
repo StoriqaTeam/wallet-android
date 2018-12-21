@@ -6,6 +6,10 @@ import com.storiqa.storiqawallet.ui.login.LoginActivity
 class RegistrationNavigator(private val navigator: INavigator) : IRegistrationNavigator {
 
     override fun openLoginActivity() {
-        navigator.startActivity(LoginActivity::class.java, false)
+        navigator.startActivity(LoginActivity::class.java)
+    }
+
+    override fun closeActivity() {
+        navigator.finishActivity()
     }
 }

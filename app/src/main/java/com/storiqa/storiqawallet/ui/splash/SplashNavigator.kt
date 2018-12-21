@@ -8,15 +8,15 @@ import com.storiqa.storiqawallet.ui.registration.RegistrationActivity
 class SplashNavigator(private val navigator: INavigator) : ISplashNavigator {
 
     override fun openLoginActivity() {
-        navigator.startActivity(LoginActivity::class.java, false)
+        navigator.startActivity(LoginActivity::class.java)
     }
 
     override fun openRegistrationActivity() {
-        navigator.startActivity(RegistrationActivity::class.java, false)
+        navigator.startActivity(RegistrationActivity::class.java)
     }
 
     override fun openEnterPinActivity() {
-        navigator.startActivity(EnterPinCodeActivity::class.java, true)
+        navigator.startActivity(EnterPinCodeActivity::class.java)
     }
 
 }

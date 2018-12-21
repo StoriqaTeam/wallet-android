@@ -8,15 +8,15 @@ import com.storiqa.storiqawallet.ui.registration.RegistrationActivity
 class LoginNavigator(private val navigator: INavigator) : ILoginNavigator {
 
     override fun openRegistrationActivity() {
-        navigator.startActivity(RegistrationActivity::class.java, false)
+        navigator.startActivity(RegistrationActivity::class.java)
     }
 
     override fun openPasswordRecoveryActivity() {
-        navigator.startActivity(PasswordRecoveryActivity::class.java, false)
+        navigator.startActivity(PasswordRecoveryActivity::class.java)
     }
 
     override fun openMainActivity() {
-        navigator.startActivity(MainActivity::class.java, true)
+        navigator.startActivity(MainActivity::class.java)
     }
 
 }

@@ -9,6 +9,7 @@ import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentPasswordSetupBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
+import com.storiqa.storiqawallet.ui.common.onSubmitButtonClicked
 
 class PasswordSetupFragment : BaseFragment<FragmentPasswordSetupBinding, PasswordSetupViewModel>() {
 
@@ -43,7 +44,15 @@ class PasswordSetupFragment : BaseFragment<FragmentPasswordSetupBinding, Passwor
 
         viewModel.token = arguments?.getString(ARGUMENT_TOKEN, "") ?: ""
 
+        initView()
+
         return view
+    }
+
+    private fun initView() {
+        binding.etPasswordRepeat.setOnEditorActionListener { textView, actionId, event ->
+            onSubmitButtonClicked(textView, actionId, event) { viewModel.onConfirmButtonClicked() }
+        }
     }
 
 }

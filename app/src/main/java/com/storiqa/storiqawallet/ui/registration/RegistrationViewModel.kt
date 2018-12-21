@@ -2,22 +2,20 @@ package com.storiqa.storiqawallet.ui.registration
 
 import android.annotation.SuppressLint
 import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
+import com.storiqa.storiqawallet.network.errors.RegistrationMailSentDialogPresenter
 import com.storiqa.storiqawallet.network.requests.RegisterUserRequest
 import com.storiqa.storiqawallet.network.responses.RegisterUserResponse
 import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
-import com.storiqa.storiqawallet.ui.binding.SubmitButtonCallback
-import com.storiqa.storiqawallet.utils.getDeviceId
-import com.storiqa.storiqawallet.utils.getSign
-import com.storiqa.storiqawallet.utils.getTimestamp
-import com.storiqa.storiqawallet.utils.isEmailValid
+import com.storiqa.storiqawallet.utils.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -28,24 +26,32 @@ class RegistrationViewModel
 constructor(navigator: IRegistrationNavigator,
             private val walletApi: WalletApi,
             val facebookAuthHelper: FacebookAuthHelper) :
-        BaseViewModel<IRegistrationNavigator>(), SocialNetworksViewModel, SubmitButtonCallback {
+        BaseViewModel<IRegistrationNavigator>(), SocialNetworksViewModel {
 
-    val firstName = ObservableField<String>("")
-    val lastName = ObservableField<String>("")
-    val email = ObservableField<String>("")
-    val emailError = ObservableField<String>("")
-    val password = ObservableField<String>("")
-    val passwordError = ObservableField<String>("")
-    val passwordRepeat = ObservableField<String>("")
-    val passwordRepeatError = ObservableField<String>("")
+    val firstName = NonNullObservableField("")
+    val firstNameError = NonNullObservableField("")
+    val lastName = NonNullObservableField("")
+    val lastNameError = NonNullObservableField("")
+    val email = NonNullObservableField("")
+    val emailError = NonNullObservableField("")
+    val password = NonNullObservableField("")
+    val passwordError = NonNullObservableField("")
+    val passwordRepeat = NonNullObservableField("")
+    val passwordRepeatError = NonNullObservableField("")
     val policyAgreement = ObservableBoolean(false)
     val signUpButtonEnabled = ObservableBoolean(false)
 
     init {
         setNavigator(navigator)
 
-        firstName.addOnPropertyChanged { checkSignUpButtonEnabled() }
-        lastName.addOnPropertyChanged { checkSignUpButtonEnabled() }
+        firstName.addOnPropertyChanged {
+            firstNameError.set("")
+            checkSignUpButtonEnabled()
+        }
+        lastName.addOnPropertyChanged {
+            lastNameError.set("")
+            checkSignUpButtonEnabled()
+        }
         email.addOnPropertyChanged {
             emailError.set("")
             checkSignUpButtonEnabled()
@@ -59,23 +65,38 @@ constructor(navigator: IRegistrationNavigator,
     }
 
     private fun checkSignUpButtonEnabled() {
-        if (firstName.get()?.isNotEmpty()!! && lastName.get()?.isNotEmpty()!! &&
-                email.get()?.isNotEmpty()!! && password.get()?.isNotEmpty()!! &&
-                passwordRepeat.get()?.isNotEmpty()!! && policyAgreement.get() &&
-                emailError.get() == "")
+        if (firstName.get().isNotEmpty() && lastName.get().isNotEmpty() &&
+                email.get().isNotEmpty() && password.get().isNotEmpty() &&
+                passwordRepeat.get().isNotEmpty() && policyAgreement.get() &&
+                isEmailValid(email.get()) && isUserNameValid(firstName.get().removeSuffix(" ")) &&
+                isUserNameValid(lastName.get().removeSuffix(" ")))
             signUpButtonEnabled.set(true)
         else
             signUpButtonEnabled.set(false)
     }
 
     fun validateEmail() {
-        if (!isEmailValid(email.get()!!))
+        if (email.get().isNotEmpty() && !isEmailValid(email.get()))
             emailError.set(App.res.getString(R.string.error_email_not_valid))
     }
 
-    override fun onSubmitButtonClicked() {
+    fun validateFirstName() {
+        if (firstName.get().isNotEmpty() && !isUserNameValid(firstName.get().removeSuffix(" ")))
+            firstNameError.set(App.res.getString(R.string.error_name_not_valid))
+        else
+            firstNameError.set("")
+    }
+
+    fun validateLastName() {
+        if (lastName.get().isNotEmpty() && !isUserNameValid(lastName.get().removeSuffix(" ")))
+            lastNameError.set(App.res.getString(R.string.error_name_not_valid))
+        else
+            lastNameError.set("")
+    }
+
+    fun onSubmitButtonClicked() {
         hideKeyboard()
-        if (password.get()?.isNotEmpty()!! && passwordRepeat.get()?.isNotEmpty()!!
+        if (password.get().isNotEmpty() && passwordRepeat.get().isNotEmpty()
                 && password.get() != passwordRepeat.get())
             passwordRepeatError.set(App.res.getString(R.string.error_passwords_not_match))
     }
@@ -83,9 +104,9 @@ constructor(navigator: IRegistrationNavigator,
     fun onSignUpButtonClicked() {
         hideKeyboard()
         passwordError.set("")
-        if (!isEmailValid(email.get()!!))
+        if (!isEmailValid(email.get()))
             emailError.set(App.res.getString(R.string.error_email_not_valid))
-        else if (password.get()?.isNotEmpty()!! && passwordRepeat.get()?.isNotEmpty()!!
+        else if (password.get().isNotEmpty() && passwordRepeat.get().isNotEmpty()
                 && password.get() != passwordRepeat.get())
             passwordRepeatError.set(App.res.getString(R.string.error_passwords_not_match))
         else {
@@ -100,8 +121,8 @@ constructor(navigator: IRegistrationNavigator,
         val deviceId = getDeviceId()
         val deviceOs = "25"
         val sign = getSign(timestamp, deviceId)!!
-        val registerUserRequest = RegisterUserRequest(email.get()!!, "", password.get()!!,
-                firstName.get()?.removeSuffix(" ")!!, lastName.get()?.removeSuffix(" ")!!, deviceOs, deviceId)
+        val registerUserRequest = RegisterUserRequest(email.get(), "", password.get(),
+                firstName.get().removeSuffix(" "), lastName.get().removeSuffix(" "), deviceOs, deviceId)
 
         val observableField: Observable<RegisterUserResponse> =
                 walletApi.registerUser(timestamp, deviceId, sign, registerUserRequest)
@@ -118,7 +139,7 @@ constructor(navigator: IRegistrationNavigator,
 
     private fun onSuccess(response: RegisterUserResponse) {
         hideLoadingDialog()
-        println(response)
+        showMessageDialog(RegistrationMailSentDialogPresenter())
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
@@ -128,12 +149,22 @@ constructor(navigator: IRegistrationNavigator,
                     "email" ->
                         emailError.set(App.res.getString(value))
                     "password" ->
-                        if (passwordError.get()!!.isEmpty())
+                        if (passwordError.get().isEmpty())
                             passwordError.set(App.res.getString(value))
                         else
                             passwordError.set(passwordError.get() + "\n" + App.res.getString(value))
                 }
             }
+        }
+    }
+
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType): () -> Unit {
+        when (dialogType) {
+            DialogType.REGISTRATION_MAIL_SENT -> return {
+                getNavigator()?.openLoginActivity() //TODO add flags
+                getNavigator()?.closeActivity()
+            }
+            else -> return { }
         }
     }
 

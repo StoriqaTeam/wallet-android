@@ -9,6 +9,7 @@ import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentPasswordResetBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
+import com.storiqa.storiqawallet.ui.common.onSubmitButtonClicked
 
 class PasswordResetFragment : BaseFragment<FragmentPasswordResetBinding, PasswordResetViewModel>() {
 
@@ -26,7 +27,15 @@ class PasswordResetFragment : BaseFragment<FragmentPasswordResetBinding, Passwor
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        initView()
+
         return view
+    }
+
+    private fun initView() {
+        binding.etEmail.setOnEditorActionListener { textView, actionId, event ->
+            onSubmitButtonClicked(textView, actionId, event) { viewModel.onPasswordResetButtonClicked() }
+        }
     }
 
 }

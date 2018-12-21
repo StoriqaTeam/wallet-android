@@ -5,11 +5,11 @@ import com.storiqa.storiqawallet.ui.login.LoginActivity
 
 class PasswordRecoveryNavigator(private val navigator: INavigator) : IPasswordRecoveryNavigator {
 
-    override fun closePasswordRecoveryActivity() {
+    override fun closeActivity() {
         navigator.finishActivity()
     }
 
     override fun openLoginActivity() {
-        navigator.startActivity(LoginActivity::class.java, true)
+        navigator.startActivity(LoginActivity::class.java)
     }
 }
