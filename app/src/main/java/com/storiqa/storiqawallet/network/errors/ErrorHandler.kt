@@ -84,23 +84,17 @@ open class ErrorHandler {
                     ErrorCode.ALREADY_EXISTS ->
                         return ErrorPresenterDialog(
                                 DialogType.DEVICE_NOT_ATTACHED,
-                                R.string.error_device_not_attached_title,
-                                R.string.error_device_not_attached_description,
+                                R.string.dialog_device_not_attached_title,
+                                R.string.dialog_device_not_attached_description,
                                 R.drawable.general_error_icon,
                                 DialogButton(R.string.button_ok, {}),
                                 DialogButton(R.string.cancel, {}))
 
                     ErrorCode.DEVICE_NOT_ATTACHED ->
-                        return ErrorPresenterDialog(
-                                DialogType.DEVICE_NOT_ATTACHED,
-                                R.string.error_device_not_attached_title,
-                                R.string.error_device_not_attached_description,
-                                R.drawable.general_error_icon,
-                                DialogButton(R.string.button_ok, {}),
-                                DialogButton(R.string.cancel, {}))
+                        return NotAttachedDialogPresenter()
 
                     ErrorCode.NOT_VERIFIED ->
-                        return EmailNotVerifiedDialogPresenter()
+                        return EmailNotVerifiedDialogPresenter().apply { params = error.params }
                 }
 
                 errorFields.add(errorField)

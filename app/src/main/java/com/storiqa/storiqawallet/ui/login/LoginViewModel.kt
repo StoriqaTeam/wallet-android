@@ -8,10 +8,14 @@ import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.errors.AttachDeviceMailSentDialogPresenter
 import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
+import com.storiqa.storiqawallet.network.errors.RegistrationMailSentDialogPresenter
+import com.storiqa.storiqawallet.network.requests.AddDeviceRequest
 import com.storiqa.storiqawallet.network.requests.ConfirmEmailRequest
 import com.storiqa.storiqawallet.network.requests.LoginRequest
+import com.storiqa.storiqawallet.network.requests.ResendConfirmEmailRequest
 import com.storiqa.storiqawallet.network.responses.TokenResponse
 import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
@@ -24,7 +28,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import kotlin.math.sign
 
 class LoginViewModel
 @Inject
@@ -111,25 +114,65 @@ constructor(navigator: ILoginNavigator,
         }
     }
 
-    override fun getDialogPositiveButtonClicked(dialogType: DialogType): () -> Unit {
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
         when (dialogType) {
-            DialogType.DEVICE_NOT_ATTACHED -> return { attachDevice() }
+            DialogType.DEVICE_NOT_ATTACHED -> return { attachDevice(params) }
+            DialogType.EMAIL_NOT_VERIFIED -> return ::resendEmail
             else -> return { }
         }
     }
 
-    private fun attachDevice() {
-        Log.d("TAGGG", "attach device")
+    @SuppressLint("CheckResult")
+    private fun resendEmail() {
+        showLoadingDialog()
+
+        walletApi
+                .resendConfirmEmail(ResendConfirmEmailRequest(email.get()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    hideKeyboard()
+                    showMessageDialog(RegistrationMailSentDialogPresenter())
+                }, {
+                    handleError(it as Exception)
+                })
+    }
+
+    @SuppressLint("CheckResult")
+    private fun attachDevice(params: HashMap<String, String>?) {
+        showLoadingDialog()
+
+
+        val timestamp = getTimestamp()
+        val deviceId = getDeviceId()
+        val deviceOs = "25"
+        val sign = getSign(timestamp, deviceId)!!
+        val userId = params?.get("userId")?.toInt()
+        if (userId == null) {
+            //TODO show unknown error
+            return
+        }
+
+        val addDeviceRequest = AddDeviceRequest(userId, getDeviceId())
+
+        walletApi
+                .addDevice(timestamp, deviceId, sign, addDeviceRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    hideKeyboard()
+                    showMessageDialog(AttachDeviceMailSentDialogPresenter())
+                }, {
+                    handleError(it as Exception)
+                })
     }
 
     @SuppressLint("CheckResult")
     fun confirmEmail(token: String) {
         showLoadingDialog()
 
-        val observableField: Observable<TokenResponse> = walletApi
-                        .confirmEmail(ConfirmEmailRequest(token))
-
-        observableField
+        walletApi
+                .confirmEmail(ConfirmEmailRequest(token))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

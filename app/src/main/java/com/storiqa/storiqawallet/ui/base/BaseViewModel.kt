@@ -41,7 +41,7 @@ abstract class BaseViewModel<N> : ViewModel() {
     fun showMessageDialog(errorPresenter: ErrorPresenterDialog) {
         showMessageDialog.value = errorPresenter.apply {
             positiveButton?.onClick =
-                    getDialogPositiveButtonClicked(errorPresenter.dialogType)
+                    getDialogPositiveButtonClicked(errorPresenter.dialogType, errorPresenter.params)
             negativeButton?.onClick =
                     getDialogNegativeButtonClicked(errorPresenter.dialogType)
         }
@@ -63,7 +63,7 @@ abstract class BaseViewModel<N> : ViewModel() {
         }
     }
 
-    open fun getDialogPositiveButtonClicked(dialogType: DialogType): () -> Unit {
+    open fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
         return {}
     }
 

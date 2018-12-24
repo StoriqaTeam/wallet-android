@@ -12,14 +12,15 @@ open class ErrorPresenterDialog(
         @StringRes val description: Int = 0,
         @DrawableRes val icon: Int = 0,
         val positiveButton: DialogButton? = null,
-        val negativeButton: DialogButton? = null) : ErrorPresenter()
+        val negativeButton: DialogButton? = null,
+        var params: HashMap<String, String>? = null) : ErrorPresenter()
 
 data class ErrorPresenterFields(
         val fieldErrors: ArrayList<HashMap<String, Int>>) : ErrorPresenter()
 
 enum class DialogType {
     NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP,
-    REGISTRATION_MAIL_SENT, EMAIL_NOT_VERIFIED
+    REGISTRATION_MAIL_SENT, EMAIL_NOT_VERIFIED, ATTACH_DEVICE_MAIL_SENT
 }
 
 data class DialogButton(
@@ -54,3 +55,18 @@ class EmailNotVerifiedDialogPresenter : ErrorPresenterDialog(
         R.drawable.general_error_icon,
         DialogButton(R.string.button_resend, {}),
         DialogButton(R.string.button_cancel, {}))
+
+class NotAttachedDialogPresenter : ErrorPresenterDialog(
+        DialogType.DEVICE_NOT_ATTACHED,
+        R.string.dialog_device_not_attached_title,
+        R.string.dialog_device_not_attached_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_ok, {}),
+        DialogButton(R.string.cancel, {}))
+
+class AttachDeviceMailSentDialogPresenter : ErrorPresenterDialog(
+        DialogType.ATTACH_DEVICE_MAIL_SENT,
+        R.string.dialog_attach_device_mail_sent_title,
+        R.string.dialog_attach_device_mail_sent_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_ok, {}))

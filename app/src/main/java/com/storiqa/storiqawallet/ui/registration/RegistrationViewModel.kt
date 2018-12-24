@@ -158,7 +158,7 @@ constructor(navigator: IRegistrationNavigator,
         }
     }
 
-    override fun getDialogPositiveButtonClicked(dialogType: DialogType): () -> Unit {
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
         when (dialogType) {
             DialogType.REGISTRATION_MAIL_SENT -> return {
                 getNavigator()?.openLoginActivity() //TODO add flags

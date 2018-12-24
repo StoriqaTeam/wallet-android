@@ -99,8 +99,6 @@
     <string name="error_passwords_not_match">Passwords do not match</string>
     <string name="error_password_no_upper">At least one upper case character is required</string>
     <string name="error_password_invalid_length">Password should be between 8 and 30 symbols</string>
-    <string name="error_device_not_attached_title">Your device is not registered yet</string>
-    <string name="error_device_not_attached_description">Do you want to register this device to your account?</string>
     <string name="error_bad_request">Bad request</string>
     <string name="error_server_error">Server error</string>
     <string name="error_no_internet_title">No internet</string>
@@ -115,6 +113,10 @@
     <string name="dialog_registration_mail_sent_description">Check the mail! We sent instruction how to confirm your account to your email address</string>
     <string name="dialog_not_verified_title">Your email is not verified</string>
     <string name="dialog_not_verified_description">The link we’ve sent you has been expired. Tap ‘Resend’ to get a new link to verify your account.</string>
+    <string name="dialog_device_not_attached_title">Your device is not registered yet</string>
+    <string name="dialog_device_not_attached_description">Do you want to register this device to your account?</string>
+    <string name="dialog_attach_device_mail_sent_title">Email sent successfully</string>
+    <string name="dialog_attach_device_mail_sent_description">Check the mail! We sent instruction how to attach device to your account to your email address</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
