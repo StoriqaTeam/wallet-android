@@ -82,6 +82,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.pincode.PinCodeActivity"
+            android:screenOrientation="portrait" />
+
         <!--////////////////////////////////////////////////-->
 
         <activity
