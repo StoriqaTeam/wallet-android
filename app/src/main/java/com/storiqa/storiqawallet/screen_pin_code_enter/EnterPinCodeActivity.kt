@@ -48,7 +48,7 @@ class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
             }
         }
 
-        tvForgotPin.onClick {
+        btnForgotPin.onClick {
             ScreenStarter().startLoginScreen(this@EnterPinCodeActivity)
             viewModel.eraseUserQuickLaunch()
         }

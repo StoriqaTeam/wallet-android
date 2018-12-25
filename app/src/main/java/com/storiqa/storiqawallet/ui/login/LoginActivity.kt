@@ -2,7 +2,6 @@ package com.storiqa.storiqawallet.ui.login
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
@@ -10,7 +9,6 @@ import com.storiqa.storiqawallet.databinding.ActivityLoginBinding
 import com.storiqa.storiqawallet.objects.GoogleAuthFlow
 import com.storiqa.storiqawallet.ui.base.BaseActivity
 import com.storiqa.storiqawallet.ui.common.onSubmitButtonClicked
-import com.storiqa.storiqawallet.ui.password.reset.PasswordResetFragment
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
@@ -22,11 +20,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
         initView()
 
-        val data: Uri? = intent?.data
-        val token = data?.path?.split("/")?.last()
+        val path = intent?.data?.path ?: return
+        val token = path.split("/").last()
 
-        if (token != null) {
+        if (path.contains("verify_email")) {
             viewModel.confirmEmail(token)
+        } else if (path.contains("register_device")) {
+            viewModel.confirmAttachDevice(token)
         }
     }
 

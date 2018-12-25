@@ -41,7 +41,7 @@ interface WalletApi {
 
     @POST("v1/users/confirm_email")
     fun confirmEmail(
-            @Body confirmEmailRequest: ConfirmEmailRequest): Observable<TokenResponse>
+            @Body confirmEmailRequest: ConfirmEmailRequest): Observable<String>
 
     @POST("v1/users/add_device")
     fun addDevice(
@@ -72,7 +72,7 @@ interface WalletApi {
 
     @POST("v1/users/confirm_reset_password")
     fun confirmResetPassword(
-            @Body confirmResetPasswordRequest: ConfirmResetPasswordRequest): Observable<TokenResponse>
+            @Body confirmResetPasswordRequest: ConfirmResetPasswordRequest): Observable<String>
 
     @GET("v1/users/me")
     fun getUserInfo(

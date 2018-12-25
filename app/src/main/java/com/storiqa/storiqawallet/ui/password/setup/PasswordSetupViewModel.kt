@@ -6,6 +6,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.network.errors.PassSetUpDialogPresenter
 import com.storiqa.storiqawallet.network.requests.ConfirmResetPasswordRequest
@@ -56,12 +57,19 @@ constructor(navigator: IPasswordRecoveryNavigator,
     }
 
     private fun onSuccess() {
-        val dialogPresenter = PassSetUpDialogPresenter()
-        dialogPresenter.positiveButton?.onClick = {
-            getNavigator()?.openLoginActivity()
-            getNavigator()?.closeActivity()
+        hideLoadingDialog()
+        showMessageDialog(PassSetUpDialogPresenter())
+    }
+
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
+        when (dialogType) {
+            DialogType.RECOVERY_PASS_SET_UP ->
+                return {
+                    getNavigator()?.openLoginActivity()
+                    getNavigator()?.closeActivity()
+                }
+            else -> return {}
         }
-        showMessageDialog(dialogPresenter)
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {

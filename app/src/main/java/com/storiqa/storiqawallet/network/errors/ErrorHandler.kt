@@ -32,27 +32,23 @@ open class ErrorHandler {
     }
 
     private fun handleFacebookAuthError(): ErrorPresenter {
-        return ErrorPresenterDialog()
+        return UnknownErrorDialogPresenter()
     }
 
     private fun handleBadRequest(): ErrorPresenterDialog {
-        return ErrorPresenterDialog()
+        return UnknownErrorDialogPresenter()
     }
 
     private fun handleInternalServerError(): ErrorPresenterDialog {
-        return ErrorPresenterDialog()
+        return UnknownErrorDialogPresenter()
     }
 
     private fun handleUnknownError(): ErrorPresenterDialog {
-        return ErrorPresenterDialog()
+        return UnknownErrorDialogPresenter()
     }
 
     private fun handleNoInternetError(): ErrorPresenterDialog {
-        return ErrorPresenterDialog(
-                DialogType.DEVICE_NOT_ATTACHED,
-                R.string.error_no_internet_title,
-                R.string.error_no_internet_description,
-                R.drawable.general_error_icon)
+        return NoInternetDialogPresenter()
     }
 
     private fun handleUnprocessableEntity(validationErrors: HashMap<String,
@@ -66,8 +62,21 @@ open class ErrorHandler {
                     ErrorCode.INVALID_EMAIL ->
                         errorField[field] = R.string.error_email_not_valid
 
-                    ErrorCode.NOT_FOUND ->
-                        errorField[field] = R.string.error_email_not_exist
+                    ErrorCode.NOT_EXISTS ->
+                        if (field == "email")
+                            errorField[field] = R.string.error_email_not_exist
+                        else if (field == "device")
+                            return NotAttachedDialogPresenter().apply { params = error.params }
+
+                    /////////delete/////////
+
+                    /*ErrorCode.NOT_EXIST ->
+                            errorField[field] = R.string.error_email_not_exist
+
+                    ErrorCode.DEVICE_NOT_ATTACHED ->
+                            return NotAttachedDialogPresenter().apply { params = error.params }*/
+
+                    ////////////////////////
 
                     ErrorCode.INVALID_PASSWORD ->
                         errorField[field] = R.string.error_password_wrong_pass
@@ -81,20 +90,11 @@ open class ErrorHandler {
                     ErrorCode.NO_NUMBER ->
                         errorField[field] = R.string.error_password_no_number
 
-                    ErrorCode.ALREADY_EXISTS ->
-                        return ErrorPresenterDialog(
-                                DialogType.DEVICE_NOT_ATTACHED,
-                                R.string.dialog_device_not_attached_title,
-                                R.string.dialog_device_not_attached_description,
-                                R.drawable.general_error_icon,
-                                DialogButton(R.string.button_ok, {}),
-                                DialogButton(R.string.cancel, {}))
-
-                    ErrorCode.DEVICE_NOT_ATTACHED ->
-                        return NotAttachedDialogPresenter()
+                    ErrorCode.EMAIL_TIMEOUT ->
+                        return EmailTimeoutDialogPresenter()
 
                     ErrorCode.NOT_VERIFIED ->
-                        return EmailNotVerifiedDialogPresenter().apply { params = error.params }
+                        return EmailNotVerifiedDialogPresenter()
                 }
 
                 errorFields.add(errorField)

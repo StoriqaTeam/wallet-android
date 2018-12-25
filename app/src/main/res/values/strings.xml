@@ -88,7 +88,7 @@
     <string name="exchange">Exchange</string>
     <string name="menu">Menu</string>
     <string name="willBeAvailableSoon">Will be available soon</string>
-<!--*********************************************************************************************-->
+    <!--*********************************************************************************************-->
     <string name="text_haven_t_got_account">Haven’t got account?</string>
 
     <string name="error_name_not_valid">Wrong name</string> <!--TODO set text-->
@@ -101,10 +101,14 @@
     <string name="error_password_invalid_length">Password should be between 8 and 30 symbols</string>
     <string name="error_bad_request">Bad request</string>
     <string name="error_server_error">Server error</string>
-    <string name="error_no_internet_title">No internet</string>
-    <string name="error_no_internet_description">No internet</string>
     <string name="error_unknown_error">Unknown error</string>
 
+    <string name="dialog_no_internet_title">No internet</string>
+    <string name="dialog_no_internet_description">No internet description</string>
+    <string name="dialog_email_timeout_title">Email timeout</string>
+    <string name="dialog_email_timeout_description">Email timeout description</string>
+    <string name="dialog_unknown_error_title">Oops! Something gone wrong!</string>
+    <string name="dialog_unknown_error_description">Aliens have stolen some of our servers. Chasing them, but haven’t catch them yet. Please try again or come back later!</string>
     <string name="dialog_pass_mail_sent_title">Mail successfully sent</string>
     <string name="dialog_pass_mail_sent_description">Check your mailbox and follow the link to recover your password</string>
     <string name="dialog_pass_set_up_title">Password was successfully set up</string>
@@ -115,6 +119,8 @@
     <string name="dialog_not_verified_description">The link we’ve sent you has been expired. Tap ‘Resend’ to get a new link to verify your account.</string>
     <string name="dialog_device_not_attached_title">Your device is not registered yet</string>
     <string name="dialog_device_not_attached_description">Do you want to register this device to your account?</string>
+    <string name="dialog_device_attached_title">Device attached</string>
+    <string name="dialog_device_attached_description">Device attached description</string>
     <string name="dialog_attach_device_mail_sent_title">Email sent successfully</string>
     <string name="dialog_attach_device_mail_sent_description">Check the mail! We sent instruction how to attach device to your account to your email address</string>
 
@@ -142,6 +148,12 @@
     <string name="text_create_password">Create new password\nand confirm it.</string>
     <string name="text_sign_up">Sign up</string>
     <string name="text_sign_in">Sign in</string>
+    <string name="text_pin_title_setup">Set up PIN-code</string>
+    <string name="text_pin_description_setup">Enter 4-digit PIN-code</string>
+    <string name="text_pin_title_confirm">Confirm PIN-code</string>
+    <string name="text_pin_description_confirm">The codes entered must match each other</string>
+    <string name="text_pin_title_enter">Hello, %s</string>
+    <string name="text_pin_description_enter">Enter your PIN-code</string>
 
     <string name="toolbar_password_recovery">Password recover</string>
 </resources>

@@ -20,12 +20,35 @@ data class ErrorPresenterFields(
 
 enum class DialogType {
     NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP,
-    REGISTRATION_MAIL_SENT, EMAIL_NOT_VERIFIED, ATTACH_DEVICE_MAIL_SENT
+    REGISTRATION_MAIL_SENT, EMAIL_NOT_VERIFIED, ATTACH_DEVICE_MAIL_SENT, UNKNOWN_ERROR,
+    EMAIL_TIMEOUT, DEVICE_ATTACHED
 }
 
 data class DialogButton(
         @StringRes val name: Int,
         var onClick: () -> Unit)
+
+class EmailTimeoutDialogPresenter : ErrorPresenterDialog(
+        DialogType.EMAIL_TIMEOUT,
+        R.string.dialog_email_timeout_title,
+        R.string.dialog_email_timeout_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_resend, {}),
+        DialogButton(R.string.cancel, {}))
+
+class NoInternetDialogPresenter : ErrorPresenterDialog(
+        DialogType.NO_INTERNET,
+        R.string.dialog_no_internet_title,
+        R.string.dialog_no_internet_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_ok, {}))
+
+class UnknownErrorDialogPresenter : ErrorPresenterDialog(
+        DialogType.UNKNOWN_ERROR,
+        R.string.dialog_unknown_error_title,
+        R.string.dialog_unknown_error_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_ok, {}))
 
 class PassMailSentDialogPresenter : ErrorPresenterDialog(
         DialogType.RECOVERY_PASS_MAIL_SENT,
@@ -63,6 +86,13 @@ class NotAttachedDialogPresenter : ErrorPresenterDialog(
         R.drawable.general_error_icon,
         DialogButton(R.string.button_ok, {}),
         DialogButton(R.string.cancel, {}))
+
+class DeviceAttachedDialogPresenter : ErrorPresenterDialog(
+        DialogType.DEVICE_ATTACHED,
+        R.string.dialog_device_attached_title,
+        R.string.dialog_device_attached_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_ok, {}))
 
 class AttachDeviceMailSentDialogPresenter : ErrorPresenterDialog(
         DialogType.ATTACH_DEVICE_MAIL_SENT,

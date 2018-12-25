@@ -54,9 +54,14 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="https"
                     android:host="stable.stq.cloud"
-                    android:pathPrefix="/wallet/verify_email" />
+                    android:pathPrefix="/wallet/verify_email"
+                    android:scheme="https" />
+
+                <data
+                    android:host="stable.stq.cloud"
+                    android:pathPrefix="/wallet/register_device"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 
@@ -76,15 +81,25 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="https"
                     android:host="stable.stq.cloud"
-                    android:pathPrefix="/wallet/reset_password" />
+                    android:pathPrefix="/wallet/reset_password"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.pincode.PinCodeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.storiqa.storiqawallet.SETUP_PIN" />
+                <action android:name="com.storiqa.storiqawallet.ENTER_PIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--<action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />-->
+            </intent-filter>
+        </activity>
 
         <!--////////////////////////////////////////////////-->
 

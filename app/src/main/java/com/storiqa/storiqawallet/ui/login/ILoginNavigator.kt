@@ -6,5 +6,5 @@ interface ILoginNavigator {
 
     fun openPasswordRecoveryActivity()
 
-    fun openMainActivity()
+    fun openPinCodeActivity()
 }

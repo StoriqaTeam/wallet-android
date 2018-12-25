@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PinIndicator">
+        <attr name="pinLength" format="integer" />
+        <attr name="radius" format="dimension" />
+        <attr name="gap" format="dimension" />
+        <attr name="colorDefault" format="color" />
+        <attr name="colorHighlight" format="color" />
+    </declare-styleable>
+</resources>

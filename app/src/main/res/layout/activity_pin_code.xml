@@ -15,176 +15,9 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/button2"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="1"
-            app:layout_constraintBottom_toBottomOf="@+id/button3"
-            app:layout_constraintEnd_toStartOf="@+id/button3"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button3"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/button3"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="2"
-            app:layout_constraintBottom_toTopOf="@+id/button6"
-            app:layout_constraintEnd_toStartOf="@+id/button4"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/button4"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="3"
-            app:layout_constraintBottom_toBottomOf="@+id/button3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button3"
-            app:layout_constraintTop_toTopOf="@+id/button3"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/button7"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="4"
-            app:layout_constraintBottom_toBottomOf="@+id/button6"
-            app:layout_constraintEnd_toStartOf="@+id/button6"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button6"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/button6"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="5"
-            app:layout_constraintBottom_toTopOf="@+id/button9"
-            app:layout_constraintEnd_toStartOf="@+id/button5"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button7"
-            app:layout_constraintTop_toBottomOf="@+id/button3"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/button5"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="6"
-            app:layout_constraintBottom_toBottomOf="@+id/button6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button6"
-            app:layout_constraintTop_toTopOf="@+id/button6"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/button10"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="7"
-            app:layout_constraintBottom_toBottomOf="@+id/button9"
-            app:layout_constraintEnd_toStartOf="@+id/button9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button9"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/button9"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="8"
-            app:layout_constraintBottom_toTopOf="@+id/textView7"
-            app:layout_constraintEnd_toStartOf="@+id/button8"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button10"
-            app:layout_constraintTop_toBottomOf="@+id/button6"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/button8"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="9"
-            app:layout_constraintBottom_toBottomOf="@+id/button9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button9"
-            app:layout_constraintTop_toTopOf="@+id/button9"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/textView7"
-            style="@style/pinCodeNumber"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:text="0"
-            app:layout_constraintBottom_toTopOf="@+id/tvForgotPin"
-            app:layout_constraintEnd_toStartOf="@+id/imageView9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnLoginWithFingerprint2"
-            app:layout_constraintTop_toBottomOf="@+id/button9"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            app:layout_constraintBottom_toBottomOf="@+id/textView7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
-            app:layout_constraintTop_toTopOf="@+id/textView7"
-            app:srcCompat="@drawable/erase_pin" />
-
-        <ImageView
-            android:id="@+id/btnLoginWithFingerprint2"
-            android:layout_width="@dimen/pin_button_size"
-            android:layout_height="@dimen/pin_button_size"
-            android:layout_margin="@dimen/pin_button_margin"
-            android:background="@drawable/fingerprint_blue"
-            app:layout_constraintBottom_toBottomOf="@+id/textView7"
-            app:layout_constraintEnd_toStartOf="@+id/textView7"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView7" />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -192,46 +25,238 @@
             android:layout_height="?attr/actionBarSize" />
 
         <TextView
-            android:id="@+id/tvMessageToUser"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_light"
             android:gravity="center_horizontal"
             android:lineSpacingExtra="8sp"
-            android:text="User, good day"
+            android:text="@{viewModel.title}"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMessageToUser">
-
-            <ImageView style="@style/pinCircleStyle" />
-
-            <ImageView style="@style/pinCircleStyle" />
-
-            <ImageView style="@style/pinCircleStyle" />
-
-            <ImageView style="@style/pinCircleStyle" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:text="@string/text_pin_title_confirm" />
 
         <TextView
-            android:id="@+id/tvForgotPin"
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@{viewModel.description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tools:text="@string/text_pin_description_confirm" />
+
+        <com.storiqa.storiqawallet.ui.views.PinIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            app:colorDefault="@color/bluegrey"
+            app:colorHighlight="@color/brightSkyBlue"
+            app:gap="25dp"
+            app:highlightCircleCount="@{viewModel.pinCode.length()}"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:radius="5dp" />
+
+        <Button
+            android:id="@+id/btnDigit1"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="1"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDigit2"
+            app:layout_constraintEnd_toStartOf="@+id/btnDigit2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnDigit2"
+            android:onClick="@{()->viewModel.onDigitEntered(1)}"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit2"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:layout_marginTop="8dp"
+            android:text="2"
+            app:layout_constraintBottom_toTopOf="@+id/btnDigit5"
+            app:layout_constraintEnd_toStartOf="@+id/btnDigit3"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:onClick="@{()->viewModel.onDigitEntered(2)}"
+            app:layout_constraintStart_toEndOf="@+id/btnDigit1"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit3"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="3"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDigit2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{()->viewModel.onDigitEntered(3)}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnDigit2"
+            app:layout_constraintTop_toTopOf="@+id/btnDigit2"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit4"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="4"
+            android:onClick="@{()->viewModel.onDigitEntered(4)}"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDigit5"
+            app:layout_constraintEnd_toStartOf="@+id/btnDigit5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnDigit5"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit5"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="5"
+            android:onClick="@{()->viewModel.onDigitEntered(5)}"
+            app:layout_constraintBottom_toTopOf="@+id/btnDigit8"
+            app:layout_constraintEnd_toStartOf="@+id/btnDigit6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnDigit4"
+            app:layout_constraintTop_toBottomOf="@+id/btnDigit2"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit6"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="6"
+            android:onClick="@{()->viewModel.onDigitEntered(6)}"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDigit5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnDigit5"
+            app:layout_constraintTop_toTopOf="@+id/btnDigit5"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit7"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="7"
+            android:onClick="@{()->viewModel.onDigitEntered(7)}"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDigit8"
+            app:layout_constraintEnd_toStartOf="@+id/btnDigit8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnDigit8"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit8"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="8"
+            android:onClick="@{()->viewModel.onDigitEntered(8)}"
+            app:layout_constraintBottom_toTopOf="@+id/btnDigit0"
+            app:layout_constraintEnd_toStartOf="@+id/btnDigit9"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnDigit7"
+            app:layout_constraintTop_toBottomOf="@+id/btnDigit5"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit9"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="9"
+            android:onClick="@{()->viewModel.onDigitEntered(9)}"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDigit8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnDigit8"
+            app:layout_constraintTop_toTopOf="@+id/btnDigit8"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDigit0"
+            style="@style/pinCodeNumber"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:text="0"
+            android:onClick="@{()->viewModel.onDigitEntered(0)}"
+            app:layout_constraintBottom_toTopOf="@+id/btnForgotPin"
+            app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnScan"
+            app:layout_constraintTop_toBottomOf="@+id/btnDigit8"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDigit0"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{()->viewModel.deleteLastDigit()}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnDigit0"
+            app:layout_constraintTop_toTopOf="@+id/btnDigit0"
+            android:background="@drawable/erase_pin" />
+
+        <ImageView
+            android:id="@+id/btnScan"
+            android:layout_width="@dimen/pin_button_size"
+            android:layout_height="@dimen/pin_button_size"
+            android:layout_margin="@dimen/pin_button_margin"
+            android:background="@drawable/fingerprint_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/btnDigit0"
+            app:layout_constraintEnd_toStartOf="@+id/btnDigit0"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnDigit0" />
+
+        <TextView
+            android:id="@+id/btnForgotPin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -245,9 +270,17 @@
             android:text="@string/forgotPin"
             android:textColor="@color/warm_grey"
             android:textSize="13sp"
+            android:onClick="@{()->viewModel.onForgotPinButtonClicked()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
 
     </android.support.constraint.ConstraintLayout>
 
