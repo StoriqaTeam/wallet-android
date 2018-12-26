@@ -79,11 +79,11 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Observable<Response<UserInfoResponse>>
+            @Header("Authorization") bearer: String): Observable<UserInfoResponse>
 
-    @GET("v1/users/{userId}/accounts")
+    @GET("v1/users/{id}/accounts")
     fun getAccounts(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
@@ -91,27 +91,27 @@ interface WalletApi {
             @Query("offset") offset: Int,
             @Query("limit") limit: Int): Observable<Response<Any>>
 
-    @PUT("v1/users/{userId}/accounts")
+    @PUT("v1/users/{id}/accounts")
     fun updateAccounts(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Body updateAccountRequest: UpdateAccountRequest): Observable<Response<Any>>
 
-    @POST("v1/users/{userId}/accounts")
+    @POST("v1/users/{id}/accounts")
     fun createAccount(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Body createAccountRequest: CreateAccountRequest): Observable<Response<Any>>
 
-    @DELETE("v1/users/{userId}/accounts")
+    @DELETE("v1/users/{id}/accounts")
     fun deleteAccount(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
@@ -119,15 +119,15 @@ interface WalletApi {
 
     @GET("v1/accounts/{accountId}")
     fun getAccountInfo(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String): Observable<Response<Any>>
 
-    @GET("v1/users/{userId}/transactions")
+    @GET("v1/users/{id}/transactions")
     fun getTransactions(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,

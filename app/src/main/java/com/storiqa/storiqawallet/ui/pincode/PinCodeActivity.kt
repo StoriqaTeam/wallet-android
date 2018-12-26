@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.ui.pincode
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.widget.Toast
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityPinCodeBinding
@@ -23,9 +25,13 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding, PinCodeViewModel>()
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             viewModel.state = PinCodeViewModel.PinCodeState.SET_UP
         } else {
-            viewModel.userName.set("Elon")
             viewModel.state = PinCodeViewModel.PinCodeState.ENTER
         }
+
+        viewModel.showPinError.observe(this, Observer {
+            //todo show wrong pin error
+            Toast.makeText(this, "Wrong pin", Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

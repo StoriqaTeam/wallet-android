@@ -7,18 +7,18 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
+import com.storiqa.storiqawallet.data.IAppDataStorage
+import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.errors.*
 import com.storiqa.storiqawallet.network.requests.*
-import com.storiqa.storiqawallet.network.responses.TokenResponse
+import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
-import com.storiqa.storiqawallet.utils.getDeviceId
-import com.storiqa.storiqawallet.utils.getSign
-import com.storiqa.storiqawallet.utils.getTimestamp
+import com.storiqa.storiqawallet.utils.SignUtil
+import com.storiqa.storiqawallet.utils.getDeviceOs
 import com.storiqa.storiqawallet.utils.isEmailValid
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -26,8 +26,11 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject
 constructor(navigator: ILoginNavigator,
+            val facebookAuthHelper: FacebookAuthHelper,
             private val walletApi: WalletApi,
-            val facebookAuthHelper: FacebookAuthHelper) :
+            private val userData: IUserDataStorage,
+            private val appData: IAppDataStorage,
+            private val signUtil: SignUtil) :
         BaseViewModel<ILoginNavigator>(), SocialNetworksViewModel {
 
     val emailError = NonNullObservableField("")
@@ -70,17 +73,11 @@ constructor(navigator: ILoginNavigator,
 
     @SuppressLint("CheckResult")
     private fun requestLogIn() {
-        val timestamp = getTimestamp()
-        val deviceId = getDeviceId()
-        val deviceOs = "25"
-        val sign = getSign(timestamp, deviceId)!!
-        val loginRequest = LoginRequest(email.get(), password.get(), deviceOs, deviceId)
+        val signHeader = signUtil.createSignHeader(email.get())
+        val loginRequest = LoginRequest(email.get(), password.get(), getDeviceOs(), signHeader.deviceId)
 
-        val observableField: Observable<TokenResponse> =
-                walletApi
-                        .login(timestamp, deviceId, sign, loginRequest)
-
-        observableField
+        walletApi
+                .login(signHeader.timestamp, signHeader.deviceId, signHeader.signature, loginRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -92,6 +89,30 @@ constructor(navigator: ILoginNavigator,
 
     private fun onTokenReceived(token: String) {
         //TODO save token
+        val bearer = "Bearer $token"
+        requestUserInfo(bearer)
+    }
+
+    @SuppressLint("CheckResult")
+    private fun requestUserInfo(token: String) {
+        val signHeader = signUtil.createSignHeader(email.get())
+
+        walletApi
+                .getUserInfo(signHeader.timestamp, signHeader.deviceId, signHeader.signature, token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    saveUserInfo(it)
+                }, {
+                    handleError(it as Exception)
+                })
+    }
+
+    private fun saveUserInfo(userInfo: UserInfoResponse) {
+        userData.id = userInfo.id
+        userData.email = userInfo.email
+        userData.firstName = userInfo.firstName
+        userData.lastName = userInfo.lastName
         getNavigator()?.openPinCodeActivity()
         hideLoadingDialog()
     }
@@ -109,7 +130,8 @@ constructor(navigator: ILoginNavigator,
         }
     }
 
-    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType,
+                                                params: HashMap<String, String>?): () -> Unit {
         when (dialogType) {
             DialogType.DEVICE_NOT_ATTACHED -> return { attachDevice(params) }
             DialogType.EMAIL_NOT_VERIFIED -> return ::resendConfirmEmail
@@ -143,17 +165,14 @@ constructor(navigator: ILoginNavigator,
     private fun attachDevice(params: HashMap<String, String>?) {
         showLoadingDialog()
 
-        val timestamp = getTimestamp()
-        val deviceId = getDeviceId()
-        val deviceOs = "25"
-        val sign = getSign(timestamp, deviceId)!!
+        val signHeader = signUtil.createSignHeader(email.get())
         val userId = params?.get("user_id")?.toInt()
-                ?: throw Exception("Not found userId in params")
+                ?: throw Exception("Not found id in params")
 
-        val addDeviceRequest = AddDeviceRequest(userId, getDeviceId())
+        val addDeviceRequest = AddDeviceRequest(userId, appData.deviceOs, signHeader.deviceId, signHeader.pubKeyHex)
 
         walletApi
-                .addDevice(timestamp, deviceId, sign, addDeviceRequest)
+                .addDevice(signHeader.timestamp, signHeader.deviceId, signHeader.signature, addDeviceRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -184,7 +203,7 @@ constructor(navigator: ILoginNavigator,
         showLoadingDialog()
 
         walletApi
-                .confirmAddingDevice(ConfirmAddingDeviceRequest(token, getDeviceId()))
+                .confirmAddingDevice(ConfirmAddingDeviceRequest(token, appData.deviceId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

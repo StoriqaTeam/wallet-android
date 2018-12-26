@@ -6,6 +6,7 @@ import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
+import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
@@ -15,8 +16,10 @@ import com.storiqa.storiqawallet.network.responses.RegisterUserResponse
 import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
-import com.storiqa.storiqawallet.utils.*
-import io.reactivex.Observable
+import com.storiqa.storiqawallet.utils.SignUtil
+import com.storiqa.storiqawallet.utils.getDeviceOs
+import com.storiqa.storiqawallet.utils.isEmailValid
+import com.storiqa.storiqawallet.utils.isUserNameValid
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -24,8 +27,10 @@ import javax.inject.Inject
 class RegistrationViewModel
 @Inject
 constructor(navigator: IRegistrationNavigator,
+            val facebookAuthHelper: FacebookAuthHelper,
             private val walletApi: WalletApi,
-            val facebookAuthHelper: FacebookAuthHelper) :
+            private val userData: IUserDataStorage,
+            private val signUtil: SignUtil) :
         BaseViewModel<IRegistrationNavigator>(), SocialNetworksViewModel {
 
     val firstName = NonNullObservableField("")
@@ -117,17 +122,12 @@ constructor(navigator: IRegistrationNavigator,
 
     @SuppressLint("CheckResult")
     private fun requestRegistration() {
-        val timestamp = getTimestamp()
-        val deviceId = getDeviceId()
-        val deviceOs = "25"
-        val sign = getSign(timestamp, deviceId)!!
+        val signHeader = signUtil.createSignHeader(email.get())
         val registerUserRequest = RegisterUserRequest(email.get(), "", password.get(),
-                firstName.get().removeSuffix(" "), lastName.get().removeSuffix(" "), deviceOs, deviceId)
+                firstName.get().removeSuffix(" "), lastName.get().removeSuffix(" "), getDeviceOs(), signHeader.deviceId, signHeader.pubKeyHex)
 
-        val observableField: Observable<RegisterUserResponse> =
-                walletApi.registerUser(timestamp, deviceId, sign, registerUserRequest)
-
-        observableField
+        walletApi
+                .registerUser(signHeader.timestamp, signHeader.deviceId, signHeader.signature, registerUserRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -158,7 +158,8 @@ constructor(navigator: IRegistrationNavigator,
         }
     }
 
-    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType,
+                                                params: HashMap<String, String>?): () -> Unit {
         when (dialogType) {
             DialogType.REGISTRATION_MAIL_SENT -> return {
                 getNavigator()?.openLoginActivity() //TODO add flags

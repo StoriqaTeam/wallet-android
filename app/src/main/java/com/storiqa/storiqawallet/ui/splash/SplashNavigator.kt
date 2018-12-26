@@ -1,6 +1,5 @@
 package com.storiqa.storiqawallet.ui.splash
 
-import com.storiqa.storiqawallet.screen_pin_code_enter.EnterPinCodeActivity
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.login.LoginActivity
 import com.storiqa.storiqawallet.ui.registration.RegistrationActivity
@@ -15,8 +14,8 @@ class SplashNavigator(private val navigator: INavigator) : ISplashNavigator {
         navigator.startActivity(RegistrationActivity::class.java)
     }
 
-    override fun openEnterPinActivity() {
-        navigator.startActivity(EnterPinCodeActivity::class.java)
+    override fun openPinCodeActivity() {
+        navigator.startActivity("com.storiqa.storiqawallet.ENTER_PIN")
     }
 
 }

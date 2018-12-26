@@ -1,19 +1,45 @@
 package com.storiqa.storiqawallet.utils
 
-import android.content.Context
+import com.storiqa.cryptokeys.IKeyGenerator
 import com.storiqa.cryptokeys.ISigner
-import com.storiqa.cryptokeys.KeyGenerator
 import com.storiqa.cryptokeys.PrivateKey
-import com.storiqa.cryptokeys.Signer
-import com.storiqa.storiqawallet.di.qualifiers.AppContext
-import java.security.KeyStore
+import com.storiqa.storiqawallet.data.IAppDataStorage
+import com.storiqa.storiqawallet.data.model.SignHeader
 import javax.inject.Inject
 
-class CryptoSignUtils
+class SignUtil
 @Inject
-constructor(@AppContext private val context: Context) {
+constructor(
+        private val appData: IAppDataStorage,
+        private val signer: ISigner,
+        private val keyGenerator: IKeyGenerator) {
 
-    private val keyStoreFile = "KeyStore"
+    fun createSignHeader(email: String): SignHeader {
+        val deviceId = appData.deviceId
+        val timestamp = System.currentTimeMillis().toString()
+
+        val privateKeyHex = appData.getPrivateKey(email)
+        val privateKey: PrivateKey
+        if (privateKeyHex == null) {
+            privateKey = keyGenerator.generatePrivateKey()
+                    ?: throw Exception("Can't generate new private key")
+            appData.setPrivateKey(email, privateKey.hex)
+        } else
+            privateKey = PrivateKey.fromHex(privateKeyHex)
+
+        val publicKeyHex = privateKey.publicKey.hex
+
+        val message = timestamp + deviceId
+
+        val signature = signer.sign(message, privateKey)
+                ?: throw Exception("Can't sign message")
+
+        return SignHeader(deviceId, timestamp, signature, publicKeyHex)
+    }
+
+    //****  saving private privateKey to encrypted keystore  ****
+
+    /*private val keyStoreFile = "KeyStore"
     private val keyAlias = "KeyAlias"
 
     private var privateKey: PrivateKey? = null
@@ -26,10 +52,11 @@ constructor(@AppContext private val context: Context) {
             context.openFileInput(keyStoreFile)
                     .use { fis -> keyStore.load(fis, password) }
 
-            val keyRaw = keyStore.getKey(keyAlias, password).encoded
+            val keyRaw = keyStore.getPrivateKey(keyAlias, password).encoded
             privateKey = PrivateKey.fromRaw(keyRaw)
             return true
         } catch (exception: Exception) {
+            exception.printStackTrace()
         }
 
         return false
@@ -54,5 +81,5 @@ constructor(@AppContext private val context: Context) {
 
     fun sign(message: String): String? {
         return signer.sign(message, privateKey!!)
-    }
+    }*/
 }

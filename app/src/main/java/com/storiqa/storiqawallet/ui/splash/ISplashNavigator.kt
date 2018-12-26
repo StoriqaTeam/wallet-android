@@ -6,5 +6,5 @@ interface ISplashNavigator {
 
     fun openRegistrationActivity()
 
-    fun openEnterPinActivity()
+    fun openPinCodeActivity()
 }
