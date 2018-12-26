@@ -6,6 +6,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.network.errors.PassMailSentDialogPresenter
 import com.storiqa.storiqawallet.network.requests.ResetPasswordRequest
@@ -36,7 +37,6 @@ constructor(navigator: IPasswordRecoveryNavigator,
             return
 
         if (isEmailValid(email.get())) {
-            showLoadingDialog()
             requestResetPassword()
         } else
             emailError.set(App.res.getString(R.string.error_email_not_valid))
@@ -44,6 +44,8 @@ constructor(navigator: IPasswordRecoveryNavigator,
 
     @SuppressLint("CheckResult")
     private fun requestResetPassword() {
+        showLoadingDialog()
+
         walletApi.resetPassword(ResetPasswordRequest(email.get()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -57,8 +59,15 @@ constructor(navigator: IPasswordRecoveryNavigator,
     private fun onSuccess() {
         hideLoadingDialog()
         val dialogPresenter = PassMailSentDialogPresenter()
-        dialogPresenter.positiveButton?.onClick = ::closeActivity
         showMessageDialog(dialogPresenter)
+    }
+
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
+        when (dialogType) {
+            DialogType.RECOVERY_PASS_MAIL_SENT -> return ::closeActivity
+            DialogType.EMAIL_TIMEOUT -> return ::requestResetPassword
+            else -> return {}
+        }
     }
 
     private fun closeActivity() {

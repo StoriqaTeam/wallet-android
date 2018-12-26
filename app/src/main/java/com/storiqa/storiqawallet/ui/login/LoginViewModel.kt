@@ -143,7 +143,6 @@ constructor(navigator: ILoginNavigator,
     private fun attachDevice(params: HashMap<String, String>?) {
         showLoadingDialog()
 
-
         val timestamp = getTimestamp()
         val deviceId = getDeviceId()
         val deviceOs = "25"
@@ -174,7 +173,7 @@ constructor(navigator: ILoginNavigator,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    onTokenReceived(it)
+                    hideLoadingDialog()
                 }, {
                     handleError(it as Exception)
                 })
