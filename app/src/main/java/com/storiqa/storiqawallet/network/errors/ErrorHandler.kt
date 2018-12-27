@@ -78,16 +78,6 @@ open class ErrorHandler {
                     ErrorCode.NOT_PROVIDED ->
                         return EmailNotProvidedDialogPresenter()
 
-                    /////////delete/////////
-
-                    /*ErrorCode.NOT_EXIST ->
-                            errorField[field] = R.string.error_email_not_exist
-
-                    ErrorCode.DEVICE_NOT_ATTACHED ->
-                            return NotAttachedDialogPresenter().apply { params = error.params }*/
-
-                    ////////////////////////
-
                     ErrorCode.INVALID_PASSWORD ->
                         errorField[field] = R.string.error_password_wrong_pass
 

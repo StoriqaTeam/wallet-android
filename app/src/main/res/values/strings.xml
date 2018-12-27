@@ -2,11 +2,6 @@
     <string name="app_name">StoriqaWallet</string>
     <string name="wallet">Wallet</string>
     <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
-    <string name="signInButtonText">Sign in</string>
-    <string name="haventGotAccount">Haven’t got account?</string>
-    <string name="errorPassword">Password must contain at least 8 symbols, at least one capital letter and digit</string>
-    <string name="errorVerification">Error occurred. Please try again or try later</string>
-    <string name="errorEmailNotVerified">This email isn’t verified</string>
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="fb_app_id">730145060671124</string>
@@ -14,24 +9,10 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="repeatPassword">Repeat password</string>
-    <string name="errorPasswordHaveToMathc">Passwords have to match</string>
-    <string name="emailSentMessage">Check the mail! We sent instruction how to confirm your account to your email address</string>
-    <string name="emailSentTitle">Email sent successfully</string>
-    <string name="registerErrorTitle">Oops! Something gone wrong!</string>
-    <string name="registerErrorMessage">Aliens have stolen some of our servers. Chasing them, but haven’t catch them yet. Please try again or later!</string>
     <string name="close">Close</string>
-    <string name="tryAgain">Try again</string>
-    <string name="yourEmail">Your email</string>
-    <string name="setUpPinCodeQuestion">Set up PIN code?</string>
-    <string name="setUpPinCode">Set up PIN code</string>
     <string name="continueButton">Continue</string>
     <string name="setUpQuickLaunch">Set up quick launch</string>
     <string name="chooseWay">Choose the way to confirm\nyour identity</string>
-    <string name="setupFingerprint">Set up fingerprint\nlaunch?</string>
-    <string name="useFingerprintScanner">Use Fingerprint scanner</string>
-    <string name="pinCodeSet">Enter PIN code</string>
-    <string name="pinCodeRepeat">Repeat PIN code</string>
-    <string name="pinNotValid">Entered pin is not valid</string>
     <string name="pinsNotMatch">Your pin codes doesn\'t match. Try again</string>
     <string name="scanYourFinger">Scan your finger to enable\nTouch ID launch</string>
     <string name="scanFingerMessage">Scan your finger to enable\nTouch ID quick launch</string>
@@ -39,10 +20,7 @@
     <string name="goBack">Go back</string>
     <string name="cannotPerformAuth">Can not perform\nauthentication</string>
     <string name="server_client_id">245895770851-38n6to49r49reccloeepeutocvk2hne3.apps.googleusercontent.com</string>
-    <string name="noEmailProgram">Can\'t find any email program</string>
-    <string name="openEmail">Open email</string>
     <string name="cancel">Cancel</string>
-    <string name="resetDialogMessage">Instructions to reset an email was sent to your email.</string>
     <string name="putYourFingerOnTouchId">Put your finger on\ntouch ID</string>
     <string name="myWallet">My wallet</string>
     <string name="black">Black</string>
