@@ -62,11 +62,21 @@ open class ErrorHandler {
                     ErrorCode.INVALID_EMAIL ->
                         errorField[field] = R.string.error_email_not_valid
 
-                    ErrorCode.EMAIL_NOT_FOUND ->
-                        errorField[field] = R.string.error_email_not_exist
+                    ErrorCode.BLOCKED ->
+                        errorField[field] = R.string.error_email_blocked
 
-                    ErrorCode.NOT_EXISTS ->
-                        return NotAttachedDialogPresenter().apply { params = error.params }
+                    ErrorCode.ALREADY_EXISTS ->
+                        errorField[field] = R.string.error_email_exists
+
+                    ErrorCode.NOT_EXISTS -> {
+                        if (field == "email")
+                            errorField[field] = R.string.error_email_not_exist
+                        else if (field == "device")
+                            return NotAttachedDialogPresenter().apply { params = error.params }
+                    }
+
+                    ErrorCode.NOT_PROVIDED ->
+                        return EmailNotProvidedDialogPresenter()
 
                     /////////delete/////////
 

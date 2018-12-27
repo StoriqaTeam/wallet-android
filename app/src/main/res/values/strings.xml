@@ -90,7 +90,9 @@
 
     <string name="error_name_not_valid">Wrong name</string> <!--TODO set text-->
     <string name="error_email_not_valid">Email not valid</string>
+    <string name="error_email_blocked">Email blocked</string>
     <string name="error_email_not_exist">Email not found</string>
+    <string name="error_email_exists">Email already exists</string>
     <string name="error_password_no_number">At least one number is required</string>
     <string name="error_password_wrong_pass">Wrong password</string>
     <string name="error_passwords_not_match">Passwords do not match</string>
@@ -124,6 +126,8 @@
     <string name="dialog_attach_device_mail_sent_description">Check the mail! We sent instruction how to attach device to your account to your email address</string>
     <string name="dialog_wrong_device_id_title">Wrong device id</string>
     <string name="dialog_wrong_device_id_description">Wrong device id description</string>
+    <string name="dialog_email_not_provided_title">Email not provided</string>
+    <string name="dialog_email_not_provided_description">You don`t have email in your social network</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>

@@ -41,11 +41,14 @@ enum class ErrorCode {
     @SerializedName("not_valid")
     INVALID_EMAIL,
 
-    @SerializedName("email")
-    EMAIL_NOT_FOUND,
-
     @SerializedName("not_exists")
     NOT_EXISTS,
+
+    @SerializedName("blocked")
+    BLOCKED,
+
+    @SerializedName("not_provided")
+    NOT_PROVIDED,
 
     @SerializedName("exists")
     ALREADY_EXISTS,
