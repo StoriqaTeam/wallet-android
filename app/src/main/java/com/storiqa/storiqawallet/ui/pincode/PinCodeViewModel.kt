@@ -8,21 +8,22 @@ import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.IUserDataStorage
-import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ResetPinDialogPresenter
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.utils.VibrationUtil
 import javax.inject.Inject
 
 class PinCodeViewModel
 @Inject
 constructor(navigator: IPinCodeNavigator,
-            private val walletApi: WalletApi,
+            private val vibrationUtil: VibrationUtil,
             private val userData: IUserDataStorage,
             private val appData: IAppDataStorage) :
         BaseViewModel<IPinCodeNavigator>() {
 
     private val pinLength = App.res.getInteger(R.integer.PIN_LENGTH)
+    private val vibrationDuration: Long = 200
 
     private var enteredPinCode: String = ""
     val pinCode = NonNullObservableField("")
@@ -63,6 +64,7 @@ constructor(navigator: IPinCodeNavigator,
     }
 
     fun onDigitEntered(digit: Int) {
+        vibrationUtil.vibrate(vibrationDuration)
         if (pinCode.get().length == pinLength)
             return
 
@@ -70,6 +72,7 @@ constructor(navigator: IPinCodeNavigator,
     }
 
     fun deleteLastDigit() {
+        vibrationUtil.vibrate(vibrationDuration)
         pinCode.set(pinCode.get().dropLast(1))
     }
 
@@ -101,6 +104,7 @@ constructor(navigator: IPinCodeNavigator,
                     getNavigator()?.openMainActivity()
                 } else {
                     showPinError.trigger()
+                    vibrationUtil.vibrate(longArrayOf(200, 200, 200))
                     pinCode.set("")
                 }
             }
