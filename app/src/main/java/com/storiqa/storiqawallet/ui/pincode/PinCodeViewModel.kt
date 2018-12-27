@@ -9,6 +9,8 @@ import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.errors.DialogType
+import com.storiqa.storiqawallet.network.errors.ResetPinDialogPresenter
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import javax.inject.Inject
 
@@ -22,11 +24,11 @@ constructor(navigator: IPinCodeNavigator,
 
     private val pinLength = App.res.getInteger(R.integer.PIN_LENGTH)
 
-    var enteredPinCode: String = ""
+    private var enteredPinCode: String = ""
     val pinCode = NonNullObservableField("")
     val title = NonNullObservableField("")
     val description = NonNullObservableField("")
-    val forgotPinVisible = ObservableBoolean(false)
+    val isPinInput = ObservableBoolean(false)
 
     val showPinError = SingleLiveEvent<String>()
 
@@ -46,7 +48,7 @@ constructor(navigator: IPinCodeNavigator,
                 PinCodeState.ENTER -> {
                     title.set(App.res.getString(R.string.text_pin_title_enter, userData.firstName))
                     description.set(App.res.getString(R.string.text_pin_description_enter))
-                    forgotPinVisible.set(true)
+                    isPinInput.set(true)
                 }
             }
         }
@@ -72,7 +74,18 @@ constructor(navigator: IPinCodeNavigator,
     }
 
     fun onForgotPinButtonClicked() {
+        showMessageDialog(ResetPinDialogPresenter())
+    }
 
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
+        when (dialogType) {
+            DialogType.RESET_PIN -> return {
+                appData.isPinEntered = false
+                getNavigator()?.openLoginActivity()
+                getNavigator()?.closeActivity()
+            }
+            else -> return {}
+        }
     }
 
     private fun onPinCodeEntered() {

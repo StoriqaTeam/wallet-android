@@ -21,12 +21,20 @@ data class ErrorPresenterFields(
 enum class DialogType {
     NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP,
     REGISTRATION_MAIL_SENT, EMAIL_NOT_VERIFIED, ATTACH_DEVICE_MAIL_SENT, UNKNOWN_ERROR,
-    EMAIL_TIMEOUT, DEVICE_ATTACHED
+    EMAIL_TIMEOUT, DEVICE_ATTACHED, RESET_PIN, WRONG_DEVICE_ID
 }
 
 data class DialogButton(
         @StringRes val name: Int,
         var onClick: () -> Unit)
+
+class ResetPinDialogPresenter : ErrorPresenterDialog(
+        DialogType.RESET_PIN,
+        R.string.dialog_reset_pin_title,
+        R.string.dialog_reset_pin_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_reset_pin, {}),
+        DialogButton(R.string.cancel, {}))
 
 class EmailTimeoutDialogPresenter : ErrorPresenterDialog(
         DialogType.EMAIL_TIMEOUT,
@@ -98,5 +106,12 @@ class AttachDeviceMailSentDialogPresenter : ErrorPresenterDialog(
         DialogType.ATTACH_DEVICE_MAIL_SENT,
         R.string.dialog_attach_device_mail_sent_title,
         R.string.dialog_attach_device_mail_sent_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_ok, {}))
+
+class WrongDeviceIdDialogPresenter : ErrorPresenterDialog(
+        DialogType.WRONG_DEVICE_ID,
+        R.string.dialog_wrong_device_id_title,
+        R.string.dialog_wrong_device_id_description,
         R.drawable.general_error_icon,
         DialogButton(R.string.button_ok, {}))

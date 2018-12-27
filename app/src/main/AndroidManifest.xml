@@ -95,11 +95,12 @@
                 <action android:name="com.storiqa.storiqawallet.ENTER_PIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                <!--<action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.question.QuestionActivity"
+            android:screenOrientation="portrait" />
 
         <!--////////////////////////////////////////////////-->
 

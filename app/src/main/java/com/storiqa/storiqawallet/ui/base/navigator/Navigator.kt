@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.ui.base.navigator
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
@@ -40,6 +41,12 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
     override fun startActivity(clsActivity: Class<out Activity>, vararg flags: Int) {
         val intent = Intent(activity, clsActivity)
         flags.forEach { intent.addFlags(it) }
+        startActivity(intent)
+    }
+
+    override fun startActivity(clsActivity: Class<out Activity>, bundle: Bundle) {
+        val intent = Intent(activity, clsActivity)
+        intent.putExtras(bundle)
         startActivity(intent)
     }
 

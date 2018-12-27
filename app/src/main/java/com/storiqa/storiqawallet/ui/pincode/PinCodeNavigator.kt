@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.ui.pincode
 
 import com.storiqa.storiqawallet.screen_main.MainActivity
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
+import com.storiqa.storiqawallet.ui.login.LoginActivity
 
 class PinCodeNavigator(private val navigator: INavigator) : IPinCodeNavigator {
 
@@ -9,4 +10,11 @@ class PinCodeNavigator(private val navigator: INavigator) : IPinCodeNavigator {
         navigator.startActivity(MainActivity::class.java)
     }
 
+    override fun openLoginActivity() {
+        navigator.startActivity(LoginActivity::class.java)
+    }
+
+    override fun closeActivity() {
+        navigator.finishActivity()
+    }
 }

@@ -14,6 +14,8 @@ import com.storiqa.storiqawallet.ui.password.IPasswordRecoveryNavigator
 import com.storiqa.storiqawallet.ui.password.PasswordRecoveryActivity
 import com.storiqa.storiqawallet.ui.pincode.IPinCodeNavigator
 import com.storiqa.storiqawallet.ui.pincode.PinCodeActivity
+import com.storiqa.storiqawallet.ui.question.IQuestionNavigator
+import com.storiqa.storiqawallet.ui.question.QuestionActivity
 import com.storiqa.storiqawallet.ui.registration.IRegistrationNavigator
 import com.storiqa.storiqawallet.ui.registration.RegistrationActivity
 import com.storiqa.storiqawallet.ui.splash.ISplashNavigator
@@ -30,6 +32,7 @@ interface ActivityComponent : ActivityComponentProvides {
     fun inject(activity: PasswordRecoveryActivity)
     fun inject(activity: RegistrationActivity)
     fun inject(activity: PinCodeActivity)
+    fun inject(activity: QuestionActivity)
 
 }
 
@@ -46,5 +49,6 @@ interface ActivityComponentProvides : AppComponentProvides {
     fun passwordRecoveryNavigator(): IPasswordRecoveryNavigator
     fun registrationNavigator(): IRegistrationNavigator
     fun pinCodeNavigator(): IPinCodeNavigator
+    fun questionNavigator(): IQuestionNavigator
 
 }

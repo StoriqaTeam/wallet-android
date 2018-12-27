@@ -72,7 +72,7 @@ class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
         if (FingerprintHepler(this@EnterPinCodeActivity).isFingerprintSetupNotAvailable()) {
             ScreenStarter().startMainScreen(this@EnterPinCodeActivity)
         } else {
-            ScreenStarter().startFingerprintSetupScreen(this@EnterPinCodeActivity)
+            //ScreenStarter().startFingerprintSetupScreen(this@EnterPinCodeActivity)
             finish()
         }
     }

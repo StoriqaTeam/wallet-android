@@ -41,6 +41,9 @@ enum class ErrorCode {
     @SerializedName("not_valid")
     INVALID_EMAIL,
 
+    @SerializedName("email")
+    EMAIL_NOT_FOUND,
+
     @SerializedName("not_exists")
     NOT_EXISTS,
 
@@ -63,6 +66,9 @@ enum class ErrorCode {
     NOT_VERIFIED,
 
     @SerializedName("email_timeout")
-    EMAIL_TIMEOUT
+    EMAIL_TIMEOUT,
+
+    @SerializedName("device_id")
+    WRONG_DEVICE_ID
 
 }

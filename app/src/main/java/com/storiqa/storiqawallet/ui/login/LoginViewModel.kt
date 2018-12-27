@@ -113,7 +113,7 @@ constructor(navigator: ILoginNavigator,
         userData.email = userInfo.email
         userData.firstName = userInfo.firstName
         userData.lastName = userInfo.lastName
-        getNavigator()?.openPinCodeActivity()
+        getNavigator()?.openQuickLaunchQuestionActivity()
         hideLoadingDialog()
     }
 

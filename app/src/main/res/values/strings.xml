@@ -23,10 +23,8 @@
     <string name="tryAgain">Try again</string>
     <string name="yourEmail">Your email</string>
     <string name="setUpPinCodeQuestion">Set up PIN code?</string>
-    <string name="doNotUse">Do not use</string>
     <string name="setUpPinCode">Set up PIN code</string>
     <string name="continueButton">Continue</string>
-    <string name="quickLaunch">Wanna use quick\nlaunch?</string>
     <string name="setUpQuickLaunch">Set up quick launch</string>
     <string name="chooseWay">Choose the way to confirm\nyour identity</string>
     <string name="setupFingerprint">Set up fingerprint\nlaunch?</string>
@@ -89,7 +87,6 @@
     <string name="menu">Menu</string>
     <string name="willBeAvailableSoon">Will be available soon</string>
     <!--*********************************************************************************************-->
-    <string name="text_haven_t_got_account">Haven’t got account?</string>
 
     <string name="error_name_not_valid">Wrong name</string> <!--TODO set text-->
     <string name="error_email_not_valid">Email not valid</string>
@@ -121,8 +118,12 @@
     <string name="dialog_device_not_attached_description">Do you want to register this device to your account?</string>
     <string name="dialog_device_attached_title">Device attached</string>
     <string name="dialog_device_attached_description">Device attached description</string>
+    <string name="dialog_reset_pin_title">Reset pin</string>
+    <string name="dialog_reset_pin_description">Reset pin description</string>
     <string name="dialog_attach_device_mail_sent_title">Email sent successfully</string>
     <string name="dialog_attach_device_mail_sent_description">Check the mail! We sent instruction how to attach device to your account to your email address</string>
+    <string name="dialog_wrong_device_id_title">Wrong device id</string>
+    <string name="dialog_wrong_device_id_description">Wrong device id description</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
@@ -133,7 +134,12 @@
     <string name="button_forgot_password">I forgot password</string>
     <string name="button_register">Register</string>
     <string name="button_reset_password">Reset password</string>
+    <string name="button_reset_pin">Reset pin</string>
     <string name="button_confirm_password">Confirm new password</string>
+    <string name="button_set_up_fingerprint">Set up fingerprint launch</string>
+    <string name="button_set_up_pin">Set up PIN-code</string>
+    <string name="button_set_up_quick_launch">Set up Quick Launch</string>
+    <string name="button_do_not_use">Do not use</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -141,6 +147,7 @@
     <string name="hint_first_name">First name</string>
     <string name="hint_last_name">Last name</string>
 
+    <string name="text_haven_t_got_account">Haven’t got account?</string>
     <string name="text_social_accounts">Sign in via social account</string>
     <string name="text_have_an_account">Have an account?</string>
     <string name="text_policy_agreement">I accept the terms of the license agreement and privacy policy</string>
@@ -154,6 +161,10 @@
     <string name="text_pin_description_confirm">The codes entered must match each other</string>
     <string name="text_pin_title_enter">Hello, %s</string>
     <string name="text_pin_description_enter">Enter your PIN-code</string>
+    <string name="text_quick_launch">Set up Quick Launch?</string>
+    <string name="text_quick_launch_description">Choose the way to confirm\nyour identity</string>
+    <string name="text_pin_code">Set up PIN-code?</string>
+    <string name="text_fingerprint">Set up fingerprint launch?</string>
 
     <string name="toolbar_password_recovery">Password recover</string>
 </resources>
