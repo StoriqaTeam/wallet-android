@@ -1,12 +1,14 @@
 package com.storiqa.storiqawallet.ui.pincode
 
 import android.databinding.ObservableBoolean
+import android.util.Log
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.data.IAppDataStorage
+import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ResetPinDialogPresenter
@@ -19,7 +21,8 @@ class PinCodeViewModel
 constructor(navigator: IPinCodeNavigator,
             private val vibrationUtil: VibrationUtil,
             private val userData: IUserDataStorage,
-            private val appData: IAppDataStorage) :
+            private val appData: IAppDataStorage,
+            private val tokenProvider: ITokenProvider) :
         BaseViewModel<IPinCodeNavigator>() {
 
     private val pinLength = App.res.getInteger(R.integer.PIN_LENGTH)
@@ -80,7 +83,8 @@ constructor(navigator: IPinCodeNavigator,
         showMessageDialog(ResetPinDialogPresenter())
     }
 
-    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType,
+                                                params: HashMap<String, String>?): () -> Unit {
         when (dialogType) {
             DialogType.RESET_PIN -> return {
                 appData.isPinEntered = false
@@ -109,9 +113,12 @@ constructor(navigator: IPinCodeNavigator,
                 }
             }
             PinCodeState.ENTER -> {
-                if (isValidPinCode(pinCode.get()))
+                if (isValidPinCode(pinCode.get())) {
+                    val token = appData.token
+                    if (tokenProvider.isExpired(token))
+                        tokenProvider.refreshToken({ Log.d("TAGGG", "token: $it") }, ::handleError)
                     getNavigator()?.openMainActivity()
-                else {
+                } else {
                     showPinError.trigger()
                     pinCode.set("")
                 }

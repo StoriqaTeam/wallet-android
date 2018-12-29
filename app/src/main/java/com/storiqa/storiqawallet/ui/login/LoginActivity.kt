@@ -6,14 +6,13 @@ import android.os.Bundle
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityLoginBinding
-import com.storiqa.storiqawallet.objects.GoogleAuthFlow
 import com.storiqa.storiqawallet.ui.base.BaseActivity
 import com.storiqa.storiqawallet.ui.common.onSubmitButtonClicked
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
-    private lateinit var googleAuthFlow: GoogleAuthFlow
+    val RC_SIGN_IN: Int = 42
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +44,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         super.subscribeEvents()
 
         viewModel.requestLoginViaFacebook.observe(this, Observer { requestLoginViaFacebook() })
+
+        viewModel.requestLoginViaGoogle.observe(this, Observer { requestLoginViaGoogle() })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        hideKeyboard()
 
-        viewModel.facebookAuthHelper.onActivityResult(requestCode, resultCode, data)
+        if (viewModel.facebookAuthHelper.onActivityResult(requestCode, resultCode, data))
+            return
+
+        if (viewModel.googleAuthHelper.onActivityResult(requestCode, resultCode, data))
+            return
     }
 
     override fun getBindingVariable() = BR.viewModel
@@ -61,5 +67,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     private fun requestLoginViaFacebook() {
         viewModel.facebookAuthHelper.requestLogIn(this)
+    }
+
+    private fun requestLoginViaGoogle() {
+        viewModel.googleAuthHelper.requestLogIn(this)
     }
 }

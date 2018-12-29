@@ -8,6 +8,8 @@ private const val PIN_ENTERED = "pin_entered"
 private const val USER_PIN = "user_pin"
 private const val DEVICE_ID = "device_id"
 private const val PRIVATE_KEY = "private_key"
+private const val TOKEN = "token"
+private const val CURRENT_USER_EMAIL = "current_user_email"
 
 class AppDataStorage(private val prefs: PrefUtil) : IAppDataStorage {
 
@@ -32,6 +34,18 @@ class AppDataStorage(private val prefs: PrefUtil) : IAppDataStorage {
         get() = prefs.getPreferences().getString(DEVICE_ID, null)!!
         set(value) {
             prefs.getEditor().putString(DEVICE_ID, value).apply()
+        }
+
+    override var token: String
+        get() = prefs.getPreferences().getString(TOKEN, null)!!
+        set(value) {
+            prefs.getEditor().putString(TOKEN, value).apply()
+        }
+
+    override var currentUserEmail: String
+        get() = prefs.getPreferences().getString(CURRENT_USER_EMAIL, null)!!
+        set(value) {
+            prefs.getEditor().putString(CURRENT_USER_EMAIL, value).apply()
         }
 
     override val deviceOs: String

@@ -5,6 +5,7 @@ import android.content.res.Resources
 import com.storiqa.cryptokeys.IKeyGenerator
 import com.storiqa.cryptokeys.ISigner
 import com.storiqa.storiqawallet.data.IAppDataStorage
+import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.di.modules.AppModule
 import com.storiqa.storiqawallet.di.modules.NetworkModule
@@ -35,4 +36,5 @@ interface AppComponentProvides {
 
     fun signer(): ISigner
     fun keyGenerator(): IKeyGenerator
+    fun tokenProvider(): ITokenProvider
 }

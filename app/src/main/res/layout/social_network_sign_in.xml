@@ -42,6 +42,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="30dp"
+                android:onClick="@{() -> viewModel.onGoogleLoginButtonClicked()}"
                 android:src="@drawable/google_login_icon" />
 
 

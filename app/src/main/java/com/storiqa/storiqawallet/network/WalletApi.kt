@@ -22,7 +22,19 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body loginByOauth: LoginByOauthRequest): Observable<Response<Any>>
+            @Body loginByOauth: LoginByOauthRequest): Observable<TokenResponse>
+
+    @POST("v1//sessions/refresh")
+    fun refreshToken(
+            @Header("Timestamp") timestamp: String,
+            @Header("Device-id") deviceId: String,
+            @Header("Sign") sign: String): Observable<TokenResponse>
+
+    @POST("v1/sessions/oauth")
+    fun revokeToken(
+            @Header("Timestamp") timestamp: String,
+            @Header("Device-id") deviceId: String,
+            @Header("Sign") sign: String): Observable<TokenResponse>
 
     @POST("v1/users")
     fun registerUser(

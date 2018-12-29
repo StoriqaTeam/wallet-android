@@ -7,13 +7,12 @@ import com.storiqa.cryptokeys.IKeyGenerator
 import com.storiqa.cryptokeys.ISigner
 import com.storiqa.cryptokeys.KeyGenerator
 import com.storiqa.cryptokeys.Signer
-import com.storiqa.storiqawallet.data.AppDataStorage
-import com.storiqa.storiqawallet.data.IAppDataStorage
-import com.storiqa.storiqawallet.data.IUserDataStorage
-import com.storiqa.storiqawallet.data.UserDataStorage
+import com.storiqa.storiqawallet.data.*
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
+import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.utils.PrefUtil
+import com.storiqa.storiqawallet.utils.SignUtil
 import dagger.Module
 import dagger.Provides
 
@@ -48,4 +47,9 @@ class AppModule(private val app: Application) {
     @Provides
     @PerApplication
     internal fun provideKeyGenerator(): IKeyGenerator = KeyGenerator()
+
+    @Provides
+    @PerApplication
+    internal fun provideTokenProvider(appData: IAppDataStorage, signUtil: SignUtil, walletApi: WalletApi):
+            ITokenProvider = TokenProvider(appData, signUtil, walletApi)
 }

@@ -1,7 +1,6 @@
 package com.storiqa.storiqawallet.ui.login
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
@@ -14,6 +13,7 @@ import com.storiqa.storiqawallet.network.errors.*
 import com.storiqa.storiqawallet.network.requests.*
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
+import com.storiqa.storiqawallet.socialnetworks.GoogleAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.utils.SignUtil
@@ -27,6 +27,7 @@ class LoginViewModel
 @Inject
 constructor(navigator: ILoginNavigator,
             val facebookAuthHelper: FacebookAuthHelper,
+            val googleAuthHelper: GoogleAuthHelper,
             private val walletApi: WalletApi,
             private val userData: IUserDataStorage,
             private val appData: IAppDataStorage,
@@ -39,6 +40,7 @@ constructor(navigator: ILoginNavigator,
     val password = NonNullObservableField("")
 
     val requestLoginViaFacebook = SingleLiveEvent<Boolean>()
+    val requestLoginViaGoogle = SingleLiveEvent<Boolean>()
 
     init {
         setNavigator(navigator)
@@ -87,8 +89,24 @@ constructor(navigator: ILoginNavigator,
                 })
     }
 
+    @SuppressLint("CheckResult")
+    private fun requestLogInByOauth(token: String, provider: String) {
+        val signHeader = signUtil.createSignHeader(email.get())
+        val request = LoginByOauthRequest(token, provider, getDeviceOs(), signHeader.deviceId)
+
+        walletApi
+                .loginByOauth(signHeader.timestamp, signHeader.deviceId, signHeader.signature, request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    onTokenReceived(it.token)
+                }, {
+                    handleError(it as Exception)
+                })
+    }
+
     private fun onTokenReceived(token: String) {
-        //TODO save token
+        appData.token = token
         val bearer = "Bearer $token"
         requestUserInfo(bearer)
     }
@@ -113,6 +131,7 @@ constructor(navigator: ILoginNavigator,
         userData.email = userInfo.email
         userData.firstName = userInfo.firstName
         userData.lastName = userInfo.lastName
+        appData.currentUserEmail = userInfo.email
         getNavigator()?.openQuickLaunchQuestionActivity()
         hideLoadingDialog()
     }
@@ -216,14 +235,24 @@ constructor(navigator: ILoginNavigator,
 
     override fun onFacebookLoginButtonClicked() {
         facebookAuthHelper.registerCallback(
-                onSuccess = { Log.d("TAGGG", "token: ${it.accessToken.token}") },
+                onSuccess = {
+                    showLoadingDialog()
+                    requestLogInByOauth(it, "facebook")
+                },
                 onError = { handleError(it) })
 
         requestLoginViaFacebook.trigger()
     }
 
     override fun onGoogleLoginButtonClicked() {
-        Log.d("TAGGG", "onGoogleLoginButtonClicked")
+        googleAuthHelper.registerCallback(
+                onSuccess = {
+                    showLoadingDialog()
+                    requestLogInByOauth("ya29.GluBBkFBzDQMeMvVPsy6p1B4NFDT4FA7FbY_AqdCb_GN7dBhpi2qarFZyP1RmPBai0LsmRf-PXhjGlIjbRM7-PJ4AzNQ0ZlyoSQu3Yjc-MHPiMuEb7bf6LXYupMn", "google")
+                },
+                onError = { handleError(it) })
+
+        requestLoginViaGoogle.trigger()
     }
 
     fun validateEmail() {

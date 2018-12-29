@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">StoriqaWallet</string>
+
+    <string name="fb_app_id">730145060671124</string>
+    <string name="fb_login_protocol_scheme">fb730145060671124</string>
+    <string name="server_client_id">358105401754-mc1pt5si6ubo4e8bnhf22rgg1s50vni6.apps.googleusercontent.com</string>
+
     <string name="wallet">Wallet</string>
     <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
-    <string name="fb_app_id">730145060671124</string>
-    <string name="fb_login_protocol_scheme">fb730145060671124</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="repeatPassword">Repeat password</string>
@@ -18,8 +21,8 @@
     <string name="scanFingerMessage">Scan your finger to enable\nTouch ID quick launch</string>
     <string name="confirmWithTouchId">Confirm using Touch ID</string>
     <string name="goBack">Go back</string>
+    <string name="pinNotValid">pinNotValid</string>
     <string name="cannotPerformAuth">Can not perform\nauthentication</string>
-    <string name="server_client_id">245895770851-38n6to49r49reccloeepeutocvk2hne3.apps.googleusercontent.com</string>
     <string name="cancel">Cancel</string>
     <string name="putYourFingerOnTouchId">Put your finger on\ntouch ID</string>
     <string name="myWallet">My wallet</string>

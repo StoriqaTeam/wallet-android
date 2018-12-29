@@ -1,8 +1,10 @@
 package com.storiqa.storiqawallet
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.lifecycle.LifecycleObserver
 import android.content.res.Resources
+import com.facebook.login.LoginManager
 import com.storiqa.storiqawallet.di.components.AppComponent
 import com.storiqa.storiqawallet.di.components.DaggerAppComponent
 import com.storiqa.storiqawallet.di.modules.AppModule
@@ -21,6 +23,7 @@ class App : Application(), LifecycleObserver {
 
     }
 
+    @SuppressLint("HardwareIds")
     override fun onCreate() {
         super.onCreate()
 
@@ -28,6 +31,8 @@ class App : Application(), LifecycleObserver {
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .build()
+
+        LoginManager.getInstance().logOut()
     }
 
 }

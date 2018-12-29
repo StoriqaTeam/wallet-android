@@ -6,6 +6,8 @@ interface IAppDataStorage {
     var isPinEntered: Boolean
     var pin: String
     var deviceId: String
+    var token: String
+    var currentUserEmail: String
     val deviceOs: String
 
     fun setPrivateKey(email: String, key: String)
