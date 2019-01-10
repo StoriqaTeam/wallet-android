@@ -32,63 +32,75 @@ open class ErrorHandler {
     }
 
     private fun handleFacebookAuthError(): ErrorPresenter {
-        return ErrorPresenterDialog()
+        return UnknownErrorDialogPresenter()
     }
 
     private fun handleBadRequest(): ErrorPresenterDialog {
-        return ErrorPresenterDialog()
+        return UnknownErrorDialogPresenter()
     }
 
     private fun handleInternalServerError(): ErrorPresenterDialog {
-        return ErrorPresenterDialog()
+        return UnknownErrorDialogPresenter()
     }
 
     private fun handleUnknownError(): ErrorPresenterDialog {
-        return ErrorPresenterDialog()
+        return UnknownErrorDialogPresenter()
     }
 
     private fun handleNoInternetError(): ErrorPresenterDialog {
-        return ErrorPresenterDialog(
-                DialogType.DEVICE_NOT_ATTACHED,
-                R.string.error_no_internet_title,
-                R.string.error_no_internet_description,
-                R.drawable.general_error_icon)
+        return NoInternetDialogPresenter()
     }
 
     private fun handleUnprocessableEntity(validationErrors: HashMap<String,
             Array<ValidationError>>): ErrorPresenter {
-        val errorFields = HashMap<String, Int>()
+        val errorFields = ArrayList<HashMap<String, Int>>()
 
         for ((field, errors) in validationErrors) {
             for (error in errors) {
+                val errorField = HashMap<String, Int>()
                 when (error.code) {
                     ErrorCode.INVALID_EMAIL ->
-                        errorFields[field] = R.string.error_email_not_valid
+                        errorField[field] = R.string.error_email_not_valid
 
-                    ErrorCode.NOT_FOUND ->
-                        errorFields[field] = R.string.error_email_not_exist
-
-                    ErrorCode.INVALID_PASSWORD ->
-                        errorFields[field] = R.string.error_password_wrong_pass
+                    ErrorCode.BLOCKED ->
+                        errorField[field] = R.string.error_email_blocked
 
                     ErrorCode.ALREADY_EXISTS ->
-                        return ErrorPresenterDialog(
-                                DialogType.DEVICE_NOT_ATTACHED,
-                                R.string.error_device_not_attached_title,
-                                R.string.error_device_not_attached_description,
-                                R.drawable.general_error_icon,
-                                DialogButton(R.string.button_ok, {}),
-                                DialogButton(R.string.cancel, {}))
+                        errorField[field] = R.string.error_email_exists
 
-                    ErrorCode.DEVICE_NOT_ATTACHED ->
-                        return ErrorPresenterDialog(
-                                DialogType.DEVICE_NOT_ATTACHED,
-                                R.string.error_device_not_attached_title,
-                                R.string.error_device_not_attached_description,
-                                R.drawable.general_error_icon,
-                                DialogButton(R.string.button_ok, {}),
-                                DialogButton(R.string.cancel, {}))
+                    ErrorCode.NOT_EXISTS -> {
+                        if (field == "email")
+                            errorField[field] = R.string.error_email_not_exist
+                        else if (field == "device")
+                            return NotAttachedDialogPresenter().apply { params = error.params }
+                    }
+
+                    ErrorCode.NOT_PROVIDED ->
+                        return EmailNotProvidedDialogPresenter()
+
+                    ErrorCode.INVALID_PASSWORD ->
+                        errorField[field] = R.string.error_password_wrong_pass
+
+                    ErrorCode.NO_UPPER_CASE_CHARACTER ->
+                        errorField[field] = R.string.error_password_no_upper
+
+                    ErrorCode.INVALID_LENGTH ->
+                        errorField[field] = R.string.error_password_invalid_length
+
+                    ErrorCode.NO_NUMBER ->
+                        errorField[field] = R.string.error_password_no_number
+
+                    ErrorCode.EMAIL_TIMEOUT ->
+                        return EmailTimeoutDialogPresenter()
+
+                    ErrorCode.NOT_VERIFIED ->
+                        return EmailNotVerifiedDialogPresenter()
+
+                    ErrorCode.WRONG_DEVICE_ID ->
+                        return WrongDeviceIdDialogPresenter()
                 }
+
+                errorFields.add(errorField)
             }
         }
 

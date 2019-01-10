@@ -6,54 +6,57 @@ import android.os.Bundle
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityLoginBinding
-import com.storiqa.storiqawallet.objects.GoogleAuthFlow
 import com.storiqa.storiqawallet.ui.base.BaseActivity
+import com.storiqa.storiqawallet.ui.common.onSubmitButtonClicked
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
-    private lateinit var googleAuthFlow: GoogleAuthFlow
+    val RC_SIGN_IN: Int = 42
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*val binding: ActivityLoginBinding =
-                DataBindingUtil.setContentView(this, R.layout.activity_login)*/
-        //binding.viewModel = loginViewModel
+        initView()
 
-        /*loginViaGoogle.setOnClickListener {
-            googleAuthFlow = GoogleAuthFlow(this@LoginActivity, {
-                println(it)
-                println()
-            }, {
-                GeneralErrorDialogHelper(this).show {
-                    loginViaGoogle.performClick()
-                }
-            })
-            googleAuthFlow.performLogin()
+        val path = intent?.data?.path ?: return
+        val token = path.split("/").last()
+
+        if (path.contains("verify_email")) {
+            viewModel.confirmEmail(token)
+        } else if (path.contains("register_device")) {
+            viewModel.confirmAttachDevice(token)
+        }
+    }
+
+    private fun initView() {
+        binding.etEmail.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus)
+                viewModel.validateEmail()
         }
 
-        facebookAuthFlow = FacebookAuthFlow(this, loginViaFB, {
-            println(it)
-            println()
-        }, {
-            GeneralErrorDialogHelper(this).show {
-                loginViaFB.performClick()
-            }
-        })*/
-        //FacebookSdk.sdkInitialize(this.applicationContext)
+        binding.etPassword.setOnEditorActionListener { textView, actionId, event ->
+            onSubmitButtonClicked(textView, actionId, event) { viewModel.onSubmitButtonClicked() }
+        }
     }
 
     override fun subscribeEvents() {
         super.subscribeEvents()
 
         viewModel.requestLoginViaFacebook.observe(this, Observer { requestLoginViaFacebook() })
+
+        viewModel.requestLoginViaGoogle.observe(this, Observer { requestLoginViaGoogle() })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        hideKeyboard()
 
-        viewModel.facebookAuthHelper.onActivityResult(requestCode, resultCode, data)
+        if (viewModel.facebookAuthHelper.onActivityResult(requestCode, resultCode, data))
+            return
+
+        if (viewModel.googleAuthHelper.onActivityResult(requestCode, resultCode, data))
+            return
     }
 
     override fun getBindingVariable() = BR.viewModel
@@ -64,5 +67,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     private fun requestLoginViaFacebook() {
         viewModel.facebookAuthHelper.requestLogIn(this)
+    }
+
+    private fun requestLoginViaGoogle() {
+        viewModel.googleAuthHelper.requestLogIn(this)
     }
 }

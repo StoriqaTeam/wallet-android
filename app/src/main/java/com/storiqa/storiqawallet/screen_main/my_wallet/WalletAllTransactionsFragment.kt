@@ -13,8 +13,6 @@ import com.storiqa.storiqawallet.adapters.TransactionAdapter
 import com.storiqa.storiqawallet.objects.Transaction
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.transaction_list_fragment.*
-import kotlinx.android.synthetic.main.transaction_list_fragment.view.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class WalletAllTransactionsFragment : Fragment() {
     lateinit var viewModel: MainActivityViewModel
@@ -26,7 +24,7 @@ class WalletAllTransactionsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.transaction_list_fragment, container, false)
-        view.btnBack.onClick { viewModel.goBack() }
+        //view.btnBack.onClick { viewModel.goBack() }
         return view
     }
 

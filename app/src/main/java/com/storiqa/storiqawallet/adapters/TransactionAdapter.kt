@@ -9,8 +9,6 @@ import com.storiqa.storiqawallet.databinding.ItemTransactionBinding
 import com.storiqa.storiqawallet.enums.TransactionType
 import com.storiqa.storiqawallet.objects.Transaction
 import kotlinx.android.synthetic.main.item_transaction.view.*
-import org.jetbrains.anko.dip
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class TransactionAdapter(val transactions: Array<Transaction>, val onClick: () -> Unit) : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
@@ -33,7 +31,7 @@ class TransactionAdapter(val transactions: Array<Transaction>, val onClick: () -
         fun bind(transaction: Transaction, onClick: () -> Unit) {
             binder.apply {
                 this.transaction = transaction
-                root.onClick { onClick() }
+                //root.onClick { onClick() }
                 executePendingBindings()
 
                 var sign = ""
@@ -58,7 +56,7 @@ class TransactionAdapter(val transactions: Array<Transaction>, val onClick: () -
                 root.tvTransactionDescription.text = transactionDescriptionLocaliced
                 root.tvAmountInToken.text = "$sign${transaction.amountInToken} ${transaction.tokenType}"
                 root.tvAmountInDollars.text = "$sign\$${transaction.amountInDollars}"
-                root.setPadding(root.context.dip(20), 0, root.context.dip(20), 0)
+                //root.setPadding(root.context.dip(20), 0, root.context.dip(20), 0)
 
             }
         }

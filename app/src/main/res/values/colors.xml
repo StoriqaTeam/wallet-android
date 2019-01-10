@@ -3,6 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">@color/brightSkyBlue</color>
     <color name="colorAccent">@color/brightSkyBlue</color>
+
+    <color name="window_background">#333333</color>
+    <color name="bottom_navigation_background">#333333</color>
+    <color name="bottom_navigation_icon_unselected">#808080</color>
+    <color name="bottom_navigation_icon_selected">#f1ab3b</color>
+
+    <!--**************************************************************************-->
     <color name="brightSkyBlue">#00B2FF</color>
     <color name="gray">#0D000000</color>
     <color name="disableButton">#AAAAAA</color>

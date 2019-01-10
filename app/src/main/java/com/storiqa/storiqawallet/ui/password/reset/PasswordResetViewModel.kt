@@ -1,51 +1,87 @@
 package com.storiqa.storiqawallet.ui.password.reset
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.common.SingleLiveEvent
+import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.errors.DialogType
+import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
+import com.storiqa.storiqawallet.network.errors.PassMailSentDialogPresenter
 import com.storiqa.storiqawallet.network.requests.ResetPasswordRequest
+import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.ui.password.IPasswordRecoveryNavigator
 import com.storiqa.storiqawallet.utils.isEmailValid
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class PasswordResetViewModel : ViewModel() {
+class PasswordResetViewModel
+@Inject
+constructor(navigator: IPasswordRecoveryNavigator,
+            private val walletApi: WalletApi) : BaseViewModel<IPasswordRecoveryNavigator>() {
 
-    private val storiqaApi = WalletApi.Factory().getInstance()
-
-    val email = ObservableField<String>("")
-    val emailError = ObservableField<String>("")
-
-    val hideKeyboard = SingleLiveEvent<Void>()
+    val email = NonNullObservableField("")
+    val emailError = NonNullObservableField("")
 
     init {
+        setNavigator(navigator)
+
         email.addOnPropertyChanged { emailError.set("") }
     }
 
     fun onPasswordResetButtonClicked() {
         hideKeyboard.trigger()
-        if (isEmailValid(email.get()!!))
+        if (email.get().isEmpty())
+            return
+
+        if (isEmailValid(email.get())) {
             requestResetPassword()
-        else
+        } else
             emailError.set(App.res.getString(R.string.error_email_not_valid))
     }
 
     @SuppressLint("CheckResult")
     private fun requestResetPassword() {
-        storiqaApi.resetPassword(ResetPasswordRequest(email.get()!!))
+        showLoadingDialog()
+
+        walletApi.resetPassword(ResetPasswordRequest(email.get()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-
-                    print("nice")
+                    onSuccess()
                 }, {
-                    it.printStackTrace()
-
-                    print("not nice")
+                    handleError(it as Exception)
                 })
+    }
+
+    private fun onSuccess() {
+        hideLoadingDialog()
+        val dialogPresenter = PassMailSentDialogPresenter()
+        showMessageDialog(dialogPresenter)
+    }
+
+    override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {
+        when (dialogType) {
+            DialogType.RECOVERY_PASS_MAIL_SENT -> return ::closeActivity
+            DialogType.EMAIL_TIMEOUT -> return ::requestResetPassword
+            else -> return {}
+        }
+    }
+
+    private fun closeActivity() {
+        getNavigator()?.closeActivity()
+    }
+
+    override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
+        errorPresenter.fieldErrors.forEach {
+            it.forEach { (key, value) ->
+                when (key) {
+                    "email" ->
+                        emailError.set(App.res.getString(value))
+                }
+            }
+        }
     }
 }

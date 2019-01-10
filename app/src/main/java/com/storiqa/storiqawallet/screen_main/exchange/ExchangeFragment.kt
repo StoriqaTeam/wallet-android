@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_exchange.view.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class ExchangeFragment : Fragment() {
 
@@ -23,8 +21,8 @@ class ExchangeFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_exchange, null, false)
-        view.btnBack.onClick { viewModel.goBack() }
+        val view = inflater.inflate(R.layout.fragment_exchange_deprecated, null, false)
+        //view.btnBack.onClick { viewModel.goBack() }
         return view
     }
 }

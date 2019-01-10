@@ -6,7 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.databinding.ActivityMainBinding
+import com.storiqa.storiqawallet.databinding.ActivityMainDeprecatedBinding
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.screen_main.deposit.DepositFragment
 import com.storiqa.storiqawallet.screen_main.exchange.ExchangeFragment
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
 
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val binding: ActivityMainDeprecatedBinding = DataBindingUtil.setContentView(this, R.layout.activity_main_deprecated)
         binding.viewModel = viewModel
         binding.executePendingBindings()
 

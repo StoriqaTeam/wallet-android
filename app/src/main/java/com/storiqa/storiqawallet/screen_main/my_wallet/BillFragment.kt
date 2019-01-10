@@ -8,11 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.storiqa.storiqawallet.constants.Extras
-import com.storiqa.storiqawallet.databinding.ItemBillBinding
+import com.storiqa.storiqawallet.databinding.ItemBillDeprecatedBinding
 import com.storiqa.storiqawallet.databinding.ItemBillSmallBinding
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.BillInfo
-import org.jetbrains.anko.support.v4.dip
 
 class BillFragment : Fragment() {
 
@@ -22,16 +21,16 @@ class BillFragment : Fragment() {
 
         binding.apply {
             var isSmall = false
-            if (binding is ItemBillBinding) {
+            if (binding is ItemBillDeprecatedBinding) {
                 isSmall = false
-                (binding as ItemBillBinding).bill = bill
+                (binding as ItemBillDeprecatedBinding).account = bill
             } else {
                 isSmall = true
                 (binding as ItemBillSmallBinding).bill = bill
             } //TODO refactore. Break of Open/close principle
 
             executePendingBindings()
-            root.setPadding(dip(7), 0, dip(7), 0)
+            //root.setPadding(dip(7), 0, dip(7), 0)
 
             val billInfo = BillInfo(bill)
             billInfo.initBillView(root, isSmall)

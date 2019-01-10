@@ -30,6 +30,7 @@ class NetworkModule {
         val httpClientBuilder = okHttpClient.newBuilder()
                 .addInterceptor(ErrorInterceptor())
                 .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor()

@@ -1,14 +1,12 @@
 package com.storiqa.storiqawallet.network
 
+import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.network.requests.*
+import com.storiqa.storiqawallet.network.responses.RegisterUserResponse
 import com.storiqa.storiqawallet.network.responses.TokenResponse
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import io.reactivex.Observable
-import okhttp3.OkHttpClient
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface WalletApi {
@@ -25,14 +23,26 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body loginByOauth: LoginByOauthRequest): Observable<Response<Any>>
+            @Body loginByOauth: LoginByOauthRequest): Observable<TokenResponse>
+
+    @POST("v1//sessions/refresh")
+    fun refreshToken(
+            @Header("Timestamp") timestamp: String,
+            @Header("Device-id") deviceId: String,
+            @Header("Sign") sign: String): Observable<TokenResponse>
+
+    @POST("v1/sessions/oauth")
+    fun revokeToken(
+            @Header("Timestamp") timestamp: String,
+            @Header("Device-id") deviceId: String,
+            @Header("Sign") sign: String): Observable<TokenResponse>
 
     @POST("v1/users")
     fun registerUser(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body registerUserRequest: RegisterUserRequest): Observable<Response<Any>>
+            @Body registerUserRequest: RegisterUserRequest): Observable<RegisterUserResponse>
 
     @PUT("v1/users")
     fun updateUser(
@@ -44,7 +54,7 @@ interface WalletApi {
 
     @POST("v1/users/confirm_email")
     fun confirmEmail(
-            @Body confirmEmailRequest: ConfirmEmailRequest): Observable<Response<Any>>
+            @Body confirmEmailRequest: ConfirmEmailRequest): Observable<String>
 
     @POST("v1/users/add_device")
     fun addDevice(
@@ -75,46 +85,46 @@ interface WalletApi {
 
     @POST("v1/users/confirm_reset_password")
     fun confirmResetPassword(
-            @Body confirmResetPasswordRequest: ConfirmResetPasswordRequest): Observable<Response<Any>>
+            @Body confirmResetPasswordRequest: ConfirmResetPasswordRequest): Observable<String>
 
     @GET("v1/users/me")
     fun getUserInfo(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Observable<Response<UserInfoResponse>>
+            @Header("Authorization") bearer: String): Observable<UserInfoResponse>
 
-    @GET("v1/users/{userId}/accounts")
+    @GET("v1/users/{id}/accounts")
     fun getAccounts(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Query("offset") offset: Int,
-            @Query("limit") limit: Int): Observable<Response<Any>>
+            @Query("limit") limit: Int): Observable<ArrayList<Account>>
 
-    @PUT("v1/users/{userId}/accounts")
+    @PUT("v1/users/{id}/accounts")
     fun updateAccounts(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Body updateAccountRequest: UpdateAccountRequest): Observable<Response<Any>>
 
-    @POST("v1/users/{userId}/accounts")
+    @POST("v1/users/{id}/accounts")
     fun createAccount(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Body createAccountRequest: CreateAccountRequest): Observable<Response<Any>>
 
-    @DELETE("v1/users/{userId}/accounts")
+    @DELETE("v1/users/{id}/accounts")
     fun deleteAccount(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
@@ -122,15 +132,15 @@ interface WalletApi {
 
     @GET("v1/accounts/{accountId}")
     fun getAccountInfo(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String): Observable<Response<Any>>
 
-    @GET("v1/users/{userId}/transactions")
+    @GET("v1/users/{id}/transactions")
     fun getTransactions(
-            @Path("userId") userId: Int,
+            @Path("id") userId: Int,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
@@ -160,20 +170,4 @@ interface WalletApi {
             @Header("Authorization") bearer: String,
             @Body calculateFeeResponse: CalculateFeeResponse): Observable<Response<Any>>
 
-    class Factory {
-        private val baseUrl = "https://pay-nightly.stq.cloud/" //stage
-
-        fun getInstance(): WalletApi {
-
-            val client = OkHttpClient.Builder().build()
-
-            val retrofit = Retrofit.Builder()
-                    .client(client)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(baseUrl)
-                    .build()
-            return retrofit.create(WalletApi::class.java)
-        }
-    }
 }

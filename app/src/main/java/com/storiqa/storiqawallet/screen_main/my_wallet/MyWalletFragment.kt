@@ -11,12 +11,12 @@ import android.view.ViewGroup
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.BillsAdapter
 import com.storiqa.storiqawallet.constants.Extras
-import com.storiqa.storiqawallet.databinding.FragmentMywalletBinding
+import com.storiqa.storiqawallet.databinding.FragmentMenuDeprecatedBinding
 import com.storiqa.storiqawallet.db.PreferencesHelper
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_mywallet.*
+import kotlinx.android.synthetic.main.fragment_mywallet_deprecated.*
 
 
 class MyWalletFragment : Fragment() {
@@ -27,7 +27,7 @@ class MyWalletFragment : Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(MainActivityViewModel::class.java)
         viewModel.selectedScreen.set(Screen.MY_WALLET)
 
-        val binding: FragmentMywalletBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mywallet, container, false)
+        val binding: FragmentMenuDeprecatedBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_mywallet_deprecated, container, false)
         binding.viewModel = viewModel
         binding.executePendingBindings()
         return binding.root

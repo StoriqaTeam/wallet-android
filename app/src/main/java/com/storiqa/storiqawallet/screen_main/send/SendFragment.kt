@@ -8,19 +8,15 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jakewharton.rxbinding2.widget.RxTextView
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.databinding.FragmentSendBinding
+import com.storiqa.storiqawallet.databinding.FragmentSendDeprecatedBinding
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.BillPagerHelper
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_send.*
-import kotlinx.android.synthetic.main.fragment_send.view.*
+import kotlinx.android.synthetic.main.fragment_send_deprecated.*
+import kotlinx.android.synthetic.main.fragment_send_deprecated.view.*
 import kotlinx.android.synthetic.main.tab_icon.view.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.math.BigDecimal
-import java.util.concurrent.TimeUnit
 
 
 class SendFragment : Fragment() {
@@ -33,13 +29,13 @@ class SendFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binder = FragmentSendBinding.inflate(inflater, container, false)
+        val binder = FragmentSendDeprecatedBinding.inflate(inflater, container, false)
         viewModel.selectedScreen.set(Screen.SEND)
 
         binder.viewModel = viewModel
         binder.executePendingBindings()
 
-        BillPagerHelper(R.layout.item_bill, childFragmentManager) { pageNumber ->
+        BillPagerHelper(R.layout.item_bill_deprecated, childFragmentManager) { pageNumber ->
             viewModel.selectedBillId = viewModel.bills.value!![pageNumber].id
         }.setPager(binder.vpBills, binder.pageIndicator, viewModel.bills.value!!, viewModel.selectedBillId)
 
@@ -54,9 +50,9 @@ class SendFragment : Fragment() {
         observeCurrencyChangeRecalculated()
         refreshAmountInStq()
 
-        btnNext.onClick {
+        /*btnNext.onClick {
             viewModel.openRecieverScreen()
-        }
+        }*/
 
         addTab(R.drawable.stq_small_logo_off_2x, R.drawable.stq_small_logo_2x)
         addTab(R.drawable.btc_small_logo_off_2x, R.drawable.btc_small_logo_on)
@@ -73,9 +69,9 @@ class SendFragment : Fragment() {
             }
         }
 
-        btnBack.onClick {
+        /*btnBack.onClick {
             viewModel.goBack()
-        }
+        }*/
     }
 
     override fun onResume() {
@@ -102,14 +98,14 @@ class SendFragment : Fragment() {
     }
 
     private fun observeAmountChanging() {
-        RxTextView.afterTextChangeEvents(etAmount).skipInitialValue()
+        /*RxTextView.afterTextChangeEvents(etAmount).skipInitialValue()
                 .observeOn(AndroidSchedulers.mainThread()).subscribe {
                     viewModel.isAmountInStqUpdating.set(true)
                     btnNext.isEnabled = false
                 }
 
         RxTextView.afterTextChangeEvents(etAmount).skipInitialValue().debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread()).subscribe { refreshAmountInStq() }
+                .observeOn(AndroidSchedulers.mainThread()).subscribe { refreshAmountInStq() }*/
     }
 
     private fun setTokenTypeInfo() {

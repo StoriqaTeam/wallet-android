@@ -24,7 +24,7 @@ import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
 import javax.inject.Inject
 
-abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCompatActivity(), IBaseActivity {
 
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -42,7 +42,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
 
     abstract fun getViewModelClass(): Class<VM>
 
-    internal val activityComponent: ActivityComponent by lazy {
+    override val activityComponent: ActivityComponent by lazy {
         DaggerActivityComponent.builder()
                 .activityModule(ActivityModule(this))
                 .navigatorModule(NavigatorModule(this))
@@ -73,10 +73,10 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
 
         viewModel.hideKeyboard.observe(this, Observer { hideKeyboard() })
 
-        viewModel.showErrorDialog.observe(this, Observer { showErrorDialog(it!!) })
+        viewModel.showMessageDialog.observe(this, Observer { showErrorDialog(it!!) })
     }
 
-    fun showErrorDialog(error: ErrorPresenterDialog) {
+    override fun showErrorDialog(error: ErrorPresenterDialog) {
         val messageDialog = MessageDialog.newInstance(error).apply {
             setPositiveButton(error.positiveButton?.name ?: R.string.button_ok,
                     error.positiveButton?.onClick ?: {})
@@ -88,7 +88,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
         }
     }
 
-    fun showLoadingDialog() {
+    override fun showLoadingDialog() {
         if (loadingDialog != null && loadingDialog?.isShowing!!)
             return
 
@@ -101,13 +101,13 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
         }
     }
 
-    fun hideLoadingDialog() {
+    override fun hideLoadingDialog() {
         if (loadingDialog != null && loadingDialog!!.isShowing) {
             loadingDialog!!.cancel()
         }
     }
 
-    fun hideKeyboard() {
+    override fun hideKeyboard() {
         val view = this.currentFocus
         if (view != null) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

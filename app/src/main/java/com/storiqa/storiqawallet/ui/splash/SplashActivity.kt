@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.ui.splash
 
+import android.os.Bundle
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivitySplashBinding
@@ -12,4 +13,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
     override fun getLayoutId() = R.layout.activity_splash
 
     override fun getViewModelClass(): Class<SplashViewModel> = SplashViewModel::class.java
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.checkLoggedIn()
+    }
 }

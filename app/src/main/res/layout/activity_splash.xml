@@ -16,7 +16,7 @@
         android:background="@android:color/white">
 
         <ImageView
-            android:id="@+id/imgLogo"
+            android:id="@+id/imgIcon"
             android:layout_width="222dp"
             android:layout_height="222dp"
             android:layout_marginTop="8dp"
@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+            app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
 
         <Button
             android:id="@+id/btnGetStarted"
@@ -53,7 +53,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/blue_button_background"
             android:onClick="@{() -> viewModel.startRegistration()}"
-            android:text="@string/getStartedButtonText"
+            android:text="@string/button_get_started"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/signInButtonText"
+            android:text="@string/button_sign_in"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

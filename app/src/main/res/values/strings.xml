@@ -1,66 +1,29 @@
 <resources>
     <string name="app_name">StoriqaWallet</string>
-    <string name="wallet">Wallet</string>
-    <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
-    <string name="getStartedButtonText">Get started</string>
-    <string name="signInButtonText">Sign in</string>
-    <string name="emailHint">Email</string>
-    <string name="passwordHint">Password</string>
-    <string name="forgotPassword">I forgot password</string>
-    <string name="socialNetworkButtonText">Sign in via social account</string>
-    <string name="haventGotAccount">Haven’t got account?</string>
-    <string name="register">Register</string>
-    <string name="errorPassword">Password must contain at least 8 symbols, at least one capital letter and digit</string>
-    <string name="errorVerification">Error occurred. Please try again or try later</string>
-    <string name="errorEmailNotVerified">This email isn’t verified</string>
 
-    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="fb_app_id">730145060671124</string>
     <string name="fb_login_protocol_scheme">fb730145060671124</string>
-    <string name="signUpButtonText">Sign up</string>
-    <string name="haveAnAccount">Have an account?</string>
-    <string name="firstName">First name</string>
+    <string name="server_client_id">358105401754-mc1pt5si6ubo4e8bnhf22rgg1s50vni6.apps.googleusercontent.com</string>
+
+    <string name="wallet">Wallet</string>
+    <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="repeatPassword">Repeat password</string>
-    <string name="termsAndConditions">I accept the terms of the license agreement and privacy policy</string>
-    <string name="lastName">Last name</string>
-    <string name="errorPasswordHaveToMathc">Passwords have to match</string>
-    <string name="emailSentMessage">Check the mail! We sent instruction how to confirm your account to your email address</string>
-    <string name="emailSentTitle">Email sent successfully</string>
-    <string name="registerErrorTitle">Oops! Something gone wrong!</string>
-    <string name="registerErrorMessage">Aliens have stolen some of our servers. Chasing them, but haven’t catch them yet. Please try again or later!</string>
     <string name="close">Close</string>
-    <string name="tryAgain">Try again</string>
-    <string name="passwordRecovery">Password recover</string>
-    <string name="recoverPasswordMessage">Enter email address where new\npassword recovering instructions \n will be sent to.</string>
-    <string name="yourEmail">Your email</string>
-    <string name="resetPassword">Reset password</string>
-    <string name="newPasswordMessage">Create new password\nand confirm it.</string>
-    <string name="confirmNewPassword">Confirm new password</string>
-    <string name="setUpPinCodeQuestion">Set up PIN code?</string>
-    <string name="doNotUse">Do not use</string>
-    <string name="setUpPinCode">Set up PIN code</string>
     <string name="continueButton">Continue</string>
-    <string name="quickLaunch">Wanna use quick\nlaunch?</string>
     <string name="setUpQuickLaunch">Set up quick launch</string>
     <string name="chooseWay">Choose the way to confirm\nyour identity</string>
-    <string name="setupFingerprint">Set up fingerprint\nlaunch?</string>
-    <string name="useFingerprintScanner">Use Fingerprint scanner</string>
-    <string name="pinCodeSet">Enter PIN code</string>
-    <string name="pinCodeRepeat">Repeat PIN code</string>
-    <string name="pinNotValid">Entered pin is not valid</string>
     <string name="pinsNotMatch">Your pin codes doesn\'t match. Try again</string>
     <string name="scanYourFinger">Scan your finger to enable\nTouch ID launch</string>
     <string name="scanFingerMessage">Scan your finger to enable\nTouch ID quick launch</string>
     <string name="confirmWithTouchId">Confirm using Touch ID</string>
     <string name="goBack">Go back</string>
+    <string name="pinNotValid">pinNotValid</string>
     <string name="cannotPerformAuth">Can not perform\nauthentication</string>
-    <string name="server_client_id">245895770851-38n6to49r49reccloeepeutocvk2hne3.apps.googleusercontent.com</string>
-    <string name="noEmailProgram">Can\'t find any email program</string>
-    <string name="openEmail">Open email</string>
     <string name="cancel">Cancel</string>
-    <string name="resetDialogMessage">Instructions to reset an email was sent to your email.</string>
     <string name="putYourFingerOnTouchId">Put your finger on\ntouch ID</string>
     <string name="myWallet">My wallet</string>
     <string name="black">Black</string>
@@ -93,8 +56,6 @@
     <string name="deposit">Deposit</string>
     <string name="noWalletError">This user doesn\'t have a wallet</string>
     <string name="notEnoghtFounds">You haven’t got enough funds to send. Try to set another count.</string>
-    <string name="signUp">Sign up</string>
-    <string name="signIn">Sign in</string>
     <string name="mailSent">Mail successfully sent</string>
     <string name="checkMailbox">Check your mailbox and follow the link to recover your password</string>
     <string name="wantToAccessContacts">Allow StoriqaWallet to access your contacts?</string>
@@ -106,22 +67,95 @@
     <string name="exchange">Exchange</string>
     <string name="menu">Menu</string>
     <string name="willBeAvailableSoon">Will be available soon</string>
+    <!--*********************************************************************************************-->
 
-    <string name="haven_t_got_account">Haven’t got account?</string>
+    <string name="error_name_not_valid">Wrong name</string> <!--TODO set text-->
     <string name="error_email_not_valid">Email not valid</string>
+    <string name="error_email_blocked">Email blocked</string>
     <string name="error_email_not_exist">Email not found</string>
-    <string name="error_password_length"></string>
-    <string name="error_password_upper_case"></string>
-    <string name="error_password_numbers"></string>
+    <string name="error_email_exists">Email already exists</string>
+    <string name="error_password_no_number">At least one number is required</string>
     <string name="error_password_wrong_pass">Wrong password</string>
-    <string name="error_device_not_attached_title">Your device is not registered yet</string>
-    <string name="error_device_not_attached_description">Do you want to register this device to your account?</string>
+    <string name="error_passwords_not_match">Passwords do not match</string>
+    <string name="error_password_no_upper">At least one upper case character is required</string>
+    <string name="error_password_invalid_length">Password should be between 8 and 30 symbols</string>
     <string name="error_bad_request">Bad request</string>
     <string name="error_server_error">Server error</string>
-    <string name="error_no_internet_title">No internet</string>
-    <string name="error_no_internet_description">No internet</string>
     <string name="error_unknown_error">Unknown error</string>
+
+    <string name="dialog_no_internet_title">No internet</string>
+    <string name="dialog_no_internet_description">No internet description</string>
+    <string name="dialog_email_timeout_title">Email timeout</string>
+    <string name="dialog_email_timeout_description">Email timeout description</string>
+    <string name="dialog_unknown_error_title">Oops! Something gone wrong!</string>
+    <string name="dialog_unknown_error_description">Aliens have stolen some of our servers. Chasing them, but haven’t catch them yet. Please try again or come back later!</string>
+    <string name="dialog_pass_mail_sent_title">Mail successfully sent</string>
+    <string name="dialog_pass_mail_sent_description">Check your mailbox and follow the link to recover your password</string>
+    <string name="dialog_pass_set_up_title">Password was successfully set up</string>
+    <string name="dialog_pass_set_up_description">You have successfully set up new password.</string>
+    <string name="dialog_registration_mail_sent_title">Email sent successfully</string>
+    <string name="dialog_registration_mail_sent_description">Check the mail! We sent instruction how to confirm your account to your email address</string>
+    <string name="dialog_not_verified_title">Your email is not verified</string>
+    <string name="dialog_not_verified_description">The link we’ve sent you has been expired. Tap ‘Resend’ to get a new link to verify your account.</string>
+    <string name="dialog_device_not_attached_title">Your device is not registered yet</string>
+    <string name="dialog_device_not_attached_description">Do you want to register this device to your account?</string>
+    <string name="dialog_device_attached_title">Device attached</string>
+    <string name="dialog_device_attached_description">Device attached description</string>
+    <string name="dialog_reset_pin_title">Reset pin</string>
+    <string name="dialog_reset_pin_description">Reset pin description</string>
+    <string name="dialog_attach_device_mail_sent_title">Email sent successfully</string>
+    <string name="dialog_attach_device_mail_sent_description">Check the mail! We sent instruction how to attach device to your account to your email address</string>
+    <string name="dialog_wrong_device_id_title">Wrong device id</string>
+    <string name="dialog_wrong_device_id_description">Wrong device id description</string>
+    <string name="dialog_email_not_provided_title">Email not provided</string>
+    <string name="dialog_email_not_provided_description">You don`t have email in your social network</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
+    <string name="button_sign_in">Sign in</string>
+    <string name="button_sign_up">Sign up</string>
+    <string name="button_resend">Resend</string>
+    <string name="button_get_started">Get started</string>
+    <string name="button_forgot_password">I forgot password</string>
+    <string name="button_register">Register</string>
+    <string name="button_reset_password">Reset password</string>
+    <string name="button_reset_pin">Reset pin</string>
+    <string name="button_confirm_password">Confirm new password</string>
+    <string name="button_set_up_fingerprint">Set up fingerprint launch</string>
+    <string name="button_set_up_pin">Set up PIN-code</string>
+    <string name="button_set_up_quick_launch">Set up Quick Launch</string>
+    <string name="button_do_not_use">Do not use</string>
+
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_repeat_password">Repeat password</string>
+    <string name="hint_first_name">First name</string>
+    <string name="hint_last_name">Last name</string>
+
+    <string name="menu_wallet">Wallet</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_exchange">Exchange</string>
+    <string name="menu_receive">Receive</string>
+    <string name="menu_menu">Menu</string>
+
+    <string name="text_haven_t_got_account">Haven’t got account?</string>
+    <string name="text_social_accounts">Sign in via social account</string>
+    <string name="text_have_an_account">Have an account?</string>
+    <string name="text_policy_agreement">I accept the terms of the license agreement and privacy policy</string>
+    <string name="text_recover_password">Enter email address where new\npassword recovering instructions \n will be sent to.</string>
+    <string name="text_create_password">Create new password\nand confirm it.</string>
+    <string name="text_sign_up">Sign up</string>
+    <string name="text_sign_in">Sign in</string>
+    <string name="text_pin_title_setup">Set up PIN-code</string>
+    <string name="text_pin_description_setup">Enter 4-digit PIN-code</string>
+    <string name="text_pin_title_confirm">Confirm PIN-code</string>
+    <string name="text_pin_description_confirm">The codes entered must match each other</string>
+    <string name="text_pin_title_enter">Hello, %s</string>
+    <string name="text_pin_description_enter">Enter your PIN-code</string>
+    <string name="text_quick_launch">Set up Quick Launch?</string>
+    <string name="text_quick_launch_description">Choose the way to confirm\nyour identity</string>
+    <string name="text_pin_code">Set up PIN-code?</string>
+    <string name="text_fingerprint">Set up fingerprint launch?</string>
+
+    <string name="toolbar_password_recovery">Password recover</string>
 </resources>

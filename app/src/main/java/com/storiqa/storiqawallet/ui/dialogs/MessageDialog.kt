@@ -14,7 +14,7 @@ import com.storiqa.storiqawallet.di.components.DaggerFragmentComponent
 import com.storiqa.storiqawallet.di.components.FragmentComponent
 import com.storiqa.storiqawallet.di.modules.FragmentModule
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
-import com.storiqa.storiqawallet.ui.base.BaseActivity
+import com.storiqa.storiqawallet.ui.base.IBaseActivity
 import javax.inject.Inject
 
 
@@ -37,7 +37,7 @@ class MessageDialog : DialogFragment() {
     internal val fragmentComponent: FragmentComponent by lazy {
         DaggerFragmentComponent.builder()
                 .fragmentModule(FragmentModule(this))
-                .activityComponent((activity as BaseActivity<*, *>).activityComponent)
+                .activityComponent((activity as IBaseActivity).activityComponent)
                 .build()
     }
 
@@ -63,6 +63,7 @@ class MessageDialog : DialogFragment() {
             throw NoSuchMethodException("You forgot to add \"fun inject(activity: " +
                     "${this::class.java.simpleName})\" in ActivityComponent")
         }
+        isCancelable = false
 
         subscribeEvents()
     }
