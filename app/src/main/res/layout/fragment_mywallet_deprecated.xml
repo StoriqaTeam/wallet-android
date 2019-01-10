@@ -37,7 +37,7 @@
             android:id="@+id/rvBills"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:listitem="@layout/item_bill"
+            tools:listitem="@layout/item_bill_deprecated"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

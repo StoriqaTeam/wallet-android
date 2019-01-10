@@ -33,7 +33,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.makeramen.roundedimageview.RoundedImageView
+                <ImageView
                     android:id="@+id/ivAvatar"
                     android:layout_width="47dp"
                     android:layout_height="47dp"
@@ -42,8 +42,6 @@
                     android:src="#e4e4e4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:riv_corner_radius="30dip"
-                    app:riv_oval="true"
                     tools:src="@color/contactGray" />
 
                 <TextView

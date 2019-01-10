@@ -7,7 +7,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.storiqa.storiqawallet"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -72,15 +72,9 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
 
-    //TODO delete
-    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
-    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
+    //BottomNavigator
+    implementation "com.aurelhubert:ahbottomnavigation:$bottomNavigatorVersion"
 
-    implementation 'com.karumi:dexter:5.0.0'
-    implementation 'org.jetbrains.anko:anko:0.10.6'
-
-    implementation 'com.makeramen:roundedimageview:2.3.0'
-    implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

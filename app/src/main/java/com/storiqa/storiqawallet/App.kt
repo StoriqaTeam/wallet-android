@@ -18,9 +18,10 @@ class App : Application(), LifecycleObserver {
         lateinit var appComponent: AppComponent
             private set
 
+        var density = 1f
+
         val res: Resources
             get() = this.instance.resources
-
     }
 
     @SuppressLint("HardwareIds")
@@ -28,6 +29,7 @@ class App : Application(), LifecycleObserver {
         super.onCreate()
 
         instance = this
+        density = instance.resources.displayMetrics.density
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .build()

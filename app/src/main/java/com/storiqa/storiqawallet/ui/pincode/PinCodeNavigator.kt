@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.ui.pincode
 
-import com.storiqa.storiqawallet.screen_main.MainActivity
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.login.LoginActivity
+import com.storiqa.storiqawallet.ui.main.MainActivity
 
 class PinCodeNavigator(private val navigator: INavigator) : IPinCodeNavigator {
 

@@ -12,6 +12,10 @@ class TokenProvider(private val appData: IAppDataStorage,
                     private val signUtil: SignUtil,
                     private val walletApi: WalletApi) : ITokenProvider {
 
+    override fun getToken(): String {
+        return appData.token
+    }
+
     override fun isExpired(token: String): Boolean {
         return JWTUtil.getExpiredTime(token) + 30000 < getTimeStamp()
     }
@@ -35,6 +39,7 @@ class TokenProvider(private val appData: IAppDataStorage,
 
     @SuppressLint("CheckResult")
     override fun revokeToken(errorHandler: (Exception) -> Unit) {
+        //todo appData.token = -1
         val signHeader = signUtil.createSignHeader(appData.currentUserEmail)
 
         walletApi

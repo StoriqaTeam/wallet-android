@@ -132,6 +132,12 @@
     <string name="hint_first_name">First name</string>
     <string name="hint_last_name">Last name</string>
 
+    <string name="menu_wallet">Wallet</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_exchange">Exchange</string>
+    <string name="menu_receive">Receive</string>
+    <string name="menu_menu">Menu</string>
+
     <string name="text_haven_t_got_account">Haven’t got account?</string>
     <string name="text_social_accounts">Sign in via social account</string>
     <string name="text_have_an_account">Have an account?</string>

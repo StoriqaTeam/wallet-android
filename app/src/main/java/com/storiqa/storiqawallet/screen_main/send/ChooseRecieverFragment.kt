@@ -3,7 +3,6 @@ package com.storiqa.storiqawallet.screen_main.send
 import android.Manifest
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,29 +12,19 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.blikoon.qrcodescanner.QrCodeActivity
-import com.jakewharton.rxbinding2.widget.RxTextView
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.ContactsAdapter
-import com.storiqa.storiqawallet.constants.RequestCodes
-import com.storiqa.storiqawallet.databinding.FragmentChooseRecieverBinding
+import com.storiqa.storiqawallet.databinding.FragmentChooseRecieverDeprecatedBinding
 import com.storiqa.storiqawallet.enums.Currency
 import com.storiqa.storiqawallet.objects.Contact
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_choose_reciever.*
+import kotlinx.android.synthetic.main.fragment_choose_reciever_deprecated.*
 import kotlinx.android.synthetic.main.layout_ask_contacts.view.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class ChooseRecieverFragment : Fragment() {
 
     lateinit var viewModel: MainActivityViewModel
-    lateinit var binder: FragmentChooseRecieverBinding
+    lateinit var binder: FragmentChooseRecieverDeprecatedBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +32,7 @@ class ChooseRecieverFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binder = FragmentChooseRecieverBinding.inflate(inflater, container, false)
+        binder = FragmentChooseRecieverDeprecatedBinding.inflate(inflater, container, false)
         binder.viewModel = viewModel
         binder.executePendingBindings()
         return binder.root
@@ -51,7 +40,7 @@ class ChooseRecieverFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vClear.onClick {
+        /*vClear.onClick {
             viewModel.clearSenderInfo()
             etReciever.text.clear()
         }
@@ -70,7 +59,7 @@ class ChooseRecieverFragment : Fragment() {
 
         btnBack.onClick { viewModel.goBack() }
 
-        btnNext.onClick { viewModel.openSendFinalScreen() }
+        btnNext.onClick { viewModel.openSendFinalScreen() }*/
 
         when (viewModel.tokenType.get()) {
             Currency.STQ.name -> {
@@ -82,9 +71,9 @@ class ChooseRecieverFragment : Fragment() {
         }
 
 
-        ivEdit.onClick {
+        /*ivEdit.onClick {
             viewModel.goBack()
-        }
+        }*/
 
         if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestAccessToContacts()
@@ -121,7 +110,7 @@ class ChooseRecieverFragment : Fragment() {
     }
 
     private fun startScan() {
-        Dexter.withActivity(activity).withPermission(Manifest.permission.CAMERA).withListener(object : PermissionListener {
+        /*Dexter.withActivity(activity).withPermission(Manifest.permission.CAMERA).withListener(object : PermissionListener {
             override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                 startActivityForResult(Intent(context, QrCodeActivity::class.java), RequestCodes().scanQR)
             }
@@ -131,7 +120,7 @@ class ChooseRecieverFragment : Fragment() {
             }
 
             override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
-        }).check()
+        }).check()*/
     }
 
     private fun filterContacts() {
@@ -144,7 +133,7 @@ class ChooseRecieverFragment : Fragment() {
 
         val dialog = AlertDialog.Builder(context!!).setView(view).create()
 
-        view.btnAllow.setOnClickListener {
+        /*view.btnAllow.setOnClickListener {
             Dexter.withActivity(activity).withPermission(Manifest.permission.READ_CONTACTS).withListener(object : PermissionListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                     viewModel.requestContacts()
@@ -160,7 +149,7 @@ class ChooseRecieverFragment : Fragment() {
             if (dialog.isShowing) {
                 dialog.dismiss()
             }
-        }
+        }*/
 
         view.tvDeny.setOnClickListener {
             if (dialog.isShowing) {

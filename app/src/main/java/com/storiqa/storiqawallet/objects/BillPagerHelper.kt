@@ -4,7 +4,6 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewPager
 import com.storiqa.storiqawallet.adapters.BillsPagerAdapter
-import org.jetbrains.anko.dip
 
 class BillPagerHelper(private val resId: Int, private val fragmentManager: FragmentManager, val onPageChanged: (pageNumber: Int) -> Unit) {
 
@@ -12,7 +11,7 @@ class BillPagerHelper(private val resId: Int, private val fragmentManager: Fragm
         vpBills.adapter = BillsPagerAdapter(resId, fragmentManager, bills)
         vpBills.adapter?.notifyDataSetChanged()
         vpBills.clipToPadding = false
-        vpBills.setPadding(vpBills.context.dip(10), 0, vpBills.context.dip(10), 0)
+        //vpBills.setPadding(vpBills.context.dip(10), 0, vpBills.context.dip(10), 0)
         pageIndicator.setupWithViewPager(vpBills, true)
         vpBills.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {}

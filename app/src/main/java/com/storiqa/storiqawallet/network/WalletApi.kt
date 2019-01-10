@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.network
 
+import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.network.requests.*
 import com.storiqa.storiqawallet.network.responses.RegisterUserResponse
 import com.storiqa.storiqawallet.network.responses.TokenResponse
@@ -101,7 +102,7 @@ interface WalletApi {
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Query("offset") offset: Int,
-            @Query("limit") limit: Int): Observable<Response<Any>>
+            @Query("limit") limit: Int): Observable<ArrayList<Account>>
 
     @PUT("v1/users/{id}/accounts")
     fun updateAccounts(

@@ -5,6 +5,12 @@ import android.arch.lifecycle.ViewModelProvider
 import com.storiqa.storiqawallet.di.mapkeys.ViewModelKey
 import com.storiqa.storiqawallet.ui.dialogs.MessageViewModel
 import com.storiqa.storiqawallet.ui.login.LoginViewModel
+import com.storiqa.storiqawallet.ui.main.MainViewModel
+import com.storiqa.storiqawallet.ui.main.exchange.ExchangeViewModel
+import com.storiqa.storiqawallet.ui.main.menu.MenuViewModel
+import com.storiqa.storiqawallet.ui.main.receive.ReceiveViewModel
+import com.storiqa.storiqawallet.ui.main.send.SendViewModel
+import com.storiqa.storiqawallet.ui.main.wallet.WalletViewModel
 import com.storiqa.storiqawallet.ui.password.reset.PasswordResetViewModel
 import com.storiqa.storiqawallet.ui.password.setup.PasswordSetupViewModel
 import com.storiqa.storiqawallet.ui.pincode.PinCodeViewModel
@@ -63,6 +69,36 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PasswordSetupViewModel::class)
     abstract fun bindPasswordSetupViewModel(passwordSetupViewModel: PasswordSetupViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WalletViewModel::class)
+    abstract fun bindWalletViewModel(walletViewModel: WalletViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SendViewModel::class)
+    abstract fun bindSendViewModel(sendViewModel: SendViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ExchangeViewModel::class)
+    abstract fun bindExchangeViewModel(exchangeViewModel: ExchangeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReceiveViewModel::class)
+    abstract fun bindReceiveViewModel(receiveViewModel: ReceiveViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MenuViewModel::class)
+    abstract fun bindMenuViewModel(menuViewModel: MenuViewModel): ViewModel
 
 }
 

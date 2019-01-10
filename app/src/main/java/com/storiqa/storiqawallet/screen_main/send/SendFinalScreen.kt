@@ -3,19 +3,15 @@ package com.storiqa.storiqawallet.screen_main.send
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.Toast
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentSendFinalBinding
 import com.storiqa.storiqawallet.enums.Currency
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_send_final.*
-import kotlinx.android.synthetic.main.layout_sent.view.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class SendFinalScreen : Fragment() {
 
@@ -45,10 +41,10 @@ class SendFinalScreen : Fragment() {
             Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
         }
 
-        ivEdit.onClick {
+        /*ivEdit.onClick {
             viewModel.goBack()
             viewModel.goBack()
-        }
+        }*/
 
         when (viewModel.tokenType.get()) {
             Currency.STQ.name -> {
@@ -59,9 +55,9 @@ class SendFinalScreen : Fragment() {
             Currency.BTC.name -> currencyLogo.setImageResource(R.drawable.bitcoin_medium_logo)
         }
 
-        btnBack.onClick {
+        /*btnBack.onClick {
             viewModel.goBack()
-        }
+        }*/
 
         val minFee = 20.0
         val maxFee = 3000.0
@@ -100,7 +96,7 @@ class SendFinalScreen : Fragment() {
         tvSubtotal.text = subtotal.toString() + " STQ"
         refreshErrorState(subtotal)
 
-        btnSend.onClick {
+        /*btnSend.onClick {
             val view = LayoutInflater.from(context).inflate(R.layout.layout_sent, null, false)
             val dialog = AlertDialog.Builder(context!!).setView(view).create()
 
@@ -123,7 +119,7 @@ class SendFinalScreen : Fragment() {
 
             dialog.show()
 
-        }
+        }*/
     }
 
     fun refreshErrorState(subtotal: Double) {

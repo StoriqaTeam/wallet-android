@@ -19,7 +19,6 @@ import com.storiqa.storiqawallet.enums.PinCodeEnterType
 import com.storiqa.storiqawallet.objects.FingerprintHepler
 import com.storiqa.storiqawallet.objects.ScreenStarter
 import kotlinx.android.synthetic.main.activity_enter_pin_code.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
 
@@ -48,10 +47,10 @@ class EnterPinCodeActivity : AppCompatActivity(), EnterPinCodeView {
             }
         }
 
-        btnForgotPin.onClick {
+        /*btnForgotPin.onClick {
             ScreenStarter().startLoginScreen(this@EnterPinCodeActivity)
             viewModel.eraseUserQuickLaunch()
-        }
+        }*/
     }
 
     fun startFingerprintDialog(viewModel: EnterPinViewModel) {

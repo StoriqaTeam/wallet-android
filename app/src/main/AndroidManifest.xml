@@ -39,11 +39,6 @@
         </activity>
 
         <activity
-            android:name=".screen_main.MainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan">
@@ -102,43 +97,25 @@
             android:name=".ui.question.QuestionActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
         <!--////////////////////////////////////////////////-->
+
+        <activity
+            android:name=".screen_main.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name=".screen_pin_code_enter.EnterPinCodeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".screen_register.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".screen_recover_password.screen_recover_email_enter_first_step.RecoverPasswordActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity
-            android:name=".screen_quick_start.QuickStartActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".screen_setup_fingerprint.FingerprintSetupActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".screen_scan_finger.ScanFingerActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".screen_recover_password.screen_recover_password_enter_second_step.NewPasswordEnterActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="stage.stq.cloud"
-                    android:scheme="https" />
-            </intent-filter>
-        </activity>
 
         <!--*************************what is it?***************************-->
         <meta-data

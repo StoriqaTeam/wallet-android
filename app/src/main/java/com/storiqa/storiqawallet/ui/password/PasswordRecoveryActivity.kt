@@ -9,7 +9,6 @@ import com.storiqa.storiqawallet.ui.password.setup.PasswordSetupFragment
 
 class PasswordRecoveryActivity : BaseFragmentActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

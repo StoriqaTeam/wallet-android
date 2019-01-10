@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/menu_wallet"
+        android:icon="@drawable/my_wallet_tab_off" />
+
+    <item
+        android:title="@string/menu_send"
+        android:icon="@drawable/send_tab_off" />
+
+    <item
+        android:title="@string/menu_exchange"
+        android:icon="@drawable/change_tab_off" />
+
+    <item
+        android:title="@string/menu_receive"
+        android:icon="@drawable/deposit_tab_off" />
+
+    <item
+        android:title="@string/menu_menu"
+        android:icon="@drawable/menu_tab_off" />
+
+</menu>

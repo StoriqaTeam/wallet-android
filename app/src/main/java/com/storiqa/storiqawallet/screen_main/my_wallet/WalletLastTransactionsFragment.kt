@@ -18,7 +18,6 @@ import com.storiqa.storiqawallet.objects.Transaction
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_wallet_transactions.*
 import kotlinx.android.synthetic.main.fragment_wallet_transactions.view.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
 class WalletLastTransactionsFragment : Fragment() {
@@ -47,7 +46,7 @@ class WalletLastTransactionsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        btnBack.onClick { viewModel.goBack() }
+        /*btnBack.onClick { viewModel.goBack() }
         tvViewAll.onClick {
             fragmentManager?.let {
                 val walletAllTransactionsFragment = WalletAllTransactionsFragment()
@@ -59,7 +58,7 @@ class WalletLastTransactionsFragment : Fragment() {
 
         btnSend.onClick { viewModel.selectScreen(Screen.SEND) }
         btnChange.onClick { viewModel.selectScreen(Screen.EXCHANGE) }
-        btnDeposit.onClick { viewModel.selectScreen(Screen.DEPOSIT) }
+        btnDeposit.onClick { viewModel.selectScreen(Screen.DEPOSIT) }*/
     }
 
     override fun onResume() {
