@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.di.modules
 
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.db.dao.UserDao
+import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.data.repository.UserRepository
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import com.storiqa.storiqawallet.network.WalletApi
@@ -17,7 +18,8 @@ class RepositoryModule {
     internal fun provideUserRepository(userDao: UserDao,
                                        walletApi: WalletApi,
                                        appDataStorage: IAppDataStorage,
-                                       signUtil: SignUtil): UserRepository {
+                                       signUtil: SignUtil): IUserRepository {
+
         return UserRepository(userDao, walletApi, appDataStorage, signUtil)
     }
 
