@@ -1,7 +1,6 @@
 package com.storiqa.storiqawallet.ui.main.wallet
 
 import android.annotation.SuppressLint
-import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.objects.Bill
@@ -18,7 +17,7 @@ class WalletViewModel
 @Inject
 constructor(navigator: IMainNavigator,
             private val walletApi: WalletApi,
-            private val tokenProvider: ITokenProvider,
+        //private val userRepository: UserRepository,
             private val signUtil: SignUtil,
             private val userData: IUserDataStorage) : BaseViewModel<IMainNavigator>() {
 
@@ -33,6 +32,15 @@ constructor(navigator: IMainNavigator,
         else
             requestAccounts(token)*/
         //todo get accounts
+        /*val user = userRepository.getUser(userData.email)
+
+        user.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    print(it)
+                }, {
+                    print(it)
+                })*/
     }
 
     @SuppressLint("CheckResult")

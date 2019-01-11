@@ -37,4 +37,9 @@ interface AppComponentProvides {
     fun signer(): ISigner
     fun keyGenerator(): IKeyGenerator
     fun tokenProvider(): ITokenProvider
+
+    //fun roomDatabase(): AppDatabase
+    //fun userDao(): UserDao
+
+    //fun userRepository(): UserRepository
 }
