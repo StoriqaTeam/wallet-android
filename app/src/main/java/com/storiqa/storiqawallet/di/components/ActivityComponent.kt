@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.di.components
 
 import android.content.Context
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import com.storiqa.storiqawallet.di.modules.ActivityModule
 import com.storiqa.storiqawallet.di.modules.NavigatorModule
 import com.storiqa.storiqawallet.di.modules.ViewModelModule

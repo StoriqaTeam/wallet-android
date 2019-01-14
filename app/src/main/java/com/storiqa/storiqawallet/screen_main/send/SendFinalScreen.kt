@@ -1,19 +1,18 @@
 package com.storiqa.storiqawallet.screen_main.send
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentSendFinalBinding
 import com.storiqa.storiqawallet.enums.Currency
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_send_final.*
 
-class SendFinalScreen : Fragment() {
+class SendFinalScreen : androidx.fragment.app.Fragment() {
 
     lateinit var viewModel: MainActivityViewModel
 

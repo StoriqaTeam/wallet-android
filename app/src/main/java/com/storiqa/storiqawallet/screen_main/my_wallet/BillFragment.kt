@@ -1,19 +1,18 @@
 package com.storiqa.storiqawallet.screen_main.my_wallet
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.storiqa.storiqawallet.constants.Extras
 import com.storiqa.storiqawallet.databinding.ItemBillDeprecatedBinding
 import com.storiqa.storiqawallet.databinding.ItemBillSmallBinding
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.BillInfo
 
-class BillFragment : Fragment() {
+class BillFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: ViewDataBinding = DataBindingUtil.inflate(inflater, arguments?.getInt(Extras().billRes)!!, container, false)

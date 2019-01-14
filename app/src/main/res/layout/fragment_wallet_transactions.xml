@@ -13,7 +13,7 @@
             type="com.storiqa.storiqawallet.screen_main.MainActivityViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/vpBills"
             android:layout_width="match_parent"
             android:layout_height="102dp"
@@ -57,7 +57,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/pageIndicator"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -160,7 +160,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView22" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             tools:layout_marginLeft="20dp"
             tools:layout_marginRight="20dp"
             android:id="@+id/rvTransactions"
@@ -174,6 +174,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView22"
             tools:listitem="@layout/item_transaction" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

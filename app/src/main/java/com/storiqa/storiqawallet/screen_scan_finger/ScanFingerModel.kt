@@ -2,7 +2,7 @@ package com.storiqa.storiqawallet.screen_scan_finger
 
 import android.hardware.fingerprint.FingerprintManager
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.objects.FingerprintHepler
 

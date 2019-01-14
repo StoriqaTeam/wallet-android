@@ -1,9 +1,9 @@
 package com.storiqa.storiqawallet.data.db.entity
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Index
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 
 @Entity(indices = [Index(value = arrayOf("id"),

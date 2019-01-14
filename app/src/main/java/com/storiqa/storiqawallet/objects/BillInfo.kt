@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.objects
 
-import android.support.v4.content.res.ResourcesCompat
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.storiqa.storiqawallet.R
 import kotlinx.android.synthetic.main.item_bill_deprecated.view.*
 import java.math.BigDecimal

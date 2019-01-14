@@ -1,7 +1,8 @@
 package com.storiqa.storiqawallet.objects;
 
-import android.databinding.BindingAdapter;
-import android.support.design.widget.TextInputLayout;
+import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.databinding.BindingAdapter;
 
 public class CutomBindings {
 

@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.data.db.dao
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.storiqa.storiqawallet.data.db.entity.User
 import io.reactivex.Flowable
 import io.reactivex.Single

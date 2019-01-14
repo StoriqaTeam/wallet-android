@@ -1,7 +1,6 @@
 package com.storiqa.storiqawallet.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.storiqa.storiqawallet.R
@@ -10,7 +9,7 @@ import com.storiqa.storiqawallet.enums.TransactionType
 import com.storiqa.storiqawallet.objects.Transaction
 import kotlinx.android.synthetic.main.item_transaction.view.*
 
-class TransactionAdapter(val transactions: Array<Transaction>, val onClick: () -> Unit) : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
+class TransactionAdapter(val transactions: Array<Transaction>, val onClick: () -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     private var layoutInflater: LayoutInflater? = null
 
@@ -27,7 +26,7 @@ class TransactionAdapter(val transactions: Array<Transaction>, val onClick: () -
     }
 
 
-    class ViewHolder(val binder: ItemTransactionBinding) : RecyclerView.ViewHolder(binder.root) {
+    class ViewHolder(val binder: ItemTransactionBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binder.root) {
         fun bind(transaction: Transaction, onClick: () -> Unit) {
             binder.apply {
                 this.transaction = transaction

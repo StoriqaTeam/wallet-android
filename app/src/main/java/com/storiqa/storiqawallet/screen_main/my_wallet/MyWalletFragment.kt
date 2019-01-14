@@ -1,13 +1,11 @@
 package com.storiqa.storiqawallet.screen_main.my_wallet
 
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.BillsAdapter
 import com.storiqa.storiqawallet.constants.Extras
@@ -19,7 +17,7 @@ import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_mywallet_deprecated.*
 
 
-class MyWalletFragment : Fragment() {
+class MyWalletFragment : androidx.fragment.app.Fragment() {
 
     lateinit var viewModel: MainActivityViewModel
 
@@ -45,7 +43,7 @@ class MyWalletFragment : Fragment() {
             adapter = BillsAdapter(viewModel.bills.value!!) { positionOfClickedBill ->
                 viewModel.loadBillInfo(viewModel.bills.value!![positionOfClickedBill].id)
             }
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
             setHasFixedSize(true)
         }
     }

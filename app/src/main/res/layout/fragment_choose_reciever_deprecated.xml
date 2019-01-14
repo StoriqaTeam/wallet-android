@@ -12,7 +12,7 @@
             type="com.storiqa.storiqawallet.screen_main.MainActivityViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             style="@style/send_header_container"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                 tools:layout_height="48dp"
                 tools:layout_width="48dp" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView26"
@@ -189,7 +189,7 @@
                 android:textSize="13sp" />
         </RelativeLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvContacts"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -286,6 +286,6 @@
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/shad_nav_bar" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

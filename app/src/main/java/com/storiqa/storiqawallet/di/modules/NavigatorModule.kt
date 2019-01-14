@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.di.modules
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.storiqa.storiqawallet.di.scopes.PerActivity
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.base.navigator.Navigator

@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.ui.binding
 
-import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 
 @BindingAdapter("imageResource")
 fun ImageView.imageResource(res: Int) {

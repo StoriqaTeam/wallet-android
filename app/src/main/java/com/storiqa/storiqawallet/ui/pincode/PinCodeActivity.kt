@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.ui.pincode
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityPinCodeBinding

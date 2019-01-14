@@ -1,16 +1,15 @@
 package com.storiqa.storiqawallet.screen_main.exchange
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 
-class ExchangeFragment : Fragment() {
+class ExchangeFragment : androidx.fragment.app.Fragment() {
 
     lateinit var viewModel: MainActivityViewModel
 

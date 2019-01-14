@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.ui.dialogs
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
 import android.graphics.drawable.Drawable
+import androidx.databinding.ObservableField
+import androidx.lifecycle.ViewModel
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import javax.inject.Inject
 

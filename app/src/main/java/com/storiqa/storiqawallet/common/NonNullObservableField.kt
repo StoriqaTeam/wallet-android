@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.common
 
-import android.databinding.Observable
-import android.databinding.ObservableField
+import androidx.databinding.Observable
+import androidx.databinding.ObservableField
 
 class NonNullObservableField<T>(value: T, vararg dependencies: Observable) :
         ObservableField<T>(*dependencies) {
