@@ -25,7 +25,7 @@ interface WalletApi {
             @Header("Sign") sign: String,
             @Body loginByOauth: LoginByOauthRequest): Observable<TokenResponse>
 
-    @POST("v1//sessions/refresh")
+    @POST("v1/sessions/refresh")
     fun refreshToken(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,

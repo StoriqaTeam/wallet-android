@@ -1,7 +1,6 @@
 package com.storiqa.storiqawallet.ui.pincode
 
 import android.databinding.ObservableBoolean
-import android.util.Log
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
@@ -114,9 +113,6 @@ constructor(navigator: IPinCodeNavigator,
             }
             PinCodeState.ENTER -> {
                 if (isValidPinCode(pinCode.get())) {
-                    val token = appData.token
-                    if (tokenProvider.isExpired(token))
-                        tokenProvider.refreshToken({ Log.d("TAGGG", "token: $it") }, ::handleError)
                     getNavigator()?.openMainActivity()
                 } else {
                     showPinError.trigger()

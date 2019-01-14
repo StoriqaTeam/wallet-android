@@ -7,7 +7,7 @@ import io.reactivex.Flowable
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user WHERE id IN (:id)")
-    fun loadUserById(id: Int): Flowable<User>
+    fun loadUserById(id: Long): Flowable<User>
 
     @Query("SELECT * FROM user WHERE email LIKE (:email) LIMIT 1")
     fun loadUserByEmail(email: String): Flowable<User>

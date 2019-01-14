@@ -8,7 +8,7 @@ import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 @Entity
 data class User(
         @PrimaryKey var email: String,
-        @ColumnInfo(name = "id") var id: Int,
+        @ColumnInfo(name = "id") var id: Long,
         @ColumnInfo(name = "first_name") var firstName: String,
         @ColumnInfo(name = "last_name") var lastName: String,
         @ColumnInfo(name = "phone") var phone: String?) {
