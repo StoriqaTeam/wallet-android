@@ -25,8 +25,8 @@ import com.storiqa.storiqawallet.ui.splash.SplashActivity
 import dagger.Component
 
 @PerActivity
-@Component(dependencies = arrayOf(AppComponent::class),
-        modules = arrayOf(ActivityModule::class, NavigatorModule::class, ViewModelModule::class))
+@Component(dependencies = [AppComponent::class],
+        modules = [ActivityModule::class, NavigatorModule::class, ViewModelModule::class])
 interface ActivityComponent : ActivityComponentProvides {
 
     fun inject(activity: SplashActivity)

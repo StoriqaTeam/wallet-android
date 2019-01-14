@@ -14,8 +14,8 @@ import com.storiqa.storiqawallet.ui.password.setup.PasswordSetupFragment
 import dagger.Component
 
 @PerFragment
-@Component(dependencies = arrayOf(ActivityComponent::class),
-        modules = arrayOf(FragmentModule::class, ViewModelModule::class))
+@Component(dependencies = [ActivityComponent::class],
+        modules = [FragmentModule::class, ViewModelModule::class])
 interface FragmentComponent : FragmentComponentProvides {
 
     fun inject(fragment: MessageDialog)

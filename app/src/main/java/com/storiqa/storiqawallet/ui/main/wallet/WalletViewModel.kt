@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.ui.main.wallet
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
+import com.storiqa.storiqawallet.data.repository.IAccountRepository
 import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
@@ -15,6 +16,7 @@ class WalletViewModel
 @Inject
 constructor(navigator: IMainNavigator,
             private val userRepository: IUserRepository,
+            private val accountRepository: IAccountRepository,
             private val userData: IUserDataStorage,
             private val appData: IAppDataStorage,
             private val tokenProvider: ITokenProvider) : BaseViewModel<IMainNavigator>() {
@@ -36,7 +38,9 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun updateData() {
-        userRepository.updateUser(::handleError)
+        userRepository.refreshUser(::handleError)
+
+        accountRepository.refreshAccounts(::handleError)
 
         //get User from BD
 

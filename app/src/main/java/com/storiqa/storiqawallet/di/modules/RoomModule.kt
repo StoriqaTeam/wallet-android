@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.di.modules
 import android.app.Application
 import android.arch.persistence.room.Room
 import com.storiqa.storiqawallet.data.db.AppDatabase
+import com.storiqa.storiqawallet.data.db.dao.AccountDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import dagger.Module
@@ -27,5 +28,9 @@ class RoomModule(application: Application) {
     @Provides
     @PerApplication
     internal fun provideUserDao(appDatabase: AppDatabase): UserDao = appDatabase.userDao()
+
+    @Provides
+    @PerApplication
+    internal fun provideAccountDao(appDatabase: AppDatabase): AccountDao = appDatabase.accountDao()
 
 }

@@ -96,17 +96,17 @@ interface WalletApi {
 
     @GET("v1/users/{id}/accounts")
     fun getAccounts(
-            @Path("id") userId: Int,
+            @Path("id") userId: Long,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Query("offset") offset: Int,
-            @Query("limit") limit: Int): Observable<ArrayList<Account>>
+            @Query("offset") offset: Long,
+            @Query("limit") limit: Long): Observable<ArrayList<Account>>
 
     @PUT("v1/users/{id}/accounts")
     fun updateAccounts(
-            @Path("id") userId: Int,
+            @Path("id") userId: Long,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
@@ -115,7 +115,7 @@ interface WalletApi {
 
     @POST("v1/users/{id}/accounts")
     fun createAccount(
-            @Path("id") userId: Int,
+            @Path("id") userId: Long,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
@@ -124,7 +124,7 @@ interface WalletApi {
 
     @DELETE("v1/users/{id}/accounts")
     fun deleteAccount(
-            @Path("id") userId: Int,
+            @Path("id") userId: Long,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
@@ -132,7 +132,7 @@ interface WalletApi {
 
     @GET("v1/accounts/{accountId}")
     fun getAccountInfo(
-            @Path("id") userId: Int,
+            @Path("id") userId: Long,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
@@ -140,13 +140,13 @@ interface WalletApi {
 
     @GET("v1/users/{id}/transactions")
     fun getTransactions(
-            @Path("id") userId: Int,
+            @Path("id") userId: Long,
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Query("offset") offset: Int,
-            @Query("limit") limit: Int): Observable<Response<Any>>
+            @Query("offset") offset: Long,
+            @Query("limit") limit: Long): Observable<Response<Any>>
 
     @POST("v1/transactions")
     fun createTransaction(

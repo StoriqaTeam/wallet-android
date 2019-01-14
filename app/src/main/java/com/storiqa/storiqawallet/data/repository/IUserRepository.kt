@@ -7,6 +7,6 @@ interface IUserRepository {
 
     fun getUser(email: String): Flowable<User>
 
-    fun updateUser(errorHandler: (Exception) -> Unit)
+    fun refreshUser(errorHandler: (Exception) -> Unit)
 
 }

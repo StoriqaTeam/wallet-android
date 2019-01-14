@@ -55,6 +55,16 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
 
+    //Lifecycle
+    implementation "android.arch.lifecycle:runtime:$lifecycleVersion"
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
+
+    //Room
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+
     //DI
     implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
@@ -67,17 +77,6 @@ dependencies {
 
     //Login via facebook
     implementation "com.facebook.android:facebook-login:$facebookVersion"
-
-    //Lifecycle
-    implementation "android.arch.lifecycle:runtime:$lifecycleVersion"
-    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
-
-    //Room
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
 
     //BottomNavigator
     implementation "com.aurelhubert:ahbottomnavigation:$bottomNavigatorVersion"
