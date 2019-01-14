@@ -1,13 +1,12 @@
 package com.storiqa.storiqawallet.screen_main.send
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.tabs.TabLayout
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentSendDeprecatedBinding
 import com.storiqa.storiqawallet.enums.Screen
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.tab_icon.view.*
 import java.math.BigDecimal
 
 
-class SendFragment : Fragment() {
+class SendFragment : androidx.fragment.app.Fragment() {
 
     lateinit var viewModel: MainActivityViewModel
 

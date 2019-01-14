@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.network.errors
 
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.storiqa.storiqawallet.R
 
 sealed class ErrorPresenter

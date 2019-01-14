@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.screen_pin_code_enter
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
+import androidx.lifecycle.ViewModel
 import com.storiqa.storiqawallet.enums.PinCodeEnterType
 import com.storiqa.storiqawallet.screen_scan_finger.ScanFingerModel
 

@@ -1,14 +1,13 @@
 package com.storiqa.storiqawallet.adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.storiqa.storiqawallet.databinding.ItemBillDeprecatedBinding
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.BillInfo
 
-class BillsAdapter(private val bills: Array<Bill>, val onClick: (position: Int) -> Unit) : RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
+class BillsAdapter(private val bills: Array<Bill>, val onClick: (position: Int) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<BillsAdapter.ViewHolder>() {
 
     private var layoutInflater: LayoutInflater? = null
 
@@ -24,7 +23,7 @@ class BillsAdapter(private val bills: Array<Bill>, val onClick: (position: Int) 
         holder.bind(bills[position], onClick)
     }
 
-    class ViewHolder(private val binding: ItemBillDeprecatedBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemBillDeprecatedBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(bill: Bill, onClick: (position: Int) -> Unit) {
 
             binding.apply {

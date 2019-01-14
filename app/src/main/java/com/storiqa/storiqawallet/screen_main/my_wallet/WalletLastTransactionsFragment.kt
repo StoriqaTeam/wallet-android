@@ -1,13 +1,11 @@
 package com.storiqa.storiqawallet.screen_main.my_wallet
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.TransactionAdapter
 import com.storiqa.storiqawallet.constants.Extras
@@ -20,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_wallet_transactions.*
 import kotlinx.android.synthetic.main.fragment_wallet_transactions.view.*
 
 
-class WalletLastTransactionsFragment : Fragment() {
+class WalletLastTransactionsFragment : androidx.fragment.app.Fragment() {
 
     lateinit var viewModel: MainActivityViewModel
     lateinit var bills: Array<Bill>
@@ -66,7 +64,7 @@ class WalletLastTransactionsFragment : Fragment() {
         viewModel.transactions.observe(this, Observer<Array<Transaction>> { newTransactions ->
             rvTransactions.apply {
                 setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
                 adapter = TransactionAdapter(newTransactions!!, {})
             }
         })

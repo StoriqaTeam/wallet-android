@@ -7,7 +7,6 @@ import com.storiqa.storiqawallet.data.db.entity.User
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class UserRepository(private val userDao: UserDao,
@@ -30,8 +29,11 @@ class UserRepository(private val userDao: UserDao,
                 .getUserInfo(signHeader.timestamp, signHeader.deviceId,
                         signHeader.signature, "Bearer $token")
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ userDao.insert(User(it)) }, { errorHandler(it as Exception) })
+                .observeOn(Schedulers.io())
+                .doOnError { errorHandler(it as Exception) }
+                .observeOn(Schedulers.io())
+                .doOnNext { userDao.insert(User(it)) }
+                .subscribe()
     }
 
 }

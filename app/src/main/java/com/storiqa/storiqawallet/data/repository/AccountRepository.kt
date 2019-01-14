@@ -19,7 +19,7 @@ class AccountRepository(private val userDao: UserDao,
                         private val signUtil: SignUtil) : IAccountRepository {
 
     override fun getAccounts(userId: Long): Flowable<List<Account>> {
-        return accountDao.loadAccounts(userId)
+        return accountDao.loadAccounts(userId).subscribeOn(Schedulers.io()).distinct()
     }
 
     @SuppressLint("CheckResult")
@@ -41,7 +41,10 @@ class AccountRepository(private val userDao: UserDao,
                 .getAccounts(user.id, signHeader.timestamp, signHeader.deviceId,
                         signHeader.signature, "Bearer $token", 0, 20)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ print(it) }, { errorHandler(it as Exception) })
+                .observeOn(Schedulers.io())
+                .doOnError { errorHandler(it as Exception) }
+                .observeOn(Schedulers.io())
+                .doOnNext { print(it) }
+                .subscribe()
     }
 }

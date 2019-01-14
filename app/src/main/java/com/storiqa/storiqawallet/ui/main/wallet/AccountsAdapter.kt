@@ -1,9 +1,9 @@
 package com.storiqa.storiqawallet.ui.main.wallet
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.storiqa.storiqawallet.databinding.ItemBillDeprecatedBinding
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.BillInfo

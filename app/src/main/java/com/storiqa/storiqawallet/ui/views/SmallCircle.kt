@@ -3,8 +3,8 @@ package com.storiqa.storiqawallet.ui.views
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.support.annotation.ColorRes
 import android.view.View
+import androidx.annotation.ColorRes
 
 
 class SmallCircle(context: Context,

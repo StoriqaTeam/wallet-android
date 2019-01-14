@@ -1,14 +1,14 @@
 package com.storiqa.storiqawallet.ui.dialogs
 
 import android.app.Dialog
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
-import com.android.databinding.library.baseAdapters.BR
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.App
+import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.databinding.DialogMessageBinding
 import com.storiqa.storiqawallet.di.components.DaggerFragmentComponent
 import com.storiqa.storiqawallet.di.components.FragmentComponent

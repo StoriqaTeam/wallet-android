@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.ui.question
 
-import android.databinding.ObservableInt
+import androidx.databinding.ObservableInt
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField

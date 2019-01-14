@@ -11,7 +11,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         dataBinding.enabled = true
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
@@ -35,18 +35,18 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':crypto-signer')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-    implementation "com.android.support:appcompat-v7:$androidSupportVersion"
-    implementation "com.android.support:support-annotations:$androidSupportVersion"
-    implementation "com.android.support:design:$androidSupportVersion"
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'androidx.annotation:annotation:1.0.1'
 
     //ConstraintLayout
-    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
     //Testing
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.18.3'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     //Retrofit2
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -56,14 +56,14 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
 
     //Lifecycle
-    implementation "android.arch.lifecycle:runtime:$lifecycleVersion"
-    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
 
     //Room
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 
     //DI
     implementation "com.google.dagger:dagger:$daggerVersion"
@@ -82,7 +82,7 @@ dependencies {
     implementation "com.aurelhubert:ahbottomnavigation:$bottomNavigatorVersion"
 
     //TODO delete
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

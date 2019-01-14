@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.di.modules
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.storiqa.storiqawallet.di.mapkeys.ViewModelKey
 import com.storiqa.storiqawallet.ui.dialogs.MessageViewModel
 import com.storiqa.storiqawallet.ui.login.LoginViewModel

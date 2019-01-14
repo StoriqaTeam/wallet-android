@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.di.modules
 
 import android.content.Context
-import android.support.v4.app.FragmentManager
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.storiqa.storiqawallet.di.qualifiers.ActivityContext
 import com.storiqa.storiqawallet.di.scopes.PerActivity
 import dagger.Module

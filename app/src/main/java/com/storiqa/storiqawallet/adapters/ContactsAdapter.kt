@@ -2,7 +2,6 @@ package com.storiqa.storiqawallet.adapters
 
 import android.content.Context
 import android.net.Uri
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import com.storiqa.storiqawallet.databinding.ItemContactBinding
 import com.storiqa.storiqawallet.objects.Contact
 import kotlinx.android.synthetic.main.item_contact.view.*
 
-class ContactsAdapter(private val contacts: Array<Contact>, val onClick: (position: Int) -> Unit) : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+class ContactsAdapter(private val contacts: Array<Contact>, val onClick: (position: Int) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     private var layoutInflater: LayoutInflater? = null
 
@@ -27,7 +26,7 @@ class ContactsAdapter(private val contacts: Array<Contact>, val onClick: (positi
         holder.bind(contacts[position], onClick)
     }
 
-    class ViewHolder(private val binding: ItemContactBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemContactBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact, onClick: (position: Int) -> Unit) {
             binding.apply {
                 this.contact = contact

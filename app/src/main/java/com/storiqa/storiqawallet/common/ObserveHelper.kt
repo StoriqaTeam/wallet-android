@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.common
 
-import android.databinding.Observable
+import androidx.databinding.Observable
 
 fun <T : Observable> T.addOnPropertyChanged(callback: (T) -> Unit) =
         object : Observable.OnPropertyChangedCallback() {

@@ -1,9 +1,9 @@
 package com.storiqa.storiqawallet
 
 import android.app.Application
-import android.arch.lifecycle.LifecycleObserver
 import android.content.res.Resources
-import android.support.multidex.MultiDex
+import androidx.lifecycle.LifecycleObserver
+import androidx.multidex.MultiDex
 import com.facebook.login.LoginManager
 import com.storiqa.storiqawallet.di.components.AppComponent
 import com.storiqa.storiqawallet.di.components.DaggerAppComponent

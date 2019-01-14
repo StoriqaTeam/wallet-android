@@ -2,12 +2,11 @@ package com.storiqa.storiqawallet
 
 import android.app.Activity
 import android.content.Context
-import android.support.v4.app.Fragment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 
-fun Fragment.hideKeyboard() {
+fun androidx.fragment.app.Fragment.hideKeyboard() {
     activity?.hideKeyboard(this.view)
 }
 

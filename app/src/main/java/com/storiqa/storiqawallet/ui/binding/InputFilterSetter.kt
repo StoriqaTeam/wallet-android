@@ -1,9 +1,9 @@
 package com.storiqa.storiqawallet.ui.binding
 
-import android.databinding.BindingAdapter
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import androidx.databinding.BindingAdapter
 
 @BindingAdapter("addTextFilter")
 fun EditText.addTextFilter(isEnabled: Boolean) {

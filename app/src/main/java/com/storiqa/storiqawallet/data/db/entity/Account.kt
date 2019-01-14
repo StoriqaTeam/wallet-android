@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.data.db.entity
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
 @Entity(indices = [Index(value = arrayOf("id", "user_id"))],
         foreignKeys = [ForeignKey(

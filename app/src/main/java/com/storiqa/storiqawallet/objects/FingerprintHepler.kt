@@ -11,9 +11,9 @@ import android.os.CancellationSignal
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.security.keystore.KeyProperties
-import android.support.annotation.RequiresApi
-import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.facebook.internal.FacebookRequestErrorClassification
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException

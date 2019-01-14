@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.di.modules
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.storiqa.storiqawallet.data.db.AppDatabase
 import com.storiqa.storiqawallet.data.db.dao.AccountDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao

@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.ui.registration
 
 import android.annotation.SuppressLint
-import android.databinding.ObservableBoolean
+import androidx.databinding.ObservableBoolean
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField

@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.screen_main
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.objects.Contact

@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.ui.login
 
-import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityLoginBinding

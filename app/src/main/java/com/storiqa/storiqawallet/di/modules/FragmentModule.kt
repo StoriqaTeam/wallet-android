@@ -1,10 +1,9 @@
 package com.storiqa.storiqawallet.di.modules
 
-import android.support.v4.app.Fragment
 import dagger.Module
 
 @Module
-class FragmentModule(private val fragment: Fragment) {
+class FragmentModule(private val fragment: androidx.fragment.app.Fragment) {
 
     /*@Provides
     @PerFragment

@@ -1,17 +1,15 @@
 package com.storiqa.storiqawallet.screen_main.send
 
 import android.Manifest
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.adapters.ContactsAdapter
 import com.storiqa.storiqawallet.databinding.FragmentChooseRecieverDeprecatedBinding
@@ -21,7 +19,7 @@ import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_choose_reciever_deprecated.*
 import kotlinx.android.synthetic.main.layout_ask_contacts.view.*
 
-class ChooseRecieverFragment : Fragment() {
+class ChooseRecieverFragment : androidx.fragment.app.Fragment() {
 
     lateinit var viewModel: MainActivityViewModel
     lateinit var binder: FragmentChooseRecieverDeprecatedBinding
@@ -183,7 +181,7 @@ class ChooseRecieverFragment : Fragment() {
     fun setAdapter(newContacts: Array<Contact>) {
         rvContacts.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
             adapter = ContactsAdapter(newContacts!!) {
                 binder.etReciever.setText(newContacts[it].phone)
                 setContacts(arrayOf(newContacts[it]))

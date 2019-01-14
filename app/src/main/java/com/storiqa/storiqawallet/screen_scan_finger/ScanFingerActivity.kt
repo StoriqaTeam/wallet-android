@@ -1,12 +1,12 @@
 package com.storiqa.storiqawallet.screen_scan_finger
 
 import android.annotation.TargetApi
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityScanFingerBinding
 import com.storiqa.storiqawallet.objects.ScreenStarter
