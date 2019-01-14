@@ -173,7 +173,7 @@ constructor(navigator: ILoginNavigator,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    hideKeyboard()
+                    hideLoadingDialog()
                     showMessageDialog(RegistrationMailSentDialogPresenter())
                 }, {
                     handleError(it as Exception)
@@ -188,10 +188,12 @@ constructor(navigator: ILoginNavigator,
         val userId = params?.get("user_id")?.toInt()
                 ?: throw Exception("Not found id in params")
 
-        val addDeviceRequest = AddDeviceRequest(userId, appData.deviceOs, signHeader.deviceId, signHeader.pubKeyHex)
+        val addDeviceRequest = AddDeviceRequest(userId, appData.deviceOs,
+                signHeader.deviceId, signHeader.pubKeyHex)
 
         walletApi
-                .addDevice(signHeader.timestamp, signHeader.deviceId, signHeader.signature, addDeviceRequest)
+                .addDevice(signHeader.timestamp, signHeader.deviceId,
+                        signHeader.signature, addDeviceRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

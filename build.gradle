@@ -32,6 +32,7 @@ ext {
     daggerVersion = '2.19'
     rxJavaVersion = '2.0.2'
     lifecycleVersion = '1.1.1'
+    roomVersion = '1.1.1'
     playServicesAuthVersion = '16.0.1'
     facebookVersion = '4.36.0'
     bottomNavigatorVersion = '2.2.0'

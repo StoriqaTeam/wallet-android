@@ -1,13 +1,14 @@
 package com.storiqa.storiqawallet
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.lifecycle.LifecycleObserver
 import android.content.res.Resources
+import android.support.multidex.MultiDex
 import com.facebook.login.LoginManager
 import com.storiqa.storiqawallet.di.components.AppComponent
 import com.storiqa.storiqawallet.di.components.DaggerAppComponent
 import com.storiqa.storiqawallet.di.modules.AppModule
+import com.storiqa.storiqawallet.di.modules.RoomModule
 
 class App : Application(), LifecycleObserver {
 
@@ -24,7 +25,6 @@ class App : Application(), LifecycleObserver {
             get() = this.instance.resources
     }
 
-    @SuppressLint("HardwareIds")
     override fun onCreate() {
         super.onCreate()
 
@@ -32,9 +32,12 @@ class App : Application(), LifecycleObserver {
         density = instance.resources.displayMetrics.density
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
+                .roomModule(RoomModule(this))
                 .build()
 
         LoginManager.getInstance().logOut()
+
+        MultiDex.install(this)
     }
 
 }

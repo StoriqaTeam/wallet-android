@@ -14,6 +14,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         dataBinding.enabled = true
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
         resValue "integer", "PIN_LENGTH", "4"
     }
     buildTypes {
@@ -55,8 +56,8 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:3.10.0"
 
     //DI
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     //RxJava2
     implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
@@ -72,9 +73,17 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
 
+    //Room
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+
     //BottomNavigator
     implementation "com.aurelhubert:ahbottomnavigation:$bottomNavigatorVersion"
 
+    //TODO delete
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

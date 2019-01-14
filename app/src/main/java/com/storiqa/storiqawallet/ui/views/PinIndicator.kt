@@ -11,7 +11,7 @@ class PinIndicator : LinearLayout {
     private var pinLength = 0
     private var circleRadius = 5
     private var colorDefault = android.R.color.darker_gray
-    private var colorHighlight = android.R.color.holo_blue_dark
+    private var colorHighlight = android.R.color.holo_orange_light
     private var gap = 0
 
     private var circles = ArrayList<SmallCircle>()
@@ -20,8 +20,14 @@ class PinIndicator : LinearLayout {
         set(value) {
             when {
                 value == 0 -> circles.forEach { it.isHighlight = false }
-                value > field -> circles[field].isHighlight = true
-                value < field -> circles[value].isHighlight = false
+                value > field -> {
+                    for (i in 0..field)
+                        circles[i].isHighlight = true
+                }
+                value < field -> {
+                    for (i in pinLength - 1 downTo value)
+                        circles[i].isHighlight = false
+                }
             }
 
             field = value
@@ -42,8 +48,6 @@ class PinIndicator : LinearLayout {
         pinLength = attributes.getInteger(R.styleable.PinIndicator_pinLength, resources.getInteger(R.integer.PIN_LENGTH))
 
         attributes.recycle()
-
-        //pinLength = resources.getInteger(R.integer.PIN_LENGTH)
 
         val size = 2 * circleRadius
 
