@@ -10,10 +10,10 @@ private const val LAST_NAME = "last_name"
 
 class UserDataStorage(private val prefs: PrefUtil) : IUserDataStorage {
 
-    override var id: Int
-        get() = prefs.getPreferences().getInt(ID, -1)
+    override var id: Long
+        get() = prefs.getPreferences().getLong(ID, -1)
         set(value) {
-            prefs.getEditor().putInt(ID, value).apply()
+            prefs.getEditor().putLong(ID, value).apply()
         }
 
     override var email: String

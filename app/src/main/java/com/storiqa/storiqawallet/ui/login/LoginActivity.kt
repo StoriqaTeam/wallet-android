@@ -19,6 +19,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
         initView()
 
+        checkIntentData(intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        checkIntentData(intent)
+    }
+
+    private fun checkIntentData(intent: Intent?) {
         val path = intent?.data?.path ?: return
         val token = path.split("/").last()
 
