@@ -27,4 +27,8 @@ class LoginNavigator(private val navigator: INavigator) : ILoginNavigator {
     override fun openEnterPinCodeActivity() {
         navigator.startActivity("com.storiqa.storiqawallet.ENTER_PIN")
     }
+
+    override fun closeActivity() {
+        navigator.finishActivity()
+    }
 }

@@ -133,6 +133,7 @@ constructor(navigator: ILoginNavigator,
         userData.lastName = userInfo.lastName
         appData.currentUserEmail = userInfo.email
         getNavigator()?.openQuickLaunchQuestionActivity()
+        getNavigator()?.closeActivity()
         hideLoadingDialog()
     }
 

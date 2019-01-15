@@ -44,6 +44,7 @@ constructor(navigator: IRegistrationNavigator,
     val passwordRepeat = NonNullObservableField("")
     val passwordRepeatError = NonNullObservableField("")
     val policyAgreement = ObservableBoolean(false)
+    val licenseAgreement = ObservableBoolean(false)
     val signUpButtonEnabled = ObservableBoolean(false)
 
     init {
@@ -67,13 +68,15 @@ constructor(navigator: IRegistrationNavigator,
             checkSignUpButtonEnabled()
         }
         policyAgreement.addOnPropertyChanged { checkSignUpButtonEnabled() }
+        licenseAgreement.addOnPropertyChanged { checkSignUpButtonEnabled() }
     }
 
     private fun checkSignUpButtonEnabled() {
         if (firstName.get().isNotEmpty() && lastName.get().isNotEmpty() &&
                 email.get().isNotEmpty() && password.get().isNotEmpty() &&
                 passwordRepeat.get().isNotEmpty() && policyAgreement.get() &&
-                isEmailValid(email.get()) && isUserNameValid(firstName.get().removeSuffix(" ")) &&
+                licenseAgreement.get() && isEmailValid(email.get()) &&
+                isUserNameValid(firstName.get().removeSuffix(" ")) &&
                 isUserNameValid(lastName.get().removeSuffix(" ")))
             signUpButtonEnabled.set(true)
         else

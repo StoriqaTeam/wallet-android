@@ -22,6 +22,9 @@
     <color name="button_text_enabled">#ffffff</color>
     <color name="button_text_disabled">#5affffff</color>
 
+    <color name="checkbox_text_checked">#ffffff</color>
+    <color name="checkbox_text_unchecked">#656565</color>
+
     <color name="input_hint">#adadad</color>
     <color name="input_text">#ffffff</color>
 
@@ -29,6 +32,8 @@
     <color name="input_underline_selected">#b0854d</color>
 
     <color name="text_caption">#ffffff</color>
+
+    <color name="link">#0645ad</color>
 
     <!--**************************************************************************-->
     <color name="brightSkyBlue">#00B2FF</color>
