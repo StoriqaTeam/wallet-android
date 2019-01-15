@@ -24,7 +24,10 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/headerRegisterLoginText"
+                style="@style/Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:text="@string/text_sign_up" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -32,18 +35,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginRight="17dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.firstNameError}">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFirstName"
+                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_first_name"
                     android:inputType="textCapWords|textPersonName"
-                    android:maxLines="1"
                     android:nextFocusDown="@id/etLastName"
                     android:text="@={viewModel.firstName}" />
 
@@ -59,13 +62,13 @@
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.lastNameError}">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
+                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_last_name"
                     android:inputType="textCapWords|textPersonName"
-                    android:maxLines="1"
                     android:nextFocusDown="@id/etEmail"
                     android:text="@={viewModel.lastName}" />
 
@@ -81,13 +84,13 @@
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.emailError}">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
+                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
                     android:nextFocusDown="@id/etPassword"
                     android:text="@={viewModel.email}" />
 
@@ -108,12 +111,12 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
+                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_password"
                     android:inputType="textPassword"
                     android:nextFocusDown="@+id/etRepeatPassword"
-                    android:paddingTop="0dp"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -133,8 +136,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPasswordRepeat"
+                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_repeat_password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
@@ -151,18 +155,17 @@
                 android:layout_marginRight="17dp"
                 android:checked="@={viewModel.policyAgreement}"
                 android:text="@string/text_policy_agreement"
-                android:textColor="@color/grayTextButtonColor"
-                app:buttonTint="@color/brightSkyBlue" />
+                android:textColor="@color/grayTextButtonColor" />
 
             <Button
                 android:id="@+id/btnSignUp"
-                style="@style/buttonStyle"
-                android:layout_marginTop="29dp"
-                android:background="@drawable/switch_state_button"
+                style="@style/GradientButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 android:enabled="@{viewModel.signUpButtonEnabled}"
                 android:onClick="@{()->viewModel.onSignUpButtonClicked()}"
-                android:text="@string/button_sign_up"
-                android:textColor="@color/grayTextButtonColor" />
+                android:text="@string/button_sign_up" />
 
             <include
                 layout="@layout/social_network_sign_in"

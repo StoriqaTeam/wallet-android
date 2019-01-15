@@ -12,8 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imgIcon"
@@ -45,31 +44,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnGetStarted"
-            style="@style/buttonStyle"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            style="@style/GradientButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/blue_button_background"
             android:onClick="@{() -> viewModel.startRegistration()}"
             android:text="@string/button_get_started"
-            android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnSignIn"
             style="@style/BorderlessButtonStyle"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="8dp"
+            android:onClick="@{() -> viewModel.startLogin()}"
             android:text="@string/button_sign_in"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> viewModel.startLogin()}" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
