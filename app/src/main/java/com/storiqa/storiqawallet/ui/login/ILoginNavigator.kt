@@ -9,4 +9,6 @@ interface ILoginNavigator {
     fun openQuickLaunchQuestionActivity()
 
     fun openEnterPinCodeActivity()
+
+    fun closeActivity()
 }

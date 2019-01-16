@@ -51,7 +51,6 @@
     <string name="reciever">Receiver</string>
     <string name="account">Account</string>
     <string name="hintAddReceiver">Wallet address or phone number</string>
-    <string name="forgotPin">I forgot my PIN</string>
     <string name="change">Change</string>
     <string name="deposit">Deposit</string>
     <string name="noWalletError">This user doesn\'t have a wallet</string>
@@ -125,6 +124,7 @@
     <string name="button_set_up_pin">Set up PIN-code</string>
     <string name="button_set_up_quick_launch">Set up Quick Launch</string>
     <string name="button_do_not_use">Do not use</string>
+    <string name="button_forgot_pin">I forgot my PIN</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -141,7 +141,8 @@
     <string name="text_haven_t_got_account">Haven’t got account?</string>
     <string name="text_social_accounts">Sign in via social account</string>
     <string name="text_have_an_account">Have an account?</string>
-    <string name="text_policy_agreement">I accept the terms of the license agreement and privacy policy</string>
+    <string name="text_license_agreement">I accept the <a href="https://storiqa.com/turewallet/terms_of_use.pdf">License Agreement</a> </string>
+    <string name="text_policy_agreement">I accept the <a href="https://storiqa.com/turewallet/privacy_policy.pdf">Privacy Policy</a> </string>
     <string name="text_recover_password">Enter email address where new\npassword recovering instructions \n will be sent to.</string>
     <string name="text_create_password">Create new password\nand confirm it.</string>
     <string name="text_sign_up">Sign up</string>

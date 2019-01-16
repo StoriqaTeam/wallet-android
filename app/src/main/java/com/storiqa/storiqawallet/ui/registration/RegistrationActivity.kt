@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.ui.registration
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.ViewGroup
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
@@ -18,6 +19,9 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding, Registrat
     }
 
     private fun initView() {
+        binding.policyAgreement.movementMethod = LinkMovementMethod.getInstance()
+        binding.licenseAgreement.movementMethod = LinkMovementMethod.getInstance()
+
         binding.etFirstName.apply {
             setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus)

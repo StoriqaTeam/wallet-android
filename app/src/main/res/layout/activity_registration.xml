@@ -2,7 +2,8 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -24,7 +25,10 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/headerRegisterLoginText"
+                style="@style/TitleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:text="@string/text_sign_up" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -32,18 +36,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="70dp"
                 android:layout_marginRight="17dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.firstNameError}">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFirstName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_first_name"
                     android:inputType="textCapWords|textPersonName"
-                    android:maxLines="1"
                     android:nextFocusDown="@id/etLastName"
                     android:text="@={viewModel.firstName}" />
 
@@ -59,13 +62,12 @@
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.lastNameError}">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_last_name"
                     android:inputType="textCapWords|textPersonName"
-                    android:maxLines="1"
                     android:nextFocusDown="@id/etEmail"
                     android:text="@={viewModel.lastName}" />
 
@@ -81,13 +83,12 @@
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.emailError}">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
                     android:nextFocusDown="@id/etPassword"
                     android:text="@={viewModel.email}" />
 
@@ -95,46 +96,41 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
+                style="@style/Widget.Design.TextInputLayout.Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="17dp"
                 app:errorEnabled="true"
-                app:errorText="@{viewModel.passwordError}"
-                app:passwordToggleDrawable="@drawable/eye_background"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorAccent">
+                app:errorText="@{viewModel.passwordError}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_password"
                     android:inputType="textPassword"
                     android:nextFocusDown="@+id/etRepeatPassword"
-                    android:paddingTop="0dp"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPasswordRepeat"
+                style="@style/Widget.Design.TextInputLayout.Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="17dp"
                 app:errorEnabled="true"
-                app:errorText="@{viewModel.passwordRepeatError}"
-                app:passwordToggleDrawable="@drawable/eye_background"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorAccent">
+                app:errorText="@{viewModel.passwordRepeatError}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPasswordRepeat"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_repeat_password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
@@ -143,26 +139,37 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
-                android:id="@+id/policyAgreement"
+                android:id="@+id/licenseAgreement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="17dp"
+                android:checked="@={viewModel.licenseAgreement}"
+                android:text="@string/text_license_agreement"
+                android:textColor="#ffffff" />
+
+            <CheckBox
+                android:id="@+id/policyAgreement"
+                style="@style/CheckBoxStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="17dp"
                 android:checked="@={viewModel.policyAgreement}"
                 android:text="@string/text_policy_agreement"
-                android:textColor="@color/grayTextButtonColor"
-                app:buttonTint="@color/brightSkyBlue" />
+                tools:textColor="#ffffff" />
 
             <Button
                 android:id="@+id/btnSignUp"
-                style="@style/buttonStyle"
-                android:layout_marginTop="29dp"
-                android:background="@drawable/switch_state_button"
+                style="@style/GradientButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 android:enabled="@{viewModel.signUpButtonEnabled}"
                 android:onClick="@{()->viewModel.onSignUpButtonClicked()}"
-                android:text="@string/button_sign_up"
-                android:textColor="@color/grayTextButtonColor" />
+                android:text="@string/button_sign_up" />
 
             <include
                 layout="@layout/social_network_sign_in"

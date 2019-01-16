@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -11,7 +10,6 @@
         <variable
             name="viewModel"
             type="com.storiqa.storiqawallet.ui.pincode.PinCodeViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,20 +22,19 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="?attr/actionBarSize"
+            app:title=" " />
 
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            style="@style/TitleText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_light"
-            android:gravity="center_horizontal"
+            android:layout_marginEnd="8dp"
             android:lineSpacingExtra="8sp"
             android:text="@{viewModel.title}"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +43,7 @@
 
         <TextView
             android:id="@+id/tvDescription"
+            style="@style/RegularText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -53,7 +51,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:gravity="center"
             android:text="@{viewModel.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,8 +65,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            app:colorDefault="@color/bluegrey"
-            app:colorHighlight="@color/brightSkyBlue"
+            app:colorDefault="@color/pin_indicator_default"
+            app:colorHighlight="@color/pin_indicator_highlight"
             app:gap="25dp"
             app:highlightCircleCount="@{viewModel.pinCode.length()}"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -79,10 +76,11 @@
 
         <Button
             android:id="@+id/btnDigit1"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
+            android:onClick="@{()->viewModel.onDigitEntered(1)}"
             android:text="1"
             app:layout_constraintBottom_toBottomOf="@+id/btnDigit2"
             app:layout_constraintEnd_toStartOf="@+id/btnDigit2"
@@ -90,21 +88,20 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnDigit2"
-            android:onClick="@{()->viewModel.onDigitEntered(1)}"
             tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnDigit2"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
             android:layout_marginTop="8dp"
+            android:onClick="@{()->viewModel.onDigitEntered(2)}"
             android:text="2"
             app:layout_constraintBottom_toTopOf="@+id/btnDigit5"
             app:layout_constraintEnd_toStartOf="@+id/btnDigit3"
             app:layout_constraintHorizontal_bias="0.5"
-            android:onClick="@{()->viewModel.onDigitEntered(2)}"
             app:layout_constraintStart_toEndOf="@+id/btnDigit1"
             app:layout_constraintTop_toTopOf="@+id/guideline"
             app:layout_constraintVertical_chainStyle="packed"
@@ -112,14 +109,14 @@
 
         <Button
             android:id="@+id/btnDigit3"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
+            android:onClick="@{()->viewModel.onDigitEntered(3)}"
             android:text="3"
             app:layout_constraintBottom_toBottomOf="@+id/btnDigit2"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{()->viewModel.onDigitEntered(3)}"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnDigit2"
             app:layout_constraintTop_toTopOf="@+id/btnDigit2"
@@ -127,12 +124,12 @@
 
         <Button
             android:id="@+id/btnDigit4"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
-            android:text="4"
             android:onClick="@{()->viewModel.onDigitEntered(4)}"
+            android:text="4"
             app:layout_constraintBottom_toBottomOf="@+id/btnDigit5"
             app:layout_constraintEnd_toStartOf="@+id/btnDigit5"
             app:layout_constraintHorizontal_bias="0.5"
@@ -143,12 +140,12 @@
 
         <Button
             android:id="@+id/btnDigit5"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
-            android:text="5"
             android:onClick="@{()->viewModel.onDigitEntered(5)}"
+            android:text="5"
             app:layout_constraintBottom_toTopOf="@+id/btnDigit8"
             app:layout_constraintEnd_toStartOf="@+id/btnDigit6"
             app:layout_constraintHorizontal_bias="0.5"
@@ -158,12 +155,12 @@
 
         <Button
             android:id="@+id/btnDigit6"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
-            android:text="6"
             android:onClick="@{()->viewModel.onDigitEntered(6)}"
+            android:text="6"
             app:layout_constraintBottom_toBottomOf="@+id/btnDigit5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -173,12 +170,12 @@
 
         <Button
             android:id="@+id/btnDigit7"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
-            android:text="7"
             android:onClick="@{()->viewModel.onDigitEntered(7)}"
+            android:text="7"
             app:layout_constraintBottom_toBottomOf="@+id/btnDigit8"
             app:layout_constraintEnd_toStartOf="@+id/btnDigit8"
             app:layout_constraintHorizontal_bias="0.5"
@@ -189,12 +186,12 @@
 
         <Button
             android:id="@+id/btnDigit8"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
-            android:text="8"
             android:onClick="@{()->viewModel.onDigitEntered(8)}"
+            android:text="8"
             app:layout_constraintBottom_toTopOf="@+id/btnDigit0"
             app:layout_constraintEnd_toStartOf="@+id/btnDigit9"
             app:layout_constraintHorizontal_bias="0.5"
@@ -204,12 +201,12 @@
 
         <Button
             android:id="@+id/btnDigit9"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
-            android:text="9"
             android:onClick="@{()->viewModel.onDigitEntered(9)}"
+            android:text="9"
             app:layout_constraintBottom_toBottomOf="@+id/btnDigit8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -219,12 +216,12 @@
 
         <Button
             android:id="@+id/btnDigit0"
-            style="@style/pinCodeNumber"
+            style="@style/PinCodeButton"
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
-            android:text="0"
             android:onClick="@{()->viewModel.onDigitEntered(0)}"
+            android:text="0"
             app:layout_constraintBottom_toTopOf="@+id/btnForgotPin"
             app:layout_constraintEnd_toStartOf="@+id/btnDelete"
             app:layout_constraintHorizontal_bias="0.5"
@@ -237,13 +234,13 @@
             android:layout_width="@dimen/pin_button_size"
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
+            android:background="@drawable/erase_pin"
+            android:onClick="@{()->viewModel.deleteLastDigit()}"
             app:layout_constraintBottom_toBottomOf="@+id/btnDigit0"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{()->viewModel.deleteLastDigit()}"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnDigit0"
-            app:layout_constraintTop_toTopOf="@+id/btnDigit0"
-            android:background="@drawable/erase_pin" />
+            app:layout_constraintTop_toTopOf="@+id/btnDigit0" />
 
         <ImageView
             android:id="@+id/btnScan"
@@ -251,16 +248,17 @@
             android:layout_height="@dimen/pin_button_size"
             android:layout_margin="@dimen/pin_button_margin"
             android:background="@drawable/fingerprint_blue"
+            android:visibility="@{viewModel.isPinInput ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@+id/btnDigit0"
             app:layout_constraintEnd_toStartOf="@+id/btnDigit0"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
-            android:visibility="@{viewModel.isPinInput ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnDigit0" />
 
         <TextView
             android:id="@+id/btnForgotPin"
+            style="@style/BorderlessButton.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -268,14 +266,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="4sp"
-            android:padding="10dp"
-            android:text="@string/forgotPin"
-            android:textColor="@color/warm_grey"
-            android:textSize="13sp"
-            android:visibility="@{viewModel.isPinInput ? View.VISIBLE : View.INVISIBLE}"
             android:onClick="@{()->viewModel.onForgotPinButtonClicked()}"
+            android:text="@string/button_forgot_pin"
+            android:visibility="@{viewModel.isPinInput ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
