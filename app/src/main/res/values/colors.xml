@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">@color/window_background</color>
     <color name="colorAccent">#b0854d</color>
 
@@ -21,9 +21,16 @@
     <color name="button_disabled_foreground">#91000000</color>
     <color name="button_text_enabled">#ffffff</color>
     <color name="button_text_disabled">#5affffff</color>
+    <color name="button_pin">#ffffff</color>
+    <color name="button_navigate_up">#ffffff</color>
+    <color name="button_borderless_text">#a5783e</color>
+    <color name="button_borderless_small_text">#555555</color>
 
     <color name="checkbox_text_checked">#ffffff</color>
     <color name="checkbox_text_unchecked">#656565</color>
+
+    <color name="pin_indicator_default">#2e2e2e</color>
+    <color name="pin_indicator_highlight">#ffffff</color>
 
     <color name="input_hint">#adadad</color>
     <color name="input_text">#ffffff</color>
@@ -32,8 +39,8 @@
     <color name="input_underline_selected">#b0854d</color>
 
     <color name="text_caption">#ffffff</color>
-
-    <color name="link">#0645ad</color>
+    <color name="text_highlighted">#ffffff</color>
+    <color name="text_regular">#808080</color>
 
     <!--**************************************************************************-->
     <color name="brightSkyBlue">#00B2FF</color>

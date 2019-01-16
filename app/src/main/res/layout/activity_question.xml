@@ -14,14 +14,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:id="@+id/tvTitle"
-            style="@style/recoveryHeader"
+            style="@style/TitleText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
             android:text="@{viewModel.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,12 +34,13 @@
 
         <TextView
             android:id="@+id/tvDescription"
+            style="@style/RegularText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:gravity="center"
+            android:layout_marginEnd="8dp"
             android:text="@{viewModel.description}"
-            android:textColor="@color/greyishBrown"
             android:visibility="@{(viewModel.description.length() > 0) ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,13 +49,11 @@
 
         <ImageView
             android:id="@+id/imgIcon"
+            imageResource="@{viewModel.icon}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            imageResource="@{viewModel.icon}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,16 +62,16 @@
 
         <Button
             android:id="@+id/btnPositive"
-            style="@style/buttonStyle"
+            style="@style/GradientButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
-            android:layout_marginBottom="19dp"
-            android:text="@{viewModel.positiveButtonText}"
+            android:layout_marginBottom="8dp"
             android:onClick="@{()->viewModel.onPositiveButtonClicked()}"
-            android:background="@drawable/blue_button_background"
-            android:textColor="@android:color/white"
+            android:text="@{viewModel.positiveButtonText}"
             app:layout_constraintBottom_toTopOf="@+id/btnNegative"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,13 +79,15 @@
 
         <TextView
             android:id="@+id/btnNegative"
-            style="@style/textButtonStyle"
-            android:layout_marginBottom="19dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/BorderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:onClick="@{()->viewModel.onNegativeButtonClicked()}"
             android:text="@{viewModel.negativeButtonText}"
             android:visibility="@{(viewModel.negativeButtonText.length() > 0) ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/button_do_not_use" />
 

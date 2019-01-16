@@ -51,7 +51,6 @@
     <string name="reciever">Receiver</string>
     <string name="account">Account</string>
     <string name="hintAddReceiver">Wallet address or phone number</string>
-    <string name="forgotPin">I forgot my PIN</string>
     <string name="change">Change</string>
     <string name="deposit">Deposit</string>
     <string name="noWalletError">This user doesn\'t have a wallet</string>
@@ -125,6 +124,7 @@
     <string name="button_set_up_pin">Set up PIN-code</string>
     <string name="button_set_up_quick_launch">Set up Quick Launch</string>
     <string name="button_do_not_use">Do not use</string>
+    <string name="button_forgot_pin">I forgot my PIN</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>

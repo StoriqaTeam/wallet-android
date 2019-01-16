@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/Title"
+                style="@style/TitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -43,7 +43,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFirstName"
-                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_first_name"
@@ -65,7 +64,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
-                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_last_name"
@@ -87,7 +85,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
-                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_email"
@@ -99,20 +96,17 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
+                style="@style/Widget.Design.TextInputLayout.Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="17dp"
                 app:errorEnabled="true"
-                app:errorText="@{viewModel.passwordError}"
-                app:passwordToggleDrawable="@drawable/eye_background"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorAccent">
+                app:errorText="@{viewModel.passwordError}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
-                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_password"
@@ -124,20 +118,17 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPasswordRepeat"
+                style="@style/Widget.Design.TextInputLayout.Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="17dp"
                 app:errorEnabled="true"
-                app:errorText="@{viewModel.passwordRepeatError}"
-                app:passwordToggleDrawable="@drawable/eye_background"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorAccent">
+                app:errorText="@{viewModel.passwordRepeatError}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPasswordRepeat"
-                    style="@style/EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_repeat_password"
