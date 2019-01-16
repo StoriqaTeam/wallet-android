@@ -18,6 +18,7 @@ import com.storiqa.storiqawallet.di.modules.RepositoryModule
 import com.storiqa.storiqawallet.di.modules.RoomModule
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
+import com.storiqa.storiqawallet.network.CryptoCompareApi
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.utils.PrefUtil
 import dagger.Component
@@ -35,6 +36,7 @@ interface AppComponentProvides {
 
     fun resources(): Resources
     fun walletApi(): WalletApi
+    fun cryptoCompareApi(): CryptoCompareApi
 
     fun prefUtil(): PrefUtil
 
