@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.di.modules
 
 import com.storiqa.storiqawallet.BuildConfig
 import com.storiqa.storiqawallet.di.scopes.PerApplication
+import com.storiqa.storiqawallet.network.CryptoCompareApi
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.errors.ErrorInterceptor
 import dagger.Module
@@ -18,6 +19,9 @@ import java.util.concurrent.TimeUnit
 @Module
 class NetworkModule {
 
+    private val cryptoCompareUrl = "https://min-api.cryptocompare.com/"
+    private val timeout = 50L
+
     @Provides
     @PerApplication
     internal fun provideOkHttpClient(): OkHttpClient {
@@ -29,8 +33,8 @@ class NetworkModule {
     internal fun provideWalletApi(okHttpClient: OkHttpClient): WalletApi {
         val httpClientBuilder = okHttpClient.newBuilder()
                 .addInterceptor(ErrorInterceptor())
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(timeout, TimeUnit.SECONDS)
+                .readTimeout(timeout, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor()
@@ -45,6 +49,29 @@ class NetworkModule {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
                 .create(WalletApi::class.java)
+    }
+
+    @Provides
+    @PerApplication
+    internal fun provideCryptoCompareApi(okHttpClient: OkHttpClient): CryptoCompareApi {
+        val httpClientBuilder = okHttpClient.newBuilder()
+                .addInterceptor(ErrorInterceptor())
+                .connectTimeout(timeout, TimeUnit.SECONDS)
+                .readTimeout(timeout, TimeUnit.SECONDS)
+
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            httpClientBuilder.addInterceptor(loggingInterceptor)
+        }
+
+        return Retrofit.Builder()
+                .baseUrl(cryptoCompareUrl)
+                .client(httpClientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+                .build()
+                .create(CryptoCompareApi::class.java)
     }
 
 }

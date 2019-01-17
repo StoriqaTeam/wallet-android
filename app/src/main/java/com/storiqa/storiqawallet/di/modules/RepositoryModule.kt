@@ -2,12 +2,11 @@ package com.storiqa.storiqawallet.di.modules
 
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.db.dao.AccountDao
+import com.storiqa.storiqawallet.data.db.dao.RateDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao
-import com.storiqa.storiqawallet.data.repository.AccountRepository
-import com.storiqa.storiqawallet.data.repository.IAccountRepository
-import com.storiqa.storiqawallet.data.repository.IUserRepository
-import com.storiqa.storiqawallet.data.repository.UserRepository
+import com.storiqa.storiqawallet.data.repository.*
 import com.storiqa.storiqawallet.di.scopes.PerApplication
+import com.storiqa.storiqawallet.network.CryptoCompareApi
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.utils.SignUtil
 import dagger.Module
@@ -28,13 +27,21 @@ class RepositoryModule {
 
     @Provides
     @PerApplication
-    internal fun provideAccountRepository(userDao: UserDao,
-                                          accountDao: AccountDao,
-                                          walletApi: WalletApi,
-                                          appDataStorage: IAppDataStorage,
-                                          signUtil: SignUtil): IAccountRepository {
+    internal fun provideAccountsRepository(userDao: UserDao,
+                                           accountDao: AccountDao,
+                                           walletApi: WalletApi,
+                                           appDataStorage: IAppDataStorage,
+                                           signUtil: SignUtil): IAccountsRepository {
 
-        return AccountRepository(userDao, accountDao, walletApi, appDataStorage, signUtil)
+        return AccountsRepository(userDao, accountDao, walletApi, appDataStorage, signUtil)
+    }
+
+    @Provides
+    @PerApplication
+    internal fun provideRatesRepository(rateDao: RateDao,
+                                        cryptoCompareApi: CryptoCompareApi): IRatesRepository {
+
+        return RatesRepository(rateDao, cryptoCompareApi)
     }
 
 }

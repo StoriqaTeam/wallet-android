@@ -2,15 +2,13 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
             type="com.storiqa.storiqawallet.ui.registration.RegistrationViewModel" />
-
     </data>
 
     <ScrollView
@@ -146,20 +144,17 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="17dp"
                 android:checked="@={viewModel.licenseAgreement}"
-                android:text="@string/text_license_agreement"
-                android:textColor="#ffffff" />
+                android:text="@string/text_license_agreement" />
 
             <CheckBox
                 android:id="@+id/policyAgreement"
-                style="@style/CheckBoxStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="17dp"
                 android:checked="@={viewModel.policyAgreement}"
-                android:text="@string/text_policy_agreement"
-                tools:textColor="#ffffff" />
+                android:text="@string/text_policy_agreement" />
 
             <Button
                 android:id="@+id/btnSignUp"

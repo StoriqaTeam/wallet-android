@@ -12,11 +12,11 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class AccountRepository(private val userDao: UserDao,
-                        private val accountDao: AccountDao,
-                        private val walletApi: WalletApi,
-                        private val appDataStorage: IAppDataStorage,
-                        private val signUtil: SignUtil) : IAccountRepository {
+class AccountsRepository(private val userDao: UserDao,
+                         private val accountDao: AccountDao,
+                         private val walletApi: WalletApi,
+                         private val appDataStorage: IAppDataStorage,
+                         private val signUtil: SignUtil) : IAccountsRepository {
 
     override fun getAccounts(userId: Long): Flowable<List<Account>> {
         return accountDao.loadAccounts(userId).subscribeOn(Schedulers.io()).distinct()
@@ -41,10 +41,17 @@ class AccountRepository(private val userDao: UserDao,
                 .getAccounts(user.id, signHeader.timestamp, signHeader.deviceId,
                         signHeader.signature, "Bearer $token", 0, 20)
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { errorHandler(it as Exception) }
                 .observeOn(Schedulers.io())
-                .doOnNext { print(it) }
+                .doOnNext { saveAccounts(it) }
                 .subscribe()
+    }
+
+    private fun saveAccounts(accounts: ArrayList<com.storiqa.storiqawallet.data.model.Account>) {
+        val accountsList = ArrayList<Account>()
+        accounts.forEach { accountsList.add(Account(it)) }
+
+        accountDao.deleteAndInsertAll(accountsList)
     }
 }

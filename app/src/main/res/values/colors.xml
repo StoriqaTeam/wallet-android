@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimary">#b0854d</color>
     <color name="colorPrimaryDark">@color/window_background</color>
     <color name="colorAccent">#b0854d</color>
 
@@ -26,8 +26,7 @@
     <color name="button_borderless_text">#a5783e</color>
     <color name="button_borderless_small_text">#555555</color>
 
-    <color name="checkbox_text_checked">#ffffff</color>
-    <color name="checkbox_text_unchecked">#656565</color>
+    <color name="checkbox_text">#555555</color>
 
     <color name="pin_indicator_default">#2e2e2e</color>
     <color name="pin_indicator_highlight">#ffffff</color>

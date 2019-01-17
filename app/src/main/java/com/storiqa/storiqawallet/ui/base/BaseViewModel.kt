@@ -52,6 +52,7 @@ abstract class BaseViewModel<N> : ViewModel() {
     }
 
     protected fun handleError(exception: Exception) {
+        exception.printStackTrace()
         hideLoadingDialog()
 
         val errorPresenter = errorHandler.handleError(exception)
