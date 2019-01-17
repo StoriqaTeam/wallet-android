@@ -9,8 +9,10 @@ import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.data.db.AppDatabase
 import com.storiqa.storiqawallet.data.db.dao.AccountDao
+import com.storiqa.storiqawallet.data.db.dao.RateDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao
-import com.storiqa.storiqawallet.data.repository.IAccountRepository
+import com.storiqa.storiqawallet.data.repository.IAccountsRepository
+import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.di.modules.AppModule
 import com.storiqa.storiqawallet.di.modules.NetworkModule
@@ -50,7 +52,9 @@ interface AppComponentProvides {
     fun roomDatabase(): AppDatabase
     fun userDao(): UserDao
     fun accountDao(): AccountDao
+    fun rateDao(): RateDao
 
     fun userRepository(): IUserRepository
-    fun accountRepository(): IAccountRepository
+    fun accountsRepository(): IAccountsRepository
+    fun ratesRepository(): IRatesRepository
 }

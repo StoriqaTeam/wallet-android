@@ -11,6 +11,7 @@
         <item name="alertDialogTheme">@style/TransparentDialogTheme</item>
         <item name="actionBarTheme">@style/ActionBarTheme</item>
         <item name="editTextStyle">@style/EditTextStyle</item>
+        <item name="checkboxStyle">@style/CheckBoxStyle</item>
 
         <item name="android:windowBackground">@color/window_background</item>
         <item name="android:textColorHint">@color/input_hint</item>
@@ -24,7 +25,13 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="GradientButton" parent="Base.TextAppearance.AppCompat.Button">
+    <style name="CheckBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textColor">@color/checkbox_text</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="GradientButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/button_gradient_background</item>
         <item name="android:textColor">@color/button_text</item>
         <item name="android:gravity">center</item>
@@ -73,18 +80,12 @@
         <item name="passwordToggleTint">@color/colorAccent</item>
     </style>
 
-    <style name="EditTextStyle" parent="Base.Widget.AppCompat.EditText">
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/input_text</item>
         <item name="android:textColorHint">@color/input_hint</item>
         <item name="android:background">@drawable/edittext_background</item>
         <item name="android:maxLines">1</item>
-    </style>
-
-    <style name="CheckBoxStyle">
-        <item name="android:paddingStart">10dp</item>
-        <item name="android:textColor">@color/checkbox_text</item>
-        <item name="buttonTint">@color/colorAccent</item>
     </style>
 
     <!--//////////////////////////////////////////////////////////////////////////////////////-->

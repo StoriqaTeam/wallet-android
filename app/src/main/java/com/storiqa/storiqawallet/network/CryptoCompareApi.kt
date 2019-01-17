@@ -9,5 +9,5 @@ interface CryptoCompareApi {
     @GET("data/pricemulti")
     fun getRates(
             @Query("fsyms") fsyms: String,
-            @Query("tsyms") tsyms: String): Observable<HashMap<String, HashMap<String, Float>>>
+            @Query("tsyms") tsyms: String): Observable<HashMap<String, HashMap<String, Double>>>
 }

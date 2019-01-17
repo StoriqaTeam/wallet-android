@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.storiqa.storiqawallet.data.db.AppDatabase
 import com.storiqa.storiqawallet.data.db.dao.AccountDao
+import com.storiqa.storiqawallet.data.db.dao.RateDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import dagger.Module
@@ -32,5 +33,9 @@ class RoomModule(application: Application) {
     @Provides
     @PerApplication
     internal fun provideAccountDao(appDatabase: AppDatabase): AccountDao = appDatabase.accountDao()
+
+    @Provides
+    @PerApplication
+    internal fun provideRateDao(appDatabase: AppDatabase): RateDao = appDatabase.rateDao()
 
 }

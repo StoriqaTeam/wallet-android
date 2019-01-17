@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit
 class NetworkModule {
 
     private val cryptoCompareUrl = "https://min-api.cryptocompare.com/"
+    private val timeout = 50L
 
     @Provides
     @PerApplication
@@ -32,8 +33,8 @@ class NetworkModule {
     internal fun provideWalletApi(okHttpClient: OkHttpClient): WalletApi {
         val httpClientBuilder = okHttpClient.newBuilder()
                 .addInterceptor(ErrorInterceptor())
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(timeout, TimeUnit.SECONDS)
+                .readTimeout(timeout, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor()
@@ -55,8 +56,8 @@ class NetworkModule {
     internal fun provideCryptoCompareApi(okHttpClient: OkHttpClient): CryptoCompareApi {
         val httpClientBuilder = okHttpClient.newBuilder()
                 .addInterceptor(ErrorInterceptor())
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(timeout, TimeUnit.SECONDS)
+                .readTimeout(timeout, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             val loggingInterceptor = HttpLoggingInterceptor()
