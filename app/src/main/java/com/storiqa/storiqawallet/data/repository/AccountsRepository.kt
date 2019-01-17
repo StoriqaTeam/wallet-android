@@ -19,7 +19,7 @@ class AccountsRepository(private val userDao: UserDao,
                          private val signUtil: SignUtil) : IAccountsRepository {
 
     override fun getAccounts(userId: Long): Flowable<List<Account>> {
-        return accountDao.loadAccounts(userId).subscribeOn(Schedulers.io())
+        return accountDao.loadAccounts(userId).subscribeOn(Schedulers.io()).distinct()
     }
 
     @SuppressLint("CheckResult")

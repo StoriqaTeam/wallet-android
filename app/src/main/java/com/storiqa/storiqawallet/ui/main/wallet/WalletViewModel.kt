@@ -51,6 +51,7 @@ constructor(navigator: IMainNavigator,
 
         val accounts = accountsRepository.getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
+                .filter { !it.isEmpty() }
                 .subscribe({
                     Log.d("TAGGG", "onNext ${it}")
                     print(it)
