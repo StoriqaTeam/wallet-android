@@ -37,6 +37,12 @@ class AuthorizationActivity : BaseActivity<ActivityAuthorizationBinding, Authori
         checkIntentData(intent)
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent != null)
+            checkIntentData(intent)
+    }
+
     private fun initView() {
         val tabs = binding.tabLayout
         for (i in 0 until tabs.tabCount) {
