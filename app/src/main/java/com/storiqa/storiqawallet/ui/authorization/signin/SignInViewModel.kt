@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.ui.login
+package com.storiqa.storiqawallet.ui.authorization.signin
 
 import android.annotation.SuppressLint
 import com.storiqa.storiqawallet.App
@@ -9,12 +9,19 @@ import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.errors.*
-import com.storiqa.storiqawallet.network.requests.*
+import com.storiqa.storiqawallet.network.errors.AttachDeviceMailSentDialogPresenter
+import com.storiqa.storiqawallet.network.errors.DialogType
+import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
+import com.storiqa.storiqawallet.network.errors.RegistrationMailSentDialogPresenter
+import com.storiqa.storiqawallet.network.requests.AddDeviceRequest
+import com.storiqa.storiqawallet.network.requests.LoginByOauthRequest
+import com.storiqa.storiqawallet.network.requests.LoginRequest
+import com.storiqa.storiqawallet.network.requests.ResendConfirmEmailRequest
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.GoogleAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
+import com.storiqa.storiqawallet.ui.authorization.IAuthorizationNavigator
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getDeviceOs
@@ -23,16 +30,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class LoginViewModel
+class SignInViewModel
 @Inject
-constructor(navigator: ILoginNavigator,
+constructor(navigator: IAuthorizationNavigator,
             val facebookAuthHelper: FacebookAuthHelper,
             val googleAuthHelper: GoogleAuthHelper,
             private val walletApi: WalletApi,
             private val userData: IUserDataStorage,
             private val appData: IAppDataStorage,
             private val signUtil: SignUtil) :
-        BaseViewModel<ILoginNavigator>(), SocialNetworksViewModel {
+        BaseViewModel<IAuthorizationNavigator>(), SocialNetworksViewModel {
 
     val emailError = NonNullObservableField("")
     val passwordError = NonNullObservableField("")
@@ -51,10 +58,12 @@ constructor(navigator: ILoginNavigator,
     fun onSignInButtonClicked() {
         hideKeyboard()
         passwordError.set("")
-        emailError.set("")
         if (isEmailValid(email.get())) {
+            emailError.set("")
             requestLogIn()
             showLoadingDialog()
+        } else {
+            emailError.set(App.res.getString(R.string.error_email_not_valid))
         }
     }
 
@@ -66,7 +75,7 @@ constructor(navigator: ILoginNavigator,
     }
 
     fun onRegistrationButtonClicked() {
-        getNavigator()?.openRegistrationActivity()
+        getNavigator()?.showSignUpFragment()
     }
 
     fun onPasswordRecoveryButtonClicked() {
@@ -200,37 +209,6 @@ constructor(navigator: ILoginNavigator,
                 .subscribe({
                     hideLoadingDialog()
                     showMessageDialog(AttachDeviceMailSentDialogPresenter())
-                }, {
-                    handleError(it as Exception)
-                })
-    }
-
-    @SuppressLint("CheckResult")
-    fun confirmEmail(token: String) {
-        showLoadingDialog()
-
-        walletApi
-                .confirmEmail(ConfirmEmailRequest(token))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    hideLoadingDialog()
-                }, {
-                    handleError(it as Exception)
-                })
-    }
-
-    @SuppressLint("CheckResult")
-    fun confirmAttachDevice(token: String) {
-        showLoadingDialog()
-
-        walletApi
-                .confirmAddingDevice(ConfirmAddingDeviceRequest(token, appData.deviceId))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    hideLoadingDialog()
-                    showMessageDialog(DeviceAttachedDialogPresenter())
                 }, {
                     handleError(it as Exception)
                 })

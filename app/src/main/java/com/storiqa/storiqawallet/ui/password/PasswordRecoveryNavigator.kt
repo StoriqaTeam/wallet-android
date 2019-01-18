@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.ui.password
 
+import com.storiqa.storiqawallet.ui.authorization.AuthorizationActivity
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
-import com.storiqa.storiqawallet.ui.login.LoginActivity
 
 class PasswordRecoveryNavigator(private val navigator: INavigator) : IPasswordRecoveryNavigator {
 
@@ -10,6 +10,6 @@ class PasswordRecoveryNavigator(private val navigator: INavigator) : IPasswordRe
     }
 
     override fun openLoginActivity() {
-        navigator.startActivity(LoginActivity::class.java)
+        navigator.startActivity(AuthorizationActivity::class.java)
     }
 }

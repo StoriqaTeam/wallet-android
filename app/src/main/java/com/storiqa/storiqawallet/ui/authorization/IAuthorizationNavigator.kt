@@ -1,8 +1,10 @@
-package com.storiqa.storiqawallet.ui.login
+package com.storiqa.storiqawallet.ui.authorization
 
-interface ILoginNavigator {
+interface IAuthorizationNavigator {
 
-    fun openRegistrationActivity()
+    fun showSignUpFragment()
+
+    fun showSignInFragment()
 
     fun openPasswordRecoveryActivity()
 
@@ -11,4 +13,5 @@ interface ILoginNavigator {
     fun openEnterPinCodeActivity()
 
     fun closeActivity()
+
 }

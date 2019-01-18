@@ -10,24 +10,26 @@ import com.storiqa.storiqawallet.ui.main.wallet.WalletFragment
 
 class MainNavigator(private val navigator: INavigator) : IMainNavigator {
 
+    private val containerId = R.id.container
+
     override fun showWalletFragment() {
-        navigator.replaceFragment(R.id.container, WalletFragment(), "wallet")
+        navigator.replaceFragment(containerId, WalletFragment(), "wallet")
     }
 
     override fun showSendFragment() {
-        navigator.replaceFragment(R.id.container, SendFragment(), "send")
+        navigator.replaceFragment(containerId, SendFragment(), "send")
     }
 
     override fun showExchangeFragment() {
-        navigator.replaceFragment(R.id.container, ExchangeFragment(), "exchange")
+        navigator.replaceFragment(containerId, ExchangeFragment(), "exchange")
     }
 
     override fun showReceiveFragment() {
-        navigator.replaceFragment(R.id.container, ReceiveFragment(), "receive")
+        navigator.replaceFragment(containerId, ReceiveFragment(), "receive")
     }
 
     override fun showMenuFragment() {
-        navigator.replaceFragment(R.id.container, MenuFragment(), "menu")
+        navigator.replaceFragment(containerId, MenuFragment(), "menu")
     }
 
 }
