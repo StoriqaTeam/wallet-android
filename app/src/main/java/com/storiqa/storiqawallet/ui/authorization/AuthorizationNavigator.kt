@@ -1,17 +1,25 @@
-package com.storiqa.storiqawallet.ui.login
+package com.storiqa.storiqawallet.ui.authorization
 
 import android.os.Bundle
+import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.ui.authorization.signin.SignInFragment
+import com.storiqa.storiqawallet.ui.authorization.signup.SignUpFragment
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.password.PasswordRecoveryActivity
 import com.storiqa.storiqawallet.ui.question.QUESTION_TYPE
 import com.storiqa.storiqawallet.ui.question.QuestionActivity
 import com.storiqa.storiqawallet.ui.question.QuestionType
-import com.storiqa.storiqawallet.ui.registration.RegistrationActivity
 
-class LoginNavigator(private val navigator: INavigator) : ILoginNavigator {
+class AuthorizationNavigator(private val navigator: INavigator) : IAuthorizationNavigator {
 
-    override fun openRegistrationActivity() {
-        navigator.startActivity(RegistrationActivity::class.java)
+    private val containerId = R.id.container
+
+    override fun showSignUpFragment() {
+        navigator.replaceFragment(containerId, SignUpFragment(), "SignUpFragment")
+    }
+
+    override fun showSignInFragment() {
+        navigator.replaceFragment(containerId, SignInFragment(), "SignInFragment")
     }
 
     override fun openPasswordRecoveryActivity() {
@@ -31,4 +39,5 @@ class LoginNavigator(private val navigator: INavigator) : ILoginNavigator {
     override fun closeActivity() {
         navigator.finishActivity()
     }
+
 }

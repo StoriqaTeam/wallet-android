@@ -3,6 +3,8 @@ package com.storiqa.storiqawallet.di.components
 import com.storiqa.storiqawallet.di.modules.FragmentModule
 import com.storiqa.storiqawallet.di.modules.ViewModelModule
 import com.storiqa.storiqawallet.di.scopes.PerFragment
+import com.storiqa.storiqawallet.ui.authorization.signin.SignInFragment
+import com.storiqa.storiqawallet.ui.authorization.signup.SignUpFragment
 import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment
 import com.storiqa.storiqawallet.ui.main.menu.MenuFragment
@@ -19,6 +21,9 @@ import dagger.Component
 interface FragmentComponent : FragmentComponentProvides {
 
     fun inject(fragment: MessageDialog)
+
+    fun inject(fragment: SignInFragment)
+    fun inject(fragment: SignUpFragment)
 
     fun inject(fragment: PasswordResetFragment)
     fun inject(fragment: PasswordSetupFragment)

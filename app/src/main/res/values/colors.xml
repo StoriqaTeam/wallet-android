@@ -41,6 +41,9 @@
     <color name="text_highlighted">#ffffff</color>
     <color name="text_regular">#808080</color>
 
+    <color name="tab_selected_text">#ffffff</color>
+    <color name="tab_unselected_text">#8c8c8c</color>
+
     <!--**************************************************************************-->
     <color name="brightSkyBlue">#00B2FF</color>
     <color name="gray">#0D000000</color>

@@ -7,11 +7,8 @@ import com.storiqa.storiqawallet.enums.PinCodeEnterType
 import com.storiqa.storiqawallet.screen_main.MainActivity
 import com.storiqa.storiqawallet.screen_pin_code_enter.EnterPinCodeActivity
 import com.storiqa.storiqawallet.screen_scan_finger.ScanFingerActivity
-import com.storiqa.storiqawallet.ui.login.LoginActivity
 
 class ScreenStarter {
-
-    fun startLoginScreen(context: Context) = context.startActivity(Intent(context, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK))
 
     fun startEnterPinCodeScreen(context: Context) = context.startActivity(Intent(context, EnterPinCodeActivity::class.java).putExtra(Extras().pinCodeEnterType, PinCodeEnterType.SET_PASSWORD))
 

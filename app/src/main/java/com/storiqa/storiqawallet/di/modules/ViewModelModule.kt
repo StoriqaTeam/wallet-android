@@ -3,8 +3,10 @@ package com.storiqa.storiqawallet.di.modules
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.storiqa.storiqawallet.di.mapkeys.ViewModelKey
+import com.storiqa.storiqawallet.ui.authorization.AuthorizationViewModel
+import com.storiqa.storiqawallet.ui.authorization.signin.SignInViewModel
+import com.storiqa.storiqawallet.ui.authorization.signup.SignUpViewModel
 import com.storiqa.storiqawallet.ui.dialogs.MessageViewModel
-import com.storiqa.storiqawallet.ui.login.LoginViewModel
 import com.storiqa.storiqawallet.ui.main.MainViewModel
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeViewModel
 import com.storiqa.storiqawallet.ui.main.menu.MenuViewModel
@@ -15,14 +17,12 @@ import com.storiqa.storiqawallet.ui.password.reset.PasswordResetViewModel
 import com.storiqa.storiqawallet.ui.password.setup.PasswordSetupViewModel
 import com.storiqa.storiqawallet.ui.pincode.PinCodeViewModel
 import com.storiqa.storiqawallet.ui.question.QuestionViewModel
-import com.storiqa.storiqawallet.ui.registration.RegistrationViewModel
 import com.storiqa.storiqawallet.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import javax.inject.Inject
 import javax.inject.Provider
-
 
 @Module
 abstract class ViewModelModule {
@@ -37,13 +37,18 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(LoginViewModel::class)
-    abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+    @ViewModelKey(AuthorizationViewModel::class)
+    abstract fun bindAuthorizationViewModel(authorizationViewModel: AuthorizationViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(RegistrationViewModel::class)
-    abstract fun bindRegistrationViewModel(registrationViewModel: RegistrationViewModel): ViewModel
+    @ViewModelKey(SignInViewModel::class)
+    abstract fun bindSignInViewModel(signInViewModel: SignInViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SignUpViewModel::class)
+    abstract fun bindSignUpViewModel(signUpViewModel: SignUpViewModel): ViewModel
 
     @Binds
     @IntoMap

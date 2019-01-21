@@ -1,17 +1,16 @@
 package com.storiqa.storiqawallet.ui.splash
 
+import com.storiqa.storiqawallet.ui.authorization.AuthorizationActivity
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
-import com.storiqa.storiqawallet.ui.login.LoginActivity
-import com.storiqa.storiqawallet.ui.registration.RegistrationActivity
 
 class SplashNavigator(private val navigator: INavigator) : ISplashNavigator {
 
     override fun openLoginActivity() {
-        navigator.startActivity(LoginActivity::class.java)
+        navigator.startActivity(AuthorizationActivity::class.java)
     }
 
     override fun openRegistrationActivity() {
-        navigator.startActivity(RegistrationActivity::class.java)
+        navigator.startActivity("com.storiqa.storiqawallet.SIGN_UP")
     }
 
     override fun openPinCodeActivity() {

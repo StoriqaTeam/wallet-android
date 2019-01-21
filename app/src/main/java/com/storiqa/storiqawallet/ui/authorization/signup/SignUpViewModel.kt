@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.ui.registration
+package com.storiqa.storiqawallet.ui.authorization.signup
 
 import android.annotation.SuppressLint
 import androidx.databinding.ObservableBoolean
@@ -15,6 +15,7 @@ import com.storiqa.storiqawallet.network.requests.RegisterUserRequest
 import com.storiqa.storiqawallet.network.responses.RegisterUserResponse
 import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
+import com.storiqa.storiqawallet.ui.authorization.IAuthorizationNavigator
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getDeviceOs
@@ -24,14 +25,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class RegistrationViewModel
+class SignUpViewModel
 @Inject
-constructor(navigator: IRegistrationNavigator,
+constructor(navigator: IAuthorizationNavigator,
             val facebookAuthHelper: FacebookAuthHelper,
             private val walletApi: WalletApi,
             private val userData: IUserDataStorage,
             private val signUtil: SignUtil) :
-        BaseViewModel<IRegistrationNavigator>(), SocialNetworksViewModel {
+        BaseViewModel<IAuthorizationNavigator>(), SocialNetworksViewModel {
 
     val firstName = NonNullObservableField("")
     val firstNameError = NonNullObservableField("")
@@ -165,7 +166,7 @@ constructor(navigator: IRegistrationNavigator,
                                                 params: HashMap<String, String>?): () -> Unit {
         when (dialogType) {
             DialogType.REGISTRATION_MAIL_SENT -> return {
-                getNavigator()?.openLoginActivity() //TODO add flags
+                getNavigator()?.showSignInFragment() //TODO add flags
                 getNavigator()?.closeActivity()
             }
             else -> return { }
@@ -173,7 +174,7 @@ constructor(navigator: IRegistrationNavigator,
     }
 
     fun onSignInButtonClicked() {
-        getNavigator()?.openLoginActivity()
+        getNavigator()?.showSignInFragment()
     }
 
     override fun onFacebookLoginButtonClicked() {

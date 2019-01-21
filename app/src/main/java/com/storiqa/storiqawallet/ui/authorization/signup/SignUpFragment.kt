@@ -1,19 +1,26 @@
-package com.storiqa.storiqawallet.ui.registration
+package com.storiqa.storiqawallet.ui.authorization.signup
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.view.View
 import android.view.ViewGroup
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.databinding.ActivityRegistrationBinding
-import com.storiqa.storiqawallet.ui.base.BaseActivity
+import com.storiqa.storiqawallet.databinding.FragmentSignUpBinding
+import com.storiqa.storiqawallet.ui.base.BaseFragment
 import com.storiqa.storiqawallet.ui.common.SpacesWatcher
 import com.storiqa.storiqawallet.ui.common.onSubmitButtonClicked
 
-class RegistrationActivity : BaseActivity<ActivityRegistrationBinding, RegistrationViewModel>() {
+class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun getLayoutId(): Int = R.layout.fragment_sign_up
+
+    override fun getBindingVariable(): Int = BR.viewModel
+
+    override fun getViewModelClass(): Class<SignUpViewModel> = SignUpViewModel::class.java
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initView()
     }
@@ -53,12 +60,5 @@ class RegistrationActivity : BaseActivity<ActivityRegistrationBinding, Registrat
             isFocusableInTouchMode = true
         }
     }
-
-
-    override fun getLayoutId(): Int = R.layout.activity_registration
-
-    override fun getBindingVariable(): Int = BR.viewModel
-
-    override fun getViewModelClass(): Class<RegistrationViewModel> = RegistrationViewModel::class.java
 
 }
