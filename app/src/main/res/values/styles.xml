@@ -50,7 +50,7 @@
     </style>
 
     <style name="BorderlessButton.Small">
-        <item name="android:textColor">@color/button_borderless_small_text</item>
+        <item name="android:textColor">@color/button_small_text</item>
         <item name="android:textSize">12sp</item>
     </style>
 
