@@ -11,6 +11,7 @@ import com.storiqa.storiqawallet.data.db.AppDatabase
 import com.storiqa.storiqawallet.data.db.dao.AccountDao
 import com.storiqa.storiqawallet.data.db.dao.RateDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao
+import com.storiqa.storiqawallet.data.polling.IShortPolling
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.data.repository.IUserRepository
@@ -44,6 +45,8 @@ interface AppComponentProvides {
 
     fun userDataStorage(): IUserDataStorage
     fun appDataStorage(): IAppDataStorage
+
+    fun shortPolling(): IShortPolling
 
     fun signer(): ISigner
     fun keyGenerator(): IKeyGenerator
