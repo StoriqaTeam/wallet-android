@@ -56,9 +56,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <android.widget.Button
+        <TextView
             android:id="@+id/btnSignIn"
-            style="@style/BorderlessButtonStyle"
+            style="@style/BorderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="8dp"

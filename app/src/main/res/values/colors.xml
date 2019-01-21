@@ -23,8 +23,10 @@
     <color name="button_text_disabled">#5affffff</color>
     <color name="button_pin">#ffffff</color>
     <color name="button_navigate_up">#ffffff</color>
-    <color name="button_borderless_text">#a5783e</color>
-    <color name="button_borderless_small_text">#555555</color>
+    <color name="button_borderless_text_normal">#a5783e</color>
+    <color name="button_borderless_text_pressed">#74542C</color>
+    <color name="button_small_text_normal">#555555</color>
+    <color name="button_small_text_pressed">#363636</color>
 
     <color name="checkbox_text">#555555</color>
 
