@@ -9,6 +9,7 @@ import com.storiqa.storiqawallet.data.db.entity.User
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -29,6 +30,15 @@ class AccountsRepository(private val userDao: UserDao,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ requestAccounts(it, errorHandler) }, { errorHandler(it as Exception) })
+    }
+
+    override fun updateAccounts(id: Long, email: String): Observable<ArrayList<com.storiqa.storiqawallet.data.model.Account>> {
+        val token = appDataStorage.token
+        val signHeader = signUtil.createSignHeader(email)
+        return walletApi
+                .getAccounts(id, signHeader.timestamp, signHeader.deviceId,
+                        signHeader.signature, "Bearer $token", 0, 20)
+                .doOnNext { saveAccounts(it) }
     }
 
     @SuppressLint("CheckResult")

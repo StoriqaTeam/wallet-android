@@ -5,8 +5,10 @@ import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.db.dao.UserDao
 import com.storiqa.storiqawallet.data.db.entity.User
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -37,4 +39,13 @@ class UserRepository(private val userDao: UserDao,
                 .subscribe()
     }
 
+    override fun updateUser(email: String): Observable<UserInfoResponse> {
+        val token = appDataStorage.token
+        val signHeader = signUtil.createSignHeader(email)
+
+        return walletApi
+                .getUserInfo(signHeader.timestamp, signHeader.deviceId,
+                        signHeader.signature, "Bearer $token")
+                .doOnNext { userDao.insert(User(it)) }
+    }
 }

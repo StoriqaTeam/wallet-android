@@ -8,6 +8,9 @@ import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.IUserDataStorage
+import com.storiqa.storiqawallet.data.repository.IAccountsRepository
+import com.storiqa.storiqawallet.data.repository.IRatesRepository
+import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.errors.AttachDeviceMailSentDialogPresenter
 import com.storiqa.storiqawallet.network.errors.DialogType
@@ -17,6 +20,7 @@ import com.storiqa.storiqawallet.network.requests.AddDeviceRequest
 import com.storiqa.storiqawallet.network.requests.LoginByOauthRequest
 import com.storiqa.storiqawallet.network.requests.LoginRequest
 import com.storiqa.storiqawallet.network.requests.ResendConfirmEmailRequest
+import com.storiqa.storiqawallet.network.responses.TokenResponse
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import com.storiqa.storiqawallet.socialnetworks.FacebookAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.GoogleAuthHelper
@@ -26,6 +30,7 @@ import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getDeviceOs
 import com.storiqa.storiqawallet.utils.isEmailValid
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -35,6 +40,9 @@ class SignInViewModel
 constructor(navigator: IAuthorizationNavigator,
             val facebookAuthHelper: FacebookAuthHelper,
             val googleAuthHelper: GoogleAuthHelper,
+            private val accountsRepository: IAccountsRepository,
+            private val userRepository: IUserRepository,
+            private val ratesRepository: IRatesRepository,
             private val walletApi: WalletApi,
             private val userData: IUserDataStorage,
             private val appData: IAppDataStorage,
@@ -60,7 +68,8 @@ constructor(navigator: IAuthorizationNavigator,
         passwordError.set("")
         if (isEmailValid(email.get())) {
             emailError.set("")
-            requestLogIn()
+            //requestLogIn()
+            sendRequests()
             showLoadingDialog()
         } else {
             emailError.set(App.res.getString(R.string.error_email_not_valid))
@@ -83,23 +92,43 @@ constructor(navigator: IAuthorizationNavigator,
     }
 
     @SuppressLint("CheckResult")
-    private fun requestLogIn() {
-        val signHeader = signUtil.createSignHeader(email.get())
-        val loginRequest = LoginRequest(email.get(), password.get(), getDeviceOs(), signHeader.deviceId)
-
-        walletApi
-                .login(signHeader.timestamp, signHeader.deviceId, signHeader.signature, loginRequest)
-                .subscribeOn(Schedulers.io())
+    private fun sendRequests() {
+        requestLogIn()
+                .doOnNext {
+                    saveToken(it.token)
+                }
+                .flatMap { userRepository.updateUser(email.get()) }
+                .doOnNext {
+                    saveUserInfo(it)
+                }
+                .flatMap { accountsRepository.updateAccounts(it.id, it.email) }
+                .flatMap { ratesRepository.updateRates() }
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    onTokenReceived(it.token)
+                    getNavigator()?.openQuickLaunchQuestionActivity()
+                    getNavigator()?.closeActivity()
+                    hideLoadingDialog()
                 }, {
                     handleError(it as Exception)
                 })
     }
 
+    private fun saveToken(token: String) {
+        appData.token = token
+    }
+
     @SuppressLint("CheckResult")
-    private fun requestLogInByOauth(token: String, provider: String) {
+    private fun requestLogIn(): Observable<TokenResponse> {
+        val signHeader = signUtil.createSignHeader(email.get())
+        val loginRequest = LoginRequest(email.get(), password.get(), getDeviceOs(), signHeader.deviceId)
+
+        return walletApi
+                .login(signHeader.timestamp, signHeader.deviceId, signHeader.signature, loginRequest)
+    }
+
+    @SuppressLint("CheckResult")
+    private fun requestLogInByOauth(token: String, provider: String) { //TODO make chain of requests with rxJava
         val signHeader = signUtil.createSignHeader(email.get())
         val request = LoginByOauthRequest(token, provider, getDeviceOs(), signHeader.deviceId)
 
@@ -117,22 +146,7 @@ constructor(navigator: IAuthorizationNavigator,
     private fun onTokenReceived(token: String) {
         appData.token = token
         val bearer = "Bearer $token"
-        requestUserInfo(bearer)
-    }
-
-    @SuppressLint("CheckResult")
-    private fun requestUserInfo(token: String) {
-        val signHeader = signUtil.createSignHeader(email.get())
-
-        walletApi
-                .getUserInfo(signHeader.timestamp, signHeader.deviceId, signHeader.signature, token)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    saveUserInfo(it)
-                }, {
-                    handleError(it as Exception)
-                })
+        //requestUserInfo(bearer)
     }
 
     private fun saveUserInfo(userInfo: UserInfoResponse) {
@@ -141,9 +155,6 @@ constructor(navigator: IAuthorizationNavigator,
         userData.firstName = userInfo.firstName
         userData.lastName = userInfo.lastName
         appData.currentUserEmail = userInfo.email
-        getNavigator()?.openQuickLaunchQuestionActivity()
-        getNavigator()?.closeActivity()
-        hideLoadingDialog()
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
