@@ -10,21 +10,29 @@
 
         <variable
             name="account"
-            type="com.storiqa.storiqawallet.data.model.Account" />
+            type="com.storiqa.storiqawallet.data.db.entity.Account" />
 
+        <variable
+            name="rate"
+            type="com.storiqa.storiqawallet.data.db.entity.Rate" />
+
+        <variable
+            name="currencyFiat"
+            type="String" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        app:cardBackgroundColor="#0be7a0"
         app:cardCornerRadius="16dp"
-        app:cardElevation="8dp">
+        app:cardElevation="8dp"
+        app:cardPreventCornerOverlap="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clBill"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:cardBackground="@{account.currency}">
 
             <ImageView
                 android:id="@+id/imgLogo"
@@ -32,9 +40,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                app:currencyIcon="@{account.currency}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/btc_small_logo" />
+                tools:srcCompat="@drawable/btc_small_logo" />
 
             <TextView
                 android:id="@+id/tvBalancePreview"
@@ -43,7 +52,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="right"
-                android:text="@{account.balance + ' ' + account.currency}"
+                android:text="@{account.balance + ' ' + account.currency.toUpperCase()}"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgLogo"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,8 +66,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="16sp"
                 android:text="@{account.name}"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvBalance"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,8 +79,8 @@
                 android:id="@+id/tvCurrency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{account.currency.toUpperCase()}"
                 android:textSize="16sp"
-                android:text="@{account.currency}"
                 app:layout_constraintEnd_toStartOf="@+id/tvBalance"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -86,8 +95,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:textSize="26sp"
                 android:text="@{account.balance}"
+                android:textSize="26sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvBalanceDollar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -102,11 +111,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:textSize="16sp"
+                app:currency="@{currencyFiat}"
+                app:equalBalance="@{rate.price * Double.parseDouble(account.balance)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvBalance"
-                tools:text="$ 2.72" />
+                tools:text="$ 390871.20 " />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

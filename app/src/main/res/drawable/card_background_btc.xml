@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:centerColor="@color/card_background_btc_center"
+        android:endColor="@color/card_background_btc_end"
+        android:startColor="@color/card_background_btc_start" />
+</shape>

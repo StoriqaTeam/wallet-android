@@ -1,18 +1,17 @@
 package com.storiqa.storiqawallet.ui.main.wallet
 
-import android.util.Log
+import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
+import com.storiqa.storiqawallet.data.db.entity.Account
+import com.storiqa.storiqawallet.data.db.entity.Rate
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.data.repository.IUserRepository
-import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.*
 import javax.inject.Inject
 
 class WalletViewModel
@@ -25,7 +24,10 @@ constructor(navigator: IMainNavigator,
             private val appData: IAppDataStorage,
             private val tokenProvider: ITokenProvider) : BaseViewModel<IMainNavigator>() {
 
-    lateinit var accounts: Observable<ArrayList<Bill>>
+    val updateAccounts = SingleLiveEvent<Any>()
+
+    var accounts: List<Account> = ArrayList()
+    var rates: List<Rate> = ArrayList()
 
     init {
         setNavigator(navigator)
@@ -39,28 +41,29 @@ constructor(navigator: IMainNavigator,
         else
             updateData()
 
-        val rates = ratesRepository.getRates()
+        ratesRepository.getRates()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Log.d("TAGGG", "onNext ${it}")
-                    print(it)
-                }, {
-                    Log.d("TAGGG", "onError ${it.message}")
-                    print(it)
-                })
+                .subscribe {
+                    rates = it
+                    updateAccounts()
+                }
 
-        val accounts = accountsRepository.getAccounts(userData.id)
+        accountsRepository.getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter { !it.isEmpty() }
-                .subscribe({
-                    Log.d("TAGGG", "onNext ${it}")
-                    print(it)
-                }, {
-                    Log.d("TAGGG", "onError ${it.message}")
-                    print(it)
-                })
+                .subscribe {
+                    accounts = it.reversed()
+                    updateAccounts()
+                }
 
-        ratesRepository.refreshRates(::handleError)
+        //accounts.subscribe()
+
+        //ratesRepository.refreshRates(::handleError)
+    }
+
+    private fun updateAccounts() {
+        if (accounts.isNotEmpty() && rates.isNotEmpty())
+            updateAccounts.trigger()
     }
 
     private fun updateData() {

@@ -15,7 +15,7 @@ class ShortPolling(private val accountsRepository: IAccountsRepository,
                    private val ratesRepository: IRatesRepository) : IShortPolling {
 
     private var shortPolling: Disposable? = null
-    private val shortPollingPeriod = 10L
+    private val shortPollingPeriod = 30L
 
     override fun start(id: Long, email: String) {
         shortPolling?.dispose()

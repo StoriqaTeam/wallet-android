@@ -29,6 +29,7 @@ class RatesRepository(private val rateDao: RateDao,
     override fun updateRates(): Observable<HashMap<String, HashMap<String, Double>>> {
         return cryptoCompareApi.getRates("BTC,ETH,STQ", "USD,RUB")
                 .doOnNext { saveRates(it) }
+                .doOnError { }
     }
 
     private fun saveRates(rates: HashMap<String, HashMap<String, Double>>) {

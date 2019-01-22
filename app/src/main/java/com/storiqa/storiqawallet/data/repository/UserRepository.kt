@@ -47,5 +47,6 @@ class UserRepository(private val userDao: UserDao,
                 .getUserInfo(signHeader.timestamp, signHeader.deviceId,
                         signHeader.signature, "Bearer $token")
                 .doOnNext { userDao.insert(User(it)) }
+                .doOnError { }
     }
 }

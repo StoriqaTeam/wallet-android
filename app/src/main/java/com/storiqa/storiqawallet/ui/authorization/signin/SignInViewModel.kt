@@ -97,7 +97,7 @@ constructor(navigator: IAuthorizationNavigator,
                 .doOnNext {
                     saveToken(it.token)
                 }
-                .flatMap { userRepository.updateUser(email.get()) }
+                .flatMap { userRepository.updateUser(email.get().toLowerCase()) }
                 .doOnNext {
                     saveUserInfo(it)
                 }
@@ -120,7 +120,7 @@ constructor(navigator: IAuthorizationNavigator,
 
     @SuppressLint("CheckResult")
     private fun requestLogIn(): Observable<TokenResponse> {
-        val signHeader = signUtil.createSignHeader(email.get())
+        val signHeader = signUtil.createSignHeader(email.get().toLowerCase())
         val loginRequest = LoginRequest(email.get(), password.get(), getDeviceOs(), signHeader.deviceId)
 
         return walletApi
@@ -129,7 +129,7 @@ constructor(navigator: IAuthorizationNavigator,
 
     @SuppressLint("CheckResult")
     private fun requestLogInByOauth(token: String, provider: String) { //TODO make chain of requests with rxJava
-        val signHeader = signUtil.createSignHeader(email.get())
+        val signHeader = signUtil.createSignHeader(email.get().toLowerCase())
         val request = LoginByOauthRequest(token, provider, getDeviceOs(), signHeader.deviceId)
 
         walletApi
@@ -151,10 +151,10 @@ constructor(navigator: IAuthorizationNavigator,
 
     private fun saveUserInfo(userInfo: UserInfoResponse) {
         userData.id = userInfo.id
-        userData.email = userInfo.email
+        userData.email = userInfo.email.toLowerCase()
         userData.firstName = userInfo.firstName
         userData.lastName = userInfo.lastName
-        appData.currentUserEmail = userInfo.email
+        appData.currentUserEmail = userInfo.email.toLowerCase()
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
@@ -190,7 +190,7 @@ constructor(navigator: IAuthorizationNavigator,
         showLoadingDialog()
 
         walletApi
-                .resendConfirmEmail(ResendConfirmEmailRequest(email.get()))
+                .resendConfirmEmail(ResendConfirmEmailRequest(email.get().toLowerCase()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -205,7 +205,7 @@ constructor(navigator: IAuthorizationNavigator,
     private fun attachDevice(params: HashMap<String, String>?) {
         showLoadingDialog()
 
-        val signHeader = signUtil.createSignHeader(email.get())
+        val signHeader = signUtil.createSignHeader(email.get().toLowerCase())
         val userId = params?.get("user_id")?.toInt()
                 ?: throw Exception("Not found id in params")
 

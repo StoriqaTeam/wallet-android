@@ -28,6 +28,12 @@
     <color name="button_small_text_normal">#555555</color>
     <color name="button_small_text_pressed">#363636</color>
 
+    <color name="card_background_btc_start">#cf8d55</color>
+    <color name="card_background_btc_center">#e96e3a</color>
+    <color name="card_background_btc_end">#a44475</color>
+    <color name="card_background_eth_start">#8292ff</color>
+    <color name="card_background_eth_end">#4732a5</color>
+
     <color name="checkbox_text">#555555</color>
 
     <color name="pin_indicator_default">#2e2e2e</color>
