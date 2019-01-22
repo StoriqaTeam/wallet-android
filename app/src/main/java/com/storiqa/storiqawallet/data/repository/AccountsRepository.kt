@@ -39,7 +39,7 @@ class AccountsRepository(private val userDao: UserDao,
                 .getAccounts(id, signHeader.timestamp, signHeader.deviceId,
                         signHeader.signature, "Bearer $token", 0, 20)
                 .doOnNext { saveAccounts(it) }
-                .doOnError { }
+                .doOnError { print(it) }
     }
 
     @SuppressLint("CheckResult")

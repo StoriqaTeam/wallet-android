@@ -101,7 +101,7 @@ constructor(navigator: IAuthorizationNavigator,
                 .doOnNext {
                     saveUserInfo(it)
                 }
-                .flatMap { accountsRepository.updateAccounts(it.id, it.email) }
+                .flatMap { accountsRepository.updateAccounts(it.id, it.email.toLowerCase()) }
                 .flatMap { ratesRepository.updateRates() }
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
