@@ -1,17 +1,34 @@
 package com.storiqa.storiqawallet.ui.main.menu
 
-import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
-import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import javax.inject.Inject
+
+interface IMenuViewModel {
+    fun didSelectEditProfile()
+    fun didSelectChangePassword()
+    fun didSelectAppInfo()
+}
+
 
 class MenuViewModel
 @Inject
-constructor(navigator: IMainNavigator,
-            private val walletApi: WalletApi) : BaseViewModel<IMainNavigator>() {
+
+constructor(navigator: IMenuNavigator) : BaseViewModel<IMenuNavigator>(), IMenuViewModel {
 
     init {
         setNavigator(navigator)
+    }
+
+    override fun didSelectEditProfile() {
+        getNavigator()?.showEditProfile()
+    }
+
+    override fun didSelectChangePassword() {
+        getNavigator()?.showChangePassword()
+    }
+
+    override fun didSelectAppInfo() {
+        getNavigator()?.showAppInfo()
     }
 
 }
