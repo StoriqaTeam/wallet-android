@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="?android:attr/scrollbarSize"
+    android:title="Menu">
+
+    <Preference
+        android:layout="@layout/item_preference"
+        android:key="edit_profile"
+        android:title="@string/preferences_edit_profile"/>
+
+    <Preference
+        android:layout="@layout/item_preference"
+        android:key="change_password"
+        android:title="@string/preferences_change_password" />
+
+    <Preference
+        android:layout="@layout/item_preference"
+        android:key="app_info"
+        android:title="@string/preferences_app_info" />
+
+</PreferenceScreen>

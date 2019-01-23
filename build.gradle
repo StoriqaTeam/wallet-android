@@ -38,4 +38,5 @@ ext {
     playServicesAuthVersion = '16.0.1'
     facebookVersion = '4.36.0'
     bottomNavigatorVersion = '2.3.4'
+    preferenceVersion = '1.0.0'
 }
