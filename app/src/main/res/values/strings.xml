@@ -161,5 +161,10 @@
     <string name="text_pin_code">Set up PIN-code?</string>
     <string name="text_fingerprint">Set up fingerprint launch?</string>
 
-    <string name="toolbar_password_recovery">Password recover</string>
+    <string name="toolbar_password_recovery">Password recovery</string>
+
+    <string name="preferences_change_password">Change password</string>
+    <string name="preferences_edit_profile">Edit profile</string>
+    <string name="preferences_app_info">App info</string>
+
 </resources>

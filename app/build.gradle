@@ -38,6 +38,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
+    implementation "androidx.preference:preference:$preferenceVersion"
 
     //ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"

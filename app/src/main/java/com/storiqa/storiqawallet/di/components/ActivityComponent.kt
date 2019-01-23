@@ -12,6 +12,7 @@ import com.storiqa.storiqawallet.ui.authorization.IAuthorizationNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.ui.main.MainActivity
+import com.storiqa.storiqawallet.ui.main.menu.IMenuNavigator
 import com.storiqa.storiqawallet.ui.password.IPasswordRecoveryNavigator
 import com.storiqa.storiqawallet.ui.password.PasswordRecoveryActivity
 import com.storiqa.storiqawallet.ui.pincode.IPinCodeNavigator
@@ -50,5 +51,6 @@ interface ActivityComponentProvides : AppComponentProvides {
     fun pinCodeNavigator(): IPinCodeNavigator
     fun questionNavigator(): IQuestionNavigator
     fun mainNavigator(): IMainNavigator
+    fun menuNavigator(): IMenuNavigator
 
 }
