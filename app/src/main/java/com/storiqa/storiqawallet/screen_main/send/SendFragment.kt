@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.screen_main.send
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.storiqa.storiqawallet.databinding.FragmentSendDeprecatedBinding
 import com.storiqa.storiqawallet.enums.Screen
 import com.storiqa.storiqawallet.objects.BillPagerHelper
 import com.storiqa.storiqawallet.screen_main.MainActivityViewModel
+import kotlinx.android.synthetic.main.fragment_send.*
 import kotlinx.android.synthetic.main.fragment_send_deprecated.*
 import kotlinx.android.synthetic.main.fragment_send_deprecated.view.*
 import kotlinx.android.synthetic.main.tab_icon.view.*
@@ -78,8 +80,6 @@ class SendFragment : androidx.fragment.app.Fragment() {
         if (viewModel.amountInCurrency != BigDecimal.ZERO) {
             etAmount.setText(viewModel.amountInCurrency.toString())
         }
-
-
     }
 
     private fun addTab(logoOff: Int, logoOn: Int) {
