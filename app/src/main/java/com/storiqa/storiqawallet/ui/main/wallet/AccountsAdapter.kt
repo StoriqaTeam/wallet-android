@@ -34,7 +34,7 @@ class AccountsAdapter(private var accounts: List<Account>, private var rates: Li
         val account = accounts[position]
         var rate = Rate("", "", 0.0)
         for (r in rates) {
-            if (r.currencyCrypto.equals(account.currency, true)) {
+            if (r.currencyCrypto.equals(account.currency, true) && r.currencyFiat.equals(currencyFiat, true)) {
                 rate = r
                 break
             }

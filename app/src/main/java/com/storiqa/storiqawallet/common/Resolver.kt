@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.common
 
 import com.storiqa.storiqawallet.R
+import java.math.BigDecimal
 
 fun resolveCurrencyIcon(currencyISO: String): Int {
     return when (currencyISO) {
@@ -25,5 +26,13 @@ fun resolveCurrencySymbol(currencyISO: String): String {
         "USD" -> "\$"
         "RUB" -> "\u20BD"
         else -> throw Exception("Not found symbol for $currencyISO")
+    }
+}
+
+fun resolveCoefficient(currencyISO: String): BigDecimal {
+    return when (currencyISO) {
+        "btc" -> BigDecimal(1e8)
+        "eth", "stq" -> BigDecimal(1e18)
+        else -> throw Exception("Not found coefficient for $currencyISO")
     }
 }

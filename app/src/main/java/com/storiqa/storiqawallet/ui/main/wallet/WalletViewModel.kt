@@ -6,6 +6,7 @@ import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.data.db.entity.Account
 import com.storiqa.storiqawallet.data.db.entity.Rate
+import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.data.repository.IUserRepository
@@ -38,8 +39,6 @@ constructor(navigator: IMainNavigator,
                 appData.token = token
                 updateData()
             }, ::handleError)
-        else
-            updateData()
 
         ratesRepository.getRates()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -55,6 +54,8 @@ constructor(navigator: IMainNavigator,
                     accounts = it.reversed()
                     updateAccounts()
                 }
+
+        ShortPolling(accountsRepository, ratesRepository).start(userData.id, userData.email)
 
         //accounts.subscribe()
 

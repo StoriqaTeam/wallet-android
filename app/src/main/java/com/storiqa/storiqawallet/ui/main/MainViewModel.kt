@@ -13,7 +13,7 @@ constructor(navigator: IMainNavigator,
 
     init {
         setNavigator(navigator)
-        shortPolling.start(193, "d.kruglov@storiqa.com")
+        //shortPolling.start(193, "d.kruglov@storiqa.com")
     }
 
     fun onMenuItemSelected(position: Int, wasSelected: Boolean): Boolean {

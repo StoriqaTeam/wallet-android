@@ -27,7 +27,7 @@ class ShortPolling(private val accountsRepository: IAccountsRepository,
                             BiFunction<ArrayList<Account>, HashMap<String, HashMap<String, Double>>, Unit?> { _, _ -> null })
                 }
                 .observeOn(Schedulers.io())
-                .subscribe()
+                .subscribe({}, {})
     }
 
     override fun stop() {
