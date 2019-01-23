@@ -26,12 +26,12 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
         initView()
 
         viewModel.updateAccounts.observe(this, Observer {
-            adapter.updateAccounts(viewModel.accounts, viewModel.rates)
+            adapter.updateAccounts(viewModel.cards)
         })
     }
 
     private fun initView() {
-        adapter = AccountsAdapter(viewModel.accounts, viewModel.rates)
+        adapter = AccountsAdapter(viewModel.cards)
 
         binding.recyclerView.layoutManager = StackCardLayoutManager()
         binding.recyclerView.adapter = adapter

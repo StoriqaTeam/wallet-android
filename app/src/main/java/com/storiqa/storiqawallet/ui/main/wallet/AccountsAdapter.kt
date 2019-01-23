@@ -4,18 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.storiqa.storiqawallet.data.db.entity.AccountEntity
-import com.storiqa.storiqawallet.data.db.entity.RateEntity
+import com.storiqa.storiqawallet.data.model.Card
 import com.storiqa.storiqawallet.databinding.ItemAccountBinding
 
-class AccountsAdapter(private var accounts: List<AccountEntity>, private var rates: List<RateEntity>) :
+class AccountsAdapter(private var cards: List<Card>) :
         RecyclerView.Adapter<AccountsAdapter.ViewHolder>() {
 
     private val currencyFiat = "USD"
 
-    fun updateAccounts(newAccounts: List<AccountEntity>, newRates: List<RateEntity>) {
-        accounts = newAccounts
-        rates = newRates
+    fun updateAccounts(newCards: List<Card>) {
+        cards = newCards
         notifyDataSetChanged()
     }
 
@@ -28,27 +26,17 @@ class AccountsAdapter(private var accounts: List<AccountEntity>, private var rat
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(ItemAccountBinding.inflate(getInflater(parent.context), parent, false))
 
-    override fun getItemCount(): Int = accounts.size
+    override fun getItemCount(): Int = cards.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val account = accounts[position]
-        var rate = RateEntity("", "", 0.0)
-        for (r in rates) {
-            if (r.currencyCrypto.equals(account.currency, true) && r.currencyFiat.equals(currencyFiat, true)) {
-                rate = r
-                break
-            }
-        }
-        holder.bind(account, rate, currencyFiat)
+        holder.bind(cards[position])
     }
 
     class ViewHolder(private val binding: ItemAccountBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(account: AccountEntity, rate: RateEntity, currencyFiat: String) {
+        fun bind(card: Card) {
 
             binding.apply {
-                this.currencyFiat = currencyFiat
-                this.account = account
-                this.rate = rate
+                this.card = card
                 executePendingBindings()
                 //root.setOnClickListener { _ -> onClick(layoutPosition) }
 

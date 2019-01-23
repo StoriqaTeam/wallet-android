@@ -6,6 +6,8 @@ import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
+import com.storiqa.storiqawallet.data.mapper.AccountMapper
+import com.storiqa.storiqawallet.data.model.Card
 import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
@@ -25,8 +27,9 @@ constructor(navigator: IMainNavigator,
             private val appData: IAppDataStorage,
             private val tokenProvider: ITokenProvider) : BaseViewModel<IMainNavigator>() {
 
-    val updateAccounts = SingleLiveEvent<Any>()
+    val updateAccounts = SingleLiveEvent<ArrayList<Card>>()
 
+    var cards: ArrayList<Card> = ArrayList()
     var accounts: List<AccountEntity> = ArrayList()
     var rates: List<RateEntity> = ArrayList()
 
@@ -63,8 +66,12 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun updateAccounts() {
-        if (accounts.isNotEmpty() && rates.isNotEmpty())
-            updateAccounts.trigger()
+        val mapper = AccountMapper(rates)
+        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
+            cards = ArrayList()
+            accounts.forEach { cards.add(mapper.map(it)) }
+            updateAccounts.value = cards
+        }
     }
 
     private fun updateData() {

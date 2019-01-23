@@ -26,7 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         supportFragmentManager
                 .beginTransaction()
                 .add(R.id.container, WalletFragment(), "wallet")
-                .commit()
+                .commitNow()
     }
 
     private fun initView() {
