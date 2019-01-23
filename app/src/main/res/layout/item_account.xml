@@ -12,11 +12,11 @@
 
         <variable
             name="account"
-            type="com.storiqa.storiqawallet.data.db.entity.Account" />
+            type="com.storiqa.storiqawallet.data.db.entity.AccountEntity" />
 
         <variable
             name="rate"
-            type="com.storiqa.storiqawallet.data.db.entity.Rate" />
+            type="com.storiqa.storiqawallet.data.db.entity.RateEntity" />
 
         <variable
             name="currencyFiat"

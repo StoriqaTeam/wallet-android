@@ -4,16 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.storiqa.storiqawallet.data.db.entity.Account
-import com.storiqa.storiqawallet.data.db.entity.Rate
+import com.storiqa.storiqawallet.data.db.entity.AccountEntity
+import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.databinding.ItemAccountBinding
 
-class AccountsAdapter(private var accounts: List<Account>, private var rates: List<Rate>) :
+class AccountsAdapter(private var accounts: List<AccountEntity>, private var rates: List<RateEntity>) :
         RecyclerView.Adapter<AccountsAdapter.ViewHolder>() {
 
     private val currencyFiat = "USD"
 
-    fun updateAccounts(newAccounts: List<Account>, newRates: List<Rate>) {
+    fun updateAccounts(newAccounts: List<AccountEntity>, newRates: List<RateEntity>) {
         accounts = newAccounts
         rates = newRates
         notifyDataSetChanged()
@@ -32,7 +32,7 @@ class AccountsAdapter(private var accounts: List<Account>, private var rates: Li
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val account = accounts[position]
-        var rate = Rate("", "", 0.0)
+        var rate = RateEntity("", "", 0.0)
         for (r in rates) {
             if (r.currencyCrypto.equals(account.currency, true) && r.currencyFiat.equals(currencyFiat, true)) {
                 rate = r
@@ -43,7 +43,7 @@ class AccountsAdapter(private var accounts: List<Account>, private var rates: Li
     }
 
     class ViewHolder(private val binding: ItemAccountBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(account: Account, rate: Rate, currencyFiat: String) {
+        fun bind(account: AccountEntity, rate: RateEntity, currencyFiat: String) {
 
             binding.apply {
                 this.currencyFiat = currencyFiat

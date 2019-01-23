@@ -3,7 +3,7 @@ package com.storiqa.storiqawallet.data.repository
 import android.annotation.SuppressLint
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.db.dao.UserDao
-import com.storiqa.storiqawallet.data.db.entity.User
+import com.storiqa.storiqawallet.data.db.entity.UserEntity
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.responses.UserInfoResponse
 import com.storiqa.storiqawallet.utils.SignUtil
@@ -17,7 +17,7 @@ class UserRepository(private val userDao: UserDao,
                      private val appDataStorage: IAppDataStorage,
                      private val signUtil: SignUtil) : IUserRepository {
 
-    override fun getUser(email: String): Flowable<User> {
+    override fun getUser(email: String): Flowable<UserEntity> {
         return userDao.loadUserFlowable(email).subscribeOn(Schedulers.io()).distinct()
     }
 
@@ -35,7 +35,7 @@ class UserRepository(private val userDao: UserDao,
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { errorHandler(it as Exception) }
                 .observeOn(Schedulers.io())
-                .doOnNext { userDao.insert(User(it)) }
+                .doOnNext { userDao.insert(UserEntity(it)) }
                 .subscribe()
     }
 
@@ -46,7 +46,7 @@ class UserRepository(private val userDao: UserDao,
         return walletApi
                 .getUserInfo(signHeader.timestamp, signHeader.deviceId,
                         signHeader.signature, "Bearer $token")
-                .doOnNext { userDao.insert(User(it)) }
+                .doOnNext { userDao.insert(UserEntity(it)) }
                 .doOnError { }
     }
 }

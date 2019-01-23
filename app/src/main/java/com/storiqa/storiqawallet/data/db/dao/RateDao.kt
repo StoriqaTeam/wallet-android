@@ -4,20 +4,20 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.storiqa.storiqawallet.data.db.entity.Rate
+import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import io.reactivex.Flowable
 
 @Dao
 interface RateDao {
-    @Query("SELECT * FROM rate")
-    fun loadRatesFlowable(): Flowable<List<Rate>>
+    @Query("SELECT * FROM Rates")
+    fun loadRatesFlowable(): Flowable<List<RateEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(rate: Rate)
+    fun insert(rate: RateEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(rates: List<Rate>)
+    fun insertAll(rates: List<RateEntity>)
 
-    @Query("DELETE FROM rate")
+    @Query("DELETE FROM Rates")
     fun deleteAll()
 }

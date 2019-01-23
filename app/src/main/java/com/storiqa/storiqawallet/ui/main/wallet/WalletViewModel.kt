@@ -4,8 +4,8 @@ import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
-import com.storiqa.storiqawallet.data.db.entity.Account
-import com.storiqa.storiqawallet.data.db.entity.Rate
+import com.storiqa.storiqawallet.data.db.entity.AccountEntity
+import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
@@ -27,8 +27,8 @@ constructor(navigator: IMainNavigator,
 
     val updateAccounts = SingleLiveEvent<Any>()
 
-    var accounts: List<Account> = ArrayList()
-    var rates: List<Rate> = ArrayList()
+    var accounts: List<AccountEntity> = ArrayList()
+    var rates: List<RateEntity> = ArrayList()
 
     init {
         setNavigator(navigator)
@@ -72,7 +72,7 @@ constructor(navigator: IMainNavigator,
 
         accountsRepository.refreshAccounts(::handleError)
 
-        //get User from BD
+        //get UserEntity from BD
 
         /*val user = userRepository.getUser(userData.email)
 

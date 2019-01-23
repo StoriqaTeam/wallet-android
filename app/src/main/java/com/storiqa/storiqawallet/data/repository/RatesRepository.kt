@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.data.repository
 
 import com.storiqa.storiqawallet.data.db.dao.RateDao
-import com.storiqa.storiqawallet.data.db.entity.Rate
+import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.network.CryptoCompareApi
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -12,7 +12,7 @@ import java.util.*
 class RatesRepository(private val rateDao: RateDao,
                       private val cryptoCompareApi: CryptoCompareApi) : IRatesRepository {
 
-    override fun getRates(): Flowable<List<Rate>> {
+    override fun getRates(): Flowable<List<RateEntity>> {
         return rateDao.loadRatesFlowable().subscribeOn(Schedulers.io()).distinct()
     }
 
@@ -33,10 +33,10 @@ class RatesRepository(private val rateDao: RateDao,
     }
 
     private fun saveRates(rates: HashMap<String, HashMap<String, Double>>) {
-        val ratesList = ArrayList<Rate>()
+        val ratesList = ArrayList<RateEntity>()
         for ((cryptoCurrency, value) in rates)
             for ((fiatCurrency, price) in value)
-                ratesList.add(Rate(cryptoCurrency, fiatCurrency, price))
+                ratesList.add(RateEntity(cryptoCurrency, fiatCurrency, price))
 
         rateDao.deleteAll()
         rateDao.insertAll(ratesList)

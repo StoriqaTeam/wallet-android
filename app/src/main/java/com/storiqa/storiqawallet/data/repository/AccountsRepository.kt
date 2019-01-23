@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.db.dao.AccountDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao
-import com.storiqa.storiqawallet.data.db.entity.Account
-import com.storiqa.storiqawallet.data.db.entity.User
+import com.storiqa.storiqawallet.data.db.entity.AccountEntity
+import com.storiqa.storiqawallet.data.db.entity.UserEntity
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
@@ -19,7 +19,7 @@ class AccountsRepository(private val userDao: UserDao,
                          private val appDataStorage: IAppDataStorage,
                          private val signUtil: SignUtil) : IAccountsRepository {
 
-    override fun getAccounts(userId: Long): Flowable<List<Account>> {
+    override fun getAccounts(userId: Long): Flowable<List<AccountEntity>> {
         return accountDao.loadAccounts(userId).subscribeOn(Schedulers.io()).distinct()
     }
 
@@ -43,7 +43,7 @@ class AccountsRepository(private val userDao: UserDao,
     }
 
     @SuppressLint("CheckResult")
-    private fun requestAccounts(user: User, errorHandler: (Exception) -> Unit) {
+    private fun requestAccounts(user: UserEntity, errorHandler: (Exception) -> Unit) {
         val email = appDataStorage.currentUserEmail
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
@@ -60,8 +60,8 @@ class AccountsRepository(private val userDao: UserDao,
     }
 
     private fun saveAccounts(accounts: ArrayList<com.storiqa.storiqawallet.data.model.Account>) {
-        val accountsList = ArrayList<Account>()
-        accounts.forEach { accountsList.add(Account(it)) }
+        val accountsList = ArrayList<AccountEntity>()
+        accounts.forEach { accountsList.add(AccountEntity(it)) }
 
         accountDao.deleteAndInsertAll(accountsList)
     }
