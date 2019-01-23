@@ -18,40 +18,53 @@
 
         <ImageView
             android:id="@+id/imgIcon"
-            android:layout_width="222dp"
-            android:layout_height="222dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/logo_start_screen"
-            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:layout_constraintBottom_toTopOf="@+id/imgName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            app:srcCompat="@drawable/app_logo" />
+
+        <ImageView
+            android:id="@+id/imgName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="47dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgIcon"
+            app:srcCompat="@drawable/app_name" />
 
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
-            android:lineSpacingExtra="5sp"
+            android:lineSpacingExtra="4sp"
             android:text="@string/splash_description"
-            android:textColor="@color/splashMessage"
+            android:textColor="#7fffffff"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/btnGetStarted"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgIcon" />
+            app:layout_constraintTop_toBottomOf="@+id/imgName" />
 
         <android.widget.Button
             android:id="@+id/btnGetStarted"
             style="@style/GradientButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="19dp"
             android:onClick="@{() -> viewModel.startRegistration()}"
             android:text="@string/button_get_started"
             app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
@@ -65,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="33dp"
             android:onClick="@{() -> viewModel.startLogin()}"
             android:text="@string/button_sign_in"
             app:layout_constraintBottom_toBottomOf="parent"
