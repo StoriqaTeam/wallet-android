@@ -1,18 +1,20 @@
 package com.storiqa.storiqawallet.ui.main.wallet
 
-import android.util.Log
+import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
+import com.storiqa.storiqawallet.data.db.entity.AccountEntity
+import com.storiqa.storiqawallet.data.db.entity.RateEntity
+import com.storiqa.storiqawallet.data.mapper.AccountMapper
+import com.storiqa.storiqawallet.data.model.Card
+import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.data.repository.IUserRepository
-import com.storiqa.storiqawallet.objects.Bill
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.*
 import javax.inject.Inject
 
 class WalletViewModel
@@ -25,7 +27,11 @@ constructor(navigator: IMainNavigator,
             private val appData: IAppDataStorage,
             private val tokenProvider: ITokenProvider) : BaseViewModel<IMainNavigator>() {
 
-    lateinit var accounts: Observable<ArrayList<Bill>>
+    val updateAccounts = SingleLiveEvent<ArrayList<Card>>()
+
+    var cards: ArrayList<Card> = ArrayList()
+    var accounts: List<AccountEntity> = ArrayList()
+    var rates: List<RateEntity> = ArrayList()
 
     init {
         setNavigator(navigator)
@@ -36,31 +42,36 @@ constructor(navigator: IMainNavigator,
                 appData.token = token
                 updateData()
             }, ::handleError)
-        else
-            updateData()
 
-        val rates = ratesRepository.getRates()
+        ratesRepository.getRates()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Log.d("TAGGG", "onNext ${it}")
-                    print(it)
-                }, {
-                    Log.d("TAGGG", "onError ${it.message}")
-                    print(it)
-                })
+                .subscribe {
+                    rates = it
+                    updateAccounts()
+                }
 
-        val accounts = accountsRepository.getAccounts(userData.id)
+        accountsRepository.getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter { !it.isEmpty() }
-                .subscribe({
-                    Log.d("TAGGG", "onNext ${it}")
-                    print(it)
-                }, {
-                    Log.d("TAGGG", "onError ${it.message}")
-                    print(it)
-                })
+                .subscribe {
+                    accounts = it.reversed()
+                    updateAccounts()
+                }
 
-        ratesRepository.refreshRates(::handleError)
+        ShortPolling(accountsRepository, ratesRepository).start(userData.id, userData.email)
+
+        //accounts.subscribe()
+
+        //ratesRepository.refreshRates(::handleError)
+    }
+
+    private fun updateAccounts() {
+        val mapper = AccountMapper(rates)
+        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
+            cards = ArrayList()
+            accounts.forEach { cards.add(mapper.map(it)) }
+            updateAccounts.value = cards
+        }
     }
 
     private fun updateData() {
@@ -68,7 +79,7 @@ constructor(navigator: IMainNavigator,
 
         accountsRepository.refreshAccounts(::handleError)
 
-        //get User from BD
+        //get UserEntity from BD
 
         /*val user = userRepository.getUser(userData.email)
 

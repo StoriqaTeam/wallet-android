@@ -8,6 +8,10 @@ import com.storiqa.cryptokeys.ISigner
 import com.storiqa.cryptokeys.KeyGenerator
 import com.storiqa.cryptokeys.Signer
 import com.storiqa.storiqawallet.data.*
+import com.storiqa.storiqawallet.data.polling.IShortPolling
+import com.storiqa.storiqawallet.data.polling.ShortPolling
+import com.storiqa.storiqawallet.data.repository.IAccountsRepository
+import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import com.storiqa.storiqawallet.network.WalletApi
@@ -39,6 +43,14 @@ class AppModule(private val app: Application) {
     @Provides
     @PerApplication
     internal fun provideAppDataStorage(prefUtil: PrefUtil): IAppDataStorage = AppDataStorage(prefUtil)
+
+
+    @Provides
+    @PerApplication
+    internal fun provideShortPolling(accountRepository: IAccountsRepository,
+                                     ratesRepository: IRatesRepository): IShortPolling {
+        return ShortPolling(accountRepository, ratesRepository)
+    }
 
     @Provides
     @PerApplication

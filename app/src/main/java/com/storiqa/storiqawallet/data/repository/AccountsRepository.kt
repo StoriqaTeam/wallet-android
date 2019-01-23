@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.db.dao.AccountDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao
-import com.storiqa.storiqawallet.data.db.entity.Account
-import com.storiqa.storiqawallet.data.db.entity.User
+import com.storiqa.storiqawallet.data.db.entity.AccountEntity
+import com.storiqa.storiqawallet.data.db.entity.UserEntity
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -18,7 +19,7 @@ class AccountsRepository(private val userDao: UserDao,
                          private val appDataStorage: IAppDataStorage,
                          private val signUtil: SignUtil) : IAccountsRepository {
 
-    override fun getAccounts(userId: Long): Flowable<List<Account>> {
+    override fun getAccounts(userId: Long): Flowable<List<AccountEntity>> {
         return accountDao.loadAccounts(userId).subscribeOn(Schedulers.io()).distinct()
     }
 
@@ -31,8 +32,18 @@ class AccountsRepository(private val userDao: UserDao,
                 .subscribe({ requestAccounts(it, errorHandler) }, { errorHandler(it as Exception) })
     }
 
+    override fun updateAccounts(id: Long, email: String): Observable<ArrayList<com.storiqa.storiqawallet.data.model.Account>> {
+        val token = appDataStorage.token
+        val signHeader = signUtil.createSignHeader(email)
+        return walletApi
+                .getAccounts(id, signHeader.timestamp, signHeader.deviceId,
+                        signHeader.signature, "Bearer $token", 0, 20)
+                .doOnNext { saveAccounts(it) }
+        //.doOnError { }
+    }
+
     @SuppressLint("CheckResult")
-    private fun requestAccounts(user: User, errorHandler: (Exception) -> Unit) {
+    private fun requestAccounts(user: UserEntity, errorHandler: (Exception) -> Unit) {
         val email = appDataStorage.currentUserEmail
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
@@ -49,8 +60,8 @@ class AccountsRepository(private val userDao: UserDao,
     }
 
     private fun saveAccounts(accounts: ArrayList<com.storiqa.storiqawallet.data.model.Account>) {
-        val accountsList = ArrayList<Account>()
-        accounts.forEach { accountsList.add(Account(it)) }
+        val accountsList = ArrayList<AccountEntity>()
+        accounts.forEach { accountsList.add(AccountEntity(it)) }
 
         accountDao.deleteAndInsertAll(accountsList)
     }

@@ -3,14 +3,15 @@ package com.storiqa.storiqawallet.data.db.entity
 import androidx.room.*
 import com.storiqa.storiqawallet.data.model.Account
 
-@Entity(indices = [Index(value = arrayOf("id", "user_id"))],
+@Entity(tableName = "Accounts",
+        indices = [Index(value = arrayOf("id", "user_id"))],
         foreignKeys = [ForeignKey(
-                entity = User::class,
+                entity = UserEntity::class,
                 parentColumns = arrayOf("id"),
                 childColumns = arrayOf("user_id"),
                 onDelete = ForeignKey.CASCADE,
                 onUpdate = ForeignKey.CASCADE)])
-data class Account(
+data class AccountEntity(
         @PrimaryKey var id: String,
         @ColumnInfo(name = "user_id") val userId: Long,
         @ColumnInfo(name = "balance") val balance: String,
