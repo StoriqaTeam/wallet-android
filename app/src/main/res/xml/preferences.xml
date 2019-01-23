@@ -3,8 +3,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="?android:attr/scrollbarSize"
-    android:title="Menu">
+    android:paddingRight="?android:attr/scrollbarSize">
 
     <Preference
         android:layout="@layout/item_preference"
