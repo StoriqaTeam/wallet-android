@@ -51,24 +51,24 @@ class MenuFragment : PreferenceFragmentCompat() {
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
         when (preference?.key) {
-            EDIT_PROFILE_KEY -> didSelectEditProfile()
-            CHANGE_PASSWORD_KEY -> didSelectChangePassword()
-            APP_INFO_KEY -> didSelectAppInfo()
+            EDIT_PROFILE_KEY -> onEditProfileSelected()
+            CHANGE_PASSWORD_KEY -> onChangePasswordSelected()
+            APP_INFO_KEY -> onAppInfoSelected()
         }
 
         return super.onPreferenceTreeClick(preference)
     }
 
-    private fun didSelectEditProfile() {
-        viewModel.didSelectEditProfile()
+    private fun onEditProfileSelected() {
+        viewModel.onEditProfileSelected()
     }
 
-    private fun didSelectChangePassword() {
-        viewModel.didSelectChangePassword()
+    private fun onChangePasswordSelected() {
+        viewModel.onChangePasswordSelected()
     }
 
-    private fun didSelectAppInfo() {
-        viewModel.didSelectAppInfo()
+    private fun onAppInfoSelected() {
+        viewModel.onAppInfoSelected()
     }
 
 }

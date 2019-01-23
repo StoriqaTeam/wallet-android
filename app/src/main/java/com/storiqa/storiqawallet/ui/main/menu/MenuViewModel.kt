@@ -4,9 +4,9 @@ import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import javax.inject.Inject
 
 interface IMenuViewModel {
-    fun didSelectEditProfile()
-    fun didSelectChangePassword()
-    fun didSelectAppInfo()
+    fun onEditProfileSelected()
+    fun onChangePasswordSelected()
+    fun onAppInfoSelected()
 }
 
 
@@ -19,15 +19,15 @@ constructor(navigator: IMenuNavigator) : BaseViewModel<IMenuNavigator>(), IMenuV
         setNavigator(navigator)
     }
 
-    override fun didSelectEditProfile() {
+    override fun onEditProfileSelected() {
         getNavigator()?.showEditProfile()
     }
 
-    override fun didSelectChangePassword() {
+    override fun onChangePasswordSelected() {
         getNavigator()?.showChangePassword()
     }
 
-    override fun didSelectAppInfo() {
+    override fun onAppInfoSelected() {
         getNavigator()?.showAppInfo()
     }
 
