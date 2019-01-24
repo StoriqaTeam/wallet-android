@@ -6,6 +6,7 @@ data class Card(
         val balance: String,
         val balanceFormatted: String,
         val balanceFiat: String,
+        val background: Int,
         val currency: String,
         val currencyIcon: Int,
         val accountAddress: String,

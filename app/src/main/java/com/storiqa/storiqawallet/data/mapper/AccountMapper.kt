@@ -1,6 +1,5 @@
 package com.storiqa.storiqawallet.data.mapper
 
-import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.CurrencyFormatter
 import com.storiqa.storiqawallet.common.ICurrencyConverter
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
@@ -13,8 +12,8 @@ class AccountMapper(private val currencyConverter: ICurrencyConverter) : IAccoun
     override fun map(account: AccountEntity): Card {
         val currency = account.currency
         val balanceDecimal = currencyFormatter.getFormattedDecimal(account.balance, currency)
-        val balanceFormatted = currencyFormatter.getFormattedString(balanceDecimal, currency)
-        val balanceFiatFormatted = currencyFormatter.getFormattedString(
+        val balanceFormatted = currencyFormatter.getBalanceWithoutSymbol(balanceDecimal, currency)
+        val balanceFiatFormatted = currencyFormatter.getBalanceWithFiatSymbol(
                 currencyConverter.convertToFiat(balanceDecimal, currency), currency)
 
         return Card(account.id,
@@ -22,19 +21,11 @@ class AccountMapper(private val currencyConverter: ICurrencyConverter) : IAccoun
                 account.balance,
                 balanceFormatted,
                 balanceFiatFormatted,
-                account.currency,
-                getCurrencyIcon(currency),
+                currency.getCardBackground(),
+                account.currency.currencyISO,
+                currency.getCurrencyIcon(),
                 account.accountAddress,
                 account.name)
-    }
-
-    private fun getCurrencyIcon(currencyISO: String): Int {
-        return when (currencyISO) {
-            "btc" -> R.drawable.btc_small_logo
-            "eth" -> R.drawable.eth_small_logo
-            "stq" -> R.drawable.stq_small_logo
-            else -> throw Exception("Not found icon for $currencyISO")
-        }
     }
 
 }

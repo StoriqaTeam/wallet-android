@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_text_height"
                 android:hint="@string/hint_password"
+                android:singleLine="true"
                 android:imeOptions="actionDone"
                 android:nextFocusDown="@+id/btnSignIn"
                 android:text="@={viewModel.password}" />
