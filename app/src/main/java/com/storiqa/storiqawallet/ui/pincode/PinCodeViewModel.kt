@@ -17,8 +17,7 @@ import javax.inject.Inject
 
 class PinCodeViewModel
 @Inject
-constructor(navigator: IPinCodeNavigator,
-            private val vibrationUtil: VibrationUtil,
+constructor(private val vibrationUtil: VibrationUtil,
             private val userData: IUserDataStorage,
             private val appData: IAppDataStorage,
             private val tokenProvider: ITokenProvider) :
@@ -57,8 +56,6 @@ constructor(navigator: IPinCodeNavigator,
         }
 
     init {
-        setNavigator(navigator)
-
         pinCode.addOnPropertyChanged {
             if (pinCode.get().length == pinLength)
                 onPinCodeEntered()

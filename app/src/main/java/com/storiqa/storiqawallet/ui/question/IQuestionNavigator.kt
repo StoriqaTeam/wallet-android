@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.ui.question
 
-interface IQuestionNavigator {
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
+
+interface IQuestionNavigator : IBaseNavigator {
 
     fun openNextQuestion(questionType: QuestionType)
 

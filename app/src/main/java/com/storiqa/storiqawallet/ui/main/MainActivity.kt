@@ -10,7 +10,7 @@ import com.storiqa.storiqawallet.ui.base.BaseActivity
 import com.storiqa.storiqawallet.ui.main.wallet.WalletFragment
 
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, IMainNavigator>() {
 
     override fun getBindingVariable() = BR.viewModel
 

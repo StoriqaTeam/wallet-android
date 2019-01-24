@@ -8,7 +8,7 @@ import com.storiqa.storiqawallet.ui.base.BaseActivity
 
 const val QUESTION_TYPE = "question_type"
 
-class QuestionActivity : BaseActivity<ActivityQuestionBinding, QuestionViewModel>() {
+class QuestionActivity : BaseActivity<ActivityQuestionBinding, QuestionViewModel, IQuestionNavigator>() {
 
     override fun getBindingVariable() = BR.viewModel
 

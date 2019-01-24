@@ -7,12 +7,7 @@ import javax.inject.Inject
 
 class SplashViewModel
 @Inject
-constructor(navigator: ISplashNavigator,
-            private val appData: IAppDataStorage) : BaseViewModel<ISplashNavigator>() {
-
-    init {
-        setNavigator(navigator)
-    }
+constructor(private val appData: IAppDataStorage) : BaseViewModel<ISplashNavigator>() {
 
     fun checkLoggedIn() {
         if (appData.isFirstLaunch) {

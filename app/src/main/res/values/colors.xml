@@ -25,8 +25,9 @@
     <color name="button_navigate_up">#ffffff</color>
     <color name="button_borderless_text_normal">#a5783e</color>
     <color name="button_borderless_text_pressed">#74542C</color>
-    <color name="button_small_text_normal">#555555</color>
-    <color name="button_small_text_pressed">#363636</color>
+    <color name="button_social_network">#313131</color>
+    <color name="button_small_text_normal">#ffffff</color>
+    <color name="button_small_text_pressed">#555555</color>
 
     <color name="card_background_btc_start">#cf8d55</color>
     <color name="card_background_btc_center">#e96e3a</color>

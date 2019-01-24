@@ -1,13 +1,13 @@
 package com.storiqa.storiqawallet.ui.authorization
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.tabs.TabLayout
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
@@ -16,7 +16,7 @@ import com.storiqa.storiqawallet.ui.authorization.signin.SignInFragment
 import com.storiqa.storiqawallet.ui.base.BaseActivity
 
 
-class AuthorizationActivity : BaseActivity<ActivityAuthorizationBinding, AuthorizationViewModel>() {
+class AuthorizationActivity : BaseActivity<ActivityAuthorizationBinding, AuthorizationViewModel, IAuthorizationNavigator>() {
 
     override fun getBindingVariable() = BR.viewModel
 
@@ -28,11 +28,14 @@ class AuthorizationActivity : BaseActivity<ActivityAuthorizationBinding, Authori
         super.onCreate(savedInstanceState)
 
         initView()
-
-        supportFragmentManager
-                .beginTransaction()
-                .add(R.id.container, SignInFragment(), "SignInFragment")
-                .commitNow()
+        if (supportFragmentManager.fragments.isEmpty()) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.container, SignInFragment(), "SignInFragment")
+                    .commitNow()
+        } else if (supportFragmentManager.findFragmentByTag("SignUpFragment") != null) {
+            binding.tabLayout.getTabAt(1)?.select()
+        }
 
         checkIntentData(intent)
     }
@@ -86,11 +89,13 @@ class AuthorizationActivity : BaseActivity<ActivityAuthorizationBinding, Authori
     private fun setupTab(tab: TabLayout.Tab, pos: Int) {
         val tabTextView = TextView(this)
         tab.customView = tabTextView
-        tabTextView.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-        tabTextView.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
-        tabTextView.setPadding(0, 0, 0, 20)
-        tabTextView.text = tab.text
-        tabTextView.gravity = Gravity.BOTTOM
+        tabTextView.apply {
+            layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+            setPadding(0, 0, 0, 20)
+            gravity = Gravity.BOTTOM
+            text = tab.text
+        }
 
         if (pos == 0)
             onTabSelected(tabTextView)
@@ -113,13 +118,13 @@ class AuthorizationActivity : BaseActivity<ActivityAuthorizationBinding, Authori
     }
 
     private fun onTabSelected(textView: TextView) {
-        textView.setTypeface(null, Typeface.BOLD)
+        textView.typeface = ResourcesCompat.getFont(this, R.font.montserrat_bold)
         textView.textSize = 24f
         textView.setTextColor(ContextCompat.getColor(this, R.color.tab_selected_text))
     }
 
     private fun onTabUnselected(textView: TextView) {
-        textView.setTypeface(null, Typeface.NORMAL)
+        textView.typeface = ResourcesCompat.getFont(this, R.font.montserrat_medium)
         textView.textSize = 16f
         textView.setTextColor(ContextCompat.getColor(this, R.color.tab_unselected_text))
     }

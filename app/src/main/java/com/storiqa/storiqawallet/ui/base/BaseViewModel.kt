@@ -6,9 +6,10 @@ import com.storiqa.storiqawallet.network.errors.DialogType
 import com.storiqa.storiqawallet.network.errors.ErrorHandler
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
 import java.lang.ref.WeakReference
 
-abstract class BaseViewModel<N> : ViewModel() {
+abstract class BaseViewModel<N : IBaseNavigator> : ViewModel() {
 
     val hideKeyboard = SingleLiveEvent<Void>()
     val showLoadingDialog = SingleLiveEvent<Boolean>()

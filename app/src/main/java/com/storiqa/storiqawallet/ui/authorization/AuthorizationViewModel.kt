@@ -13,13 +13,8 @@ import javax.inject.Inject
 
 class AuthorizationViewModel
 @Inject
-constructor(navigator: IAuthorizationNavigator,
-            private val walletApi: WalletApi,
+constructor(private val walletApi: WalletApi,
             private val appData: IAppDataStorage) : BaseViewModel<IAuthorizationNavigator>() {
-
-    init {
-        setNavigator(navigator)
-    }
 
     fun onSignInTabSelected() {
         getNavigator()?.showSignInFragment()
