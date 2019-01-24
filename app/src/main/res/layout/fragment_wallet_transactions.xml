@@ -30,7 +30,7 @@
 
         <ImageView
             android:id="@+id/btnBack"
-            android:src="@drawable/back_white"
+            android:src="@mipmap/ic_launcher"
             style="@style/arrowBackStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

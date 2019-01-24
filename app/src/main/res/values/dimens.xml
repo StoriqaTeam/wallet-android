@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="button_border_thickness">1dp</dimen>
-    <dimen name="button_space">30dp</dimen>
+    <dimen name="button_space">32dp</dimen>
+    <dimen name="button_height">51dp</dimen>
     <dimen name="edit_text_height">35dp</dimen>
 
     <!--*****************************************************************-->

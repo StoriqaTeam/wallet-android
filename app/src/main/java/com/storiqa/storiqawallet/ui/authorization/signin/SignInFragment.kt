@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.ui.authorization.signin
 
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
@@ -24,13 +25,15 @@ class SignInFragment : BaseFragment<FragmentSignInBinding, SignInViewModel>() {
     }
 
     private fun initView() {
-        binding.etEmail.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus)
-                viewModel.validateEmail()
-        }
+        binding.etPassword.transformationMethod = PasswordTransformationMethod()
 
         binding.etPassword.setOnEditorActionListener { textView, actionId, event ->
             onSubmitButtonClicked(textView, actionId, event) { viewModel.onSubmitButtonClicked() }
+        }
+
+        binding.etEmail.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus)
+                viewModel.validateEmail()
         }
     }
 

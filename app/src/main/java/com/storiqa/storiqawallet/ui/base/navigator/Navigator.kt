@@ -79,7 +79,7 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
             ft.addToBackStack(backstackTag).commit()
             fm.executePendingTransactions()
         } else {
-            ft.commitNow()
+            ft.commitAllowingStateLoss()
         }
     }
 

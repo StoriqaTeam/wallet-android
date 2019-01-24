@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.ui.main
 
-interface IMainNavigator {
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
+
+interface IMainNavigator : IBaseNavigator {
 
     fun showWalletFragment()
 

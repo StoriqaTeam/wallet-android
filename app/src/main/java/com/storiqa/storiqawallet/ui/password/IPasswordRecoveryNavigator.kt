@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.ui.password
 
-interface IPasswordRecoveryNavigator {
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
+
+interface IPasswordRecoveryNavigator : IBaseNavigator {
 
     fun closeActivity()
 
