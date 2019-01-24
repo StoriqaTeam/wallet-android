@@ -4,8 +4,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
-import com.storiqa.storiqawallet.common.resolveCardBackground
-import com.storiqa.storiqawallet.common.resolveCurrencyIcon
+import com.storiqa.storiqawallet.common.ResolveHelper
 
 @BindingAdapter("imageResource")
 fun ImageView.imageResource(res: Int) {
@@ -17,12 +16,7 @@ fun ImageView.imageDrawable(drawable: Drawable) {
     setImageDrawable(drawable)
 }
 
-@BindingAdapter("currencyIcon")
-fun ImageView.currencyIcon(currencyISO: String) {
-    setImageResource(resolveCurrencyIcon(currencyISO))
-}
-
 @BindingAdapter("cardBackground")
 fun ConstraintLayout.cardBackground(currencyISO: String) {
-    setBackgroundResource(resolveCardBackground(currencyISO))
+    setBackgroundResource(ResolveHelper().getCardBackground(currencyISO))
 }

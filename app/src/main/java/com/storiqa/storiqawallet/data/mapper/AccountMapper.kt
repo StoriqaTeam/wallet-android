@@ -1,53 +1,40 @@
 package com.storiqa.storiqawallet.data.mapper
 
-import com.storiqa.storiqawallet.common.resolveCurrencyIcon
-import com.storiqa.storiqawallet.common.resolveCurrencySymbol
-import com.storiqa.storiqawallet.common.resolveExp
+import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.common.CurrencyFormatter
+import com.storiqa.storiqawallet.common.ICurrencyConverter
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
-import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.model.Card
-import java.math.BigDecimal
-import java.math.RoundingMode
 
-class AccountMapper(private val rates: List<RateEntity>,
-                    private val currencyFiat: String = "USD") : IAccountMapper {
+class AccountMapper(private val currencyConverter: ICurrencyConverter) : IAccountMapper {
+
+    private val currencyFormatter = CurrencyFormatter()
 
     override fun map(account: AccountEntity): Card {
         val currency = account.currency
-        var coefficient = 0.0
-        for (rate in rates) {
-            if (rate.currencyCrypto.equals(currency, true) &&
-                    rate.currencyFiat.equals(currencyFiat, true)) {
-                coefficient = rate.price
-                break
-            }
-        }
-
-        val exp = resolveExp(currency)
-
-        val balanceDecimal = BigDecimal(account.balance).movePointLeft(exp)
-
-        var balanceFiat = balanceDecimal.multiply(BigDecimal(coefficient)).stripTrailingZeros()
-        if (balanceFiat.compareTo(BigDecimal.ZERO) == 0)
-            balanceFiat = BigDecimal.ZERO
-
-        var balanceCrypto = balanceDecimal.setScale(exp, RoundingMode.DOWN).stripTrailingZeros()
-        if (balanceCrypto.compareTo(BigDecimal.ZERO) == 0)
-            balanceCrypto = BigDecimal.ZERO
-
-        val balanceFormatted = balanceCrypto.toPlainString() + ' ' + account.currency.toUpperCase()
-        val balanceFiatStr = resolveCurrencySymbol(currencyFiat) + ' ' +
-                balanceFiat.setScale(2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString()
+        val balanceDecimal = currencyFormatter.getFormattedDecimal(account.balance, currency)
+        val balanceFormatted = currencyFormatter.getFormattedString(balanceDecimal, currency)
+        val balanceFiatFormatted = currencyFormatter.getFormattedString(
+                currencyConverter.convertToFiat(balanceDecimal, currency), currency)
 
         return Card(account.id,
                 account.userId,
                 account.balance,
                 balanceFormatted,
-                balanceFiatStr,
+                balanceFiatFormatted,
                 account.currency,
-                resolveCurrencyIcon(currency),
+                getCurrencyIcon(currency),
                 account.accountAddress,
                 account.name)
+    }
+
+    private fun getCurrencyIcon(currencyISO: String): Int {
+        return when (currencyISO) {
+            "btc" -> R.drawable.btc_small_logo
+            "eth" -> R.drawable.eth_small_logo
+            "stq" -> R.drawable.stq_small_logo
+            else -> throw Exception("Not found icon for $currencyISO")
+        }
     }
 
 }
