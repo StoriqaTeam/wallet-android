@@ -7,12 +7,10 @@ import javax.inject.Inject
 
 class MainViewModel
 @Inject
-constructor(navigator: IMainNavigator,
-            private val appData: IAppDataStorage,
+constructor(private val appData: IAppDataStorage,
             private val shortPolling: IShortPolling) : BaseViewModel<IMainNavigator>() {
 
     init {
-        setNavigator(navigator)
         //shortPolling.start(193, "d.kruglov@storiqa.com")
     }
 

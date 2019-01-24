@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.ui.splash
 
-interface ISplashNavigator {
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
+
+interface ISplashNavigator : IBaseNavigator {
 
     fun openLoginActivity()
 

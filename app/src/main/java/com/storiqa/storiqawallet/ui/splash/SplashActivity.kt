@@ -6,7 +6,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivitySplashBinding
 import com.storiqa.storiqawallet.ui.base.BaseActivity
 
-class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
+class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel, ISplashNavigator>() {
 
     override fun getBindingVariable() = BR.viewModel
 
@@ -16,6 +16,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel.setNavigator(navigator)
 
         viewModel.checkLoggedIn()
     }

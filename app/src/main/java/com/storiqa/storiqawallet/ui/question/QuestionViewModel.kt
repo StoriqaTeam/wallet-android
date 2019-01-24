@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class QuestionViewModel
 @Inject
-constructor(navigator: IQuestionNavigator) : BaseViewModel<IQuestionNavigator>() {
+constructor() : BaseViewModel<IQuestionNavigator>() {
 
     val title = NonNullObservableField("")
     val description = NonNullObservableField("")
@@ -18,10 +18,6 @@ constructor(navigator: IQuestionNavigator) : BaseViewModel<IQuestionNavigator>()
     var icon = ObservableInt(R.drawable.general_error_icon)
 
     private lateinit var questionType: QuestionType
-
-    init {
-        setNavigator(navigator)
-    }
 
     fun setQuestion(type: QuestionType) {
         questionType = type

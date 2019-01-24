@@ -10,7 +10,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityPinCodeBinding
 import com.storiqa.storiqawallet.ui.base.BaseActivity
 
-class PinCodeActivity : BaseActivity<ActivityPinCodeBinding, PinCodeViewModel>() {
+class PinCodeActivity : BaseActivity<ActivityPinCodeBinding, PinCodeViewModel, IPinCodeNavigator>() {
 
     override fun getLayoutId(): Int = R.layout.activity_pin_code
 

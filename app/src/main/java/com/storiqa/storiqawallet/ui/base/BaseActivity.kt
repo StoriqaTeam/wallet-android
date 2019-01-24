@@ -21,13 +21,17 @@ import com.storiqa.storiqawallet.di.components.DaggerActivityComponent
 import com.storiqa.storiqawallet.di.modules.ActivityModule
 import com.storiqa.storiqawallet.di.modules.NavigatorModule
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
 import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
 import javax.inject.Inject
 
-abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCompatActivity(), IBaseActivity {
+abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBaseNavigator> : AppCompatActivity(), IBaseActivity {
 
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var navigator: N
 
     protected lateinit var binding: B
 
@@ -62,6 +66,8 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<*>> : AppCom
             throw NoSuchMethodException("You forgot to add \"fun inject(activity: " +
                     "${this::class.java.simpleName})\" in ActivityComponent")
         }
+
+        viewModel.setNavigator(navigator)
 
         performDataBinding()
         subscribeEvents()

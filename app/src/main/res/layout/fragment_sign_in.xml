@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
@@ -25,9 +24,9 @@
             android:id="@+id/tilEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginEnd="30dp"
             app:errorEnabled="true"
             app:errorText="@{viewModel.emailError}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,11 +49,11 @@
             style="@style/Widget.Design.TextInputLayout.Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="17dp"
-            app:errorText="@{viewModel.passwordError}"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
             app:errorEnabled="true"
+            app:errorText="@{viewModel.passwordError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilEmail">
@@ -65,7 +64,6 @@
                 android:layout_height="@dimen/edit_text_height"
                 android:hint="@string/hint_password"
                 android:imeOptions="actionDone"
-                android:inputType="textPassword"
                 android:nextFocusDown="@+id/btnSignIn"
                 android:text="@={viewModel.password}" />
 
@@ -74,55 +72,39 @@
         <Button
             android:id="@+id/btnSignIn"
             style="@style/GradientButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="20dp"
             android:enabled="@{(viewModel.email.get().length > 0 &amp;&amp; viewModel.password.get().length > 0) ? true : false}"
             android:onClick="@{()->viewModel.onSignInButtonClicked()}"
             android:text="@string/button_sign_in"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/btnForgotPassword" />
 
         <TextView
             android:id="@+id/btnForgotPassword"
             style="@style/BorderlessButton.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="30dp"
             android:onClick="@{()->viewModel.onPasswordRecoveryButtonClicked()}"
             android:text="@string/button_forgot_password"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
+            app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
         <include
             layout="@layout/social_network_sign_in"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             bind:viewModel="@{viewModel}" />
-
-        <TextView
-            android:id="@+id/tvQuestion"
-            style="@style/grayTextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/text_haven_t_got_account"
-            app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
-            app:layout_constraintEnd_toStartOf="@+id/btnRegister"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnRegister" />
 
         <TextView
             android:id="@+id/btnRegister"
@@ -130,13 +112,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="30dp"
             android:onClick="@{()->viewModel.onRegistrationButtonClicked()}"
             android:text="@string/button_register"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvQuestion" />
+            app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

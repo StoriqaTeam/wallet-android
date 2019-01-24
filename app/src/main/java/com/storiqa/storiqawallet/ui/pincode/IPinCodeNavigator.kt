@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.ui.pincode
 
-interface IPinCodeNavigator {
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
+
+interface IPinCodeNavigator : IBaseNavigator {
 
     fun openMainActivity()
 

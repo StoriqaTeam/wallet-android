@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.ui.authorization
 
-interface IAuthorizationNavigator {
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
+
+interface IAuthorizationNavigator : IBaseNavigator {
 
     fun showSignUpFragment()
 
