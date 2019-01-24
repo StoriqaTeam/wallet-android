@@ -1,10 +1,11 @@
 package com.storiqa.storiqawallet.ui.main.menu
 
 import android.util.Log
+import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 
 
-interface IMenuNavigator {
+interface IMenuNavigator : IBaseNavigator {
     fun showEditProfile()
     fun showChangePassword()
     fun showAppInfo()
