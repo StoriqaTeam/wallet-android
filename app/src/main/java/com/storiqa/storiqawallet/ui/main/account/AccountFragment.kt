@@ -10,6 +10,7 @@ import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentAccountBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
+import com.storiqa.storiqawallet.ui.base.IBaseActivity
 import com.storiqa.storiqawallet.ui.main.wallet.AccountsAdapter
 
 class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>() {
@@ -41,6 +42,8 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     }
 
     private fun initView(context: Context) {
+        (activity as IBaseActivity).setupActionBar(binding.toolbar, " ", true)
+
         adapter = AccountsAdapter(viewModel.cards)
 
         binding.accountsRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

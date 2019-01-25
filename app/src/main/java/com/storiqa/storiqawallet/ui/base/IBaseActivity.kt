@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.ui.base
 
+import androidx.appcompat.widget.Toolbar
 import com.storiqa.storiqawallet.di.components.ActivityComponent
 import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
 
@@ -14,5 +15,7 @@ interface IBaseActivity {
     fun hideLoadingDialog()
 
     fun hideKeyboard()
+
+    fun setupActionBar(toolbar: Toolbar, title: String = " ", backButtonEnabled: Boolean = false)
 
 }

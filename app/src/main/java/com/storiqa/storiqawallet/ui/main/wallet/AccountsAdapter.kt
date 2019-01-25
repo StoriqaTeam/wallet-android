@@ -1,6 +1,5 @@
 package com.storiqa.storiqawallet.ui.main.wallet
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +35,6 @@ class AccountsAdapter(private var cards: List<Card>, val onClick: ((position: In
                 val onClickListener = onClick
                 if (onClickListener != null)
                     root.setOnClickListener {
-                        Log.d("TAGGG", "clicked on $layoutPosition")
                         onClickListener(layoutPosition, root, App.res.getString(R.string.transition_account))
                     }
             }

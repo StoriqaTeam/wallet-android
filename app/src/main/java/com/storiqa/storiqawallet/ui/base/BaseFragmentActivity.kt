@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.di.components.ActivityComponent
@@ -77,6 +80,21 @@ abstract class BaseFragmentActivity : AppCompatActivity(), IBaseActivity {
         if (loadingDialog != null && loadingDialog!!.isShowing) {
             loadingDialog!!.cancel()
         }
+    }
+
+    override fun setupActionBar(toolbar: Toolbar, title: String, backButtonEnabled: Boolean) {
+        setSupportActionBar(toolbar)
+
+        if (backButtonEnabled) {
+            val backButton = ContextCompat.getDrawable(this, R.drawable.back)
+            val wrappedDrawable = DrawableCompat.wrap(backButton!!)
+            DrawableCompat.setTint(wrappedDrawable, ContextCompat.getColor(this, R.color.button_navigate_up))
+
+            supportActionBar?.setHomeAsUpIndicator(wrappedDrawable)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+
+        setTitle(title)
     }
 
     override fun hideKeyboard() {
