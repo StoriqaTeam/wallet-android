@@ -173,10 +173,6 @@ constructor(navigator: IAuthorizationNavigator,
         }
     }
 
-    fun onSignInButtonClicked() {
-        getNavigator()?.showSignInFragment()
-    }
-
     override fun onFacebookLoginButtonClicked() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

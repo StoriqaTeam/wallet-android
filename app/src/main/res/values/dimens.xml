@@ -4,6 +4,7 @@
     <dimen name="button_space">32dp</dimen>
     <dimen name="button_height">51dp</dimen>
     <dimen name="edit_text_height">35dp</dimen>
+    <dimen name="input_layout_space">5dp</dimen>
 
     <!--*****************************************************************-->
     <dimen name="loginEditTextSideMargin">26dp</dimen>

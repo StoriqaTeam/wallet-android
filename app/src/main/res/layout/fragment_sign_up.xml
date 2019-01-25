@@ -15,12 +15,12 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="17dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.firstNameError}">
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/input_layout_space"
                 android:layout_marginRight="17dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.lastNameError}">
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="17dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/input_layout_space"
                 android:layout_marginRight="17dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.emailError}">
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/input_layout_space"
                 android:layout_marginEnd="17dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.passwordError}">
@@ -102,8 +102,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_password"
-                    android:inputType="textPassword"
                     android:nextFocusDown="@+id/etRepeatPassword"
+                    android:singleLine="true"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/input_layout_space"
                 android:layout_marginEnd="17dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.passwordRepeatError}">
@@ -125,7 +125,7 @@
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_repeat_password"
                     android:imeOptions="actionDone"
-                    android:inputType="textPassword"
+                    android:singleLine="true"
                     android:text="@={viewModel.passwordRepeat}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -138,7 +138,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="17dp"
                 android:checked="@={viewModel.licenseAgreement}"
-                android:text="@string/text_license_agreement" />
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/text_license_agreement"
+                android:textSize="10sp" />
 
             <CheckBox
                 android:id="@+id/policyAgreement"
@@ -148,48 +150,36 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="17dp"
                 android:checked="@={viewModel.policyAgreement}"
-                android:text="@string/text_policy_agreement" />
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/text_policy_agreement"
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/btnSignUp"
                 style="@style/GradientButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:enabled="@{viewModel.signUpButtonEnabled}"
                 android:onClick="@{()->viewModel.onSignUpButtonClicked()}"
                 android:text="@string/button_sign_up" />
 
-            <include
-                layout="@layout/social_network_sign_in"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="33dp"
-                bind:viewModel="@{viewModel}" />
+                android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/llRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="23dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                <include
+                    layout="@layout/social_network_sign_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="25dp"
+                    bind:viewModel="@{viewModel}" />
 
-                <TextView
-                    style="@style/grayTextButton"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/text_have_an_account" />
-
-                <TextView
-                    android:id="@+id/btnSignIn"
-                    style="@style/textButtonStyle"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="6dp"
-                    android:onClick="@{()->viewModel.onSignInButtonClicked()}"
-                    android:text="@string/button_sign_in" />
-
-            </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
 
