@@ -169,4 +169,6 @@
     <string name="preferences_edit_profile">Edit profile</string>
     <string name="preferences_app_info">App info</string>
 
+    <string name="transition_account">TransitionAccount</string>
+
 </resources>

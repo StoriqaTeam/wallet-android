@@ -2,10 +2,10 @@ package com.storiqa.storiqawallet.ui.main.send
 
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.databinding.FragmentPasswordResetBinding
+import com.storiqa.storiqawallet.databinding.FragmentSendBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
 
-class SendFragment : BaseFragment<FragmentPasswordResetBinding, SendViewModel>() {
+class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
 
     override fun getLayoutId(): Int = R.layout.fragment_send
 

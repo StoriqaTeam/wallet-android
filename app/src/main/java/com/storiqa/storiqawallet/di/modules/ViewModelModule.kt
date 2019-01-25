@@ -8,6 +8,7 @@ import com.storiqa.storiqawallet.ui.authorization.signin.SignInViewModel
 import com.storiqa.storiqawallet.ui.authorization.signup.SignUpViewModel
 import com.storiqa.storiqawallet.ui.dialogs.MessageViewModel
 import com.storiqa.storiqawallet.ui.main.MainViewModel
+import com.storiqa.storiqawallet.ui.main.account.AccountViewModel
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeViewModel
 import com.storiqa.storiqawallet.ui.main.menu.MenuViewModel
 import com.storiqa.storiqawallet.ui.main.receive.ReceiveViewModel
@@ -84,6 +85,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WalletViewModel::class)
     abstract fun bindWalletViewModel(walletViewModel: WalletViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountViewModel::class)
+    abstract fun bindAccountViewModel(accountViewModel: AccountViewModel): ViewModel
 
     @Binds
     @IntoMap

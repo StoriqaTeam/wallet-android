@@ -39,4 +39,5 @@ ext {
     facebookVersion = '4.36.0'
     bottomNavigatorVersion = '2.3.4'
     preferenceVersion = '1.0.0'
+    recyclerVersion = '1.0.0'
 }

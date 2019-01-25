@@ -1,5 +1,7 @@
 package com.storiqa.storiqawallet.ui.main
 
+import android.os.Bundle
+import android.view.View
 import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
 
 interface IMainNavigator : IBaseNavigator {
@@ -13,5 +15,7 @@ interface IMainNavigator : IBaseNavigator {
     fun showReceiveFragment()
 
     fun showMenuFragment()
+
+    fun showAccountFragment(bundle: Bundle, element: View, transition: String)
 
 }

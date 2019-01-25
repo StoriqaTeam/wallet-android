@@ -44,9 +44,9 @@ enum class Currency(val currencyISO: String) {
 
     fun getCurrencyIcon(): Int {
         return when (this) {
-            BTC -> R.drawable.btc_small_logo
-            ETH -> R.drawable.eth_small_logo
-            STQ -> R.drawable.stq_small_logo
+            BTC -> R.drawable.ic_btc
+            ETH -> R.drawable.ic_eth
+            STQ -> R.drawable.ic_stq
             else -> throw Exception("Not found icon for $currencyISO")
         }
     }

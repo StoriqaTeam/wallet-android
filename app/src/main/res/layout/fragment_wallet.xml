@@ -8,7 +8,6 @@
         <variable
             name="viewModel"
             type="com.storiqa.storiqawallet.ui.main.wallet.WalletViewModel" />
-
     </data>
 
     <LinearLayout
@@ -32,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            tools:listitem="@layout/item_bill_deprecated" />
+            tools:listitem="@layout/item_account" />
 
         <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 

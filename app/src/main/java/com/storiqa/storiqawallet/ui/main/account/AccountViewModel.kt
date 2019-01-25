@@ -1,34 +1,25 @@
-package com.storiqa.storiqawallet.ui.main.wallet
+package com.storiqa.storiqawallet.ui.main.account
 
-import android.os.Bundle
-import android.view.View
 import com.storiqa.storiqawallet.common.CurrencyConverter
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.data.IAppDataStorage
-import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Card
-import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
-import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class WalletViewModel
+class AccountViewModel
 @Inject
 constructor(navigator: IMainNavigator,
-            private val userRepository: IUserRepository,
             private val accountsRepository: IAccountsRepository,
             private val ratesRepository: IRatesRepository,
-            private val userData: IUserDataStorage,
-            private val appData: IAppDataStorage,
-            private val tokenProvider: ITokenProvider) : BaseViewModel<IMainNavigator>() {
+            private val userData: IUserDataStorage) : BaseViewModel<IMainNavigator>() {
 
     val updateAccounts = SingleLiveEvent<ArrayList<Card>>()
 
@@ -39,13 +30,6 @@ constructor(navigator: IMainNavigator,
 
     init {
         setNavigator(navigator)
-
-        val token = appData.token
-        if (tokenProvider.isExpired(token))
-            tokenProvider.refreshToken({
-                appData.token = token
-                updateData()
-            }, ::handleError)
 
         ratesRepository.getRates()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,8 +45,6 @@ constructor(navigator: IMainNavigator,
                     accounts = it.reversed()
                     updateAccounts()
                 }
-
-        ShortPolling(accountsRepository, ratesRepository).start(userData.id, userData.email)
     }
 
     private fun updateAccounts() {
@@ -73,17 +55,4 @@ constructor(navigator: IMainNavigator,
             updateAccounts.value = cards
         }
     }
-
-    private fun updateData() {
-        userRepository.refreshUser(::handleError)
-
-        accountsRepository.refreshAccounts(::handleError)
-    }
-
-    fun onAccountClicked(position: Int, element: View, transition: String) {
-        val bundle = Bundle()
-        bundle.putInt("POSITION", position)
-        getNavigator()?.showAccountFragment(bundle, element, transition)
-    }
-
 }

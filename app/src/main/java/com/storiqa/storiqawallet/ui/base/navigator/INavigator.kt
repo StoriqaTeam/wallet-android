@@ -4,7 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.IdRes
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 
 interface INavigator {
 
@@ -24,10 +27,12 @@ interface INavigator {
 
     fun startActivityForResult(activityClass: Class<out Activity>, requestCode: Int, adaptIntentFun: (Intent.() -> Unit)? = null)
 
-    fun <T : androidx.fragment.app.DialogFragment> showDialogFragment(dialog: T, fragmentTag: String = dialog.javaClass.name)
+    fun <T : DialogFragment> showDialogFragment(dialog: T, fragmentTag: String = dialog.javaClass.name)
 
-    fun replaceFragment(@IdRes containerId: Int, fragment: androidx.fragment.app.Fragment, fragmentTag: String? = null)
-    fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: androidx.fragment.app.Fragment, fragmentTag: String? = null, backstackTag: String? = null)
+    fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null)
+    fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, element: View, transition: String)
+    fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, backstackTag: String? = null)
+    fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, backstackTag: String? = null, element: View, transition: String)
     fun popFragmentBackStackImmediate()
 
 }
