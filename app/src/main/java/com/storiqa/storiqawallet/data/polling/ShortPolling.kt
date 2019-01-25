@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.data.polling
 
 import com.storiqa.storiqawallet.data.model.Account
+import com.storiqa.storiqawallet.data.model.Currency
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import io.reactivex.Observable
@@ -24,7 +25,7 @@ class ShortPolling(private val accountsRepository: IAccountsRepository,
                 .flatMap {
                     Observable.zip(accountsRepository.updateAccounts(id, email),
                             ratesRepository.updateRates(),
-                            BiFunction<ArrayList<Account>, HashMap<String, HashMap<String, Double>>, Unit?> { _, _ -> null })
+                            BiFunction<ArrayList<Account>, HashMap<Currency, HashMap<Currency, Double>>, Unit?> { _, _ -> null })
                 }
                 .observeOn(Schedulers.io())
                 .subscribe({}, {})

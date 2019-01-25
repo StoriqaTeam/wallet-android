@@ -29,7 +29,7 @@
             android:id="@+id/clBill"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackground="@{card.currency}">
+            app:cardBackground="@{card.background}">
 
             <ImageView
                 android:id="@+id/imgLogo"
@@ -49,7 +49,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="right"
-                app:text="@{card.balanceFormatted}"
+                app:text="@{card.balanceFormatted + ` ` + card.currency}"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgLogo"
                 app:layout_constraintEnd_toEndOf="parent"

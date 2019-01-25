@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.ui.main.wallet
 
+import com.storiqa.storiqawallet.common.CurrencyConverter
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.ITokenProvider
@@ -66,7 +67,7 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun updateAccounts() {
-        val mapper = AccountMapper(rates)
+        val mapper = AccountMapper(CurrencyConverter(rates))
         if (accounts.isNotEmpty() && rates.isNotEmpty()) {
             cards = ArrayList()
             accounts.forEach { cards.add(mapper.map(it)) }

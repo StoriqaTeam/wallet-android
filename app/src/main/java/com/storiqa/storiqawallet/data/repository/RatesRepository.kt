@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.data.repository
 
 import com.storiqa.storiqawallet.data.db.dao.RateDao
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
+import com.storiqa.storiqawallet.data.model.Currency
 import com.storiqa.storiqawallet.network.CryptoCompareApi
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -26,13 +27,13 @@ class RatesRepository(private val rateDao: RateDao,
                 .subscribe()
     }
 
-    override fun updateRates(): Observable<HashMap<String, HashMap<String, Double>>> {
+    override fun updateRates(): Observable<HashMap<Currency, HashMap<Currency, Double>>> {
         return cryptoCompareApi.getRates("BTC,ETH,STQ", "USD,RUB")
                 .doOnNext { saveRates(it) }
                 .doOnError { }
     }
 
-    private fun saveRates(rates: HashMap<String, HashMap<String, Double>>) {
+    private fun saveRates(rates: HashMap<Currency, HashMap<Currency, Double>>) {
         val ratesList = ArrayList<RateEntity>()
         for ((cryptoCurrency, value) in rates)
             for ((fiatCurrency, price) in value)
