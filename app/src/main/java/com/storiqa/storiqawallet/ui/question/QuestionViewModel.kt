@@ -32,14 +32,13 @@ constructor() : BaseViewModel<IQuestionNavigator>() {
         title.set(App.res.getString(R.string.text_quick_launch))
         description.set(App.res.getString(R.string.text_quick_launch_description))
         positiveButtonText.set(App.res.getString(R.string.button_set_up_quick_launch))
-        icon.set(R.drawable.quick_launch_image)
+        icon.set(R.drawable.set_quick_launch)
     }
 
     private fun initPinCode() {
         title.set(App.res.getString(R.string.text_pin_code))
-        description.set(App.res.getString(R.string.text_quick_launch_description))
-        positiveButtonText.set(App.res.getString(R.string.button_set_up_quick_launch))
-        icon.set(R.drawable.set_pin_image)
+        positiveButtonText.set(App.res.getString(R.string.button_set_up_pin_code))
+        icon.set(R.drawable.set_pincode)
     }
 
     private fun initFingerprint() {

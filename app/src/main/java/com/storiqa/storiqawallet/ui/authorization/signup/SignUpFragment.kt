@@ -27,6 +27,12 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>() {
     }
 
     private fun initView() {
+        binding.scrollView.apply {
+            descendantFocusability = ViewGroup.FOCUS_BEFORE_DESCENDANTS
+            isFocusable = true
+            isFocusableInTouchMode = true
+        }
+
         binding.etPassword.transformationMethod = PasswordTransformationMethod()
         binding.etPasswordRepeat.transformationMethod = PasswordTransformationMethod()
 
@@ -56,12 +62,6 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>() {
 
         binding.etPasswordRepeat.setOnEditorActionListener { textView, actionId, event ->
             onSubmitButtonClicked(textView, actionId, event) { viewModel.onSubmitButtonClicked() }
-        }
-
-        binding.scrollView.apply {
-            descendantFocusability = ViewGroup.FOCUS_BEFORE_DESCENDANTS
-            isFocusable = true
-            isFocusableInTouchMode = true
         }
     }
 
