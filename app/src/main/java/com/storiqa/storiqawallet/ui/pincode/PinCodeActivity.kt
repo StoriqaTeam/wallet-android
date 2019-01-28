@@ -2,8 +2,6 @@ package com.storiqa.storiqawallet.ui.pincode
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.Observer
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
@@ -22,13 +20,7 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding, PinCodeViewModel, I
         super.onCreate(savedInstanceState)
 
         if (intent.action == "com.storiqa.storiqawallet.SETUP_PIN") {
-            val backButton = ContextCompat.getDrawable(this, R.drawable.back)
-            val wrappedDrawable = DrawableCompat.wrap(backButton!!)
-            DrawableCompat.setTint(wrappedDrawable, ContextCompat.getColor(this, R.color.button_navigate_up))
-
-            setSupportActionBar(binding.toolbar)
-            supportActionBar?.setHomeAsUpIndicator(wrappedDrawable)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            setupActionBar(binding.toolbar, " ", true)
             viewModel.state = PinCodeViewModel.PinCodeState.SET_UP
         } else {
             viewModel.state = PinCodeViewModel.PinCodeState.ENTER
@@ -45,6 +37,6 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding, PinCodeViewModel, I
             viewModel.state = PinCodeViewModel.PinCodeState.SET_UP
         else if (viewModel.state == PinCodeViewModel.PinCodeState.SET_UP)
             onBackPressed()
-        return super.onSupportNavigateUp()
+        return true
     }
 }

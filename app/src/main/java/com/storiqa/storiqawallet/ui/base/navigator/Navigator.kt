@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -65,21 +66,55 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
         }
     }
 
-    override fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String?) {
-        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment, fragmentTag, false, null)
+    override fun replaceFragment(@IdRes containerId: Int,
+                                 fragment: Fragment,
+                                 fragmentTag: String?) {
+        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment,
+                fragmentTag, false, null, null, null)
     }
 
-    override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String?, backstackTag: String?) {
-        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment, fragmentTag, true, backstackTag)
+    override fun replaceFragment(@IdRes containerId: Int,
+                                 fragment: Fragment,
+                                 fragmentTag: String?,
+                                 element: View,
+                                 transition: String) {
+        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment,
+                fragmentTag, false, null, element, transition)
     }
 
-    protected fun replaceFragmentInternal(fm: FragmentManager, @IdRes containerId: Int, fragment: Fragment, fragmentTag: String?, addToBackstack: Boolean, backstackTag: String?) {
-        val ft = fm.beginTransaction().replace(containerId, fragment, fragmentTag)
+    override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int,
+                                                  fragment: Fragment,
+                                                  fragmentTag: String?,
+                                                  backstackTag: String?) {
+        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment, fragmentTag, true, backstackTag, null, null)
+    }
+
+    override fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int,
+                                                  fragment: Fragment,
+                                                  fragmentTag: String?,
+                                                  backstackTag: String?,
+                                                  element: View,
+                                                  transition: String) {
+        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment, fragmentTag, true, backstackTag, element, transition)
+    }
+
+    private fun replaceFragmentInternal(fm: FragmentManager,
+                                        @IdRes containerId: Int,
+                                        fragment: Fragment,
+                                        fragmentTag: String?,
+                                        addToBackstack: Boolean,
+                                        backstackTag: String?,
+                                        element: View?,
+                                        transitionName: String?) {
+        val transaction = fm.beginTransaction().replace(containerId, fragment, fragmentTag)
+
+        if (element != null && transitionName != null)
+            transaction.addSharedElement(element, transitionName)
         if (addToBackstack) {
-            ft.addToBackStack(backstackTag).commit()
+            transaction.addToBackStack(backstackTag).commit()
             fm.executePendingTransactions()
         } else {
-            ft.commitAllowingStateLoss()
+            transaction.commitAllowingStateLoss()
         }
     }
 

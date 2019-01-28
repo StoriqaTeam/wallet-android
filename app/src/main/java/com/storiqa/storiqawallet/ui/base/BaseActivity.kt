@@ -9,6 +9,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
@@ -121,9 +124,29 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
         }
     }
 
+    override fun setupActionBar(toolbar: Toolbar, title: String, backButtonEnabled: Boolean) {
+        setSupportActionBar(toolbar)
+
+        if (backButtonEnabled) {
+            val backButton = ContextCompat.getDrawable(this, R.drawable.back)
+            val wrappedDrawable = DrawableCompat.wrap(backButton!!)
+            DrawableCompat.setTint(wrappedDrawable, ContextCompat.getColor(this, R.color.button_navigate_up))
+
+            supportActionBar?.setHomeAsUpIndicator(wrappedDrawable)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+
+        setTitle(title)
+    }
+
     private fun performDataBinding() {
         binding = DataBindingUtil.setContentView(this, getLayoutId())
         binding.setVariable(getBindingVariable(), viewModel)
         binding.executePendingBindings()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

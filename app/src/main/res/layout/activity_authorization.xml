@@ -16,11 +16,11 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
-            app:tabRippleColor="@null"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="30dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            app:tabRippleColor="@null">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"

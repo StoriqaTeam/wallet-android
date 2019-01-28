@@ -10,6 +10,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentWalletBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
 
+
 class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
 
     private lateinit var adapter: AccountsAdapter
@@ -28,10 +29,11 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
         viewModel.updateAccounts.observe(this, Observer {
             adapter.updateAccounts(viewModel.cards)
         })
+
     }
 
     private fun initView() {
-        adapter = AccountsAdapter(viewModel.cards)
+        adapter = AccountsAdapter(viewModel.cards, viewModel::onAccountClicked)
 
         binding.recyclerView.layoutManager = StackCardLayoutManager()
         binding.recyclerView.adapter = adapter
@@ -41,36 +43,17 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
                             recyclerView: RecyclerView,
                             viewHolder: RecyclerView.ViewHolder,
                             target: RecyclerView.ViewHolder
-                    ): Boolean = true.also { _ ->
-                        val fromPos = viewHolder.adapterPosition
+                    ): Boolean = true.also {
+                        //TODO this block for moving cards
+                        /*val fromPos = viewHolder.adapterPosition
                         val toPos = target.adapterPosition
-                        adapter.notifyItemMoved(fromPos, toPos)
+                        adapter.notifyItemMoved(fromPos, toPos)*/
                     }
 
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     }
                 })
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
-        /*val adapter = AccountsAdapter(viewModel.accounts, {})
-        recyclerView.adapter = adapter
-
-        recyclerView.layoutManager = StackCardLayoutManager()
-
-        val itemTouchHelper = ItemTouchHelper(
-                object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
-                    override fun onMove(
-                            recyclerView: RecyclerView,
-                            viewHolder: RecyclerView.ViewHolder,
-                            target: RecyclerView.ViewHolder
-                    ): Boolean = true.also { _ ->
-                        val fromPos = viewHolder.adapterPosition
-                        val toPos = target.adapterPosition
-                        adapter.notifyItemMoved(fromPos, toPos)
-                    }
-
-                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    }
-                })
-        itemTouchHelper.attachToRecyclerView(recyclerView)*/
     }
+
 }

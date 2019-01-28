@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.ui.authorization.signup
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.view.ViewGroup
 import com.storiqa.storiqawallet.BR
@@ -26,6 +27,9 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>() {
     }
 
     private fun initView() {
+        binding.etPassword.transformationMethod = PasswordTransformationMethod()
+        binding.etPasswordRepeat.transformationMethod = PasswordTransformationMethod()
+
         binding.policyAgreement.movementMethod = LinkMovementMethod.getInstance()
         binding.licenseAgreement.movementMethod = LinkMovementMethod.getInstance()
 

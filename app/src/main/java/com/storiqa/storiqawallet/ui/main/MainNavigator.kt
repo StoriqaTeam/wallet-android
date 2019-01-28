@@ -1,7 +1,10 @@
 package com.storiqa.storiqawallet.ui.main
 
+import android.os.Bundle
+import android.view.View
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
+import com.storiqa.storiqawallet.ui.main.account.AccountFragment
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment
 import com.storiqa.storiqawallet.ui.main.menu.MenuFragment
 import com.storiqa.storiqawallet.ui.main.receive.ReceiveFragment
@@ -30,6 +33,12 @@ class MainNavigator(private val navigator: INavigator) : IMainNavigator {
 
     override fun showMenuFragment() {
         navigator.replaceFragment(containerId, MenuFragment(), "menu")
+    }
+
+    override fun showAccountFragment(bundle: Bundle, element: View, transition: String) {
+        val fragment = AccountFragment()
+        fragment.arguments = bundle
+        navigator.replaceFragmentAndAddToBackStack(containerId, fragment, "account", "account")
     }
 
 }

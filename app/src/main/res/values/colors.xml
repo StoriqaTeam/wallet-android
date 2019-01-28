@@ -35,7 +35,7 @@
     <color name="card_background_eth_start">#8292ff</color>
     <color name="card_background_eth_end">#4732a5</color>
 
-    <color name="checkbox_text">#555555</color>
+    <color name="checkbox_text">#adadad</color>
 
     <color name="pin_indicator_default">#2e2e2e</color>
     <color name="pin_indicator_highlight">#ffffff</color>

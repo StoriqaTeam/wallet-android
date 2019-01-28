@@ -6,7 +6,9 @@
     <data>
 
         <import type="android.view.View" />
+
         <import type="android.widget.EditText" />
+
         <import type="java.lang.String" />
 
         <variable
@@ -25,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
             app:errorEnabled="true"
             app:errorText="@{viewModel.emailError}"
@@ -50,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/input_layout_space"
             android:layout_marginEnd="30dp"
             app:errorEnabled="true"
             app:errorText="@{viewModel.passwordError}"
@@ -63,9 +65,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_text_height"
                 android:hint="@string/hint_password"
-                android:singleLine="true"
                 android:imeOptions="actionDone"
                 android:nextFocusDown="@+id/btnSignIn"
+                android:singleLine="true"
                 android:text="@={viewModel.password}" />
 
         </com.google.android.material.textfield.TextInputLayout>

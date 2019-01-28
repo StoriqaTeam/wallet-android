@@ -21,6 +21,8 @@ class ShortPolling(private val accountsRepository: IAccountsRepository,
     override fun start(id: Long, email: String) {
         shortPolling?.dispose()
 
+        //TODO check token expired
+
         shortPolling = Observable.interval(0, shortPollingPeriod, TimeUnit.SECONDS)
                 .flatMap {
                     Observable.zip(accountsRepository.updateAccounts(id, email),

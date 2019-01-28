@@ -145,7 +145,6 @@
 
     <string name="text_haven_t_got_account">Haven’t got account?</string>
     <string name="text_or">or</string>
-    <string name="text_have_an_account">Have an account?</string>
     <string name="text_license_agreement">I accept the <a href="https://storiqa.com/turewallet/terms_of_use.pdf">License Agreement</a> </string>
     <string name="text_policy_agreement">I accept the <a href="https://storiqa.com/turewallet/privacy_policy.pdf">Privacy Policy</a> </string>
     <string name="text_recover_password">Enter email address where new\npassword recovering instructions \n will be sent to.</string>
@@ -168,5 +167,7 @@
     <string name="preferences_change_password">Change password</string>
     <string name="preferences_edit_profile">Edit profile</string>
     <string name="preferences_app_info">App info</string>
+
+    <string name="transition_account">TransitionAccount</string>
 
 </resources>
