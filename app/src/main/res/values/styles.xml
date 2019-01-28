@@ -57,6 +57,7 @@
     </style>
 
     <style name="PinCodeButton">
+        <item name="android:fontFamily">@font/montserrat_light</item>
         <item name="android:background">@drawable/button_pin_background</item>
         <item name="android:textColor">@color/button_pin</item>
         <item name="android:gravity">center</item>
@@ -65,13 +66,14 @@
 
     <style name="TitleText">
         <item name="android:textColor">@color/text_caption</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">26sp</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="RegularText">
         <item name="android:textColor">@color/text_regular</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">12sp</item>
         <item name="android:gravity">center</item>
     </style>

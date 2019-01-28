@@ -120,9 +120,9 @@
     <string name="button_reset_password">Reset password</string>
     <string name="button_reset_pin">Reset pin</string>
     <string name="button_confirm_password">Confirm new password</string>
-    <string name="button_set_up_fingerprint">Set up fingerprint launch</string>
-    <string name="button_set_up_pin">Set up PIN-code</string>
     <string name="button_set_up_quick_launch">Set up Quick Launch</string>
+    <string name="button_set_up_pin_code">Set up PIN-code</string>
+    <string name="button_set_up_fingerprint">Set up fingerprint launch</string>
     <string name="button_do_not_use">Do not use</string>
     <string name="button_forgot_pin">I forgot my PIN</string>
     <string name="button_sign_in_facebook">Sign in via Facebook</string>
@@ -154,7 +154,7 @@
     <string name="text_pin_title_setup">Set up PIN-code</string>
     <string name="text_pin_description_setup">Enter 4-digit PIN-code</string>
     <string name="text_pin_title_confirm">Confirm PIN-code</string>
-    <string name="text_pin_description_confirm">The codes entered must match each other</string>
+    <string name="text_pin_description_confirm">The codes entered must\nmatch each other</string>
     <string name="text_pin_title_enter">Hello, %s</string>
     <string name="text_pin_description_enter">Enter your PIN-code</string>
     <string name="text_quick_launch">Set up Quick Launch?</string>

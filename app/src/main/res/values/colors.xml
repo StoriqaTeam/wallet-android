@@ -48,7 +48,7 @@
 
     <color name="text_caption">#ffffff</color>
     <color name="text_highlighted">#ffffff</color>
-    <color name="text_regular">#808080</color>
+    <color name="text_regular">#80FFFFFF</color>
 
     <color name="tab_selected_text">#ffffff</color>
     <color name="tab_unselected_text">#8c8c8c</color>
