@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -9,7 +8,6 @@
             name="viewModel"
             type="com.storiqa.storiqawallet.ui.main.account.AccountViewModel" />
     </data>
-
 
     <LinearLayout
         android:id="@+id/root"
@@ -22,20 +20,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/accountsRecycler"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/accountsPager"
             android:layout_width="match_parent"
-            tools:listitem="@layout/item_account"
-            android:layout_height="200dp" />
+            android:layout_height="160dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Account Fragment"
+            android:text="@string/text_last_transactions"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,11 +49,14 @@
 
         <Button
             android:id="@+id/btnSeeAll"
-            android:layout_width="wrap_content"
+            style="@style/GradientButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
             android:layout_weight="0"
-            android:text="Button" />
+            android:text="@string/button_all_transactions" />
 
     </LinearLayout>
 

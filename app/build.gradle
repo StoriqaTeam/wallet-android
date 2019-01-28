@@ -31,6 +31,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':crypto-signer')
@@ -39,6 +43,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.annotation:annotation:$annotationVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerVersion"
+    implementation "androidx.viewpager:viewpager:$viewpagerVersion"
     implementation "androidx.preference:preference:$preferenceVersion"
 
     //ConstraintLayout

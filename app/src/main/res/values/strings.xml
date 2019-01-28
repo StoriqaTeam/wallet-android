@@ -127,6 +127,7 @@
     <string name="button_forgot_pin">I forgot my PIN</string>
     <string name="button_sign_in_facebook">Sign in via Facebook</string>
     <string name="button_sign_in_google">Sign in via Google</string>
+    <string name="button_all_transactions">See all transactions</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -161,6 +162,7 @@
     <string name="text_quick_launch_description">Choose the way to confirm\nyour identity</string>
     <string name="text_pin_code">Set up PIN-code?</string>
     <string name="text_fingerprint">Set up fingerprint launch?</string>
+    <string name="text_last_transactions">Last transactions</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
 

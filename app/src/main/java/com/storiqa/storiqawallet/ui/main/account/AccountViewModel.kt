@@ -23,6 +23,9 @@ constructor(navigator: IMainNavigator,
 
     val updateAccounts = SingleLiveEvent<ArrayList<Card>>()
 
+    var isViewInitialized = false
+    var currentPosition = 0
+
     var cards: ArrayList<Card> = ArrayList()
 
     private var accounts: List<AccountEntity> = ArrayList()
