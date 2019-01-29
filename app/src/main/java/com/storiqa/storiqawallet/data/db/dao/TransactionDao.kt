@@ -14,7 +14,7 @@ interface TransactionDao {
     fun loadTransactions(): Flowable<List<TransactionEntity>>
 
     @Query("SELECT * FROM Transactions")
-    fun loadTransactionsWithAddresses(): List<TransactionWithAddresses>
+    fun loadTransactionsWithAddresses(): Flowable<List<TransactionWithAddresses>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(transaction: TransactionEntity)

@@ -10,7 +10,7 @@ import io.reactivex.Flowable
 @Dao
 interface TransactionAccountDao {
     @Query("SELECT * FROM TransactionAccounts")
-    fun loadTransactions(): Flowable<List<TransactionAccountEntity>>
+    fun loadTransactionAccounts(): Flowable<List<TransactionAccountEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(transactionAccount: TransactionAccountEntity)

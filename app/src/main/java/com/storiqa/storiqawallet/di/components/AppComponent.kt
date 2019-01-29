@@ -8,12 +8,11 @@ import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.data.db.AppDatabase
-import com.storiqa.storiqawallet.data.db.dao.AccountDao
-import com.storiqa.storiqawallet.data.db.dao.RateDao
-import com.storiqa.storiqawallet.data.db.dao.UserDao
+import com.storiqa.storiqawallet.data.db.dao.*
 import com.storiqa.storiqawallet.data.polling.IShortPolling
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
+import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.di.modules.AppModule
 import com.storiqa.storiqawallet.di.modules.NetworkModule
@@ -56,8 +55,13 @@ interface AppComponentProvides {
     fun userDao(): UserDao
     fun accountDao(): AccountDao
     fun rateDao(): RateDao
+    fun provideTransactionDao(): TransactionDao
+    fun provideTransactionAccountDao(): TransactionAccountDao
+    fun provideTransactionAccountJoinDao(): TransactionAccountJoinDao
+    fun provideBlockchainIdDao(): BlockchainIdDao
 
     fun userRepository(): IUserRepository
     fun accountsRepository(): IAccountsRepository
     fun ratesRepository(): IRatesRepository
+    fun transactionsRepository(): ITransactionsRepository
 }
