@@ -10,7 +10,7 @@
 
     <color name="window_background">#000000</color>
 
-    <color name="bottom_navigation_background">#333333</color>
+    <color name="bottom_navigation_background">@color/window_background</color>
     <color name="bottom_navigation_icon_unselected">#808080</color>
     <color name="bottom_navigation_icon_selected">#f1ab3b</color>
 

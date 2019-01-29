@@ -3,22 +3,22 @@
 
     <item
         android:title="@string/menu_wallet"
-        android:icon="@drawable/my_wallet_tab_off" />
+        android:icon="@drawable/ic_nav_wallet" />
 
     <item
         android:title="@string/menu_send"
-        android:icon="@drawable/send_tab_off" />
+        android:icon="@drawable/ic_nav_send" />
 
     <item
         android:title="@string/menu_exchange"
-        android:icon="@drawable/change_tab_off" />
+        android:icon="@drawable/ic_nav_exchange" />
 
     <item
         android:title="@string/menu_receive"
-        android:icon="@drawable/deposit_tab_off" />
+        android:icon="@drawable/ic_nav_receive" />
 
     <item
         android:title="@string/menu_menu"
-        android:icon="@drawable/menu_tab_off" />
+        android:icon="@drawable/ic_nav_menu" />
 
 </menu>
