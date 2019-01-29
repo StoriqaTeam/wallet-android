@@ -85,12 +85,14 @@ constructor(navigator: IMainNavigator,
         val transactionDao = appDatabase.transactionDao()
         val transactionAccountDao = appDatabase.transactionAccountDao()
         val transactionAccountJoinDao = appDatabase.transactionAccountJoinDao()
+        val blockchainIdDao = appDatabase.blockchainIdDao()
         for (transaction in transactions) {
             val toAccount = transaction.toAccount
             transactionAccountDao.insert(TransactionAccountEntity(toAccount.blockchainAddress, toAccount.accountId, toAccount.ownerName))
             transactionDao.insert(TransactionEntity(transaction.id, transaction.toAccount.blockchainAddress, transaction.fromValue, transaction.fromCurrency,
                     transaction.toValue, transaction.toCurrency, transaction.fee, transaction.createdAt, transaction.updatedAt, transaction.status, transaction.fiatValue,
                     transaction.fiatCurrency))
+            transaction.blockchainTxIds.forEach { blockchainIdDao.insert(BlockchainId(it, transaction.id)) }
             for (transactionAccount in transaction.fromAccount) {
                 transactionAccountDao.insert(TransactionAccountEntity(transactionAccount.blockchainAddress, transactionAccount.accountId, transactionAccount.ownerName))
                 transactionAccountJoinDao.insert(TransactionAccountJoin(transaction.id, transactionAccount.blockchainAddress))
@@ -98,7 +100,10 @@ constructor(navigator: IMainNavigator,
         }
 
         val qqq = transactionDao.loadTransactionsWithAddresses()
-
+        transactions.forEach {
+            if (it.blockchainTxIds.isNotEmpty())
+                print("pppp")
+        }
         print("success")
     }
 

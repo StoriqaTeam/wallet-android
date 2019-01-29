@@ -7,7 +7,7 @@ import com.storiqa.storiqawallet.data.db.converter.CurrencyTypeConverter
 import com.storiqa.storiqawallet.data.db.dao.*
 import com.storiqa.storiqawallet.data.db.entity.*
 
-@Database(entities = [UserEntity::class, AccountEntity::class, RateEntity::class,
+@Database(entities = [UserEntity::class, AccountEntity::class, RateEntity::class, BlockchainId::class,
     TransactionEntity::class, TransactionAccountEntity::class, TransactionAccountJoin::class], version = 1)
 @TypeConverters(CurrencyTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -22,4 +22,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun transactionAccountDao(): TransactionAccountDao
 
     abstract fun transactionAccountJoinDao(): TransactionAccountJoinDao
+
+    abstract fun blockchainIdDao(): BlockchainIdDao
 }
