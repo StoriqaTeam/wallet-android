@@ -7,7 +7,7 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ItemTransactionBinding
 import com.storiqa.storiqawallet.enums.TransactionType
 import com.storiqa.storiqawallet.objects.Transaction
-import kotlinx.android.synthetic.main.item_transaction.view.*
+import kotlinx.android.synthetic.main.item_transaction_deprecated.view.*
 
 class TransactionAdapter(val transactions: Array<Transaction>, val onClick: () -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
