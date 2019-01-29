@@ -12,9 +12,9 @@ interface TransactionAccountDao {
     @Query("SELECT * FROM TransactionAccounts")
     fun loadTransactions(): Flowable<List<TransactionAccountEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(transactionAccount: TransactionAccountEntity)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(transactionAccounts: List<TransactionAccountEntity>)
 }

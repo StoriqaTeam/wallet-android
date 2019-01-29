@@ -96,6 +96,9 @@ constructor(navigator: IMainNavigator,
                 transactionAccountJoinDao.insert(TransactionAccountJoin(transaction.id, transactionAccount.blockchainAddress))
             }
         }
+
+        val qqq = transactionDao.loadTransactionsWithAddresses()
+
         print("success")
     }
 
