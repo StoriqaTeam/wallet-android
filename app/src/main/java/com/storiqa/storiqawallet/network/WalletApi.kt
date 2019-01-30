@@ -142,8 +142,8 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Query("offset") offset: Long,
-            @Query("limit") limit: Long): Observable<List<TransactionResponse>>
+            @Query("offset") offset: Int,
+            @Query("limit") limit: Int): Observable<List<TransactionResponse>>
 
     @POST("v1/transactions")
     fun createTransaction(

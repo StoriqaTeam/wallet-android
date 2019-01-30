@@ -27,8 +27,18 @@ class TransactionsRepository(private val walletApi: WalletApi,
                              private val appDataStorage: IAppDataStorage,
                              private val signUtil: SignUtil) : ITransactionsRepository {
 
+    private val loadingLimit = 30
+    private var lastPendingTransaction = Long.MAX_VALUE
+
     override fun getTransactions(): Flowable<List<Transaction>> {
         return Flowable.combineLatest(getTransactionsWithAddress(),
+                getTransactionAccounts(),
+                BiFunction(::mapTransactions))
+                .distinct()
+    }
+
+    override fun getTransactionsByAddress(address: String): Flowable<List<Transaction>> {
+        return Flowable.combineLatest(getTransactionsWithAddressByAddress(address),
                 getTransactionAccounts(),
                 BiFunction(::mapTransactions))
                 .distinct()
@@ -47,6 +57,13 @@ class TransactionsRepository(private val walletApi: WalletApi,
                 .distinct()
     }
 
+    private fun getTransactionsWithAddressByAddress(address: String): Flowable<List<TransactionWithAddresses>> {
+        return transactionDao
+                .loadTransactionsByAddress(address)
+                .subscribeOn(Schedulers.io())
+                .distinct()
+    }
+
     private fun getTransactionAccounts(): Flowable<List<TransactionAccountEntity>> {
         return transactionAccountDao
                 .loadTransactionAccounts()
@@ -54,13 +71,22 @@ class TransactionsRepository(private val walletApi: WalletApi,
                 .distinct()
     }
 
-    override fun refreshTransactions(id: Long, email: String): Observable<List<TransactionResponse>> {
+    override fun refreshTransactions(id: Long, email: String, offset: Int): Observable<List<TransactionResponse>> {
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
+        lastPendingTransaction = appDataStorage.lastPendingTransactionTime
 
         return walletApi.getTransactions(id, signHeader.timestamp, signHeader.deviceId,
-                signHeader.signature, "Bearer $token", 0, 98)
-                .doOnNext { saveTransactions(it) }
+                signHeader.signature, "Bearer $token", offset, loadingLimit)
+                .doOnNext {
+                    saveTransactions(it)
+                    if (it.size >= loadingLimit || getTimastampLong(it.last().createdAt) > lastPendingTransaction)
+                        refreshTransactions(id, email, offset + loadingLimit).subscribe({ }, { })
+                    else {
+                        val pendingTime = transactionDao.getOldestPendingTransactionTime()
+                        appDataStorage.lastPendingTransactionTime = if (pendingTime != 0L) pendingTime else transactionDao.getLastTransactionTime()
+                    }
+                }
     }
 
     private fun saveTransactions(transactions: List<TransactionResponse>) {
@@ -79,5 +105,8 @@ class TransactionsRepository(private val walletApi: WalletApi,
         }
         appDatabase.setTransactionSuccessful()
         appDatabase.endTransaction()
+
+        val q = transactionDao.getLastTransactionTime()
+        print("qq")
     }
 }

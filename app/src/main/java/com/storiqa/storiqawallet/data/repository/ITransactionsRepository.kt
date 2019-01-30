@@ -9,6 +9,8 @@ interface ITransactionsRepository {
 
     fun getTransactions(): Flowable<List<Transaction>>
 
-    fun refreshTransactions(id: Long, email: String): Observable<List<TransactionResponse>>
+    fun getTransactionsByAddress(address: String): Flowable<List<Transaction>>
+
+    fun refreshTransactions(id: Long, email: String, offset: Int): Observable<List<TransactionResponse>>
 
 }

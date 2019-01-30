@@ -75,7 +75,7 @@ constructor(navigator: IMainNavigator,
 
         transactionsRepository.getTransactions().subscribe({
             print("success")
-            transactionsRepository.refreshTransactions(userData.id, appData.currentUserEmail).subscribe({
+            transactionsRepository.refreshTransactions(userData.id, appData.currentUserEmail, 0).subscribe({
 
             }, {
                 print("error")
