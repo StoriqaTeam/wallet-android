@@ -3,13 +3,13 @@ package com.storiqa.storiqawallet.ui.main.account
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.storiqa.storiqawallet.data.model.Card
+import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.ui.main.account.SingleAccountFragment.Companion.KEY_CARD
 
-class AccountPagerAdapter(fragment: Fragment, private var cards: List<Card>) :
+class AccountPagerAdapter(fragment: Fragment, private var cards: List<Account>) :
         FragmentStatePagerAdapter(fragment.childFragmentManager) {
 
-    fun updateAccounts(newCards: List<Card>) {
+    fun updateAccounts(newCards: List<Account>) {
         cards = newCards
         notifyDataSetChanged()
     }

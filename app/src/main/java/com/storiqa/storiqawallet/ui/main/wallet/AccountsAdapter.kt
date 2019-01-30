@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.data.model.Card
+import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.databinding.ItemAccountBinding
 
-class AccountsAdapter(private var cards: List<Card>, val onClick: ((position: Int, element: View, transaction: String) -> Unit)? = null) :
+class AccountsAdapter(private var cards: List<Account>, val onClick: ((position: Int, element: View, transaction: String) -> Unit)? = null) :
         RecyclerView.Adapter<AccountsAdapter.ViewHolder>() {
 
-    fun updateAccounts(newCards: List<Card>) {
+    fun updateAccounts(newCards: List<Account>) {
         cards = newCards
         notifyDataSetChanged()
     }
@@ -28,9 +28,9 @@ class AccountsAdapter(private var cards: List<Card>, val onClick: ((position: In
 
     inner class ViewHolder(private val binding: ItemAccountBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(card: Card) {
+        fun bind(account: Account) {
             binding.apply {
-                this.card = card
+                this.account = account
                 executePendingBindings()
                 val onClickListener = onClick
                 if (onClickListener != null)

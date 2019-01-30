@@ -7,6 +7,7 @@ import com.storiqa.storiqawallet.data.db.dao.UserDao
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.UserEntity
 import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.network.responses.AccountResponse
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -32,7 +33,7 @@ class AccountsRepository(private val userDao: UserDao,
                 .subscribe({ requestAccounts(it, errorHandler) }, { errorHandler(it as Exception) })
     }
 
-    override fun updateAccounts(id: Long, email: String): Observable<ArrayList<com.storiqa.storiqawallet.data.model.Account>> {
+    override fun updateAccounts(id: Long, email: String): Observable<ArrayList<AccountResponse>> {
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
         return walletApi
@@ -59,7 +60,7 @@ class AccountsRepository(private val userDao: UserDao,
                 .subscribe()
     }
 
-    private fun saveAccounts(accounts: ArrayList<com.storiqa.storiqawallet.data.model.Account>) {
+    private fun saveAccounts(accounts: ArrayList<AccountResponse>) {
         val accountsList = ArrayList<AccountEntity>()
         accounts.forEach { accountsList.add(AccountEntity(it)) }
 

@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.data.db.entity
 
 import androidx.room.*
-import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.model.Currency
+import com.storiqa.storiqawallet.network.responses.AccountResponse
 
 @Entity(tableName = "Accounts",
         indices = [Index(value = arrayOf("id", "user_id"))],
@@ -20,6 +20,6 @@ data class AccountEntity(
         @ColumnInfo(name = "account_address") val accountAddress: String,
         @ColumnInfo(name = "name") val name: String,
         @ColumnInfo(name = "erc_approved") val erc20Approved: Boolean) {
-    constructor(account: Account) : this(account.id, account.userId, account.balance,
+    constructor(account: AccountResponse) : this(account.id, account.userId, account.balance,
             account.currency, account.accountAddress, account.name, account.erc20Approved)
 }

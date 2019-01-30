@@ -1,11 +1,7 @@
 package com.storiqa.storiqawallet.network
 
-import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.network.requests.*
-import com.storiqa.storiqawallet.network.responses.RegisterUserResponse
-import com.storiqa.storiqawallet.network.responses.TokenResponse
-import com.storiqa.storiqawallet.network.responses.TransactionResponse
-import com.storiqa.storiqawallet.network.responses.UserInfoResponse
+import com.storiqa.storiqawallet.network.responses.*
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.*
@@ -103,7 +99,7 @@ interface WalletApi {
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Query("offset") offset: Long,
-            @Query("limit") limit: Long): Observable<ArrayList<Account>>
+            @Query("limit") limit: Long): Observable<ArrayList<AccountResponse>>
 
     @PUT("v1/users/{id}/accounts")
     fun updateAccounts(

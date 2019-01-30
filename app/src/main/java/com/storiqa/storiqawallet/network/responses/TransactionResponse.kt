@@ -15,15 +15,15 @@ data class TransactionResponse(
         val blockchainTxIds: List<String>,
 
         @SerializedName("to")
-        val toAccount: TransactionAccount,
+        val toAccount: TransactionAccountResponse,
 
         @SerializedName("from")
-        val fromAccount: List<TransactionAccount>,
+        val fromAccount: List<TransactionAccountResponse>,
 
         val fiatValue: String?,
         val fiatCurrency: String?)
 
-data class TransactionAccount(
+data class TransactionAccountResponse(
         @SerializedName("account_id")
         val accountId: String?,
 

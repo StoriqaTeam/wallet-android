@@ -18,4 +18,7 @@ interface TransactionAccountJoinDao {
 
     @Query("SELECT * FROM TransactionAccounts INNER JOIN TransactionAccountJoins ON TransactionAccounts.blockchain_address=TransactionAccountJoins.blockchain_address WHERE TransactionAccountJoins.transaction_id=:transactionAccountId")
     fun getRepositoriesForUsers(transactionAccountId: String): List<TransactionAccountEntity>
+
+    @Query("DELETE FROM TransactionAccountJoins")
+    fun deleteAll()
 }

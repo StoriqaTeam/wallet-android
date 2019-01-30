@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.di.modules
 
 import com.storiqa.storiqawallet.data.IAppDataStorage
+import com.storiqa.storiqawallet.data.db.AppDatabase
 import com.storiqa.storiqawallet.data.db.dao.*
 import com.storiqa.storiqawallet.data.repository.*
 import com.storiqa.storiqawallet.di.scopes.PerApplication
@@ -46,14 +47,15 @@ class RepositoryModule {
     @PerApplication
     internal fun provideTransactionsRepository(
             walletApi: WalletApi,
+            appDatabase: AppDatabase,
             transactionAccountJoinDao: TransactionAccountJoinDao,
             transactionAccountDao: TransactionAccountDao,
             transactionDao: TransactionDao,
             blockchainIdDao: BlockchainIdDao,
             appDataStorage: IAppDataStorage,
             signUtil: SignUtil): ITransactionsRepository {
-        return TransactionsRepository(walletApi, transactionAccountJoinDao, transactionAccountDao,
-                transactionDao, blockchainIdDao, appDataStorage, signUtil)
+        return TransactionsRepository(walletApi, appDatabase, transactionAccountJoinDao,
+                transactionAccountDao, transactionDao, blockchainIdDao, appDataStorage, signUtil)
     }
 
 }

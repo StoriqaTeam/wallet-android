@@ -15,8 +15,8 @@ data class TransactionEntity(
         @ColumnInfo(name = "to_value") val toValue: String,
         @ColumnInfo(name = "to_currency") val toCurrency: String,
         @ColumnInfo(name = "fee") val fee: String,
-        @ColumnInfo(name = "created_at") val createdAt: String,
-        @ColumnInfo(name = "updated_at") val updatedAt: String,
+        @ColumnInfo(name = "created_at") val createdAt: Long,
+        @ColumnInfo(name = "updated_at") val updatedAt: Long,
         @ColumnInfo(name = "status") val status: String,
         @ColumnInfo(name = "fiat_value") val fiatValue: String?,
         @ColumnInfo(name = "fiat_currency") val fiatCurrency: String?)

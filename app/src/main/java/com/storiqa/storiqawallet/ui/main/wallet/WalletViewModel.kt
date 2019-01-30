@@ -11,7 +11,7 @@ import com.storiqa.storiqawallet.data.db.AppDatabase
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.mapper.AccountMapper
-import com.storiqa.storiqawallet.data.model.Card
+import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
@@ -38,9 +38,9 @@ constructor(navigator: IMainNavigator,
             private val appData: IAppDataStorage,
             private val tokenProvider: ITokenProvider) : BaseViewModel<IMainNavigator>() {
 
-    val updateAccounts = SingleLiveEvent<ArrayList<Card>>()
+    val updateAccounts = SingleLiveEvent<ArrayList<Account>>()
 
-    var cards: ArrayList<Card> = ArrayList()
+    var cards: ArrayList<Account> = ArrayList()
 
     private var accounts: List<AccountEntity> = ArrayList()
     private var rates: List<RateEntity> = ArrayList()
@@ -72,8 +72,17 @@ constructor(navigator: IMainNavigator,
 
         ShortPolling(accountsRepository, ratesRepository).start(userData.id, userData.email)
 
-        transactionsRepository.refreshTransactions(userData.id, appData.currentUserEmail).subscribe({}, {
-            print("error")
+
+        transactionsRepository.getTransactions().subscribe({
+            print("success")
+            transactionsRepository.refreshTransactions(userData.id, appData.currentUserEmail).subscribe({
+
+            }, {
+                print("error")
+            })
+        }, {
+            print("fail")
+            it.printStackTrace()
         })
     }
 

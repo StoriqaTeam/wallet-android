@@ -16,9 +16,12 @@ interface TransactionDao {
     @Query("SELECT * FROM Transactions")
     fun loadTransactionsWithAddresses(): Flowable<List<TransactionWithAddresses>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(transaction: TransactionEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(transactions: List<TransactionEntity>)
+
+    @Query("DELETE FROM Transactions")
+    fun deleteAll()
 }

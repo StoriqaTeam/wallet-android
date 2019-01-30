@@ -12,9 +12,12 @@ interface BlockchainIdDao {
     @Query("SELECT * FROM BlockchainIds")
     fun loadBlockchainIds(): Flowable<List<BlockchainId>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(blockchainId: BlockchainId)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(blockchainIds: List<BlockchainId>)
+
+    @Query("DELETE FROM BlockchainIds")
+    fun deleteAll()
 }

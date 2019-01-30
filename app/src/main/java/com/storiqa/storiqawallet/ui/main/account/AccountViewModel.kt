@@ -6,7 +6,7 @@ import com.storiqa.storiqawallet.data.IUserDataStorage
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.mapper.AccountMapper
-import com.storiqa.storiqawallet.data.model.Card
+import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
@@ -21,12 +21,12 @@ constructor(navigator: IMainNavigator,
             private val ratesRepository: IRatesRepository,
             private val userData: IUserDataStorage) : BaseViewModel<IMainNavigator>() {
 
-    val updateAccounts = SingleLiveEvent<ArrayList<Card>>()
+    val updateAccounts = SingleLiveEvent<ArrayList<Account>>()
 
     var isViewInitialized = false
     var currentPosition = 0
 
-    var cards: ArrayList<Card> = ArrayList()
+    var cards: ArrayList<Account> = ArrayList()
 
     private var accounts: List<AccountEntity> = ArrayList()
     private var rates: List<RateEntity> = ArrayList()
