@@ -49,8 +49,8 @@ class AppDataStorage(private val prefs: PrefUtil) : IAppDataStorage {
             prefs.getEditor().putString(CURRENT_USER_EMAIL, value).apply()
         }
 
-    override var lastPendingTransactionTime: Long
-        get() = prefs.getPreferences().getLong(LAST_PENDING_TRANSACTION, Long.MAX_VALUE)
+    override var oldestPendingTransactionTime: Long
+        get() = prefs.getPreferences().getLong(LAST_PENDING_TRANSACTION, 0)
         set(value) {
             prefs.getEditor().putLong(LAST_PENDING_TRANSACTION, value).apply()
         }

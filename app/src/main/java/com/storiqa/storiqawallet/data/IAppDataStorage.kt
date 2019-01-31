@@ -8,7 +8,7 @@ interface IAppDataStorage {
     var deviceId: String
     var token: String
     var currentUserEmail: String
-    var lastPendingTransactionTime: Long
+    var oldestPendingTransactionTime: Long
     val deviceOs: String
 
     fun setPrivateKey(email: String, key: String)

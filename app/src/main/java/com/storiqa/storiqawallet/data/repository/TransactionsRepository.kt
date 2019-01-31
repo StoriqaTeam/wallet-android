@@ -28,7 +28,7 @@ class TransactionsRepository(private val walletApi: WalletApi,
                              private val signUtil: SignUtil) : ITransactionsRepository {
 
     private val loadingLimit = 30
-    private var lastPendingTransaction = Long.MAX_VALUE
+    private var oldestPendingTransaction = 0L
 
     override fun getTransactions(): Flowable<List<Transaction>> {
         return Flowable.combineLatest(getTransactionsWithAddress(),
@@ -74,28 +74,45 @@ class TransactionsRepository(private val walletApi: WalletApi,
     override fun refreshTransactions(id: Long, email: String, offset: Int): Observable<List<TransactionResponse>> {
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
-        lastPendingTransaction = appDataStorage.lastPendingTransactionTime
+        oldestPendingTransaction = appDataStorage.oldestPendingTransactionTime
 
         return walletApi.getTransactions(id, signHeader.timestamp, signHeader.deviceId,
                 signHeader.signature, "Bearer $token", offset, loadingLimit)
                 .doOnNext {
                     saveTransactions(it)
-                    if (it.size >= loadingLimit || getTimastampLong(it.last().createdAt) > lastPendingTransaction)
-                        refreshTransactions(id, email, offset + loadingLimit).subscribe({ }, { })
-                    else {
+                    if (it.size < loadingLimit ||
+                            getNewestTransactionTime(it) < oldestPendingTransaction) {
                         val pendingTime = transactionDao.getOldestPendingTransactionTime()
-                        appDataStorage.lastPendingTransactionTime = if (pendingTime != 0L) pendingTime else transactionDao.getLastTransactionTime()
-                    }
+                        appDataStorage.oldestPendingTransactionTime =
+                                if (pendingTime != 0L)
+                                    pendingTime
+                                else
+                                    transactionDao.getLastTransactionTime()
+                    } else
+                        refreshTransactions(id, email, offset + loadingLimit).subscribe({ }, { })
                 }
     }
 
+    private fun getNewestTransactionTime(transactions: List<TransactionResponse>): Long { //TODO  poprosit' Seregu sdelat' normal'niy otvet
+        return getTimastampLong(transactions.sortedWith(compareBy { it.createdAt }).last().createdAt)
+    }
+
     private fun saveTransactions(transactions: List<TransactionResponse>) {
+
+        //blockchainIdDao.deleteAll()
+        //transactionAccountJoinDao.deleteAll()
+        //transactionAccountDao.deleteAll()
+        //transactionDao.deleteAll()
+
         appDatabase.beginTransaction()
         for (transaction in transactions) {
             val toAccount = transaction.toAccount
             transactionAccountDao.insert(TransactionAccountEntity(toAccount.blockchainAddress, toAccount.accountId, toAccount.ownerName))
             transactionDao.insert(TransactionEntity(transaction.id, transaction.toAccount.blockchainAddress, transaction.fromValue, transaction.fromCurrency,
-                    transaction.toValue, transaction.toCurrency, transaction.fee, getTimastampLong(transaction.createdAt), getTimastampLong(transaction.updatedAt), transaction.status, transaction.fiatValue,
+                    transaction.toValue, transaction.toCurrency, transaction.fee, getTimastampLong(transaction.createdAt), getTimastampLong(transaction.updatedAt),
+                    //if (transaction.id == "8974ddb6-b696-4e9c-a392-34d7dd9f64fa") "pending" else transaction.status,
+                    transaction.status,
+                    transaction.fiatValue,
                     transaction.fiatCurrency))
             transaction.blockchainTxIds.forEach { blockchainIdDao.insert(BlockchainId(it, transaction.id)) }
             for (transactionAccount in transaction.fromAccount) {
@@ -105,8 +122,5 @@ class TransactionsRepository(private val walletApi: WalletApi,
         }
         appDatabase.setTransactionSuccessful()
         appDatabase.endTransaction()
-
-        val q = transactionDao.getLastTransactionTime()
-        print("qq")
     }
 }

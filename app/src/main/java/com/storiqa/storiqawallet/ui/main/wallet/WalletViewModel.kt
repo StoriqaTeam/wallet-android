@@ -72,14 +72,14 @@ constructor(navigator: IMainNavigator,
 
         ShortPolling(accountsRepository, ratesRepository).start(userData.id, userData.email)
 
+        transactionsRepository.refreshTransactions(userData.id, appData.currentUserEmail, 0).subscribe({
+
+        }, {
+            print("error")
+        })
 
         transactionsRepository.getTransactions().subscribe({
             print("success")
-            transactionsRepository.refreshTransactions(userData.id, appData.currentUserEmail, 0).subscribe({
-
-            }, {
-                print("error")
-            })
         }, {
             print("fail")
             it.printStackTrace()
