@@ -80,12 +80,6 @@ constructor(navigator: IMainNavigator,
             print("error")
         })
 
-        transactionsRepository.getAllTransactions().subscribe({
-            print("success")
-        }, {
-            print("fail")
-            it.printStackTrace()
-        })
     }
 
     private fun updateAccounts() {

@@ -29,8 +29,9 @@ class TransactionsRepository(private val walletApi: WalletApi,
 
     private val loadingLimit = 30
     private var oldestPendingTransaction = 0L
+    private lateinit var accountAddress: String
 
-    override fun getAllTransactions(): Flowable<List<Transaction>> {
+    /*override fun getAllTransactions(): Flowable<List<Transaction>> {
         return Flowable.combineLatest(loadAllTransactions(),
                 loadTransactionAccounts(),
                 BiFunction(::mapTransactions))
@@ -42,9 +43,10 @@ class TransactionsRepository(private val walletApi: WalletApi,
                 loadTransactionAccounts(),
                 BiFunction(::mapTransactions))
                 .distinct()
-    }
+    }*/
 
     override fun getTransactionsByAddress(address: String, limit: Int): Flowable<List<Transaction>> {
+        accountAddress = address
         return Flowable.combineLatest(loadTransactionsByAddress(address, limit),
                 loadTransactionAccounts(),
                 BiFunction(::mapTransactions))
@@ -54,7 +56,7 @@ class TransactionsRepository(private val walletApi: WalletApi,
     private fun mapTransactions(transactions: List<TransactionWithAddresses>,
                                 accounts: List<TransactionAccountEntity>): List<Transaction> {
         val trMapper = TransactionMapper(accounts)
-        return trMapper.map(transactions)
+        return trMapper.map(transactions, accountAddress)
     }
 
     private fun loadAllTransactions(): Flowable<List<TransactionWithAddresses>> {

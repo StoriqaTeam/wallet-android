@@ -14,6 +14,8 @@ data class Transaction(
         val fiatValue: String?,
         val fiatCurrency: Currency?,
 
+        val type: TransactionType,
+        val typeDescription: String,
         val time: String,
         val amount: String,
         val fiat: String?

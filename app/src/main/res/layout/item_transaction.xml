@@ -26,7 +26,8 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/send_icon_round" />
+            app:imageResource="@{transaction.type.getTypeIcon()}"
+            tools:srcCompat="@drawable/send_icon_round" />
 
         <TextView
             android:id="@+id/tvTransactionType"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{transaction.status}"
+            android:text="@{transaction.typeDescription}"
             app:layout_constraintStart_toEndOf="@+id/imgTransactionType"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Sent STQ" />
@@ -58,7 +59,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="end"
-            android:text="@{transaction.fromValue + ` ` + transaction.fromCurrency}"
+            android:text="@{transaction.amount}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvTransactionType"
             app:layout_constraintTop_toTopOf="@+id/tvTransactionType"

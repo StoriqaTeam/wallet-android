@@ -28,8 +28,6 @@ constructor(navigator: IMainNavigator,
     val updateAccounts = SingleLiveEvent<ArrayList<Account>>()
     val updateTransactions = SingleLiveEvent<List<Transaction>>()
 
-    var isAccountsInitialized = false
-    var isTransactionsInitialized = false
     var currentPosition = 0
 
     var cards: ArrayList<Account> = ArrayList()
@@ -38,7 +36,7 @@ constructor(navigator: IMainNavigator,
     private var rates: List<RateEntity> = ArrayList()
     private var transactions: List<Transaction> = ArrayList()
 
-    private var transactionsSubscription: Disposable
+    private var transactionsSubscription: Disposable? = null
 
     init {
         setNavigator(navigator)
@@ -57,12 +55,6 @@ constructor(navigator: IMainNavigator,
                     accounts = it.reversed()
                     updateAccounts()
                 }
-
-        transactionsSubscription = transactionsRepository.getTransactions(10).observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    transactions = it
-                    updateTransactions()
-                }
     }
 
     private fun updateAccounts() {
@@ -79,8 +71,10 @@ constructor(navigator: IMainNavigator,
     }
 
     fun onAccountSelected(position: Int) {
-        if (!transactionsSubscription.isDisposed)
-            transactionsSubscription.dispose()
+        currentPosition = position
+        val sab = transactionsSubscription
+        if (sab != null && !sab.isDisposed)
+            sab.dispose()
 
         transactionsSubscription = transactionsRepository.getTransactionsByAddress(cards[position].accountAddress, 10).observeOn(AndroidSchedulers.mainThread())
                 .subscribe {

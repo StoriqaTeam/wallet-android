@@ -5,8 +5,8 @@ import com.storiqa.storiqawallet.data.model.Transaction
 
 interface ITransactionMapper {
 
-    fun map(transaction: TransactionWithAddresses): Transaction
+    fun map(transaction: TransactionWithAddresses, address: String): Transaction
 
-    fun map(transactions: List<TransactionWithAddresses>): List<Transaction>
+    fun map(transactions: List<TransactionWithAddresses>, address: String): List<Transaction>
 
 }
