@@ -1,5 +1,9 @@
 package com.storiqa.storiqawallet.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Card(
         val id: String,
         val userId: Long,
@@ -10,4 +14,4 @@ data class Card(
         val currency: String,
         val currencyIcon: Int,
         val accountAddress: String,
-        val name: String)
+        val name: String) : Parcelable

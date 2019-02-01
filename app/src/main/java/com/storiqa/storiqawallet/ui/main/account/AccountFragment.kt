@@ -1,23 +1,19 @@
 package com.storiqa.storiqawallet.ui.main.account
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.viewpager.widget.ViewPager
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentAccountBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
-import com.storiqa.storiqawallet.ui.main.wallet.AccountsAdapter
+import com.storiqa.storiqawallet.utils.convertDpToPx
 
 class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>() {
 
-    private lateinit var adapter: AccountsAdapter
-
-    private var position = -1
+    private lateinit var pagerAdapter: AccountPagerAdapter
 
     override fun getLayoutId(): Int = R.layout.fragment_account
 
@@ -28,28 +24,41 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView(view.context)
+        viewModel.isViewInitialized = false
+        viewModel.currentPosition = arguments?.getInt("POSITION") ?: 0
+
+        initView()
 
         viewModel.updateAccounts.observe(this, Observer {
-            adapter.updateAccounts(viewModel.cards)
-            if (position != -1) {
-                binding.accountsRecycler.scrollToPosition(position)
-                position = -1
+            pagerAdapter.updateAccounts(viewModel.cards)
+            if (!viewModel.isViewInitialized) {
+                binding.toolbar.title = viewModel.cards[viewModel.currentPosition].name
+                binding.accountsPager.setCurrentItem(viewModel.currentPosition, false)
+                viewModel.isViewInitialized = true
             }
         })
 
-        position = arguments?.getInt("POSITION") ?: -1
     }
 
-    private fun initView(context: Context) {
+    private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar, " ", true)
 
-        adapter = AccountsAdapter(viewModel.cards)
+        pagerAdapter = AccountPagerAdapter(this@AccountFragment, viewModel.cards)
+        binding.accountsPager.apply {
+            adapter = pagerAdapter
+            setPadding(convertDpToPx(30f).toInt(), 0, convertDpToPx(30f).toInt(), 0)
+            clipToPadding = false
+            pageMargin = convertDpToPx(20f).toInt()
+            addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+                override fun onPageSelected(position: Int) {
+                    binding.toolbar.title = viewModel.cards[position].name
+                }
+            })
+        }
+        //prepareSharedElementTransition()
 
-        binding.accountsRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.accountsRecycler.adapter = adapter
-
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(binding.accountsRecycler)
+        /*if (savedInstanceState == null) {
+            postponeEnterTransition()
+        }*/
     }
 }
