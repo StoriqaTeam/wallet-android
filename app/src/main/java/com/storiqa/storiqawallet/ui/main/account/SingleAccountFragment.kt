@@ -21,10 +21,10 @@ class SingleAccountFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val card = arguments?.get(KEY_CARD)
+        val account = arguments?.get(KEY_CARD)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.item_account, container, false)
-        binding.setVariable(BR.card, card)
+        binding.setVariable(BR.account, account)
         binding.executePendingBindings()
 
         return binding.root

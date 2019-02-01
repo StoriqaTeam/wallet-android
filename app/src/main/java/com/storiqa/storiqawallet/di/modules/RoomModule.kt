@@ -3,9 +3,7 @@ package com.storiqa.storiqawallet.di.modules
 import android.app.Application
 import androidx.room.Room
 import com.storiqa.storiqawallet.data.db.AppDatabase
-import com.storiqa.storiqawallet.data.db.dao.AccountDao
-import com.storiqa.storiqawallet.data.db.dao.RateDao
-import com.storiqa.storiqawallet.data.db.dao.UserDao
+import com.storiqa.storiqawallet.data.db.dao.*
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import dagger.Module
 import dagger.Provides
@@ -37,5 +35,21 @@ class RoomModule(application: Application) {
     @Provides
     @PerApplication
     internal fun provideRateDao(appDatabase: AppDatabase): RateDao = appDatabase.rateDao()
+
+    @Provides
+    @PerApplication
+    internal fun provideTransactionDao(appDatabase: AppDatabase): TransactionDao = appDatabase.transactionDao()
+
+    @Provides
+    @PerApplication
+    internal fun provideTransactionAccountDao(appDatabase: AppDatabase): TransactionAccountDao = appDatabase.transactionAccountDao()
+
+    @Provides
+    @PerApplication
+    internal fun provideTransactionAccountJoinDao(appDatabase: AppDatabase): TransactionAccountJoinDao = appDatabase.transactionAccountJoinDao()
+
+    @Provides
+    @PerApplication
+    internal fun provideBlockchainIdDao(appDatabase: AppDatabase): BlockchainIdDao = appDatabase.blockchainIdDao()
 
 }

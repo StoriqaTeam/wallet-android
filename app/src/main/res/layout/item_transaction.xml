@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -7,89 +6,77 @@
     <data>
 
         <import type="android.view.View" />
-
         <import type="com.storiqa.storiqawallet.enums.TransactionType" />
 
         <variable
             name="transaction"
-            type="com.storiqa.storiqawallet.objects.Transaction" />
+            type="com.storiqa.storiqawallet.data.model.Transaction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/imgTransactionType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/deposit_icon_round"
-            android:src="@{transaction.transactionType == TransactionType.SEND? @drawable/send_icon_round : @drawable/deposit_icon_round}" />
+            app:imageResource="@{transaction.type.getTypeIcon()}"
+            tools:srcCompat="@drawable/send_icon_round" />
 
         <TextView
-            android:id="@+id/tvTransactionHeader"
+            android:id="@+id/tvTransactionType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
-            android:fontFamily="@font/roboto"
-            android:textColor="@android:color/black"
-            android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView11"
-            app:layout_constraintTop_toTopOf="@+id/imageView11"
-            tools:text="Receive ETH" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{transaction.typeDescription}"
+            app:layout_constraintStart_toEndOf="@+id/imgTransactionType"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Sent STQ" />
 
         <TextView
-            android:id="@+id/tvTransactionDescription"
+            android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/warm_grey"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@+id/tvTransactionHeader"
-            app:layout_constraintTop_toBottomOf="@+id/tvTransactionHeader"
-            tools:text="from 0xe3f…78345hj" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@{transaction.time}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvTransactionType"
+            app:layout_constraintTop_toBottomOf="@+id/tvTransactionType"
+            tools:text="20:14 Aug 12" />
 
         <TextView
-            android:id="@+id/textView25"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvAmount"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/roboto"
-            android:text="@{transaction.formattedDate}"
-            android:textColor="@color/pinkish_grey"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/tvTransactionDescription"
-            app:layout_constraintTop_toBottomOf="@+id/tvTransactionDescription"
-            tools:text="17:22 Aug 11" />
-
-        <TextView
-            android:id="@+id/tvAmountInToken"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@{transaction.transactionType == TransactionType.SEND? @color/sentRed : @color/recievedGreen}"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:text="@{transaction.amount}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvTransactionHeader"
-            tools:text="+0.00010000127 ETH" />
+            app:layout_constraintStart_toEndOf="@+id/tvTransactionType"
+            app:layout_constraintTop_toTopOf="@+id/tvTransactionType"
+            tools:text="- 109,635.00 STQ" />
 
         <TextView
-            android:id="@+id/tvAmountInDollars"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvAmountFiat"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/roboto"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/warm_grey"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:text="@{transaction.fiat}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAmountInToken"
-            tools:text="+$0.029" />
-
-
+            app:layout_constraintStart_toEndOf="@+id/tvTime"
+            app:layout_constraintTop_toTopOf="@+id/tvTime"
+            tools:text="- $250.84 " />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

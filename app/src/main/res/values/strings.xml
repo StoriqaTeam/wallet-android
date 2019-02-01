@@ -171,5 +171,7 @@
     <string name="preferences_app_info">App info</string>
 
     <string name="transition_account">TransitionAccount</string>
+    <string name="transaction_type_send">Send</string>
+    <string name="transaction_type_receive">Receive</string>
 
 </resources>

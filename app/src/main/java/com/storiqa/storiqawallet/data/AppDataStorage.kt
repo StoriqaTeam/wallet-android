@@ -10,6 +10,7 @@ private const val DEVICE_ID = "device_id"
 private const val PRIVATE_KEY = "private_key"
 private const val TOKEN = "token"
 private const val CURRENT_USER_EMAIL = "current_user_email"
+private const val LAST_PENDING_TRANSACTION = "last_pending_transaction"
 
 class AppDataStorage(private val prefs: PrefUtil) : IAppDataStorage {
 
@@ -46,6 +47,12 @@ class AppDataStorage(private val prefs: PrefUtil) : IAppDataStorage {
         get() = prefs.getPreferences().getString(CURRENT_USER_EMAIL, null)!!
         set(value) {
             prefs.getEditor().putString(CURRENT_USER_EMAIL, value).apply()
+        }
+
+    override var oldestPendingTransactionTime: Long
+        get() = prefs.getPreferences().getLong(LAST_PENDING_TRANSACTION, 0)
+        set(value) {
+            prefs.getEditor().putLong(LAST_PENDING_TRANSACTION, value).apply()
         }
 
     override val deviceOs: String

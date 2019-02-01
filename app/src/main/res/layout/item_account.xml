@@ -6,12 +6,11 @@
     <data>
 
         <import type="android.view.View" />
-
         <import type="java.math.BigDecimal" />
 
         <variable
-            name="card"
-            type="com.storiqa.storiqawallet.data.model.Card" />
+            name="account"
+            type="com.storiqa.storiqawallet.data.model.Account" />
 
         <variable
             name="currencyFiat"
@@ -29,7 +28,7 @@
             android:id="@+id/clBill"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackground="@{card.background}">
+            app:cardBackground="@{account.background}">
 
             <ImageView
                 android:id="@+id/imgLogo"
@@ -37,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                app:imageResource="@{card.currencyIcon}"
+                app:imageResource="@{account.currencyIcon}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/btc_small_logo" />
@@ -49,7 +48,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="right"
-                app:text="@{card.balanceFormatted + ` ` + card.currency}"
+                app:text="@{account.balanceFormatted + ` ` + account.currency}"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgLogo"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{card.name}"
+                android:text="@{account.name}"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvBalance"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +75,7 @@
                 android:id="@+id/tvCurrency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{card.currency.toUpperCase()}"
+                android:text="@{account.currency.toUpperCase()}"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/tvBalance"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -92,7 +91,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:text="@{card.balanceFormatted}"
+                app:text="@{account.balanceFormatted}"
                 android:textSize="26sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvBalanceDollar"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +107,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:textSize="16sp"
-                app:text="@{card.balanceFiat}"
+                app:text="@{account.balanceFiat}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

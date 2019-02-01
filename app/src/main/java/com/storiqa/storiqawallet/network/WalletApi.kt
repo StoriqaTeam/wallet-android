@@ -1,10 +1,7 @@
 package com.storiqa.storiqawallet.network
 
-import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.network.requests.*
-import com.storiqa.storiqawallet.network.responses.RegisterUserResponse
-import com.storiqa.storiqawallet.network.responses.TokenResponse
-import com.storiqa.storiqawallet.network.responses.UserInfoResponse
+import com.storiqa.storiqawallet.network.responses.*
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.*
@@ -29,13 +26,15 @@ interface WalletApi {
     fun refreshToken(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
-            @Header("Sign") sign: String): Observable<TokenResponse>
+            @Header("Sign") sign: String,
+            @Header("Authorization") bearer: String): Observable<String>
 
     @POST("v1/sessions/oauth")
     fun revokeToken(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
-            @Header("Sign") sign: String): Observable<TokenResponse>
+            @Header("Sign") sign: String,
+            @Header("Authorization") bearer: String): Observable<TokenResponse>
 
     @POST("v1/users")
     fun registerUser(
@@ -102,7 +101,7 @@ interface WalletApi {
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Query("offset") offset: Long,
-            @Query("limit") limit: Long): Observable<ArrayList<Account>>
+            @Query("limit") limit: Long): Observable<ArrayList<AccountResponse>>
 
     @PUT("v1/users/{id}/accounts")
     fun updateAccounts(
@@ -145,8 +144,8 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Query("offset") offset: Long,
-            @Query("limit") limit: Long): Observable<Response<Any>>
+            @Query("offset") offset: Int,
+            @Query("limit") limit: Int): Observable<List<TransactionResponse>>
 
     @POST("v1/transactions")
     fun createTransaction(
