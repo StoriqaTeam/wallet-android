@@ -31,59 +31,11 @@ class TransactionsRepository(private val walletApi: WalletApi,
     private var oldestPendingTransaction = 0L
     private lateinit var accountAddress: String
 
-    /*override fun getAllTransactions(): Flowable<List<Transaction>> {
-        return Flowable.combineLatest(loadAllTransactions(),
-                loadTransactionAccounts(),
-                BiFunction(::mapTransactions))
-                .distinct()
-    }
-
-    override fun getTransactions(limit: Int): Flowable<List<Transaction>> {
-        return Flowable.combineLatest(loadTransactionsWithLimit(limit),
-                loadTransactionAccounts(),
-                BiFunction(::mapTransactions))
-                .distinct()
-    }*/
-
     override fun getTransactionsByAddress(address: String, limit: Int): Flowable<List<Transaction>> {
         accountAddress = address
         return Flowable.combineLatest(loadTransactionsByAddress(address, limit),
                 loadTransactionAccounts(),
                 BiFunction(::mapTransactions))
-                .distinct()
-    }
-
-    private fun mapTransactions(transactions: List<TransactionWithAddresses>,
-                                accounts: List<TransactionAccountEntity>): List<Transaction> {
-        val trMapper = TransactionMapper(accounts)
-        return trMapper.map(transactions, accountAddress)
-    }
-
-    private fun loadAllTransactions(): Flowable<List<TransactionWithAddresses>> {
-        return transactionDao
-                .loadAllTransactions()
-                .subscribeOn(Schedulers.io())
-                .distinct()
-    }
-
-    private fun loadTransactionsWithLimit(limit: Int): Flowable<List<TransactionWithAddresses>> {
-        return transactionDao
-                .loadTransactionsWithLimit(limit)
-                .subscribeOn(Schedulers.io())
-                .distinct()
-    }
-
-    private fun loadTransactionsByAddress(address: String, limit: Int): Flowable<List<TransactionWithAddresses>> {
-        return transactionDao
-                .loadTransactionsByAddress(address, limit)
-                .subscribeOn(Schedulers.io())
-                .distinct()
-    }
-
-    private fun loadTransactionAccounts(): Flowable<List<TransactionAccountEntity>> {
-        return transactionAccountDao
-                .loadTransactionAccounts()
-                .subscribeOn(Schedulers.io())
                 .distinct()
     }
 
@@ -111,6 +63,26 @@ class TransactionsRepository(private val walletApi: WalletApi,
 
     private fun getNewestTransactionTime(transactions: List<TransactionResponse>): Long { //TODO  poprosit' Seregu sdelat' normal'niy otvet
         return getTimestampLong(transactions.sortedWith(compareBy { it.createdAt }).last().createdAt)
+    }
+
+    private fun mapTransactions(transactions: List<TransactionWithAddresses>,
+                                accounts: List<TransactionAccountEntity>): List<Transaction> {
+        val trMapper = TransactionMapper(accounts)
+        return trMapper.map(transactions, accountAddress)
+    }
+
+    private fun loadTransactionsByAddress(address: String, limit: Int): Flowable<List<TransactionWithAddresses>> {
+        return transactionDao
+                .loadTransactionsByAddress(address, limit)
+                .subscribeOn(Schedulers.io())
+                .distinct()
+    }
+
+    private fun loadTransactionAccounts(): Flowable<List<TransactionAccountEntity>> {
+        return transactionAccountDao
+                .loadTransactionAccounts()
+                .subscribeOn(Schedulers.io())
+                .distinct()
     }
 
     private fun saveTransactions(transactions: List<TransactionResponse>) {
