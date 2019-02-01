@@ -10,7 +10,7 @@
 
         <variable
             name="transaction"
-            type="com.storiqa.storiqawallet.objects.Transaction" />
+            type="com.storiqa.storiqawallet.data.model.Transaction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
 
 
         <ImageView
-            android:id="@+id/imgTrasactionType"
+            android:id="@+id/imgTransactionType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -34,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/imgTrasactionType"
+            android:text="@{transaction.status}"
+            app:layout_constraintStart_toEndOf="@+id/imgTransactionType"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Sent STQ" />
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="TextView"
+            android:text="@{transaction.time}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvTransactionType"
             app:layout_constraintTop_toBottomOf="@+id/tvTransactionType"
@@ -58,7 +58,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="end"
-            android:text="TextView"
+            android:text="@{transaction.fromValue + ` ` + transaction.fromCurrency}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvTransactionType"
             app:layout_constraintTop_toTopOf="@+id/tvTransactionType"

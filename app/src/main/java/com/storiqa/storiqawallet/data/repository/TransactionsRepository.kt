@@ -12,7 +12,7 @@ import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.network.responses.TransactionResponse
 import com.storiqa.storiqawallet.utils.SignUtil
-import com.storiqa.storiqawallet.utils.getTimastampLong
+import com.storiqa.storiqawallet.utils.getTimestampLong
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
@@ -30,16 +30,23 @@ class TransactionsRepository(private val walletApi: WalletApi,
     private val loadingLimit = 30
     private var oldestPendingTransaction = 0L
 
-    override fun getTransactions(): Flowable<List<Transaction>> {
-        return Flowable.combineLatest(getTransactionsWithAddress(),
-                getTransactionAccounts(),
+    override fun getAllTransactions(): Flowable<List<Transaction>> {
+        return Flowable.combineLatest(loadAllTransactions(),
+                loadTransactionAccounts(),
                 BiFunction(::mapTransactions))
                 .distinct()
     }
 
-    override fun getTransactionsByAddress(address: String): Flowable<List<Transaction>> {
-        return Flowable.combineLatest(getTransactionsWithAddressByAddress(address),
-                getTransactionAccounts(),
+    override fun getTransactions(limit: Int): Flowable<List<Transaction>> {
+        return Flowable.combineLatest(loadTransactionsWithLimit(limit),
+                loadTransactionAccounts(),
+                BiFunction(::mapTransactions))
+                .distinct()
+    }
+
+    override fun getTransactionsByAddress(address: String, limit: Int): Flowable<List<Transaction>> {
+        return Flowable.combineLatest(loadTransactionsByAddress(address, limit),
+                loadTransactionAccounts(),
                 BiFunction(::mapTransactions))
                 .distinct()
     }
@@ -50,21 +57,28 @@ class TransactionsRepository(private val walletApi: WalletApi,
         return trMapper.map(transactions)
     }
 
-    private fun getTransactionsWithAddress(): Flowable<List<TransactionWithAddresses>> {
+    private fun loadAllTransactions(): Flowable<List<TransactionWithAddresses>> {
         return transactionDao
-                .loadTransactionsWithAddresses()
+                .loadAllTransactions()
                 .subscribeOn(Schedulers.io())
                 .distinct()
     }
 
-    private fun getTransactionsWithAddressByAddress(address: String): Flowable<List<TransactionWithAddresses>> {
+    private fun loadTransactionsWithLimit(limit: Int): Flowable<List<TransactionWithAddresses>> {
         return transactionDao
-                .loadTransactionsByAddress(address)
+                .loadTransactionsWithLimit(limit)
                 .subscribeOn(Schedulers.io())
                 .distinct()
     }
 
-    private fun getTransactionAccounts(): Flowable<List<TransactionAccountEntity>> {
+    private fun loadTransactionsByAddress(address: String, limit: Int): Flowable<List<TransactionWithAddresses>> {
+        return transactionDao
+                .loadTransactionsByAddress(address, limit)
+                .subscribeOn(Schedulers.io())
+                .distinct()
+    }
+
+    private fun loadTransactionAccounts(): Flowable<List<TransactionAccountEntity>> {
         return transactionAccountDao
                 .loadTransactionAccounts()
                 .subscribeOn(Schedulers.io())
@@ -94,7 +108,7 @@ class TransactionsRepository(private val walletApi: WalletApi,
     }
 
     private fun getNewestTransactionTime(transactions: List<TransactionResponse>): Long { //TODO  poprosit' Seregu sdelat' normal'niy otvet
-        return getTimastampLong(transactions.sortedWith(compareBy { it.createdAt }).last().createdAt)
+        return getTimestampLong(transactions.sortedWith(compareBy { it.createdAt }).last().createdAt)
     }
 
     private fun saveTransactions(transactions: List<TransactionResponse>) {
@@ -109,7 +123,7 @@ class TransactionsRepository(private val walletApi: WalletApi,
             val toAccount = transaction.toAccount
             transactionAccountDao.insert(TransactionAccountEntity(toAccount.blockchainAddress, toAccount.accountId, toAccount.ownerName))
             transactionDao.insert(TransactionEntity(transaction.id, transaction.toAccount.blockchainAddress, transaction.fromValue, transaction.fromCurrency,
-                    transaction.toValue, transaction.toCurrency, transaction.fee, getTimastampLong(transaction.createdAt), getTimastampLong(transaction.updatedAt),
+                    transaction.toValue, transaction.toCurrency, transaction.fee, getTimestampLong(transaction.createdAt), getTimestampLong(transaction.updatedAt),
                     //if (transaction.id == "8974ddb6-b696-4e9c-a392-34d7dd9f64fa") "pending" else transaction.status,
                     transaction.status,
                     transaction.fiatValue,

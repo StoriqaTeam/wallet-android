@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.ui.main.account
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
@@ -13,7 +14,8 @@ import com.storiqa.storiqawallet.utils.convertDpToPx
 
 class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>() {
 
-    private lateinit var pagerAdapter: AccountPagerAdapter
+    private lateinit var accountsAdapter: AccountPagerAdapter
+    private lateinit var transactionsAdapter: TransactionsAdapter
 
     override fun getLayoutId(): Int = R.layout.fragment_account
 
@@ -24,41 +26,47 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.isViewInitialized = false
+        viewModel.isAccountsInitialized = false
         viewModel.currentPosition = arguments?.getInt("POSITION") ?: 0
 
         initView()
 
         viewModel.updateAccounts.observe(this, Observer {
-            pagerAdapter.updateAccounts(viewModel.cards)
-            if (!viewModel.isViewInitialized) {
+            accountsAdapter.updateAccounts(viewModel.cards)
+            if (!viewModel.isAccountsInitialized) {
                 binding.toolbar.title = viewModel.cards[viewModel.currentPosition].name
                 binding.accountsPager.setCurrentItem(viewModel.currentPosition, false)
-                viewModel.isViewInitialized = true
+                viewModel.isAccountsInitialized = true
             }
         })
 
+        viewModel.updateTransactions.observe(this, Observer {
+            if (!viewModel.isTransactionsInitialized) {
+                transactionsAdapter = TransactionsAdapter(it)
+                binding.transactionsRecycler.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = transactionsAdapter
+                }
+            } else
+                transactionsAdapter.updateAccounts(it)
+        })
     }
 
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar, " ", true)
 
-        pagerAdapter = AccountPagerAdapter(this@AccountFragment, viewModel.cards)
+        accountsAdapter = AccountPagerAdapter(this@AccountFragment, viewModel.cards)
         binding.accountsPager.apply {
-            adapter = pagerAdapter
+            adapter = accountsAdapter
             setPadding(convertDpToPx(30f).toInt(), 0, convertDpToPx(30f).toInt(), 0)
             clipToPadding = false
             pageMargin = convertDpToPx(20f).toInt()
             addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
                 override fun onPageSelected(position: Int) {
                     binding.toolbar.title = viewModel.cards[position].name
+                    viewModel.onAccountSelected(position)
                 }
             })
         }
-        //prepareSharedElementTransition()
-
-        /*if (savedInstanceState == null) {
-            postponeEnterTransition()
-        }*/
     }
 }

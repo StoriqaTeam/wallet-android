@@ -22,6 +22,7 @@ import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class WalletViewModel
@@ -55,6 +56,17 @@ constructor(navigator: IMainNavigator,
                 updateData()
             }, ::handleError)
 
+        val signHeader = signUtil.createSignHeader(appData.currentUserEmail)
+
+        walletApi.getUserInfo(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer ${appData.token}")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    print(" ")
+                }, {
+                    print("")
+                })
+
         ratesRepository.getRates()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
@@ -78,7 +90,7 @@ constructor(navigator: IMainNavigator,
             print("error")
         })
 
-        transactionsRepository.getTransactions().subscribe({
+        transactionsRepository.getAllTransactions().subscribe({
             print("success")
         }, {
             print("fail")

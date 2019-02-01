@@ -29,7 +29,7 @@ class TransactionAdapter(val transactions: Array<Transaction>, val onClick: () -
     class ViewHolder(val binder: ItemTransactionBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binder.root) {
         fun bind(transaction: Transaction, onClick: () -> Unit) {
             binder.apply {
-                this.transaction = transaction
+                //this.transaction = transaction
                 //root.onClick { onClick() }
                 executePendingBindings()
 

@@ -1,11 +1,17 @@
 package com.storiqa.storiqawallet.data.mapper
 
+import com.storiqa.storiqawallet.common.CurrencyFormatter
 import com.storiqa.storiqawallet.data.db.entity.TransactionAccountEntity
+import com.storiqa.storiqawallet.data.db.entity.TransactionEntity
 import com.storiqa.storiqawallet.data.db.entity.TransactionWithAddresses
 import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.data.model.TransactionAccount
+import com.storiqa.storiqawallet.utils.getPresentableTime
+import java.math.BigDecimal
 
 class TransactionMapper(private val transactionAccounts: List<TransactionAccountEntity>) : ITransactionMapper {
+
+    private val currencyFormatter = CurrencyFormatter()
 
     override fun map(transaction: TransactionWithAddresses): Transaction {
         val toAccount = TransactionAccount(
@@ -23,6 +29,12 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
         }
         val tr = transaction.transaction
 
+        val amountDecimal = getAmount(tr)
+
+        //val balanceDecimal = currencyFormatter.getFormattedDecimal(amountDecimal.toPlainString(), currency)
+        //val amountFormatted = currencyFormatter.getBalanceWithoutSymbol(balanceDecimal, currency)
+        //val amountFiatFormatted = currencyFormatter.getBalanceWithFiatSymbol(tr.fiatValue, currency)
+
         return Transaction(
                 tr.id,
                 tr.fromValue,
@@ -35,7 +47,11 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
                 toAccount,
                 fromAccount,
                 tr.fiatValue,
-                tr.fiatCurrency)
+                tr.fiatCurrency,
+
+                getPresentableTime(tr.createdAt)/*,
+                amountFormatted,
+                amountFiatFormatted*/)
     }
 
     override fun map(transactions: List<TransactionWithAddresses>): List<Transaction> {
@@ -53,4 +69,9 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
         throw Exception("account not found")
     }
 
+    private fun getAmount(transaction: TransactionEntity): BigDecimal {
+        val toValue = BigDecimal(transaction.toValue)
+        val fromValue = BigDecimal(transaction.fromValue)
+        return toValue.subtract(fromValue)
+    }
 }

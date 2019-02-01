@@ -12,7 +12,11 @@ data class Transaction(
         val toAccount: TransactionAccount,
         val fromAccount: List<TransactionAccount>,
         val fiatValue: String?,
-        val fiatCurrency: String?
+        val fiatCurrency: String?,
+
+        val time: String/*,
+        val amount: String,
+        val fiat: String*/
 )
 
 data class TransactionAccount(
