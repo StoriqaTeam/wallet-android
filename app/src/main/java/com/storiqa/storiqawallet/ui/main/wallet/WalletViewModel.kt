@@ -22,7 +22,6 @@ import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class WalletViewModel
@@ -52,20 +51,11 @@ constructor(navigator: IMainNavigator,
         val token = appData.token
         if (tokenProvider.isExpired(token))
             tokenProvider.refreshToken({
-                appData.token = token
+                //appData.token = it
                 updateData()
             }, ::handleError)
 
         val signHeader = signUtil.createSignHeader(appData.currentUserEmail)
-
-        walletApi.getUserInfo(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer ${appData.token}")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    print(" ")
-                }, {
-                    print("")
-                })
 
         ratesRepository.getRates()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -108,9 +98,9 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun updateData() {
-        userRepository.refreshUser(::handleError)
+        //userRepository.refreshUser(::handleError)
 
-        accountsRepository.refreshAccounts(::handleError)
+        //accountsRepository.refreshAccounts(::handleError)
     }
 
     fun onAccountClicked(position: Int, element: View, transition: String) {

@@ -25,13 +25,12 @@ class TokenProvider(private val appData: IAppDataStorage,
         val signHeader = signUtil.createSignHeader(appData.currentUserEmail)
 
         walletApi
-                .refreshToken(signHeader.timestamp, signHeader.deviceId, signHeader.signature)
+                .refreshToken(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer ${getToken()}")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    val token = it.token
-                    appData.token = token
-                    f(token)
+                    appData.token = it
+                    f(it)
                 }, {
                     errorHandler(it as Exception)
                 })
@@ -43,7 +42,7 @@ class TokenProvider(private val appData: IAppDataStorage,
         val signHeader = signUtil.createSignHeader(appData.currentUserEmail)
 
         walletApi
-                .revokeToken(signHeader.timestamp, signHeader.deviceId, signHeader.signature)
+                .revokeToken(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer ${getToken()}")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({}, {

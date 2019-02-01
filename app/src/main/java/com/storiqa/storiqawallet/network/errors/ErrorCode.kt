@@ -38,6 +38,9 @@ enum class ErrorCode {
     EMAIL_TIMEOUT,
 
     @SerializedName("device_id")
-    WRONG_DEVICE_ID
+    WRONG_DEVICE_ID,
+
+    @SerializedName("expired")
+    TOKEN_EXPIRED
 
 }
