@@ -165,6 +165,8 @@
     <string name="text_last_transactions">Last transactions</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
+    <string name="toolbar_transactions">Transactions</string>
+    <string name="toolbar_accounts">Accounts</string>
 
     <string name="preferences_change_password">Change password</string>
     <string name="preferences_edit_profile">Edit profile</string>

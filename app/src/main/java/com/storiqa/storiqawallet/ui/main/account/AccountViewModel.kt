@@ -57,17 +57,8 @@ constructor(navigator: IMainNavigator,
                 }
     }
 
-    private fun updateAccounts() {
-        val mapper = AccountMapper(CurrencyConverter(rates))
-        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            cards = ArrayList()
-            accounts.forEach { cards.add(mapper.map(it)) }
-            updateAccounts.value = cards
-        }
-    }
-
-    private fun updateTransactions() {
-        updateTransactions.value = transactions
+    fun onSeeAllButtonClicked() {
+        getNavigator()?.showTransactionsFragment()
     }
 
     fun onAccountSelected(position: Int) {
@@ -81,5 +72,18 @@ constructor(navigator: IMainNavigator,
                     transactions = it
                     updateTransactions()
                 }
+    }
+
+    private fun updateAccounts() {
+        val mapper = AccountMapper(CurrencyConverter(rates))
+        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
+            cards = ArrayList()
+            accounts.forEach { cards.add(mapper.map(it)) }
+            updateAccounts.value = cards
+        }
+    }
+
+    private fun updateTransactions() {
+        updateTransactions.value = transactions
     }
 }

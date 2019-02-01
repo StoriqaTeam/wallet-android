@@ -9,6 +9,7 @@ import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment
 import com.storiqa.storiqawallet.ui.main.menu.MenuFragment
 import com.storiqa.storiqawallet.ui.main.receive.ReceiveFragment
 import com.storiqa.storiqawallet.ui.main.send.SendFragment
+import com.storiqa.storiqawallet.ui.main.transactions.TransactionsFragment
 import com.storiqa.storiqawallet.ui.main.wallet.WalletFragment
 
 class MainNavigator(private val navigator: INavigator) : IMainNavigator {
@@ -39,6 +40,10 @@ class MainNavigator(private val navigator: INavigator) : IMainNavigator {
         val fragment = AccountFragment()
         fragment.arguments = bundle
         navigator.replaceFragmentAndAddToBackStack(containerId, fragment, "account", "account")
+    }
+
+    override fun showTransactionsFragment() {
+        navigator.replaceFragmentAndAddToBackStack(containerId, TransactionsFragment(), "transactions", "transactions")
     }
 
 }

@@ -16,6 +16,6 @@ interface IBaseActivity {
 
     fun hideKeyboard()
 
-    fun setupActionBar(toolbar: Toolbar, title: String = " ", backButtonEnabled: Boolean = false)
+    fun setupActionBar(toolbar: Toolbar, title: String? = null, backButtonEnabled: Boolean = false)
 
 }
