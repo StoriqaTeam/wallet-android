@@ -38,7 +38,7 @@ constructor(navigator: IMainNavigator,
     private var rates: List<RateEntity> = ArrayList()
     private var transactions: List<Transaction> = ArrayList()
 
-    private lateinit var transactionsSubscription: Disposable
+    private var transactionsSubscription: Disposable
 
     init {
         setNavigator(navigator)

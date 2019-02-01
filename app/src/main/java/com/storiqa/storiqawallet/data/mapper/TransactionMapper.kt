@@ -31,9 +31,12 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
 
         val amountDecimal = getAmount(tr)
 
-        //val balanceDecimal = currencyFormatter.getFormattedDecimal(amountDecimal.toPlainString(), currency)
-        //val amountFormatted = currencyFormatter.getBalanceWithoutSymbol(balanceDecimal, currency)
-        //val amountFiatFormatted = currencyFormatter.getBalanceWithFiatSymbol(tr.fiatValue, currency)
+        val balanceDecimal = currencyFormatter.getFormattedDecimal(amountDecimal.toPlainString(), tr.fromCurrency)
+        val amountFormatted = currencyFormatter.getBalanceWithoutSymbol(balanceDecimal, tr.fromCurrency)
+        val amountFiatFormatted = if (tr.fiatValue != null && tr.fiatCurrency != null)
+            tr.fiatCurrency?.getSymbol() + " " + tr.fiatValue
+        else
+            ""
 
         return Transaction(
                 tr.id,
@@ -49,9 +52,9 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
                 tr.fiatValue,
                 tr.fiatCurrency,
 
-                getPresentableTime(tr.createdAt)/*,
+                getPresentableTime(tr.createdAt),
                 amountFormatted,
-                amountFiatFormatted*/)
+                amountFiatFormatted)
     }
 
     override fun map(transactions: List<TransactionWithAddresses>): List<Transaction> {

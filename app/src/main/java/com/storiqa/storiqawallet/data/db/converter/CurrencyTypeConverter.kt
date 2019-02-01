@@ -6,12 +6,15 @@ import com.storiqa.storiqawallet.data.model.Currency
 class CurrencyTypeConverter {
 
     @TypeConverter
-    fun currencyToString(currency: Currency): String {
-        return currency.currencyISO
+    fun currencyToString(currency: Currency?): String? {
+        return currency?.currencyISO
     }
 
     @TypeConverter
-    fun stringToCurrency(currencyISO: String): Currency {
-        return Currency.valueOf(currencyISO)
+    fun stringToCurrency(currencyISO: String?): Currency? {
+        return if (currencyISO.isNullOrEmpty())
+            null
+        else
+            Currency.valueOf(currencyISO)
     }
 }

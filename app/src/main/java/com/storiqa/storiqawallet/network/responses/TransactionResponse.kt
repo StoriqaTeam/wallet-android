@@ -1,13 +1,14 @@
 package com.storiqa.storiqawallet.network.responses
 
 import com.google.gson.annotations.SerializedName
+import com.storiqa.storiqawallet.data.model.Currency
 
 data class TransactionResponse(
         val id: String,
         val fromValue: String,
-        val fromCurrency: String,
+        val fromCurrency: Currency,
         val toValue: String,
-        val toCurrency: String,
+        val toCurrency: Currency,
         val fee: String,
         val status: String,
         val createdAt: String,
@@ -21,7 +22,7 @@ data class TransactionResponse(
         val fromAccount: List<TransactionAccountResponse>,
 
         val fiatValue: String?,
-        val fiatCurrency: String?)
+        val fiatCurrency: Currency?)
 
 data class TransactionAccountResponse(
         @SerializedName("account_id")
