@@ -7,6 +7,8 @@ import io.reactivex.Observable
 
 interface ITransactionsRepository {
 
+    fun getAllTransactionsByAddress(address: String): Flowable<List<Transaction>>
+
     fun getTransactionsByAddress(address: String, limit: Int): Flowable<List<Transaction>>
 
     fun refreshTransactions(id: Long, email: String, offset: Int): Observable<List<TransactionResponse>>

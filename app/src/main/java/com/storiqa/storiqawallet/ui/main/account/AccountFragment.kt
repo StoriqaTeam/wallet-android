@@ -35,6 +35,16 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         subscribeEvents()
     }
 
+    private fun initView() {
+        (activity as IBaseActivity).setupActionBar(binding.toolbar, " ", true)
+
+        if (viewModel.cards != null)
+            initAccountsPager(viewModel.cards!!)
+
+        if (viewModel.transactions != null)
+            initTransactionsRecycler(viewModel.transactions!!)
+    }
+
     private fun subscribeEvents() {
         viewModel.updateAccounts.observe(this, Observer {
             updateAccounts(it)
@@ -43,10 +53,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         viewModel.updateTransactions.observe(this, Observer {
             updateTransactions(it)
         })
-    }
-
-    private fun initView() {
-        (activity as IBaseActivity).setupActionBar(binding.toolbar, " ", true)
     }
 
     private fun initAccountsPager(accounts: ArrayList<Account>) {

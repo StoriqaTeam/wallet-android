@@ -42,8 +42,12 @@ class MainNavigator(private val navigator: INavigator) : IMainNavigator {
         navigator.replaceFragmentAndAddToBackStack(containerId, fragment, "account", "account")
     }
 
-    override fun showTransactionsFragment() {
-        navigator.replaceFragmentAndAddToBackStack(containerId, TransactionsFragment(), "transactions", "transactions")
+    override fun showTransactionsFragment(accountAddress: String) {
+        val fragment = TransactionsFragment()
+        val bundle = Bundle()
+        bundle.putString(TransactionsFragment.KEY_ADDRESS, accountAddress)
+        fragment.arguments = bundle
+        navigator.replaceFragmentAndAddToBackStack(containerId, fragment, "transactions", "transactions")
     }
 
 }
