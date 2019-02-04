@@ -82,7 +82,7 @@ abstract class BaseFragmentActivity : AppCompatActivity(), IBaseActivity {
         }
     }
 
-    override fun setupActionBar(toolbar: Toolbar, title: String, backButtonEnabled: Boolean) {
+    override fun setupActionBar(toolbar: Toolbar, title: String?, backButtonEnabled: Boolean) {
         setSupportActionBar(toolbar)
 
         if (backButtonEnabled) {
@@ -94,7 +94,8 @@ abstract class BaseFragmentActivity : AppCompatActivity(), IBaseActivity {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
 
-        setTitle(title)
+        if (title != null)
+            setTitle(title)
     }
 
     override fun hideKeyboard() {

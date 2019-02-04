@@ -49,12 +49,12 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="stable.stq.cloud"
+                    android:host="stage.stq.cloud"
                     android:pathPrefix="/wallet/verify_email"
                     android:scheme="https" />
 
                 <data
-                    android:host="stable.stq.cloud"
+                    android:host="stage.stq.cloud"
                     android:pathPrefix="/wallet/register_device"
                     android:scheme="https" />
             </intent-filter>

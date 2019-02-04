@@ -124,7 +124,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
         }
     }
 
-    override fun setupActionBar(toolbar: Toolbar, title: String, backButtonEnabled: Boolean) {
+    override fun setupActionBar(toolbar: Toolbar, title: String?, backButtonEnabled: Boolean) {
         setSupportActionBar(toolbar)
 
         if (backButtonEnabled) {
@@ -136,7 +136,8 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
 
-        setTitle(title)
+        if (title != null)
+            setTitle(title)
     }
 
     private fun performDataBinding() {

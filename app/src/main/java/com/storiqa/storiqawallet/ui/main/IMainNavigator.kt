@@ -18,4 +18,6 @@ interface IMainNavigator : IBaseNavigator {
 
     fun showAccountFragment(bundle: Bundle, element: View, transition: String)
 
+    fun showTransactionsFragment(accountAddress: String)
+
 }

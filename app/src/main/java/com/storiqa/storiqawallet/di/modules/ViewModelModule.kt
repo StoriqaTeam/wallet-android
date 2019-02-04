@@ -13,6 +13,7 @@ import com.storiqa.storiqawallet.ui.main.exchange.ExchangeViewModel
 import com.storiqa.storiqawallet.ui.main.menu.MenuViewModel
 import com.storiqa.storiqawallet.ui.main.receive.ReceiveViewModel
 import com.storiqa.storiqawallet.ui.main.send.SendViewModel
+import com.storiqa.storiqawallet.ui.main.transactions.TransactionsViewModel
 import com.storiqa.storiqawallet.ui.main.wallet.WalletViewModel
 import com.storiqa.storiqawallet.ui.password.reset.PasswordResetViewModel
 import com.storiqa.storiqawallet.ui.password.setup.PasswordSetupViewModel
@@ -90,6 +91,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AccountViewModel::class)
     abstract fun bindAccountViewModel(accountViewModel: AccountViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TransactionsViewModel::class)
+    abstract fun bindTransactionsViewModel(transactionsViewModel: TransactionsViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -25,16 +25,18 @@ constructor(navigator: IMainNavigator,
             private val transactionsRepository: ITransactionsRepository,
             private val userData: IUserDataStorage) : BaseViewModel<IMainNavigator>() {
 
+    private val lastTransactionsAmount = 10
+
     val updateAccounts = SingleLiveEvent<ArrayList<Account>>()
     val updateTransactions = SingleLiveEvent<List<Transaction>>()
 
     var currentPosition = 0
 
-    var cards: ArrayList<Account> = ArrayList()
+    var cards: ArrayList<Account>? = null
+    var transactions: List<Transaction>? = null
 
     private var accounts: List<AccountEntity> = ArrayList()
     private var rates: List<RateEntity> = ArrayList()
-    private var transactions: List<Transaction> = ArrayList()
 
     private var transactionsSubscription: Disposable? = null
 
@@ -57,17 +59,8 @@ constructor(navigator: IMainNavigator,
                 }
     }
 
-    private fun updateAccounts() {
-        val mapper = AccountMapper(CurrencyConverter(rates))
-        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            cards = ArrayList()
-            accounts.forEach { cards.add(mapper.map(it)) }
-            updateAccounts.value = cards
-        }
-    }
-
-    private fun updateTransactions() {
-        updateTransactions.value = transactions
+    fun onSeeAllButtonClicked() {
+        getNavigator()?.showTransactionsFragment(cards?.get(currentPosition)?.accountAddress!!)
     }
 
     fun onAccountSelected(position: Int) {
@@ -76,10 +69,26 @@ constructor(navigator: IMainNavigator,
         if (sab != null && !sab.isDisposed)
             sab.dispose()
 
-        transactionsSubscription = transactionsRepository.getTransactionsByAddress(cards[position].accountAddress, 10).observeOn(AndroidSchedulers.mainThread())
+        val address = cards?.get(position)?.accountAddress!!
+        transactionsSubscription = transactionsRepository
+                .getTransactionsByAddress(address, lastTransactionsAmount)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     transactions = it
                     updateTransactions()
                 }
+    }
+
+    private fun updateAccounts() {
+        val mapper = AccountMapper(CurrencyConverter(rates))
+        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
+            cards = ArrayList()
+            accounts.forEach { cards?.add(mapper.map(it)) }
+            updateAccounts.value = cards
+        }
+    }
+
+    private fun updateTransactions() {
+        updateTransactions.value = transactions
     }
 }
