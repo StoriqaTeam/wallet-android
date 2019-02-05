@@ -1,10 +1,11 @@
 package com.storiqa.storiqawallet.ui.authorization.signup
 
+import android.content.Context
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentSignUpBinding
@@ -23,18 +24,18 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView()
+        initView(view.context)
     }
 
-    private fun initView() {
+    private fun initView(context: Context) {
         binding.scrollView.apply {
             descendantFocusability = ViewGroup.FOCUS_BEFORE_DESCENDANTS
             isFocusable = true
             isFocusableInTouchMode = true
         }
 
-        binding.etPassword.transformationMethod = PasswordTransformationMethod()
-        binding.etPasswordRepeat.transformationMethod = PasswordTransformationMethod()
+        binding.tilPasswordRepeat.typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
+        binding.tilPassword.typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
 
         binding.policyAgreement.movementMethod = LinkMovementMethod.getInstance()
         binding.licenseAgreement.movementMethod = LinkMovementMethod.getInstance()

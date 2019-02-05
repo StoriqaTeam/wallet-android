@@ -103,7 +103,7 @@
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_password"
                     android:nextFocusDown="@+id/etRepeatPassword"
-                    android:singleLine="true"
+                    android:inputType="textPassword"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -119,13 +119,13 @@
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.passwordRepeatError}">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/etPasswordRepeat"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_repeat_password"
                     android:imeOptions="actionDone"
-                    android:singleLine="true"
+                    android:inputType="textPassword"
                     android:text="@={viewModel.passwordRepeat}" />
 
             </com.google.android.material.textfield.TextInputLayout>
