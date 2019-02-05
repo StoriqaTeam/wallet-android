@@ -7,6 +7,7 @@ import com.storiqa.storiqawallet.ui.authorization.signin.SignInFragment
 import com.storiqa.storiqawallet.ui.authorization.signup.SignUpFragment
 import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
+import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsFragment
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment
 import com.storiqa.storiqawallet.ui.main.menu.MenuFragment
 import com.storiqa.storiqawallet.ui.main.receive.ReceiveFragment
@@ -33,6 +34,7 @@ interface FragmentComponent : FragmentComponentProvides {
     fun inject(fragment: WalletFragment)
     fun inject(fragment: AccountFragment)
     fun inject(fragment: TransactionsFragment)
+    fun inject(fragment: TransactionDetailsFragment)
     fun inject(fragment: SendFragment)
     fun inject(fragment: ExchangeFragment)
     fun inject(fragment: ReceiveFragment)

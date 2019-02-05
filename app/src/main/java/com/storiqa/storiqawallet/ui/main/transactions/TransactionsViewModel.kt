@@ -22,12 +22,15 @@ constructor(navigator: IMainNavigator,
 
     var currentPosition = 0
 
+    private lateinit var address: String
+
     init {
         setNavigator(navigator)
     }
 
     @SuppressLint("CheckResult")
     fun loadTransactions(address: String) {
+        this.address = address
         transactionsRepository
                 .getAllTransactionsByAddress(address)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -43,7 +46,18 @@ constructor(navigator: IMainNavigator,
                 }
     }
 
+    fun onTransactionClicked(position: Int) {
+        val transactionId = when (currentPosition) {
+            0 -> transactionsAll?.get(position)?.id!!
+            1 -> transactionsSend[position].id
+            2 -> transactionsReceive[position].id
+            else -> throw Throwable("Transaction not found")
+        }
+        getNavigator()?.showTransactionDetailsFragment(address, transactionId)
+    }
+
     fun updateTransactions(position: Int) {
+        currentPosition = position
         when (position) {
             0 -> updateTransactions.value = transactionsAll
             1 -> updateTransactions.value = transactionsSend

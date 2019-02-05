@@ -78,7 +78,7 @@ class TransactionsFragment : BaseFragment<FragmentTransactionsBinding, Transacti
     }
 
     private fun initTransactionsRecycler(transactions: List<Transaction>) {
-        transactionsAdapter = TransactionsAdapter(transactions)
+        transactionsAdapter = TransactionsAdapter(transactions, viewModel::onTransactionClicked)
         binding.transactionsRecycler.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = transactionsAdapter

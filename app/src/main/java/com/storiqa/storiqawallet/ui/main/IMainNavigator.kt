@@ -20,4 +20,6 @@ interface IMainNavigator : IBaseNavigator {
 
     fun showTransactionsFragment(accountAddress: String)
 
+    fun showTransactionDetailsFragment(address: String, transactionId: String)
+
 }

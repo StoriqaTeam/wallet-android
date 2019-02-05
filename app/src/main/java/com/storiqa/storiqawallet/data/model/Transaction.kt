@@ -18,6 +18,7 @@ data class Transaction(
         val typeDescription: String,
         val time: String,
         val amount: String,
+        val commission: String,
         val fiat: String?
 )
 

@@ -16,6 +16,10 @@ import com.storiqa.storiqawallet.utils.convertDpToPx
 
 class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>() {
 
+    companion object {
+        const val KEY_POSITION = "key_position"
+    }
+
     private var accountsAdapter: AccountPagerAdapter? = null
     private var transactionsAdapter: TransactionsAdapter? = null
 
@@ -28,7 +32,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.currentPosition = arguments?.getInt("POSITION") ?: 0
+        viewModel.currentPosition = arguments?.getInt(KEY_POSITION) ?: 0
 
         initView()
 
@@ -74,7 +78,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     }
 
     private fun initTransactionsRecycler(transactions: List<Transaction>) {
-        transactionsAdapter = TransactionsAdapter(transactions)
+        transactionsAdapter = TransactionsAdapter(transactions, viewModel::onTransactionClicked)
         binding.transactionsRecycler.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = transactionsAdapter
@@ -94,7 +98,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     private fun updateTransactions(transactions: List<Transaction>) {
         if (transactionsAdapter == null) {
             initTransactionsRecycler(transactions)
-        } else
+        } else {
             transactionsAdapter?.updateAccounts(transactions)
+            binding.transactionsRecycler.scrollToPosition(0)
+        }
     }
 }

@@ -63,6 +63,10 @@ constructor(navigator: IMainNavigator,
         getNavigator()?.showTransactionsFragment(cards?.get(currentPosition)?.accountAddress!!)
     }
 
+    fun onTransactionClicked(position: Int) {
+        getNavigator()?.showTransactionDetailsFragment(cards?.get(currentPosition)?.accountAddress!!, transactions?.get(position)?.id!!)
+    }
+
     fun onAccountSelected(position: Int) {
         currentPosition = position
         val sab = transactionsSubscription

@@ -20,6 +20,7 @@ import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.network.WalletApi
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
+import com.storiqa.storiqawallet.ui.main.account.AccountFragment
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
@@ -99,7 +100,7 @@ constructor(navigator: IMainNavigator,
 
     fun onAccountClicked(position: Int, element: View, transition: String) {
         val bundle = Bundle()
-        bundle.putInt("POSITION", position)
+        bundle.putInt(AccountFragment.KEY_POSITION, position)
         getNavigator()?.showAccountFragment(bundle, element, transition)
     }
 

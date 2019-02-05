@@ -144,8 +144,8 @@
     <string name="tab_sign_in">Sign in</string>
     <string name="tab_sign_up">Sign up</string>
     <string name="tab_all">All</string>
-    <string name="tab_send">Send</string>
-    <string name="tab_receive">Receive</string>
+    <string name="tab_sent">Sent</string>
+    <string name="tab_received">Received</string>
 
     <string name="text_haven_t_got_account">Haven’t got account?</string>
     <string name="text_or">or</string>
@@ -166,6 +166,9 @@
     <string name="text_pin_code">Set up PIN-code?</string>
     <string name="text_fingerprint">Set up fingerprint launch?</string>
     <string name="text_last_transactions">Last transactions</string>
+    <string name="text_commission">Commission</string>
+    <string name="text_from">From</string>
+    <string name="text_to">To</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
     <string name="toolbar_transactions">Transactions</string>
@@ -176,7 +179,7 @@
     <string name="preferences_app_info">App info</string>
 
     <string name="transition_account">TransitionAccount</string>
-    <string name="transaction_type_send">Send</string>
-    <string name="transaction_type_receive">Receive</string>
+    <string name="transaction_type_sent">Sent</string>
+    <string name="transaction_type_received">Received</string>
 
 </resources>
