@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.ui.common.NoTransactionsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="@{viewModel.isNoTransactions ? View.VISIBLE : View.GONE}"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/no_transactions_logo_size"
+            android:layout_height="@dimen/no_transactions_logo_size"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/ic_no_transactions" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/text_no_transactions" />
+    </LinearLayout>
+
+</layout>

@@ -14,4 +14,5 @@
     <dimen name="send_header_radius">12dp</dimen>
     <dimen name="actionBarMarginTop">57dp</dimen>
     <dimen name="navBarHeight">56dp</dimen>
+    <dimen name="no_transactions_logo_size">110dp</dimen>
 </resources>

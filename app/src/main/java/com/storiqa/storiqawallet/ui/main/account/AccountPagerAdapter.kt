@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.ui.main.account
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.ui.main.account.SingleAccountFragment.Companion.KEY_CARD
 
@@ -22,5 +23,9 @@ class AccountPagerAdapter(fragment: Fragment, private var cards: List<Account>) 
 
     override fun getCount(): Int {
         return cards.size
+    }
+
+    override fun getItemPosition(obj: Any): Int {
+        return PagerAdapter.POSITION_NONE
     }
 }

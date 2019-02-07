@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -43,21 +47,33 @@
             android:id="@+id/transactionsRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:visibility="@{viewModel.isNoTransactions ? View.GONE : View.VISIBLE}"
+            tools:listitem="@layout/item_transaction">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <ViewStub
+            android:id="@+id/stubNoTransactions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:viewModel="@{viewModel}"
+            android:visibility="@{viewModel.isNoTransactions ? View.VISIBLE : View.GONE}"
+            android:layout="@layout/layout_no_transactions" />
 
         <Button
             android:id="@+id/btnSeeAll"
             style="@style/GradientButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="0"
             android:onClick="@{()->viewModel.onSeeAllButtonClicked()}"
-            android:text="@string/button_all_transactions" />
+            android:text="@string/button_all_transactions"
+            android:textSize="12sp"
+            android:visibility="@{viewModel.isShowButtonAvailable ? View.VISIBLE : View.GONE}" />
 
     </LinearLayout>
 

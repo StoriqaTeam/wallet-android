@@ -20,7 +20,8 @@ class TransactionsFragment : BaseFragment<FragmentTransactionsBinding, Transacti
         const val KEY_ADDRESS = "key_address"
     }
 
-    private var isListsInitialized = false
+    private var isRestoring = false
+    private var isScrollNeeded = false
 
     private var transactionsAdapter: TransactionsAdapter? = null
 
@@ -37,19 +38,29 @@ class TransactionsFragment : BaseFragment<FragmentTransactionsBinding, Transacti
 
         subscribeEvents()
 
-        val address = arguments?.getString(KEY_ADDRESS)!!
-        viewModel.loadTransactions(address)
+        if (isRestoring) {
+            initTransactionsRecycler(viewModel.getTransactions())
+        } else {
+            val address = arguments?.getString(KEY_ADDRESS)!!
+            viewModel.loadTransactions(address)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isRestoring = true
     }
 
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar, backButtonEnabled = true)
 
         binding.tabLayout.setup()
-
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabSelected(tab: TabLayout.Tab) {
                 (activity as IBaseActivity).hideKeyboard()
+                if (tab.position != viewModel.currentTabPosition)
+                    isScrollNeeded = true
                 viewModel.updateTransactions(tab.position)
             }
 
@@ -61,6 +72,7 @@ class TransactionsFragment : BaseFragment<FragmentTransactionsBinding, Transacti
                 (activity as IBaseActivity).hideKeyboard()
             }
         })
+        binding.tabLayout.getTabAt(viewModel.currentTabPosition)?.select()
     }
 
     private fun subscribeEvents() {
@@ -70,10 +82,15 @@ class TransactionsFragment : BaseFragment<FragmentTransactionsBinding, Transacti
     }
 
     private fun updateTransactions(transactions: List<Transaction>) {
-        if (!isListsInitialized) {
+        if (transactionsAdapter == null)
             initTransactionsRecycler(transactions)
-        } else {
+        else {
             transactionsAdapter?.updateAccounts(transactions)
+            if (isScrollNeeded) {
+                binding.transactionsRecycler.scrollToPosition(0)
+                binding.transactionsRecycler.stopNestedScroll()
+                isScrollNeeded = false
+            }
         }
     }
 

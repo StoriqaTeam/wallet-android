@@ -23,6 +23,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     private var accountsAdapter: AccountPagerAdapter? = null
     private var transactionsAdapter: TransactionsAdapter? = null
 
+    private var isRestoring = false
+    private var isScrollNeeded = false
+
     override fun getLayoutId(): Int = R.layout.fragment_account
 
     override fun getBindingVariable(): Int = BR.viewModel
@@ -32,21 +35,27 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.currentPosition = arguments?.getInt(KEY_POSITION) ?: 0
+        if (!isRestoring)
+            viewModel.currentPosition = arguments?.getInt(KEY_POSITION) ?: 0
 
         initView()
 
         subscribeEvents()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isRestoring = true
+    }
+
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar, " ", true)
 
-        if (viewModel.cards != null)
-            initAccountsPager(viewModel.cards!!)
-
-        if (viewModel.transactions != null)
-            initTransactionsRecycler(viewModel.transactions!!)
+        if (isRestoring) {
+            initAccountsPager(viewModel.cards)
+            initTransactionsRecycler(viewModel.transactions)
+            isRestoring = false
+        }
     }
 
     private fun subscribeEvents() {
@@ -69,6 +78,8 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
             setCurrentItem(viewModel.currentPosition, false)
             addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
                 override fun onPageSelected(position: Int) {
+                    if (position != viewModel.currentPosition)
+                        isScrollNeeded = true
                     binding.toolbar.title = accounts[position].name
                     viewModel.onAccountSelected(position)
                 }
@@ -79,10 +90,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
 
     private fun initTransactionsRecycler(transactions: List<Transaction>) {
         transactionsAdapter = TransactionsAdapter(transactions, viewModel::onTransactionClicked)
-        binding.transactionsRecycler.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = transactionsAdapter
-        }
+
+        binding.transactionsRecycler.adapter = transactionsAdapter
+        binding.transactionsRecycler.layoutManager = LinearLayoutManager(context)
     }
 
     private fun updateAccounts(accounts: ArrayList<Account>) {
@@ -91,8 +101,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
             binding.toolbar.title = accounts[viewModel.currentPosition].name
         } else
             accountsAdapter?.updateAccounts(accounts)
-
-
     }
 
     private fun updateTransactions(transactions: List<Transaction>) {
@@ -100,7 +108,10 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
             initTransactionsRecycler(transactions)
         } else {
             transactionsAdapter?.updateAccounts(transactions)
-            binding.transactionsRecycler.scrollToPosition(0)
+            if (isScrollNeeded) {
+                binding.transactionsRecycler.scrollToPosition(0)
+                isScrollNeeded = false
+            }
         }
     }
 }

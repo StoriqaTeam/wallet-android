@@ -170,6 +170,7 @@
     <string name="text_from">From</string>
     <string name="text_to">To</string>
     <string name="text_need_email">We need your email</string>
+    <string name="text_no_transactions">You have no transactions.\nYet :)</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
     <string name="toolbar_transactions">Transactions</string>
