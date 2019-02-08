@@ -37,8 +37,8 @@
 
     <color name="checkbox_text">#adadad</color>
 
-    <color name="pin_indicator_default">#2e2e2e</color>
-    <color name="pin_indicator_highlight">#ffffff</color>
+    <color name="indicator_default">#2e2e2e</color>
+    <color name="indicator_highlight">#ffffff</color>
 
     <color name="input_hint">#adadad</color>
     <color name="input_text">#ffffff</color>

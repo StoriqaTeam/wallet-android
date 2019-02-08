@@ -38,6 +38,7 @@ ext {
     playServicesAuthVersion = '16.0.1'
     facebookVersion = '4.36.0'
     bottomNavigatorVersion = '2.3.4'
+    pagerIndicatorVersion = '1.0.3'
     preferenceVersion = '1.0.0'
     recyclerVersion = '1.0.0'
     viewpagerVersion = '1.0.0'
