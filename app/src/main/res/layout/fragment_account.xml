@@ -27,14 +27,15 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/accountsPager"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="180dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp" />
 
         <TextView
+            style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/text_last_transactions"

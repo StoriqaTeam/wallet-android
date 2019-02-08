@@ -4,6 +4,7 @@ import androidx.databinding.ObservableField
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
+import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.data.model.TransactionType
 import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
@@ -16,6 +17,8 @@ class TransactionDetailsViewModel
 constructor(navigator: IMainNavigator,
             private val transactionsRepository: ITransactionsRepository) : BaseViewModel<IMainNavigator>() {
 
+    val copyToClipboard = SingleLiveEvent<String>()
+
     var background = ObservableField<Int>()
     var icon = ObservableField<Int>()
     var amount = NonNullObservableField("")
@@ -26,6 +29,8 @@ constructor(navigator: IMainNavigator,
     var userName = NonNullObservableField("")
     var commission = NonNullObservableField("")
     var status = NonNullObservableField("")
+    var title = NonNullObservableField("")
+    private lateinit var fullAddress: String
 
     init {
         setNavigator(navigator)
@@ -43,6 +48,7 @@ constructor(navigator: IMainNavigator,
         time.set(transaction.time)
         status.set(transaction.status)
         commission.set(transaction.commission)
+        title.set(transaction.type.getDescription())
         if (transaction.type == TransactionType.RECEIVE) {
             direction.set(App.res.getString(R.string.text_from))
             background.set(R.drawable.background_transaction_received)
@@ -52,15 +58,19 @@ constructor(navigator: IMainNavigator,
         }
         icon.set(transaction.type.getTypeIcon())
 
-        val addr: String
         if (address == transaction.toAccount.blockchainAddress) {
             userName.set(transaction.fromAccount[0].ownerName ?: "")
-            addr = transaction.fromAccount[0].blockchainAddress
+            fullAddress = transaction.fromAccount[0].blockchainAddress
         } else {
             userName.set(transaction.toAccount.ownerName ?: "")
-            addr = transaction.toAccount.blockchainAddress
+            fullAddress = transaction.toAccount.blockchainAddress
         }
-        blockchainAddress.set("${addr.substring(0, 8)}....${addr.substring(addr.length - 4, addr.length)}")
+        blockchainAddress.set("${fullAddress.substring(0, 8)}...." +
+                fullAddress.substring(fullAddress.length - 4, fullAddress.length))
+    }
+
+    fun onCopyButtonClick() {
+        copyToClipboard.value = fullAddress
     }
 
 }

@@ -20,7 +20,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
         app:cardPreventCornerOverlap="false">
@@ -28,7 +28,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clBill"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:backgroundResource="@{account.background}">
 
             <ImageView
@@ -48,11 +48,13 @@
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/montserrat_semibold"
                 android:gravity="right|center_vertical"
                 android:text="@{account.balanceFormatted + ` ` + account.currency}"
+                android:textColor="@color/text_highlighted"
                 android:textSize="16sp"
-                app:autoSizeMaxTextSize="16sp"
-                app:autoSizeMinTextSize="12sp"
+                app:autoSizeMaxTextSize="12sp"
+                app:autoSizeMinTextSize="8sp"
                 app:autoSizeStepGranularity="1sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="@+id/imgLogo"
@@ -66,27 +68,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="@{account.name}"
-                android:textSize="16sp"
+                android:textColor="@color/text_highlighted"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvBalance"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvBalancePreview"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:text="STQ account" />
 
             <TextView
                 android:id="@+id/tvBalance"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
                 android:text="@string/app_name"
-                app:autoSizeMaxTextSize="100sp"
+                android:textColor="@color/text_highlighted"
+                app:autoSizeMaxTextSize="26sp"
                 app:autoSizeMinTextSize="12sp"
                 app:autoSizeStepGranularity="2sp"
                 app:autoSizeTextType="uniform"
@@ -95,7 +102,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvName"
                 app:text="@{account.balanceFormatted}"
-                tools:text="1,560,230.00" />
+                tools:text="1,560" />
 
             <TextView
                 android:id="@+id/tvBalanceDollar"
@@ -103,7 +110,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="16sp"
+                android:layout_marginBottom="60dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/text_highlighted"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

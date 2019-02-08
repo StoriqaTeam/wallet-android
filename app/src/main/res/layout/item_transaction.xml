@@ -20,21 +20,21 @@
 
         <ImageView
             android:id="@+id/imgTransactionType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="30dp"
             app:imageResource="@{transaction.type.getTypeIcon()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTransactionType"
             tools:srcCompat="@drawable/ic_send" />
 
         <TextView
             android:id="@+id/tvTransactionType"
+            style="@style/HighlightedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:text="@{transaction.typeDescription}"
             app:layout_constraintStart_toEndOf="@+id/imgTransactionType"
             app:layout_constraintTop_toTopOf="parent"
@@ -42,10 +42,11 @@
 
         <TextView
             android:id="@+id/tvTime"
+            style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:text="@{transaction.time}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvTransactionType"
@@ -54,26 +55,31 @@
 
         <TextView
             android:id="@+id/tvAmount"
+            style="@style/HighlightedText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="end"
+            android:layout_marginEnd="30dp"
+            android:gravity="bottom|end"
             android:text="@{transaction.amount}"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTransactionType"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvTransactionType"
-            app:layout_constraintTop_toTopOf="@+id/tvTransactionType"
             tools:text="- 109,635.00 STQ" />
 
         <TextView
             android:id="@+id/tvAmountFiat"
+            style="@style/MediumText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:gravity="end"
             android:text="@{transaction.fiat}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvAmount"
             app:layout_constraintStart_toEndOf="@+id/tvTime"
             app:layout_constraintTop_toTopOf="@+id/tvTime"
             tools:text="- $250.84 " />

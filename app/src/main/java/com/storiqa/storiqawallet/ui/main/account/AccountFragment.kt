@@ -85,6 +85,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
                 }
             })
         }
+        binding.toolbar.title = accounts[viewModel.currentPosition].name
         viewModel.onAccountSelected(viewModel.currentPosition)
     }
 
@@ -98,7 +99,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     private fun updateAccounts(accounts: List<Account>) {
         if (accountsAdapter == null) {
             initAccountsPager(accounts)
-            binding.toolbar.title = accounts[viewModel.currentPosition].name
         } else
             accountsAdapter?.updateAccounts(accounts)
     }
