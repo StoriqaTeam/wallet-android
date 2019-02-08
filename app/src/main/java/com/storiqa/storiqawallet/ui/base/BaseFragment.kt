@@ -60,6 +60,16 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<*>> : Fragme
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.onViewStarted()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.onViewStopped()
+    }
+
     private fun subscribeEvents() {
         viewModel.showLoadingDialog.observe(this,
                 Observer {

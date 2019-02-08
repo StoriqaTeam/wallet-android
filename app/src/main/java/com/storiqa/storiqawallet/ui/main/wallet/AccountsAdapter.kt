@@ -1,5 +1,7 @@
 package com.storiqa.storiqawallet.ui.main.wallet
 
+import android.text.SpannableString
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,8 @@ import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.databinding.ItemAccountBinding
+import com.storiqa.storiqawallet.ui.common.TopAlignSuperscriptSpan
+
 
 class AccountsAdapter(private var cards: List<Account>, val onClick: ((position: Int, element: View, transaction: String) -> Unit)? = null) :
         RecyclerView.Adapter<AccountsAdapter.ViewHolder>() {
@@ -38,6 +42,9 @@ class AccountsAdapter(private var cards: List<Account>, val onClick: ((position:
                         onClickListener(layoutPosition, root, App.res.getString(R.string.transition_account))
                     }
             }
+            val spannable = SpannableString(account.currency + " " + account.balanceFormatted)
+            spannable.setSpan(TopAlignSuperscriptSpan(0.35f), 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            binding.tvBalance.text = spannable
         }
     }
 

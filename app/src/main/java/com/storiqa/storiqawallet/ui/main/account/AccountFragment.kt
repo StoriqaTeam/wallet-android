@@ -68,7 +68,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         })
     }
 
-    private fun initAccountsPager(accounts: ArrayList<Account>) {
+    private fun initAccountsPager(accounts: List<Account>) {
         accountsAdapter = AccountPagerAdapter(this@AccountFragment, accounts)
         binding.accountsPager.apply {
             adapter = accountsAdapter
@@ -95,7 +95,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         binding.transactionsRecycler.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun updateAccounts(accounts: ArrayList<Account>) {
+    private fun updateAccounts(accounts: List<Account>) {
         if (accountsAdapter == null) {
             initAccountsPager(accounts)
             binding.toolbar.title = accounts[viewModel.currentPosition].name

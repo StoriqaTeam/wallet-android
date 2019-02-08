@@ -19,6 +19,14 @@ abstract class BaseViewModel<N : IBaseNavigator> : ViewModel() {
 
     private var refNavigator: WeakReference<N>? = null
 
+    open fun onViewStarted() {
+
+    }
+
+    open fun onViewStopped() {
+
+    }
+
     protected fun hideKeyboard() {
         hideKeyboard.trigger()
     }
