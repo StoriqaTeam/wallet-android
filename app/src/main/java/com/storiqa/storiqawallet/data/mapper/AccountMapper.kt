@@ -11,10 +11,6 @@ class AccountMapper(private val currencyConverter: ICurrencyConverter) : IAccoun
 
     override fun map(account: AccountEntity): Account {
         val currency = account.currency
-        //val balanceDecimal = currencyFormatter.getFormattedDecimal(account.balance, currency)
-        //val balanceFormatted = currencyFormatter.getBalanceWithoutSymbol(balanceDecimal, currency)
-        //val balanceFiatFormatted = currencyFormatter.getBalanceWithFiatSymbol(
-        //        currencyConverter.convertToFiat(balanceDecimal, currency), currency)
         val balanceFormatted = currencyFormatter.getFormattedAmount(account.balance, currency, false)
         val balanceFiatFormatted = currencyConverter.convertToFiat(account.balance, currency)
 
