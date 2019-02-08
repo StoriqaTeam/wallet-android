@@ -27,9 +27,9 @@
                 android:id="@+id/tilFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginRight="17dp"
+                android:layout_marginEnd="30dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.firstNameError}">
 
@@ -48,9 +48,9 @@
                 android:id="@+id/tilLastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="@dimen/input_layout_space"
-                android:layout_marginRight="17dp"
+                android:layout_marginEnd="30dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.lastNameError}">
 
@@ -69,9 +69,9 @@
                 android:id="@+id/tilEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="@dimen/input_layout_space"
-                android:layout_marginRight="17dp"
+                android:layout_marginEnd="30dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.emailError}">
 
@@ -91,9 +91,9 @@
                 style="@style/Widget.Design.TextInputLayout.Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="17dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="@dimen/input_layout_space"
-                android:layout_marginEnd="17dp"
+                android:layout_marginEnd="30dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.passwordError}">
 
@@ -102,8 +102,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_password"
+                    android:inputType="textPassword"
                     android:nextFocusDown="@+id/etRepeatPassword"
-                    android:singleLine="true"
                     android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -113,19 +113,19 @@
                 style="@style/Widget.Design.TextInputLayout.Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="17dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="@dimen/input_layout_space"
-                android:layout_marginEnd="17dp"
+                android:layout_marginEnd="30dp"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.passwordRepeatError}">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/etPasswordRepeat"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/edit_text_height"
                     android:hint="@string/hint_repeat_password"
                     android:imeOptions="actionDone"
-                    android:singleLine="true"
+                    android:inputType="textPassword"
                     android:text="@={viewModel.passwordRepeat}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -134,9 +134,9 @@
                 android:id="@+id/licenseAgreement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="17dp"
+                android:layout_marginEnd="30dp"
                 android:checked="@={viewModel.licenseAgreement}"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/text_license_agreement"
@@ -146,9 +146,9 @@
                 android:id="@+id/policyAgreement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="17dp"
+                android:layout_marginEnd="30dp"
                 android:checked="@={viewModel.policyAgreement}"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/text_policy_agreement"

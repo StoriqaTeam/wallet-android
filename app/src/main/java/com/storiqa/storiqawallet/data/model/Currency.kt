@@ -23,6 +23,12 @@ enum class Currency(val currencyISO: String) {
     @SerializedName(value = "EUR", alternate = ["eur"])
     EUR("EUR");
 
+    val isFiat: Boolean
+        get() = when (this) {
+            ETH, BTC, STQ -> false
+            RUB, USD, EUR -> true
+        }
+
     fun getSymbol(): String {
         return when (this) {
             ETH -> "ETH"

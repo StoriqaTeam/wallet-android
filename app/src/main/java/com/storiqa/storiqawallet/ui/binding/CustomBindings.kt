@@ -15,7 +15,7 @@ fun ImageView.imageDrawable(drawable: Drawable) {
     setImageDrawable(drawable)
 }
 
-@BindingAdapter("cardBackground")
-fun ConstraintLayout.cardBackground(res: Int) {
+@BindingAdapter("backgroundResource")
+fun ConstraintLayout.backgroundResource(res: Int) {
     setBackgroundResource(res)
 }

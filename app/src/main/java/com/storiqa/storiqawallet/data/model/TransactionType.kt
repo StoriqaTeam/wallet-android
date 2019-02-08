@@ -6,7 +6,7 @@ enum class TransactionType {
     SEND, RECEIVE;
 
     fun getTypeIcon(): Int = when (this) {
-        SEND -> R.drawable.send_icon_round
-        RECEIVE -> R.drawable.deposit_icon_round
+        SEND -> R.drawable.ic_send
+        RECEIVE -> R.drawable.ic_receive
     }
 }

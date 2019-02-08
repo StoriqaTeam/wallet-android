@@ -34,8 +34,8 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
         val type = getTransactionType(tr, address)
 
         val typeDescription = when (type) {
-            TransactionType.SEND -> App.res.getString(R.string.transaction_type_send) + " " + tr.fromCurrency
-            TransactionType.RECEIVE -> App.res.getString(R.string.transaction_type_receive) + " " + tr.toCurrency
+            TransactionType.SEND -> App.res.getString(R.string.transaction_type_sent) + " " + tr.fromCurrency
+            TransactionType.RECEIVE -> App.res.getString(R.string.transaction_type_received) + " " + tr.toCurrency
         }
 
         val amountFormatted = if (type == TransactionType.SEND)
@@ -44,9 +44,15 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
             currencyFormatter.getBalanceWithoutSymbol(currencyFormatter.getFormattedDecimal(tr.toValue, tr.toCurrency), tr.toCurrency) + " " + tr.toCurrency.getSymbol()
 
         val amountFiatFormatted = if (tr.fiatValue != null && tr.fiatCurrency != null)
-            tr.fiatCurrency.getSymbol() + " " + tr.fiatValue
+            currencyFormatter.getAmountWithSymbol(tr.fiatValue, tr.fiatCurrency)
         else
             ""
+
+        var commission = ""
+        if (type == TransactionType.SEND) {
+            val feeString = currencyFormatter.getBalanceWithoutSymbol(currencyFormatter.getFormattedDecimal(tr.fee, tr.fromCurrency), tr.fromCurrency) + " " + tr.fromCurrency.getSymbol()
+            commission = "${App.res.getString(R.string.text_commission)} $feeString"
+        }
 
         return Transaction(
                 tr.id,
@@ -66,6 +72,7 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
                 typeDescription,
                 getPresentableTime(tr.createdAt),
                 amountFormatted,
+                commission,
                 amountFiatFormatted)
     }
 

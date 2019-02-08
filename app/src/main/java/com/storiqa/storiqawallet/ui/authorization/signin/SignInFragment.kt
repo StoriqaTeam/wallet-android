@@ -1,14 +1,14 @@
 package com.storiqa.storiqawallet.ui.authorization.signin
 
+import android.content.Context
 import android.os.Bundle
-import android.text.method.PasswordTransformationMethod
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentSignInBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
 import com.storiqa.storiqawallet.ui.common.onSubmitButtonClicked
-
 
 class SignInFragment : BaseFragment<FragmentSignInBinding, SignInViewModel>() {
 
@@ -21,11 +21,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding, SignInViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView()
+        initView(view.context)
     }
 
-    private fun initView() {
-        binding.etPassword.transformationMethod = PasswordTransformationMethod()
+    private fun initView(context: Context) {
+        binding.tilPassword.typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
 
         binding.etPassword.setOnEditorActionListener { textView, actionId, event ->
             onSubmitButtonClicked(textView, actionId, event) { viewModel.onSubmitButtonClicked() }

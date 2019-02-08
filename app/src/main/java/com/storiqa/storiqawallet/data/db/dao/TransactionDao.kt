@@ -25,6 +25,9 @@ interface TransactionDao {
     @Query("SELECT * FROM Transactions LEFT JOIN TransactionAccountJoins ON Transactions.id=TransactionAccountJoins.transaction_id WHERE to_address_id=:address OR blockchain_address=:address ORDER BY created_at DESC LIMIT :limit")
     fun loadTransactionsByAddress(address: String, limit: Int): Flowable<List<TransactionWithAddresses>>
 
+    @Query("SELECT * FROM Transactions WHERE id=:id")
+    fun loadTransactionById(id: String): Flowable<TransactionWithAddresses>
+
     @Query("SELECT * FROM Transactions ORDER BY created_at DESC LIMIT :limit")
     fun loadTransactionsWithLimit(limit: Int): Flowable<List<TransactionWithAddresses>>
 

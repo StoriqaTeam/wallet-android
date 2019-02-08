@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.FragmentPasswordSetupBinding
@@ -48,6 +49,10 @@ class PasswordSetupFragment : BaseFragment<FragmentPasswordSetupBinding, Passwor
     }
 
     private fun initView() {
+        val context = context ?: return
+        binding.tilPasswordRepeat.typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
+        binding.tilPassword.typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
+
         binding.etPasswordRepeat.setOnEditorActionListener { textView, actionId, event ->
             onSubmitButtonClicked(textView, actionId, event) { viewModel.onConfirmButtonClicked() }
         }

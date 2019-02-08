@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -38,12 +41,12 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_send" />
+                android:text="@string/tab_sent" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_receive" />
+                android:text="@string/tab_received" />
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -51,9 +54,16 @@
             android:id="@+id/transactionsRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:visibility="@{viewModel.isNoTransactions ? View.GONE : View.VISIBLE}"
+            android:layout_weight="1" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+        <ViewStub
+            android:id="@+id/stubNoTransactions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:viewModel="@{viewModel}"
+            android:visibility="@{viewModel.isNoTransactions ? View.VISIBLE : View.GONE}"
+            android:layout="@layout/layout_no_transactions" />
 
     </LinearLayout>
 

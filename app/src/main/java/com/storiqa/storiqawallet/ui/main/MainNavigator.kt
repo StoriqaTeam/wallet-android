@@ -5,6 +5,7 @@ import android.view.View
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
+import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsFragment
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment
 import com.storiqa.storiqawallet.ui.main.menu.MenuFragment
 import com.storiqa.storiqawallet.ui.main.receive.ReceiveFragment
@@ -50,4 +51,12 @@ class MainNavigator(private val navigator: INavigator) : IMainNavigator {
         navigator.replaceFragmentAndAddToBackStack(containerId, fragment, "transactions", "transactions")
     }
 
+    override fun showTransactionDetailsFragment(address: String, transactionId: String) {
+        val fragment = TransactionDetailsFragment()
+        val bundle = Bundle()
+        bundle.putString(TransactionDetailsFragment.KEY_ADDRESS, address)
+        bundle.putString(TransactionDetailsFragment.KEY_TRANSACTION_ID, transactionId)
+        fragment.arguments = bundle
+        navigator.replaceFragmentAndAddToBackStack(containerId, fragment, "details", "details")
+    }
 }

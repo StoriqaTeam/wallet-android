@@ -47,6 +47,14 @@ class TransactionsRepository(private val walletApi: WalletApi,
                 .distinct()
     }
 
+    override fun getTransactionById(address: String, id: String): Flowable<Transaction> {
+        accountAddress = address
+        return Flowable.combineLatest(loadTransactionById(id),
+                loadTransactionAccounts(),
+                BiFunction(::mapTransaction))
+                .distinct()
+    }
+
     override fun refreshTransactions(id: Long, email: String, offset: Int): Observable<List<TransactionResponse>> {
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
@@ -79,6 +87,12 @@ class TransactionsRepository(private val walletApi: WalletApi,
         return trMapper.map(transactions, accountAddress)
     }
 
+    private fun mapTransaction(transactions: TransactionWithAddresses,
+                               accounts: List<TransactionAccountEntity>): Transaction {
+        val trMapper = TransactionMapper(accounts)
+        return trMapper.map(transactions, accountAddress)
+    }
+
     private fun loadAllTransactionsByAddress(address: String): Flowable<List<TransactionWithAddresses>> {
         return transactionDao
                 .loadAllTransactionsByAddress(address)
@@ -89,6 +103,13 @@ class TransactionsRepository(private val walletApi: WalletApi,
     private fun loadTransactionsByAddress(address: String, limit: Int): Flowable<List<TransactionWithAddresses>> {
         return transactionDao
                 .loadTransactionsByAddress(address, limit)
+                .subscribeOn(Schedulers.io())
+                .distinct()
+    }
+
+    private fun loadTransactionById(id: String): Flowable<TransactionWithAddresses> {
+        return transactionDao
+                .loadTransactionById(id)
                 .subscribeOn(Schedulers.io())
                 .distinct()
     }
