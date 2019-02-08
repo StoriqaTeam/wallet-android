@@ -6,6 +6,7 @@
     <data>
 
         <import type="android.view.View" />
+
         <import type="java.math.BigDecimal" />
 
         <variable
@@ -44,12 +45,16 @@
             <TextView
                 android:id="@+id/tvBalancePreview"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:gravity="right"
-                app:text="@{account.balanceFormatted + ` ` + account.currency}"
+                android:gravity="right|center_vertical"
+                android:text="@{account.balanceFormatted + ` ` + account.currency}"
                 android:textSize="16sp"
+                app:autoSizeMaxTextSize="16sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="@+id/imgLogo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgLogo"
@@ -72,32 +77,24 @@
                 tools:text="STQ account" />
 
             <TextView
-                android:id="@+id/tvCurrency"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{account.currency.toUpperCase()}"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@+id/tvBalance"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvBalance"
-                tools:text="STQ " />
-
-            <TextView
                 android:id="@+id/tvBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                app:text="@{account.balanceFormatted}"
-                android:textSize="26sp"
+                android:gravity="center"
+                android:text="@string/app_name"
+                app:autoSizeMaxTextSize="100sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/tvBalanceDollar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvCurrency"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvName"
+                app:text="@{account.balanceFormatted}"
                 tools:text="1,560,230.00" />
 
             <TextView
@@ -107,11 +104,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:textSize="16sp"
-                app:text="@{account.balanceFiat}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvBalance"
+                app:text="@{account.balanceFiat}"
                 tools:text="$ 390871.20 " />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

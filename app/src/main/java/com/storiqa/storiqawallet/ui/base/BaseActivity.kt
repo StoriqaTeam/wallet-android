@@ -76,13 +76,14 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
         subscribeEvents()
     }
 
-    open fun subscribeEvents() {
-        viewModel.showLoadingDialog.observe(this,
-                Observer { if (it != null && it) showLoadingDialog() else hideLoadingDialog() })
+    override fun onStart() {
+        super.onStart()
+        viewModel.onViewStarted()
+    }
 
-        viewModel.hideKeyboard.observe(this, Observer { hideKeyboard() })
-
-        viewModel.showMessageDialog.observe(this, Observer { showErrorDialog(it!!) })
+    override fun onStop() {
+        super.onStop()
+        viewModel.onViewStopped()
     }
 
     override fun showErrorDialog(error: ErrorPresenterDialog) {
@@ -138,6 +139,15 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
 
         if (title != null)
             setTitle(title)
+    }
+
+    open fun subscribeEvents() {
+        viewModel.showLoadingDialog.observe(this,
+                Observer { if (it != null && it) showLoadingDialog() else hideLoadingDialog() })
+
+        viewModel.hideKeyboard.observe(this, Observer { hideKeyboard() })
+
+        viewModel.showMessageDialog.observe(this, Observer { showErrorDialog(it!!) })
     }
 
     private fun performDataBinding() {
