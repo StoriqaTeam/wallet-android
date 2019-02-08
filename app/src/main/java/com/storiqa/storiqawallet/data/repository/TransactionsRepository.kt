@@ -134,8 +134,8 @@ class TransactionsRepository(private val walletApi: WalletApi,
             transactionAccountDao.insert(TransactionAccountEntity(toAccount.blockchainAddress, toAccount.accountId, toAccount.ownerName))
             transactionDao.insert(TransactionEntity(transaction.id, transaction.toAccount.blockchainAddress, transaction.fromValue, transaction.fromCurrency,
                     transaction.toValue, transaction.toCurrency, transaction.fee, getTimestampLong(transaction.createdAt), getTimestampLong(transaction.updatedAt),
-                    if (transaction.id == "8974ddb6-b696-4e9c-a392-34d7dd9f64fa") "pending" else transaction.status,
-                    //transaction.status,
+                    //if (transaction.id == "8974ddb6-b696-4e9c-a392-34d7dd9f64fa") "pending" else transaction.status,
+                    transaction.status,
                     transaction.fiatValue,
                     transaction.fiatCurrency))
             transaction.blockchainTxIds.forEach { blockchainIdDao.insert(BlockchainId(it, transaction.id)) }
