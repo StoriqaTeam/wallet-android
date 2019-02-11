@@ -2,7 +2,7 @@ package com.storiqa.storiqawallet.data.db.entity
 
 import androidx.room.*
 import com.storiqa.storiqawallet.data.model.Currency
-import com.storiqa.storiqawallet.network.responses.AccountResponse
+import com.storiqa.storiqawallet.data.network.responses.AccountResponse
 
 @Entity(tableName = "Accounts",
         indices = [Index(value = arrayOf("id", "user_id"))],

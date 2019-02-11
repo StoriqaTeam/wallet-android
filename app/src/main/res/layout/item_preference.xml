@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:fontFamily="@font/roboto_medium"
         android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceListItem"
         tools:text="Title" />

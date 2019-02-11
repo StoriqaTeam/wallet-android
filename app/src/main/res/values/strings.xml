@@ -1,72 +1,9 @@
 <resources>
-    <string name="app_name">StoriqaWallet</string>
+    <string name="app_name">TURE Wallet</string>
 
     <string name="fb_app_id">730145060671124</string>
     <string name="fb_login_protocol_scheme">fb730145060671124</string>
     <string name="server_client_id">358105401754-mc1pt5si6ubo4e8bnhf22rgg1s50vni6.apps.googleusercontent.com</string>
-
-    <string name="wallet">Wallet</string>
-    <string name="splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
-
-    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="repeatPassword">Repeat password</string>
-    <string name="close">Close</string>
-    <string name="continueButton">Continue</string>
-    <string name="setUpQuickLaunch">Set up quick launch</string>
-    <string name="chooseWay">Choose the way to confirm\nyour identity</string>
-    <string name="pinsNotMatch">Your pin codes doesn\'t match. Try again</string>
-    <string name="scanYourFinger">Scan your finger to enable\nTouch ID launch</string>
-    <string name="scanFingerMessage">Scan your finger to enable\nTouch ID quick launch</string>
-    <string name="confirmWithTouchId">Confirm using Touch ID</string>
-    <string name="goBack">Go back</string>
-    <string name="pinNotValid">pinNotValid</string>
-    <string name="cannotPerformAuth">Can not perform\nauthentication</string>
-    <string name="cancel">Cancel</string>
-    <string name="putYourFingerOnTouchId">Put your finger on\ntouch ID</string>
-    <string name="myWallet">My wallet</string>
-    <string name="black">Black</string>
-    <string name="sent">Sent</string>
-    <string name="recieve">Receive</string>
-    <string name="to">to</string>
-    <string name="from">from</string>
-    <string name="next">Next</string>
-    <string name="amount">Amount</string>
-    <string name="recieverCurrency">Receiver currency</string>
-    <string name="emptyText" />
-    <string name="gold">Gold</string>
-    <string name="phone">phone</string>
-    <string name="sendTo">Send to</string>
-    <string name="scanQR">Scan QR code</string>
-    <string name="noNumberError">There is no such number in system. Use another way to send funds.</string>
-    <string name="sending">Sending</string>
-    <string name="send">Send</string>
-    <string name="holderName">HOLDER NAME</string>
-    <string name="lastTransactions">Last transactions</string>
-    <string name="viewAll">View all</string>
-    <string name="labelPaymentFee">Payment fee</string>
-    <string name="medianWait">Median wait:</string>
-    <string name="subtotal">Subtotal to send</string>
-    <string name="reciever">Receiver</string>
-    <string name="account">Account</string>
-    <string name="hintAddReceiver">Wallet address or phone number</string>
-    <string name="change">Change</string>
-    <string name="deposit">Deposit</string>
-    <string name="noWalletError">This user doesn\'t have a wallet</string>
-    <string name="notEnoghtFounds">You haven’t got enough funds to send. Try to set another count.</string>
-    <string name="mailSent">Mail successfully sent</string>
-    <string name="checkMailbox">Check your mailbox and follow the link to recover your password</string>
-    <string name="wantToAccessContacts">Allow StoriqaWallet to access your contacts?</string>
-    <string name="deny">Deny</string>
-    <string name="allow">Allow</string>
-    <string name="willBeAwailableSoon">Will be available soon</string>
-    <string name="errorNoMatch">Error - no match!</string>
-    <string name="confirmTransaction">Confirm transaction</string>
-    <string name="exchange">Exchange</string>
-    <string name="menu">Menu</string>
-    <string name="willBeAvailableSoon">Will be available soon</string>
-    <!--*********************************************************************************************-->
 
     <string name="error_name_not_valid">Wrong name</string> <!--TODO set text-->
     <string name="error_email_not_valid">Email not valid</string>
@@ -147,6 +84,7 @@
     <string name="tab_sent">Sent</string>
     <string name="tab_received">Received</string>
 
+    <string name="text_splash_description">Multicurrency tool for easy operating\nwith your fiat \u0026 crypto funds</string>
     <string name="text_haven_t_got_account">Haven’t got account?</string>
     <string name="text_or">or Sign In</string>
     <string name="text_license_agreement">I accept the <a href="https://storiqa.com/turewallet/terms_of_use.pdf">License Agreement</a> </string>
@@ -173,6 +111,7 @@
     <string name="text_no_transactions">You have no transactions.\nYet :)</string>
     <string name="text_transaction_sent">Transaction sent</string>
     <string name="text_transaction_received">Transaction received</string>
+    <string name="text_pending">Pending</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
     <string name="toolbar_transactions">Transactions</string>

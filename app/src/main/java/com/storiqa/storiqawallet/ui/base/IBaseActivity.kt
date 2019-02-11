@@ -1,8 +1,8 @@
 package com.storiqa.storiqawallet.ui.base
 
 import androidx.appcompat.widget.Toolbar
+import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.di.components.ActivityComponent
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
 
 interface IBaseActivity {
 

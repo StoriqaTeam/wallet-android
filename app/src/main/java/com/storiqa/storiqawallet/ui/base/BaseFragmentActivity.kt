@@ -13,11 +13,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.di.components.ActivityComponent
 import com.storiqa.storiqawallet.di.components.DaggerActivityComponent
 import com.storiqa.storiqawallet.di.modules.ActivityModule
 import com.storiqa.storiqawallet.di.modules.NavigatorModule
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
 
 abstract class BaseFragmentActivity : AppCompatActivity(), IBaseActivity {
@@ -70,7 +70,7 @@ abstract class BaseFragmentActivity : AppCompatActivity(), IBaseActivity {
         loadingDialog = Dialog(this).apply {
             show()
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            setContentView(R.layout.progress_dialog)
+            setContentView(R.layout.dialog_progress)
             setCancelable(false)
             setCanceledOnTouchOutside(false)
         }

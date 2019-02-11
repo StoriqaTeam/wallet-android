@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.storiqa.storiqawallet.network.responses.UserInfoResponse
+import com.storiqa.storiqawallet.data.network.responses.UserInfoResponse
 
 @Entity(tableName = "Users",
         indices = [Index(value = arrayOf("id"),

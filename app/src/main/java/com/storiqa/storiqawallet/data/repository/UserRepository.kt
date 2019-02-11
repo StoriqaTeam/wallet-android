@@ -1,11 +1,11 @@
 package com.storiqa.storiqawallet.data.repository
 
 import android.annotation.SuppressLint
-import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.db.dao.UserDao
 import com.storiqa.storiqawallet.data.db.entity.UserEntity
-import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.responses.UserInfoResponse
+import com.storiqa.storiqawallet.data.network.WalletApi
+import com.storiqa.storiqawallet.data.network.responses.UserInfoResponse
+import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
 import io.reactivex.Observable

@@ -3,8 +3,8 @@ package com.storiqa.storiqawallet.utils
 import com.storiqa.cryptokeys.IKeyGenerator
 import com.storiqa.cryptokeys.ISigner
 import com.storiqa.cryptokeys.PrivateKey
-import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.model.SignHeader
+import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import javax.inject.Inject
 
 class SignUtil

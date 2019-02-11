@@ -1,9 +1,9 @@
 package com.storiqa.storiqawallet.data.polling
 
 import com.storiqa.storiqawallet.data.model.Currency
+import com.storiqa.storiqawallet.data.network.responses.AccountResponse
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
-import com.storiqa.storiqawallet.network.responses.AccountResponse
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiFunction

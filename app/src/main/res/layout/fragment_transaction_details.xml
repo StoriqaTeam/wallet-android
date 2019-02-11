@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -42,7 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:imageResource="@{viewModel.icon}"
-            tools:srcCompat="@drawable/deposit_icon_round" />
+            tools:srcCompat="@drawable/ic_receive" />
 
         <TextView
             android:id="@+id/tvAmount"
@@ -99,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
-            android:text="Pending"
+            android:text="@string/text_pending"
             android:visibility="@{viewModel.status.equalsIgnoreCase(`pending`) ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/tvTime"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +113,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvPending"
             app:layout_constraintEnd_toStartOf="@+id/tvPending"
             app:layout_constraintTop_toTopOf="@+id/tvPending"
-            app:srcCompat="@drawable/pencil_redact" />
+            app:srcCompat="@drawable/ic_copy" />
 
         <TextView
             android:id="@+id/tvDirection"

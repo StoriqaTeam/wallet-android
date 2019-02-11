@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.storiqa.storiqawallet">
 
+    <!--TODO clean permissions-->
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -14,7 +15,6 @@
         android:name="android.hardware.fingerprint"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -101,27 +101,6 @@
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-        <!--////////////////////////////////////////////////-->
-
-        <activity
-            android:name=".screen_main.MainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
-        <activity
-            android:name=".screen_pin_code_enter.EnterPinCodeActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".screen_scan_finger.ScanFingerActivity"
-            android:screenOrientation="portrait" />
-
-        <!--*************************what is it?***************************-->
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-        <!--***************************************************************-->
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

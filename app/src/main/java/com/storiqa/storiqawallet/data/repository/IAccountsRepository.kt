@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.data.repository
 
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
-import com.storiqa.storiqawallet.network.responses.AccountResponse
+import com.storiqa.storiqawallet.data.network.responses.AccountResponse
 import io.reactivex.Flowable
 import io.reactivex.Observable
 
