@@ -24,7 +24,8 @@ constructor(private val vibrationUtil: VibrationUtil,
         BaseViewModel<IPinCodeNavigator>() {
 
     private val pinLength = App.res.getInteger(R.integer.PIN_LENGTH)
-    private val vibrationDuration: Long = 200
+    private val vibrationDuration: Long = 50
+    private val vibrationPattern = longArrayOf(0, 50, 100, 50)
 
     private var enteredPinCode: String = ""
     val pinCode = NonNullObservableField("")
@@ -104,7 +105,7 @@ constructor(private val vibrationUtil: VibrationUtil,
                     getNavigator()?.openMainActivity()
                 } else {
                     showPinError.trigger()
-                    vibrationUtil.vibrate(longArrayOf(200, 200, 200))
+                    vibrationUtil.vibrate(vibrationPattern)
                     pinCode.set("")
                 }
             }
@@ -112,6 +113,7 @@ constructor(private val vibrationUtil: VibrationUtil,
                 if (isValidPinCode(pinCode.get())) {
                     getNavigator()?.openMainActivity()
                 } else {
+                    vibrationUtil.vibrate(vibrationPattern)
                     showPinError.trigger()
                     pinCode.set("")
                 }

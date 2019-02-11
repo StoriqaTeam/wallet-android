@@ -88,6 +88,9 @@ dependencies {
     //BottomNavigator
     implementation "com.aurelhubert:ahbottomnavigation:$bottomNavigatorVersion"
 
+    //ViewPagerIndicator
+    implementation "com.romandanylyk:pageindicatorview:$pagerIndicatorVersion"
+
     //TODO delete
     implementation 'androidx.multidex:multidex:2.0.1'
 }

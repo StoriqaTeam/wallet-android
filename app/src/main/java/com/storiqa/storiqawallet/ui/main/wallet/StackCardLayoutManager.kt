@@ -31,7 +31,7 @@ class StackCardLayoutManager : RecyclerView.LayoutManager() {
             addView(view)
             val layoutParams = view.layoutParams as RecyclerView.LayoutParams
             val left = layoutParams.marginStart
-            val top = (view.measuredHeight * i * 0.35).toInt()
+            val top = (view.measuredHeight * i * 0.25).toInt()
             val right = view.measuredWidth + layoutParams.marginEnd
             val bottom = top + view.measuredHeight
             layoutDecorated(view, left, top, right, bottom)
