@@ -44,7 +44,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding, WalletViewModel>() {
                             viewHolder: RecyclerView.ViewHolder,
                             target: RecyclerView.ViewHolder
                     ): Boolean = true.also {
-                        //TODO this block for moving cards
+                        //TODO this block for moving accounts
                         /*val fromPos = viewHolder.adapterPosition
                         val toPos = target.adapterPosition
                         adapter.notifyItemMoved(fromPos, toPos)*/

@@ -41,7 +41,7 @@ constructor(navigator: IMainNavigator,
 
     var currentPosition = 0
 
-    var cards: ArrayList<Account> = ArrayList()
+    var accounts: ArrayList<Account> = ArrayList()
     var transactions: List<Transaction> = ArrayList()
 
     private var transactionsSubscription: Disposable? = null
@@ -59,11 +59,11 @@ constructor(navigator: IMainNavigator,
     }
 
     fun onSeeAllButtonClicked() {
-        getNavigator()?.showTransactionsFragment(cards[currentPosition].accountAddress)
+        getNavigator()?.showTransactionsFragment(accounts[currentPosition].accountAddress)
     }
 
     fun onTransactionClicked(position: Int) {
-        getNavigator()?.showTransactionDetailsFragment(cards[currentPosition].accountAddress, transactions[position].id)
+        getNavigator()?.showTransactionDetailsFragment(accounts[currentPosition].accountAddress, transactions[position].id)
     }
 
     fun onAccountSelected(position: Int) {
@@ -72,7 +72,7 @@ constructor(navigator: IMainNavigator,
         if (sab != null && !sab.isDisposed)
             sab.dispose()*/
 
-        val address = cards[position].accountAddress
+        val address = accounts[position].accountAddress
         transactionsSubscription = transactionsRepository
                 .getTransactionsByAddress(address, lastTransactionsAmount)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -85,10 +85,10 @@ constructor(navigator: IMainNavigator,
     private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
         val mapper = AccountMapper(CurrencyConverter(rates))
         if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            cards = ArrayList()
-            accounts.reversed().forEach { cards.add(mapper.map(it)) }
+            this.accounts = ArrayList()
+            accounts.reversed().forEach { this.accounts.add(mapper.map(it)) }
         }
-        return cards
+        return this.accounts
     }
 
     private fun updateTransactions() {

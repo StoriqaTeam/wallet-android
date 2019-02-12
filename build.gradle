@@ -42,4 +42,5 @@ ext {
     preferenceVersion = '1.0.0'
     recyclerVersion = '1.0.0'
     viewpagerVersion = '1.0.0'
+    zxingVersion = '3.6.0'
 }

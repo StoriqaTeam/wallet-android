@@ -27,7 +27,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/accountsPager"
             android:layout_width="match_parent"
-            android:layout_height="185dp"
+            android:layout_height="@dimen/accountPagerHeight"
             android:paddingStart="20dp"
             android:paddingEnd="20dp" />
 

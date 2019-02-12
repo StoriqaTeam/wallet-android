@@ -39,10 +39,10 @@ constructor(navigator: IMainNavigator,
     init {
         setNavigator(navigator)
 
-        val token = appData.token
+        /*val token = appData.token
         if (tokenProvider.isExpired(token))
             tokenProvider.refreshToken({
-            }, ::handleError)
+            }, ::handleError)*/
 
 
         ratesRepository.getRates()

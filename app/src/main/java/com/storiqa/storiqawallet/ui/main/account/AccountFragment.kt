@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
+import com.storiqa.storiqawallet.data.model.AccountCardSize
 import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.databinding.FragmentAccountBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
@@ -52,7 +53,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         (activity as IBaseActivity).setupActionBar(binding.toolbar, " ", true)
 
         if (isRestoring) {
-            initAccountsPager(viewModel.cards)
+            initAccountsPager(viewModel.accounts)
             initTransactionsRecycler(viewModel.transactions)
             isRestoring = false
         }
@@ -69,7 +70,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     }
 
     private fun initAccountsPager(accounts: List<Account>) {
-        accountsAdapter = AccountPagerAdapter(this@AccountFragment, accounts)
+        accountsAdapter = AccountPagerAdapter(this@AccountFragment, accounts, AccountCardSize.LARGE)
         binding.accountsPager.apply {
             adapter = accountsAdapter
             setPadding(convertDpToPx(30f).toInt(), 0, convertDpToPx(30f).toInt(), 0)
