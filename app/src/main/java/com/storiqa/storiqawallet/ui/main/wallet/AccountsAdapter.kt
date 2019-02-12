@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.databinding.ItemAccountBinding
+import com.storiqa.storiqawallet.databinding.ItemAccountLargeBinding
 import com.storiqa.storiqawallet.ui.common.TopAlignSuperscriptSpan
 
 
@@ -22,7 +22,7 @@ class AccountsAdapter(private var cards: List<Account>, val onClick: ((position:
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(ItemAccountBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            ViewHolder(ItemAccountLargeBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun getItemCount(): Int = cards.size
 
@@ -30,7 +30,7 @@ class AccountsAdapter(private var cards: List<Account>, val onClick: ((position:
         holder.bind(cards[position])
     }
 
-    inner class ViewHolder(private val binding: ItemAccountBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemAccountLargeBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(account: Account) {
             binding.apply {

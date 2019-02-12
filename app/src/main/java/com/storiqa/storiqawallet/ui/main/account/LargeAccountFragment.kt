@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.databinding.ItemAccountBinding
+import com.storiqa.storiqawallet.databinding.ItemAccountLargeBinding
 import com.storiqa.storiqawallet.ui.common.TopAlignSuperscriptSpan
 
 class LargeAccountFragment : Fragment() {
@@ -26,7 +26,7 @@ class LargeAccountFragment : Fragment() {
         }
     }
 
-    private lateinit var binding: ItemAccountBinding
+    private lateinit var binding: ItemAccountLargeBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
