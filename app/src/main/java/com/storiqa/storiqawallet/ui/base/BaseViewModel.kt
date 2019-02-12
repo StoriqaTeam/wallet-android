@@ -2,10 +2,10 @@ package com.storiqa.storiqawallet.ui.base
 
 import androidx.lifecycle.ViewModel
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.network.errors.DialogType
-import com.storiqa.storiqawallet.network.errors.ErrorHandler
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterFields
+import com.storiqa.storiqawallet.data.network.errors.DialogType
+import com.storiqa.storiqawallet.data.network.errors.ErrorHandler
+import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterDialog
+import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
 import java.lang.ref.WeakReference
 

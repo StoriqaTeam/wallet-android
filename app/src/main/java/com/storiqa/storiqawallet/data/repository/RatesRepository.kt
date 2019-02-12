@@ -3,7 +3,7 @@ package com.storiqa.storiqawallet.data.repository
 import com.storiqa.storiqawallet.data.db.dao.RateDao
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.model.Currency
-import com.storiqa.storiqawallet.network.CryptoCompareApi
+import com.storiqa.storiqawallet.data.network.CryptoCompareApi
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

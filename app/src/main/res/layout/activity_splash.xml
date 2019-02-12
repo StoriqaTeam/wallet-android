@@ -50,7 +50,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
             android:lineSpacingExtra="4sp"
-            android:text="@string/splash_description"
+            android:text="@string/text_splash_description"
             android:textColor="#7fffffff"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/btnGetStarted"

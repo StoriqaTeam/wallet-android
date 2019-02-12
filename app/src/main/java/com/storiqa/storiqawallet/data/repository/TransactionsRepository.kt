@@ -1,6 +1,5 @@
 package com.storiqa.storiqawallet.data.repository
 
-import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.db.AppDatabase
 import com.storiqa.storiqawallet.data.db.dao.BlockchainIdDao
 import com.storiqa.storiqawallet.data.db.dao.TransactionAccountDao
@@ -9,8 +8,9 @@ import com.storiqa.storiqawallet.data.db.dao.TransactionDao
 import com.storiqa.storiqawallet.data.db.entity.*
 import com.storiqa.storiqawallet.data.mapper.TransactionMapper
 import com.storiqa.storiqawallet.data.model.Transaction
-import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.responses.TransactionResponse
+import com.storiqa.storiqawallet.data.network.WalletApi
+import com.storiqa.storiqawallet.data.network.responses.TransactionResponse
+import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getTimestampLong
 import io.reactivex.Flowable

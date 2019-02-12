@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.ui.splash
 
-import com.storiqa.storiqawallet.data.IAppDataStorage
+import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import java.util.*
 import javax.inject.Inject

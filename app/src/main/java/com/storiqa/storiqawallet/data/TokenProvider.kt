@@ -1,7 +1,8 @@
 package com.storiqa.storiqawallet.data
 
 import android.annotation.SuppressLint
-import com.storiqa.storiqawallet.network.WalletApi
+import com.storiqa.storiqawallet.data.network.WalletApi
+import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.utils.JWTUtil
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getTimeStamp

@@ -1,10 +1,10 @@
 package com.storiqa.storiqawallet.di.modules
 
 import com.storiqa.storiqawallet.BuildConfig
+import com.storiqa.storiqawallet.data.network.CryptoCompareApi
+import com.storiqa.storiqawallet.data.network.WalletApi
+import com.storiqa.storiqawallet.data.network.errors.ErrorInterceptor
 import com.storiqa.storiqawallet.di.scopes.PerApplication
-import com.storiqa.storiqawallet.network.CryptoCompareApi
-import com.storiqa.storiqawallet.network.WalletApi
-import com.storiqa.storiqawallet.network.errors.ErrorInterceptor
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers

@@ -1,7 +1,7 @@
 package com.storiqa.storiqawallet.ui.main
 
-import com.storiqa.storiqawallet.data.IAppDataStorage
 import com.storiqa.storiqawallet.data.polling.IShortPolling
+import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import javax.inject.Inject
 

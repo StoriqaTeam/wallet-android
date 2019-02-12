@@ -19,11 +19,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.di.components.ActivityComponent
 import com.storiqa.storiqawallet.di.components.DaggerActivityComponent
 import com.storiqa.storiqawallet.di.modules.ActivityModule
 import com.storiqa.storiqawallet.di.modules.NavigatorModule
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
 import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
 import javax.inject.Inject
@@ -105,7 +105,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
         loadingDialog = Dialog(this).apply {
             show()
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            setContentView(R.layout.progress_dialog)
+            setContentView(R.layout.dialog_progress)
             setCancelable(false)
             setCanceledOnTouchOutside(false)
         }

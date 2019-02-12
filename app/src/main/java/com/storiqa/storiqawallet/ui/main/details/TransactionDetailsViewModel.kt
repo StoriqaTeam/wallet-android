@@ -65,7 +65,7 @@ constructor(navigator: IMainNavigator,
             userName.set(transaction.toAccount.ownerName ?: "")
             fullAddress = transaction.toAccount.blockchainAddress
         }
-        blockchainAddress.set("${fullAddress.substring(0, 8)}...." +
+        blockchainAddress.set("${fullAddress.substring(0, 8)} . . . . " +
                 fullAddress.substring(fullAddress.length - 4, fullAddress.length))
     }
 

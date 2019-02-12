@@ -9,11 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.BR
+import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.databinding.DialogMessageBinding
 import com.storiqa.storiqawallet.di.components.DaggerFragmentComponent
 import com.storiqa.storiqawallet.di.components.FragmentComponent
 import com.storiqa.storiqawallet.di.modules.FragmentModule
-import com.storiqa.storiqawallet.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
 import javax.inject.Inject
 

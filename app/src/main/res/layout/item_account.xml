@@ -40,7 +40,7 @@
                 app:imageResource="@{account.currencyIcon}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/btc_small_logo" />
+                tools:srcCompat="@drawable/ic_btc" />
 
             <TextView
                 android:id="@+id/tvBalancePreview"

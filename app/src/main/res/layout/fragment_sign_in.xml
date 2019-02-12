@@ -6,9 +6,7 @@
     <data>
 
         <import type="android.view.View" />
-
         <import type="android.widget.EditText" />
-
         <import type="java.lang.String" />
 
         <variable
@@ -98,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
         <include
-            layout="@layout/social_network_sign_in"
+            layout="@layout/layout_social_network"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
