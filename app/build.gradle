@@ -91,6 +91,9 @@ dependencies {
     //ViewPagerIndicator
     implementation "com.romandanylyk:pageindicatorview:$pagerIndicatorVersion"
 
+    //QR code
+    implementation "com.journeyapps:zxing-android-embedded:$zxingVersion"
+
     //TODO delete
     implementation 'androidx.multidex:multidex:2.0.1'
 }

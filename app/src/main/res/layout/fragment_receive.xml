@@ -7,28 +7,83 @@
         <variable
             name="viewModel"
             type="com.storiqa.storiqawallet.ui.main.receive.ReceiveViewModel" />
-
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/root"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/accountsPager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mediumAccountHeight"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp" />
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Receive Fragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            app:piv_animationType="none"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="@color/indicator_highlight"
+            app:piv_unselectedColor="@color/indicator_default"
+            app:piv_viewPager="@id/accountsPager"
+            app:piv_padding="8dp"
+            app:piv_radius="3dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/text_your_address" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="none"
+                android:singleLine="true"
+                android:text="@{viewModel.address}" />
+
+            <ImageView
+                android:id="@+id/btnCopy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:onClick="@{()->viewModel.onCopyButtonClick()}"
+                app:srcCompat="@drawable/ic_copy" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgQrCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            app:imageBitmap="@{viewModel.qrCode}" />
+
+    </LinearLayout>
 
 </layout>
