@@ -14,15 +14,15 @@ import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.databinding.ItemAccountBinding
 import com.storiqa.storiqawallet.ui.common.TopAlignSuperscriptSpan
 
-class SingleAccountFragment : Fragment() {
+class LargeAccountFragment : Fragment() {
 
     companion object {
         private const val KEY_ACCOUNT = "key_account"
 
-        fun newInstance(account: Account): SingleAccountFragment {
+        fun newInstance(account: Account): LargeAccountFragment {
             val bundle = Bundle()
             bundle.putParcelable(KEY_ACCOUNT, account)
-            return SingleAccountFragment().also { it.arguments = bundle }
+            return LargeAccountFragment().also { it.arguments = bundle }
         }
     }
 
@@ -33,7 +33,7 @@ class SingleAccountFragment : Fragment() {
 
         val account: Account = arguments?.get(KEY_ACCOUNT) as Account
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.item_account, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.item_account_large, container, false)
         binding.setVariable(BR.account, account)
         binding.executePendingBindings()
 

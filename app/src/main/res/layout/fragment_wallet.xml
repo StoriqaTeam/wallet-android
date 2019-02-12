@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            tools:listitem="@layout/item_account" />
+            tools:listitem="@layout/item_account_large" />
 
         <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 

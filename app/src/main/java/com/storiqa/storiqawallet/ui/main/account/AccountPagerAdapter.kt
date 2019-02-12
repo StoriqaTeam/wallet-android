@@ -19,9 +19,9 @@ class AccountPagerAdapter(
 
     override fun getItem(position: Int): Fragment {
         return when (size) {
-            AccountCardSize.SMALL -> SingleAccountFragment.newInstance(cards[position])
+            AccountCardSize.SMALL -> LargeAccountFragment.newInstance(cards[position])
             AccountCardSize.MEDIUM -> MediumAccountFragment.newInstance(cards[position])
-            AccountCardSize.LARGE -> SingleAccountFragment.newInstance(cards[position])
+            AccountCardSize.LARGE -> LargeAccountFragment.newInstance(cards[position])
         }
     }
 
