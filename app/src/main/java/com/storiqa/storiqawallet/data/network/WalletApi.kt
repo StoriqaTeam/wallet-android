@@ -167,6 +167,6 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Body calculateFeeResponse: CalculateFeeResponse): Observable<Response<Any>>
+            @Body calculateFeeResponse: FeeRequest): Observable<FeeResponse>
 
 }

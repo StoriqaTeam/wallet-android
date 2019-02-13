@@ -10,25 +10,139 @@
 
     </data>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/toolbar_send" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/accountsPager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mediumAccountHeight"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp" />
+
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Send Fragment"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            app:piv_animationType="none"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_padding="8dp"
+            app:piv_radius="3dp"
+            app:piv_selectedColor="@color/indicator_highlight"
+            app:piv_unselectedColor="@color/indicator_default"
+            app:piv_viewPager="@id/accountsPager" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:errorEnabled="true"
+                app:errorText="@{viewModel.addressError}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_text_height"
+                    android:hint="@string/hint_address"
+                    android:inputType="textVisiblePassword"
+                    android:text="@={viewModel.address}"
+                    android:nextFocusDown="@+id/etAmount" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/btnScan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:onClick="@{()->viewModel.onScanButtonClick()}"
+                app:srcCompat="@drawable/ic_scan" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="@dimen/input_layout_space"
+            android:layout_marginEnd="30dp"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmount"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:hint="@string/hint_amount"
+                android:text="@={viewModel.amount}"
+                android:inputType="numberDecimal"
+                android:nextFocusDown="@+id/etAmountFiat" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAmountFiat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="@dimen/input_layout_space"
+            android:layout_marginEnd="30dp"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmountFiat"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:hint="@string/hint_amount_fiat"
+                android:inputType="numberDecimal"
+                android:text="@={viewModel.amountFiat}"
+                android:nextFocusDown="@+id/btnSignUp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSignUp"
+            style="@style/GradientButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:enabled="@{viewModel.sendButtonEnabled}"
+            android:onClick="@{()->viewModel.onSendButtonClicked()}"
+            android:text="@string/button_send" />
+
+    </LinearLayout>
 
 </layout>

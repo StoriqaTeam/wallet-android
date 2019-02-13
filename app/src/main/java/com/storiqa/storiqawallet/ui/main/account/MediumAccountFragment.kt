@@ -37,7 +37,7 @@ class MediumAccountFragment : Fragment() {
         binding.setVariable(BR.account, account)
         binding.executePendingBindings()
 
-        val spannable = SpannableString(account.currency + " " + account.balanceFormatted)
+        val spannable = SpannableString(account.currency.currencyISO + " " + account.balanceFormatted)
         spannable.setSpan(TopAlignSuperscriptSpan(0.35f), 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.tvBalance.text = spannable
 

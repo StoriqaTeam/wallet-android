@@ -111,7 +111,13 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="android:screenOrientation"
+            android:stateNotNeeded="true" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

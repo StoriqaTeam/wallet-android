@@ -42,7 +42,7 @@ class AccountsAdapter(private var cards: List<Account>, val onClick: ((position:
                         onClickListener(layoutPosition, root, App.res.getString(R.string.transition_account))
                     }
             }
-            val spannable = SpannableString(account.currency + " " + account.balanceFormatted)
+            val spannable = SpannableString(account.currency.currencyISO + " " + account.balanceFormatted)
             spannable.setSpan(TopAlignSuperscriptSpan(0.35f), 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             binding.tvBalance.text = spannable
         }

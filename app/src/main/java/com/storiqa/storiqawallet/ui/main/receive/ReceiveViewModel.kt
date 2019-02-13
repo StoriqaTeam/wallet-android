@@ -30,7 +30,6 @@ constructor(navigator: IMainNavigator,
             private val userData: IUserDataStorage
 ) : BaseViewModel<IMainNavigator>() {
 
-
     val updateAccounts = SingleLiveEvent<List<Account>>()
     val shareQrCode = SingleLiveEvent<Bitmap>()
     val copyToClipboard = SingleLiveEvent<String>()
@@ -54,15 +53,6 @@ constructor(navigator: IMainNavigator,
                 .subscribe { updateAccounts.value = it }
     }
 
-    private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
-        val mapper = AccountMapper(CurrencyConverter(rates))
-        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            this.accounts = ArrayList()
-            accounts.reversed().forEach { this.accounts.add(mapper.map(it)) }
-        }
-        return this.accounts
-    }
-
     fun onAccountSelected(position: Int) {
         currentPosition = position
 
@@ -83,4 +73,12 @@ constructor(navigator: IMainNavigator,
         copyToClipboard.value = accounts[currentPosition].accountAddress
     }
 
+    private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
+        val mapper = AccountMapper(CurrencyConverter(rates))
+        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
+            this.accounts = ArrayList()
+            accounts.reversed().forEach { this.accounts.add(mapper.map(it)) }
+        }
+        return this.accounts
+    }
 }
