@@ -64,7 +64,7 @@ fun String.decodeBase58(): ByteArray {
         val c = this[i]
         val digit = if (c.toInt() < 128) alphabetIndices[c.toInt()] else -1
         if (digit < 0) {
-            throw NumberFormatException("Illegal character $c at position $i")
+            return ByteArray(0)
         }
         input58[i] = digit.toByte()
     }

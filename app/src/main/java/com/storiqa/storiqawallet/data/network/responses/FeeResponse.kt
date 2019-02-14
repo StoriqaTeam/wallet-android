@@ -8,4 +8,4 @@ data class FeeResponse(
 
 data class Fee(
         val value: String,
-        val estimatedTime: String)
+        val estimatedTime: Int)

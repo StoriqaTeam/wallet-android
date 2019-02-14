@@ -53,7 +53,7 @@
             tools:text="20:14 Aug 12" />
 
         <TextView
-            android:id="@+id/tvAmount"
+            android:id="@+id/tvFeeAmount"
             style="@style/HighlightedText"
             android:layout_width="0dp"
             android:layout_height="20dp"
@@ -78,7 +78,7 @@
             android:layout_marginStart="8dp"
             android:gravity="end"
             android:text="@{transaction.fiat}"
-            app:layout_constraintEnd_toEndOf="@+id/tvAmount"
+            app:layout_constraintEnd_toEndOf="@+id/tvFeeAmount"
             app:layout_constraintStart_toEndOf="@+id/tvTime"
             app:layout_constraintTop_toTopOf="@+id/tvTime"
             tools:text="- $250.84 " />

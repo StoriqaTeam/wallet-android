@@ -9,7 +9,7 @@ import com.storiqa.storiqawallet.data.db.entity.TransactionWithAddresses
 import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.data.model.TransactionAccount
 import com.storiqa.storiqawallet.data.model.TransactionType
-import com.storiqa.storiqawallet.utils.getPresentableTime
+import com.storiqa.storiqawallet.utils.getPresentableDate
 
 class TransactionMapper(private val transactionAccounts: List<TransactionAccountEntity>) : ITransactionMapper {
 
@@ -70,7 +70,7 @@ class TransactionMapper(private val transactionAccounts: List<TransactionAccount
 
                 type,
                 typeDescription,
-                getPresentableTime(tr.createdAt),
+                getPresentableDate(tr.createdAt),
                 amountFormatted,
                 commission,
                 amountFiatFormatted)
