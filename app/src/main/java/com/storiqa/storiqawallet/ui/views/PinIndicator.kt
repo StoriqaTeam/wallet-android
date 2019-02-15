@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.ui.views
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
@@ -61,5 +62,11 @@ class PinIndicator : LinearLayout {
             circles.add(circle)
             addView(circle)
         }
+    }
+
+    fun startErrorAnimation() {
+        ObjectAnimator
+                .ofFloat(this, "translationX", 0f, 25f, -25f, 25f, -25f, 15f, -15f, 6f, -6f, 0f)
+                .start()
     }
 }

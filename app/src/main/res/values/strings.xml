@@ -19,6 +19,8 @@
     <string name="error_server_error">Server error</string>
     <string name="error_unknown_error">Unknown error</string>
     <string name="error_address_not_valid">Address not valid</string>
+    <string name="error_not_enough_money">Not enough money</string>
+    <string name="error_different_address">Different address</string>
 
     <string name="dialog_no_internet_title">No internet</string>
     <string name="dialog_no_internet_description">No internet description</string>
@@ -122,6 +124,9 @@
     <string name="text_fee">Fee</string>
     <string name="text_low">Low</string>
     <string name="text_high">High</string>
+    <string name="text_hours">h</string>
+    <string name="text_minutes">min</string>
+    <string name="text_seconds">sec</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
     <string name="toolbar_transactions">Transactions</string>
@@ -139,8 +144,5 @@
 
     <string name="toast_address_copied">Address copied to clipboard</string>
     <string name="toast_address_invalid">Not valid address</string>
-    <string name="text_hours">h</string>
-    <string name="text_minutes">min</string>
-    <string name="text_seconds">sec</string>
 
 </resources>

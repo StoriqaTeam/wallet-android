@@ -12,6 +12,7 @@ import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.model.Currency
 import com.storiqa.storiqawallet.data.network.WalletApi
+import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.data.network.requests.FeeRequest
 import com.storiqa.storiqawallet.data.network.responses.Fee
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
@@ -27,6 +28,7 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
+import java.math.BigDecimal
 import javax.inject.Inject
 
 class SendViewModel
@@ -56,6 +58,7 @@ constructor(navigator: IMainNavigator,
     val feesSize = ObservableInt(0)
     val feeAmount = NonNullObservableField("")
     val estimatedTime = NonNullObservableField("")
+    val isNotEnough = ObservableBoolean(false)
 
     private val currencyFormatter = CurrencyFormatter()
     private var currencyConverter: ICurrencyConverter? = null
@@ -74,6 +77,7 @@ constructor(navigator: IMainNavigator,
         }
         amountCrypto.addOnPropertyChanged { checkSendButtonAvailable() }
         amountFiat.addOnPropertyChanged { checkSendButtonAvailable() }
+        seekBarFeePosition.addOnPropertyChanged { checkSendButtonAvailable() }
         seekBarFeePosition.addOnPropertyChanged {
             if (fees.isNotEmpty()) {
                 feeAmount.set(currencyFormatter.getFormattedAmount(fees[it.get()].value, feeCurrency))
@@ -90,9 +94,24 @@ constructor(navigator: IMainNavigator,
                 .subscribe { updateAccounts.value = it }
     }
 
+    override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
+        errorPresenter.fieldErrors.forEach {
+            it.forEach { (key, value) ->
+                when (key) {
+                    "account" -> {
+                        addressError.set(App.res.getString(value))
+                        sendButtonEnabled.set(false)
+                    }
+                }
+            }
+        }
+    }
+
     fun onAccountSelected(position: Int) {
         hideKeyboard()
         currentPosition = position
+        sendButtonEnabled.set(false)
+        isNotEnough.set(false)
 
         fees = ArrayList()
         feesSize.set(0)
@@ -124,7 +143,9 @@ constructor(navigator: IMainNavigator,
             return
         if (isAddressValid(address.get(), accounts[currentPosition].currency)) {
             addressError.set("")
-            requestFees(address.get())
+            Thread {
+                requestFees(address.get())
+            }.start()
         } else {
             addressError.set(App.res.getString(R.string.error_address_not_valid))
             fees = ArrayList()
@@ -155,28 +176,40 @@ constructor(navigator: IMainNavigator,
         val email = appData.currentUserEmail
         val token = appData.token
         val signHeader = signUtil.createSignHeader(email)
-        val request = FeeRequest(accounts[currentPosition].currency.currencyISO.toLowerCase(), address)
+        val request = FeeRequest(accounts[currentPosition].currency.currencyISO.toLowerCase(), address.removePrefix("0x"))
         walletApi
                 .calculateFee(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    feeCurrency = it.currency
                     fees = it.fees
+                    if (it.fees.size == 1 && it.fees[0].estimatedTime == 0) {
+                        checkSendButtonAvailable()
+                        return@subscribe
+                    }
+
+                    feeCurrency = it.currency
                     feesSize.set(fees.size)
                     seekBarFeePosition.set(0)
                     feeAmount.set(currencyFormatter.getFormattedAmount(fees[0].value, feeCurrency))
                     estimatedTime.set(getPresentableTime(fees[0].estimatedTime))
+                    checkSendButtonAvailable()
                 }, {
-                    print(it)
+                    handleError(it as Exception)
                 })
     }
 
     private fun checkSendButtonAvailable() {
-        if (address.get().isNotEmpty() && amountCrypto.get().isNotEmpty() && amountFiat.get().isNotEmpty())
-            sendButtonEnabled.set(true)
-        else
-            sendButtonEnabled.set(false)
+        if (address.get().isNotEmpty() && addressError.get().isEmpty() && fees.isNotEmpty()
+                && amountCrypto.get().isNotEmpty() && amountFiat.get().isNotEmpty()) {
+            if (isEnoughMoneyForSend()) {
+                sendButtonEnabled.set(true)
+                isNotEnough.set(false)
+                return
+            } else
+                isNotEnough.set(true)
+        }
+        sendButtonEnabled.set(false)
     }
 
     private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
@@ -187,5 +220,16 @@ constructor(navigator: IMainNavigator,
             accounts.reversed().forEach { this.accounts.add(mapper.map(it)) }
         }
         return this.accounts
+    }
+
+    private fun isEnoughMoneyForSend(): Boolean {
+        val feeDecimal = if (feesSize.get() == 0)
+            BigDecimal.ZERO
+        else
+            BigDecimal(fees[seekBarFeePosition.get()].value).movePointLeft(feeCurrency.getSignificantDigits())
+        val amountDecimal = BigDecimal(amountCrypto.get())
+        val balanceDecimal = BigDecimal(accounts[currentPosition].balance)
+                .movePointLeft(accounts[currentPosition].currency.getSignificantDigits())
+        return feeDecimal + amountDecimal <= balanceDecimal
     }
 }

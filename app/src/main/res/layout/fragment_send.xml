@@ -216,6 +216,15 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/not_enough_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/error"
+                    android:visibility="@{viewModel.isNotEnough ? View.VISIBLE : View.GONE}"
+                    android:text="@string/error_not_enough_money" />
+
                 <Button
                     android:id="@+id/btnSignUp"
                     style="@style/GradientButton"
