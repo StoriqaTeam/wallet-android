@@ -29,6 +29,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
+                style="@style/Widget.Design.TextInputLayout.Text"
                 app:errorEnabled="true"
                 app:errorText="@{viewModel.firstNameError}">
 
@@ -48,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
+                style="@style/Widget.Design.TextInputLayout.Text"
                 android:layout_marginTop="@dimen/input_layout_space"
                 android:layout_marginEnd="30dp"
                 app:errorEnabled="true"
@@ -69,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
+                style="@style/Widget.Design.TextInputLayout.Text"
                 android:layout_marginTop="@dimen/input_layout_space"
                 android:layout_marginEnd="30dp"
                 app:errorEnabled="true"

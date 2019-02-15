@@ -71,6 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/Widget.Design.TextInputLayout.Text"
                         app:errorEnabled="true"
                         app:errorText="@{viewModel.addressError}"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +84,7 @@
                             android:layout_height="@dimen/edit_text_height"
                             android:hint="@string/hint_address"
                             android:inputType="textVisiblePassword"
-                            android:nextFocusDown="@+id/etAmount"
+                            android:nextFocusDown="@+id/etAmountCrypto"
                             android:text="@={viewModel.address}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -100,26 +101,27 @@
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilAmount"
+                    android:id="@+id/tilAmountCrypto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="@dimen/input_layout_space"
                     android:layout_marginEnd="30dp"
+                    style="@style/Widget.Design.TextInputLayout.Text"
                     app:errorEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etAmount"
+                        android:id="@+id/etAmountCrypto"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/edit_text_height"
                         android:hint="@string/hint_amount"
                         android:inputType="numberDecimal"
                         android:imeOptions="actionDone"
                         android:nextFocusDown="@+id/btnSignUp"
-                        android:text="@={viewModel.amount}" />
+                        android:text="@={viewModel.amountCrypto}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,7 +132,8 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="@dimen/input_layout_space"
                     android:layout_marginEnd="30dp"
-                    app:errorEnabled="true"
+                    style="@style/Widget.Design.TextInputLayout.Text"
+                    app:helperTextEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -158,7 +161,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
 
                         <TextView
                             android:id="@+id/tvFee"

@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.ui.main.send
 
+import android.annotation.SuppressLint
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableInt
 import com.storiqa.storiqawallet.App
@@ -43,15 +44,11 @@ constructor(navigator: IMainNavigator,
     val scanQrCode = SingleLiveEvent<Boolean>()
     val showInvalidAddressError = SingleLiveEvent<Boolean>()
 
-    var accounts: ArrayList<Account> = ArrayList()
-    private var fees: List<Fee> = ArrayList()
-    private lateinit var feeCurrency: Currency
-
     var currentPosition = 0
 
     val sendButtonEnabled = ObservableBoolean(false)
     val address = NonNullObservableField("")
-    val amount = NonNullObservableField("")
+    val amountCrypto = NonNullObservableField("")
     val amountFiat = NonNullObservableField("")
     val addressError = NonNullObservableField("")
 
@@ -61,6 +58,12 @@ constructor(navigator: IMainNavigator,
     val estimatedTime = NonNullObservableField("")
 
     private val currencyFormatter = CurrencyFormatter()
+    private var currencyConverter: ICurrencyConverter? = null
+
+    var accounts: ArrayList<Account> = ArrayList()
+    private var fees: List<Fee> = ArrayList()
+    private lateinit var feeCurrency: Currency
+    private var isAmountCryptoLastEdited = true
 
     init {
         setNavigator(navigator)
@@ -69,7 +72,7 @@ constructor(navigator: IMainNavigator,
             addressError.set("")
             checkSendButtonAvailable()
         }
-        amount.addOnPropertyChanged { checkSendButtonAvailable() }
+        amountCrypto.addOnPropertyChanged { checkSendButtonAvailable() }
         amountFiat.addOnPropertyChanged { checkSendButtonAvailable() }
         seekBarFeePosition.addOnPropertyChanged {
             if (fees.isNotEmpty()) {
@@ -88,11 +91,16 @@ constructor(navigator: IMainNavigator,
     }
 
     fun onAccountSelected(position: Int) {
+        hideKeyboard()
         currentPosition = position
 
         fees = ArrayList()
         feesSize.set(0)
         validateAddress()
+        if (isAmountCryptoLastEdited)
+            calculateAmountFiat()
+        else
+            calculateAmountCrypto()
     }
 
     fun onSendButtonClicked() {
@@ -104,9 +112,10 @@ constructor(navigator: IMainNavigator,
     }
 
     fun onQrCodeScanned(blockchainAddress: String) {
-        if (isAddressValid(blockchainAddress, accounts[currentPosition].currency))
+        if (isAddressValid(blockchainAddress, accounts[currentPosition].currency)) {
             address.set(blockchainAddress)
-        else
+            requestFees(blockchainAddress)
+        } else
             showInvalidAddressError.trigger()
     }
 
@@ -123,6 +132,25 @@ constructor(navigator: IMainNavigator,
         }
     }
 
+    fun calculateAmountCrypto() {
+        isAmountCryptoLastEdited = false
+        if (currencyConverter == null || amountFiat.get().isEmpty() || amountFiat.get() == ".")
+            amountCrypto.set("")
+        else
+            amountCrypto.set(currencyConverter?.convertBalance(amountFiat.get(), Currency.USD, accounts[currentPosition].currency)
+                    ?: "")
+    }
+
+    fun calculateAmountFiat() {
+        isAmountCryptoLastEdited = true
+        if (currencyConverter == null || amountCrypto.get().isEmpty() || amountCrypto.get() == ".")
+            amountFiat.set("")
+        else
+            amountFiat.set(currencyConverter?.convertBalance(amountCrypto.get(), accounts[currentPosition].currency, Currency.USD)
+                    ?: "")
+    }
+
+    @SuppressLint("CheckResult")
     private fun requestFees(address: String) {
         val email = appData.currentUserEmail
         val token = appData.token
@@ -145,13 +173,14 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun checkSendButtonAvailable() {
-        if (address.get().isNotEmpty() && amount.get().isNotEmpty() && amountFiat.get().isNotEmpty())
+        if (address.get().isNotEmpty() && amountCrypto.get().isNotEmpty() && amountFiat.get().isNotEmpty())
             sendButtonEnabled.set(true)
         else
             sendButtonEnabled.set(false)
     }
 
     private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
+        currencyConverter = CurrencyConverter(rates)
         val mapper = AccountMapper(CurrencyConverter(rates))
         if (accounts.isNotEmpty() && rates.isNotEmpty()) {
             this.accounts = ArrayList()

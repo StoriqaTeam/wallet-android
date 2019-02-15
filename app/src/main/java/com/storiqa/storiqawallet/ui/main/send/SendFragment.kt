@@ -15,6 +15,7 @@ import com.storiqa.storiqawallet.databinding.FragmentSendBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
 import com.storiqa.storiqawallet.ui.common.SpacesWatcher
+import com.storiqa.storiqawallet.ui.common.addUserInputListener
 import com.storiqa.storiqawallet.ui.main.account.AccountPagerAdapter
 import com.storiqa.storiqawallet.utils.convertDpToPx
 
@@ -70,6 +71,9 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
             }
             addTextChangedListener(SpacesWatcher(binding.etAddress))
         }
+
+        binding.etAmountCrypto.addUserInputListener(viewModel::calculateAmountFiat)
+        binding.etAmountFiat.addUserInputListener(viewModel::calculateAmountCrypto)
     }
 
     private fun subscribeEvents() {
