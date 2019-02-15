@@ -2,19 +2,13 @@ package com.storiqa.storiqawallet.ui.main.receive
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
-import com.facebook.FacebookSdk.getCacheDir
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
@@ -24,9 +18,7 @@ import com.storiqa.storiqawallet.ui.base.BaseFragment
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
 import com.storiqa.storiqawallet.ui.main.account.AccountPagerAdapter
 import com.storiqa.storiqawallet.utils.convertDpToPx
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
+import com.storiqa.storiqawallet.utils.shareImage
 
 
 class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>() {
@@ -57,7 +49,7 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
     }
 
     private fun initView() {
-        (activity as IBaseActivity).setupActionBar(binding.toolbar, "")
+        (activity as IBaseActivity).setupActionBar(binding.toolbar)
 
         if (isRestoring) {
             initAccountsPager(viewModel.accounts)
@@ -75,27 +67,8 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
         })
 
         viewModel.shareQrCode.observe(this, Observer {
-            val imagesFolder = File(getCacheDir(), "images")
-            var uri: Uri? = null
-            try {
-                imagesFolder.mkdirs()
-                val file = File(imagesFolder, "shared_image.png")
-
-                val stream = FileOutputStream(file)
-                it.compress(Bitmap.CompressFormat.PNG, 90, stream)
-                stream.flush()
-                stream.close()
-                uri = FileProvider.getUriForFile(context!!, "com.mydomain.fileprovider", file)
-
-            } catch (e: IOException) {
-                Log.d("TAGGG", "IOException while trying to write file for sharing: " + e.message)
-            }
-
-            val intent = Intent(android.content.Intent.ACTION_SEND)
-            intent.putExtra(Intent.EXTRA_STREAM, uri)
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            intent.type = "image/png"
-            startActivity(intent)
+            val ctx = context ?: return@Observer
+            shareImage(ctx, it)
         })
 
         viewModel.copyToClipboard.observe(this, Observer(::copyToClipboard))
@@ -111,12 +84,10 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
             setCurrentItem(viewModel.currentPosition, false)
             addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
                 override fun onPageSelected(position: Int) {
-                    binding.toolbar.title = accounts[position].name
                     viewModel.onAccountSelected(position)
                 }
             })
         }
-        binding.toolbar.title = accounts[viewModel.currentPosition].name
         viewModel.onAccountSelected(viewModel.currentPosition)
     }
 

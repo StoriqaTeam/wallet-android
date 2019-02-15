@@ -40,6 +40,5 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, IMainNavig
         bottomNavigation.accentColor = resources.getColor(R.color.bottom_navigation_icon_selected)
         bottomNavigation.inactiveColor = resources.getColor(R.color.bottom_navigation_icon_unselected)
         bottomNavigation.setTitleTypeface(ResourcesCompat.getFont(this, R.font.montserrat_medium))
-
     }
 }

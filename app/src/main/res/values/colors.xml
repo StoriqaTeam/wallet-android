@@ -54,4 +54,6 @@
     <color name="tab_selected_text">#ffffff</color>
     <color name="tab_unselected_text">#8c8c8c</color>
 
+    <color name="error">#f5515f</color>
+
 </resources>

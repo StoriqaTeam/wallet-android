@@ -11,7 +11,7 @@ data class Account(
         val balanceFormatted: String,
         val balanceFiat: String,
         val background: Int,
-        val currency: String,
+        val currency: Currency,
         val currencyIcon: Int,
         val accountAddress: String,
         val name: String) : Parcelable

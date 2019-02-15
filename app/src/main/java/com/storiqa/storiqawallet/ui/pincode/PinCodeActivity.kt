@@ -1,12 +1,12 @@
 package com.storiqa.storiqawallet.ui.pincode
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.databinding.ActivityPinCodeBinding
 import com.storiqa.storiqawallet.ui.base.BaseActivity
+
 
 class PinCodeActivity : BaseActivity<ActivityPinCodeBinding, PinCodeViewModel, IPinCodeNavigator>() {
 
@@ -28,7 +28,8 @@ class PinCodeActivity : BaseActivity<ActivityPinCodeBinding, PinCodeViewModel, I
 
         viewModel.showPinError.observe(this, Observer {
             //todo show wrong pin error
-            Toast.makeText(this, "Wrong pin", Toast.LENGTH_SHORT).show()
+            binding.pinIndicator.startErrorAnimation()
+            //Toast.makeText(this, "Wrong pin", Toast.LENGTH_SHORT).show()
         })
     }
 

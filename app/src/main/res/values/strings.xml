@@ -18,6 +18,9 @@
     <string name="error_bad_request">Bad request</string>
     <string name="error_server_error">Server error</string>
     <string name="error_unknown_error">Unknown error</string>
+    <string name="error_address_not_valid">Address not valid</string>
+    <string name="error_not_enough_money">Not enough money</string>
+    <string name="error_different_address">Different address</string>
 
     <string name="dialog_no_internet_title">No internet</string>
     <string name="dialog_no_internet_description">No internet description</string>
@@ -65,12 +68,16 @@
     <string name="button_sign_in_facebook">via Facebook</string>
     <string name="button_sign_in_google">via Google</string>
     <string name="button_all_transactions">See all transactions</string>
+    <string name="button_send">Send</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_repeat_password">Repeat password</string>
     <string name="hint_first_name">First name</string>
     <string name="hint_last_name">Last name</string>
+    <string name="hint_address">Recipient`s address</string>
+    <string name="hint_amount">Amount</string>
+    <string name="hint_amount_fiat">Amount in fiat</string>
 
     <string name="menu_wallet">Wallet</string>
     <string name="menu_send">Send</string>
@@ -113,10 +120,19 @@
     <string name="text_transaction_received">Transaction received</string>
     <string name="text_pending">Pending</string>
     <string name="text_your_address">Your address</string>
+    <string name="text_scan">Scan a barcode</string>
+    <string name="text_fee">Fee</string>
+    <string name="text_low">Low</string>
+    <string name="text_high">High</string>
+    <string name="text_hours">h</string>
+    <string name="text_minutes">min</string>
+    <string name="text_seconds">sec</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
     <string name="toolbar_transactions">Transactions</string>
     <string name="toolbar_accounts">Accounts</string>
+    <string name="toolbar_send">Send</string>
+    <string name="toolbar_receive">Receive</string>
 
     <string name="preferences_change_password">Change password</string>
     <string name="preferences_edit_profile">Edit profile</string>
@@ -127,5 +143,6 @@
     <string name="transaction_type_received">Received</string>
 
     <string name="toast_address_copied">Address copied to clipboard</string>
+    <string name="toast_address_invalid">Not valid address</string>
 
 </resources>

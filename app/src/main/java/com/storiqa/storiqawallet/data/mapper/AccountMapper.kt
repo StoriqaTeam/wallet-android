@@ -20,7 +20,7 @@ class AccountMapper(private val currencyConverter: ICurrencyConverter) : IAccoun
                 balanceFormatted,
                 balanceFiatFormatted,
                 currency.getCardBackground(),
-                account.currency.currencyISO,
+                account.currency,
                 currency.getCurrencyIcon(),
                 account.accountAddress,
                 account.name)

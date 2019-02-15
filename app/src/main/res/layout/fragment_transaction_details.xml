@@ -44,7 +44,7 @@
             tools:srcCompat="@drawable/ic_receive" />
 
         <TextView
-            android:id="@+id/tvAmount"
+            android:id="@+id/tvFeeAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -66,7 +66,7 @@
             android:text="@{viewModel.fiat}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAmount"
+            app:layout_constraintTop_toBottomOf="@+id/tvFeeAmount"
             tools:text="~$2.84" />
 
         <TextView

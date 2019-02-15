@@ -9,7 +9,6 @@ import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
@@ -60,7 +59,7 @@ constructor(navigator: IMainNavigator,
                     updateAccounts()
                 }
 
-        ShortPolling(accountsRepository, ratesRepository).start(userData.id, userData.email)
+        //ShortPolling(accountsRepository, ratesRepository).start(userData.id, userData.email)
 
     }
 

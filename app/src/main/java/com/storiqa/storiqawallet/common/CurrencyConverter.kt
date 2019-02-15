@@ -19,11 +19,38 @@ class CurrencyConverter(private val rates: List<RateEntity>,
         }
         val amountFiat = BigDecimal(amountCrypto)
                 .movePointLeft(currencyCrypto.getSignificantDigits())
-                .setScale(currencyCrypto.getSignificantDigits(), RoundingMode.HALF_UP)
+                .setScale(currencyCrypto.getSignificantDigits(), RoundingMode.HALF_DOWN)
                 .multiply(BigDecimal(coefficient))
                 .toPlainString()
 
         return CurrencyFormatter().getFormattedAmount(amountFiat, currencyFiat)
     }
 
+    override fun convertBalance(amount: String, fromCurrency: Currency, toCurrency: Currency): String {
+        var rate: RateEntity? = null
+        for (r in rates) {
+            if ((r.currencyCrypto == fromCurrency && r.currencyFiat == toCurrency) ||
+                    (r.currencyCrypto == toCurrency && r.currencyFiat == fromCurrency)) {
+                rate = r
+                break
+            }
+        }
+        if (rate == null)
+            throw Exception("Not found rate for currencies: $fromCurrency and $toCurrency")
+
+        var amountConverted = BigDecimal(amount)
+        if (rate.currencyCrypto == fromCurrency)
+            amountConverted = amountConverted
+                    .multiply(BigDecimal(rate.price))
+                    .setScale(toCurrency.getSignificantDigits(), RoundingMode.HALF_DOWN)
+        else
+            amountConverted = amountConverted.divide(
+                    BigDecimal(rate.price),
+                    toCurrency.getSignificantDigits(),
+                    RoundingMode.HALF_DOWN)
+        return if (amountConverted.compareTo(BigDecimal.ZERO) == 0)
+            BigDecimal.ZERO.toPlainString()
+        else
+            amountConverted.stripTrailingZeros().toPlainString()
+    }
 }

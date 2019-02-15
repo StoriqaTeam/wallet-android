@@ -24,14 +24,14 @@ class CurrencyFormatter : ICurrencyFormatter {
     private fun getFormattedFiat(amount: String): String {
         val floatAmount = amount.replace(",", ".").toFloat()
         val df = DecimalFormat("#.##")
-        df.roundingMode = RoundingMode.CEILING
+        df.roundingMode = RoundingMode.HALF_DOWN
         return df.format(floatAmount)
     }
 
     private fun getFormattedCrypto(amount: String, currency: Currency): String {
         val decimalAmount = BigDecimal(amount)
                 .movePointLeft(currency.getSignificantDigits())
-                .setScale(currency.getSignificantDigits(), RoundingMode.HALF_UP)
+                .setScale(currency.getSignificantDigits(), RoundingMode.HALF_DOWN)
         return if (decimalAmount.compareTo(BigDecimal.ZERO) == 0)
             BigDecimal.ZERO.toPlainString()
         else

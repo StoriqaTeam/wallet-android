@@ -161,12 +161,12 @@ interface WalletApi {
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String): Observable<Response<Any>>
 
-    @GET("v1/fees")
+    @POST("v1/fees")
     fun calculateFee(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Body calculateFeeResponse: CalculateFeeResponse): Observable<Response<Any>>
+            @Body feeRequest: FeeRequest): Observable<FeeResponse>
 
 }

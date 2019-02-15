@@ -130,4 +130,9 @@
         <item name="errorTextAppearance">@style/TextAppearance.Design.Error.Password</item>
     </style>
 
+    <style name="Widget.Design.TextInputLayout.Text">
+        <item name="hintTextAppearance">@style/TextAppearance.Design.Hint.Password</item>
+        <item name="errorTextAppearance">@style/TextAppearance.Design.Error.Password</item>
+    </style>
+
 </resources>

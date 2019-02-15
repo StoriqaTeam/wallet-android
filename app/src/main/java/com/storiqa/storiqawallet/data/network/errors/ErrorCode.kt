@@ -41,6 +41,9 @@ enum class ErrorCode {
     WRONG_DEVICE_ID,
 
     @SerializedName("expired")
-    TOKEN_EXPIRED
+    TOKEN_EXPIRED,
+
+    @SerializedName("currency")
+    DIFFERENT_CURRENCY
 
 }

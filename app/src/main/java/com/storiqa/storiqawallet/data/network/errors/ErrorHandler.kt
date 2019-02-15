@@ -98,6 +98,9 @@ open class ErrorHandler {
 
                     ErrorCode.WRONG_DEVICE_ID ->
                         return WrongDeviceIdDialogPresenter()
+
+                    ErrorCode.DIFFERENT_CURRENCY ->
+                        errorField[field] = R.string.error_different_address
                 }
 
                 errorFields.add(errorField)
