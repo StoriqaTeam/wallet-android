@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.BR
-import com.storiqa.storiqawallet.databinding.DialogMessageBinding
+import com.storiqa.storiqawallet.databinding.DialogSendConfirmationBinding
 import com.storiqa.storiqawallet.di.components.DaggerFragmentComponent
 import com.storiqa.storiqawallet.di.components.FragmentComponent
 import com.storiqa.storiqawallet.di.modules.FragmentModule
@@ -87,14 +87,14 @@ class SendConfirmationDialog : DialogFragment() {
         val args = arguments
         if (args != null) {
             viewModel.initData(
-                    args.getString(MessageDialog.ARGUMENT_TITLE) ?: "",
-                    args.getString(MessageDialog.ARGUMENT_MESSAGE) ?: "",
-                    args.getString(MessageDialog.ARGUMENT_MESSAGE) ?: "",
-                    args.getString(MessageDialog.ARGUMENT_MESSAGE) ?: ""
+                    args.getString(ARGUMENT_ADDRESS) ?: "",
+                    args.getString(ARGUMENT_AMOUNT) ?: "",
+                    args.getString(ARGUMENT_FEE) ?: "",
+                    args.getString(ARGUMENT_TOTAL) ?: ""
             )
         }
 
-        val binding = DialogMessageBinding.inflate(activity!!.layoutInflater)
+        val binding = DialogSendConfirmationBinding.inflate(activity!!.layoutInflater)
         builder.setView(binding.root)
         binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()

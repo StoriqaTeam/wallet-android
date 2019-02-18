@@ -152,7 +152,8 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Observable<Response<Any>>
+            @Header("Authorization") bearer: String,
+            @Body createTransactionRequest: CreateTransactionRequest): Observable<Response<Any>>
 
     @GET("v1/rate")
     fun getExchangeRate(

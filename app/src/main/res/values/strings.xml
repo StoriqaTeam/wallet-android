@@ -133,6 +133,7 @@
     <string name="text_amount">Amount</string>
     <string name="text_transaction_fee">Transaction fee</string>
     <string name="text_total_to_send">Total to send</string>
+    <string name="text_no_fee">Free</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
     <string name="toolbar_transactions">Transactions</string>

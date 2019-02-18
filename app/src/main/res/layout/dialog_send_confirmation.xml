@@ -5,10 +5,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
-        <import type="java.lang.String" />
-
         <variable
             name="viewModel"
             type="com.storiqa.storiqawallet.ui.dialogs.SendConfirmationViewModel" />

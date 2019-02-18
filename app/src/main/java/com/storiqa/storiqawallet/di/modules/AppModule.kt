@@ -18,6 +18,7 @@ import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.preferences.UserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
+import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import com.storiqa.storiqawallet.utils.PrefUtil
@@ -53,8 +54,9 @@ class AppModule(private val app: Application) {
     @Provides
     @PerApplication
     internal fun provideShortPolling(accountRepository: IAccountsRepository,
-                                     ratesRepository: IRatesRepository): IShortPolling {
-        return ShortPolling(accountRepository, ratesRepository)
+                                     ratesRepository: IRatesRepository,
+                                     transactionsRepository: ITransactionsRepository): IShortPolling {
+        return ShortPolling(accountRepository, ratesRepository, transactionsRepository)
     }
 
     @Provides
