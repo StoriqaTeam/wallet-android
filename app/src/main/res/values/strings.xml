@@ -69,6 +69,7 @@
     <string name="button_sign_in_google">via Google</string>
     <string name="button_all_transactions">See all transactions</string>
     <string name="button_send">Send</string>
+    <string name="button_confirm">Confirm</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -127,6 +128,11 @@
     <string name="text_hours">h</string>
     <string name="text_minutes">min</string>
     <string name="text_seconds">sec</string>
+    <string name="text_confirm_sending">Confirm sending</string>
+    <string name="text_address">Address</string>
+    <string name="text_amount">Amount</string>
+    <string name="text_transaction_fee">Transaction fee</string>
+    <string name="text_total_to_send">Total to send</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
     <string name="toolbar_transactions">Transactions</string>

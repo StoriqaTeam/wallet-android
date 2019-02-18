@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="java.lang.String" />
+
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.ui.dialogs.SendConfirmationViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_dialog"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_send" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/TitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/text_confirm_sending" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/RegularText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="start"
+            android:text="@string/text_address" />
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/HighlightedText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.address}"
+            tools:text="0xddb833 . . . . 7511 " />
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/RegularText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/text_amount" />
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/HighlightedText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.amount}"
+            tools:text="10372.22 STQ" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/RegularText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/text_transaction_fee" />
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/HighlightedText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.fee}"
+            tools:text="Free" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/gradient_separator" />
+
+        <TextView
+            android:id="@+id/textView11"
+            style="@style/RegularText"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/text_total_to_send" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@{viewModel.total}"
+            android:textColor="@color/text_highlighted"
+            android:textSize="20sp"
+            tools:text="10402.22 STQ" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/GradientButton"
+            android:layout_marginTop="40dp"
+            android:onClick="@{()->viewModel.onConfirmButtonClicked()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_confirm" />
+
+        <TextView
+            android:id="@+id/btnForgotPin"
+            style="@style/BorderlessButton.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="@{()->viewModel.onCancelButtonClicked()}"
+            android:text="@string/button_cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+</layout>
