@@ -78,9 +78,6 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<*>> : Fragme
                 })
 
         viewModel.hideKeyboard.observe(this, Observer { getBaseActivity()?.hideKeyboard() })
-
-        viewModel.showMessageDialog.observe(this,
-                Observer { getBaseActivity()?.showErrorDialog(it!!) })
     }
 
     private fun performDataBinding(inflater: LayoutInflater, container: ViewGroup?) {

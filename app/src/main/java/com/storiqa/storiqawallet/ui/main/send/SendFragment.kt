@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
@@ -87,6 +88,10 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
 
         viewModel.showInvalidAddressError.observe(this, Observer {
             Toast.makeText(context, getText(R.string.toast_address_invalid), Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.showSuccessMessage.observe(this, Observer {
+            Snackbar.make(binding.toolbar, "Transaction successfully sent", Snackbar.LENGTH_LONG).show()
         })
     }
 

@@ -49,7 +49,7 @@ constructor(private val walletApi: WalletApi,
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     hideLoadingDialog()
-                    showMessageDialog(DeviceAttachedDialogPresenter())
+                    showErrorDialog(DeviceAttachedDialogPresenter())
                 }, {
                     handleError(it as Exception)
                 })

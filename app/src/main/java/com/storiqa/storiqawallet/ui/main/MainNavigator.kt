@@ -3,7 +3,9 @@ package com.storiqa.storiqawallet.ui.main
 import android.os.Bundle
 import android.view.View
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.ui.base.navigator.BaseNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
+import com.storiqa.storiqawallet.ui.dialogs.SendConfirmationDialog
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
 import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsFragment
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment
@@ -13,7 +15,7 @@ import com.storiqa.storiqawallet.ui.main.send.SendFragment
 import com.storiqa.storiqawallet.ui.main.transactions.TransactionsFragment
 import com.storiqa.storiqawallet.ui.main.wallet.WalletFragment
 
-class MainNavigator(private val navigator: INavigator) : IMainNavigator {
+class MainNavigator(private val navigator: INavigator) : BaseNavigator(navigator), IMainNavigator {
 
     private val containerId = R.id.container
 
@@ -58,5 +60,11 @@ class MainNavigator(private val navigator: INavigator) : IMainNavigator {
         bundle.putString(TransactionDetailsFragment.KEY_TRANSACTION_ID, transactionId)
         fragment.arguments = bundle
         navigator.replaceFragmentAndAddToBackStack(containerId, fragment, "details", "details")
+    }
+
+    override fun showSendConfirmationDialog(address: String, amount: String, fee: String, total: String, onConfirm: () -> Unit) {
+        val dialog = SendConfirmationDialog.newInstance(address, amount, fee, total)
+        dialog.setConfirmClickedListener(onConfirm)
+        navigator.showDialogFragment(dialog)
     }
 }

@@ -22,4 +22,6 @@ interface IMainNavigator : IBaseNavigator {
 
     fun showTransactionDetailsFragment(address: String, transactionId: String)
 
+    fun showSendConfirmationDialog(address: String, amount: String, fee: String, total: String, onConfirm: () -> Unit)
+
 }

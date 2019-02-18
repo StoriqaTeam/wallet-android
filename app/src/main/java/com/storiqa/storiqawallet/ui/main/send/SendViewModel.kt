@@ -13,6 +13,7 @@ import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.model.Currency
 import com.storiqa.storiqawallet.data.network.WalletApi
 import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterFields
+import com.storiqa.storiqawallet.data.network.requests.CreateTransactionRequest
 import com.storiqa.storiqawallet.data.network.requests.FeeRequest
 import com.storiqa.storiqawallet.data.network.responses.Fee
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
@@ -29,6 +30,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import java.math.BigDecimal
+import java.util.*
 import javax.inject.Inject
 
 class SendViewModel
@@ -45,6 +47,7 @@ constructor(navigator: IMainNavigator,
     val updateAccounts = SingleLiveEvent<List<Account>>()
     val scanQrCode = SingleLiveEvent<Boolean>()
     val showInvalidAddressError = SingleLiveEvent<Boolean>()
+    val showSuccessMessage = SingleLiveEvent<Boolean>()
 
     var currentPosition = 0
 
@@ -67,6 +70,7 @@ constructor(navigator: IMainNavigator,
     private var fees: List<Fee> = ArrayList()
     private lateinit var feeCurrency: Currency
     private var isAmountCryptoLastEdited = true
+    private var total = ""
 
     init {
         setNavigator(navigator)
@@ -123,7 +127,14 @@ constructor(navigator: IMainNavigator,
     }
 
     fun onSendButtonClicked() {
-
+        hideKeyboard()
+        getNavigator()?.showSendConfirmationDialog(
+                address.get(),
+                amountCrypto.get(),
+                feeAmount.get(),
+                total,
+                ::sendTransactionRequest
+        )
     }
 
     fun onScanButtonClick() {
@@ -172,6 +183,40 @@ constructor(navigator: IMainNavigator,
     }
 
     @SuppressLint("CheckResult")
+    private fun sendTransactionRequest() {
+        showLoadingDialog()
+        val email = appData.currentUserEmail
+        val token = appData.token
+        val signHeader = signUtil.createSignHeader(email)
+        val currency = accounts[currentPosition].currency
+        val request = CreateTransactionRequest(
+                UUID.randomUUID().toString(),
+                userData.id,
+                accounts[currentPosition].id,
+                address.get().removePrefix("0x"),
+                "address",
+                currency.currencyISO.toLowerCase(),
+                currencyFormatter.getStringAmount(amountCrypto.get(), currency),
+                currency.currencyISO.toLowerCase(),
+                amountFiat.get(),
+                Currency.USD.currencyISO.toLowerCase(),
+                currencyFormatter.getStringAmount(fees[seekBarFeePosition.get()].value, currency)
+
+        )
+        walletApi
+                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    hideLoadingDialog()
+                    showSuccessMessage.trigger()
+                }, {
+                    hideLoadingDialog()
+                    handleError(it as Exception)
+                })
+    }
+
+    @SuppressLint("CheckResult")
     private fun requestFees(address: String) {
         val email = appData.currentUserEmail
         val token = appData.token
@@ -201,7 +246,9 @@ constructor(navigator: IMainNavigator,
 
     private fun checkSendButtonAvailable() {
         if (address.get().isNotEmpty() && addressError.get().isEmpty() && fees.isNotEmpty()
-                && amountCrypto.get().isNotEmpty() && amountFiat.get().isNotEmpty()) {
+                && amountCrypto.get().isNotEmpty() && amountFiat.get().isNotEmpty()
+                && amountCrypto.get() != "." && amountFiat.get() != "."
+                && BigDecimal(amountCrypto.get()).compareTo(BigDecimal.ZERO) != 0) {
             if (isEnoughMoneyForSend()) {
                 sendButtonEnabled.set(true)
                 isNotEnough.set(false)
@@ -230,6 +277,7 @@ constructor(navigator: IMainNavigator,
         val amountDecimal = BigDecimal(amountCrypto.get())
         val balanceDecimal = BigDecimal(accounts[currentPosition].balance)
                 .movePointLeft(accounts[currentPosition].currency.getSignificantDigits())
+        total = "${feeDecimal + amountDecimal} ${accounts[currentPosition].currency.getSymbol()}"
         return feeDecimal + amountDecimal <= balanceDecimal
     }
 }

@@ -1,6 +1,8 @@
 package com.storiqa.storiqawallet.ui.base
 
 import androidx.lifecycle.ViewModel
+import com.storiqa.storiqawallet.App
+import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.data.network.errors.DialogType
 import com.storiqa.storiqawallet.data.network.errors.ErrorHandler
@@ -13,7 +15,6 @@ abstract class BaseViewModel<N : IBaseNavigator> : ViewModel() {
 
     val hideKeyboard = SingleLiveEvent<Void>()
     val showLoadingDialog = SingleLiveEvent<Boolean>()
-    val showMessageDialog = SingleLiveEvent<ErrorPresenterDialog>()
 
     private val errorHandler = ErrorHandler()
 
@@ -47,13 +48,17 @@ abstract class BaseViewModel<N : IBaseNavigator> : ViewModel() {
         return refNavigator?.get()
     }
 
-    fun showMessageDialog(errorPresenter: ErrorPresenterDialog) {
-        showMessageDialog.value = errorPresenter.apply {
-            positiveButton?.onClick =
-                    getDialogPositiveButtonClicked(errorPresenter.dialogType, errorPresenter.params)
-            negativeButton?.onClick =
-                    getDialogNegativeButtonClicked(errorPresenter.dialogType)
-        }
+    fun showErrorDialog(errorPresenter: ErrorPresenterDialog) {
+        val negativeButtonName = errorPresenter.negativeButton?.name
+        getNavigator()?.showMessageDialog(
+                App.res.getString(errorPresenter.title),
+                App.res.getString(errorPresenter.description),
+                errorPresenter.icon,
+                App.res.getString(errorPresenter.positiveButton?.name ?: R.string.button_ok),
+                getDialogPositiveButtonClicked(errorPresenter.dialogType, errorPresenter.params),
+                if (negativeButtonName != null) App.res.getString(negativeButtonName) else null,
+                getDialogNegativeButtonClicked(errorPresenter.dialogType))
+
     }
 
     open fun showErrorFields(errorPresenter: ErrorPresenterFields) {
@@ -68,7 +73,7 @@ abstract class BaseViewModel<N : IBaseNavigator> : ViewModel() {
         when (errorPresenter) {
             is ErrorPresenterFields -> showErrorFields(errorPresenter)
             is ErrorPresenterDialog -> {
-                showMessageDialog(errorPresenter)
+                showErrorDialog(errorPresenter)
             }
         }
     }

@@ -21,6 +21,10 @@ class CurrencyFormatter : ICurrencyFormatter {
         }
     }
 
+    override fun getStringAmount(formattedAmount: String, currency: Currency): String {
+        return BigDecimal(formattedAmount).movePointRight(currency.getSignificantDigits()).toPlainString()
+    }
+
     private fun getFormattedFiat(amount: String): String {
         val floatAmount = amount.replace(",", ".").toFloat()
         val df = DecimalFormat("#.##")

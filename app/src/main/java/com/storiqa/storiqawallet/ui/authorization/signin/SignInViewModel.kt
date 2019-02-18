@@ -195,7 +195,7 @@ constructor(navigator: IAuthorizationNavigator,
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     hideLoadingDialog()
-                    showMessageDialog(RegistrationMailSentDialogPresenter())
+                    showErrorDialog(RegistrationMailSentDialogPresenter())
                 }, {
                     handleError(it as Exception)
                 })
@@ -206,7 +206,7 @@ constructor(navigator: IAuthorizationNavigator,
         showLoadingDialog()
 
         val signHeader = signUtil.createSignHeader(email.get().toLowerCase())
-        val userId = params?.get("user_id")?.toInt()
+        val userId = params?.get("user_id")?.toLong()
                 ?: throw Exception("Not found id in params")
 
         val addDeviceRequest = AddDeviceRequest(userId, appData.deviceOs,
@@ -219,7 +219,7 @@ constructor(navigator: IAuthorizationNavigator,
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     hideLoadingDialog()
-                    showMessageDialog(AttachDeviceMailSentDialogPresenter())
+                    showErrorDialog(AttachDeviceMailSentDialogPresenter())
                 }, {
                     handleError(it as Exception)
                 })

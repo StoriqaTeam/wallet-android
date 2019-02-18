@@ -9,10 +9,12 @@ import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
+import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
+import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
@@ -24,6 +26,7 @@ class WalletViewModel
 constructor(navigator: IMainNavigator,
             private val accountsRepository: IAccountsRepository,
             private val ratesRepository: IRatesRepository,
+            private val transactionsRepository: ITransactionsRepository,
             private val userData: IUserDataStorage,
             private val appData: IAppDataStorage,
             private val tokenProvider: ITokenProvider) : BaseViewModel<IMainNavigator>() {
@@ -59,7 +62,7 @@ constructor(navigator: IMainNavigator,
                     updateAccounts()
                 }
 
-        //ShortPolling(accountsRepository, ratesRepository).start(userData.id, userData.email)
+        ShortPolling(accountsRepository, ratesRepository, transactionsRepository).start(userData.id, userData.email)
 
     }
 

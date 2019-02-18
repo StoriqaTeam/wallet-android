@@ -7,30 +7,36 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.BR
-import com.storiqa.storiqawallet.databinding.DialogMessageBinding
+import com.storiqa.storiqawallet.databinding.DialogSendConfirmationBinding
 import com.storiqa.storiqawallet.di.components.DaggerFragmentComponent
 import com.storiqa.storiqawallet.di.components.FragmentComponent
 import com.storiqa.storiqawallet.di.modules.FragmentModule
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
 import javax.inject.Inject
 
-class MessageDialog : DialogFragment() {
+class SendConfirmationDialog : DialogFragment() {
 
     companion object {
-        const val ARGUMENT_TITLE = "argument_title"
-        const val ARGUMENT_MESSAGE = "argument_message"
-        const val ARGUMENT_ICON = "argument_icon"
-        const val ARGUMENT_POSITIVE_BUTTON = "positive_button"
-        const val ARGUMENT_NEGATIVE_BUTTON = "negative_button"
+        const val ARGUMENT_ADDRESS = "argument_address"
+        const val ARGUMENT_AMOUNT = "argument_amount"
+        const val ARGUMENT_FEE = "argument_fee"
+        const val ARGUMENT_TOTAL = "argument_total"
 
         @JvmStatic
-        fun newInstance(title: String, description: String, iconRes: Int) = MessageDialog().apply {
-            arguments = Bundle().apply {
-                putString(ARGUMENT_TITLE, title)
-                putString(ARGUMENT_MESSAGE, description)
-                putInt(ARGUMENT_ICON, iconRes)
+        fun newInstance(
+                address: String,
+                amount: String,
+                fee: String,
+                total: String
+        ): SendConfirmationDialog {
+            return SendConfirmationDialog().apply {
+                arguments = Bundle().apply {
+                    putString(ARGUMENT_ADDRESS, address)
+                    putString(ARGUMENT_AMOUNT, amount)
+                    putString(ARGUMENT_FEE, fee)
+                    putString(ARGUMENT_TOTAL, total)
+                }
             }
         }
     }
@@ -38,10 +44,9 @@ class MessageDialog : DialogFragment() {
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var viewModel: MessageViewModel
+    private lateinit var viewModel: SendConfirmationViewModel
 
     private lateinit var onPositiveClick: () -> Unit
-    private var onNegativeClick: (() -> Unit)? = null
 
     internal val fragmentComponent: FragmentComponent by lazy {
         DaggerFragmentComponent.builder()
@@ -55,7 +60,7 @@ class MessageDialog : DialogFragment() {
         try {
             FragmentComponent::class.java.getDeclaredMethod("inject", this::class.java)
                     .invoke(fragmentComponent, this)
-            viewModel = ViewModelProviders.of(this, viewModelFactory).get(MessageViewModel::class.java)
+            viewModel = ViewModelProviders.of(this, viewModelFactory).get(SendConfirmationViewModel::class.java)
         } catch (e: NoSuchMethodException) {
             throw NoSuchMethodException("You forgot to add \"fun inject(fragment: " +
                     "${this::class.java.simpleName})\" in FragmentComponent")
@@ -66,14 +71,13 @@ class MessageDialog : DialogFragment() {
     }
 
     private fun subscribeEvents() {
-        viewModel.positiveButtonClicked.observe(this, Observer {
+        viewModel.confirmButtonClicked.observe(this, Observer {
             dismiss()
-            onPositiveClick.invoke()
+            onPositiveClick()
         })
 
-        viewModel.negativeButtonClicked.observe(this, Observer {
+        viewModel.cancelButtonClicked.observe(this, Observer {
             dismiss()
-            onNegativeClick?.invoke()
         })
     }
 
@@ -82,19 +86,15 @@ class MessageDialog : DialogFragment() {
 
         val args = arguments
         if (args != null) {
-            val btnNegativeText = if (onNegativeClick == null) null else
-                args.getString(ARGUMENT_NEGATIVE_BUTTON)
-
             viewModel.initData(
-                    args.getString(ARGUMENT_TITLE) ?: "",
-                    args.getString(ARGUMENT_MESSAGE) ?: "",
-                    App.res.getDrawable(args.getInt(ARGUMENT_ICON)),
-                    args.getString(ARGUMENT_POSITIVE_BUTTON) ?: "",
-                    btnNegativeText
+                    args.getString(ARGUMENT_ADDRESS) ?: "",
+                    args.getString(ARGUMENT_AMOUNT) ?: "",
+                    args.getString(ARGUMENT_FEE) ?: "",
+                    args.getString(ARGUMENT_TOTAL) ?: ""
             )
         }
 
-        val binding = DialogMessageBinding.inflate(activity!!.layoutInflater)
+        val binding = DialogSendConfirmationBinding.inflate(activity!!.layoutInflater)
         builder.setView(binding.root)
         binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()
@@ -102,14 +102,7 @@ class MessageDialog : DialogFragment() {
         return builder.create()
     }
 
-    fun setPositiveButton(name: String, onClick: () -> Unit) {
-        arguments?.putString(ARGUMENT_POSITIVE_BUTTON, name)
+    fun setConfirmClickedListener(onClick: () -> Unit) {
         onPositiveClick = onClick
-    }
-
-    fun setNegativeButton(name: String, onClick: () -> Unit) {
-        arguments?.putString(ARGUMENT_NEGATIVE_BUTTON, name)
-        onNegativeClick = onClick
-
     }
 }

@@ -7,7 +7,7 @@ enum class ErrorCode {
     @SerializedName("not_valid")
     INVALID_EMAIL,
 
-    @SerializedName("not_exists")
+    @SerializedName("not_exists", alternate = ["email"])
     NOT_EXISTS,
 
     @SerializedName("blocked")
