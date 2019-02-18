@@ -4,13 +4,15 @@ import android.os.Bundle
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.ui.authorization.signin.SignInFragment
 import com.storiqa.storiqawallet.ui.authorization.signup.SignUpFragment
+import com.storiqa.storiqawallet.ui.base.navigator.BaseNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.password.PasswordRecoveryActivity
 import com.storiqa.storiqawallet.ui.question.QUESTION_TYPE
 import com.storiqa.storiqawallet.ui.question.QuestionActivity
 import com.storiqa.storiqawallet.ui.question.QuestionType
 
-class AuthorizationNavigator(private val navigator: INavigator) : IAuthorizationNavigator {
+class AuthorizationNavigator(private val navigator: INavigator) : BaseNavigator(navigator),
+        IAuthorizationNavigator {
 
     private val containerId = R.id.container
 

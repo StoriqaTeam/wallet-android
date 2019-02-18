@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.ui.main
 import android.os.Bundle
 import android.view.View
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.ui.base.navigator.BaseNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.dialogs.SendConfirmationDialog
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
@@ -14,7 +15,7 @@ import com.storiqa.storiqawallet.ui.main.send.SendFragment
 import com.storiqa.storiqawallet.ui.main.transactions.TransactionsFragment
 import com.storiqa.storiqawallet.ui.main.wallet.WalletFragment
 
-class MainNavigator(private val navigator: INavigator) : IMainNavigator {
+class MainNavigator(private val navigator: INavigator) : BaseNavigator(navigator), IMainNavigator {
 
     private val containerId = R.id.container
 

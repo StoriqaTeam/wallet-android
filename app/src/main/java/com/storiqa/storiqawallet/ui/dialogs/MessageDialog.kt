@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.BR
-import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.databinding.DialogMessageBinding
 import com.storiqa.storiqawallet.di.components.DaggerFragmentComponent
 import com.storiqa.storiqawallet.di.components.FragmentComponent
@@ -27,11 +26,11 @@ class MessageDialog : DialogFragment() {
         const val ARGUMENT_NEGATIVE_BUTTON = "negative_button"
 
         @JvmStatic
-        fun newInstance(error: ErrorPresenterDialog) = MessageDialog().apply {
+        fun newInstance(title: String, description: String, iconRes: Int) = MessageDialog().apply {
             arguments = Bundle().apply {
-                putInt(ARGUMENT_TITLE, error.title)
-                putInt(ARGUMENT_MESSAGE, error.description)
-                putInt(ARGUMENT_ICON, error.icon)
+                putString(ARGUMENT_TITLE, title)
+                putString(ARGUMENT_MESSAGE, description)
+                putInt(ARGUMENT_ICON, iconRes)
             }
         }
     }
@@ -69,7 +68,7 @@ class MessageDialog : DialogFragment() {
     private fun subscribeEvents() {
         viewModel.positiveButtonClicked.observe(this, Observer {
             dismiss()
-            onPositiveClick()
+            onPositiveClick.invoke()
         })
 
         viewModel.negativeButtonClicked.observe(this, Observer {
@@ -84,13 +83,13 @@ class MessageDialog : DialogFragment() {
         val args = arguments
         if (args != null) {
             val btnNegativeText = if (onNegativeClick == null) null else
-                App.res.getString(args.getInt(ARGUMENT_NEGATIVE_BUTTON))
+                args.getString(ARGUMENT_NEGATIVE_BUTTON)
 
             viewModel.initData(
-                    App.res.getString(args.getInt(ARGUMENT_TITLE)),
-                    App.res.getString(args.getInt(ARGUMENT_MESSAGE)),
+                    args.getString(ARGUMENT_TITLE) ?: "",
+                    args.getString(ARGUMENT_MESSAGE) ?: "",
                     App.res.getDrawable(args.getInt(ARGUMENT_ICON)),
-                    App.res.getString(args.getInt(ARGUMENT_POSITIVE_BUTTON)),
+                    args.getString(ARGUMENT_POSITIVE_BUTTON) ?: "",
                     btnNegativeText
             )
         }
@@ -103,13 +102,13 @@ class MessageDialog : DialogFragment() {
         return builder.create()
     }
 
-    fun setPositiveButton(name: Int, onClick: () -> Unit) {
-        arguments?.putInt(ARGUMENT_POSITIVE_BUTTON, name)
+    fun setPositiveButton(name: String, onClick: () -> Unit) {
+        arguments?.putString(ARGUMENT_POSITIVE_BUTTON, name)
         onPositiveClick = onClick
     }
 
-    fun setNegativeButton(name: Int, onClick: () -> Unit) {
-        arguments?.putInt(ARGUMENT_NEGATIVE_BUTTON, name)
+    fun setNegativeButton(name: String, onClick: () -> Unit) {
+        arguments?.putString(ARGUMENT_NEGATIVE_BUTTON, name)
         onNegativeClick = onClick
 
     }

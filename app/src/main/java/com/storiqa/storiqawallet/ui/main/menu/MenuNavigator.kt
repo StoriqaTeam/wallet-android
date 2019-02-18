@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.ui.main.menu
 
 import android.util.Log
+import com.storiqa.storiqawallet.ui.base.navigator.BaseNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 
@@ -12,7 +13,7 @@ interface IMenuNavigator : IBaseNavigator {
 }
 
 
-class MenuNavigator(private val navigator: INavigator) : IMenuNavigator {
+class MenuNavigator(private val navigator: INavigator) : BaseNavigator(navigator), IMenuNavigator {
 
     override fun showEditProfile() {
         Log.d("MenuNavigator", "showEditProfile")

@@ -19,13 +19,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterDialog
 import com.storiqa.storiqawallet.di.components.ActivityComponent
 import com.storiqa.storiqawallet.di.components.DaggerActivityComponent
 import com.storiqa.storiqawallet.di.modules.ActivityModule
 import com.storiqa.storiqawallet.di.modules.NavigatorModule
 import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
-import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
 import javax.inject.Inject
 
 abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBaseNavigator> : AppCompatActivity(), IBaseActivity {
@@ -86,18 +84,6 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
         viewModel.onViewStopped()
     }
 
-    override fun showErrorDialog(error: ErrorPresenterDialog) {
-        val messageDialog = MessageDialog.newInstance(error).apply {
-            setPositiveButton(error.positiveButton?.name ?: R.string.button_ok,
-                    error.positiveButton?.onClick ?: {})
-            val negativeButton = error.negativeButton
-            if (negativeButton != null)
-                setNegativeButton(negativeButton.name, negativeButton.onClick)
-
-            show(supportFragmentManager, "error dialog")
-        }
-    }
-
     override fun showLoadingDialog() {
         if (loadingDialog != null && loadingDialog?.isShowing!!)
             return
@@ -146,8 +132,6 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
                 Observer { if (it != null && it) showLoadingDialog() else hideLoadingDialog() })
 
         viewModel.hideKeyboard.observe(this, Observer { hideKeyboard() })
-
-        viewModel.showMessageDialog.observe(this, Observer { showErrorDialog(it!!) })
     }
 
     private fun performDataBinding() {

@@ -47,6 +47,7 @@ constructor(navigator: IMainNavigator,
     val updateAccounts = SingleLiveEvent<List<Account>>()
     val scanQrCode = SingleLiveEvent<Boolean>()
     val showInvalidAddressError = SingleLiveEvent<Boolean>()
+    val showSuccessMessage = SingleLiveEvent<Boolean>()
 
     var currentPosition = 0
 
@@ -208,6 +209,7 @@ constructor(navigator: IMainNavigator,
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     hideLoadingDialog()
+                    showSuccessMessage.trigger()
                 }, {
                     hideLoadingDialog()
                     handleError(it as Exception)
