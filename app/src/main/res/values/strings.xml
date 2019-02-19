@@ -140,6 +140,7 @@
     <string name="toolbar_accounts">Accounts</string>
     <string name="toolbar_send">Send</string>
     <string name="toolbar_receive">Receive</string>
+    <string name="toolbar_exchange">Exchange</string>
 
     <string name="preferences_change_password">Change password</string>
     <string name="preferences_edit_profile">Edit profile</string>

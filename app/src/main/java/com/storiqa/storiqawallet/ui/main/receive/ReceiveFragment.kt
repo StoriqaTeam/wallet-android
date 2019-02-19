@@ -12,10 +12,10 @@ import androidx.viewpager.widget.ViewPager
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.data.model.AccountCardSize
 import com.storiqa.storiqawallet.databinding.FragmentReceiveBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
+import com.storiqa.storiqawallet.ui.main.account.AccountCardSize
 import com.storiqa.storiqawallet.ui.main.account.AccountPagerAdapter
 import com.storiqa.storiqawallet.utils.convertDpToPx
 import com.storiqa.storiqawallet.utils.shareImage

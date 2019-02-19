@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.data.model.AccountCardSize
 
 class AccountPagerAdapter(
         fragment: Fragment,
@@ -19,9 +18,9 @@ class AccountPagerAdapter(
 
     override fun getItem(position: Int): Fragment {
         return when (size) {
-            AccountCardSize.SMALL -> LargeAccountFragment.newInstance(cards[position])
-            AccountCardSize.MEDIUM -> MediumAccountFragment.newInstance(cards[position])
             AccountCardSize.LARGE -> LargeAccountFragment.newInstance(cards[position])
+            AccountCardSize.MEDIUM -> MediumAccountFragment.newInstance(cards[position])
+            AccountCardSize.SMALL -> SmallAccountFragment.newInstance(cards[position])
         }
     }
 

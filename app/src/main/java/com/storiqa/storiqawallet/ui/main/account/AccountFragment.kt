@@ -8,7 +8,6 @@ import androidx.viewpager.widget.ViewPager
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.data.model.AccountCardSize
 import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.databinding.FragmentAccountBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
