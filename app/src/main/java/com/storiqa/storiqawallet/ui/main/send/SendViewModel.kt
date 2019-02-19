@@ -76,7 +76,7 @@ constructor(navigator: IMainNavigator,
         setNavigator(navigator)
 
         address.addOnPropertyChanged {
-            addressError.set("")
+            validateAddress()
             checkSendButtonAvailable()
         }
         amountCrypto.addOnPropertyChanged { checkSendButtonAvailable() }
@@ -142,11 +142,13 @@ constructor(navigator: IMainNavigator,
     }
 
     fun onQrCodeScanned(blockchainAddress: String) {
-        if (isAddressValid(blockchainAddress, accounts[currentPosition].currency)) {
-            address.set(blockchainAddress)
-            requestFees(blockchainAddress)
-        } else
-            showInvalidAddressError.trigger()
+        accounts.forEach {
+            if (isAddressValid(blockchainAddress, it.currency)) {
+                address.set(blockchainAddress)
+                return
+            }
+        }
+        showInvalidAddressError.trigger()
     }
 
     fun validateAddress() {
