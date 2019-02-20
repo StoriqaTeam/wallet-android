@@ -20,17 +20,13 @@ class AccountChooser
 constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
         LinearLayout(context, attrs, defStyleAttr) {
 
-    var onPageSelectedListener: ((Int) -> Unit)? = null
+    private var onPageSelectedListener: ((Int, String) -> Unit)? = null
     var accounts: List<Account> = ArrayList()
         set(value) {
             field = value
-            accountsAdapter.updateAccounts(value)
-            if (initialPosition != -1) {
-                accountsPager.setCurrentItem(initialPosition, false)
-                initialPosition = -1
-            }
+            updateAccounts()
         }
-    private lateinit var accountsAdapter: AccountPagerAdapter
+    private var accountsAdapter: AccountPagerAdapter? = null
     private val size: AccountCardSize
     private val isIndicatorEnable: Boolean
     private var initialPosition = -1
@@ -58,6 +54,9 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
             2 -> resources.getDimension(com.storiqa.storiqawallet.R.dimen.largeAccountHeight).toInt()
             else -> throw Exception("not valid card size")
         }
+
+        if (isIndicatorEnable)
+            pageIndicator.setViewPager(accountsPager)
     }
 
 
@@ -68,17 +67,28 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
             setPadding(convertDpToPx(30f).toInt(), 0, convertDpToPx(30f).toInt(), 0)
             clipToPadding = false
             pageMargin = convertDpToPx(20f).toInt()
-            accountsAdapter.notifyDataSetChanged()
+            accountsAdapter?.notifyDataSetChanged()
             this@AccountChooser.initialPosition = initialPosition
             addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
                 override fun onPageSelected(position: Int) {
-                    if (isIndicatorEnable)
-                        pageIndicator.selection = position
-
-                    onPageSelectedListener?.invoke(position)
+                    onPageSelectedListener?.invoke(position, accounts[position].name)
                 }
             })
         }
     }
 
+    fun setOnPageSelectedListener(callback: (Int, String) -> Unit) {
+        onPageSelectedListener = callback
+    }
+
+    private fun updateAccounts() {
+        accountsAdapter?.updateAccounts(accounts)
+        if (initialPosition != -1) {
+            accountsPager.setCurrentItem(initialPosition, false)
+            pageIndicator.selection = initialPosition
+            if (initialPosition == 0)
+                onPageSelectedListener?.invoke(0, accounts[0].name)
+            initialPosition = -1
+        }
+    }
 }

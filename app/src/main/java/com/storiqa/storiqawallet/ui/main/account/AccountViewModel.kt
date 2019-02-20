@@ -2,6 +2,7 @@ package com.storiqa.storiqawallet.ui.main.account
 
 import androidx.databinding.ObservableBoolean
 import com.storiqa.storiqawallet.common.CurrencyConverter
+import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
@@ -35,6 +36,7 @@ constructor(navigator: IMainNavigator,
 
     override val isNoTransactions = ObservableBoolean(false)
     val isShowButtonAvailable = ObservableBoolean(false)
+    val observableAccounts = NonNullObservableField<List<Account>>(ArrayList())
 
     val updateAccounts = SingleLiveEvent<List<Account>>()
     val updateTransactions = SingleLiveEvent<List<Transaction>>()
@@ -87,6 +89,7 @@ constructor(navigator: IMainNavigator,
         if (accounts.isNotEmpty() && rates.isNotEmpty()) {
             this.accounts = ArrayList()
             accounts.reversed().forEach { this.accounts.add(mapper.map(it)) }
+            observableAccounts.set(this.accounts)
         }
         return this.accounts
     }

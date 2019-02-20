@@ -8,24 +8,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.viewpager.widget.ViewPager
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.databinding.FragmentReceiveBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
-import com.storiqa.storiqawallet.ui.main.account.AccountCardSize
-import com.storiqa.storiqawallet.ui.main.account.AccountPagerAdapter
-import com.storiqa.storiqawallet.utils.convertDpToPx
 import com.storiqa.storiqawallet.utils.shareImage
 
 
 class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>() {
 
     private val clipDataLabel = "Blockchain address"
-
-    private var accountsAdapter: AccountPagerAdapter? = null
 
     private var isRestoring = false
 
@@ -51,8 +45,12 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar)
 
+        binding.accountChooser.init(this, viewModel.currentPosition)
+        binding.accountChooser.setOnPageSelectedListener { position, _ ->
+            viewModel.onAccountSelected(position)
+        }
         if (isRestoring) {
-            initAccountsPager(viewModel.accounts)
+            updateAccounts(viewModel.accounts)
             isRestoring = false
         }
 
@@ -74,28 +72,8 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
         viewModel.copyToClipboard.observe(this, Observer(::copyToClipboard))
     }
 
-    private fun initAccountsPager(accounts: List<Account>) {
-        accountsAdapter = AccountPagerAdapter(this@ReceiveFragment, accounts, AccountCardSize.MEDIUM)
-        binding.accountsPager.apply {
-            adapter = accountsAdapter
-            setPadding(convertDpToPx(30f).toInt(), 0, convertDpToPx(30f).toInt(), 0)
-            clipToPadding = false
-            pageMargin = convertDpToPx(20f).toInt()
-            setCurrentItem(viewModel.currentPosition, false)
-            addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-                override fun onPageSelected(position: Int) {
-                    viewModel.onAccountSelected(position)
-                }
-            })
-        }
-        viewModel.onAccountSelected(viewModel.currentPosition)
-    }
-
     private fun updateAccounts(accounts: List<Account>) {
-        if (accountsAdapter == null) {
-            initAccountsPager(accounts)
-        } else
-            accountsAdapter?.updateAccounts(accounts)
+        binding.accountChooser.accounts = accounts
     }
 
     private fun copyToClipboard(address: String) {

@@ -32,6 +32,7 @@ import io.reactivex.schedulers.Schedulers
 import java.math.BigDecimal
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class SendViewModel
 @Inject
@@ -144,6 +145,8 @@ constructor(navigator: IMainNavigator,
     fun onQrCodeScanned(blockchainAddress: String) {
         accounts.forEach {
             if (isAddressValid(blockchainAddress, it.currency)) {
+                feesSize.set(0)
+                fees = ArrayList()
                 address.set(blockchainAddress)
                 return
             }
