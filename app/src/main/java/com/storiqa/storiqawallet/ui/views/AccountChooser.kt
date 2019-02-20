@@ -2,17 +2,15 @@ package com.storiqa.storiqawallet.ui.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.rd.PageIndicatorView
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.ui.main.account.AccountCardSize
 import com.storiqa.storiqawallet.ui.main.account.AccountPagerAdapter
 import com.storiqa.storiqawallet.utils.convertDpToPx
-import kotlinx.android.synthetic.main.view_account_chooser.view.*
 
 
 class AccountChooser
@@ -31,8 +29,13 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     private val isIndicatorEnable: Boolean
     private var initialPosition = -1
 
+    private val pageIndicator: PageIndicatorView
+    private val accountsPager: ViewPager
+
     init {
-        LayoutInflater.from(context).inflate(R.layout.view_account_chooser, this, true)
+        val view = View.inflate(context, R.layout.view_account_chooser, this)
+        pageIndicator = view.findViewById(R.id.pageIndicator)
+        accountsPager = view.findViewById(R.id.accountsPager)
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.AccountChooser)
         val cardSize = attributes.getInt(R.styleable.AccountChooser_cardSize, 1)
@@ -60,8 +63,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     }
 
 
-    fun init(fragment: Fragment, initialPosition: Int = 0) {
-        accountsAdapter = AccountPagerAdapter(fragment, accounts, size)
+    fun init(context: Context, initialPosition: Int = 0) {
+        accountsAdapter = AccountPagerAdapter(context, accounts, size)
         accountsPager.apply {
             adapter = accountsAdapter
             setPadding(convertDpToPx(30f).toInt(), 0, convertDpToPx(30f).toInt(), 0)

@@ -45,7 +45,7 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar)
 
-        binding.accountChooser.init(this, viewModel.currentPosition)
+        binding.accountChooser.init(requireContext(), viewModel.currentPosition)
         binding.accountChooser.setOnPageSelectedListener { position, _ ->
             viewModel.onAccountSelected(position)
         }

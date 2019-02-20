@@ -24,12 +24,12 @@
             android:layout_height="wrap_content"
             app:title="@string/toolbar_exchange" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/accountsFromPager"
+        <com.storiqa.storiqawallet.ui.views.AccountChooser
+            android:id="@+id/accountFromChooser"
+            app:cardSize="small"
+            app:indicatorEnable="false"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/smallAccountHeight"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp" />
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -39,7 +39,7 @@
             app:srcCompat="@drawable/ic_nav_exchange" />
 
         <com.storiqa.storiqawallet.ui.views.AccountChooser
-            android:id="@+id/accountsToPager"
+            android:id="@+id/accountToChooser"
             app:cardSize="small"
             app:indicatorEnable="false"
             android:layout_width="match_parent"

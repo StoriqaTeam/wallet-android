@@ -49,7 +49,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar, " ", true)
 
-        binding.accountChooser.init(this, viewModel.currentPosition)
+        binding.accountChooser.init(requireContext(), viewModel.currentPosition)
         binding.accountChooser.setOnPageSelectedListener { position, title ->
             if (position != viewModel.currentPosition)
                 isScrollNeeded = true

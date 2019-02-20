@@ -42,8 +42,12 @@ constructor(navigator: IMainNavigator,
                 .subscribe { updateAccounts.value = it }
     }
 
-    fun onAccountSelected(position: Int) {
+    fun onAccountFromSelected(position: Int) {
         currentPosition = position
+
+    }
+
+    fun onAccountToSelected(position: Int) {
 
     }
 
