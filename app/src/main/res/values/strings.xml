@@ -21,6 +21,7 @@
     <string name="error_address_not_valid">Address not valid</string>
     <string name="error_not_enough_money">Not enough money</string>
     <string name="error_different_address">Different address</string>
+    <string name="error_not_enough_money_on_market">Not enough money on market</string>
 
     <string name="dialog_no_internet_title">No internet</string>
     <string name="dialog_no_internet_description">No internet description</string>
@@ -70,6 +71,7 @@
     <string name="button_all_transactions">See all transactions</string>
     <string name="button_send">Send</string>
     <string name="button_confirm">Confirm</string>
+    <string name="button_exchange">Exchange</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -79,6 +81,8 @@
     <string name="hint_address">Recipient`s address</string>
     <string name="hint_amount">Amount</string>
     <string name="hint_amount_fiat">Amount in fiat</string>
+    <string name="hint_amount_remittance">Remittance amount</string>
+    <string name="hint_amount_collection">Collection amount</string>
 
     <string name="menu_wallet">Wallet</string>
     <string name="menu_send">Send</string>

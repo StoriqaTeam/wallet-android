@@ -89,7 +89,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         if (initialPosition != -1) {
             accountsPager.setCurrentItem(initialPosition, false)
             pageIndicator.selection = initialPosition
-            if (initialPosition == 0)
+            if (initialPosition == 0 && accounts.isNotEmpty())
                 onPageSelectedListener?.invoke(0, accounts[0].name)
             initialPosition = -1
         }

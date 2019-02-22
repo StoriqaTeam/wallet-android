@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -26,10 +29,10 @@
 
         <com.storiqa.storiqawallet.ui.views.AccountChooser
             android:id="@+id/accountFromChooser"
-            app:cardSize="small"
-            app:indicatorEnable="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardSize="small"
+            app:indicatorEnable="false" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -40,10 +43,96 @@
 
         <com.storiqa.storiqawallet.ui.views.AccountChooser
             android:id="@+id/accountToChooser"
-            app:cardSize="small"
-            app:indicatorEnable="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:cardSize="small"
+            app:indicatorEnable="false" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAmountRemittance"
+            style="@style/Widget.Design.TextInputLayout.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:errorText="@{viewModel.errorAmountRemittance}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmountRemittance"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:hint="@string/hint_amount_remittance"
+                android:inputType="numberDecimal"
+                android:imeOptions="actionDone"
+                android:nextFocusDown="@+id/etAmountCollection"
+                android:text="@={viewModel.amountRemittance}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilAmountCollection"
+            style="@style/Widget.Design.TextInputLayout.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:errorText="@{viewModel.errorAmountCollection}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmountCollection"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:hint="@string/hint_amount_collection"
+                android:inputType="numberDecimal"
+                android:imeOptions="actionDone"
+                android:text="@={viewModel.amountCollection}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvExchangeRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.exchangeRate}"
+                android:visibility="@{(viewModel.countDown &lt;= 0) ? View.INVISIBLE : View.VISIBLE}"
+                tools:text="1 STQ = 0,00000036 BTС" />
+
+            <com.storiqa.storiqawallet.ui.views.countdown.CountDownTextView
+                android:id="@+id/tvCountdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:visibility="@{(viewModel.countDown &lt;= 0) ? View.INVISIBLE : View.VISIBLE}"
+                app:countdownTime="@{viewModel.countDown}"
+                tools:text="05:39" />
+
+            <ProgressBar
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:visibility="@{(viewModel.countDown == 0 &amp;&amp; (viewModel.amountRemittance != `` || viewModel.amountCollection != ``)) ? View.VISIBLE : View.INVISIBLE}"
+                android:layout_gravity="end" />
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btnExchange"
+            style="@style/GradientButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:enabled="@{viewModel.exchangeButtonEnabled}"
+            android:onClick="@{()->viewModel.onExchangeButtonClicked()}"
+            android:text="@string/button_exchange" />
 
     </LinearLayout>
 

@@ -211,7 +211,7 @@
                     android:text="@string/error_not_enough_money" />
 
                 <Button
-                    android:id="@+id/btnSignUp"
+                    android:id="@+id/btnSend"
                     style="@style/GradientButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

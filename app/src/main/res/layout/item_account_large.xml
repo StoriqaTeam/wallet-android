@@ -6,13 +6,11 @@
     <data>
 
         <import type="android.view.View" />
-
         <import type="java.math.BigDecimal" />
 
         <variable
             name="account"
             type="com.storiqa.storiqawallet.data.model.Account" />
-
         <variable
             name="currencyFiat"
             type="String" />

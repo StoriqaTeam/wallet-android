@@ -1,5 +1,6 @@
 package com.storiqa.storiqawallet.data.network
 
+import com.storiqa.storiqawallet.data.network.errors.RefreshRateResponse
 import com.storiqa.storiqawallet.data.network.requests.*
 import com.storiqa.storiqawallet.data.network.responses.*
 import io.reactivex.Observable
@@ -155,12 +156,21 @@ interface WalletApi {
             @Header("Authorization") bearer: String,
             @Body createTransactionRequest: CreateTransactionRequest): Observable<Response<Any>>
 
-    @GET("v1/rate")
+    @POST("v1/rate")
     fun getExchangeRate(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Observable<Response<Any>>
+            @Header("Authorization") bearer: String,
+            @Body exchangeRateRequest: ExchangeRateRequest): Observable<ExchangeRateResponse>
+
+    @POST("v1/rate/refresh")
+    fun refreshRate(
+            @Header("Timestamp") timestamp: String,
+            @Header("Device-id") deviceId: String,
+            @Header("Sign") sign: String,
+            @Header("Authorization") bearer: String,
+            @Body refreshRateRequest: RefreshRateRequest): Observable<RefreshRateResponse>
 
     @POST("v1/fees")
     fun calculateFee(

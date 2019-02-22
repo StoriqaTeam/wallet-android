@@ -101,6 +101,11 @@ open class ErrorHandler {
 
                     ErrorCode.DIFFERENT_CURRENCY ->
                         errorField[field] = R.string.error_different_address
+
+                    ErrorCode.TOKEN_EXPIRED -> TODO()
+
+                    ErrorCode.NOT_ENOUGH_ON_MARKET ->
+                        errorField[field] = R.string.error_not_enough_money_on_market
                 }
 
                 errorFields.add(errorField)
