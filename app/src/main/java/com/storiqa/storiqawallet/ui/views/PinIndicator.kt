@@ -7,7 +7,10 @@ import android.widget.LinearLayout
 import com.storiqa.storiqawallet.R
 
 
-class PinIndicator : LinearLayout {
+class PinIndicator
+@JvmOverloads
+constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+        LinearLayout(context, attrs, defStyleAttr) {
 
     private var pinLength = 0
     private var circleRadius = 5
@@ -34,10 +37,7 @@ class PinIndicator : LinearLayout {
             field = value
         }
 
-    constructor(context: Context) : this(context, null)
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    init {
         orientation = HORIZONTAL
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.PinIndicator)

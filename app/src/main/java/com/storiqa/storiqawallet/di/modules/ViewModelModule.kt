@@ -6,8 +6,9 @@ import com.storiqa.storiqawallet.di.mapkeys.ViewModelKey
 import com.storiqa.storiqawallet.ui.authorization.AuthorizationViewModel
 import com.storiqa.storiqawallet.ui.authorization.signin.SignInViewModel
 import com.storiqa.storiqawallet.ui.authorization.signup.SignUpViewModel
-import com.storiqa.storiqawallet.ui.dialogs.MessageViewModel
-import com.storiqa.storiqawallet.ui.dialogs.SendConfirmationViewModel
+import com.storiqa.storiqawallet.ui.dialogs.exchange.ExchangeConfirmationViewModel
+import com.storiqa.storiqawallet.ui.dialogs.message.MessageViewModel
+import com.storiqa.storiqawallet.ui.dialogs.send.SendConfirmationViewModel
 import com.storiqa.storiqawallet.ui.main.MainViewModel
 import com.storiqa.storiqawallet.ui.main.account.AccountViewModel
 import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsViewModel
@@ -63,6 +64,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SendConfirmationViewModel::class)
     abstract fun bindSendConfirmationViewModel(sendConfirmationViewModel: SendConfirmationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ExchangeConfirmationViewModel::class)
+    abstract fun bindExchangeConfirmationViewModell(exchangeConfirmationViewModel: ExchangeConfirmationViewModel): ViewModel
 
     @Binds
     @IntoMap

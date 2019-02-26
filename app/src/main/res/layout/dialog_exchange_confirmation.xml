@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.storiqa.storiqawallet.ui.dialogs.send.SendConfirmationViewModel" />
+            type="com.storiqa.storiqawallet.ui.dialogs.exchange.ExchangeConfirmationViewModel" />
     </data>
 
     <LinearLayout
@@ -18,11 +18,11 @@
         android:orientation="vertical"
         android:padding="30dp">
 
-
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_send" />
+            app:srcCompat="@drawable/ic_exchange" />
 
         <TextView
             style="@style/TitleText"
@@ -31,78 +31,76 @@
             android:layout_marginTop="20dp"
             android:text="@string/text_confirm_sending" />
 
-        <TextView
-            style="@style/RegularText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:gravity="start"
-            android:text="@string/text_address" />
+            android:orientation="horizontal">
 
-        <TextView
-            style="@style/HighlightedText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.address}"
-            tools:text="0xddb833 . . . . 7511 " />
+            <TextView
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="start"
+                android:text="@string/text_from" />
 
-        <TextView
-            style="@style/RegularText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/text_amount" />
+            <TextView
+                style="@style/HighlightedText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.remittanceAccount}"
+                tools:text="STQ account " />
 
-        <TextView
-            style="@style/HighlightedText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.amount}"
-            tools:text="10372.22 STQ" />
-
-        <TextView
-            style="@style/RegularText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/text_transaction_fee" />
-
-        <TextView
-            style="@style/HighlightedText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.fee}"
-            tools:text="Free" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/gradient_separator" />
-
-        <TextView
-            style="@style/RegularText"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/text_total_to_send" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
-            android:text="@{viewModel.total}"
+            android:text="@{viewModel.remittanceAmount}"
             android:textColor="@color/text_highlighted"
             android:textSize="20sp"
             tools:text="10402.22 STQ" />
 
-        <Button
-            style="@style/GradientButton"
-            android:layout_marginTop="40dp"
-            android:onClick="@{()->viewModel.onConfirmButtonClicked()}"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/RegularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginRight="5dp"
+                android:text="@string/text_to" />
+
+            <TextView
+                style="@style/HighlightedText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.collectionAccount}"
+                tools:text="BTC account" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@{viewModel.collectionAmount}"
+            android:textColor="@color/text_highlighted"
+            android:textSize="20sp"
+            tools:text="0.082 BTC" />
+
+        <Button
+            style="@style/GradientButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:onClick="@{()->viewModel.onConfirmButtonClicked()}"
             android:text="@string/button_confirm" />
 
         <TextView

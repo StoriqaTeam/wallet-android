@@ -44,6 +44,15 @@ enum class ErrorCode {
     TOKEN_EXPIRED,
 
     @SerializedName("currency")
-    DIFFERENT_CURRENCY
+    DIFFERENT_CURRENCY,
+
+    @SerializedName("not_enough_on_market")
+    NOT_ENOUGH_ON_MARKET,
+
+    @SerializedName("not_found")
+    NOT_FOUND_EXCHANGE_RATE,
+
+    @SerializedName("limit")
+    EXCHANGE_WRONG_LIMIT
 
 }

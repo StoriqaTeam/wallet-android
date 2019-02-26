@@ -1,6 +1,6 @@
 package com.storiqa.storiqawallet.ui.base.navigator
 
-import com.storiqa.storiqawallet.ui.dialogs.MessageDialog
+import com.storiqa.storiqawallet.ui.dialogs.message.MessageDialog
 
 abstract class BaseNavigator(private val navigator: INavigator) : IBaseNavigator {
 

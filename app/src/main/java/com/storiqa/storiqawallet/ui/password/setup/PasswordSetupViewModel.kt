@@ -78,9 +78,9 @@ constructor(navigator: IPasswordRecoveryNavigator,
                 when (key) {
                     "password" -> {
                         if (passwordError.get().isEmpty())
-                            passwordError.set(App.res.getString(value))
+                            passwordError.set(value)
                         else
-                            passwordError.set(passwordError.get() + "\n" + App.res.getString(value))
+                            passwordError.set(passwordError.get() + "\n" + value)
                     }
                 }
             }

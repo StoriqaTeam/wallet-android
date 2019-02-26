@@ -6,6 +6,7 @@
     <dimen name="edit_text_height">35dp</dimen>
     <dimen name="input_layout_space">5dp</dimen>
     <dimen name="no_transactions_logo_size">110dp</dimen>
-    <dimen name="accountPagerHeight">185dp</dimen>
+    <dimen name="largeAccountHeight">185dp</dimen>
     <dimen name="mediumAccountHeight">120dp</dimen>
+    <dimen name="smallAccountHeight">55dp</dimen>
 </resources>

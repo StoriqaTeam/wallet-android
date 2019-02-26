@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.ui.dialogs
+package com.storiqa.storiqawallet.ui.dialogs.message
 
 import android.graphics.drawable.Drawable
 import androidx.databinding.ObservableField

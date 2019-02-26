@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.ui.dialogs
+package com.storiqa.storiqawallet.ui.dialogs.message
 
 import android.app.Dialog
 import android.os.Bundle
@@ -78,7 +78,7 @@ class MessageDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(context!!)
+        val builder = AlertDialog.Builder(requireContext())
 
         val args = arguments
         if (args != null) {
@@ -94,12 +94,12 @@ class MessageDialog : DialogFragment() {
             )
         }
 
-        val binding = DialogMessageBinding.inflate(activity!!.layoutInflater)
+        val binding = DialogMessageBinding.inflate(requireActivity().layoutInflater)
         builder.setView(binding.root)
         binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()
 
-        return builder.create()
+        return builder.create()//.apply { window?.setDimAmount(0f) }
     }
 
     fun setPositiveButton(name: String, onClick: () -> Unit) {

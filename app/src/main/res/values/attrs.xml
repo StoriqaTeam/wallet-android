@@ -7,4 +7,13 @@
         <attr name="colorDefault" format="color" />
         <attr name="colorHighlight" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="AccountChooser">
+        <attr name="indicatorEnable" format="boolean" />
+        <attr name="cardSize">
+            <enum name="small" value="0" />
+            <enum name="medium" value="1" />
+            <enum name="large" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

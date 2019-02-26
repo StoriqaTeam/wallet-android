@@ -6,11 +6,13 @@
     <data>
 
         <import type="android.view.View" />
+
         <import type="java.math.BigDecimal" />
 
         <variable
             name="account"
             type="com.storiqa.storiqawallet.data.model.Account" />
+
         <variable
             name="currencyFiat"
             type="String" />
@@ -35,70 +37,48 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 app:imageResource="@{account.currencyIcon}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/ic_btc" />
 
             <TextView
-                android:id="@+id/tvBalancePreview"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:gravity="right|center_vertical"
-                android:text="@{account.balanceFormatted + ` ` + account.currency}"
-                android:textColor="@color/text_highlighted"
-                android:textSize="16sp"
-                app:autoSizeMaxTextSize="12sp"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeStepGranularity="1sp"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toBottomOf="@+id/imgLogo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imgLogo"
-                app:layout_constraintTop_toTopOf="@+id/imgLogo"
-                tools:text="1,560,230.00 STQ" />
-
-            <TextView
                 android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/montserrat_medium"
+                android:singleLine="true"
                 android:text="@{account.name}"
                 android:textColor="@color/text_highlighted"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/tvBalance"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/barrier3"
+                app:layout_constraintStart_toEndOf="@+id/imgLogo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:text="STQ account" />
 
             <TextView
                 android:id="@+id/tvBalance"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:gravity="center"
-                android:text="@string/app_name"
+                android:gravity="end"
+                android:text="@{account.balanceFormatted + ` ` + account.currency.getSymbol()}"
                 android:textColor="@color/text_highlighted"
-                app:autoSizeMaxTextSize="26sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvBalanceDollar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvName"
+                app:layout_constraintTop_toTopOf="parent"
                 app:text="@{account.balanceFormatted}"
                 tools:text="1,560" />
 
@@ -106,18 +86,23 @@
                 android:id="@+id/tvBalanceDollar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/text_highlighted"
+                android:textColor="@color/text_small_balance"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tvBalance"
                 app:layout_constraintTop_toBottomOf="@+id/tvBalance"
                 app:text="@{account.balanceFiat}"
                 tools:text="$ 390871.20 " />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="left"
+                app:constraint_referenced_ids="tvBalance,tvBalanceDollar"
+                tools:layout_editor_absoluteX="411dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

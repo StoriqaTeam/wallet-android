@@ -76,8 +76,9 @@ constructor(navigator: IMainNavigator,
     private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
         val mapper = AccountMapper(CurrencyConverter(rates))
         if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            this.accounts = ArrayList()
-            accounts.reversed().forEach { this.accounts.add(mapper.map(it)) }
+            val tempAccounts = java.util.ArrayList<Account>()
+            accounts.reversed().forEach { tempAccounts.add(mapper.map(it)) }
+            this.accounts = tempAccounts
         }
         return this.accounts
     }

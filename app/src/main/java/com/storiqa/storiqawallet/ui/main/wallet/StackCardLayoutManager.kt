@@ -39,7 +39,7 @@ class StackCardLayoutManager : RecyclerView.LayoutManager() {
         }
     }
 
-    override fun canScrollVertically(): Boolean = true
+    override fun canScrollVertically(): Boolean = false
 
     override fun scrollVerticallyBy(
             dy: Int,

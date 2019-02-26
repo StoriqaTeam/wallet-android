@@ -25,6 +25,15 @@ class CurrencyFormatter : ICurrencyFormatter {
         return BigDecimal(formattedAmount).movePointRight(currency.getSignificantDigits()).toPlainString()
     }
 
+    fun getAmountFromDouble(amount: Double, currency: Currency): String {
+        val decimalAmount = BigDecimal(amount)
+                .setScale(currency.getSignificantDigits(), RoundingMode.DOWN)
+        return if (decimalAmount.compareTo(BigDecimal.ZERO) == 0)
+            BigDecimal.ZERO.toPlainString()
+        else
+            decimalAmount.stripTrailingZeros().toPlainString()
+    }
+
     private fun getFormattedFiat(amount: String): String {
         val floatAmount = amount.replace(",", ".").toFloat()
         val df = DecimalFormat("#.##")

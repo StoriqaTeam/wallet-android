@@ -5,25 +5,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.data.model.AccountCardSize
 import com.storiqa.storiqawallet.databinding.FragmentSendBinding
 import com.storiqa.storiqawallet.ui.base.BaseFragment
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
 import com.storiqa.storiqawallet.ui.common.SpacesWatcher
 import com.storiqa.storiqawallet.ui.common.addUserInputListener
-import com.storiqa.storiqawallet.ui.main.account.AccountPagerAdapter
-import com.storiqa.storiqawallet.utils.convertDpToPx
 
 
 class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
-
-    private var accountsAdapter: AccountPagerAdapter? = null
 
     private var isRestoring = false
 
@@ -60,8 +54,12 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar)
 
+        binding.accountChooser.init(requireContext(), viewModel.currentPosition)
+        binding.accountChooser.setOnPageSelectedListener { position, _ ->
+            viewModel.onAccountSelected(position)
+        }
         if (isRestoring) {
-            initAccountsPager(viewModel.accounts)
+            updateAccounts(viewModel.accounts)
             isRestoring = false
         }
 
@@ -91,32 +89,12 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
         })
 
         viewModel.showSuccessMessage.observe(this, Observer {
-            Snackbar.make(binding.toolbar, "Transaction successfully sent", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.toolbar, "Transaction successfully sent", Snackbar.LENGTH_SHORT).show()
         })
     }
 
-    private fun initAccountsPager(accounts: List<Account>) {
-        accountsAdapter = AccountPagerAdapter(this@SendFragment, accounts, AccountCardSize.MEDIUM)
-        binding.accountsPager.apply {
-            adapter = accountsAdapter
-            setPadding(convertDpToPx(30f).toInt(), 0, convertDpToPx(30f).toInt(), 0)
-            clipToPadding = false
-            pageMargin = convertDpToPx(20f).toInt()
-            setCurrentItem(viewModel.currentPosition, false)
-            addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-                override fun onPageSelected(position: Int) {
-                    viewModel.onAccountSelected(position)
-                }
-            })
-        }
-        viewModel.onAccountSelected(viewModel.currentPosition)
-    }
-
     private fun updateAccounts(accounts: List<Account>) {
-        if (accountsAdapter == null) {
-            initAccountsPager(accounts)
-        } else
-            accountsAdapter?.updateAccounts(accounts)
+        binding.accountChooser.accounts = accounts
     }
 
     private fun scanQrCode() {

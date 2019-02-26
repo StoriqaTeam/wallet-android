@@ -162,9 +162,9 @@ constructor(navigator: IAuthorizationNavigator,
             it.forEach { (key, value) ->
                 when (key) {
                     "email" ->
-                        emailError.set(App.res.getString(value))
+                        emailError.set(value)
                     "password" ->
-                        passwordError.set(App.res.getString(value))
+                        passwordError.set(value)
                 }
             }
         }

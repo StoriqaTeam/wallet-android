@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.storiqa.storiqawallet.ui.dialogs.MessageViewModel" />
+            type="com.storiqa.storiqawallet.ui.dialogs.message.MessageViewModel" />
     </data>
 
     <LinearLayout

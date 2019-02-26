@@ -79,7 +79,7 @@ constructor(navigator: IPasswordRecoveryNavigator,
             it.forEach { (key, value) ->
                 when (key) {
                     "email" ->
-                        emailError.set(App.res.getString(value))
+                        emailError.set(value)
                 }
             }
         }

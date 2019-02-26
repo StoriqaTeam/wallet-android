@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun getTimestampLong(timestamp: String): Long {
-    return Timestamp.valueOf(timestamp.replace("T", " ", true)).time
+    val cal = Calendar.getInstance()
+    val timezoneOffset = cal.timeZone.rawOffset
+    return Timestamp.valueOf(timestamp.replace("T", " ")).time + timezoneOffset
 }
 
 fun getPresentableDate(timestamp: Long): String {

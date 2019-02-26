@@ -20,6 +20,7 @@ import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
+import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.utils.SignUtil
@@ -32,12 +33,14 @@ import io.reactivex.schedulers.Schedulers
 import java.math.BigDecimal
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class SendViewModel
 @Inject
 constructor(navigator: IMainNavigator,
             private val accountsRepository: IAccountsRepository,
             private val ratesRepository: IRatesRepository,
+            private val transactionsRepository: ITransactionsRepository,
             private val userData: IUserDataStorage,
             private val walletApi: WalletApi,
             private val appData: IAppDataStorage,
@@ -103,7 +106,7 @@ constructor(navigator: IMainNavigator,
             it.forEach { (key, value) ->
                 when (key) {
                     "account" -> {
-                        addressError.set(App.res.getString(value))
+                        addressError.set(value)
                         sendButtonEnabled.set(false)
                     }
                 }
@@ -144,6 +147,8 @@ constructor(navigator: IMainNavigator,
     fun onQrCodeScanned(blockchainAddress: String) {
         accounts.forEach {
             if (isAddressValid(blockchainAddress, it.currency)) {
+                feesSize.set(0)
+                fees = ArrayList()
                 address.set(blockchainAddress)
                 return
             }
@@ -188,8 +193,6 @@ constructor(navigator: IMainNavigator,
     private fun sendTransactionRequest() {
         showLoadingDialog()
         val email = appData.currentUserEmail
-        val token = appData.token
-        val signHeader = signUtil.createSignHeader(email)
         val currency = accounts[currentPosition].currency
         val request = CreateTransactionRequest(
                 UUID.randomUUID().toString(),
@@ -202,16 +205,14 @@ constructor(navigator: IMainNavigator,
                 currency.currencyISO.toLowerCase(),
                 amountFiat.get(),
                 Currency.USD.currencyISO.toLowerCase(),
-                currencyFormatter.getStringAmount(fees[seekBarFeePosition.get()].value, currency)
+                fees[seekBarFeePosition.get()].value
 
         )
-        walletApi
-                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        transactionsRepository.sendTransaction(email, request)
                 .subscribe({
                     hideLoadingDialog()
                     showSuccessMessage.trigger()
+                    accountsRepository.refreshAccounts(::handleError)
                 }, {
                     hideLoadingDialog()
                     handleError(it as Exception)
@@ -265,8 +266,9 @@ constructor(navigator: IMainNavigator,
         currencyConverter = CurrencyConverter(rates)
         val mapper = AccountMapper(CurrencyConverter(rates))
         if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            this.accounts = ArrayList()
-            accounts.reversed().forEach { this.accounts.add(mapper.map(it)) }
+            val tempAccounts = java.util.ArrayList<Account>()
+            accounts.reversed().forEach { tempAccounts.add(mapper.map(it)) }
+            this.accounts = tempAccounts
         }
         return this.accounts
     }

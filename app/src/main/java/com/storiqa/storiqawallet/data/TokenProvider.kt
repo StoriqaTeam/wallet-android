@@ -5,7 +5,7 @@ import com.storiqa.storiqawallet.data.network.WalletApi
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.utils.JWTUtil
 import com.storiqa.storiqawallet.utils.SignUtil
-import com.storiqa.storiqawallet.utils.getTimeStamp
+import com.storiqa.storiqawallet.utils.getCurrentTimeMillis
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -18,7 +18,7 @@ class TokenProvider(private val appData: IAppDataStorage,
     }
 
     override fun isExpired(token: String): Boolean {
-        return JWTUtil.getExpiredTime(token) + 30000 < getTimeStamp()
+        return JWTUtil.getExpiredTime(token) + 30000 < getCurrentTimeMillis()
     }
 
     @SuppressLint("CheckResult")
