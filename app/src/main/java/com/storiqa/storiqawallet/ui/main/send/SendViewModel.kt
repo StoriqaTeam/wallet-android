@@ -20,6 +20,7 @@ import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
+import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.utils.SignUtil
@@ -39,6 +40,7 @@ class SendViewModel
 constructor(navigator: IMainNavigator,
             private val accountsRepository: IAccountsRepository,
             private val ratesRepository: IRatesRepository,
+            private val transactionsRepository: ITransactionsRepository,
             private val userData: IUserDataStorage,
             private val walletApi: WalletApi,
             private val appData: IAppDataStorage,
@@ -191,8 +193,6 @@ constructor(navigator: IMainNavigator,
     private fun sendTransactionRequest() {
         showLoadingDialog()
         val email = appData.currentUserEmail
-        val token = appData.token
-        val signHeader = signUtil.createSignHeader(email)
         val currency = accounts[currentPosition].currency
         val request = CreateTransactionRequest(
                 UUID.randomUUID().toString(),
@@ -208,13 +208,11 @@ constructor(navigator: IMainNavigator,
                 fees[seekBarFeePosition.get()].value
 
         )
-        walletApi
-                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        transactionsRepository.sendTransaction(email, request)
                 .subscribe({
                     hideLoadingDialog()
                     showSuccessMessage.trigger()
+                    accountsRepository.refreshAccounts(::handleError)
                 }, {
                     hideLoadingDialog()
                     handleError(it as Exception)

@@ -9,12 +9,14 @@ import com.storiqa.storiqawallet.data.db.entity.*
 import com.storiqa.storiqawallet.data.mapper.TransactionMapper
 import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.data.network.WalletApi
+import com.storiqa.storiqawallet.data.network.requests.CreateTransactionRequest
 import com.storiqa.storiqawallet.data.network.responses.TransactionResponse
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getTimestampLong
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
@@ -77,6 +79,28 @@ class TransactionsRepository(private val walletApi: WalletApi,
                 }
     }
 
+    override fun sendTransaction(email: String, request: CreateTransactionRequest): Observable<Unit> {
+        val token = appDataStorage.token
+        val signHeader = signUtil.createSignHeader(email)
+        return walletApi
+                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(::saveTransaction)
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun sendExchange(email: String, request: CreateTransactionRequest): Observable<Unit> {
+        val token = appDataStorage.token
+        val signHeader = signUtil.createSignHeader(email)
+        return walletApi
+                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(::saveTransaction)
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     private fun getNewestTransactionTime(transactions: List<TransactionResponse>): Long { //TODO  poprosit' Seregu sdelat' normal'niy otvet
         return getTimestampLong(transactions.sortedWith(compareBy { it.createdAt }).last().createdAt)
     }
@@ -129,22 +153,24 @@ class TransactionsRepository(private val walletApi: WalletApi,
         //transactionDao.deleteAll()
 
         appDatabase.beginTransaction()
-        for (transaction in transactions) {
-            val toAccount = transaction.toAccount
-            transactionAccountDao.insert(TransactionAccountEntity(toAccount.blockchainAddress, toAccount.accountId, toAccount.ownerName))
-            transactionDao.insert(TransactionEntity(transaction.id, transaction.toAccount.blockchainAddress, transaction.fromValue, transaction.fromCurrency,
-                    transaction.toValue, transaction.toCurrency, transaction.fee, getTimestampLong(transaction.createdAt), getTimestampLong(transaction.updatedAt),
-                    //if (transaction.id == "8974ddb6-b696-4e9c-a392-34d7dd9f64fa") "pending" else transaction.status,
-                    transaction.status,
-                    transaction.fiatValue,
-                    transaction.fiatCurrency))
-            transaction.blockchainTxIds.forEach { blockchainIdDao.insert(BlockchainId(it, transaction.id)) }
-            for (transactionAccount in transaction.fromAccount) {
-                transactionAccountDao.insert(TransactionAccountEntity(transactionAccount.blockchainAddress, transactionAccount.accountId, transactionAccount.ownerName))
-                transactionAccountJoinDao.insert(TransactionAccountJoin(transaction.id, transactionAccount.blockchainAddress))
-            }
-        }
+        transactions.forEach(::saveTransaction)
         appDatabase.setTransactionSuccessful()
         appDatabase.endTransaction()
+    }
+
+    private fun saveTransaction(transaction: TransactionResponse) {
+        val toAccount = transaction.toAccount
+        transactionAccountDao.insert(TransactionAccountEntity(toAccount.blockchainAddress, toAccount.accountId, toAccount.ownerName))
+        transactionDao.insert(TransactionEntity(transaction.id, transaction.toAccount.blockchainAddress, transaction.fromValue, transaction.fromCurrency,
+                transaction.toValue, transaction.toCurrency, transaction.fee, getTimestampLong(transaction.createdAt), getTimestampLong(transaction.updatedAt),
+                //if (transaction.id == "8974ddb6-b696-4e9c-a392-34d7dd9f64fa") "pending" else transaction.status,
+                transaction.status,
+                transaction.fiatValue,
+                transaction.fiatCurrency))
+        transaction.blockchainTxIds.forEach { blockchainIdDao.insert(BlockchainId(it, transaction.id)) }
+        for (transactionAccount in transaction.fromAccount) {
+            transactionAccountDao.insert(TransactionAccountEntity(transactionAccount.blockchainAddress, transactionAccount.accountId, transactionAccount.ownerName))
+            transactionAccountJoinDao.insert(TransactionAccountJoin(transaction.id, transactionAccount.blockchainAddress))
+        }
     }
 }
