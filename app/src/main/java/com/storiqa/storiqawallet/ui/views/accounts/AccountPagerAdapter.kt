@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.ui.main.account
+package com.storiqa.storiqawallet.ui.views.accounts
 
 import android.content.Context
 import android.text.SpannableString
@@ -19,8 +19,8 @@ import com.storiqa.storiqawallet.ui.common.TopAlignSuperscriptSpan
 class AccountPagerAdapter(
         private val context: Context,
         private var accounts: List<Account>,
-        private val size: AccountCardSize) :
-        PagerAdapter() {
+        private val size: AccountCardSize
+) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflater = LayoutInflater.from(context)
@@ -75,12 +75,12 @@ class AccountPagerAdapter(
         return accounts.size
     }
 
+    override fun getItemPosition(obj: Any): Int {
+        return PagerAdapter.POSITION_NONE
+    }
+
     fun updateAccounts(newCards: List<Account>) {
         accounts = newCards
         notifyDataSetChanged()
     }
-
-    /*override fun getItemPosition(obj: Any): Int {
-        return PagerAdapter.POSITION_NONE
-    }*/
 }

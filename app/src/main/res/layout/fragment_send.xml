@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             app:title="@string/toolbar_send" />
 
-        <com.storiqa.storiqawallet.ui.views.AccountChooser
+        <com.storiqa.storiqawallet.ui.views.accounts.AccountChooser
             android:id="@+id/accountChooser"
             app:cardSize="medium"
             app:indicatorEnable="true"

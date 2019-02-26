@@ -18,7 +18,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
         const val KEY_POSITION = "key_position"
     }
 
-    private var accountsAdapter: AccountPagerAdapter? = null
     private var transactionsAdapter: TransactionsAdapter? = null
 
     private var isRestoring = false

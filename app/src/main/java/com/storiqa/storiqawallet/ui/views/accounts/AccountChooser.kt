@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.ui.views
+package com.storiqa.storiqawallet.ui.views.accounts
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,8 +8,6 @@ import androidx.viewpager.widget.ViewPager
 import com.rd.PageIndicatorView
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.ui.main.account.AccountCardSize
-import com.storiqa.storiqawallet.ui.main.account.AccountPagerAdapter
 import com.storiqa.storiqawallet.utils.convertDpToPx
 
 
