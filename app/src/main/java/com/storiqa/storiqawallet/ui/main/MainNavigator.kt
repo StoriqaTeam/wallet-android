@@ -5,8 +5,8 @@ import android.view.View
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.ui.base.navigator.BaseNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
-import com.storiqa.storiqawallet.ui.dialogs.ExchangeConfirmationDialog
-import com.storiqa.storiqawallet.ui.dialogs.SendConfirmationDialog
+import com.storiqa.storiqawallet.ui.dialogs.exchange.ExchangeConfirmationDialog
+import com.storiqa.storiqawallet.ui.dialogs.send.SendConfirmationDialog
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
 import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsFragment
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment

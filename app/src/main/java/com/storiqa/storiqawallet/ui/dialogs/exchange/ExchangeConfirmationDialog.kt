@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.ui.dialogs
+package com.storiqa.storiqawallet.ui.dialogs.exchange
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,34 +8,34 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.BR
-import com.storiqa.storiqawallet.databinding.DialogSendConfirmationBinding
+import com.storiqa.storiqawallet.databinding.DialogExchangeConfirmationBinding
 import com.storiqa.storiqawallet.di.components.DaggerFragmentComponent
 import com.storiqa.storiqawallet.di.components.FragmentComponent
 import com.storiqa.storiqawallet.di.modules.FragmentModule
 import com.storiqa.storiqawallet.ui.base.IBaseActivity
 import javax.inject.Inject
 
-class SendConfirmationDialog : DialogFragment() {
+class ExchangeConfirmationDialog : DialogFragment() {
 
     companion object {
-        const val ARGUMENT_ADDRESS = "argument_address"
-        const val ARGUMENT_AMOUNT = "argument_amount"
-        const val ARGUMENT_FEE = "argument_fee"
-        const val ARGUMENT_TOTAL = "argument_total"
+        const val ARGUMENT_REMITTANCE_ACCOUNT = "remittance_account"
+        const val ARGUMENT_REMITTANCE_AMOUNT = "remittance_amount"
+        const val ARGUMENT_COLLECTION_ACCOUNT = "collection_account"
+        const val ARGUMENT_COLLECTION_AMOUNT = "collection_amount"
 
         @JvmStatic
         fun newInstance(
-                address: String,
-                amount: String,
-                fee: String,
-                total: String
-        ): SendConfirmationDialog {
-            return SendConfirmationDialog().apply {
+                remittanceAccount: String,
+                remittanceAmount: String,
+                collectionAccount: String,
+                collectionAmount: String
+        ): ExchangeConfirmationDialog {
+            return ExchangeConfirmationDialog().apply {
                 arguments = Bundle().apply {
-                    putString(ARGUMENT_ADDRESS, address)
-                    putString(ARGUMENT_AMOUNT, amount)
-                    putString(ARGUMENT_FEE, fee)
-                    putString(ARGUMENT_TOTAL, total)
+                    putString(ARGUMENT_REMITTANCE_ACCOUNT, remittanceAccount)
+                    putString(ARGUMENT_REMITTANCE_AMOUNT, remittanceAmount)
+                    putString(ARGUMENT_COLLECTION_ACCOUNT, collectionAccount)
+                    putString(ARGUMENT_COLLECTION_AMOUNT, collectionAmount)
                 }
             }
         }
@@ -44,7 +44,7 @@ class SendConfirmationDialog : DialogFragment() {
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var viewModel: SendConfirmationViewModel
+    private lateinit var viewModel: ExchangeConfirmationViewModel
 
     private lateinit var onPositiveClick: () -> Unit
 
@@ -60,7 +60,7 @@ class SendConfirmationDialog : DialogFragment() {
         try {
             FragmentComponent::class.java.getDeclaredMethod("inject", this::class.java)
                     .invoke(fragmentComponent, this)
-            viewModel = ViewModelProviders.of(this, viewModelFactory).get(SendConfirmationViewModel::class.java)
+            viewModel = ViewModelProviders.of(this, viewModelFactory).get(ExchangeConfirmationViewModel::class.java)
         } catch (e: NoSuchMethodException) {
             throw NoSuchMethodException("You forgot to add \"fun inject(fragment: " +
                     "${this::class.java.simpleName})\" in FragmentComponent")
@@ -87,14 +87,14 @@ class SendConfirmationDialog : DialogFragment() {
         val args = arguments
         if (args != null) {
             viewModel.initData(
-                    args.getString(ARGUMENT_ADDRESS) ?: "",
-                    args.getString(ARGUMENT_AMOUNT) ?: "",
-                    args.getString(ARGUMENT_FEE) ?: "",
-                    args.getString(ARGUMENT_TOTAL) ?: ""
+                    args.getString(ARGUMENT_REMITTANCE_ACCOUNT) ?: "",
+                    args.getString(ARGUMENT_REMITTANCE_AMOUNT) ?: "",
+                    args.getString(ARGUMENT_COLLECTION_ACCOUNT) ?: "",
+                    args.getString(ARGUMENT_COLLECTION_AMOUNT) ?: ""
             )
         }
 
-        val binding = DialogSendConfirmationBinding.inflate(activity!!.layoutInflater)
+        val binding = DialogExchangeConfirmationBinding.inflate(activity!!.layoutInflater)
         builder.setView(binding.root)
         binding.setVariable(BR.viewModel, viewModel)
         binding.executePendingBindings()

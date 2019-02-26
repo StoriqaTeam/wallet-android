@@ -162,10 +162,10 @@ class CountDownTextView : TextView {
     }
 
     fun setCountdownTime(millisInFuture: Long) {
+        cancel()
         if (millisInFuture <= 0)
             return
 
-        cancel()
         scheduledTime = SystemClock.elapsedRealtime() + millisInFuture
         start()
     }

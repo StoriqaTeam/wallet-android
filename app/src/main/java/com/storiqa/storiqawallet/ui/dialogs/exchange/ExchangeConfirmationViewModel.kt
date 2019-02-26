@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.ui.dialogs
+package com.storiqa.storiqawallet.ui.dialogs.exchange
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel

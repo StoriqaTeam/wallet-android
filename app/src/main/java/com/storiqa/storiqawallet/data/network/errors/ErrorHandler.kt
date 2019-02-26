@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.data.network.errors
 
 import com.facebook.FacebookException
+import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import java.io.IOException
 
@@ -53,24 +54,24 @@ open class ErrorHandler {
 
     private fun handleUnprocessableEntity(validationErrors: HashMap<String,
             Array<ValidationError>>): ErrorPresenter {
-        val errorFields = ArrayList<HashMap<String, Int>>()
+        val errorFields = ArrayList<HashMap<String, String>>()
 
         for ((field, errors) in validationErrors) {
             for (error in errors) {
-                val errorField = HashMap<String, Int>()
+                val errorField = HashMap<String, String>()
                 when (error.code) {
                     ErrorCode.INVALID_EMAIL ->
-                        errorField[field] = R.string.error_email_not_valid
+                        errorField[field] = App.res.getString(R.string.error_email_not_valid)
 
                     ErrorCode.BLOCKED ->
-                        errorField[field] = R.string.error_email_blocked
+                        errorField[field] = App.res.getString(R.string.error_email_blocked)
 
                     ErrorCode.ALREADY_EXISTS ->
-                        errorField[field] = R.string.error_email_exists
+                        errorField[field] = App.res.getString(R.string.error_email_exists)
 
                     ErrorCode.NOT_EXISTS -> {
                         if (field == "email")
-                            errorField[field] = R.string.error_email_not_exist
+                            errorField[field] = App.res.getString(R.string.error_email_not_exist)
                         else if (field == "device")
                             return NotAttachedDialogPresenter().apply { params = error.params }
                     }
@@ -79,16 +80,16 @@ open class ErrorHandler {
                         return EmailNotProvidedDialogPresenter()
 
                     ErrorCode.INVALID_PASSWORD ->
-                        errorField[field] = R.string.error_password_wrong_pass
+                        errorField[field] = App.res.getString(R.string.error_password_wrong_pass)
 
                     ErrorCode.NO_UPPER_CASE_CHARACTER ->
-                        errorField[field] = R.string.error_password_no_upper
+                        errorField[field] = App.res.getString(R.string.error_password_no_upper)
 
                     ErrorCode.INVALID_LENGTH ->
-                        errorField[field] = R.string.error_password_invalid_length
+                        errorField[field] = App.res.getString(R.string.error_password_invalid_length)
 
                     ErrorCode.NO_NUMBER ->
-                        errorField[field] = R.string.error_password_no_number
+                        errorField[field] = App.res.getString(R.string.error_password_no_number)
 
                     ErrorCode.EMAIL_TIMEOUT ->
                         return EmailTimeoutDialogPresenter()
@@ -100,18 +101,25 @@ open class ErrorHandler {
                         return WrongDeviceIdDialogPresenter()
 
                     ErrorCode.DIFFERENT_CURRENCY ->
-                        errorField[field] = R.string.error_different_address
+                        errorField[field] = App.res.getString(R.string.error_different_address)
 
                     ErrorCode.TOKEN_EXPIRED -> TODO()
 
                     ErrorCode.NOT_ENOUGH_ON_MARKET ->
-                        errorField[field] = R.string.error_not_enough_money_on_market
+                        errorField[field] = App.res.getString(R.string.error_not_enough_money_on_market)
 
                     ErrorCode.NOT_FOUND_EXCHANGE_RATE ->
-                        errorField[field] = R.string.error_not_found_exchange_rate
+                        errorField[field] = App.res.getString(R.string.error_not_found_exchange_rate)
 
-                    ErrorCode.EXCHANGE_WRONG_LIMIT ->
-                        errorField[field] = R.string.error_exchange_not_in_range
+                    ErrorCode.EXCHANGE_WRONG_LIMIT -> {
+                        val currency = error.params?.get("currency")?.toUpperCase()
+                        val minLimit = error.params?.get("min")
+                        val maxLimit = error.params?.get("max")
+                        errorField[field] = App.res.getString(
+                                R.string.error_exchange_not_in_range,
+                                "$minLimit $currency",
+                                "$maxLimit $currency")
+                    }
                 }
 
                 errorFields.add(errorField)

@@ -237,10 +237,10 @@ constructor(navigator: IMainNavigator,
                 when (key) {
                     "value" -> {
                         countDown.set(-1)
-                        errorCommon.set(App.res.getString(value))
+                        errorCommon.set(value)
                     }
                     "actual_amount" -> {
-                        errorCommon.set(App.res.getString(value))
+                        errorCommon.set(value)
                     }
                 }
             }

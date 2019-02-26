@@ -151,12 +151,12 @@ constructor(navigator: IAuthorizationNavigator,
             it.forEach { (key, value) ->
                 when (key) {
                     "email" ->
-                        emailError.set(App.res.getString(value))
+                        emailError.set(value)
                     "password" ->
                         if (passwordError.get().isEmpty())
-                            passwordError.set(App.res.getString(value))
+                            passwordError.set(value)
                         else
-                            passwordError.set(passwordError.get() + "\n" + App.res.getString(value))
+                            passwordError.set(passwordError.get() + "\n" + value)
                 }
             }
         }

@@ -16,7 +16,7 @@ open class ErrorPresenterDialog(
         var params: HashMap<String, String>? = null) : ErrorPresenter()
 
 data class ErrorPresenterFields(
-        val fieldErrors: ArrayList<HashMap<String, Int>>) : ErrorPresenter()
+        val fieldErrors: ArrayList<HashMap<String, String>>) : ErrorPresenter()
 
 enum class DialogType {
     NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP,

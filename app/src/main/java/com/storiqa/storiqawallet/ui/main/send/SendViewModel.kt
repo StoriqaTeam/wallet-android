@@ -104,7 +104,7 @@ constructor(navigator: IMainNavigator,
             it.forEach { (key, value) ->
                 when (key) {
                     "account" -> {
-                        addressError.set(App.res.getString(value))
+                        addressError.set(value)
                         sendButtonEnabled.set(false)
                     }
                 }
