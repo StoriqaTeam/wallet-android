@@ -205,7 +205,7 @@ constructor(navigator: IMainNavigator,
                 currency.currencyISO.toLowerCase(),
                 amountFiat.get(),
                 Currency.USD.currencyISO.toLowerCase(),
-                currencyFormatter.getStringAmount(fees[seekBarFeePosition.get()].value, currency)
+                fees[seekBarFeePosition.get()].value
 
         )
         walletApi
@@ -265,6 +265,7 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
+        currencyConverter = CurrencyConverter(rates)
         val mapper = AccountMapper(CurrencyConverter(rates))
         if (accounts.isNotEmpty() && rates.isNotEmpty()) {
             val tempAccounts = java.util.ArrayList<Account>()

@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey
 import com.storiqa.storiqawallet.data.network.responses.UserInfoResponse
 
 @Entity(tableName = "Users",
-        indices = [Index(value = arrayOf("id"),
-        unique = true)])
+        indices = [Index(value = arrayOf("id"), unique = true)])
 data class UserEntity(
         @PrimaryKey var email: String,
         @ColumnInfo(name = "id") var id: Long,

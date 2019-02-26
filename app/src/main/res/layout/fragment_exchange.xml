@@ -53,8 +53,8 @@
             style="@style/Widget.Design.TextInputLayout.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:errorText="@{viewModel.errorAmountRemittance}"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -64,8 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_text_height"
                 android:hint="@string/hint_amount_remittance"
-                android:inputType="numberDecimal"
                 android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
                 android:nextFocusDown="@+id/etAmountCollection"
                 android:text="@={viewModel.amountRemittance}" />
 
@@ -76,8 +76,8 @@
             style="@style/Widget.Design.TextInputLayout.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:errorText="@{viewModel.errorAmountCollection}"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -87,8 +87,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_text_height"
                 android:hint="@string/hint_amount_collection"
-                android:inputType="numberDecimal"
                 android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
                 android:text="@={viewModel.amountCollection}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -96,13 +96,15 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvExchangeRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.exchangeRate}"
+                android:text="@{viewModel.exchangeRateDescription}"
                 android:visibility="@{(viewModel.countDown &lt;= 0) ? View.INVISIBLE : View.VISIBLE}"
                 tools:text="1 STQ = 0,00000036 BTС" />
 
@@ -118,11 +120,22 @@
             <ProgressBar
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_gravity="end"
                 android:layout_marginRight="10dp"
-                android:visibility="@{(viewModel.countDown == 0 &amp;&amp; (viewModel.amountRemittance != `` || viewModel.amountCollection != ``)) ? View.VISIBLE : View.INVISIBLE}"
-                android:layout_gravity="end" />
+                android:visibility="@{(viewModel.countDown == 0 &amp;&amp; (viewModel.amountRemittance != `` || viewModel.amountCollection != ``)) ? View.VISIBLE : View.INVISIBLE}" />
 
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/not_enough_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:text="@{viewModel.errorCommon}"
+            android:textColor="@color/error"
+            android:visibility="@{viewModel.errorCommon.equals(``) ? View.GONE : View.VISIBLE}"
+            android:layout_marginRight="30dp" />
 
         <Button
             android:id="@+id/btnExchange"

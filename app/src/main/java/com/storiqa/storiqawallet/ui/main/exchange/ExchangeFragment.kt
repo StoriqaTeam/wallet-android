@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.ui.main.exchange
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.storiqa.storiqawallet.BR
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.data.model.Account
@@ -56,6 +57,10 @@ class ExchangeFragment : BaseFragment<FragmentExchangeBinding, ExchangeViewModel
     private fun subscribeEvents() {
         viewModel.updateAccounts.observe(this, Observer {
             updateAccounts(it)
+        })
+
+        viewModel.showSuccessMessage.observe(this, Observer {
+            Snackbar.make(binding.toolbar, "Exchanged successfully", Snackbar.LENGTH_SHORT).show()
         })
     }
 

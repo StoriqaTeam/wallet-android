@@ -106,6 +106,12 @@ open class ErrorHandler {
 
                     ErrorCode.NOT_ENOUGH_ON_MARKET ->
                         errorField[field] = R.string.error_not_enough_money_on_market
+
+                    ErrorCode.NOT_FOUND_EXCHANGE_RATE ->
+                        errorField[field] = R.string.error_not_found_exchange_rate
+
+                    ErrorCode.EXCHANGE_WRONG_LIMIT ->
+                        errorField[field] = R.string.error_exchange_not_in_range
                 }
 
                 errorFields.add(errorField)

@@ -24,4 +24,12 @@ interface IMainNavigator : IBaseNavigator {
 
     fun showSendConfirmationDialog(address: String, amount: String, fee: String, total: String, onConfirm: () -> Unit)
 
+    fun showExchangeConfirmationDialog(
+            remittanceAccount: String,
+            remittanceAmount: String,
+            collectionAccount: String,
+            collectionAmount: String,
+            onConfirm: () -> Unit
+    )
+
 }

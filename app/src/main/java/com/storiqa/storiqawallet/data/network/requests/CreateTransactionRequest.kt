@@ -9,9 +9,9 @@ data class CreateTransactionRequest(
         val toCurrency: String,
         val value: String,
         val valueCurrency: String,
-        val fiatValue: String,
-        val fiatCurrency: String,
-        val fee: String,
+        val fiatValue: String? = null,
+        val fiatCurrency: String? = null,
+        val fee: String = "0",
         val exchangeId: String? = null,
-        val exchangeRate: String? = null
+        val exchangeRate: Double? = null
 )

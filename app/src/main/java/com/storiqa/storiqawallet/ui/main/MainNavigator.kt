@@ -5,6 +5,7 @@ import android.view.View
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.ui.base.navigator.BaseNavigator
 import com.storiqa.storiqawallet.ui.base.navigator.INavigator
+import com.storiqa.storiqawallet.ui.dialogs.ExchangeConfirmationDialog
 import com.storiqa.storiqawallet.ui.dialogs.SendConfirmationDialog
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
 import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsFragment
@@ -64,6 +65,22 @@ class MainNavigator(private val navigator: INavigator) : BaseNavigator(navigator
 
     override fun showSendConfirmationDialog(address: String, amount: String, fee: String, total: String, onConfirm: () -> Unit) {
         val dialog = SendConfirmationDialog.newInstance(address, amount, fee, total)
+        dialog.setConfirmClickedListener(onConfirm)
+        navigator.showDialogFragment(dialog)
+    }
+
+    override fun showExchangeConfirmationDialog(
+            remittanceAccount: String,
+            remittanceAmount: String,
+            collectionAccount: String,
+            collectionAmount: String,
+            onConfirm: () -> Unit
+    ) {
+        val dialog = ExchangeConfirmationDialog.newInstance(
+                remittanceAccount,
+                remittanceAmount,
+                collectionAccount,
+                collectionAmount)
         dialog.setConfirmClickedListener(onConfirm)
         navigator.showDialogFragment(dialog)
     }

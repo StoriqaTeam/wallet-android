@@ -22,6 +22,8 @@
     <string name="error_not_enough_money">Not enough money</string>
     <string name="error_different_address">Different address</string>
     <string name="error_not_enough_money_on_market">Not enough money on market</string>
+    <string name="error_not_found_exchange_rate">Not found exchange rate</string>
+    <string name="error_exchange_not_in_range">Transaction amount should be between %s and %s.</string>
 
     <string name="dialog_no_internet_title">No internet</string>
     <string name="dialog_no_internet_description">No internet description</string>
@@ -133,6 +135,7 @@
     <string name="text_minutes">min</string>
     <string name="text_seconds">sec</string>
     <string name="text_confirm_sending">Confirm sending</string>
+    <string name="text_confirm_exchanging">Confirm exchanging</string>
     <string name="text_address">Address</string>
     <string name="text_amount">Amount</string>
     <string name="text_transaction_fee">Transaction fee</string>

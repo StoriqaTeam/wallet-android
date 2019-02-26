@@ -47,6 +47,12 @@ enum class ErrorCode {
     DIFFERENT_CURRENCY,
 
     @SerializedName("not_enough_on_market")
-    NOT_ENOUGH_ON_MARKET
+    NOT_ENOUGH_ON_MARKET,
+
+    @SerializedName("not_found")
+    NOT_FOUND_EXCHANGE_RATE,
+
+    @SerializedName("limit")
+    EXCHANGE_WRONG_LIMIT
 
 }

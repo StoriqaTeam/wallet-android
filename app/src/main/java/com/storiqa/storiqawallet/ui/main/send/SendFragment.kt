@@ -89,7 +89,7 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
         })
 
         viewModel.showSuccessMessage.observe(this, Observer {
-            Snackbar.make(binding.toolbar, "Transaction successfully sent", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.toolbar, "Transaction successfully sent", Snackbar.LENGTH_SHORT).show()
         })
     }
 
