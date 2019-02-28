@@ -205,6 +205,11 @@ constructor(navigator: IMainNavigator,
         val email = appData.currentUserEmail
         val currencyFrom = accounts[fromPosition].currency
         val currencyTo = accounts[toPosition].currency
+        val amount = if (isAmountRemittanceLastEdited) {
+            currencyFormatter.getStringAmount(amountRemittance.get(), currencyFrom)
+        } else {
+            currencyFormatter.getStringAmount(amountCollection.get(), currencyFrom)
+        }
         val request = CreateTransactionRequest(
                 UUID.randomUUID().toString(),
                 userData.id,
@@ -212,7 +217,7 @@ constructor(navigator: IMainNavigator,
                 accounts[toPosition].id,
                 "account",
                 currencyTo.currencyISO.toLowerCase(),
-                currencyFormatter.getStringAmount(amountRemittance.get(), currencyFrom),
+                amount,
                 currencyFrom.currencyISO.toLowerCase(),
                 exchangeId = exchangeId,
                 exchangeRate = exchangeRate

@@ -103,7 +103,7 @@ open class ErrorHandler {
                     ErrorCode.DIFFERENT_CURRENCY ->
                         errorField[field] = App.res.getString(R.string.error_different_address)
 
-                    ErrorCode.TOKEN_EXPIRED -> TODO()
+                    ErrorCode.EXPIRED -> TODO()
 
                     ErrorCode.NOT_ENOUGH_ON_MARKET ->
                         errorField[field] = App.res.getString(R.string.error_not_enough_money_on_market)
@@ -119,6 +119,10 @@ open class ErrorHandler {
                                 R.string.error_exchange_not_in_range,
                                 "$minLimit $currency",
                                 "$maxLimit $currency")
+                    }
+
+                    ErrorCode.NOT_ENOUGH_BALANCE -> {
+                        errorField[field] = App.res.getString(R.string.error_not_enough_balance)
                     }
                 }
 

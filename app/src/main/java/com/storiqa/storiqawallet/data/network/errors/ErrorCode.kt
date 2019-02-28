@@ -41,7 +41,7 @@ enum class ErrorCode {
     WRONG_DEVICE_ID,
 
     @SerializedName("expired")
-    TOKEN_EXPIRED,
+    EXPIRED,//token or exchange rate
 
     @SerializedName("currency")
     DIFFERENT_CURRENCY,
@@ -53,6 +53,8 @@ enum class ErrorCode {
     NOT_FOUND_EXCHANGE_RATE,
 
     @SerializedName("limit")
-    EXCHANGE_WRONG_LIMIT
+    EXCHANGE_WRONG_LIMIT,
 
+    @SerializedName("not_enough_balance")
+    NOT_ENOUGH_BALANCE
 }
