@@ -29,10 +29,11 @@ class RepositoryModule {
     internal fun provideAccountsRepository(
             userDao: UserDao,
             accountDao: AccountDao,
+            rateDao: RateDao,
             walletApi: WalletApi,
             appDataStorage: IAppDataStorage,
             signUtil: SignUtil): IAccountsRepository {
-        return AccountsRepository(userDao, accountDao, walletApi, appDataStorage, signUtil)
+        return AccountsRepository(userDao, accountDao, rateDao, walletApi, appDataStorage, signUtil)
     }
 
     @Provides

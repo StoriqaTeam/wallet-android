@@ -56,16 +56,13 @@ class AccountFragment : BaseFragment<FragmentAccountBinding, AccountViewModel>()
             viewModel.onAccountSelected(position)
         }
         if (isRestoring) {
-            updateAccounts(viewModel.accounts)
             initTransactionsRecycler(viewModel.transactions)
             isRestoring = false
         }
     }
 
     private fun subscribeEvents() {
-        viewModel.updateAccounts.observe(this, Observer {
-            updateAccounts(it)
-        })
+        viewModel.accounts.observe(this, Observer { updateAccounts(it) })
 
         viewModel.updateTransactions.observe(this, Observer {
             updateTransactions(it)

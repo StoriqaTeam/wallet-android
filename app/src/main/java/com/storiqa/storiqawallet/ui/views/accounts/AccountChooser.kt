@@ -84,7 +84,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 
     private fun updateAccounts() {
         accountsAdapter?.updateAccounts(accounts)
-        if (initialPosition != -1) {
+        if (initialPosition != -1 && accounts.isNotEmpty()) {
             accountsPager.setCurrentItem(initialPosition, false)
             pageIndicator.selection = initialPosition
             if (initialPosition == 0 && accounts.isNotEmpty())

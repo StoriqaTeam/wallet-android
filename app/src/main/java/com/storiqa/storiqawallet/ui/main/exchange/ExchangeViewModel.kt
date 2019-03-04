@@ -5,13 +5,10 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableLong
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.common.CurrencyConverter
 import com.storiqa.storiqawallet.common.CurrencyFormatter
+import com.storiqa.storiqawallet.common.NonNullMutableLiveData
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.data.db.entity.AccountEntity
-import com.storiqa.storiqawallet.data.db.entity.RateEntity
-import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.model.Currency
 import com.storiqa.storiqawallet.data.network.WalletApi
@@ -22,16 +19,13 @@ import com.storiqa.storiqawallet.data.network.requests.RefreshRateRequest
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
-import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getTimestampLong
-import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import java.lang.System.currentTimeMillis
 import java.math.BigDecimal
@@ -43,17 +37,16 @@ class ExchangeViewModel
 @Inject
 constructor(navigator: IMainNavigator,
             private val accountsRepository: IAccountsRepository,
-            private val ratesRepository: IRatesRepository,
             private val transactionsRepository: ITransactionsRepository,
             private val walletApi: WalletApi,
             private val appData: IAppDataStorage,
             private val userData: IUserDataStorage,
             private val signUtil: SignUtil) : BaseViewModel<IMainNavigator>() {
 
-    val updateAccounts = SingleLiveEvent<List<Account>>()
     val showSuccessMessage = SingleLiveEvent<Boolean>()
 
-    var accounts: ArrayList<Account> = ArrayList()
+    var accounts = NonNullMutableLiveData<List<Account>>(ArrayList())
+
     var toPosition = 0
     var fromPosition = 0
 
@@ -73,13 +66,10 @@ constructor(navigator: IMainNavigator,
     init {
         setNavigator(navigator)
 
-        Flowable.combineLatest(ratesRepository.getRates(),
-                accountsRepository.getAccounts(userData.id),
-                BiFunction(::mapAccounts))
-                .distinct()
-                .subscribeOn(Schedulers.io())
+        accountsRepository
+                .getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { updateAccounts.value = it }
+                .subscribe { accounts.value = it.reversed() }
     }
 
     fun onAccountFromSelected(position: Int) {
@@ -96,13 +86,13 @@ constructor(navigator: IMainNavigator,
     fun onAmountRemittanceInputted() {
         isAmountRemittanceLastEdited = true
         amountCollection.set("")
-        onAmountChanged(amountRemittance.get(), accounts[fromPosition].currency)
+        onAmountChanged(amountRemittance.get(), accounts.value[fromPosition].currency)
     }
 
     fun onAmountCollectionInputted() {
         isAmountRemittanceLastEdited = false
         amountRemittance.set("")
-        onAmountChanged(amountCollection.get(), accounts[toPosition].currency)
+        onAmountChanged(amountCollection.get(), accounts.value[toPosition].currency)
     }
 
     fun onCountdownFinish() {
@@ -113,9 +103,9 @@ constructor(navigator: IMainNavigator,
     fun onExchangeButtonClicked() {
         hideKeyboard()
         getNavigator()?.showExchangeConfirmationDialog(
-                accounts[fromPosition].name,
+                accounts.value[fromPosition].name,
                 amountRemittance.get(),
-                accounts[toPosition].name,
+                accounts.value[toPosition].name,
                 amountCollection.get(),
                 ::sendExchangeTransaction
         )
@@ -136,9 +126,9 @@ constructor(navigator: IMainNavigator,
 
         countDown.set(0)
         if (isAmountRemittanceLastEdited)
-            onAmountChanged(amountRemittance.get(), accounts[fromPosition].currency)
+            onAmountChanged(amountRemittance.get(), accounts.value[fromPosition].currency)
         else
-            onAmountChanged(amountCollection.get(), accounts[toPosition].currency)
+            onAmountChanged(amountCollection.get(), accounts.value[toPosition].currency)
     }
 
     private fun onAmountChanged(amount: String, currency: Currency) {
@@ -166,8 +156,8 @@ constructor(navigator: IMainNavigator,
         val signHeader = signUtil.createSignHeader(email)
         val request = ExchangeRateRequest(
                 exchangeId,
-                accounts[fromPosition].currency.currencyISO.toLowerCase(),
-                accounts[toPosition].currency.currencyISO.toLowerCase(),
+                accounts.value[fromPosition].currency.currencyISO.toLowerCase(),
+                accounts.value[toPosition].currency.currencyISO.toLowerCase(),
                 amountCurrency.currencyISO.toLowerCase(),
                 amountInMinUnits
         )
@@ -203,19 +193,19 @@ constructor(navigator: IMainNavigator,
         showLoadingDialog()
         val email = appData.currentUserEmail
         val currencyFrom: Currency
-        val currencyTo = accounts[toPosition].currency
+        val currencyTo = accounts.value[toPosition].currency
         val amount = if (isAmountRemittanceLastEdited) {
-            currencyFrom = accounts[fromPosition].currency
+            currencyFrom = accounts.value[fromPosition].currency
             currencyFormatter.getStringAmount(amountRemittance.get(), currencyFrom)
         } else {
-            currencyFrom = accounts[toPosition].currency
+            currencyFrom = accounts.value[toPosition].currency
             currencyFormatter.getStringAmount(amountCollection.get(), currencyFrom)
         }
         val request = CreateTransactionRequest(
                 UUID.randomUUID().toString(),
                 userData.id,
-                accounts[fromPosition].id,
-                accounts[toPosition].id,
+                accounts.value[fromPosition].id,
+                accounts.value[toPosition].id,
                 "account",
                 currencyTo.currencyISO.toLowerCase(),
                 amount,
@@ -252,16 +242,6 @@ constructor(navigator: IMainNavigator,
         }
     }
 
-    private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
-        val mapper = AccountMapper(CurrencyConverter(rates))
-        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            val tempAccounts = ArrayList<Account>()
-            accounts.reversed().forEach { tempAccounts.add(mapper.map(it)) }
-            this.accounts = tempAccounts
-        }
-        return this.accounts
-    }
-
     private fun convertStringToDecimal(amount: String): BigDecimal {
         if (amount.isEmpty() || amount == ".")
             return BigDecimal.ZERO
@@ -274,22 +254,22 @@ constructor(navigator: IMainNavigator,
         countDown.set(expiration - currentTimeMillis() - 30000)
         exchangeRateDescription.set(buildString {
             append("1 ")
-            append(accounts[fromPosition].currency.getSymbol())
+            append(accounts.value[fromPosition].currency.getSymbol())
             append(" = ")
-            append(currencyFormatter.getAmountFromDouble(rate, accounts[toPosition].currency))
+            append(currencyFormatter.getAmountFromDouble(rate, accounts.value[toPosition].currency))
             append(" ")
-            append(accounts[toPosition].currency.getSymbol())
+            append(accounts.value[toPosition].currency.getSymbol())
         })
 
         if (isAmountRemittanceLastEdited) {
             val calculatedAmount = currencyFormatter
                     .getAmountFromDouble(amountRemittance.get().toDouble() * rate,
-                            accounts[toPosition].currency)
+                            accounts.value[toPosition].currency)
             amountCollection.set(calculatedAmount)
         } else {
             val calculatedAmount = currencyFormatter
                     .getAmountFromDouble(amountCollection.get().toDouble() / rate,
-                            accounts[fromPosition].currency)
+                            accounts.value[fromPosition].currency)
             amountRemittance.set(calculatedAmount)
         }
         checkExchangeButtonAvailable()
@@ -308,8 +288,8 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun isEnoughMoneyForExchange(): Boolean {
-        val balanceDecimal = BigDecimal(accounts[fromPosition].balance)
-        val amountRemittanceDecimal = BigDecimal(amountRemittance.get()).movePointRight(accounts[fromPosition].currency.getSignificantDigits())
+        val balanceDecimal = BigDecimal(accounts.value[fromPosition].balance)
+        val amountRemittanceDecimal = BigDecimal(amountRemittance.get()).movePointRight(accounts.value[fromPosition].currency.getSignificantDigits())
         return balanceDecimal >= amountRemittanceDecimal
     }
 }

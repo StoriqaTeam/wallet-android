@@ -1,10 +1,15 @@
 package com.storiqa.storiqawallet.data.repository
 
 import android.annotation.SuppressLint
+import com.storiqa.storiqawallet.common.CurrencyConverter
 import com.storiqa.storiqawallet.data.db.dao.AccountDao
+import com.storiqa.storiqawallet.data.db.dao.RateDao
 import com.storiqa.storiqawallet.data.db.dao.UserDao
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
+import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.db.entity.UserEntity
+import com.storiqa.storiqawallet.data.mapper.AccountMapper
+import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.network.WalletApi
 import com.storiqa.storiqawallet.data.network.responses.AccountResponse
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
@@ -12,16 +17,33 @@ import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
 class AccountsRepository(private val userDao: UserDao,
                          private val accountDao: AccountDao,
+                         private val rateDao: RateDao,
                          private val walletApi: WalletApi,
                          private val appDataStorage: IAppDataStorage,
                          private val signUtil: SignUtil) : IAccountsRepository {
 
-    override fun getAccounts(userId: Long): Flowable<List<AccountEntity>> {
-        return accountDao.loadAccounts(userId).subscribeOn(Schedulers.io()).distinct()
+    override fun getAccounts(userId: Long): Flowable<List<Account>> {
+        return Flowable
+                .combineLatest(
+                        rateDao
+                                .loadRatesFlowable()
+                                .subscribeOn(Schedulers.io())
+                                .filter { it.isNotEmpty() }
+                                .distinct(),
+                        accountDao
+                                .loadAccounts(userId)
+                                .subscribeOn(Schedulers.io())
+                                .filter { it.isNotEmpty() }
+                                .distinct(),
+                        BiFunction(::mapAccounts)
+                )
+                .distinct()
+                .subscribeOn(Schedulers.io())
     }
 
     @SuppressLint("CheckResult")
@@ -64,5 +86,14 @@ class AccountsRepository(private val userDao: UserDao,
         accounts.forEach { accountsList.add(AccountEntity(it)) }
 
         accountDao.deleteAndInsertAll(accountsList)
+    }
+
+    private fun mapAccounts(ratesDb: List<RateEntity>, accountsDb: List<AccountEntity>): List<Account> {
+        val mapper = AccountMapper(CurrencyConverter(ratesDb))
+        val accounts = ArrayList<Account>()
+        if (accountsDb.isNotEmpty() && ratesDb.isNotEmpty()) {
+            accountsDb.forEach { accounts.add(mapper.map(it)) }
+        }
+        return accounts
     }
 }

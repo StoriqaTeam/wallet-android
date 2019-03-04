@@ -13,8 +13,11 @@ import com.storiqa.storiqawallet.databinding.ItemAccountLargeBinding
 import com.storiqa.storiqawallet.ui.common.TopAlignSuperscriptSpan
 
 
-class AccountsAdapter(private var cards: List<Account>, val onClick: ((position: Int, element: View, transaction: String) -> Unit)? = null) :
-        RecyclerView.Adapter<AccountsAdapter.ViewHolder>() {
+class AccountsAdapter(
+        val onClick: ((position: Int, element: View, transaction: String) -> Unit)? = null
+) : RecyclerView.Adapter<AccountsAdapter.ViewHolder>() {
+
+    private var cards: List<Account> = ArrayList()
 
     fun updateAccounts(newCards: List<Account>) {
         cards = newCards

@@ -71,6 +71,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-rxjava2:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.5'
 
     //DI
     implementation "com.google.dagger:dagger:$daggerVersion"

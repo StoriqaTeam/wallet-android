@@ -2,11 +2,8 @@ package com.storiqa.storiqawallet.ui.main.wallet
 
 import android.os.Bundle
 import android.view.View
-import com.storiqa.storiqawallet.common.CurrencyConverter
+import androidx.lifecycle.MutableLiveData
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.data.db.entity.AccountEntity
-import com.storiqa.storiqawallet.data.db.entity.RateEntity
-import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
@@ -24,39 +21,17 @@ constructor(navigator: IMainNavigator,
             private val ratesRepository: IRatesRepository,
             private val userData: IUserDataStorage) : BaseViewModel<IMainNavigator>() {
 
-    val updateAccounts = SingleLiveEvent<ArrayList<Account>>()
+    val updateAccounts = SingleLiveEvent<List<Account>>()
 
-    var cards: ArrayList<Account> = ArrayList()
-
-    private var accounts: List<AccountEntity> = ArrayList()
-    private var rates: List<RateEntity> = ArrayList()
+    var accounts = MutableLiveData<List<Account>>()
 
     init {
         setNavigator(navigator)
 
-        ratesRepository.getRates()
+        accountsRepository
+                .getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    rates = it
-                    updateAccounts()
-                }
-
-        accountsRepository.getAccounts(userData.id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .filter { !it.isEmpty() }
-                .subscribe {
-                    accounts = it.reversed()
-                    updateAccounts()
-                }
-    }
-
-    private fun updateAccounts() {
-        val mapper = AccountMapper(CurrencyConverter(rates))
-        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            cards = ArrayList()
-            accounts.forEach { cards.add(mapper.map(it)) }
-            updateAccounts.value = cards
-        }
+                .subscribe { accounts.value = it.reversed() }
     }
 
     fun onAccountClicked(position: Int, element: View, transition: String) {

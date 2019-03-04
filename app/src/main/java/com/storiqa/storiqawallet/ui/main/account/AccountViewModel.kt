@@ -1,32 +1,24 @@
 package com.storiqa.storiqawallet.ui.main.account
 
 import androidx.databinding.ObservableBoolean
-import com.storiqa.storiqawallet.common.CurrencyConverter
+import com.storiqa.storiqawallet.common.NonNullMutableLiveData
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.data.db.entity.AccountEntity
-import com.storiqa.storiqawallet.data.db.entity.RateEntity
-import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
-import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.common.NoTransactionsViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
-import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.BiFunction
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class AccountViewModel
 @Inject
 constructor(navigator: IMainNavigator,
             private val accountsRepository: IAccountsRepository,
-            private val ratesRepository: IRatesRepository,
             private val transactionsRepository: ITransactionsRepository,
             private val userData: IUserDataStorage
 ) : BaseViewModel<IMainNavigator>(), NoTransactionsViewModel {
@@ -36,12 +28,11 @@ constructor(navigator: IMainNavigator,
     override val isNoTransactions = ObservableBoolean(false)
     val isShowButtonAvailable = ObservableBoolean(false)
 
-    val updateAccounts = SingleLiveEvent<List<Account>>()
     val updateTransactions = SingleLiveEvent<List<Transaction>>()
 
     var currentPosition = 0
 
-    var accounts: ArrayList<Account> = ArrayList()
+    var accounts = NonNullMutableLiveData<List<Account>>(ArrayList())
     var transactions: List<Transaction> = ArrayList()
 
     private var transactionsSubscription: Disposable? = null
@@ -49,30 +40,24 @@ constructor(navigator: IMainNavigator,
     init {
         setNavigator(navigator)
 
-        Flowable.combineLatest(ratesRepository.getRates(),
-                accountsRepository.getAccounts(userData.id),
-                BiFunction(::mapAccounts))
-                .distinct()
-                .subscribeOn(Schedulers.io())
+        accountsRepository
+                .getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { updateAccounts.value = it }
+                .subscribe { accounts.value = it.reversed() }
     }
 
     fun onSeeAllButtonClicked() {
-        getNavigator()?.showTransactionsFragment(accounts[currentPosition].accountAddress)
+        getNavigator()?.showTransactionsFragment(accounts.value[currentPosition].accountAddress)
     }
 
     fun onTransactionClicked(position: Int) {
-        getNavigator()?.showTransactionDetailsFragment(accounts[currentPosition].accountAddress, transactions[position].id)
+        getNavigator()?.showTransactionDetailsFragment(accounts.value[currentPosition].accountAddress, transactions[position].id)
     }
 
     fun onAccountSelected(position: Int) {
         currentPosition = position
-        /*val sab = transactionsSubscription
-        if (sab != null && !sab.isDisposed)
-            sab.dispose()*/
 
-        val address = accounts[position].accountAddress
+        val address = accounts.value[position].accountAddress
         transactionsSubscription = transactionsRepository
                 .getTransactionsByAddress(address, lastTransactionsAmount)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -80,16 +65,6 @@ constructor(navigator: IMainNavigator,
                     transactions = it
                     updateTransactions()
                 }
-    }
-
-    private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
-        val mapper = AccountMapper(CurrencyConverter(rates))
-        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            val tempAccounts = java.util.ArrayList<Account>()
-            accounts.reversed().forEach { tempAccounts.add(mapper.map(it)) }
-            this.accounts = tempAccounts
-        }
-        return this.accounts
     }
 
     private fun updateTransactions() {

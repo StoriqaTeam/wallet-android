@@ -14,8 +14,6 @@ import com.storiqa.storiqawallet.ui.common.addUserInputListener
 
 class ExchangeFragment : BaseFragment<FragmentExchangeBinding, ExchangeViewModel>() {
 
-    private var isRestoring = false
-
     override fun getLayoutId(): Int = R.layout.fragment_exchange
 
     override fun getBindingVariable(): Int = BR.viewModel
@@ -32,11 +30,6 @@ class ExchangeFragment : BaseFragment<FragmentExchangeBinding, ExchangeViewModel
 
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar)
-
-        if (isRestoring) {
-            updateAccounts(viewModel.accounts)
-            isRestoring = false
-        }
 
         binding.accountFromChooser.init(requireContext(), 0)
         binding.accountFromChooser.setOnPageSelectedListener { position, _ ->
@@ -55,9 +48,7 @@ class ExchangeFragment : BaseFragment<FragmentExchangeBinding, ExchangeViewModel
     }
 
     private fun subscribeEvents() {
-        viewModel.updateAccounts.observe(this, Observer {
-            updateAccounts(it)
-        })
+        viewModel.accounts.observe(this, Observer { updateAccounts(it) })
 
         viewModel.showSuccessMessage.observe(this, Observer {
             Snackbar.make(binding.toolbar, "Exchanged successfully", Snackbar.LENGTH_SHORT).show()

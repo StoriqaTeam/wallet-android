@@ -19,8 +19,6 @@ import com.storiqa.storiqawallet.ui.common.addUserInputListener
 
 class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
 
-    private var isRestoring = false
-
     override fun getLayoutId(): Int = R.layout.fragment_send
 
     override fun getBindingVariable(): Int = BR.viewModel
@@ -33,11 +31,6 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
         initView()
 
         subscribeEvents()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        isRestoring = true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -58,10 +51,6 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
         binding.accountChooser.setOnPageSelectedListener { position, _ ->
             viewModel.onAccountSelected(position)
         }
-        if (isRestoring) {
-            updateAccounts(viewModel.accounts)
-            isRestoring = false
-        }
 
         binding.etAddress.apply {
             setOnFocusChangeListener { _, hasFocus ->
@@ -76,9 +65,7 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
     }
 
     private fun subscribeEvents() {
-        viewModel.updateAccounts.observe(this, Observer {
-            updateAccounts(it)
-        })
+        viewModel.accounts.observe(this, Observer { updateAccounts(it) })
 
         viewModel.scanQrCode.observe(this, Observer {
             scanQrCode()

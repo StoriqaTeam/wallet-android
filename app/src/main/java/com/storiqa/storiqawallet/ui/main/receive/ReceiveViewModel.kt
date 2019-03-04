@@ -4,22 +4,16 @@ import android.graphics.Bitmap
 import androidx.databinding.ObservableField
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import com.storiqa.storiqawallet.common.CurrencyConverter
+import com.storiqa.storiqawallet.common.NonNullMutableLiveData
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.data.db.entity.AccountEntity
-import com.storiqa.storiqawallet.data.db.entity.RateEntity
-import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
-import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.BiFunction
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ReceiveViewModel
@@ -34,7 +28,7 @@ constructor(navigator: IMainNavigator,
     val shareQrCode = SingleLiveEvent<Bitmap>()
     val copyToClipboard = SingleLiveEvent<String>()
 
-    var accounts: ArrayList<Account> = ArrayList()
+    var accounts = NonNullMutableLiveData<List<Account>>(ArrayList())
 
     var currentPosition = 0
 
@@ -44,19 +38,16 @@ constructor(navigator: IMainNavigator,
     init {
         setNavigator(navigator)
 
-        Flowable.combineLatest(ratesRepository.getRates(),
-                accountsRepository.getAccounts(userData.id),
-                BiFunction(::mapAccounts))
-                .distinct()
-                .subscribeOn(Schedulers.io())
+        accountsRepository
+                .getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { updateAccounts.value = it }
+                .subscribe { accounts.value = it.reversed() }
     }
 
     fun onAccountSelected(position: Int) {
         currentPosition = position
 
-        val blockchainAddress = accounts[position].accountAddress
+        val blockchainAddress = accounts.value[position].accountAddress
         val barcodeEncoder = BarcodeEncoder()
         val bitmap = barcodeEncoder.encodeBitmap(blockchainAddress, BarcodeFormat.QR_CODE, 400, 400)
         qrCode.set(bitmap)
@@ -70,16 +61,6 @@ constructor(navigator: IMainNavigator,
     }
 
     fun onCopyButtonClick() {
-        copyToClipboard.value = accounts[currentPosition].accountAddress
-    }
-
-    private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
-        val mapper = AccountMapper(CurrencyConverter(rates))
-        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            val tempAccounts = java.util.ArrayList<Account>()
-            accounts.reversed().forEach { tempAccounts.add(mapper.map(it)) }
-            this.accounts = tempAccounts
-        }
-        return this.accounts
+        copyToClipboard.value = accounts.value[currentPosition].accountAddress
     }
 }

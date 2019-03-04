@@ -21,8 +21,6 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
 
     private val clipDataLabel = "Blockchain address"
 
-    private var isRestoring = false
-
     override fun getLayoutId(): Int = R.layout.fragment_receive
 
     override fun getBindingVariable(): Int = BR.viewModel
@@ -37,21 +35,12 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
         subscribeEvents()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        isRestoring = true
-    }
-
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar)
 
         binding.accountChooser.init(requireContext(), viewModel.currentPosition)
         binding.accountChooser.setOnPageSelectedListener { position, _ ->
             viewModel.onAccountSelected(position)
-        }
-        if (isRestoring) {
-            updateAccounts(viewModel.accounts)
-            isRestoring = false
         }
 
         binding.etAddress.inputType = InputType.TYPE_NULL
@@ -60,9 +49,7 @@ class ReceiveFragment : BaseFragment<FragmentReceiveBinding, ReceiveViewModel>()
     }
 
     private fun subscribeEvents() {
-        viewModel.updateAccounts.observe(this, Observer {
-            updateAccounts(it)
-        })
+        viewModel.accounts.observe(this, Observer { updateAccounts(it) })
 
         viewModel.shareQrCode.observe(this, Observer {
             val ctx = context ?: return@Observer

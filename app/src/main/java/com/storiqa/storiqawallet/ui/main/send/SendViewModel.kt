@@ -6,9 +6,6 @@ import androidx.databinding.ObservableInt
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.*
-import com.storiqa.storiqawallet.data.db.entity.AccountEntity
-import com.storiqa.storiqawallet.data.db.entity.RateEntity
-import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.model.Currency
 import com.storiqa.storiqawallet.data.network.WalletApi
@@ -26,9 +23,7 @@ import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getPresentableTime
 import com.storiqa.storiqawallet.utils.isAddressValid
-import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import java.math.BigDecimal
 import java.util.*
@@ -47,7 +42,6 @@ constructor(navigator: IMainNavigator,
             private val signUtil: SignUtil
 ) : BaseViewModel<IMainNavigator>() {
 
-    val updateAccounts = SingleLiveEvent<List<Account>>()
     val scanQrCode = SingleLiveEvent<Boolean>()
     val showInvalidAddressError = SingleLiveEvent<Boolean>()
     val showSuccessMessage = SingleLiveEvent<Boolean>()
@@ -69,7 +63,7 @@ constructor(navigator: IMainNavigator,
     private val currencyFormatter = CurrencyFormatter()
     private var currencyConverter: ICurrencyConverter? = null
 
-    var accounts: ArrayList<Account> = ArrayList()
+    var accounts = NonNullMutableLiveData<List<Account>>(ArrayList())
     private var fees: List<Fee> = ArrayList()
     private lateinit var feeCurrency: Currency
     private var isAmountCryptoLastEdited = true
@@ -92,13 +86,10 @@ constructor(navigator: IMainNavigator,
             }
         }
 
-        Flowable.combineLatest(ratesRepository.getRates(),
-                accountsRepository.getAccounts(userData.id),
-                BiFunction(::mapAccounts))
-                .distinct()
-                .subscribeOn(Schedulers.io())
+        accountsRepository
+                .getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { updateAccounts.value = it }
+                .subscribe { accounts.value = it.reversed() }
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {
@@ -145,7 +136,7 @@ constructor(navigator: IMainNavigator,
     }
 
     fun onQrCodeScanned(blockchainAddress: String) {
-        accounts.forEach {
+        accounts.value.forEach {
             if (isAddressValid(blockchainAddress, it.currency)) {
                 feesSize.set(0)
                 fees = ArrayList()
@@ -159,7 +150,7 @@ constructor(navigator: IMainNavigator,
     fun validateAddress() {
         if (address.get().isEmpty())
             return
-        if (isAddressValid(address.get(), accounts[currentPosition].currency)) {
+        if (isAddressValid(address.get(), accounts.value[currentPosition].currency)) {
             addressError.set("")
             Thread {
                 requestFees(address.get())
@@ -176,7 +167,7 @@ constructor(navigator: IMainNavigator,
         if (currencyConverter == null || amountFiat.get().isEmpty() || amountFiat.get() == ".")
             amountCrypto.set("")
         else
-            amountCrypto.set(currencyConverter?.convertBalance(amountFiat.get(), Currency.USD, accounts[currentPosition].currency)
+            amountCrypto.set(currencyConverter?.convertBalance(amountFiat.get(), Currency.USD, accounts.value[currentPosition].currency)
                     ?: "")
     }
 
@@ -185,7 +176,7 @@ constructor(navigator: IMainNavigator,
         if (currencyConverter == null || amountCrypto.get().isEmpty() || amountCrypto.get() == ".")
             amountFiat.set("")
         else
-            amountFiat.set(currencyConverter?.convertBalance(amountCrypto.get(), accounts[currentPosition].currency, Currency.USD)
+            amountFiat.set(currencyConverter?.convertBalance(amountCrypto.get(), accounts.value[currentPosition].currency, Currency.USD)
                     ?: "")
     }
 
@@ -193,11 +184,11 @@ constructor(navigator: IMainNavigator,
     private fun sendTransactionRequest() {
         showLoadingDialog()
         val email = appData.currentUserEmail
-        val currency = accounts[currentPosition].currency
+        val currency = accounts.value[currentPosition].currency
         val request = CreateTransactionRequest(
                 UUID.randomUUID().toString(),
                 userData.id,
-                accounts[currentPosition].id,
+                accounts.value[currentPosition].id,
                 address.get().removePrefix("0x"),
                 "address",
                 currency.currencyISO.toLowerCase(),
@@ -224,7 +215,7 @@ constructor(navigator: IMainNavigator,
         val email = appData.currentUserEmail
         val token = appData.token
         val signHeader = signUtil.createSignHeader(email)
-        val request = FeeRequest(accounts[currentPosition].currency.currencyISO.toLowerCase(), address.removePrefix("0x"))
+        val request = FeeRequest(accounts.value[currentPosition].currency.currencyISO.toLowerCase(), address.removePrefix("0x"))
         walletApi
                 .calculateFee(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
                 .subscribeOn(Schedulers.io())
@@ -262,26 +253,15 @@ constructor(navigator: IMainNavigator,
         sendButtonEnabled.set(false)
     }
 
-    private fun mapAccounts(rates: List<RateEntity>, accounts: List<AccountEntity>): List<Account> {
-        currencyConverter = CurrencyConverter(rates)
-        val mapper = AccountMapper(CurrencyConverter(rates))
-        if (accounts.isNotEmpty() && rates.isNotEmpty()) {
-            val tempAccounts = java.util.ArrayList<Account>()
-            accounts.reversed().forEach { tempAccounts.add(mapper.map(it)) }
-            this.accounts = tempAccounts
-        }
-        return this.accounts
-    }
-
     private fun isEnoughMoneyForSend(): Boolean {
         val feeDecimal = if (feesSize.get() == 0)
             BigDecimal.ZERO
         else
             BigDecimal(fees[seekBarFeePosition.get()].value).movePointLeft(feeCurrency.getSignificantDigits())
         val amountDecimal = BigDecimal(amountCrypto.get())
-        val balanceDecimal = BigDecimal(accounts[currentPosition].balance)
-                .movePointLeft(accounts[currentPosition].currency.getSignificantDigits())
-        total = "${feeDecimal + amountDecimal} ${accounts[currentPosition].currency.getSymbol()}"
+        val balanceDecimal = BigDecimal(accounts.value[currentPosition].balance)
+                .movePointLeft(accounts.value[currentPosition].currency.getSignificantDigits())
+        total = "${feeDecimal + amountDecimal} ${accounts.value[currentPosition].currency.getSymbol()}"
         return feeDecimal + amountDecimal <= balanceDecimal
     }
 }
