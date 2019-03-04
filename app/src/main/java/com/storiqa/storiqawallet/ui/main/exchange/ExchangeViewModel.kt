@@ -147,7 +147,6 @@ constructor(navigator: IMainNavigator,
         val decimalAmount = convertStringToDecimal(amount)
         obtainingRateRequest?.dispose()
         if (decimalAmount.compareTo(BigDecimal.ZERO) != 0 && toPosition != fromPosition) {
-            //todo cache check
             requestExchangeRate(amount, currency)
             countDown.set(0)
         } else {

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.Resources
 import com.storiqa.cryptokeys.IKeyGenerator
 import com.storiqa.cryptokeys.ISigner
-import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.db.AppDatabase
 import com.storiqa.storiqawallet.data.db.dao.*
 import com.storiqa.storiqawallet.data.network.CryptoCompareApi
@@ -22,6 +21,7 @@ import com.storiqa.storiqawallet.di.modules.RepositoryModule
 import com.storiqa.storiqawallet.di.modules.RoomModule
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
+import com.storiqa.storiqawallet.provider.ITokenProvider
 import com.storiqa.storiqawallet.utils.PrefUtil
 import dagger.Component
 

@@ -1,8 +1,8 @@
-package com.storiqa.storiqawallet.data
+package com.storiqa.storiqawallet.provider
 
 interface ITokenProvider {
 
-    fun getAccessToken(): String
+    val accessToken: String
 
     fun refreshToken(): String?
 

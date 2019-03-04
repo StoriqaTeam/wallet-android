@@ -7,8 +7,6 @@ import com.storiqa.cryptokeys.IKeyGenerator
 import com.storiqa.cryptokeys.ISigner
 import com.storiqa.cryptokeys.KeyGenerator
 import com.storiqa.cryptokeys.Signer
-import com.storiqa.storiqawallet.data.ITokenProvider
-import com.storiqa.storiqawallet.data.TokenProvider
 import com.storiqa.storiqawallet.data.network.OpenWalletApi
 import com.storiqa.storiqawallet.data.polling.IShortPolling
 import com.storiqa.storiqawallet.data.polling.ShortPolling
@@ -22,6 +20,8 @@ import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
+import com.storiqa.storiqawallet.provider.ITokenProvider
+import com.storiqa.storiqawallet.provider.TokenProvider
 import com.storiqa.storiqawallet.utils.PrefUtil
 import com.storiqa.storiqawallet.utils.SignUtil
 import dagger.Module

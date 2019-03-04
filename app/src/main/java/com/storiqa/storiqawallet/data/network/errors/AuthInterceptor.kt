@@ -2,7 +2,7 @@ package com.storiqa.storiqawallet.data.network.errors
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.storiqa.storiqawallet.data.ITokenProvider
+import com.storiqa.storiqawallet.provider.ITokenProvider
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
