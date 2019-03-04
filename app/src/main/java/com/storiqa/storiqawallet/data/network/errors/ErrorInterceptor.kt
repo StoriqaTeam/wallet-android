@@ -21,6 +21,10 @@ class ErrorInterceptor : Interceptor {
                 val type = object : TypeToken<HashMap<String, Array<ValidationError>>>() {}.type
                 val validationErrors: HashMap<String, Array<ValidationError>> =
                         gson.fromJson(response.body()?.string(), type)
+
+                if (validationErrors["token"]?.isNotEmpty() == true && validationErrors["token"]?.get(0)?.code == ErrorCode.EXPIRED)
+                    throw TokenExpired
+
                 throw UnprocessableEntity(validationErrors)
             }
             in 500..599 -> throw InternalServerError

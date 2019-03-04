@@ -9,7 +9,7 @@ interface IUserRepository {
 
     fun getUser(email: String): Flowable<UserEntity>
 
-    fun refreshUser(errorHandler: (Exception) -> Unit)
+    fun refreshUser(): Observable<UserInfoResponse>
 
     fun updateUser(email: String): Observable<UserInfoResponse>
 

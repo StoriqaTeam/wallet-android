@@ -8,4 +8,6 @@ object InternalServerError : ApiError()
 
 object UnknownError : ApiError()
 
+object TokenExpired : ApiError()
+
 class UnprocessableEntity(val validationErrors: HashMap<String, Array<ValidationError>>) : ApiError()

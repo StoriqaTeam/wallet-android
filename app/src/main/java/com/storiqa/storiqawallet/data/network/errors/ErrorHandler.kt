@@ -27,6 +27,9 @@ open class ErrorHandler {
             is IOException ->
                 return handleNoInternetError()
 
+            is TokenExpired ->
+                return handleTokenExpired()
+
             else ->
                 return handleUnknownError()
         }
@@ -50,6 +53,10 @@ open class ErrorHandler {
 
     private fun handleNoInternetError(): ErrorPresenterDialog {
         return NoInternetDialogPresenter()
+    }
+
+    private fun handleTokenExpired(): ErrorPresenterDialog {
+        return TokenExpiredDialogPresenter()
     }
 
     private fun handleUnprocessableEntity(validationErrors: HashMap<String,
@@ -103,7 +110,7 @@ open class ErrorHandler {
                     ErrorCode.DIFFERENT_CURRENCY ->
                         errorField[field] = App.res.getString(R.string.error_different_address)
 
-                    ErrorCode.TOKEN_EXPIRED -> TODO()
+                    ErrorCode.EXPIRED -> TODO()
 
                     ErrorCode.NOT_ENOUGH_ON_MARKET ->
                         errorField[field] = App.res.getString(R.string.error_not_enough_money_on_market)
@@ -120,6 +127,12 @@ open class ErrorHandler {
                                 "$minLimit $currency",
                                 "$maxLimit $currency")
                     }
+
+                    ErrorCode.NOT_ENOUGH_BALANCE -> {
+                        errorField[field] = App.res.getString(R.string.error_not_enough_balance)
+                    }
+
+                    ErrorCode.TOKEN_REVOKED -> TODO()
                 }
 
                 errorFields.add(errorField)

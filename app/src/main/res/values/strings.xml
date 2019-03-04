@@ -24,6 +24,7 @@
     <string name="error_not_enough_money_on_market">Not enough money on market</string>
     <string name="error_not_found_exchange_rate">Not found exchange rate</string>
     <string name="error_exchange_not_in_range">Transaction amount should be between\n%s and %s.</string>
+    <string name="error_not_enough_balance">Not enough balance(server may be, i`m not sure).</string>
 
     <string name="dialog_no_internet_title">No internet</string>
     <string name="dialog_no_internet_description">No internet description</string>
@@ -51,6 +52,8 @@
     <string name="dialog_wrong_device_id_description">Wrong device id description</string>
     <string name="dialog_email_not_provided_title">Email not provided</string>
     <string name="dialog_email_not_provided_description">You don`t have email in your social network</string>
+    <string name="dialog_token_expired_title">Token expired</string>
+    <string name="dialog_token_expired_description">Token expired description</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>

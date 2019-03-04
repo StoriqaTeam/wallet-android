@@ -87,7 +87,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="stable.stq.cloud"
+                    android:host="stage.stq.cloud"
                     android:pathPrefix="/wallet/reset_password"
                     android:scheme="https" />
             </intent-filter>

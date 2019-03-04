@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.View
 import com.storiqa.storiqawallet.common.CurrencyConverter
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.db.entity.AccountEntity
 import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.mapper.AccountMapper
 import com.storiqa.storiqawallet.data.model.Account
-import com.storiqa.storiqawallet.data.polling.ShortPolling
-import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
-import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
@@ -26,10 +22,7 @@ class WalletViewModel
 constructor(navigator: IMainNavigator,
             private val accountsRepository: IAccountsRepository,
             private val ratesRepository: IRatesRepository,
-            private val transactionsRepository: ITransactionsRepository,
-            private val userData: IUserDataStorage,
-            private val appData: IAppDataStorage,
-            private val tokenProvider: ITokenProvider) : BaseViewModel<IMainNavigator>() {
+            private val userData: IUserDataStorage) : BaseViewModel<IMainNavigator>() {
 
     val updateAccounts = SingleLiveEvent<ArrayList<Account>>()
 
@@ -40,12 +33,6 @@ constructor(navigator: IMainNavigator,
 
     init {
         setNavigator(navigator)
-
-        /*val token = appData.token
-        if (tokenProvider.isExpired(token))
-            tokenProvider.refreshToken({
-            }, ::handleError)*/
-
 
         ratesRepository.getRates()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,9 +48,6 @@ constructor(navigator: IMainNavigator,
                     accounts = it.reversed()
                     updateAccounts()
                 }
-
-        ShortPolling(accountsRepository, ratesRepository, transactionsRepository).start(userData.id, userData.email)
-
     }
 
     private fun updateAccounts() {

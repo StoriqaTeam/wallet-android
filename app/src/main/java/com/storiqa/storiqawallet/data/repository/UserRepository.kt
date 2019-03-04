@@ -22,21 +22,19 @@ class UserRepository(private val userDao: UserDao,
     }
 
     @SuppressLint("CheckResult")
-    override fun refreshUser(errorHandler: (Exception) -> Unit) {
+    override fun refreshUser(): Observable<UserInfoResponse> {
         val token = appDataStorage.token
 
         val email = appDataStorage.currentUserEmail
         val signHeader = signUtil.createSignHeader(email)
 
-        walletApi
+        return walletApi
                 .getUserInfo(signHeader.timestamp, signHeader.deviceId,
                         signHeader.signature, "Bearer $token")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError { errorHandler(it as Exception) }
                 .observeOn(Schedulers.io())
                 .doOnNext { userDao.insert(UserEntity(it)) }
-                .subscribe()
     }
 
     override fun updateUser(email: String): Observable<UserInfoResponse> {

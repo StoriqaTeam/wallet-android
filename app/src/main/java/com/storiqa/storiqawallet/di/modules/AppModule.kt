@@ -9,7 +9,7 @@ import com.storiqa.cryptokeys.KeyGenerator
 import com.storiqa.cryptokeys.Signer
 import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.TokenProvider
-import com.storiqa.storiqawallet.data.network.WalletApi
+import com.storiqa.storiqawallet.data.network.OpenWalletApi
 import com.storiqa.storiqawallet.data.polling.IShortPolling
 import com.storiqa.storiqawallet.data.polling.ShortPolling
 import com.storiqa.storiqawallet.data.preferences.AppDataStorage
@@ -19,6 +19,7 @@ import com.storiqa.storiqawallet.data.preferences.UserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.IRatesRepository
 import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
+import com.storiqa.storiqawallet.data.repository.IUserRepository
 import com.storiqa.storiqawallet.di.qualifiers.AppContext
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import com.storiqa.storiqawallet.utils.PrefUtil
@@ -53,10 +54,13 @@ class AppModule(private val app: Application) {
 
     @Provides
     @PerApplication
-    internal fun provideShortPolling(accountRepository: IAccountsRepository,
-                                     ratesRepository: IRatesRepository,
-                                     transactionsRepository: ITransactionsRepository): IShortPolling {
-        return ShortPolling(accountRepository, ratesRepository, transactionsRepository)
+    internal fun provideShortPolling(
+            userRepository: IUserRepository,
+            accountRepository: IAccountsRepository,
+            ratesRepository: IRatesRepository,
+            transactionsRepository: ITransactionsRepository
+    ): IShortPolling {
+        return ShortPolling(userRepository, accountRepository, ratesRepository, transactionsRepository)
     }
 
     @Provides
@@ -69,6 +73,9 @@ class AppModule(private val app: Application) {
 
     @Provides
     @PerApplication
-    internal fun provideTokenProvider(appData: IAppDataStorage, signUtil: SignUtil, walletApi: WalletApi):
-            ITokenProvider = TokenProvider(appData, signUtil, walletApi)
+    internal fun provideTokenProvider(
+            appData: IAppDataStorage,
+            openWalletApi: OpenWalletApi,
+            signUtil: SignUtil):
+            ITokenProvider = TokenProvider(appData, openWalletApi, signUtil)
 }

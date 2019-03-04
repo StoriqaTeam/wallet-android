@@ -6,7 +6,6 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
-import com.storiqa.storiqawallet.data.ITokenProvider
 import com.storiqa.storiqawallet.data.network.errors.DialogType
 import com.storiqa.storiqawallet.data.network.errors.ResetPinDialogPresenter
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
@@ -19,8 +18,7 @@ class PinCodeViewModel
 @Inject
 constructor(private val vibrationUtil: VibrationUtil,
             private val userData: IUserDataStorage,
-            private val appData: IAppDataStorage,
-            private val tokenProvider: ITokenProvider) :
+            private val appData: IAppDataStorage) :
         BaseViewModel<IPinCodeNavigator>() {
 
     private val pinLength = App.res.getInteger(R.integer.PIN_LENGTH)
