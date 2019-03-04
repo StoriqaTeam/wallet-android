@@ -86,9 +86,14 @@ constructor(navigator: IMainNavigator,
             }
         }
 
-        accountsRepository
-                .getAccounts(userData.id)
+        ratesRepository.getRates()
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { currencyConverter = CurrencyConverter(it) }
+                .flatMap {
+                    accountsRepository
+                            .getAccounts(userData.id)
+                            .observeOn(AndroidSchedulers.mainThread())
+                }
                 .subscribe { accounts.value = it.reversed() }
     }
 
@@ -239,13 +244,13 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun checkSendButtonAvailable() {
+        isNotEnough.set(false)
         if (address.get().isNotEmpty() && addressError.get().isEmpty() && fees.isNotEmpty()
                 && amountCrypto.get().isNotEmpty() && amountFiat.get().isNotEmpty()
                 && amountCrypto.get() != "." && amountFiat.get() != "."
                 && BigDecimal(amountCrypto.get()).compareTo(BigDecimal.ZERO) != 0) {
             if (isEnoughMoneyForSend()) {
                 sendButtonEnabled.set(true)
-                isNotEnough.set(false)
                 return
             } else
                 isNotEnough.set(true)
