@@ -56,5 +56,8 @@ enum class ErrorCode {
     EXCHANGE_WRONG_LIMIT,
 
     @SerializedName("not_enough_balance")
-    NOT_ENOUGH_BALANCE
+    NOT_ENOUGH_BALANCE,
+
+    @SerializedName("revoked")
+    TOKEN_REVOKED
 }

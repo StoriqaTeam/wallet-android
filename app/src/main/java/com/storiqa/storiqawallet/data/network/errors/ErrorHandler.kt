@@ -27,6 +27,9 @@ open class ErrorHandler {
             is IOException ->
                 return handleNoInternetError()
 
+            is TokenExpired ->
+                return handleTokenExpired()
+
             else ->
                 return handleUnknownError()
         }
@@ -50,6 +53,10 @@ open class ErrorHandler {
 
     private fun handleNoInternetError(): ErrorPresenterDialog {
         return NoInternetDialogPresenter()
+    }
+
+    private fun handleTokenExpired(): ErrorPresenterDialog {
+        return TokenExpiredDialogPresenter()
     }
 
     private fun handleUnprocessableEntity(validationErrors: HashMap<String,
@@ -124,6 +131,8 @@ open class ErrorHandler {
                     ErrorCode.NOT_ENOUGH_BALANCE -> {
                         errorField[field] = App.res.getString(R.string.error_not_enough_balance)
                     }
+
+                    ErrorCode.TOKEN_REVOKED -> TODO()
                 }
 
                 errorFields.add(errorField)

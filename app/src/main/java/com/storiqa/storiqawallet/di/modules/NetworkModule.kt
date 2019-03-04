@@ -2,7 +2,9 @@ package com.storiqa.storiqawallet.di.modules
 
 import com.storiqa.storiqawallet.BuildConfig
 import com.storiqa.storiqawallet.data.network.CryptoCompareApi
+import com.storiqa.storiqawallet.data.network.OpenWalletApi
 import com.storiqa.storiqawallet.data.network.WalletApi
+import com.storiqa.storiqawallet.data.network.errors.AuthInterceptor
 import com.storiqa.storiqawallet.data.network.errors.ErrorInterceptor
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import dagger.Module
@@ -30,7 +32,30 @@ class NetworkModule {
 
     @Provides
     @PerApplication
-    internal fun provideWalletApi(okHttpClient: OkHttpClient): WalletApi {
+    internal fun provideWalletApi(okHttpClient: OkHttpClient, authInterceptor: AuthInterceptor): WalletApi {
+        val httpClientBuilder = okHttpClient.newBuilder()
+                .addInterceptor(authInterceptor)
+                .connectTimeout(timeout, TimeUnit.SECONDS)
+                .readTimeout(timeout, TimeUnit.SECONDS)
+
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            httpClientBuilder.addInterceptor(loggingInterceptor)
+        }
+
+        return Retrofit.Builder()
+                .baseUrl(BuildConfig.BASE_URL)
+                .client(httpClientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+                .build()
+                .create(WalletApi::class.java)
+    }
+
+    @Provides
+    @PerApplication
+    internal fun provideOpenWalletApi(okHttpClient: OkHttpClient): OpenWalletApi {
         val httpClientBuilder = okHttpClient.newBuilder()
                 .addInterceptor(ErrorInterceptor())
                 .connectTimeout(timeout, TimeUnit.SECONDS)
@@ -48,7 +73,7 @@ class NetworkModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
-                .create(WalletApi::class.java)
+                .create(OpenWalletApi::class.java)
     }
 
     @Provides

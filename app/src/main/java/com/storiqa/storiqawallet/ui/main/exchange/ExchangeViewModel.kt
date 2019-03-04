@@ -203,11 +203,13 @@ constructor(navigator: IMainNavigator,
     private fun sendExchangeTransaction() {
         showLoadingDialog()
         val email = appData.currentUserEmail
-        val currencyFrom = accounts[fromPosition].currency
+        val currencyFrom: Currency
         val currencyTo = accounts[toPosition].currency
         val amount = if (isAmountRemittanceLastEdited) {
+            currencyFrom = accounts[fromPosition].currency
             currencyFormatter.getStringAmount(amountRemittance.get(), currencyFrom)
         } else {
+            currencyFrom = accounts[toPosition].currency
             currencyFormatter.getStringAmount(amountCollection.get(), currencyFrom)
         }
         val request = CreateTransactionRequest(

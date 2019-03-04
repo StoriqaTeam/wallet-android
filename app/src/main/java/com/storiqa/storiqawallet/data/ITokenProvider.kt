@@ -2,11 +2,9 @@ package com.storiqa.storiqawallet.data
 
 interface ITokenProvider {
 
-    fun getToken(): String
+    fun getAccessToken(): String
 
-    fun isExpired(token: String): Boolean
-
-    fun refreshToken(f: (String) -> Unit, errorHandler: (Exception) -> Unit)
+    fun refreshToken(): String?
 
     fun revokeToken(errorHandler: (Exception) -> Unit)
 

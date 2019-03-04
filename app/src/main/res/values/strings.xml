@@ -52,6 +52,8 @@
     <string name="dialog_wrong_device_id_description">Wrong device id description</string>
     <string name="dialog_email_not_provided_title">Email not provided</string>
     <string name="dialog_email_not_provided_description">You don`t have email in your social network</string>
+    <string name="dialog_token_expired_title">Token expired</string>
+    <string name="dialog_token_expired_description">Token expired description</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
