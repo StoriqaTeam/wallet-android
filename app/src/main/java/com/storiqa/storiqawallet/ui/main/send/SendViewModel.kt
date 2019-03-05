@@ -127,9 +127,10 @@ constructor(navigator: IMainNavigator,
 
     fun onSendButtonClicked() {
         hideKeyboard()
+        val amount = BigDecimal(amountCrypto.get()).stripTrailingZeros().toPlainString()
         getNavigator()?.showSendConfirmationDialog(
                 address.get(),
-                amountCrypto.get(),
+                amount,
                 feeAmount.get(),
                 total,
                 ::sendTransactionRequest
@@ -248,7 +249,8 @@ constructor(navigator: IMainNavigator,
         if (address.get().isNotEmpty() && addressError.get().isEmpty() && fees.isNotEmpty()
                 && amountCrypto.get().isNotEmpty() && amountFiat.get().isNotEmpty()
                 && amountCrypto.get() != "." && amountFiat.get() != "."
-                && BigDecimal(amountCrypto.get()).compareTo(BigDecimal.ZERO) != 0) {
+                && BigDecimal(amountCrypto.get()).compareTo(BigDecimal.ZERO) != 0
+                && BigDecimal(amountCrypto.get()).compareTo(BigDecimal.ONE.movePointLeft(accounts.value[currentPosition].currency.getSignificantDigits())) == 1) {
             if (isEnoughMoneyForSend()) {
                 sendButtonEnabled.set(true)
                 return
@@ -266,7 +268,7 @@ constructor(navigator: IMainNavigator,
         val amountDecimal = BigDecimal(amountCrypto.get())
         val balanceDecimal = BigDecimal(accounts.value[currentPosition].balance)
                 .movePointLeft(accounts.value[currentPosition].currency.getSignificantDigits())
-        total = "${feeDecimal + amountDecimal} ${accounts.value[currentPosition].currency.getSymbol()}"
+        total = "${(feeDecimal + amountDecimal).stripTrailingZeros()} ${accounts.value[currentPosition].currency.getSymbol()}"
         return feeDecimal + amountDecimal <= balanceDecimal
     }
 }

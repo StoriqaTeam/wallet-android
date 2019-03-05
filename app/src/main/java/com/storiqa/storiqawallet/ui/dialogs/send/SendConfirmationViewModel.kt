@@ -23,7 +23,7 @@ constructor() : ViewModel() {
 
     fun initData(address: String, amount: String, fee: String, total: String) {
         fullAddress = address
-        this.amount = ObservableField(if (amount.startsWith("")) "0$amount" else amount)
+        this.amount = ObservableField(amount)
         this.fee = ObservableField(if (fee.isEmpty()) App.res.getString(R.string.text_no_fee) else fee)
         this.total = ObservableField(total)
         this.address = ObservableField("${address.substring(0, 8)} . . . . " +

@@ -102,11 +102,13 @@ constructor(navigator: IMainNavigator,
 
     fun onExchangeButtonClicked() {
         hideKeyboard()
+        val remittance = BigDecimal(amountRemittance.get()).stripTrailingZeros().toPlainString()
+        val collection = BigDecimal(amountCollection.get()).stripTrailingZeros().toPlainString()
         getNavigator()?.showExchangeConfirmationDialog(
                 accounts.value[fromPosition].name,
-                amountRemittance.get(),
+                remittance,
                 accounts.value[toPosition].name,
-                amountCollection.get(),
+                collection,
                 ::sendExchangeTransaction
         )
     }
@@ -276,7 +278,9 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun checkExchangeButtonAvailable() {
-        if (amountRemittance.get().isNotEmpty() && amountCollection.get().isNotEmpty()) {
+        if (amountRemittance.get().isNotEmpty() && amountCollection.get().isNotEmpty()
+                && BigDecimal(amountRemittance.get()).compareTo(BigDecimal.ONE.movePointLeft(accounts.value[fromPosition].currency.getSignificantDigits())) == 1
+                && BigDecimal(amountCollection.get()).compareTo(BigDecimal.ONE.movePointLeft(accounts.value[toPosition].currency.getSignificantDigits())) == 1) {
             if (isEnoughMoneyForExchange()) {
                 exchangeButtonEnabled.set(true)
                 return
