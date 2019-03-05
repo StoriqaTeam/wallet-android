@@ -66,6 +66,9 @@ constructor(navigator: IMainNavigator,
     init {
         setNavigator(navigator)
 
+        fromPosition = accountsRepository.currentAccountPosition
+        toPosition = if (fromPosition == 0) 1 else 0
+
         accountsRepository
                 .getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -115,6 +118,9 @@ constructor(navigator: IMainNavigator,
 
     private fun onAccountChanged() {
         hideKeyboard()
+
+        accountsRepository.currentAccountPosition = fromPosition
+
         errorCommon.set("")
         exchangeButtonEnabled.set(false)
         if (isAmountRemittanceLastEdited)

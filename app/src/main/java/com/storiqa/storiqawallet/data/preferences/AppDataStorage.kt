@@ -14,44 +14,82 @@ private const val LAST_PENDING_TRANSACTION = "last_pending_transaction"
 
 class AppDataStorage(private val prefs: PrefUtil) : IAppDataStorage {
 
+    private var prefIsFirstLaunch: Boolean? = null
+    private var prefIsPinEntered: Boolean? = null
+    private var prefPin: String? = null
+    private var prefDeviceId: String? = null
+    private var prefToken: String? = null
+    private var prefCurrentUserEmail: String? = null
+    private var prefOldestPendingTransactionTime: Long? = null
+    private var prefPrivateKey: String? = null
+    private var prefPrivateKeyEmail = ""
+
     override var isFirstLaunch: Boolean
-        get() = prefs.getPreferences().getBoolean(FIRST_LAUNCH, true)
+        get() {
+            if (prefIsFirstLaunch == null) prefIsFirstLaunch = prefs.getPreferences().getBoolean(FIRST_LAUNCH, true)
+            return prefIsFirstLaunch!!
+        }
         set(value) {
+            prefIsFirstLaunch = value
             prefs.getEditor().putBoolean(FIRST_LAUNCH, value).apply()
         }
 
     override var isPinEntered: Boolean
-        get() = prefs.getPreferences().getBoolean(PIN_ENTERED, false)
+        get() {
+            if (prefIsPinEntered == null) prefIsPinEntered = prefs.getPreferences().getBoolean(PIN_ENTERED, false)
+            return prefIsPinEntered!!
+        }
         set(value) {
+            prefIsPinEntered = value
             prefs.getEditor().putBoolean(PIN_ENTERED, value).apply()
         }
     override var pin: String
-        get() = prefs.getPreferences().getString(USER_PIN, null)!!
+        get() {
+            if (prefPin == null) prefPin = prefs.getPreferences().getString(USER_PIN, null)
+            return prefPin!!
+        }
         set(value) {
+            prefPin = value
             prefs.getEditor().putString(USER_PIN, value).apply()
         }
 
     override var deviceId: String
-        get() = prefs.getPreferences().getString(DEVICE_ID, null)!!
+        get() {
+            if (prefDeviceId == null) prefDeviceId = prefs.getPreferences().getString(DEVICE_ID, null)
+            return prefDeviceId!!
+        }
         set(value) {
+            prefDeviceId = value
             prefs.getEditor().putString(DEVICE_ID, value).apply()
         }
 
     override var token: String
-        get() = prefs.getPreferences().getString(TOKEN, "")!!
+        get() {
+            if (prefToken == null) prefToken = prefs.getPreferences().getString(TOKEN, "")
+            return prefToken!!
+        }
         set(value) {
+            prefToken = value
             prefs.getEditor().putString(TOKEN, value).apply()
         }
 
     override var currentUserEmail: String
-        get() = prefs.getPreferences().getString(CURRENT_USER_EMAIL, null)!!
+        get() {
+            if (prefCurrentUserEmail == null) prefCurrentUserEmail = prefs.getPreferences().getString(CURRENT_USER_EMAIL, null)
+            return prefCurrentUserEmail!!
+        }
         set(value) {
+            prefCurrentUserEmail = value
             prefs.getEditor().putString(CURRENT_USER_EMAIL, value).apply()
         }
 
     override var oldestPendingTransactionTime: Long
-        get() = prefs.getPreferences().getLong(LAST_PENDING_TRANSACTION, 0)
+        get() {
+            if (prefOldestPendingTransactionTime == null) prefOldestPendingTransactionTime = prefs.getPreferences().getLong(LAST_PENDING_TRANSACTION, 0)
+            return prefOldestPendingTransactionTime!!
+        }
         set(value) {
+            prefOldestPendingTransactionTime = value
             prefs.getEditor().putLong(LAST_PENDING_TRANSACTION, value).apply()
         }
 
@@ -59,10 +97,16 @@ class AppDataStorage(private val prefs: PrefUtil) : IAppDataStorage {
         get() = getDeviceOs()
 
     override fun getPrivateKey(email: String): String? {
-        return prefs.getPreferences().getString(PRIVATE_KEY + email, null)
+        if (prefPrivateKey == null || prefPrivateKeyEmail != email) {
+            prefPrivateKeyEmail = email
+            prefPrivateKey = prefs.getPreferences().getString(PRIVATE_KEY + email, null)
+        }
+        return prefPrivateKey
     }
 
     override fun setPrivateKey(email: String, key: String) {
+        prefPrivateKey = key
+        prefPrivateKeyEmail = email
         prefs.getEditor().putString(PRIVATE_KEY + email, key).apply()
     }
 }

@@ -27,6 +27,8 @@ class AccountsRepository(private val userDao: UserDao,
                          private val appDataStorage: IAppDataStorage,
                          private val signUtil: SignUtil) : IAccountsRepository {
 
+    override var currentAccountPosition: Int = 0
+
     override fun getAccounts(userId: Long): Flowable<List<Account>> {
         return Flowable
                 .combineLatest(

@@ -72,6 +72,8 @@ constructor(navigator: IMainNavigator,
     init {
         setNavigator(navigator)
 
+        currentPosition = accountsRepository.currentAccountPosition
+
         address.addOnPropertyChanged {
             validateAddress()
             checkSendButtonAvailable()
@@ -113,6 +115,8 @@ constructor(navigator: IMainNavigator,
     fun onAccountSelected(position: Int) {
         hideKeyboard()
         currentPosition = position
+        accountsRepository.currentAccountPosition = position
+
         sendButtonEnabled.set(false)
         isNotEnough.set(false)
 

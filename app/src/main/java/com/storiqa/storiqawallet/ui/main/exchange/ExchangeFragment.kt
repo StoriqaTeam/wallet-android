@@ -31,12 +31,12 @@ class ExchangeFragment : BaseFragment<FragmentExchangeBinding, ExchangeViewModel
     private fun initView() {
         (activity as IBaseActivity).setupActionBar(binding.toolbar)
 
-        binding.accountFromChooser.init(requireContext(), 0)
+        binding.accountFromChooser.init(requireContext(), viewModel.fromPosition)
         binding.accountFromChooser.setOnPageSelectedListener { position, _ ->
             viewModel.onAccountFromSelected(position)
         }
 
-        binding.accountToChooser.init(requireContext(), 0)
+        binding.accountToChooser.init(requireContext(), viewModel.toPosition)
         binding.accountToChooser.setOnPageSelectedListener { position, _ ->
             viewModel.onAccountToSelected(position)
         }

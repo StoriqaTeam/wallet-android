@@ -56,6 +56,7 @@ constructor(navigator: IMainNavigator,
 
     fun onAccountSelected(position: Int) {
         currentPosition = position
+        accountsRepository.currentAccountPosition = position
 
         val address = accounts.value[position].accountAddress
         transactionsSubscription = transactionsRepository

@@ -7,6 +7,8 @@ import io.reactivex.Observable
 
 interface IAccountsRepository {
 
+    var currentAccountPosition: Int
+
     fun getAccounts(userId: Long): Flowable<List<Account>>
 
     fun refreshAccounts(errorHandler: (Exception) -> Unit)

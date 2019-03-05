@@ -38,6 +38,8 @@ constructor(navigator: IMainNavigator,
     init {
         setNavigator(navigator)
 
+        currentPosition = accountsRepository.currentAccountPosition
+
         accountsRepository
                 .getAccounts(userData.id)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -46,6 +48,7 @@ constructor(navigator: IMainNavigator,
 
     fun onAccountSelected(position: Int) {
         currentPosition = position
+        accountsRepository.currentAccountPosition = position
 
         val blockchainAddress = accounts.value[position].accountAddress
         val barcodeEncoder = BarcodeEncoder()
