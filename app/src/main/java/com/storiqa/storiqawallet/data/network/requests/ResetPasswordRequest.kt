@@ -1,6 +1,12 @@
 package com.storiqa.storiqawallet.data.network.requests
 
-class ResetPasswordRequest(val email: String = "d.kruglov@storiqa.com") {
+import com.google.gson.annotations.SerializedName
 
+class ResetPasswordRequest(
+
+        @SerializedName("email")
+        val email: String
+) {
+    @SerializedName("deviceType")
     val deviceType = "android"
 }

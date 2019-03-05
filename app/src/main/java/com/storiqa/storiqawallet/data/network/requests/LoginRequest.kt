@@ -1,11 +1,22 @@
 package com.storiqa.storiqawallet.data.network.requests
 
-data class LoginRequest(
-        val email: String = "d.kruglov@storiqa.com",
-        val password: String = "Qwerty12345",
-        val deviceOs: String = "25",
-        val deviceId: String = "09bbda10-2908-4c5a-bd63-9098fc6bffff") {
+import com.google.gson.annotations.SerializedName
 
+data class LoginRequest(
+
+        @SerializedName("email")
+        val email: String,
+
+        @SerializedName("password")
+        val password: String,
+
+        @SerializedName("deviceOs")
+        val deviceOs: String,
+
+        @SerializedName("deviceId")
+        val deviceId: String
+) {
+    @SerializedName("deviceType")
     val deviceType = "android"
 
 }

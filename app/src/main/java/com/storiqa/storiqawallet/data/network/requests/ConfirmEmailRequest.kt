@@ -1,3 +1,9 @@
 package com.storiqa.storiqawallet.data.network.requests
 
-data class ConfirmEmailRequest(val emailConfirmToken: String = "YmFiOGFiZmYtY2YzMi00Mzg0LTk3ZWItNjE3MTk2ZjY4NjFj")
+import com.google.gson.annotations.SerializedName
+
+data class ConfirmEmailRequest(
+
+        @SerializedName("emailConfirmToken")
+        val emailConfirmToken: String
+)

@@ -1,5 +1,12 @@
 package com.storiqa.storiqawallet.data.network.requests
 
+import com.google.gson.annotations.SerializedName
+
 class ChangePasswordRequest(
-        val oldPassword: String = "Qwerty12345",
-        val newPassword: String = "Popidj73829")
+
+        @SerializedName("oldPassword")
+        val oldPassword: String,
+
+        @SerializedName("newPassword")
+        val newPassword: String
+)

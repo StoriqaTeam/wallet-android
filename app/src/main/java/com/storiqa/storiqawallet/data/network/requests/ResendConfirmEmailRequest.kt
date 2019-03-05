@@ -1,7 +1,13 @@
 package com.storiqa.storiqawallet.data.network.requests
 
-class ResendConfirmEmailRequest(val email: String = "d.kruglov@storiqa.com") {
+import com.google.gson.annotations.SerializedName
 
+class ResendConfirmEmailRequest(
+
+        @SerializedName("email")
+        val email: String
+) {
+    @SerializedName("deviceType")
     val deviceType = "android"
 
 }
