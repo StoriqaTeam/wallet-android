@@ -5,7 +5,7 @@ import com.storiqa.storiqawallet.data.db.entity.RateEntity
 import com.storiqa.storiqawallet.data.model.Currency
 import com.storiqa.storiqawallet.data.network.CryptoCompareApi
 import io.reactivex.Flowable
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -23,13 +23,13 @@ class RatesRepository(private val rateDao: RateDao,
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { errorHandler(it as Exception) }
                 .observeOn(Schedulers.io())
-                .doOnNext { saveRates(it) }
+                .doOnSuccess { saveRates(it) }
                 .subscribe()
     }
 
-    override fun updateRates(): Observable<HashMap<Currency, HashMap<Currency, Double>>> {
+    override fun updateRates(): Single<HashMap<Currency, HashMap<Currency, Double>>> {
         return cryptoCompareApi.getRates("BTC,ETH,STQ", "USD,RUB")
-                .doOnNext { saveRates(it) }
+                .doOnSuccess { saveRates(it) }
                 .doOnError { }
     }
 

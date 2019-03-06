@@ -3,7 +3,7 @@ package com.storiqa.storiqawallet.data.network
 import com.storiqa.storiqawallet.data.network.errors.RefreshRateResponse
 import com.storiqa.storiqawallet.data.network.requests.*
 import com.storiqa.storiqawallet.data.network.responses.*
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -14,28 +14,28 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body loginRequest: LoginRequest): Observable<TokenResponse>
+            @Body loginRequest: LoginRequest): Single<TokenResponse>
 
     @POST("v1/sessions/oauth")
     fun loginByOauth(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body loginByOauth: LoginByOauthRequest): Observable<TokenResponse>
+            @Body loginByOauth: LoginByOauthRequest): Single<TokenResponse>
 
     @POST("v1/sessions/oauth")
     fun revokeToken(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Observable<TokenResponse>
+            @Header("Authorization") bearer: String): Single<TokenResponse>
 
     @POST("v1/users")
     fun registerUser(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body registerUserRequest: RegisterUserRequest): Observable<RegisterUserResponse>
+            @Body registerUserRequest: RegisterUserRequest): Single<RegisterUserResponse>
 
     @PUT("v1/users")
     fun updateUser(
@@ -43,30 +43,30 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Body updateUserRequest: UpdateUserRequest): Observable<Response<Any>>
+            @Body updateUserRequest: UpdateUserRequest): Single<Response<Any>>
 
     @POST("v1/users/confirm_email")
     fun confirmEmail(
-            @Body confirmEmailRequest: ConfirmEmailRequest): Observable<String>
+            @Body confirmEmailRequest: ConfirmEmailRequest): Single<String>
 
     @POST("v1/users/add_device")
     fun addDevice(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body addDeviceRequest: AddDeviceRequest): Observable<Response<Any>>
+            @Body addDeviceRequest: AddDeviceRequest): Single<Response<Any>>
 
     @POST("v1/users/confirm_add_device")
     fun confirmAddingDevice(
-            @Body confirmAddingDeviceRequest: ConfirmAddingDeviceRequest): Observable<Response<Any>>
+            @Body confirmAddingDeviceRequest: ConfirmAddingDeviceRequest): Single<Response<Any>>
 
     @POST("v1/users/reset_password")
     fun resetPassword(
-            @Body resetPasswordRequest: ResetPasswordRequest): Observable<Response<Any>>
+            @Body resetPasswordRequest: ResetPasswordRequest): Single<Response<Any>>
 
     @POST("v1/users/resend_confirm_email")
     fun resendConfirmEmail(
-            @Body resendConfirmEmailRequest: ResendConfirmEmailRequest): Observable<Response<Any>>
+            @Body resendConfirmEmailRequest: ResendConfirmEmailRequest): Single<Response<Any>>
 
     @POST("v1/users/change_password")
     fun changePassword(
@@ -74,18 +74,18 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Body changePasswordRequest: ChangePasswordRequest): Observable<Response<Any>>
+            @Body changePasswordRequest: ChangePasswordRequest): Single<Response<Any>>
 
     @POST("v1/users/confirm_reset_password")
     fun confirmResetPassword(
-            @Body confirmResetPasswordRequest: ConfirmResetPasswordRequest): Observable<String>
+            @Body confirmResetPasswordRequest: ConfirmResetPasswordRequest): Single<String>
 
     @GET("v1/users/me")
     fun getUserInfo(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Observable<UserInfoResponse>
+            @Header("Authorization") bearer: String): Single<UserInfoResponse>
 
     @GET("v1/users/{id}/accounts")
     fun getAccounts(
@@ -95,41 +95,7 @@ interface WalletApi {
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Query("offset") offset: Long,
-            @Query("limit") limit: Long): Observable<ArrayList<AccountResponse>>
-
-    @PUT("v1/users/{id}/accounts")
-    fun updateAccounts(
-            @Path("id") userId: Long,
-            @Header("Timestamp") timestamp: String,
-            @Header("Device-id") deviceId: String,
-            @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
-            @Body updateAccountRequest: UpdateAccountRequest): Observable<Response<Any>>
-
-    @POST("v1/users/{id}/accounts")
-    fun createAccount(
-            @Path("id") userId: Long,
-            @Header("Timestamp") timestamp: String,
-            @Header("Device-id") deviceId: String,
-            @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
-            @Body createAccountRequest: CreateAccountRequest): Observable<Response<Any>>
-
-    @DELETE("v1/users/{id}/accounts")
-    fun deleteAccount(
-            @Path("id") userId: Long,
-            @Header("Timestamp") timestamp: String,
-            @Header("Device-id") deviceId: String,
-            @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Observable<Response<Any>>
-
-    @GET("v1/accounts/{accountId}")
-    fun getAccountInfo(
-            @Path("id") userId: Long,
-            @Header("Timestamp") timestamp: String,
-            @Header("Device-id") deviceId: String,
-            @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Observable<Response<Any>>
+            @Query("limit") limit: Long): Single<ArrayList<AccountResponse>>
 
     @GET("v1/users/{id}/transactions")
     fun getTransactions(
@@ -139,7 +105,7 @@ interface WalletApi {
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
             @Query("offset") offset: Int,
-            @Query("limit") limit: Int): Observable<List<TransactionResponse>>
+            @Query("limit") limit: Int): Single<List<TransactionResponse>>
 
     @POST("v1/transactions")
     fun createTransaction(
@@ -147,7 +113,7 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Body createTransactionRequest: CreateTransactionRequest): Observable<TransactionResponse>
+            @Body createTransactionRequest: CreateTransactionRequest): Single<TransactionResponse>
 
     @POST("v1/rate")
     fun getExchangeRate(
@@ -155,7 +121,7 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Body exchangeRateRequest: ExchangeRateRequest): Observable<ExchangeRateResponse>
+            @Body exchangeRateRequest: ExchangeRateRequest): Single<ExchangeRateResponse>
 
     @POST("v1/rate/refresh")
     fun refreshRate(
@@ -163,7 +129,7 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Body refreshRateRequest: RefreshRateRequest): Observable<RefreshRateResponse>
+            @Body refreshRateRequest: RefreshRateRequest): Single<RefreshRateResponse>
 
     @POST("v1/fees")
     fun calculateFee(
@@ -171,6 +137,6 @@ interface WalletApi {
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
             @Header("Authorization") bearer: String,
-            @Body feeRequest: FeeRequest): Observable<FeeResponse>
+            @Body feeRequest: FeeRequest): Single<FeeResponse>
 
 }

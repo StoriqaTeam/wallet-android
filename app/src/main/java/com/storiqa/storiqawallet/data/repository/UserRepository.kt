@@ -8,7 +8,7 @@ import com.storiqa.storiqawallet.data.network.responses.UserInfoResponse
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.utils.SignUtil
 import io.reactivex.Flowable
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -22,7 +22,7 @@ class UserRepository(private val userDao: UserDao,
     }
 
     @SuppressLint("CheckResult")
-    override fun refreshUser(): Observable<UserInfoResponse> {
+    override fun refreshUser(): Single<UserInfoResponse> {
         val token = appDataStorage.token
 
         val email = appDataStorage.currentUserEmail
@@ -34,17 +34,16 @@ class UserRepository(private val userDao: UserDao,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
-                .doOnNext { userDao.insert(UserEntity(it)) }
+                .doOnSuccess { userDao.insert(UserEntity(it)) }
     }
 
-    override fun updateUser(email: String): Observable<UserInfoResponse> {
+    override fun updateUser(email: String): Single<UserInfoResponse> {
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
 
         return walletApi
                 .getUserInfo(signHeader.timestamp, signHeader.deviceId,
                         signHeader.signature, "Bearer $token")
-                .doOnNext { userDao.insert(UserEntity(it)) }
-                .doOnError { }
+                .doOnSuccess { userDao.insert(UserEntity(it)) }
     }
 }

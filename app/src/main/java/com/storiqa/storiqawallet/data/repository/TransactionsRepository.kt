@@ -15,7 +15,7 @@ import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getTimestampLong
 import io.reactivex.Flowable
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
@@ -57,14 +57,14 @@ class TransactionsRepository(private val walletApi: WalletApi,
                 .distinct()
     }
 
-    override fun refreshTransactions(id: Long, email: String, offset: Int): Observable<List<TransactionResponse>> {
+    override fun refreshTransactions(id: Long, email: String, offset: Int): Single<List<TransactionResponse>> {
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
         oldestPendingTransaction = appDataStorage.oldestPendingTransactionTime
 
         return walletApi.getTransactions(id, signHeader.timestamp, signHeader.deviceId,
                 signHeader.signature, "Bearer $token", offset, loadingLimit)
-                .doOnNext {
+                .doOnSuccess {
                     saveTransactions(it)
                     if (it.size < loadingLimit ||
                             getNewestTransactionTime(it) < oldestPendingTransaction) {
@@ -79,7 +79,7 @@ class TransactionsRepository(private val walletApi: WalletApi,
                 }
     }
 
-    override fun sendTransaction(email: String, request: CreateTransactionRequest): Observable<Unit> {
+    override fun sendTransaction(email: String, request: CreateTransactionRequest): Single<Unit> {
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
         return walletApi
@@ -90,7 +90,7 @@ class TransactionsRepository(private val walletApi: WalletApi,
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun sendExchange(email: String, request: CreateTransactionRequest): Observable<Unit> {
+    override fun sendExchange(email: String, request: CreateTransactionRequest): Single<Unit> {
         val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
         return walletApi

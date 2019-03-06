@@ -4,7 +4,7 @@ import com.storiqa.storiqawallet.data.model.Transaction
 import com.storiqa.storiqawallet.data.network.requests.CreateTransactionRequest
 import com.storiqa.storiqawallet.data.network.responses.TransactionResponse
 import io.reactivex.Flowable
-import io.reactivex.Observable
+import io.reactivex.Single
 
 interface ITransactionsRepository {
 
@@ -14,9 +14,9 @@ interface ITransactionsRepository {
 
     fun getTransactionById(address: String, id: String): Flowable<Transaction>
 
-    fun refreshTransactions(id: Long, email: String, offset: Int): Observable<List<TransactionResponse>>
+    fun refreshTransactions(id: Long, email: String, offset: Int): Single<List<TransactionResponse>>
 
-    fun sendTransaction(email: String, request: CreateTransactionRequest): Observable<Unit>
+    fun sendTransaction(email: String, request: CreateTransactionRequest): Single<Unit>
 
-    fun sendExchange(email: String, request: CreateTransactionRequest): Observable<Unit>
+    fun sendExchange(email: String, request: CreateTransactionRequest): Single<Unit>
 }

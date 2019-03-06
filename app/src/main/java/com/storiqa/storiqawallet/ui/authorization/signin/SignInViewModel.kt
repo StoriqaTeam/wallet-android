@@ -30,7 +30,7 @@ import com.storiqa.storiqawallet.ui.base.BaseViewModel
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getDeviceOs
 import com.storiqa.storiqawallet.utils.isEmailValid
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -94,11 +94,11 @@ constructor(navigator: IAuthorizationNavigator,
     @SuppressLint("CheckResult")
     private fun sendRequests() {
         requestLogIn()
-                .doOnNext {
+                .doOnSuccess {
                     saveToken(it.token)
                 }
                 .flatMap { userRepository.updateUser(email.get().toLowerCase()) }
-                .doOnNext {
+                .doOnSuccess {
                     saveUserInfo(it)
                 }
                 .flatMap { accountsRepository.updateAccounts(it.id, it.email.toLowerCase()) }
@@ -119,7 +119,7 @@ constructor(navigator: IAuthorizationNavigator,
     }
 
     @SuppressLint("CheckResult")
-    private fun requestLogIn(): Observable<TokenResponse> {
+    private fun requestLogIn(): Single<TokenResponse> {
         val signHeader = signUtil.createSignHeader(email.get().toLowerCase())
         val loginRequest = LoginRequest(email.get(), password.get(), getDeviceOs(), signHeader.deviceId)
 
