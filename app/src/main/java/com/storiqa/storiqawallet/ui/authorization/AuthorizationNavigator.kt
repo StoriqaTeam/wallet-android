@@ -17,11 +17,13 @@ class AuthorizationNavigator(private val navigator: INavigator) : BaseNavigator(
     private val containerId = R.id.container
 
     override fun showSignUpFragment() {
-        navigator.replaceFragment(containerId, SignUpFragment(), "SignUpFragment")
+        if (!navigator.findAndReplace(containerId, "SignUpFragment"))
+            navigator.replaceFragment(containerId, SignUpFragment(), "SignUpFragment", "SignUpFragment")
     }
 
     override fun showSignInFragment() {
-        navigator.replaceFragment(containerId, SignInFragment(), "SignInFragment")
+        if (!navigator.findAndReplace(containerId, "SignInFragment"))
+            navigator.replaceFragment(containerId, SignInFragment(), "SignInFragment", "SignInFragment")
     }
 
     override fun openPasswordRecoveryActivity() {

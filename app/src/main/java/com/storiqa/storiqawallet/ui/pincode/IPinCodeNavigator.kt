@@ -7,7 +7,4 @@ interface IPinCodeNavigator : IBaseNavigator {
     fun openMainActivity()
 
     fun openLoginActivity()
-
-    fun closeActivity()
-
 }

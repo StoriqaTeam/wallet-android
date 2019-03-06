@@ -84,7 +84,7 @@ constructor(private val vibrationUtil: VibrationUtil,
             DialogType.RESET_PIN -> return {
                 appData.isPinEntered = false
                 getNavigator()?.openLoginActivity()
-                getNavigator()?.closeActivity()
+                getNavigator()?.finishActivity()
             }
             else -> return {}
         }

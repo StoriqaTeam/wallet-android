@@ -66,12 +66,25 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
         }
     }
 
+    override fun findAndReplace(containerId: Int, fragmentTag: String): Boolean {
+        val fragmentManager = activity.supportFragmentManager
+        val fragment = fragmentManager.findFragmentByTag(fragmentTag)
+        if (fragment != null) {
+            replaceFragmentInternal(fragmentManager, containerId, fragment, null, null, null, null)
+            return true
+        } else {
+            return false
+        }
+    }
+
     override fun replaceFragment(
             @IdRes containerId: Int,
             fragment: Fragment,
-            fragmentTag: String?) {
+            fragmentTag: String?,
+            backstackTag: String?
+    ) {
         replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment,
-                fragmentTag, false, null, null, null)
+                fragmentTag, backstackTag, null, null)
     }
 
     override fun replaceFragment(
@@ -81,7 +94,7 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
             element: View,
             transition: String) {
         replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment,
-                fragmentTag, false, null, element, transition)
+                fragmentTag, null, element, transition)
     }
 
     override fun replaceFragmentAndAddToBackStack(
@@ -89,7 +102,7 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
             fragment: Fragment,
             fragmentTag: String?,
             backstackTag: String?) {
-        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment, fragmentTag, true, backstackTag, null, null)
+        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment, fragmentTag, backstackTag, null, null)
     }
 
     override fun replaceFragmentAndAddToBackStack(
@@ -99,7 +112,7 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
             backstackTag: String?,
             element: View,
             transition: String) {
-        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment, fragmentTag, true, backstackTag, element, transition)
+        replaceFragmentInternal(activity.supportFragmentManager, containerId, fragment, fragmentTag, backstackTag, element, transition)
     }
 
     private fun replaceFragmentInternal(
@@ -107,7 +120,6 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
             @IdRes containerId: Int,
             fragment: Fragment,
             fragmentTag: String?,
-            addToBackstack: Boolean,
             backstackTag: String?,
             element: View?,
             transitionName: String?
@@ -116,7 +128,7 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
 
         if (element != null && transitionName != null)
             transaction.addSharedElement(element, transitionName)
-        if (addToBackstack) {
+        if (backstackTag != null) {
             transaction.addToBackStack(backstackTag).commit()
             fm.executePendingTransactions()
         } else {

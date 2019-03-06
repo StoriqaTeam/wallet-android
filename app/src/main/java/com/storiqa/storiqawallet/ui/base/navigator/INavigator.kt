@@ -29,7 +29,9 @@ interface INavigator {
 
     fun <T : DialogFragment> showDialogFragment(dialog: T, fragmentTag: String = dialog.javaClass.name)
 
-    fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null)
+    fun findAndReplace(@IdRes containerId: Int, fragmentTag: String): Boolean
+
+    fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, backstackTag: String? = null)
     fun replaceFragment(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, element: View, transition: String)
     fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, backstackTag: String? = null)
     fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, backstackTag: String? = null, element: View, transition: String)

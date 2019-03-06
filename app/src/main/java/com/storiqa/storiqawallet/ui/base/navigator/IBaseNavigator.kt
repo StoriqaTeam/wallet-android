@@ -5,4 +5,6 @@ interface IBaseNavigator {
                           positiveButtonName: String, positiveButtonCallback: () -> Unit,
                           negativeButtonName: String?,
                           negativeButtonCallback: (() -> Unit)?)
+
+    fun finishActivity()
 }

@@ -27,6 +27,7 @@ class AuthorizationActivity : BaseActivity<ActivityAuthorizationBinding, Authori
             supportFragmentManager
                     .beginTransaction()
                     .add(R.id.container, SignInFragment(), "SignInFragment")
+                    //.addToBackStack("SignInFragment")
                     .commitNow()
         } else if (supportFragmentManager.findFragmentByTag("SignUpFragment") != null) {
             binding.tabLayout.getTabAt(1)?.select()

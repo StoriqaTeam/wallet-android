@@ -15,4 +15,8 @@ abstract class BaseNavigator(private val navigator: INavigator) : IBaseNavigator
         }
         navigator.showDialogFragment(dialog, "message dialog")
     }
+
+    override fun finishActivity() {
+        navigator.finishActivity()
+    }
 }

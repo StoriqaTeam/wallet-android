@@ -17,8 +17,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel, ISpl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.setNavigator(navigator)
-
         viewModel.checkLoggedIn()
     }
 }

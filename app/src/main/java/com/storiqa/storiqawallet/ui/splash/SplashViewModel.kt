@@ -15,15 +15,19 @@ constructor(private val appData: IAppDataStorage) : BaseViewModel<ISplashNavigat
             appData.isFirstLaunch = false
         }
 
-        if (appData.isPinEntered)
+        if (appData.isPinEntered) {
             getNavigator()?.openPinCodeActivity()
+            getNavigator()?.finishActivity()
+        }
     }
 
     fun startLogin() {
         getNavigator()?.openLoginActivity()
+        getNavigator()?.finishActivity()
     }
 
     fun startRegistration() {
         getNavigator()?.openRegistrationActivity()
+        getNavigator()?.finishActivity()
     }
 }
