@@ -51,8 +51,7 @@
         <activity
             android:name=".ui.authorization.AuthorizationActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:launchMode="singleInstance">
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

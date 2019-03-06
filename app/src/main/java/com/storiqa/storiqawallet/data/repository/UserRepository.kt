@@ -23,14 +23,12 @@ class UserRepository(private val userDao: UserDao,
 
     @SuppressLint("CheckResult")
     override fun refreshUser(): Single<UserInfoResponse> {
-        val token = appDataStorage.token
-
         val email = appDataStorage.currentUserEmail
         val signHeader = signUtil.createSignHeader(email)
 
         return walletApi
                 .getUserInfo(signHeader.timestamp, signHeader.deviceId,
-                        signHeader.signature, "Bearer $token")
+                        signHeader.signature)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
@@ -38,12 +36,11 @@ class UserRepository(private val userDao: UserDao,
     }
 
     override fun updateUser(email: String): Single<UserInfoResponse> {
-        val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
 
         return walletApi
                 .getUserInfo(signHeader.timestamp, signHeader.deviceId,
-                        signHeader.signature, "Bearer $token")
+                        signHeader.signature)
                 .doOnSuccess { userDao.insert(UserEntity(it)) }
     }
 }

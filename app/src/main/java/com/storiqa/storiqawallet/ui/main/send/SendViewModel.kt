@@ -223,11 +223,10 @@ constructor(navigator: IMainNavigator,
     @SuppressLint("CheckResult")
     private fun requestFees(address: String) {
         val email = appData.currentUserEmail
-        val token = appData.token
         val signHeader = signUtil.createSignHeader(email)
         val request = FeeRequest(accounts.value[currentPosition].currency.currencyISO.toLowerCase(), address.removePrefix("0x"))
         walletApi
-                .calculateFee(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
+                .calculateFee(signHeader.timestamp, signHeader.deviceId, signHeader.signature, request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

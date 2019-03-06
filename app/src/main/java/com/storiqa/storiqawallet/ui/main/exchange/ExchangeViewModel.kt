@@ -160,7 +160,6 @@ constructor(navigator: IMainNavigator,
                 .setScale(amountCurrency.getSignificantDigits(), RoundingMode.DOWN)
                 .movePointRight(amountCurrency.getSignificantDigits())
         val email = appData.currentUserEmail
-        val token = appData.token
         val signHeader = signUtil.createSignHeader(email)
         val request = ExchangeRateRequest(
                 exchangeId,
@@ -170,7 +169,7 @@ constructor(navigator: IMainNavigator,
                 amountInMinUnits
         )
         obtainingRateRequest = walletApi
-                .getExchangeRate(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
+                .getExchangeRate(signHeader.timestamp, signHeader.deviceId, signHeader.signature, request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -182,11 +181,10 @@ constructor(navigator: IMainNavigator,
 
     private fun requestRefreshRate() {
         val email = appData.currentUserEmail
-        val token = appData.token
         val signHeader = signUtil.createSignHeader(email)
         val request = RefreshRateRequest(exchangeId)
         obtainingRateRequest = walletApi
-                .refreshRate(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
+                .refreshRate(signHeader.timestamp, signHeader.deviceId, signHeader.signature, request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

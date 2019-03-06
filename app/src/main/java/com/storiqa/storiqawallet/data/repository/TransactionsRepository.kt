@@ -58,12 +58,11 @@ class TransactionsRepository(private val walletApi: WalletApi,
     }
 
     override fun refreshTransactions(id: Long, email: String, offset: Int): Single<List<TransactionResponse>> {
-        val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
         oldestPendingTransaction = appDataStorage.oldestPendingTransactionTime
 
         return walletApi.getTransactions(id, signHeader.timestamp, signHeader.deviceId,
-                signHeader.signature, "Bearer $token", offset, loadingLimit)
+                signHeader.signature, offset, loadingLimit)
                 .doOnSuccess {
                     saveTransactions(it)
                     if (it.size < loadingLimit ||
@@ -80,10 +79,9 @@ class TransactionsRepository(private val walletApi: WalletApi,
     }
 
     override fun sendTransaction(email: String, request: CreateTransactionRequest): Single<Unit> {
-        val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
         return walletApi
-                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
+                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .map(::saveTransaction)
@@ -91,10 +89,9 @@ class TransactionsRepository(private val walletApi: WalletApi,
     }
 
     override fun sendExchange(email: String, request: CreateTransactionRequest): Single<Unit> {
-        val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
         return walletApi
-                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, "Bearer $token", request)
+                .createTransaction(signHeader.timestamp, signHeader.deviceId, signHeader.signature, request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .map(::saveTransaction)
@@ -163,7 +160,6 @@ class TransactionsRepository(private val walletApi: WalletApi,
         transactionAccountDao.insert(TransactionAccountEntity(toAccount.blockchainAddress, toAccount.accountId, toAccount.ownerName))
         transactionDao.insert(TransactionEntity(transaction.id, transaction.toAccount.blockchainAddress, transaction.fromValue, transaction.fromCurrency,
                 transaction.toValue, transaction.toCurrency, transaction.fee, getTimestampLong(transaction.createdAt), getTimestampLong(transaction.updatedAt),
-                //if (transaction.id == "8974ddb6-b696-4e9c-a392-34d7dd9f64fa") "pending" else transaction.status,
                 transaction.status,
                 transaction.fiatValue,
                 transaction.fiatCurrency))

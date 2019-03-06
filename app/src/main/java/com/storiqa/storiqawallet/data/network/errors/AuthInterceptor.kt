@@ -12,7 +12,7 @@ class AuthInterceptor
 constructor(private val tokenProvider: ITokenProvider) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request().newBuilder().addHeader("Pessos", "dc dkcd").build()
+        val request = chain.request().newBuilder().addHeader("Authorization", "Bearer ${tokenProvider.accessToken}").build()
         val response = chain.proceed(request)
         return proceedResponse(response, chain)
     }

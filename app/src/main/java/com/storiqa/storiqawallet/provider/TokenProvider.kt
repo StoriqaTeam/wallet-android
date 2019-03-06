@@ -10,8 +10,9 @@ class TokenProvider(
         private val openWalletApi: OpenWalletApi,
         private val signUtil: SignUtil) : ITokenProvider {
 
-    override var accessToken = appData.token
+    override var accessToken = ""
         private set
+        get() = appData.token
 
     override fun refreshToken(): String? {
         val signHeader = signUtil.createSignHeader(appData.currentUserEmail)

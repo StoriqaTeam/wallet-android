@@ -27,8 +27,7 @@ interface WalletApi {
     fun revokeToken(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
-            @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Single<TokenResponse>
+            @Header("Sign") sign: String): Single<TokenResponse>
 
     @POST("v1/users")
     fun registerUser(
@@ -42,7 +41,6 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
             @Body updateUserRequest: UpdateUserRequest): Single<Response<Any>>
 
     @POST("v1/users/confirm_email")
@@ -73,7 +71,6 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
             @Body changePasswordRequest: ChangePasswordRequest): Single<Response<Any>>
 
     @POST("v1/users/confirm_reset_password")
@@ -84,8 +81,7 @@ interface WalletApi {
     fun getUserInfo(
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
-            @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String): Single<UserInfoResponse>
+            @Header("Sign") sign: String): Single<UserInfoResponse>
 
     @GET("v1/users/{id}/accounts")
     fun getAccounts(
@@ -93,7 +89,6 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
             @Query("offset") offset: Long,
             @Query("limit") limit: Long): Single<ArrayList<AccountResponse>>
 
@@ -103,7 +98,6 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
             @Query("offset") offset: Int,
             @Query("limit") limit: Int): Single<List<TransactionResponse>>
 
@@ -112,7 +106,6 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
             @Body createTransactionRequest: CreateTransactionRequest): Single<TransactionResponse>
 
     @POST("v1/rate")
@@ -120,7 +113,6 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
             @Body exchangeRateRequest: ExchangeRateRequest): Single<ExchangeRateResponse>
 
     @POST("v1/rate/refresh")
@@ -128,7 +120,6 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
             @Body refreshRateRequest: RefreshRateRequest): Single<RefreshRateResponse>
 
     @POST("v1/fees")
@@ -136,7 +127,6 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Header("Authorization") bearer: String,
             @Body feeRequest: FeeRequest): Single<FeeResponse>
 
 }

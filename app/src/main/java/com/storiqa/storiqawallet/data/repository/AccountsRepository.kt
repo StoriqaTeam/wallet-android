@@ -58,23 +58,21 @@ class AccountsRepository(private val userDao: UserDao,
     }
 
     override fun updateAccounts(id: Long, email: String): Single<ArrayList<AccountResponse>> {
-        val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
         return walletApi
                 .getAccounts(id, signHeader.timestamp, signHeader.deviceId,
-                        signHeader.signature, "Bearer $token", 0, 20)
+                        signHeader.signature, 0, 20)
                 .doOnSuccess { saveAccounts(it) }
     }
 
     @SuppressLint("CheckResult")
     private fun requestAccounts(user: UserEntity, errorHandler: (Exception) -> Unit) {
         val email = appDataStorage.currentUserEmail
-        val token = appDataStorage.token
         val signHeader = signUtil.createSignHeader(email)
 
         walletApi
                 .getAccounts(user.id, signHeader.timestamp, signHeader.deviceId,
-                        signHeader.signature, "Bearer $token", 0, 20)
+                        signHeader.signature, 0, 20)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError { errorHandler(it as Exception) }
