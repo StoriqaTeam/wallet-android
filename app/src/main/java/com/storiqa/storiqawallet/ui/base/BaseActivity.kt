@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.data.network.errors.ExitDialogPresenter
 import com.storiqa.storiqawallet.di.components.ActivityComponent
 import com.storiqa.storiqawallet.di.components.DaggerActivityComponent
 import com.storiqa.storiqawallet.di.modules.ActivityModule
@@ -127,6 +128,27 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
             setTitle(title)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    override fun onBackPressed() {
+        if (isTaskRoot) {
+            val presenter = ExitDialogPresenter()
+            navigator.showMessageDialog(
+                    getString(presenter.title),
+                    getString(presenter.description),
+                    presenter.icon,
+                    getString(presenter.positiveButton?.name ?: R.string.button_ok),
+                    ::finish,
+                    if (presenter.negativeButton?.name != null) getString(presenter.negativeButton.name) else null
+            ) {}
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     open fun subscribeEvents() {
         viewModel.showLoadingDialog.observe(this,
                 Observer { if (it != null && it) showLoadingDialog() else hideLoadingDialog() })
@@ -138,10 +160,5 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBas
         binding = DataBindingUtil.setContentView(this, getLayoutId())
         binding.setVariable(getBindingVariable(), viewModel)
         binding.executePendingBindings()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

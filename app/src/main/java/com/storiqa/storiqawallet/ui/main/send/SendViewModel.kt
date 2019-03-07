@@ -26,6 +26,7 @@ import com.storiqa.storiqawallet.utils.isAddressValid
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -131,7 +132,7 @@ constructor(navigator: IMainNavigator,
 
     fun onSendButtonClicked() {
         hideKeyboard()
-        val amount = BigDecimal(amountCrypto.get()).stripTrailingZeros().toPlainString()
+        val amount = BigDecimal(amountCrypto.get()).setScale(accounts.value[currentPosition].currency.getSignificantDigits(), RoundingMode.DOWN).stripTrailingZeros().toPlainString()
         getNavigator()?.showSendConfirmationDialog(
                 address.get(),
                 amount,
@@ -264,14 +265,15 @@ constructor(navigator: IMainNavigator,
     }
 
     private fun isEnoughMoneyForSend(): Boolean {
+        val currency = accounts.value[currentPosition].currency
         val feeDecimal = if (feesSize.get() == 0)
             BigDecimal.ZERO
         else
             BigDecimal(fees[seekBarFeePosition.get()].value).movePointLeft(feeCurrency.getSignificantDigits())
         val amountDecimal = BigDecimal(amountCrypto.get())
         val balanceDecimal = BigDecimal(accounts.value[currentPosition].balance)
-                .movePointLeft(accounts.value[currentPosition].currency.getSignificantDigits())
-        total = "${(feeDecimal + amountDecimal).stripTrailingZeros()} ${accounts.value[currentPosition].currency.getSymbol()}"
+                .movePointLeft(currency.getSignificantDigits())
+        total = "${(feeDecimal + amountDecimal).setScale(currency.getSignificantDigits(), RoundingMode.DOWN).stripTrailingZeros()} ${currency.getSymbol()}"
         return feeDecimal + amountDecimal <= balanceDecimal
     }
 }

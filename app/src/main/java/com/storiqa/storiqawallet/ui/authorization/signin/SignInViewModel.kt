@@ -195,7 +195,7 @@ constructor(navigator: IAuthorizationNavigator,
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     hideLoadingDialog()
-                    showErrorDialog(RegistrationMailSentDialogPresenter())
+                    showMessageDialog(RegistrationMailSentDialogPresenter())
                 }, {
                     handleError(it as Exception)
                 })
@@ -219,7 +219,7 @@ constructor(navigator: IAuthorizationNavigator,
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     hideLoadingDialog()
-                    showErrorDialog(AttachDeviceMailSentDialogPresenter())
+                    showMessageDialog(AttachDeviceMailSentDialogPresenter())
                 }, {
                     handleError(it as Exception)
                 })

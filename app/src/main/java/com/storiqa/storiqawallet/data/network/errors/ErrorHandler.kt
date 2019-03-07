@@ -39,23 +39,23 @@ open class ErrorHandler {
         return UnknownErrorDialogPresenter()
     }
 
-    private fun handleBadRequest(): ErrorPresenterDialog {
+    private fun handleBadRequest(): MessageDialogPresenter {
         return UnknownErrorDialogPresenter()
     }
 
-    private fun handleInternalServerError(): ErrorPresenterDialog {
+    private fun handleInternalServerError(): MessageDialogPresenter {
         return UnknownErrorDialogPresenter()
     }
 
-    private fun handleUnknownError(): ErrorPresenterDialog {
+    private fun handleUnknownError(): MessageDialogPresenter {
         return UnknownErrorDialogPresenter()
     }
 
-    private fun handleNoInternetError(): ErrorPresenterDialog {
+    private fun handleNoInternetError(): MessageDialogPresenter {
         return NoInternetDialogPresenter()
     }
 
-    private fun handleTokenExpired(): ErrorPresenterDialog {
+    private fun handleTokenExpired(): MessageDialogPresenter {
         return TokenExpiredDialogPresenter()
     }
 

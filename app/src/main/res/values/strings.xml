@@ -54,6 +54,8 @@
     <string name="dialog_email_not_provided_description">You don`t have email in your social network</string>
     <string name="dialog_token_expired_title">Token expired</string>
     <string name="dialog_token_expired_description">Token expired description</string>
+    <string name="dialog_exit_title">Sure to exit?</string>
+    <string name="dialog_exit_description">Exit description</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
@@ -77,6 +79,7 @@
     <string name="button_send">Send</string>
     <string name="button_confirm">Confirm</string>
     <string name="button_exchange">Exchange</string>
+    <string name="button_exit">Exit</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>

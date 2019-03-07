@@ -36,5 +36,5 @@ interface INavigator {
     fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, backstackTag: String? = null)
     fun replaceFragmentAndAddToBackStack(@IdRes containerId: Int, fragment: Fragment, fragmentTag: String? = null, backstackTag: String? = null, element: View, transition: String)
     fun popFragmentBackStackImmediate()
-
+    fun clearBackStack()
 }

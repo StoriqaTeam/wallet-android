@@ -58,7 +58,7 @@ constructor(navigator: IPasswordRecoveryNavigator,
 
     private fun onSuccess() {
         hideLoadingDialog()
-        showErrorDialog(PassSetUpDialogPresenter())
+        showMessageDialog(PassSetUpDialogPresenter())
     }
 
     override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {

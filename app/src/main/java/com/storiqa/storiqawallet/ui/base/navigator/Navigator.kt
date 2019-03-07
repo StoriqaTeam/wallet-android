@@ -143,4 +143,8 @@ open class Navigator(protected val activity: FragmentActivity) : INavigator {
     override fun popFragmentBackStackImmediate() {
         activity.supportFragmentManager.popBackStackImmediate()
     }
+
+    override fun clearBackStack() {
+        activity.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
 }

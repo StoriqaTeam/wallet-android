@@ -75,7 +75,7 @@ constructor(private val vibrationUtil: VibrationUtil,
     }
 
     fun onForgotPinButtonClicked() {
-        showErrorDialog(ResetPinDialogPresenter())
+        showMessageDialog(ResetPinDialogPresenter())
     }
 
     override fun getDialogPositiveButtonClicked(dialogType: DialogType,

@@ -59,7 +59,7 @@ constructor(navigator: IPasswordRecoveryNavigator,
     private fun onSuccess() {
         hideLoadingDialog()
         val dialogPresenter = PassMailSentDialogPresenter()
-        showErrorDialog(dialogPresenter)
+        showMessageDialog(dialogPresenter)
     }
 
     override fun getDialogPositiveButtonClicked(dialogType: DialogType, params: HashMap<String, String>?): () -> Unit {

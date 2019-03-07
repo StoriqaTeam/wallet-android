@@ -40,6 +40,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, IMainNavig
         viewModel.onStop()
     }
 
+    override fun onBackPressed() {
+        if (!supportFragmentManager.popBackStackImmediate())
+            super.onBackPressed()
+    }
+
+    override fun subscribeEvents() {
+        super.subscribeEvents()
+
+        viewModel.viewState.observe(this, Observer(::onViewStateChanged))
+    }
+
     private fun initView() {
         val bottomNavigation = binding.bottomNavigation
         val navigationAdapter = AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu)
@@ -50,12 +61,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, IMainNavig
         bottomNavigation.accentColor = resources.getColor(R.color.bottom_navigation_icon_selected)
         bottomNavigation.inactiveColor = resources.getColor(R.color.bottom_navigation_icon_unselected)
         bottomNavigation.setTitleTypeface(ResourcesCompat.getFont(this, R.font.montserrat_medium))
-    }
-
-    override fun subscribeEvents() {
-        super.subscribeEvents()
-
-        viewModel.viewState.observe(this, Observer(::onViewStateChanged))
     }
 
     private fun onViewStateChanged(state: MainViewState) {

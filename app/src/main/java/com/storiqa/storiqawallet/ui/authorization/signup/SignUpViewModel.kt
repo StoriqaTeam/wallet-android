@@ -143,7 +143,7 @@ constructor(navigator: IAuthorizationNavigator,
 
     private fun onSuccess(response: RegisterUserResponse) {
         hideLoadingDialog()
-        showErrorDialog(RegistrationMailSentDialogPresenter())
+        showMessageDialog(RegistrationMailSentDialogPresenter())
     }
 
     override fun showErrorFields(errorPresenter: ErrorPresenterFields) {

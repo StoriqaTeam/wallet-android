@@ -269,7 +269,7 @@ constructor(navigator: IMainNavigator,
 
         if (isAmountRemittanceLastEdited) {
             val calculatedAmount = currencyFormatter
-                    .getAmountFromDouble(amountRemittance.get().toDouble() * rate,
+                    .getAmountFromDouble(amountRemittance.get().toDouble() * rate, //todo biginteger
                             accounts.value[toPosition].currency)
             amountCollection.set(calculatedAmount)
         } else {

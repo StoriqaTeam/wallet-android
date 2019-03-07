@@ -26,22 +26,27 @@ class MainNavigator(private val navigator: INavigator) : BaseNavigator(navigator
     }
 
     override fun showWalletFragment() {
+        navigator.clearBackStack()
         navigator.replaceFragment(containerId, WalletFragment(), "wallet")
     }
 
     override fun showSendFragment() {
+        navigator.clearBackStack()
         navigator.replaceFragment(containerId, SendFragment(), "send")
     }
 
     override fun showExchangeFragment() {
+        navigator.clearBackStack()
         navigator.replaceFragment(containerId, ExchangeFragment(), "exchange")
     }
 
     override fun showReceiveFragment() {
+        navigator.clearBackStack()
         navigator.replaceFragment(containerId, ReceiveFragment(), "receive")
     }
 
     override fun showMenuFragment() {
+        navigator.clearBackStack()
         navigator.replaceFragment(containerId, MenuFragment(), "menu")
     }
 
