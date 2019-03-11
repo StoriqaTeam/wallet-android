@@ -226,6 +226,8 @@ constructor(navigator: IMainNavigator,
                     hideLoadingDialog()
                     showSuccessMessage.trigger()
                     accountsRepository.refreshAccounts(::handleError)
+                    amountRemittance.set("")
+                    amountCollection.set("")
                 }, {
                     hideLoadingDialog()
                     handleError(it as Exception)
@@ -257,7 +259,7 @@ constructor(navigator: IMainNavigator,
 
     private fun updateRates(rate: Double, expiration: Long) {
         exchangeRate = rate
-        countDown.set(expiration - currentTimeMillis() - 30000)
+        countDown.set(expiration - currentTimeMillis() - 250000)
         exchangeRateDescription.set(buildString {
             append("1 ")
             append(accounts.value[fromPosition].currency.getSymbol())

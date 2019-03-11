@@ -97,7 +97,7 @@ constructor(navigator: IAuthorizationNavigator,
                 .doOnSuccess {
                     saveToken(it.token)
                 }
-                .flatMap { userRepository.updateUser(email.get().toLowerCase()) }
+                .flatMap { userRepository.loadUser(email.get().toLowerCase()) }
                 .doOnSuccess {
                     saveUserInfo(it)
                 }

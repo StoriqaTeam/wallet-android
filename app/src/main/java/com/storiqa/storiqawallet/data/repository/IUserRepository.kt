@@ -7,10 +7,12 @@ import io.reactivex.Single
 
 interface IUserRepository {
 
-    fun getUser(email: String): Flowable<UserEntity>
+    fun getCurrentUser(): Flowable<UserEntity>
 
-    fun refreshUser(): Single<UserInfoResponse>
+    fun refreshCurrentUser(): Single<UserInfoResponse>
 
-    fun updateUser(email: String): Single<UserInfoResponse>
+    fun loadUser(email: String): Single<UserInfoResponse>
+
+    fun updateUserProfile(firstName: String, lastName: String): Single<UserInfoResponse>
 
 }

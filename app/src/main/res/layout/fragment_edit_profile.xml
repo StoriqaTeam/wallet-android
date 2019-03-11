@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.storiqa.storiqawallet.ui.main.profile.EditProfileViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/back"
+            app:title="@string/toolbar_edit_profile" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilFirstNametInputLayout.Password"
+            style="@style/Widget.Design.TextInputLayout.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            app:errorEnabled="true"
+            app:errorText="@{viewModel.firstNameError}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:hint="@string/hint_first_name"
+                android:inputType="textCapWords|textPersonName"
+                android:nextFocusDown="@+id/etLastName"
+                android:text="@={viewModel.firstName}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLastName"
+            style="@style/Widget.Design.TextInputLayout.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            app:errorEnabled="true"
+            app:errorText="@{viewModel.lastNameError}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLastName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:hint="@string/hint_last_name"
+                android:inputType="textCapWords|textPersonName"
+                android:nextFocusDown="@+id/btnSavePassword"
+                android:text="@={viewModel.lastName}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnSavePassword"
+                style="@style/GradientButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:enabled="@{viewModel.firstName.get().length > 0 &amp;&amp; viewModel.lastName.get().length > 0}"
+                android:onClick="@{()->viewModel.onSaveButtonClicked()}"
+                android:text="@string/button_save" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

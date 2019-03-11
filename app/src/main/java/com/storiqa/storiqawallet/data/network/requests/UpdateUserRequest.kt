@@ -1,7 +1,15 @@
 package com.storiqa.storiqawallet.data.network.requests
 
+import com.google.gson.annotations.SerializedName
+
 data class UpdateUserRequest(
-        val phone: String = "78005555555",
-        val firstName: String = "Dmitry2",
-        val lastName: String = "Kruglov2") {
-}
+
+        @SerializedName("phone")
+        val phone: String? = null,
+
+        @SerializedName("firstName")
+        val firstName: String,
+
+        @SerializedName("lastName")
+        val lastName: String
+)

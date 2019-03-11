@@ -32,10 +32,9 @@ class PasswordChangeFragment : BaseFragment<FragmentPasswordChangeBinding, Passw
     }
 
     private fun initView() {
-        val context = context ?: return
-        binding.tilPasswordRepeat.typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
-        binding.tilPasswordNew.typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
-        binding.tilPasswordCurrent.typeface = ResourcesCompat.getFont(context, R.font.montserrat_regular)
+        binding.tilPasswordRepeat.typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular)
+        binding.tilPasswordNew.typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular)
+        binding.tilPasswordCurrent.typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular)
 
         binding.etPasswordRepeat.setOnEditorActionListener { textView, actionId, event ->
             onSubmitButtonClicked(textView, actionId, event) { viewModel.onConfirmButtonClicked() }

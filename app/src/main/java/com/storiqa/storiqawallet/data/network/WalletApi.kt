@@ -41,7 +41,7 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body updateUserRequest: UpdateUserRequest): Single<Response<Any>>
+            @Body updateUserRequest: UpdateUserRequest): Single<UserInfoResponse>
 
     @POST("v1/users/confirm_email")
     fun confirmEmail(

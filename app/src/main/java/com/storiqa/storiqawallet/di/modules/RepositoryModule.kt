@@ -5,6 +5,7 @@ import com.storiqa.storiqawallet.data.db.dao.*
 import com.storiqa.storiqawallet.data.network.CryptoCompareApi
 import com.storiqa.storiqawallet.data.network.WalletApi
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
+import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.*
 import com.storiqa.storiqawallet.di.scopes.PerApplication
 import com.storiqa.storiqawallet.utils.SignUtil
@@ -20,8 +21,9 @@ class RepositoryModule {
             userDao: UserDao,
             walletApi: WalletApi,
             appDataStorage: IAppDataStorage,
+            userDataStorage: IUserDataStorage,
             signUtil: SignUtil): IUserRepository {
-        return UserRepository(userDao, walletApi, appDataStorage, signUtil)
+        return UserRepository(userDao, walletApi, appDataStorage, userDataStorage, signUtil)
     }
 
     @Provides

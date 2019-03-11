@@ -32,7 +32,7 @@ class ShortPolling(
                 .interval(0, shortPollingPeriod, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .flatMapSingle { userRepository.refreshUser() }
+                .flatMapSingle { userRepository.refreshCurrentUser() }
                 .flatMapSingle {
                     Single.zip(accountsRepository.updateAccounts(id, email),
                             ratesRepository.updateRates(),

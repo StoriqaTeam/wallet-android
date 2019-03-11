@@ -38,7 +38,7 @@ class CountDownTextView : TextView {
     }
 
     private fun init() {
-        setTimeFormat(TIME_SHOW_H_M_S)
+        setTimeFormat(TIME_SHOW_M_S)
     }
 
     override fun onAttachedToWindow() {
@@ -215,14 +215,14 @@ class CountDownTextView : TextView {
 
         private val TAG = "CountDownTextView"
 
-        val TIME_SHOW_D_H_M_S = 10
-        val TIME_SHOW_H_M_S = 20
-        val TIME_SHOW_M_S = 30
-        val TIME_SHOW_S = 40
+        const val TIME_SHOW_D_H_M_S = 10
+        const val TIME_SHOW_H_M_S = 20
+        const val TIME_SHOW_M_S = 30
+        const val TIME_SHOW_S = 40
 
-        private val TIME_FORMAT_D_H_M_S = "%1$02d:%2$02d:%3$02d:%4$02d"
-        private val TIME_FORMAT_H_M_S = "%1$02d:%2$02d:%3$02d"
-        private val TIME_FORMAT_M_S = "%1$02d:%2$02d"
-        private val TIME_FORMAT_S = "%1$02d"
+        private const val TIME_FORMAT_D_H_M_S = "%1$02d:%2$02d:%3$02d:%4$02d"
+        private const val TIME_FORMAT_H_M_S = "%1$02d:%2$02d:%3$02d"
+        private const val TIME_FORMAT_M_S = "%1$02d:%2$02d"
+        private const val TIME_FORMAT_S = "%1$02d"
     }
 }
