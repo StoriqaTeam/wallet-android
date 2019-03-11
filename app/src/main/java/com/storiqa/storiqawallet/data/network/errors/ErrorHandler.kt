@@ -132,7 +132,7 @@ open class ErrorHandler {
                         errorField[field] = App.res.getString(R.string.error_not_enough_balance)
                     }
 
-                    ErrorCode.TOKEN_REVOKED -> TODO()
+                    ErrorCode.TOKEN_REVOKED -> TODO() //TODO go to login screen
                 }
 
                 errorFields.add(errorField)

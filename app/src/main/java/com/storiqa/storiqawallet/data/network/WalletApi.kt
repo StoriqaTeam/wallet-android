@@ -71,7 +71,7 @@ interface WalletApi {
             @Header("Timestamp") timestamp: String,
             @Header("Device-id") deviceId: String,
             @Header("Sign") sign: String,
-            @Body changePasswordRequest: ChangePasswordRequest): Single<Response<Any>>
+            @Body changePasswordRequest: ChangePasswordRequest): Single<String>
 
     @POST("v1/users/confirm_reset_password")
     fun confirmResetPassword(

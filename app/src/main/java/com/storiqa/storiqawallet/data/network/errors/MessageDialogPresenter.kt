@@ -22,7 +22,7 @@ enum class DialogType {
     NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP,
     REGISTRATION_MAIL_SENT, EMAIL_NOT_VERIFIED, ATTACH_DEVICE_MAIL_SENT, UNKNOWN_ERROR,
     EMAIL_TIMEOUT, DEVICE_ATTACHED, RESET_PIN, WRONG_DEVICE_ID, EMAIL_NOT_PROVIDED, TOKEN_EXPIRED,
-    EXIT
+    EXIT, PASSWORD_CHANGED
 }
 
 data class DialogButton(
@@ -138,3 +138,10 @@ class ExitDialogPresenter : MessageDialogPresenter(
         R.drawable.general_error_icon,
         DialogButton(R.string.button_exit, {}),
         DialogButton(R.string.button_cancel, {}))
+
+class PasswordChangedDialogPresenter : MessageDialogPresenter(
+        DialogType.PASSWORD_CHANGED,
+        R.string.dialog_password_changed_title,
+        R.string.dialog_password_changed_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_ok, {}))

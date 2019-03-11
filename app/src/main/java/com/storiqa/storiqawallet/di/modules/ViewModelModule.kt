@@ -11,6 +11,7 @@ import com.storiqa.storiqawallet.ui.dialogs.message.MessageViewModel
 import com.storiqa.storiqawallet.ui.dialogs.send.SendConfirmationViewModel
 import com.storiqa.storiqawallet.ui.main.MainViewModel
 import com.storiqa.storiqawallet.ui.main.account.AccountViewModel
+import com.storiqa.storiqawallet.ui.main.change_password.PasswordChangeViewModel
 import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsViewModel
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeViewModel
 import com.storiqa.storiqawallet.ui.main.menu.MenuViewModel
@@ -134,6 +135,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MenuViewModel::class)
     abstract fun bindMenuViewModel(menuViewModel: MenuViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PasswordChangeViewModel::class)
+    abstract fun bindPasswordChangeViewModel(passwordChangeViewModel: PasswordChangeViewModel): ViewModel
 
 }
 

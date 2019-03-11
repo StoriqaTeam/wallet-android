@@ -9,6 +9,7 @@ import com.storiqa.storiqawallet.ui.dialogs.exchange.ExchangeConfirmationDialog
 import com.storiqa.storiqawallet.ui.dialogs.message.MessageDialog
 import com.storiqa.storiqawallet.ui.dialogs.send.SendConfirmationDialog
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
+import com.storiqa.storiqawallet.ui.main.change_password.PasswordChangeFragment
 import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsFragment
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment
 import com.storiqa.storiqawallet.ui.main.menu.MenuFragment
@@ -43,6 +44,7 @@ interface FragmentComponent : FragmentComponentProvides {
     fun inject(fragment: ExchangeFragment)
     fun inject(fragment: ReceiveFragment)
     fun inject(fragment: MenuFragment)
+    fun inject(fragment: PasswordChangeFragment)
 }
 
 interface FragmentComponentProvides : ActivityComponentProvides {

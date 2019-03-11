@@ -25,7 +25,7 @@ enum class ErrorCode {
     @SerializedName("upper case")
     NO_UPPER_CASE_CHARACTER,
 
-    @SerializedName("len")
+    @SerializedName("len", alternate = ["length"])
     INVALID_LENGTH,
 
     @SerializedName("numbers")

@@ -12,6 +12,7 @@
     <string name="error_email_exists">Email already exists</string>
     <string name="error_password_no_number">At least one number is required</string>
     <string name="error_password_wrong_pass">Wrong password</string>
+    <string name="error_password_new_error">Old and new are the same</string>
     <string name="error_passwords_not_match">Passwords do not match</string>
     <string name="error_password_no_upper">At least one upper case character is required</string>
     <string name="error_password_invalid_length">Password should be between 8 and 30 symbols</string>
@@ -56,6 +57,8 @@
     <string name="dialog_token_expired_description">Token expired description</string>
     <string name="dialog_exit_title">Sure to exit?</string>
     <string name="dialog_exit_description">Exit description</string>
+    <string name="dialog_password_changed_title">Password was\nsuccessfully set up</string>
+    <string name="dialog_password_changed_description">You have successfully set up\nnew password. </string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
@@ -83,6 +86,8 @@
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
+    <string name="hint_new_password">New password</string>
+    <string name="hint_current_password">Current password</string>
     <string name="hint_repeat_password">Repeat password</string>
     <string name="hint_first_name">First name</string>
     <string name="hint_last_name">Last name</string>
@@ -147,8 +152,11 @@
     <string name="text_transaction_fee">Transaction fee</string>
     <string name="text_total_to_send">Total to send</string>
     <string name="text_no_fee">Free</string>
+    <string name="text_create_new_password">Create a new password</string>
+    <string name="text_create_new_password_description">You’ll receive the link to your mail to\nconfirm password changing.</string>
 
     <string name="toolbar_password_recovery">Password recovery</string>
+    <string name="toolbar_password_change">Change password</string>
     <string name="toolbar_transactions">Transactions</string>
     <string name="toolbar_accounts">Accounts</string>
     <string name="toolbar_send">Send</string>
