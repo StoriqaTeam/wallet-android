@@ -1,4 +1,4 @@
-package com.storiqa.storiqawallet.data.network.errors
+package com.storiqa.storiqawallet.ui.dialogs.message
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -22,7 +22,7 @@ enum class DialogType {
     NO_INTERNET, DEVICE_NOT_ATTACHED, RECOVERY_PASS_MAIL_SENT, RECOVERY_PASS_SET_UP,
     REGISTRATION_MAIL_SENT, EMAIL_NOT_VERIFIED, ATTACH_DEVICE_MAIL_SENT, UNKNOWN_ERROR,
     EMAIL_TIMEOUT, DEVICE_ATTACHED, RESET_PIN, WRONG_DEVICE_ID, EMAIL_NOT_PROVIDED, TOKEN_EXPIRED,
-    EXIT, PASSWORD_CHANGED
+    EXIT, PASSWORD_CHANGED, SIGN_OUT
 }
 
 data class DialogButton(
@@ -145,3 +145,11 @@ class PasswordChangedDialogPresenter : MessageDialogPresenter(
         R.string.dialog_password_changed_description,
         R.drawable.general_error_icon,
         DialogButton(R.string.button_ok, {}))
+
+class SignOutDialogPresenter : MessageDialogPresenter(
+        DialogType.SIGN_OUT,
+        R.string.dialog_sign_out_title,
+        R.string.dialog_sign_out_description,
+        R.drawable.general_error_icon,
+        DialogButton(R.string.button_sure, {}),
+        DialogButton(R.string.button_not_now, {}))

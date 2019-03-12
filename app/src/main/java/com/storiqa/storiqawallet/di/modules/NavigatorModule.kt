@@ -8,8 +8,6 @@ import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.base.navigator.Navigator
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.ui.main.MainNavigator
-import com.storiqa.storiqawallet.ui.main.menu.IMenuNavigator
-import com.storiqa.storiqawallet.ui.main.menu.MenuNavigator
 import com.storiqa.storiqawallet.ui.password.IPasswordRecoveryNavigator
 import com.storiqa.storiqawallet.ui.password.PasswordRecoveryNavigator
 import com.storiqa.storiqawallet.ui.pincode.IPinCodeNavigator
@@ -51,9 +49,4 @@ class NavigatorModule(private val activity: AppCompatActivity) {
     @Provides
     @PerActivity
     internal fun provideMainNavigator(navigator: INavigator): IMainNavigator = MainNavigator(navigator)
-
-    @Provides
-    @PerActivity
-    internal fun provideMenuNavigator(navigator: INavigator): IMenuNavigator = MenuNavigator(navigator)
-
 }

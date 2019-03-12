@@ -19,12 +19,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
-import com.storiqa.storiqawallet.data.network.errors.ExitDialogPresenter
 import com.storiqa.storiqawallet.di.components.ActivityComponent
 import com.storiqa.storiqawallet.di.components.DaggerActivityComponent
 import com.storiqa.storiqawallet.di.modules.ActivityModule
 import com.storiqa.storiqawallet.di.modules.NavigatorModule
 import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
+import com.storiqa.storiqawallet.ui.dialogs.message.ExitDialogPresenter
 import javax.inject.Inject
 
 abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel<N>, N : IBaseNavigator> : AppCompatActivity(), IBaseActivity {

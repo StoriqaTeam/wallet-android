@@ -1,6 +1,7 @@
 package com.storiqa.storiqawallet.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.ui.authorization.AuthorizationActivity
@@ -9,9 +10,11 @@ import com.storiqa.storiqawallet.ui.base.navigator.INavigator
 import com.storiqa.storiqawallet.ui.dialogs.exchange.ExchangeConfirmationDialog
 import com.storiqa.storiqawallet.ui.dialogs.send.SendConfirmationDialog
 import com.storiqa.storiqawallet.ui.main.account.AccountFragment
+import com.storiqa.storiqawallet.ui.main.change_password.PasswordChangeFragment
 import com.storiqa.storiqawallet.ui.main.details.TransactionDetailsFragment
 import com.storiqa.storiqawallet.ui.main.exchange.ExchangeFragment
 import com.storiqa.storiqawallet.ui.main.menu.MenuFragment
+import com.storiqa.storiqawallet.ui.main.profile.EditProfileFragment
 import com.storiqa.storiqawallet.ui.main.receive.ReceiveFragment
 import com.storiqa.storiqawallet.ui.main.send.SendFragment
 import com.storiqa.storiqawallet.ui.main.transactions.TransactionsFragment
@@ -21,7 +24,8 @@ class MainNavigator(private val navigator: INavigator) : BaseNavigator(navigator
 
     private val containerId = R.id.container
 
-    override fun showLoginFragment() {
+    override fun showSignInFragment() {
+        navigator.finishActivity()
         navigator.startActivity(AuthorizationActivity::class.java)
     }
 
@@ -93,5 +97,17 @@ class MainNavigator(private val navigator: INavigator) : BaseNavigator(navigator
                 collectionAmount)
         dialog.setConfirmClickedListener(onConfirm)
         navigator.showDialogFragment(dialog)
+    }
+
+    override fun showEditProfile() {
+        navigator.replaceFragment(R.id.container, EditProfileFragment(), "edit_profile", "edit_profile")
+    }
+
+    override fun showChangePassword() {
+        navigator.replaceFragment(R.id.container, PasswordChangeFragment(), "password_change", "password_change")
+    }
+
+    override fun showAppInfo() {
+        Log.d("MenuNavigator", "showAppInfo")
     }
 }

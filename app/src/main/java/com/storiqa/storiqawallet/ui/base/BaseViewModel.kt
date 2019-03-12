@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.SingleLiveEvent
-import com.storiqa.storiqawallet.data.network.errors.DialogType
 import com.storiqa.storiqawallet.data.network.errors.ErrorHandler
-import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterFields
-import com.storiqa.storiqawallet.data.network.errors.MessageDialogPresenter
 import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
+import com.storiqa.storiqawallet.ui.dialogs.message.DialogType
+import com.storiqa.storiqawallet.ui.dialogs.message.ErrorPresenterFields
+import com.storiqa.storiqawallet.ui.dialogs.message.MessageDialogPresenter
 import java.lang.ref.WeakReference
 
 abstract class BaseViewModel<N : IBaseNavigator> : ViewModel() {

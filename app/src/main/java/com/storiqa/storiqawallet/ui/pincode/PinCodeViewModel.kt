@@ -6,11 +6,11 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
-import com.storiqa.storiqawallet.data.network.errors.DialogType
-import com.storiqa.storiqawallet.data.network.errors.ResetPinDialogPresenter
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.ui.dialogs.message.DialogType
+import com.storiqa.storiqawallet.ui.dialogs.message.ResetPinDialogPresenter
 import com.storiqa.storiqawallet.utils.VibrationUtil
 import javax.inject.Inject
 

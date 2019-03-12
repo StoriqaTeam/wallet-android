@@ -12,7 +12,6 @@ import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.data.model.Account
 import com.storiqa.storiqawallet.data.model.Currency
 import com.storiqa.storiqawallet.data.network.WalletApi
-import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterFields
 import com.storiqa.storiqawallet.data.network.requests.CreateTransactionRequest
 import com.storiqa.storiqawallet.data.network.requests.ExchangeRateRequest
 import com.storiqa.storiqawallet.data.network.requests.RefreshRateRequest
@@ -21,6 +20,7 @@ import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.data.repository.IAccountsRepository
 import com.storiqa.storiqawallet.data.repository.ITransactionsRepository
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.ui.dialogs.message.ErrorPresenterFields
 import com.storiqa.storiqawallet.ui.main.IMainNavigator
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getTimestampLong

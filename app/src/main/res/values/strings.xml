@@ -58,7 +58,9 @@
     <string name="dialog_exit_title">Sure to exit?</string>
     <string name="dialog_exit_description">Exit description</string>
     <string name="dialog_password_changed_title">Password was\nsuccessfully set up</string>
-    <string name="dialog_password_changed_description">You have successfully set up\nnew password. </string>
+    <string name="dialog_password_changed_description">You have successfully set up\nnew password.</string>
+    <string name="dialog_sign_out_title">Sure to sign out?</string>
+    <string name="dialog_sign_out_description">After signing out you won’t be able to receive notifications from Wallet app</string>
 
     <string name="button_ok">Ok</string>
     <string name="button_cancel">Cancel</string>
@@ -84,6 +86,9 @@
     <string name="button_exchange">Exchange</string>
     <string name="button_exit">Exit</string>
     <string name="button_save">Save</string>
+    <string name="button_sign_out">Sign out</string>
+    <string name="button_sure">Yepp, sure!</string>
+    <string name="button_not_now">No, not now</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -94,7 +99,7 @@
     <string name="hint_last_name">Last name</string>
     <string name="hint_address">Recipient`s address</string>
     <string name="hint_amount">Amount</string>
-    <string name="hint_amount_fiat">Amount in fiat</string>
+    <string name="hint_amount_fiat">Equivalent amount in USD</string>
     <string name="hint_amount_remittance">Remittance amount</string>
     <string name="hint_amount_collection">Collection amount</string>
 
@@ -164,6 +169,7 @@
     <string name="toolbar_receive">Receive</string>
     <string name="toolbar_exchange">Exchange</string>
     <string name="toolbar_edit_profile">Edit profile</string>
+    <string name="toolbar_menu">Menu</string>
 
     <string name="preferences_change_password">Change password</string>
     <string name="preferences_edit_profile">Edit profile</string>

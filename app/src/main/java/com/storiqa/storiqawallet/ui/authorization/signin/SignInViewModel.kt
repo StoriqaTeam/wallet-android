@@ -7,10 +7,6 @@ import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.SingleLiveEvent
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.data.network.WalletApi
-import com.storiqa.storiqawallet.data.network.errors.AttachDeviceMailSentDialogPresenter
-import com.storiqa.storiqawallet.data.network.errors.DialogType
-import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterFields
-import com.storiqa.storiqawallet.data.network.errors.RegistrationMailSentDialogPresenter
 import com.storiqa.storiqawallet.data.network.requests.AddDeviceRequest
 import com.storiqa.storiqawallet.data.network.requests.LoginByOauthRequest
 import com.storiqa.storiqawallet.data.network.requests.LoginRequest
@@ -27,6 +23,10 @@ import com.storiqa.storiqawallet.socialnetworks.GoogleAuthHelper
 import com.storiqa.storiqawallet.socialnetworks.SocialNetworksViewModel
 import com.storiqa.storiqawallet.ui.authorization.IAuthorizationNavigator
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.ui.dialogs.message.AttachDeviceMailSentDialogPresenter
+import com.storiqa.storiqawallet.ui.dialogs.message.DialogType
+import com.storiqa.storiqawallet.ui.dialogs.message.ErrorPresenterFields
+import com.storiqa.storiqawallet.ui.dialogs.message.RegistrationMailSentDialogPresenter
 import com.storiqa.storiqawallet.utils.SignUtil
 import com.storiqa.storiqawallet.utils.getDeviceOs
 import com.storiqa.storiqawallet.utils.isEmailValid

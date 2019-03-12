@@ -6,11 +6,11 @@ import com.storiqa.storiqawallet.R
 import com.storiqa.storiqawallet.common.NonNullObservableField
 import com.storiqa.storiqawallet.common.addOnPropertyChanged
 import com.storiqa.storiqawallet.data.network.WalletApi
-import com.storiqa.storiqawallet.data.network.errors.DialogType
-import com.storiqa.storiqawallet.data.network.errors.ErrorPresenterFields
-import com.storiqa.storiqawallet.data.network.errors.PassSetUpDialogPresenter
 import com.storiqa.storiqawallet.data.network.requests.ConfirmResetPasswordRequest
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.ui.dialogs.message.DialogType
+import com.storiqa.storiqawallet.ui.dialogs.message.ErrorPresenterFields
+import com.storiqa.storiqawallet.ui.dialogs.message.PassSetUpDialogPresenter
 import com.storiqa.storiqawallet.ui.password.IPasswordRecoveryNavigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

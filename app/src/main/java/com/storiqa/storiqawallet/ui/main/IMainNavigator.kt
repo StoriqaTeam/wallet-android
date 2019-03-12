@@ -6,7 +6,7 @@ import com.storiqa.storiqawallet.ui.base.navigator.IBaseNavigator
 
 interface IMainNavigator : IBaseNavigator {
 
-    fun showLoginFragment()
+    fun showSignInFragment()
 
     fun showWalletFragment()
 
@@ -17,6 +17,12 @@ interface IMainNavigator : IBaseNavigator {
     fun showReceiveFragment()
 
     fun showMenuFragment()
+
+    fun showEditProfile()
+
+    fun showChangePassword()
+
+    fun showAppInfo()
 
     fun showAccountFragment(bundle: Bundle, element: View, transition: String)
 

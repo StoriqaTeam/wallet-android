@@ -3,6 +3,7 @@ package com.storiqa.storiqawallet.data.network.errors
 import com.facebook.FacebookException
 import com.storiqa.storiqawallet.App
 import com.storiqa.storiqawallet.R
+import com.storiqa.storiqawallet.ui.dialogs.message.*
 import java.io.IOException
 
 open class ErrorHandler {

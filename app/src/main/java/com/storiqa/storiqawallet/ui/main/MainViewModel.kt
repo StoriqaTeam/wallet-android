@@ -2,12 +2,12 @@ package com.storiqa.storiqawallet.ui.main
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
-import com.storiqa.storiqawallet.data.network.errors.DialogType
 import com.storiqa.storiqawallet.data.network.errors.TokenExpired
 import com.storiqa.storiqawallet.data.polling.IShortPolling
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.data.preferences.IUserDataStorage
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.ui.dialogs.message.DialogType
 import com.storiqa.storiqawallet.ui.main.MainViewState.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -76,7 +76,7 @@ constructor(private val appData: IAppDataStorage,
         when (dialogType) {
             DialogType.TOKEN_EXPIRED -> return {
                 appData.isPinEntered = false
-                getNavigator()?.showLoginFragment()
+                getNavigator()?.showSignInFragment()
             }
             else -> return {}
         }

@@ -2,11 +2,11 @@ package com.storiqa.storiqawallet.ui.authorization
 
 import android.annotation.SuppressLint
 import com.storiqa.storiqawallet.data.network.WalletApi
-import com.storiqa.storiqawallet.data.network.errors.DeviceAttachedDialogPresenter
 import com.storiqa.storiqawallet.data.network.requests.ConfirmAddingDeviceRequest
 import com.storiqa.storiqawallet.data.network.requests.ConfirmEmailRequest
 import com.storiqa.storiqawallet.data.preferences.IAppDataStorage
 import com.storiqa.storiqawallet.ui.base.BaseViewModel
+import com.storiqa.storiqawallet.ui.dialogs.message.DeviceAttachedDialogPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
