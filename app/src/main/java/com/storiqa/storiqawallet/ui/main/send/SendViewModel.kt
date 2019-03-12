@@ -46,6 +46,7 @@ constructor(navigator: IMainNavigator,
     val scanQrCode = SingleLiveEvent<Boolean>()
     val showInvalidAddressError = SingleLiveEvent<Boolean>()
     val showSuccessMessage = SingleLiveEvent<Boolean>()
+    val scrollAccountsToPosition = SingleLiveEvent<Int>()
 
     var currentPosition = 0
 
@@ -146,13 +147,33 @@ constructor(navigator: IMainNavigator,
         scanQrCode.trigger()
     }
 
-    fun onQrCodeScanned(blockchainAddress: String) {
+    fun onQrCodeScanned(scannedString: String) {
         accounts.value.forEach {
-            if (isAddressValid(blockchainAddress, it.currency)) {
+            if (isAddressValid(scannedString, it.currency)) {
                 feesSize.set(0)
                 fees = ArrayList()
-                address.set(blockchainAddress)
+                address.set(scannedString)
                 return
+            }
+        }
+        val params = scannedString.split(Regex(":|=|\\?"))
+        if (params.size == 4 && params[2] == "amount"
+                && (params[0] == "ethereum" || params[0] == "bitcoin")) {
+            try {
+                val price = BigDecimal(params[3]).toPlainString()
+                accounts.value.reversed().forEachIndexed { index, account ->
+                    if (isAddressValid(params[1], account.currency)) {
+                        feesSize.set(0)
+                        fees = ArrayList()
+                        address.set(params[1])
+                        amountCrypto.set(price)
+                        calculateAmountFiat()
+                        scrollAccountsToPosition.value = index
+                        return
+                    }
+                }
+            } catch (e: Exception) {
+
             }
         }
         showInvalidAddressError.trigger()

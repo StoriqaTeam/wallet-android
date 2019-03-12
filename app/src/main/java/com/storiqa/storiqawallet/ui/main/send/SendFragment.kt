@@ -78,6 +78,10 @@ class SendFragment : BaseFragment<FragmentSendBinding, SendViewModel>() {
         viewModel.showSuccessMessage.observe(this, Observer {
             Snackbar.make(binding.toolbar, "Transaction successfully sent", Snackbar.LENGTH_SHORT).show()
         })
+
+        viewModel.scrollAccountsToPosition.observe(this, Observer {
+            binding.accountChooser.scrollToPosition(it)
+        })
     }
 
     private fun updateAccounts(accounts: List<Account>) {

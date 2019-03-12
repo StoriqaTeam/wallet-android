@@ -82,6 +82,10 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         onPageSelectedListener = callback
     }
 
+    fun scrollToPosition(position: Int) {
+        accountsPager.currentItem = position
+    }
+
     private fun updateAccounts() {
         accountsAdapter?.updateAccounts(accounts)
         if (initialPosition != -1 && accounts.isNotEmpty()) {
